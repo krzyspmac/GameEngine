@@ -32,6 +32,12 @@ public:
     ///
     int initSDL();
 
+    void prepare();
+
+    void doInput();
+
+    void doScene();
+
     ///
     void main(int argc, const char *argv[]);
 

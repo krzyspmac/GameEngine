@@ -19,6 +19,7 @@
 		7F3CAB0B2770951B00E0D74C /* engine_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3CAB072770951B00E0D74C /* engine_provider.cpp */; };
 		7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3CAB0E277095DD00E0D74C /* liblua.a */; };
 		7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3CAB112770964000E0D74C /* RendererEntry.cpp */; };
+		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +61,7 @@
 		7F3CAB0E277095DD00E0D74C /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3CAB112770964000E0D74C /* RendererEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererEntry.cpp; sourceTree = "<group>"; };
 		7F3CAB122770964000E0D74C /* RendererEntry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererEntry.hpp; sourceTree = "<group>"; };
+		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
 				7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */,
 				7F3CAAF82770947500E0D74C /* SDL2.framework in Frameworks */,
 			);
@@ -106,6 +109,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 				7F3CAB0E277095DD00E0D74C /* liblua.a */,
 				7F3CAAF62770944E00E0D74C /* SDL2.framework */,
 			);
