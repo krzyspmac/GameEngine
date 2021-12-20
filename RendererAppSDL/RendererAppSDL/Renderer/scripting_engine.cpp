@@ -60,6 +60,10 @@ void ScriptingEngine::registerFunctions()
     lua_pushcclosure(L, &ScriptingEngine::lua_loadTexture, 0);
     lua_setglobal (L, "loadTexture");
 
+    lua_pushcclosure(L, &ScriptingEngine::lua_unloadTexture, 0);
+    lua_setglobal (L, "unloadTexture");
+
+
     lua_pushcclosure(L, &ScriptingEngine::lua_drawTexture, 0);
     lua_setglobal (L, "drawTexture");
 };
@@ -118,6 +122,20 @@ int ScriptingEngine::lua_loadTexture(lua_State *L)
     lua_pushlightuserdata(L, texture);
 
     return 1;
+}
+
+/// unloadtexture(texture_handle)
+int ScriptingEngine::lua_unloadTexture(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    TextureI *texturePointer = (TextureI*)lua_topointer(L, argc-0);
+
+    if (texturePointer != NULL)
+    {
+        m_curEngine->UnloadTexture(texturePointer);
+    }
+
+    return 0;
 }
 
 /// drawTexture(texture_handle, x, y)

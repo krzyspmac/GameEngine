@@ -69,6 +69,7 @@ void Engine::UnloadTexture(TextureI *texture)
         {
             m_engineProvider.UnloadTexture(item);
             m_textures.erase(it);
+            break;
         }
     }
 }

@@ -111,9 +111,10 @@ void RendererEntry::main(int argc, const char *argv[])
         return;
     }
 
+    prepare();
+    
     while(1)
     {
-        prepare();
         doInput();
         doScene();
         SDL_Delay(1);

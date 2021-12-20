@@ -58,6 +58,9 @@ namespace engine
         /// loadTexture(name)
         static int lua_loadTexture(lua_State *L);
 
+        /// unloadtexture(texture_handle)
+        static int lua_unloadTexture(lua_State *L);
+
         /// drawTexture(texture_handle, x, y)
         static int lua_drawTexture(lua_State *L);
 
