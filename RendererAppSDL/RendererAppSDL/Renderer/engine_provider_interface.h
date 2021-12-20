@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "texture_interface.h"
+#include "font_interface.h"
 
 namespace engine
 {
@@ -29,6 +30,13 @@ namespace engine
         /// A concrete instance will draw the texture on screen
         /// at given coordinates.
         virtual void DrawTexture(TextureI *texture, int x, int y) = 0;
+
+        /// Load a font. The ownership
+        /// of the texture is passed to the caller.
+        virtual FontI *LoadFont(std::string name) = 0;
+
+        /// Draws a text using a specified font.
+        virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;
 
         ///
 //        virtual void DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...) = 0;

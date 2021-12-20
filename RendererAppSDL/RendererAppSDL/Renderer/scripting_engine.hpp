@@ -56,6 +56,7 @@ namespace engine
     public:
 
         /// loadTexture(name)
+        /// returns: texture_handle
         static int lua_loadTexture(lua_State *L);
 
         /// unloadtexture(texture_handle)
@@ -64,8 +65,12 @@ namespace engine
         /// drawTexture(texture_handle, x, y)
         static int lua_drawTexture(lua_State *L);
 
-        /// drawDebugString(x, y, val, text)
-        static int lua_drawDebugString(lua_State *L);
+        /// loadFont(font_name)
+        /// returns: font_handle
+        static int lua_loadFont(lua_State *L);
+
+        /// drawText(font_handle, text, x, y, r, g, b, align: "left"|"center"|"right")
+        static int lua_drawText(lua_State *L);
 
     private:
         lua_State* L;

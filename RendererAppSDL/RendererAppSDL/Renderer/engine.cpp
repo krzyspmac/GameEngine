@@ -7,6 +7,7 @@
 
 #include "engine.hpp"
 #include <vector>
+#include "font.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,6 +28,7 @@ Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, Scripti
 Engine::~Engine()
 {
     DisposeAllTextures();
+    DisposeAllFonts();
 }
 
 void Engine::setup()
@@ -39,9 +41,15 @@ void Engine::setup()
 
 TextureI *Engine::LoadTexture(std::string name)
 {
-    TextureI *result = m_engineProvider.LoadTexture(name);
-
-    m_textures.emplace_back(std::move(result));
+    TextureI *result = GetTexture(name);
+    if (!result)
+    {
+        result = m_engineProvider.LoadTexture(name);
+        if (result)
+        {
+            m_textures.emplace_back(std::move(result));
+        }
+    }
 
     return result;
 }
@@ -58,6 +66,11 @@ TextureI *Engine::GetTexture(std::string name)
     }
 
     return NULL;
+}
+
+void Engine::DrawTexture(TextureI *texture, int x, int y)
+{
+    m_engineProvider.DrawTexture(texture, x, y);
 }
 
 void Engine::UnloadTexture(TextureI *texture)
@@ -79,9 +92,50 @@ void Engine::DisposeAllTextures()
     std::cout << "DisposeAlLTextures not implemented" << std::endl;
 }
 
+FontI *Engine::LoadFont(std::string name)
+{
+    FontI *result = GetFont(name);
+    if (!result)
+    {
+        result = m_engineProvider.LoadFont(name);
+        if (result)
+        {
+            m_fonts.emplace_back(std::move(result));
+            return result;
+        }
+    }
+    return NULL;
+}
+
+FontI *Engine::GetFont(std::string name)
+{
+    for(auto it = std::begin(m_fonts); it != std::end(m_fonts); ++it)
+    {
+        FontI *item = it->get();
+        if (item->getFontName().compare(name) == 0)
+        {
+            return item;
+        }
+    }
+
+    return NULL;
+}
+
+void Engine::DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
+{
+    m_engineProvider.DrawText(font, text, x, y, r, g, b, align);
+}
+
+void Engine::DisposeAllFonts()
+{
+    std::cout << "DisposeAllFonts not implemented" << std::endl;
+}
+
 void Engine::update()
 {
     m_scriptingEngine.callUpdate();
+
+//    m_engineProvider.DrawText(f, "test", 10, 10, 100, 100, 100, TEXT_ALIGN_LEFT);
 
 //    static int i = 0;
 //

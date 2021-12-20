@@ -12,6 +12,7 @@
 #include "common_engine_impl.h"
 #include "engine_provider_interface.h"
 #include "texture_interface.h"
+#include "font_interface.h"
 
 namespace engine
 {
@@ -29,6 +30,9 @@ public:
     TextureI *LoadTexture(std::string name);
     void UnloadTexture(TextureI *texture);
     void DrawTexture(TextureI *texture, int x, int y);
+
+    FontI *LoadFont(std::string name);
+    void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
 
 //        void DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...) override;
 

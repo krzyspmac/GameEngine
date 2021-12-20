@@ -25,6 +25,8 @@
 		7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9B72770E5150009E6E5 /* texture.cpp */; };
 		7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9BB2770F7330009E6E5 /* background.jpg */; };
 		7FEDC9BF2771194B0009E6E5 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FEDC9BE2771194B0009E6E5 /* libSDL2_ttf.a */; };
+		7FEDC9C327711C9F0009E6E5 /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9C127711C9F0009E6E5 /* font.cpp */; };
+		7FEDC9C527711D8C0009E6E5 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -76,6 +78,10 @@
 		7FEDC9BB2770F7330009E6E5 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		7FEDC9BD2770F9BA0009E6E5 /* common_engine_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_engine_impl.h; sourceTree = "<group>"; };
 		7FEDC9BE2771194B0009E6E5 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FEDC9C027711C580009E6E5 /* font_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = font_interface.h; sourceTree = "<group>"; };
+		7FEDC9C127711C9F0009E6E5 /* font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font.cpp; sourceTree = "<group>"; };
+		7FEDC9C227711C9F0009E6E5 /* font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = font.hpp; sourceTree = "<group>"; };
+		7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnterCommand.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +155,9 @@
 				7FEDC9B62770E4660009E6E5 /* texture_interface.h */,
 				7FEDC9B82770E5150009E6E5 /* texture.hpp */,
 				7FEDC9B72770E5150009E6E5 /* texture.cpp */,
+				7FEDC9C027711C580009E6E5 /* font_interface.h */,
+				7FEDC9C127711C9F0009E6E5 /* font.cpp */,
+				7FEDC9C227711C9F0009E6E5 /* font.hpp */,
 				7F3CAB062770951B00E0D74C /* engine_provider_interface.h */,
 				7F3CAB012770951B00E0D74C /* engine_provider.hpp */,
 				7F3CAB072770951B00E0D74C /* engine_provider.cpp */,
@@ -184,6 +193,7 @@
 		7FEDC99E2770CECF0009E6E5 /* Game Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */,
 				7FEDC9BB2770F7330009E6E5 /* background.jpg */,
 				7FEDC99F2770CEE00009E6E5 /* main.lua */,
 			);
@@ -251,6 +261,7 @@
 				7F3CAAE8277093D600E0D74C /* Assets.xcassets in Resources */,
 				7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */,
 				7FEDC9A12770CF340009E6E5 /* main.lua in Resources */,
+				7FEDC9C527711D8C0009E6E5 /* EnterCommand.ttf in Resources */,
 				7F3CAAEB277093D600E0D74C /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,6 +275,7 @@
 			files = (
 				7F3CAB082770951B00E0D74C /* file_access.mm in Sources */,
 				7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */,
+				7FEDC9C327711C9F0009E6E5 /* font.cpp in Sources */,
 				7F3CAB0A2770951B00E0D74C /* engine.cpp in Sources */,
 				7F3CAB0B2770951B00E0D74C /* engine_provider.cpp in Sources */,
 				7F3CAB092770951B00E0D74C /* scripting_engine.cpp in Sources */,

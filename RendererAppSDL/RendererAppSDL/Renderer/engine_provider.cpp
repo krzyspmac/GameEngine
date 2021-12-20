@@ -7,6 +7,7 @@
 
 #include "engine_provider.hpp"
 #include "texture.hpp"
+#include "font.hpp"
 
 namespace engine
 {
@@ -66,6 +67,17 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
     {
         std::cout << "No texture to draw" << std::endl;
     }
+}
+
+FontI *EngineProvider::LoadFont(std::string name)
+{
+    return (FontI*)new Font(m_engineHandle, name);
+}
+
+void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
+{
+    Font *fontImpl = (Font*)font;
+    fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
 
 //void EngineProvider::DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...)
