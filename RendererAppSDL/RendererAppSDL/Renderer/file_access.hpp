@@ -8,14 +8,17 @@
 #ifndef file_access_hpp
 #define file_access_hpp
 
-#include <stdio.h>
+#include "common.h"
 #include "file_access_provider.h"
 
 namespace engine
 {
     class FileAccess : public FileAccessI
     {
-        void getBundledFilepath(const char *value);
+    public:
+        std::string getBundlePath();
+    
+        std::string getBundledFilepath(const char *value);
     };
 };
 

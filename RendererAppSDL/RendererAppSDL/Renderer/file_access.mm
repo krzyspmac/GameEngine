@@ -14,15 +14,22 @@
 namespace engine
 {
 
-void FileAccess::getBundledFilepath(const char *value)
+std::string FileAccess::getBundlePath()
+{
+    return "";
+}
+
+std::string FileAccess::getBundledFilepath(const char *value)
 {
 #ifdef __APPLE__
     NSBundle *mainBundle = [NSBundle mainBundle];
 
-    NSString *filename = [[NSString alloc] initWithCharactersNoCopy:(unichar*)value length:strlen(value) freeWhenDone:NO];
+    NSString *filename = [[NSString alloc] initWithUTF8String:value];
     NSString *path = [mainBundle pathForResource:filename ofType:nil];
 
-    [path UTF8String];
+    std::string cString = std::string(path.UTF8String);
+
+    return cString;
 #endif
 };
 

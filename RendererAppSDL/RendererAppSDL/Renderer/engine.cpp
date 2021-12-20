@@ -6,6 +6,7 @@
 //
 
 #include "engine.hpp"
+#include <vector>
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,17 +19,78 @@ extern "C" {
 namespace engine
 {
 
-Engine::Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine) :
-    m_engineProvider(engine), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine)
+Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine)
+: EngineI(engineProvider, fileAccess, scriptingEngine)
+{
+}
+
+Engine::~Engine()
+{
+    DisposeAllTextures();
+}
+
+void Engine::setup()
 {
     m_scriptingEngine.newState();
-    m_scriptingEngine.loadFile("/Users/Shared/Shared Documents/NoBackup/xcode_temporary/Build/Products/Debug/RendererApp.app/Contents/Resources/main.lua");
+    m_scriptingEngine.loadFile(m_fileAccess.getBundledFilepath("main.lua"));
     m_scriptingEngine.registerFunctions();
+    m_scriptingEngine.callInit();
+}
+
+TextureI *Engine::LoadTexture(std::string name)
+{
+    TextureI *result = m_engineProvider.LoadTexture(name);
+
+    m_textures.emplace_back(std::move(result));
+
+    return result;
+}
+
+TextureI *Engine::GetTexture(std::string name)
+{
+    for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
+    {
+        TextureI *item = it->get();
+        if (item->getTextureName().compare(name) == 0)
+        {
+            return item;
+        }
+    }
+
+    return NULL;
+}
+
+void Engine::UnloadTexture(TextureI *texture)
+{
+    for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
+    {
+        TextureI *item = it->get();
+        if (item == texture)
+        {
+            m_engineProvider.UnloadTexture(item);
+            m_textures.erase(it);
+        }
+    }
+}
+
+void Engine::DisposeAllTextures()
+{
+    std::cout << "DisposeAlLTextures not implemented" << std::endl;
 }
 
 void Engine::update()
 {
     m_scriptingEngine.callUpdate();
+
+//    static int i = 0;
+//
+//    if (i++ < 30)
+//    {
+//        TextureI *texture = GetTexture(m_fileAccess.getBundledFilepath("background.jpg"));
+//        m_engineProvider.DrawTexture(texture, 0, 0);
+//    } else if (i++ > 60) {
+//        i = 0;
+//    }
 }
 
 }

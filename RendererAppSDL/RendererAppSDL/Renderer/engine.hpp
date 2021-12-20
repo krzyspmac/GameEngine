@@ -22,17 +22,17 @@ namespace engine
         ///
         Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine);
 
+        ~Engine();
+
+        void setup();
         void update();
+        TextureI *LoadTexture(std::string name);
+        TextureI *GetTexture(std::string name);
+        void UnloadTexture(TextureI *texture);
+        void DisposeAllTextures();
 
-        ///
-        EngineProviderI& getProvider() { return m_engineProvider; };
-
-        ///
-        FileAccessI& getFileAccess() { return m_fileAccess; };
     private:
-        EngineProviderI &m_engineProvider;
-        FileAccessI &m_fileAccess;
-        ScriptingEngineI &m_scriptingEngine;
+        std::vector<std::unique_ptr<TextureI>> m_textures;
     };
 }
 

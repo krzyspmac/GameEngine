@@ -20,6 +20,10 @@
 		7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3CAB0E277095DD00E0D74C /* liblua.a */; };
 		7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3CAB112770964000E0D74C /* RendererEntry.cpp */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7FEDC9A12770CF340009E6E5 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC99F2770CEE00009E6E5 /* main.lua */; };
+		7FEDC9B52770E3030009E6E5 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */; };
+		7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9B72770E5150009E6E5 /* texture.cpp */; };
+		7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9BB2770F7330009E6E5 /* background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +66,14 @@
 		7F3CAB112770964000E0D74C /* RendererEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererEntry.cpp; sourceTree = "<group>"; };
 		7F3CAB122770964000E0D74C /* RendererEntry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererEntry.hpp; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7FEDC99F2770CEE00009E6E5 /* main.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.lua; sourceTree = "<group>"; };
+		7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FEDC9B62770E4660009E6E5 /* texture_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture_interface.h; sourceTree = "<group>"; };
+		7FEDC9B72770E5150009E6E5 /* texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
+		7FEDC9B82770E5150009E6E5 /* texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
+		7FEDC9BA2770E6680009E6E5 /* common_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_engine.h; sourceTree = "<group>"; };
+		7FEDC9BB2770F7330009E6E5 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		7FEDC9BD2770F9BA0009E6E5 /* common_engine_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_engine_impl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FEDC9B52770E3030009E6E5 /* libSDL2_image.a in Frameworks */,
 				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
 				7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */,
 				7F3CAAF82770947500E0D74C /* SDL2.framework in Frameworks */,
@@ -99,9 +112,12 @@
 			isa = PBXGroup;
 			children = (
 				7F3CAB0D2770958A00E0D74C /* common.h */,
+				7FEDC9BA2770E6680009E6E5 /* common_engine.h */,
+				7FEDC9BD2770F9BA0009E6E5 /* common_engine_impl.h */,
 				7F3CAB0C2770952000E0D74C /* MacOS */,
 				7F3CAB102770962900E0D74C /* Entry */,
 				7F3CAAFB2770951B00E0D74C /* Renderer */,
+				7FEDC99E2770CECF0009E6E5 /* Game Scripts */,
 			);
 			path = RendererAppSDL;
 			sourceTree = "<group>";
@@ -109,6 +125,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 				7F3CAB0E277095DD00E0D74C /* liblua.a */,
 				7F3CAAF62770944E00E0D74C /* SDL2.framework */,
@@ -125,6 +142,9 @@
 				7F3CAB002770951B00E0D74C /* scripting_engine_provider_interface.h */,
 				7F3CAB042770951B00E0D74C /* scripting_engine.hpp */,
 				7F3CAB022770951B00E0D74C /* scripting_engine.cpp */,
+				7FEDC9B62770E4660009E6E5 /* texture_interface.h */,
+				7FEDC9B82770E5150009E6E5 /* texture.hpp */,
+				7FEDC9B72770E5150009E6E5 /* texture.cpp */,
 				7F3CAB062770951B00E0D74C /* engine_provider_interface.h */,
 				7F3CAB012770951B00E0D74C /* engine_provider.hpp */,
 				7F3CAB072770951B00E0D74C /* engine_provider.cpp */,
@@ -156,6 +176,15 @@
 			);
 			path = Entry;
 			sourceTree = "<group>";
+		};
+		7FEDC99E2770CECF0009E6E5 /* Game Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				7FEDC9BB2770F7330009E6E5 /* background.jpg */,
+				7FEDC99F2770CEE00009E6E5 /* main.lua */,
+			);
+			path = "Game Scripts";
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -216,6 +245,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F3CAAE8277093D600E0D74C /* Assets.xcassets in Resources */,
+				7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */,
+				7FEDC9A12770CF340009E6E5 /* main.lua in Resources */,
 				7F3CAAEB277093D600E0D74C /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +263,7 @@
 				7F3CAB0A2770951B00E0D74C /* engine.cpp in Sources */,
 				7F3CAB0B2770951B00E0D74C /* engine_provider.cpp in Sources */,
 				7F3CAB092770951B00E0D74C /* scripting_engine.cpp in Sources */,
+				7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */,
 				7F3CAAED277093D600E0D74C /* main.mm in Sources */,
 				7F3CAAE6277093D500E0D74C /* AppDelegate.m in Sources */,
 			);
@@ -288,6 +320,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Dependencies/SDL_image-main/Xcode/Frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -302,11 +335,18 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/SDL2.framework/Headers";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Frameworks/SDL2.framework/Headers",
+					"$(SRCROOT)/Dependencies/SDL_image-main",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					webp,
+				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -348,6 +388,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Dependencies/SDL_image-main/Xcode/Frameworks";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -356,10 +397,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/SDL2.framework/Headers";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/Frameworks/SDL2.framework/Headers",
+					"$(SRCROOT)/Dependencies/SDL_image-main",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					webp,
+				);
 				SDKROOT = macosx;
 			};
 			name = Release;

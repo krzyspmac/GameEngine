@@ -9,19 +9,16 @@
 #define RendererEntry_hpp
 
 #include <stdio.h>
+#include "common.h"
+#include "common_engine_impl.h"
 #include "file_access_provider.h"
 #include "engine_provider_interface.h"
 #include "scripting_engine_provider_interface.h"
 #include "engine_interface.h"
-#include "SDL.h"
+#include "engine.hpp"
 
 namespace engine
 {
-
-typedef struct {
-    SDL_Renderer *renderer;
-    SDL_Window *window;
-} SDL_APP;
 
 class RendererEntry
 {
@@ -45,7 +42,7 @@ private:
     engine::FileAccessI *m_fileAccess;
     engine::EngineProviderI *m_engineProvider;
     engine::ScriptingEngineI *m_scriptingEngine;
-    engine::EngineI *m_engine;
+    engine::Engine *m_engine;
     engine::SDL_APP m_app;
 };
 

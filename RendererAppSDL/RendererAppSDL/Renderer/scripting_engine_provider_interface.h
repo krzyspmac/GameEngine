@@ -35,13 +35,15 @@ namespace engine
         virtual void closeState() = 0;
 
         ///
-        virtual void loadFile(const char *fname) = 0;
+        virtual void loadFile(std::string fname) = 0;
 
         ///
         virtual void registerFunctions() = 0;
 
     /// Default, must-have main lua script functions
     public:
+        virtual void callInit() = 0;
+
         virtual void callUpdate() = 0;
 
     };

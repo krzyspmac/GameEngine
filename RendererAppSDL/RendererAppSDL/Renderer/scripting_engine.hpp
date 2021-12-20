@@ -10,6 +10,7 @@
 
 #include "scripting_engine_provider_interface.h"
 #include "engine_provider_interface.h"
+#include "engine_interface.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,7 +27,10 @@ namespace engine
     {
     public:
         ///
-        ScriptingEngine(EngineProviderI *engineProvider);
+        ScriptingEngine();
+
+        ///
+        void setEngine(EngineI *engine);
 
         ///
         /// Creates a new L for lua.
@@ -37,24 +41,33 @@ namespace engine
         void closeState();
 
         ///
-        void loadFile(const char *fname);
+        void loadFile(std::string fname);
 
         ///
         void registerFunctions();
 
     /// Default, must-have main lua script functions
     public:
+        void callInit();
+
         void callUpdate();
 
     /// Renderer functions available from lua
     public:
 
+        /// loadTexture(name)
+        static int lua_loadTexture(lua_State *L);
+
+        /// drawTexture(texture_handle, x, y)
+        static int lua_drawTexture(lua_State *L);
+
         /// drawDebugString(x, y, val, text)
-        static int lua_drawDebugString(lua_State *lua);
+        static int lua_drawDebugString(lua_State *L);
 
     private:
         lua_State* L;
         EngineProviderI *m_engineProvider;
+        EngineI *m_engine;
     };
 
 };

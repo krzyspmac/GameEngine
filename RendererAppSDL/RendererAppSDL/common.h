@@ -7,5 +7,8 @@
 #define COMMON_H_HEADER_GUARD
 
 #include <iostream>
+#include <vector>
+#include "SDL.h"
+#include "SDL_image.h"
 
 #endif // COMMON_H_HEADER_GUARD
