@@ -24,6 +24,7 @@
 		7FEDC9B52770E3030009E6E5 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */; };
 		7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9B72770E5150009E6E5 /* texture.cpp */; };
 		7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9BB2770F7330009E6E5 /* background.jpg */; };
+		7FEDC9BF2771194B0009E6E5 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FEDC9BE2771194B0009E6E5 /* libSDL2_ttf.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -74,6 +75,7 @@
 		7FEDC9BA2770E6680009E6E5 /* common_engine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_engine.h; sourceTree = "<group>"; };
 		7FEDC9BB2770F7330009E6E5 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		7FEDC9BD2770F9BA0009E6E5 /* common_engine_impl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_engine_impl.h; sourceTree = "<group>"; };
+		7FEDC9BE2771194B0009E6E5 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FEDC9BF2771194B0009E6E5 /* libSDL2_ttf.a in Frameworks */,
 				7FEDC9B52770E3030009E6E5 /* libSDL2_image.a in Frameworks */,
 				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
 				7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */,
@@ -125,6 +128,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FEDC9BE2771194B0009E6E5 /* libSDL2_ttf.a */,
 				7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 				7F3CAB0E277095DD00E0D74C /* liblua.a */,
@@ -338,6 +342,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Frameworks/SDL2.framework/Headers",
 					"$(SRCROOT)/Dependencies/SDL_image-main",
+					"$(SRCROOT)/Dependencies/SDL_ttf-main",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -400,6 +405,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/Frameworks/SDL2.framework/Headers",
 					"$(SRCROOT)/Dependencies/SDL_image-main",
+					"$(SRCROOT)/Dependencies/SDL_ttf-main",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = NO;

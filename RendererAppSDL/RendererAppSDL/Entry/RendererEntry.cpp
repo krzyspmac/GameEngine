@@ -47,6 +47,12 @@ int RendererEntry::initSDL()
 
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
 
+    if (TTF_Init() < 0)
+    {
+        printf("Couldn't initialize SDL TTF: %s\n", SDL_GetError());
+        exit(1);
+    }
+
     m_app.window = SDL_CreateWindow("Shooter 01", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
     if(!m_app.window)
@@ -71,6 +77,15 @@ int RendererEntry::initSDL()
     return 0;
 }
 
+void RendererEntry::destroy()
+{
+    delete (m_engine);
+    SDL_DestroyRenderer(m_app.renderer);
+    SDL_DestroyWindow(m_app.window);
+    TTF_Quit();
+    SDL_Quit();
+}
+
 void RendererEntry::prepare()
 {
     SDL_SetRenderDrawColor(m_app.renderer, 96, 128, 255, 255);
@@ -87,7 +102,7 @@ void RendererEntry::doInput()
         switch (event.type)
         {
             case SDL_QUIT:
-                delete (m_engine);
+                destroy();
                 exit(0);
             break;
 

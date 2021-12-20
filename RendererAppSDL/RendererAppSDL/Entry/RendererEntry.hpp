@@ -29,6 +29,8 @@ public:
     ///
     int initSDL();
 
+    void destroy();
+
     void prepare();
 
     void doInput();

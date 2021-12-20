@@ -34,6 +34,20 @@
                ReferencedContainer = "container:../Lua/Lua.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BE48FD6807AFA17000BB41DA"
+               BuildableName = "libSDL2_ttf.a"
+               BlueprintName = "Static Library"
+               ReferencedContainer = "container:Dependencies/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
