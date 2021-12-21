@@ -14,7 +14,6 @@
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
-#define SPRITE_SIZE    32
 
 namespace engine
 {
@@ -91,8 +90,6 @@ void RendererEntry::destroy()
 
 void RendererEntry::prepare()
 {
-    SDL_SetRenderDrawColor(m_app.renderer, 96, 128, 255, 255);
-    SDL_RenderClear(m_app.renderer);
     m_engine->setup();
 }
 

@@ -36,6 +36,9 @@ void Engine::setup()
     m_scriptingEngine.loadFile(m_fileAccess.getBundledFilepath("main.lua"));
     m_scriptingEngine.registerFunctions();
     m_scriptingEngine.callInit();
+
+    m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
+    m_engineProvider.ClearRender();;
 }
 
 int Engine::doInput()
@@ -60,6 +63,14 @@ int Engine::doInput()
     m_engineProvider.GetMousePosition(&m_mousePosition.x, &m_mousePosition.y);
 
     return 0;
+}
+
+void Engine::update()
+{
+    m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
+    m_engineProvider.ClearRender();
+
+    m_scriptingEngine.callUpdate();
 }
 
 TextureI *Engine::LoadTexture(std::string name)
@@ -152,11 +163,6 @@ void Engine::DrawText(FontI *font, std::string text, int x, int y, int r, int g,
 void Engine::DisposeAllFonts()
 {
     std::cout << "DisposeAllFonts not implemented" << std::endl;
-}
-
-void Engine::update()
-{
-    m_scriptingEngine.callUpdate();
 }
 
 } // namespace

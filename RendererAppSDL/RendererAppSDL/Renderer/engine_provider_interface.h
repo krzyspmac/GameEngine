@@ -14,15 +14,40 @@
 
 namespace engine
 {
+    /// EngineProviderI declares an abstraction for low-level
+    /// drawing functions. Those are bare-bones only.
+    /// EngineI provides further concrete instances where
+    /// additional caching might happen. Texturing should be
+    /// used via EngineI since the cache is there.
     class EngineProviderI
     {
     public:
         ///
         EngineProviderI() { }
 
+    /// Engine states
+    public:
+
+        /// Concrete instance would get the ticks since the
+        /// provider library initialized. The library itself
+        /// should check for overflows.
+        virtual Uint64 GetTicks() = 0;
+
         /// Concrete instance would get the mouse position
         /// and store them under the given pointers.
         virtual void GetMousePosition(int *x, int *y) = 0;
+
+    /// Basic drawing
+    public:
+
+        /// Set the drawing colour.
+        virtual void SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) = 0;
+
+        /// Clear the frambuffer with a previously set colour.
+        virtual void ClearRender() = 0;
+
+    /// Textures
+    public:
 
         /// A concrete instance should load the texture. The ownership
         /// of the texture is passed to the caller.
@@ -34,6 +59,9 @@ namespace engine
         /// A concrete instance will draw the texture on screen
         /// at given coordinates.
         virtual void DrawTexture(TextureI *texture, int x, int y) = 0;
+
+    /// Fonts
+    public:
 
         /// Load a font. The ownership
         /// of the texture is passed to the caller.
