@@ -38,7 +38,7 @@ int RendererEntry::initSDL()
 {
     int rendererFlags, windowFlags;
 
-    rendererFlags = SDL_RENDERER_ACCELERATED;
+    rendererFlags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC;
     windowFlags = 0;
 
     if (SDL_Init(SDL_INIT_VIDEO) < 0)

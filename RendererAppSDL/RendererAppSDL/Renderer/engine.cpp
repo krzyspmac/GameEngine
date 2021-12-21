@@ -67,13 +67,20 @@ int Engine::doInput()
 
 void Engine::update()
 {
+    m_performanceStart = m_engineProvider.GetPerformanceTicks();
+
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
 
     m_scriptingEngine.callUpdate();
-    m_engineProvider.RenderPresent();
 
+    m_performanceEnd = m_engineProvider.GetPerformanceTicks();
+
+    m_engineProvider.RenderPresent();
     m_engineProvider.Delay(1);
+
+#if CALC_FPS
+#endif
 }
 
 TextureI *Engine::LoadTexture(std::string name)

@@ -27,6 +27,7 @@ class EngineProvider : public EngineProviderI
 
     public:
         Uint64 GetTicks();
+        Uint64 GetPerformanceTicks();
         void GetMousePosition(int *x, int *y);
         void Delay(Uint32 ms);
 

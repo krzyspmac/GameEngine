@@ -41,6 +41,10 @@ namespace engine
     private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
+
+        Uint64 m_performanceStart;
+        Uint64 m_performanceEnd;
+        Uint64 m_performanceDelta;
     };
 }
 

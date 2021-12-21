@@ -33,6 +33,9 @@ namespace engine
         /// should check for overflows.
         virtual Uint64 GetTicks() = 0;
 
+        /// More robuts results than GetTicks.
+        virtual Uint64 GetPerformanceTicks() = 0;
+
         /// Concrete instance would get the mouse position
         /// and store them under the given pointers.
         virtual void GetMousePosition(int *x, int *y) = 0;

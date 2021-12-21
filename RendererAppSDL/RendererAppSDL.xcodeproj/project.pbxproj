@@ -21,7 +21,6 @@
 		7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3CAB112770964000E0D74C /* RendererEntry.cpp */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7FB6C2CF2772574100ADAEF1 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */; };
-		7FB6C2D22772625400ADAEF1 /* defs.c in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6C2D12772625400ADAEF1 /* defs.c */; };
 		7FEDC9A12770CF340009E6E5 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC99F2770CEE00009E6E5 /* main.lua */; };
 		7FEDC9B52770E3030009E6E5 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */; };
 		7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9B72770E5150009E6E5 /* texture.cpp */; };
@@ -75,7 +74,6 @@
 		7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event_provider.cpp; sourceTree = "<group>"; };
 		7FB6C2CE2772574100ADAEF1 /* event_provider.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = event_provider.hpp; sourceTree = "<group>"; };
 		7FB6C2D02772625400ADAEF1 /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
-		7FB6C2D12772625400ADAEF1 /* defs.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = defs.c; sourceTree = "<group>"; };
 		7FEDC99F2770CEE00009E6E5 /* main.lua */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.lua; sourceTree = "<group>"; };
 		7FEDC9B42770E3030009E6E5 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FEDC9B62770E4660009E6E5 /* texture_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture_interface.h; sourceTree = "<group>"; };
@@ -127,6 +125,7 @@
 		7F3CAAE3277093D500E0D74C /* RendererAppSDL */ = {
 			isa = PBXGroup;
 			children = (
+				7FB6C2D02772625400ADAEF1 /* defs.h */,
 				7F3CAB0D2770958A00E0D74C /* common.h */,
 				7FEDC9BA2770E6680009E6E5 /* common_engine.h */,
 				7FEDC9BD2770F9BA0009E6E5 /* common_engine_impl.h */,
@@ -134,8 +133,6 @@
 				7F3CAB102770962900E0D74C /* Entry */,
 				7F3CAAFB2770951B00E0D74C /* Renderer */,
 				7FEDC99E2770CECF0009E6E5 /* Game Scripts */,
-				7FB6C2D02772625400ADAEF1 /* defs.h */,
-				7FB6C2D12772625400ADAEF1 /* defs.c */,
 			);
 			path = RendererAppSDL;
 			sourceTree = "<group>";
@@ -292,7 +289,6 @@
 				7F3CAB0B2770951B00E0D74C /* engine_provider.cpp in Sources */,
 				7FB6C2CF2772574100ADAEF1 /* event_provider.cpp in Sources */,
 				7F3CAB092770951B00E0D74C /* scripting_engine.cpp in Sources */,
-				7FB6C2D22772625400ADAEF1 /* defs.c in Sources */,
 				7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */,
 				7F3CAAED277093D600E0D74C /* main.mm in Sources */,
 				7F3CAAE6277093D500E0D74C /* AppDelegate.m in Sources */,
