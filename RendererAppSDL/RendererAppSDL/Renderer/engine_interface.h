@@ -13,6 +13,7 @@
 #include "file_access_provider.h"
 #include "scripting_engine_provider_interface.h"
 #include "event_provider_interface.h"
+#include "sprite_interface.h"
 
 namespace engine
 {
@@ -40,8 +41,9 @@ namespace engine
     /// so that things that need be cashed are cached propery.
     /// Also multiple methods should be called on-demant by the
     /// main renderer-entry that is platform specific.
-    public:
 
+    /// Textures
+    public:
         /// A concrete instance should load the texture.
         /// If a texture exists for a given name the existing
         /// texture will be returned.
@@ -67,6 +69,9 @@ namespace engine
         /// remove them from the cache.
         virtual void DisposeAllTextures() = 0;
 
+    /// Fonts
+    public:
+
         /// Loads a font if not loaded previously.
         virtual FontI *LoadFont(std::string name) = 0;
 
@@ -77,6 +82,21 @@ namespace engine
 
         /// Disposes of all fonts.
         virtual void DisposeAllFonts() = 0;
+
+    /// Sprites
+    public:
+
+        /// Loads a sprite and stores it in the sprite cache.
+        virtual SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor) = 0;
+
+        /// Unloads a sprite. Does not unload the texture.
+        virtual void UnloadSprite(SpriteI *sprite) = 0;
+
+        /// Unloads all sprites.
+        virtual void DisposeAllSprites() = 0;
+
+        /// Draw the sprite.
+        virtual void SpriteDraw(SpriteI *sprite, int x, int y) = 0;
 
     public:
         ///
@@ -96,6 +116,11 @@ namespace engine
 
         engine::MOUSE_POSITION m_mousePosition;
     };
+
 };
 
+/// Main accessor for easy access.
+engine::EngineI *GetMainEngine();
+
 #endif /* engine_interface_h */
+

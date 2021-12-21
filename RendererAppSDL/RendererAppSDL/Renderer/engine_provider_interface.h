@@ -69,6 +69,10 @@ namespace engine
         /// at given coordinates.
         virtual void DrawTexture(TextureI *texture, int x, int y) = 0;
 
+        /// A concrete instance will draw the texture on screen
+        /// at given coordinates from the given source rect.
+        virtual void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH) = 0;
+
     /// Fonts
     public:
 

@@ -30,9 +30,6 @@ namespace engine
         ScriptingEngine();
 
         ///
-        void setEngine(EngineI *engine);
-
-        ///
         /// Creates a new L for lua.
         void newState();
 
@@ -55,9 +52,9 @@ namespace engine
     /// Renderer functions available from lua
     public:
 
-        /// loadTexture(name)
+        /// lua_textureLoad(name)
         /// returns: texture_handle
-        static int lua_loadTexture(lua_State *L);
+        static int lua_textureLoad(lua_State *L);
 
         /// unloadtexture(texture_handle)
         static int lua_unloadTexture(lua_State *L);
@@ -72,10 +69,19 @@ namespace engine
         /// drawText(font_handle, text, x, y, r, g, b, align: "left"|"center"|"right")
         static int lua_drawText(lua_State *L);
 
+        /// L_spriteLoad(texture_handle, sprite_width, sprite_height, frame_count, frame_duration_ms)
+        /// returns: sprite_handle
+        static int lua_spriteLoad(lua_State *L);
+
+        /// L_spriteDraw(sprite_handle, x, y, frame_number)
+        static int lua_spriteDraw(lua_State *L);
+
+        /// L_spriteDrawAnimated(sprite_handle, x, y)
+        static int lua_spriteDrawAnimated(lua_State *L);
+
     private:
         lua_State* L;
         EngineProviderI *m_engineProvider;
-        EngineI *m_engine;
     };
 
 };

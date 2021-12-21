@@ -7,6 +7,7 @@
 
 #include "engine.hpp"
 #include "font.hpp"
+#include "sprite.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,18 +17,26 @@ extern "C" {
 }
 #endif //__cplusplus
 
-namespace engine
+using namespace engine;
+
+/// Main accessor for easy access.
+EngineI *sharedEngine = NULL;
+engine::EngineI *GetMainEngine()
 {
+    return sharedEngine;
+}
 
 Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider)
 : EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider)
 {
+    sharedEngine = this;
 }
 
 Engine::~Engine()
 {
-    DisposeAllTextures();
+    DisposeAllSprites();
     DisposeAllFonts();
+    DisposeAllTextures();
 }
 
 void Engine::setup()
@@ -175,4 +184,32 @@ void Engine::DisposeAllFonts()
     std::cout << "DisposeAllFonts not implemented" << std::endl;
 }
 
-} // namespace
+SpriteI *Engine::LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor)
+{
+    Sprite *sprite = new Sprite(texture, spriteDescriptor);
+    m_sprites.emplace_back(std::move(sprite));
+    return sprite;
+}
+
+void Engine::UnloadSprite(SpriteI *sprite)
+{
+    for(auto it = std::begin(m_sprites); it != std::end(m_sprites); ++it)
+    {
+        SpriteI *item = it->get();
+        if (item == sprite)
+        {
+            m_sprites.erase(it);
+            break;
+        }
+    }
+}
+
+void Engine::DisposeAllSprites()
+{
+    m_sprites.clear();
+}
+
+void Engine::SpriteDraw(SpriteI *sprite, int x, int y)
+{
+    sprite->Draw(x, y);
+}

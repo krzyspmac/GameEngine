@@ -19,9 +19,14 @@ end)
 myTexture = nil
 myFont = nil
 
+walkTexture = nil
+walkSprite = nil
+
 function init()
-    myTexture = loadTexture("background.jpg")
+    myTexture = L_textureLoad("background.jpg")
     myFont = loadFont("EnterCommand.ttf")
+    walkTexture = L_textureLoad("sheriff.png")
+    walkSprite = L_spriteLoad(walkTexture, 68, 158, 9, 100)
 end
 
 function update ()
@@ -30,5 +35,10 @@ function update ()
 
     --drawDebugText(0, 1, 0x0f, "Lua in a C++ Engine! " .. a)
     drawTexture(myTexture, 0, 0)
+    --drawTexture(walkTexture, 0, 0)
+    L_spriteDraw(walkSprite, 20, 50, 8)
+    
+    L_spriteDrawAnimated(walkSprite, 120, 50)
+
 	drawText(myFont, "Lua in a C++ Engine! " .. a, 10, 10, 100, 100, 100, "left")
 end

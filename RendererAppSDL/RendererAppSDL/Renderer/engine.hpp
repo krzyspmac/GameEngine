@@ -38,9 +38,15 @@ namespace engine
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
         void DisposeAllFonts();
 
+        SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor);
+        void UnloadSprite(SpriteI *sprite);
+        void DisposeAllSprites();
+        void SpriteDraw(SpriteI *sprite, int x, int y);
+
     private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
+        std::vector<std::unique_ptr<SpriteI>> m_sprites;
 
         Uint64 m_performanceStart;
         Uint64 m_performanceEnd;

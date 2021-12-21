@@ -30,8 +30,6 @@ RendererEntry::RendererEntry()
     this->m_scriptingEngine = se;
     this->m_eventProvider = eventProvider;
     this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider);
-
-    se->setEngine(m_engine);
 }
 
 int RendererEntry::initSDL()

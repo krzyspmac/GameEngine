@@ -104,6 +104,34 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
     }
 }
 
+void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH)
+{
+    if (texture != NULL)
+    {
+        SDL_Rect dest;
+        SDL_Rect src;
+
+        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
+        SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
+
+        dest.x = x;
+        dest.y = y;
+        dest.w = srcW;
+        dest.h = srcH;
+
+        src.x = srcX;
+        src.y = srcY;
+        src.w = srcW;
+        src.h = srcH;
+
+        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, &src, &dest);
+    }
+    else
+    {
+        std::cout << "No texture to draw" << std::endl;
+    }
+}
+
 FontI *EngineProvider::LoadFont(std::string name)
 {
     return (FontI*)new Font(m_engineHandle, name);

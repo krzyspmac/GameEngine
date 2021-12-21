@@ -8,19 +8,10 @@
 #include "common.h"
 #include "scripting_engine.hpp"
 
-static engine::EngineI *m_curEngine = NULL;
-
-namespace engine
-{
+using namespace engine;
 
 ScriptingEngine::ScriptingEngine()
 {
-}
-
-void ScriptingEngine::setEngine(EngineI *engine)
-{
-    m_engine = engine;
-    m_curEngine = m_engine;
 }
 
 void ScriptingEngine::newState()
@@ -54,8 +45,8 @@ void ScriptingEngine::loadFile(std::string fname)
 
 void ScriptingEngine::registerFunctions()
 {
-    lua_pushcclosure(L, &ScriptingEngine::lua_loadTexture, 0);
-    lua_setglobal (L, "loadTexture");
+    lua_pushcclosure(L, &ScriptingEngine::lua_textureLoad, 0);
+    lua_setglobal (L, "L_textureLoad");
 
     lua_pushcclosure(L, &ScriptingEngine::lua_unloadTexture, 0);
     lua_setglobal (L, "unloadTexture");
@@ -68,6 +59,15 @@ void ScriptingEngine::registerFunctions()
 
     lua_pushcclosure(L, &ScriptingEngine::lua_drawTexture, 0);
     lua_setglobal (L, "drawTexture");
+
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteLoad, 0);
+    lua_setglobal (L, "L_spriteLoad");
+
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDraw, 0);
+    lua_setglobal (L, "L_spriteDraw");
+
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDrawAnimated, 0);
+    lua_setglobal (L, "L_spriteDrawAnimated");
 };
 
 void ScriptingEngine::callInit()
@@ -91,13 +91,13 @@ void ScriptingEngine::callUpdate()
 }
 
 /// loadTexture(name)
-int ScriptingEngine::lua_loadTexture(lua_State *L)
+int ScriptingEngine::lua_textureLoad(lua_State *L)
 {
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
 
-    std::string path = m_curEngine->getFileAccess().getBundledFilepath(msgX);
-    TextureI *texture = m_curEngine->LoadTexture(path);
+    std::string path = GetMainEngine()->getFileAccess().getBundledFilepath(msgX);
+    TextureI *texture = GetMainEngine()->LoadTexture(path);
     lua_pushlightuserdata(L, texture);
 
     return 1;
@@ -111,7 +111,7 @@ int ScriptingEngine::lua_unloadTexture(lua_State *L)
 
     if (texturePointer != NULL)
     {
-        m_curEngine->UnloadTexture(texturePointer);
+        GetMainEngine()->UnloadTexture(texturePointer);
     }
 
     return 0;
@@ -121,13 +121,13 @@ int ScriptingEngine::lua_unloadTexture(lua_State *L)
 int ScriptingEngine::lua_drawTexture(lua_State *L)
 {
     int argc = lua_gettop(L);
-    int y = lua_tonumberx(L, argc-0, NULL);
-    int x = lua_tonumberx(L, argc-1, NULL);
-    TextureI *texturePointer = (TextureI*)lua_topointer(L, argc-2);
+    int y = lua_tonumberx(L, argc--, NULL);
+    int x = lua_tonumberx(L, argc--, NULL);
+    TextureI *texturePointer = (TextureI*)lua_topointer(L, argc--);
 
     if (texturePointer != NULL)
     {
-        m_curEngine->getProvider().DrawTexture(texturePointer, x, y);
+        GetMainEngine()->getProvider().DrawTexture(texturePointer, x, y);
     }
 
     return 0;
@@ -140,7 +140,7 @@ int ScriptingEngine::lua_loadFont(lua_State *L)
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
 
-    FontI *font = m_curEngine->LoadFont(msgX);
+    FontI *font = GetMainEngine()->LoadFont(msgX);
     lua_pushlightuserdata(L, font);
 
     return 1;
@@ -151,16 +151,16 @@ int ScriptingEngine::lua_drawText(lua_State *L)
 {
     int argc = lua_gettop(L);
 
-    const char *alignment = (char *) lua_tostring (L, argc);
-    int b = lua_tonumberx(L, argc-1, NULL);
-    int g = lua_tonumberx(L, argc-2, NULL);
-    int r = lua_tonumberx(L, argc-3, NULL);
+    const char *alignment = (char *) lua_tostring (L, argc--);
+    int b = lua_tonumberx(L, argc--, NULL);
+    int g = lua_tonumberx(L, argc--, NULL);
+    int r = lua_tonumberx(L, argc--, NULL);
 
-    int y = lua_tonumberx(L, argc-4, NULL);
-    int x = lua_tonumberx(L, argc-5, NULL);
+    int y = lua_tonumberx(L, argc--, NULL);
+    int x = lua_tonumberx(L, argc--, NULL);
 
-    const char *text = (char *) lua_tostring (L, argc-6);
-    FontI *fontPointer = (FontI*)lua_topointer(L, argc-7);
+    const char *text = (char *) lua_tostring (L, argc--);
+    FontI *fontPointer = (FontI*)lua_topointer(L, argc--);
 
     if (fontPointer)
     {
@@ -178,10 +178,70 @@ int ScriptingEngine::lua_drawText(lua_State *L)
             align = TEXT_ALIGN_RIGHT;
         }
 
-        m_curEngine->DrawText(fontPointer, text, x, y, r, g, b, align);
+        GetMainEngine()->DrawText(fontPointer, text, x, y, r, g, b, align);
     }
 
     return 0;
 }
 
-};
+/// L_spriteLoad(texture_handle, sprite_width, sprite_height, frame_count, frame_duration_ms)
+/// returns: sprite_handle
+int ScriptingEngine::lua_spriteLoad(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
+    int frame_count = lua_tonumberx(L, argc--, NULL);
+    int sprite_height = lua_tonumberx(L, argc--, NULL);
+    int sprite_width = lua_tonumberx(L, argc--, NULL);
+    TextureI *texturePointer = (TextureI*)lua_topointer(L, argc--);
+
+    if (texturePointer)
+    {
+        SpriteDescriptor descriptor;
+        descriptor.spriteWidth = sprite_width;
+        descriptor.spriteHeight = sprite_height;
+        descriptor.frameCount = frame_count;
+        descriptor.frameDuration = frame_duration_ms;
+
+        SpriteI *sprite = GetMainEngine()->LoadSprite(texturePointer, descriptor);
+        lua_pushlightuserdata(L, sprite);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/// L_spriteDraw(sprite_handle, x, y, frame_number)
+int ScriptingEngine::lua_spriteDraw(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    int frame_number = lua_tonumberx(L, argc--, NULL);
+    int y = lua_tonumberx(L, argc--, NULL);
+    int x = lua_tonumberx(L, argc--, NULL);
+    SpriteI *spritePointer = (SpriteI*)lua_topointer(L, argc--);
+
+    if (spritePointer)
+    {
+        spritePointer->Draw(x, y, frame_number);
+    }
+
+    return 0;
+}
+
+/// L_spriteDrawAnimated(sprite_handle, x, y)
+int ScriptingEngine::lua_spriteDrawAnimated(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    int y = lua_tonumberx(L, argc--, NULL);
+    int x = lua_tonumberx(L, argc--, NULL);
+    SpriteI *spritePointer = (SpriteI*)lua_topointer(L, argc--);
+
+    if (spritePointer)
+    {
+        spritePointer->DrawAnimated(x, y);
+    }
+
+    return 0;
+}
