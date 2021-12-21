@@ -26,13 +26,16 @@ class EngineProvider : public EngineProviderI
         }
 
     public:
-
         Uint64 GetTicks();
         void GetMousePosition(int *x, int *y);
+        void Delay(Uint32 ms);
 
+    public:
         void SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
         void ClearRender();
+        void RenderPresent();
 
+    public:
         TextureI *LoadTexture(std::string name);
         void UnloadTexture(TextureI *texture);
         void DrawTexture(TextureI *texture, int x, int y);

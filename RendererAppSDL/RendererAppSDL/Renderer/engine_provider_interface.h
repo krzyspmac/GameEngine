@@ -37,7 +37,10 @@ namespace engine
         /// and store them under the given pointers.
         virtual void GetMousePosition(int *x, int *y) = 0;
 
-    /// Basic drawing
+        /// Wait ms
+        virtual void Delay(Uint32 ms) = 0;
+
+    /// Renderer related
     public:
 
         /// Set the drawing colour.
@@ -45,6 +48,9 @@ namespace engine
 
         /// Clear the frambuffer with a previously set colour.
         virtual void ClearRender() = 0;
+
+        /// Update the screen with any rendering performed since the previous call.
+        virtual void RenderPresent() = 0;
 
     /// Textures
     public:

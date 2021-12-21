@@ -105,7 +105,6 @@ void RendererEntry::doInput()
 void RendererEntry::doScene()
 {
     m_engine->update();
-    SDL_RenderPresent(m_app.renderer);
 }
 
 void RendererEntry::main(int argc, const char *argv[])
@@ -122,7 +121,6 @@ void RendererEntry::main(int argc, const char *argv[])
     {
         doInput();
         doScene();
-        SDL_Delay(1);
     }
 }
 

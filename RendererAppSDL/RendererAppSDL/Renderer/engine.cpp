@@ -71,6 +71,9 @@ void Engine::update()
     m_engineProvider.ClearRender();
 
     m_scriptingEngine.callUpdate();
+    m_engineProvider.RenderPresent();
+
+    m_engineProvider.Delay(1);
 }
 
 TextureI *Engine::LoadTexture(std::string name)

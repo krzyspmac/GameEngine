@@ -22,6 +22,11 @@ void EngineProvider::GetMousePosition(int *x, int *y)
     SDL_GetMouseState(x, y);
 }
 
+void EngineProvider::Delay(Uint32 ms)
+{
+    SDL_Delay(ms);
+}
+
 void EngineProvider::SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     SDL_SetRenderDrawColor(m_engineHandle->renderer, r, g, b, a);
@@ -30,6 +35,11 @@ void EngineProvider::SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a
 void EngineProvider::ClearRender()
 {
     SDL_RenderClear(m_engineHandle->renderer);
+}
+
+void EngineProvider::RenderPresent()
+{
+    SDL_RenderPresent(m_engineHandle->renderer);
 }
 
 TextureI *EngineProvider::LoadTexture(std::string filename)
