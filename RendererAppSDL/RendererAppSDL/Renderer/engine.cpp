@@ -41,6 +41,10 @@ Engine::~Engine()
 
 void Engine::setup()
 {
+#if SHOW_FPS
+    m_fpsFont = LoadFont("EnterCommand.ttf");
+#endif
+
     m_scriptingEngine.newState();
     m_scriptingEngine.loadFile(m_fileAccess.getBundledFilepath("main.lua"));
     m_scriptingEngine.registerFunctions();
@@ -76,20 +80,26 @@ int Engine::doInput()
 
 void Engine::update()
 {
-    m_performanceStart = m_engineProvider.GetPerformanceTicks();
+    m_performanceStart = m_engineProvider.GetPerformanceCounter();
 
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
 
     m_scriptingEngine.callUpdate();
 
-    m_performanceEnd = m_engineProvider.GetPerformanceTicks();
+#if SHOW_FPS
+    sprintf(m_fpsBuffer, "%.0f", m_previousFps);
+    DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
+#endif
 
     m_engineProvider.RenderPresent();
-    m_engineProvider.Delay(1);
 
-#if CALC_FPS
-#endif
+    m_performanceEnd = m_engineProvider.GetPerformanceCounter();
+    m_performanceDelta = m_performanceEnd - m_performanceStart;
+    m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
+    m_previousFps = 1.0f / m_seconds;
+
+    m_engineProvider.Delay(1);
 }
 
 TextureI *Engine::LoadTexture(std::string name)

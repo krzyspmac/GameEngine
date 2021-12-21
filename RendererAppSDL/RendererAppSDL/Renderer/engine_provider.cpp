@@ -22,6 +22,11 @@ Uint64 EngineProvider::GetPerformanceTicks()
     return SDL_GetPerformanceCounter();
 }
 
+Uint64 EngineProvider::GetPerformanceCounter()
+{
+    return SDL_GetPerformanceCounter();
+}
+
 void EngineProvider::GetMousePosition(int *x, int *y)
 {
     SDL_GetMouseState(x, y);

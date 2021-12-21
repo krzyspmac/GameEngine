@@ -8,6 +8,7 @@
 #ifndef engine_hpp
 #define engine_hpp
 
+#import "defs.h"
 #import "common.h"
 #import "engine_interface.h"
 #import "engine_provider_interface.h"
@@ -51,6 +52,13 @@ namespace engine
         Uint64 m_performanceStart;
         Uint64 m_performanceEnd;
         Uint64 m_performanceDelta;
+        float m_seconds;
+        float m_previousFps; // only when CALC_FPS set
+
+    #if SHOW_FPS
+        char m_fpsBuffer[256];
+        FontI *m_fpsFont;
+    #endif
     };
 }
 
