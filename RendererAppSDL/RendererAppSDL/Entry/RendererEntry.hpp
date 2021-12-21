@@ -44,6 +44,7 @@ private:
     engine::FileAccessI *m_fileAccess;
     engine::EngineProviderI *m_engineProvider;
     engine::ScriptingEngineI *m_scriptingEngine;
+    engine::EventProviderI *m_eventProvider;
     engine::Engine *m_engine;
     engine::SDL_APP m_app;
 };

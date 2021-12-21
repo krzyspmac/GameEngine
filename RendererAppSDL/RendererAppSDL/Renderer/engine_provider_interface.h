@@ -20,6 +20,10 @@ namespace engine
         ///
         EngineProviderI() { }
 
+        /// Concrete instance would get the mouse position
+        /// and store them under the given pointers.
+        virtual void GetMousePosition(int *x, int *y) = 0;
+
         /// A concrete instance should load the texture. The ownership
         /// of the texture is passed to the caller.
         virtual TextureI *LoadTexture(std::string name) = 0;

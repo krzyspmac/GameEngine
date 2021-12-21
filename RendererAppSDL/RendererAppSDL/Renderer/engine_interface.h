@@ -8,9 +8,11 @@
 #ifndef engine_interface_h
 #define engine_interface_h
 
+#include "common_engine_impl.h"
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
 #include "scripting_engine_provider_interface.h"
+#include "event_provider_interface.h"
 
 namespace engine
 {
@@ -18,17 +20,27 @@ namespace engine
     {
     public:
         ///
-        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine)
-        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine)
+        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider)
+        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider)
         { }
 
         /// The main setup. All engine components should be
         /// loaded by the concrete class after this call.
         virtual void setup() = 0;
 
+        /// Process the inputs from the game.
+        /// Return != 0 do quit the application.
+        virtual int doInput() = 0;
+
         /// The main `update` method.
         /// Engine magic happens there.
         virtual void update() = 0;
+
+    /// Helper methods to deal with engine provider functionality
+    /// so that things that need be cashed are cached propery.
+    /// Also multiple methods should be called on-demant by the
+    /// main renderer-entry that is platform specific.
+    public:
 
         /// A concrete instance should load the texture.
         /// If a texture exists for a given name the existing
@@ -80,6 +92,9 @@ namespace engine
         EngineProviderI &m_engineProvider;
         FileAccessI &m_fileAccess;
         ScriptingEngineI &m_scriptingEngine;
+        EventProviderI &m_eventProvider;
+
+        engine::MOUSE_POSITION m_mousePosition;
     };
 };
 

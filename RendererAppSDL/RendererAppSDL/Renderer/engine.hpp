@@ -20,11 +20,12 @@ namespace engine
     {
     public:
         ///
-        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine);
+        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider);
 
         ~Engine();
 
         void setup();
+        int doInput();
         void update();
         TextureI *LoadTexture(std::string name);
         TextureI *GetTexture(std::string name);

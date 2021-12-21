@@ -12,6 +12,11 @@
 namespace engine
 {
 
+void EngineProvider::GetMousePosition(int *x, int *y)
+{
+    SDL_GetMouseState(x, y);
+}
+
 TextureI *EngineProvider::LoadTexture(std::string filename)
 {
     SDL_Texture *textureHandle;

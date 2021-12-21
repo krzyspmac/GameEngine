@@ -9,6 +9,7 @@
 #include "file_access.hpp"
 #include "engine_provider.hpp"
 #include "scripting_engine.hpp"
+#include "event_provider.hpp"
 #include "engine.hpp"
 
 #define SCREEN_WIDTH  640
@@ -23,11 +24,13 @@ RendererEntry::RendererEntry()
     FileAccess *fa = new FileAccess();;
     EngineProvider *ep = new EngineProvider(&m_app);
     ScriptingEngine *se = new ScriptingEngine();
+    EventProvider *eventProvider = new EventProvider();
 
     this->m_fileAccess = fa;
     this->m_engineProvider = ep;
     this->m_scriptingEngine = se;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine);
+    this->m_eventProvider = eventProvider;
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider);
 
     se->setEngine(m_engine);
 }
@@ -53,7 +56,7 @@ int RendererEntry::initSDL()
         exit(1);
     }
 
-    m_app.window = SDL_CreateWindow("Shooter 01", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+    m_app.window = SDL_CreateWindow("SomeEngine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
     if(!m_app.window)
     {
@@ -70,9 +73,9 @@ int RendererEntry::initSDL()
         exit(1);
     }
 
-//    SDL_ShowCursor(0);
-
-    m_engine->LoadTexture(m_fileAccess->getBundledFilepath("background.jpg"));
+    SDL_Cursor *cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_CROSSHAIR);
+    SDL_SetCursor(cursor);
+    SDL_ShowCursor(1);
 
     return 0;
 }
@@ -95,20 +98,10 @@ void RendererEntry::prepare()
 
 void RendererEntry::doInput()
 {
-    SDL_Event event;
-
-    while (SDL_PollEvent(&event))
+    if (m_engine->doInput())
     {
-        switch (event.type)
-        {
-            case SDL_QUIT:
-                destroy();
-                exit(0);
-            break;
-
-            default:
-                break;
-        }
+        destroy();
+        exit(0);
     }
 }
 

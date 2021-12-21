@@ -19,26 +19,28 @@ namespace engine
 
 class EngineProvider : public EngineProviderI
 {
-public:
-    EngineProvider(engine::SDL_APP *engineHandle)
-        :EngineProviderI(), m_engineHandle(engineHandle)
-    {
-    }
+    public:
+        EngineProvider(engine::SDL_APP *engineHandle)
+            :EngineProviderI(), m_engineHandle(engineHandle)
+        {
+        }
 
-public:
+    public:
 
-    TextureI *LoadTexture(std::string name);
-    void UnloadTexture(TextureI *texture);
-    void DrawTexture(TextureI *texture, int x, int y);
+        void GetMousePosition(int *x, int *y);
 
-    FontI *LoadFont(std::string name);
-    void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
+        TextureI *LoadTexture(std::string name);
+        void UnloadTexture(TextureI *texture);
+        void DrawTexture(TextureI *texture, int x, int y);
 
-//        void DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...) override;
+        FontI *LoadFont(std::string name);
+        void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
 
-private:
-    engine::SDL_APP *m_engineHandle;
-};
+    //        void DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...) override;
+
+    private:
+        engine::SDL_APP *m_engineHandle;
+    };
 
 };
 

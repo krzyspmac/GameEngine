@@ -6,7 +6,6 @@
 //
 
 #include "engine.hpp"
-#include <vector>
 #include "font.hpp"
 
 #ifdef __cplusplus
@@ -20,8 +19,8 @@ extern "C" {
 namespace engine
 {
 
-Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine)
-: EngineI(engineProvider, fileAccess, scriptingEngine)
+Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider)
 {
 }
 
@@ -37,6 +36,30 @@ void Engine::setup()
     m_scriptingEngine.loadFile(m_fileAccess.getBundledFilepath("main.lua"));
     m_scriptingEngine.registerFunctions();
     m_scriptingEngine.callInit();
+}
+
+int Engine::doInput()
+{
+    EVENT event;
+    while (m_eventProvider.PollEvent(&event))
+    {
+        switch (event)
+        {
+            case EVENT_NONE:
+            {
+                break;
+            }
+
+            case EVENT_QUIT:
+            {
+                return 1;
+            }
+        };
+    };
+
+    m_engineProvider.GetMousePosition(&m_mousePosition.x, &m_mousePosition.y);
+
+    return 0;
 }
 
 TextureI *Engine::LoadTexture(std::string name)
@@ -134,49 +157,6 @@ void Engine::DisposeAllFonts()
 void Engine::update()
 {
     m_scriptingEngine.callUpdate();
-
-//    m_engineProvider.DrawText(f, "test", 10, 10, 100, 100, 100, TEXT_ALIGN_LEFT);
-
-//    static int i = 0;
-//
-//    if (i++ < 30)
-//    {
-//        TextureI *texture = GetTexture(m_fileAccess.getBundledFilepath("background.jpg"));
-//        m_engineProvider.DrawTexture(texture, 0, 0);
-//    } else if (i++ > 60) {
-//        i = 0;
-//    }
 }
 
-}
-
-/*
- lua_State* L;
- L = luaL_newstate();
- lua_pushstring(L, "Anna");
- lua_setglobal(L, "name");
- luaL_openlibs(L);
- if(luaL_dofile(L, "hello.lua")) {
- std::cout << "Final:" << lua_tostring(L, -1) << "\n";
- }
- lua_close(L);
- */
-
-/*
- // delete some dangerous functions
- lua_pushnil(L); lua_setglobal(L, "dofile");
- lua_pushnil(L); lua_setglobal(L, "loadfile");
- lua_pushnil(L); lua_setglobal(L, "loadlib");
- lua_pushnil(L); lua_setglobal(L, "loadstring"); // replaced
- lua_pushnil(L); lua_setglobal(L, "require");
- lua_pushnil(L); lua_setglobal(L, "rawequal");
- lua_pushnil(L); lua_setglobal(L, "rawget");
- lua_pushnil(L); lua_setglobal(L, "rawset");
- //    lua_pushnil(L); lua_setglobal(L, "getfenv");
- //    lua_pushnil(L); lua_setglobal(L, "setfenv");
- lua_pushnil(L); lua_setglobal(L, "newproxy");
- lua_pushnil(L); lua_setglobal(L, "gcinfo");
- lua_pushnil(L); lua_setglobal(L, "collectgarbage");
-
- see https://cpp.hotexamples.com/examples/-/-/lua_setglobal/cpp-lua_setglobal-function-examples.html
- */
+} // namespace

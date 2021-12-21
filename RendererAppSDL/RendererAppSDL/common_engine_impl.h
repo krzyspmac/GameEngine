@@ -18,6 +18,11 @@ typedef struct {
     SDL_Window *window;
 } SDL_APP;
 
+typedef struct {
+    int x;
+    int y;
+} MOUSE_POSITION;
+
 }
 
 #endif /* common_engine_impl_h */
