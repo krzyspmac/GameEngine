@@ -8,9 +8,9 @@
 #include <math.h>
 #include <sys/stat.h>
 #include <dirent.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_image.h>
-#include <png.h>
+#include <SDL.h>
+#include <SDL_image.h>
+//#include <png.h>
 #include "defs.h"
 #include "structs.h"
 #include "cJSON.h"

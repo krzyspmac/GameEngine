@@ -8,6 +8,8 @@ static Image *images;
 static int atlasSize;
 static int padding;
 static char *rootDir;
+static char *outAtlasImage;
+static char *outAtlasJson;
 
 static void splitNode(Node *node, int w, int h)
 {
@@ -153,7 +155,7 @@ static void handleCommandLine(int argc, char *argv[])
 	int i;
 
 	/* defaults */
-	atlasSize = 256;
+	atlasSize = 1024;
 	rootDir = "gfx";
 	padding = 1;
 
@@ -171,6 +173,14 @@ static void handleCommandLine(int argc, char *argv[])
 		{
 			padding = atoi(argv[i + 1]);
 		}
+        else if (strcmp(argv[i], "-outAtlasImage") == 0)
+        {
+            outAtlasImage = argv[i+1];
+        }
+        else if (strcmp(argv[i], "-outAtlasJson") == 0)
+        {
+            outAtlasJson = argv[i+1];
+        }
 	}
 }
 
@@ -289,6 +299,17 @@ static void blitRotated(SDL_Surface *src, SDL_Surface *dest, int destX, int dest
 	}
 }
 
+char *strremove(char *str, const char *sub) {
+    size_t len = strlen(sub);
+    if (len > 0) {
+        char *p = str;
+        while ((p = strstr(p, sub)) != NULL) {
+            memmove(p, p + len, strlen(p + len) + 1);
+        }
+    }
+    return str;
+}
+
 int main(int argc, char *argv[])
 {
 	Node *root, *n;
@@ -358,11 +379,15 @@ int main(int argc, char *argv[])
 				blitRotated(images[i].surface, atlas, dest.x, dest.y);
 			}
 
+            char *filenameWithoutDir = malloc(strlen(images[i].filename) + 1);
+            strcpy(filenameWithoutDir, images[i].filename);
+            strremove(filenameWithoutDir, rootDir);
+
 			printf("[%04d / %04d] %s\n", i + 1, numImages, images[i].filename);
 
 			entryJSON = cJSON_CreateObject();
 
-			cJSON_AddStringToObject(entryJSON, "filename", images[i].filename);
+			cJSON_AddStringToObject(entryJSON, "filename", filenameWithoutDir);
 			cJSON_AddNumberToObject(entryJSON, "x", dest.x);
 			cJSON_AddNumberToObject(entryJSON, "y", dest.y);
 			cJSON_AddNumberToObject(entryJSON, "w", dest.w);
@@ -370,6 +395,8 @@ int main(int argc, char *argv[])
 			cJSON_AddNumberToObject(entryJSON, "rotated", rotated);
 
 			cJSON_AddItemToArray(rootJSON, entryJSON);
+
+           free(filenameWithoutDir);
 		}
 		else
 		{
@@ -384,11 +411,11 @@ int main(int argc, char *argv[])
 
 	out = cJSON_Print(rootJSON);
 
-	fp = fopen("atlas.json", "wb");
+	fp = fopen(outAtlasJson, "wb");
 	fprintf(fp, "%s", out);
 	fclose(fp);
 
-	IMG_SavePNG(atlas, "atlas.png");
+	IMG_SavePNG(atlas, outAtlasImage);
 
 	free(images);
 

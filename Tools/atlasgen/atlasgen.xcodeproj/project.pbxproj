@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		7F4172B4277330C100B6AE24 /* atlasGen.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F4172B3277330C100B6AE24 /* atlasGen.c */; };
+		7F4172D427733EB700B6AE24 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172D327733EB700B6AE24 /* SDL2.framework */; };
+		7F4172D627733EE600B6AE24 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172D527733EE600B6AE24 /* libSDL2_image.a */; };
+		7F4172D827733EF000B6AE24 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172D727733EF000B6AE24 /* Metal.framework */; };
+		7F42606627733F8B00E0DC09 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606527733F8B00E0DC09 /* libcjson.a */; };
+		7F42606827733F9C00E0DC09 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606727733F9C00E0DC09 /* Quartz.framework */; };
+		7F42606A27733FAB00E0DC09 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606927733FAB00E0DC09 /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +32,14 @@
 		7F4172A8277330A600B6AE24 /* atlasgen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = atlasgen; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F4172B2277330C100B6AE24 /* atlasGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = atlasGen.h; sourceTree = "<group>"; };
 		7F4172B3277330C100B6AE24 /* atlasGen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atlasGen.c; sourceTree = "<group>"; };
+		7F4172D127733E2F00B6AE24 /* structs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = structs.h; sourceTree = "<group>"; };
+		7F4172D227733E4C00B6AE24 /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
+		7F4172D327733EB700B6AE24 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		7F4172D527733EE600B6AE24 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F4172D727733EF000B6AE24 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F42606527733F8B00E0DC09 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F42606727733F9C00E0DC09 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		7F42606927733FAB00E0DC09 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +47,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F42606A27733FAB00E0DC09 /* Cocoa.framework in Frameworks */,
+				7F42606827733F9C00E0DC09 /* Quartz.framework in Frameworks */,
+				7F42606627733F8B00E0DC09 /* libcjson.a in Frameworks */,
+				7F4172D827733EF000B6AE24 /* Metal.framework in Frameworks */,
+				7F4172D627733EE600B6AE24 /* libSDL2_image.a in Frameworks */,
+				7F4172D427733EB700B6AE24 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +79,10 @@
 		7F4172AA277330A600B6AE24 /* atlasgen */ = {
 			isa = PBXGroup;
 			children = (
-				7F4172B3277330C100B6AE24 /* atlasGen.c */,
+				7F4172D227733E4C00B6AE24 /* defs.h */,
+				7F4172D127733E2F00B6AE24 /* structs.h */,
 				7F4172B2277330C100B6AE24 /* atlasGen.h */,
+				7F4172B3277330C100B6AE24 /* atlasGen.c */,
 			);
 			path = atlasgen;
 			sourceTree = "<group>";
@@ -68,6 +90,12 @@
 		7F4172B5277330CF00B6AE24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F42606927733FAB00E0DC09 /* Cocoa.framework */,
+				7F42606727733F9C00E0DC09 /* Quartz.framework */,
+				7F42606527733F8B00E0DC09 /* libcjson.a */,
+				7F4172D727733EF000B6AE24 /* Metal.framework */,
+				7F4172D527733EE600B6AE24 /* libSDL2_image.a */,
+				7F4172D327733EB700B6AE24 /* SDL2.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -173,6 +201,10 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks",
+					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -187,12 +219,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
+					"$(SRCROOT)/../../Libraries/SDL_image-main",
+					"$(SRCROOT)/../../Libraries/cJson/cJson",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../RendererAppSDL/Frameworks/SDL2.framework/Headers";
 			};
 			name = Debug;
 		};
@@ -233,6 +270,10 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks",
+					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -241,20 +282,28 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
+					"$(SRCROOT)/../../Libraries/SDL_image-main",
+					"$(SRCROOT)/../../Libraries/cJson/cJson",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../RendererAppSDL/Frameworks/SDL2.framework/Headers";
 			};
 			name = Release;
 		};
 		7F4172B0277330A600B6AE24 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 75FQAVWUP3;
-				ENABLE_HARDENED_RUNTIME = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					webp,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -262,9 +311,12 @@
 		7F4172B1277330A600B6AE24 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 75FQAVWUP3;
-				ENABLE_HARDENED_RUNTIME = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					webp,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
