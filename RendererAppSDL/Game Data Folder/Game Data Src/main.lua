@@ -37,7 +37,7 @@ function init()
     
     myFont = L_loadFont("EnterCommand.ttf")
     
-    atlas = L_spriteAtlasLoad("image.json", "image.png")
+    atlas = L_spriteAtlasLoad("characters.json", "characters.png")
     atlasSprite = L_spriteAtlasGetSprite(atlas, "/characters/sheriff.png", 9, 100)
     atlasSpriteRenderer = L_spriteDrawAnimatedCreate(atlasSprite, 9, 100)
 end
