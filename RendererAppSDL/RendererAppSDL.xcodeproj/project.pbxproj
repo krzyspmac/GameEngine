@@ -176,39 +176,13 @@
 		7F3CAAFB2770951B00E0D74C /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
-				7F3CAB032770951B00E0D74C /* file_access_provider.h */,
-				7F3CAAFE2770951B00E0D74C /* file_access.hpp */,
-				7F3CAAFC2770951B00E0D74C /* file_access.mm */,
-				7F3CAB002770951B00E0D74C /* scripting_engine_provider_interface.h */,
-				7F3CAB042770951B00E0D74C /* scripting_engine.hpp */,
-				7F3CAB022770951B00E0D74C /* scripting_engine.cpp */,
-				7FEDC9B62770E4660009E6E5 /* texture_interface.h */,
-				7FEDC9B82770E5150009E6E5 /* texture.hpp */,
-				7FEDC9B72770E5150009E6E5 /* texture.cpp */,
-				7FEDC9C027711C580009E6E5 /* font_interface.h */,
-				7FEDC9C127711C9F0009E6E5 /* font.cpp */,
-				7FEDC9C227711C9F0009E6E5 /* font.hpp */,
-				7F3CAB062770951B00E0D74C /* engine_provider_interface.h */,
-				7F3CAB012770951B00E0D74C /* engine_provider.hpp */,
-				7F3CAB072770951B00E0D74C /* engine_provider.cpp */,
-				7FB6C2CC2772566000ADAEF1 /* event_provider_interface.h */,
-				7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */,
-				7FB6C2CE2772574100ADAEF1 /* event_provider.hpp */,
-				7F3CAAFF2770951B00E0D74C /* engine_interface.h */,
-				7F3CAAFD2770951B00E0D74C /* engine.hpp */,
-				7F3CAB052770951B00E0D74C /* engine.cpp */,
-				7F42607A277379EC00E0DC09 /* sprite_interface_defs.h */,
-				7FB6C2D72772879200ADAEF1 /* sprite_interface.h */,
-				7FB6C2D92772883400ADAEF1 /* sprite.hpp */,
-				7FB6C2D82772883400ADAEF1 /* sprite.cpp */,
-				7F426070277368C000E0DC09 /* sprite_atlas_interface.h */,
-				7F426072277368F900E0DC09 /* sprite_atlas.hpp */,
-				7F426071277368F900E0DC09 /* sprite_atlas.cpp */,
-				7F42607B277397D900E0DC09 /* sprite_draw_interface.h */,
-				7F42607D27739BA000E0DC09 /* sprite_draw_static.hpp */,
-				7F42607C27739BA000E0DC09 /* sprite_draw_static.cpp */,
-				7FFE54582773AFA30046D532 /* sprite_draw_animated.hpp */,
-				7FFE54572773AFA30046D532 /* sprite_draw_animated.cpp */,
+				7FDA3EF22773BF8100698376 /* File Access */,
+				7FDA3EF32773BF9D00698376 /* Textures */,
+				7FDA3EF42773BFB100698376 /* Fonts */,
+				7FDA3EF52773BFBD00698376 /* Engine Provider */,
+				7FDA3EF62773BFDF00698376 /* Sprites */,
+				7FDA3EF12773BF6B00698376 /* Scripting */,
+				7FDA3EF72773BFF800698376 /* Engine */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -256,6 +230,88 @@
 			name = gen;
 			path = "Game Data Folder/gen";
 			sourceTree = SOURCE_ROOT;
+		};
+		7FDA3EF12773BF6B00698376 /* Scripting */ = {
+			isa = PBXGroup;
+			children = (
+				7F3CAB002770951B00E0D74C /* scripting_engine_provider_interface.h */,
+				7F3CAB042770951B00E0D74C /* scripting_engine.hpp */,
+				7F3CAB022770951B00E0D74C /* scripting_engine.cpp */,
+			);
+			path = Scripting;
+			sourceTree = "<group>";
+		};
+		7FDA3EF22773BF8100698376 /* File Access */ = {
+			isa = PBXGroup;
+			children = (
+				7F3CAB032770951B00E0D74C /* file_access_provider.h */,
+				7F3CAAFE2770951B00E0D74C /* file_access.hpp */,
+				7F3CAAFC2770951B00E0D74C /* file_access.mm */,
+			);
+			path = "File Access";
+			sourceTree = "<group>";
+		};
+		7FDA3EF32773BF9D00698376 /* Textures */ = {
+			isa = PBXGroup;
+			children = (
+				7FEDC9B62770E4660009E6E5 /* texture_interface.h */,
+				7FEDC9B82770E5150009E6E5 /* texture.hpp */,
+				7FEDC9B72770E5150009E6E5 /* texture.cpp */,
+			);
+			path = Textures;
+			sourceTree = "<group>";
+		};
+		7FDA3EF42773BFB100698376 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7FEDC9C027711C580009E6E5 /* font_interface.h */,
+				7FEDC9C127711C9F0009E6E5 /* font.cpp */,
+				7FEDC9C227711C9F0009E6E5 /* font.hpp */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		7FDA3EF52773BFBD00698376 /* Engine Provider */ = {
+			isa = PBXGroup;
+			children = (
+				7F3CAB062770951B00E0D74C /* engine_provider_interface.h */,
+				7F3CAB012770951B00E0D74C /* engine_provider.hpp */,
+				7F3CAB072770951B00E0D74C /* engine_provider.cpp */,
+				7FB6C2CC2772566000ADAEF1 /* event_provider_interface.h */,
+				7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */,
+				7FB6C2CE2772574100ADAEF1 /* event_provider.hpp */,
+			);
+			path = "Engine Provider";
+			sourceTree = "<group>";
+		};
+		7FDA3EF62773BFDF00698376 /* Sprites */ = {
+			isa = PBXGroup;
+			children = (
+				7F42607A277379EC00E0DC09 /* sprite_interface_defs.h */,
+				7FB6C2D72772879200ADAEF1 /* sprite_interface.h */,
+				7FB6C2D92772883400ADAEF1 /* sprite.hpp */,
+				7FB6C2D82772883400ADAEF1 /* sprite.cpp */,
+				7F426070277368C000E0DC09 /* sprite_atlas_interface.h */,
+				7F426072277368F900E0DC09 /* sprite_atlas.hpp */,
+				7F426071277368F900E0DC09 /* sprite_atlas.cpp */,
+				7F42607B277397D900E0DC09 /* sprite_draw_interface.h */,
+				7F42607D27739BA000E0DC09 /* sprite_draw_static.hpp */,
+				7F42607C27739BA000E0DC09 /* sprite_draw_static.cpp */,
+				7FFE54582773AFA30046D532 /* sprite_draw_animated.hpp */,
+				7FFE54572773AFA30046D532 /* sprite_draw_animated.cpp */,
+			);
+			path = Sprites;
+			sourceTree = "<group>";
+		};
+		7FDA3EF72773BFF800698376 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				7F3CAAFF2770951B00E0D74C /* engine_interface.h */,
+				7F3CAAFD2770951B00E0D74C /* engine.hpp */,
+				7F3CAB052770951B00E0D74C /* engine.cpp */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
