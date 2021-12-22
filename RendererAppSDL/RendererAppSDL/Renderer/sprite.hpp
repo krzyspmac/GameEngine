@@ -10,15 +10,20 @@
 
 #include "common.h"
 #include "sprite_interface.h"
+#include "sprite_atlas_interface.h"
+#include "texture_interface.h"
 
 namespace engine
 {
     class Sprite: public SpriteI
     {
     public:
+
         Sprite(TextureI *texture, SpriteDescriptor spriteDescriptor)
-            : SpriteI(texture, spriteDescriptor)
+        : SpriteI(texture, spriteDescriptor)
         { };
+
+        Sprite(SpriteAtlasItemI *spriteAtlasItem);
 
         /// Ask the engine provider to draw the sprite.
         void Draw(int x, int y, int frameNumber = 0);

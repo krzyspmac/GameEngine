@@ -18,9 +18,14 @@
 		7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3CAB0E277095DD00E0D74C /* liblua.a */; };
 		7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3CAB112770964000E0D74C /* RendererEntry.cpp */; };
 		7F4172BB2773351100B6AE24 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172BA2773351100B6AE24 /* SDL2.framework */; };
-		7F4172C8277335BE00B6AE24 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172C52773359F00B6AE24 /* libSDL2_image.a */; };
 		7F4172CE2773372600B6AE24 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172CD2773372600B6AE24 /* libSDL2_ttf.a */; };
 		7F4172D02773378A00B6AE24 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172BA2773351100B6AE24 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		7F42606F2773667B00E0DC09 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606E2773667B00E0DC09 /* libSDL2_image.a */; };
+		7F426073277368F900E0DC09 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F426071277368F900E0DC09 /* sprite_atlas.cpp */; };
+		7F42607627736A0400E0DC09 /* image.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F42607427736A0400E0DC09 /* image.json */; };
+		7F42607727736A0400E0DC09 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F42607527736A0400E0DC09 /* image.png */; };
+		7F42607927736A6D00E0DC09 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42607827736A6D00E0DC09 /* libcjson.a */; };
+		7F42607E27739BA000E0DC09 /* sprite_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F42607C27739BA000E0DC09 /* sprite_draw.cpp */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7FB6C2CF2772574100ADAEF1 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */; };
 		7FB6C2D42772786800ADAEF1 /* walk-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB6C2D32772786800ADAEF1 /* walk-left.png */; };
@@ -32,30 +37,6 @@
 		7FEDC9C327711C9F0009E6E5 /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9C127711C9F0009E6E5 /* font.cpp */; };
 		7FEDC9C527711D8C0009E6E5 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7F4172C22773359F00B6AE24 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F4172BC2773359F00B6AE24 /* SDL_image.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE1FA72E07AF4C45004B6283;
-			remoteInfo = Framework;
-		};
-		7F4172C42773359F00B6AE24 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F4172BC2773359F00B6AE24 /* SDL_image.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE1FA74107AF4C45004B6283;
-			remoteInfo = "Static Library";
-		};
-		7F4172C62773359F00B6AE24 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F4172BC2773359F00B6AE24 /* SDL_image.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BE1FA74507AF4C45004B6283;
-			remoteInfo = "Create DMG";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7F3CAAFA2770947500E0D74C /* Embed Frameworks */ = {
@@ -96,8 +77,18 @@
 		7F3CAB112770964000E0D74C /* RendererEntry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererEntry.cpp; sourceTree = "<group>"; };
 		7F3CAB122770964000E0D74C /* RendererEntry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererEntry.hpp; sourceTree = "<group>"; };
 		7F4172BA2773351100B6AE24 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		7F4172BC2773359F00B6AE24 /* SDL_image.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SDL_image.xcodeproj; path = "../Libraries/SDL_image-main/Xcode/SDL_image.xcodeproj"; sourceTree = "<group>"; };
 		7F4172CD2773372600B6AE24 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F42606E2773667B00E0DC09 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F426070277368C000E0DC09 /* sprite_atlas_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_atlas_interface.h; sourceTree = "<group>"; };
+		7F426071277368F900E0DC09 /* sprite_atlas.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_atlas.cpp; sourceTree = "<group>"; };
+		7F426072277368F900E0DC09 /* sprite_atlas.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_atlas.hpp; sourceTree = "<group>"; };
+		7F42607427736A0400E0DC09 /* image.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = image.json; sourceTree = "<group>"; };
+		7F42607527736A0400E0DC09 /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
+		7F42607827736A6D00E0DC09 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F42607A277379EC00E0DC09 /* sprite_interface_defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_interface_defs.h; sourceTree = "<group>"; };
+		7F42607B277397D900E0DC09 /* sprite_draw_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_draw_interface.h; sourceTree = "<group>"; };
+		7F42607C27739BA000E0DC09 /* sprite_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw.cpp; sourceTree = "<group>"; };
+		7F42607D27739BA000E0DC09 /* sprite_draw.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw.hpp; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7FB6C2CC2772566000ADAEF1 /* event_provider_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = event_provider_interface.h; sourceTree = "<group>"; };
 		7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event_provider.cpp; sourceTree = "<group>"; };
@@ -126,8 +117,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F42607927736A6D00E0DC09 /* libcjson.a in Frameworks */,
+				7F42606F2773667B00E0DC09 /* libSDL2_image.a in Frameworks */,
 				7F4172CE2773372600B6AE24 /* libSDL2_ttf.a in Frameworks */,
-				7F4172C8277335BE00B6AE24 /* libSDL2_image.a in Frameworks */,
 				7F4172BB2773351100B6AE24 /* SDL2.framework in Frameworks */,
 				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
 				7F3CAB0F277095DD00E0D74C /* liblua.a in Frameworks */,
@@ -140,7 +132,6 @@
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
-				7F4172BC2773359F00B6AE24 /* SDL_image.xcodeproj */,
 				7F3CAAE3277093D500E0D74C /* RendererAppSDL */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
 				7F3CAAE2277093D500E0D74C /* Products */,
@@ -173,6 +164,8 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F42607827736A6D00E0DC09 /* libcjson.a */,
+				7F42606E2773667B00E0DC09 /* libSDL2_image.a */,
 				7F4172CD2773372600B6AE24 /* libSDL2_ttf.a */,
 				7F4172BA2773351100B6AE24 /* SDL2.framework */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
@@ -205,9 +198,16 @@
 				7F3CAAFF2770951B00E0D74C /* engine_interface.h */,
 				7F3CAAFD2770951B00E0D74C /* engine.hpp */,
 				7F3CAB052770951B00E0D74C /* engine.cpp */,
+				7F42607A277379EC00E0DC09 /* sprite_interface_defs.h */,
 				7FB6C2D72772879200ADAEF1 /* sprite_interface.h */,
-				7FB6C2D82772883400ADAEF1 /* sprite.cpp */,
 				7FB6C2D92772883400ADAEF1 /* sprite.hpp */,
+				7FB6C2D82772883400ADAEF1 /* sprite.cpp */,
+				7F426070277368C000E0DC09 /* sprite_atlas_interface.h */,
+				7F426072277368F900E0DC09 /* sprite_atlas.hpp */,
+				7F426071277368F900E0DC09 /* sprite_atlas.cpp */,
+				7F42607B277397D900E0DC09 /* sprite_draw_interface.h */,
+				7F42607C27739BA000E0DC09 /* sprite_draw.cpp */,
+				7F42607D27739BA000E0DC09 /* sprite_draw.hpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -234,19 +234,11 @@
 			path = Entry;
 			sourceTree = "<group>";
 		};
-		7F4172BD2773359F00B6AE24 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				7F4172C32773359F00B6AE24 /* SDL2_image.framework */,
-				7F4172C52773359F00B6AE24 /* libSDL2_image.a */,
-				7F4172C72773359F00B6AE24 /* Create DMG */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		7FEDC99E2770CECF0009E6E5 /* Game Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				7F42607427736A0400E0DC09 /* image.json */,
+				7F42607527736A0400E0DC09 /* image.png */,
 				7FB6C2D527727DC100ADAEF1 /* sheriff.png */,
 				7FB6C2D32772786800ADAEF1 /* walk-left.png */,
 				7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */,
@@ -302,42 +294,12 @@
 			mainGroup = 7F3CAAD8277093D500E0D74C;
 			productRefGroup = 7F3CAAE2277093D500E0D74C /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 7F4172BD2773359F00B6AE24 /* Products */;
-					ProjectRef = 7F4172BC2773359F00B6AE24 /* SDL_image.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				7F3CAAE0277093D500E0D74C /* RendererAppSDL */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		7F4172C32773359F00B6AE24 /* SDL2_image.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SDL2_image.framework;
-			remoteRef = 7F4172C22773359F00B6AE24 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7F4172C52773359F00B6AE24 /* libSDL2_image.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libSDL2_image.a;
-			remoteRef = 7F4172C42773359F00B6AE24 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		7F4172C72773359F00B6AE24 /* Create DMG */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = "Create DMG";
-			remoteRef = 7F4172C62773359F00B6AE24 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7F3CAADF277093D500E0D74C /* Resources */ = {
@@ -349,8 +311,10 @@
 				7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */,
 				7FEDC9A12770CF340009E6E5 /* main.lua in Resources */,
 				7FB6C2D627727DC100ADAEF1 /* sheriff.png in Resources */,
+				7F42607627736A0400E0DC09 /* image.json in Resources */,
 				7FEDC9C527711D8C0009E6E5 /* EnterCommand.ttf in Resources */,
 				7F3CAAEB277093D600E0D74C /* MainMenu.xib in Resources */,
+				7F42607727736A0400E0DC09 /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F3CAB082770951B00E0D74C /* file_access.mm in Sources */,
+				7F42607E27739BA000E0DC09 /* sprite_draw.cpp in Sources */,
 				7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */,
 				7FEDC9C327711C9F0009E6E5 /* font.cpp in Sources */,
 				7F3CAB0A2770951B00E0D74C /* engine.cpp in Sources */,
@@ -369,6 +334,7 @@
 				7FB6C2DA2772883400ADAEF1 /* sprite.cpp in Sources */,
 				7FB6C2CF2772574100ADAEF1 /* event_provider.cpp in Sources */,
 				7F3CAB092770951B00E0D74C /* scripting_engine.cpp in Sources */,
+				7F426073277368F900E0DC09 /* sprite_atlas.cpp in Sources */,
 				7FEDC9B92770E5150009E6E5 /* texture.cpp in Sources */,
 				7F3CAAED277093D600E0D74C /* main.mm in Sources */,
 				7F3CAAE6277093D500E0D74C /* AppDelegate.m in Sources */,
@@ -448,6 +414,7 @@
 					"$(SRCROOT)/../Frameworks/SDL2.framework/Headers",
 					"$(SRCROOT)/../Libraries/SDL_image-main",
 					"$(SRCROOT)/../Libraries/SDL_ttf-main",
+					"$(SRCROOT)/../Libraries/cJson/cJson",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -514,6 +481,7 @@
 					"$(SRCROOT)/../Frameworks/SDL2.framework/Headers",
 					"$(SRCROOT)/../Libraries/SDL_image-main",
 					"$(SRCROOT)/../Libraries/SDL_ttf-main",
+					"$(SRCROOT)/../Libraries/cJson/cJson",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.6;
 				MTL_ENABLE_DEBUG_INFO = NO;

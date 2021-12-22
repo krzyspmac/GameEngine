@@ -14,6 +14,7 @@
 #include "scripting_engine_provider_interface.h"
 #include "event_provider_interface.h"
 #include "sprite_interface.h"
+#include "sprite_draw_interface.h"
 
 namespace engine
 {
@@ -97,6 +98,34 @@ namespace engine
 
         /// Draw the sprite.
         virtual void SpriteDraw(SpriteI *sprite, int x, int y) = 0;
+
+    /// Sprite atlas
+    public:
+
+        /// A concrete instance would load the sprite atlas, its texture (using ::LoadTexture) and the json
+        /// file for individual sprite splices.
+        virtual SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename) = 0;
+
+        ///
+        virtual SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename) = 0;
+
+        ///
+        virtual void SpriteAtlasUnload(SpriteAtlasI *atlas) = 0;
+
+        ///
+        virtual void SpriteAtlasDisposeAll() = 0;
+
+    /// Drawing
+    public:
+
+        /// Creates or gets a drawing handle for a sprite
+        virtual SpriteDrawI *SpriteDrawLoad(SpriteI *sprite, SpriteAnimationDescriptor animation) = 0;
+
+        /// Unloads the sprite draw.
+        virtual void SpriteDrawUnload(SpriteDrawI *spriteDraw) = 0;
+
+        /// Unloads all.
+        virtual void SpriteDrawDisposeAll() = 0;
 
     public:
         ///

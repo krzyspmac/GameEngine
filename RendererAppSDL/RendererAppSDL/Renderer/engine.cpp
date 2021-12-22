@@ -8,6 +8,9 @@
 #include "engine.hpp"
 #include "font.hpp"
 #include "sprite.hpp"
+#include "sprite_atlas_interface.h"
+#include "sprite_atlas.hpp"
+#include "sprite_draw.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,6 +40,8 @@ Engine::~Engine()
     DisposeAllSprites();
     DisposeAllFonts();
     DisposeAllTextures();
+    SpriteAtlasDisposeAll();
+    SpriteDrawDisposeAll();
 }
 
 void Engine::setup()
@@ -51,7 +56,16 @@ void Engine::setup()
     m_scriptingEngine.callInit();
 
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
-    m_engineProvider.ClearRender();;
+    m_engineProvider.ClearRender();
+
+//    SpriteAtlasI *atlas = SpriteAtlasLoad("image.json", "image.png");
+////    SpriteAtlas *atlas = new SpriteAtlas("image.json", "image.png");
+//    SpriteAtlasItemI *item = atlas->GetItemForName("/characters/sheriff.png");
+////    SpriteI *s = 
+//    if (item)
+//        {
+//
+//        }
 }
 
 int Engine::doInput()
@@ -222,4 +236,80 @@ void Engine::DisposeAllSprites()
 void Engine::SpriteDraw(SpriteI *sprite, int x, int y)
 {
     sprite->Draw(x, y);
+}
+
+SpriteAtlasI *Engine::SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename)
+{
+    SpriteAtlasI *atlas = SpriteAtlasGet(jsonFilename);
+    if (!atlas)
+    {
+        atlas = new SpriteAtlas(jsonFilename, textureFilename);
+        if (atlas)
+        {
+            m_atlas.emplace_back(std::move(atlas));
+        }
+    }
+
+    return atlas;
+}
+
+SpriteAtlasI *Engine::SpriteAtlasGet(std::string jsonFilename)
+{
+    for(auto it = std::begin(m_atlas); it != std::end(m_atlas); ++it)
+    {
+        SpriteAtlasI *item = it->get();
+        if (item->GetFilename().compare(jsonFilename) == 0)
+        {
+            return item;
+        }
+    }
+
+    return NULL;
+}
+
+void Engine::SpriteAtlasUnload(SpriteAtlasI *atlas)
+{
+    for(auto it = std::begin(m_atlas); it != std::end(m_atlas); ++it)
+    {
+        SpriteAtlasI *item = it->get();
+        if (item == atlas)
+        {
+            m_atlas.erase(it);
+            break;
+        }
+    }
+}
+
+void Engine::SpriteAtlasDisposeAll()
+{
+    m_sprites.clear();
+}
+
+SpriteDrawI *Engine::SpriteDrawLoad(SpriteI *sprite, SpriteAnimationDescriptor animation)
+{
+    engine::SpriteDraw *sd = new engine::SpriteDraw(sprite, animation);
+
+    if (sd)
+    {
+        m_spriteDraws.emplace_back(std::move(sd));
+    }
+    return sd;
+}
+
+void Engine::SpriteDrawUnload(SpriteDrawI *spriteDraw)
+{
+    for(auto it = std::begin(m_spriteDraws); it != std::end(m_spriteDraws); ++it)
+    {
+        SpriteDrawI *item = it->get();
+        if (item == spriteDraw)
+        {
+            m_spriteDraws.erase(it);
+            break;
+        }
+    }
+}
+
+void Engine::SpriteDrawDisposeAll()
+{
+    m_spriteDraws.empty();
 }

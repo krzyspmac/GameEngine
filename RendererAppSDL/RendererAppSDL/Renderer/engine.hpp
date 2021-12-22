@@ -44,10 +44,21 @@ namespace engine
         void DisposeAllSprites();
         void SpriteDraw(SpriteI *sprite, int x, int y);
 
+        SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
+        SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename);
+        void SpriteAtlasUnload(SpriteAtlasI *atlas);
+        void SpriteAtlasDisposeAll();
+
+        SpriteDrawI *SpriteDrawLoad(SpriteI *sprite, SpriteAnimationDescriptor animation);
+        void SpriteDrawUnload(SpriteDrawI *spriteDraw);
+        void SpriteDrawDisposeAll();
+
     private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
         std::vector<std::unique_ptr<SpriteI>> m_sprites;
+        std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;
+        std::vector<std::unique_ptr<SpriteDrawI>> m_spriteDraws;
 
         Uint64 m_performanceStart;
         Uint64 m_performanceEnd;

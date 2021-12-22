@@ -62,6 +62,20 @@
                ReferencedContainer = "container:../Libraries/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F2E2313276F8C51003E6B4E"
+               BuildableName = "libcjson.a"
+               BlueprintName = "cjson"
+               ReferencedContainer = "container:../Libraries/cJson/cJson.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

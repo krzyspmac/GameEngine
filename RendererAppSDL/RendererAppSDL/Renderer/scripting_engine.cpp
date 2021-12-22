@@ -6,7 +6,9 @@
 //
 
 #include "common.h"
+#include "sprite_interface_defs.h"
 #include "scripting_engine.hpp"
+#include "sprite.hpp"
 
 using namespace engine;
 
@@ -63,11 +65,17 @@ void ScriptingEngine::registerFunctions()
     lua_pushcclosure(L, &ScriptingEngine::lua_spriteLoad, 0);
     lua_setglobal (L, "L_spriteLoad");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDraw, 0);
-    lua_setglobal (L, "L_spriteDraw");
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteAtlasLoad, 0);
+    lua_setglobal (L, "L_spriteAtlasLoad");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDrawAnimated, 0);
-    lua_setglobal (L, "L_spriteDrawAnimated");
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteAtlasGetSprite, 0);
+    lua_setglobal (L, "L_spriteAtlasGetSprite");
+
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDrawCreate, 0);
+    lua_setglobal (L, "L_spriteDrawCreate");
+
+    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDrawRender, 0);
+    lua_setglobal (L, "L_spriteDrawRender");
 };
 
 void ScriptingEngine::callInit()
@@ -184,24 +192,24 @@ int ScriptingEngine::lua_drawText(lua_State *L)
     return 0;
 }
 
-/// L_spriteLoad(texture_handle, sprite_width, sprite_height, frame_count, frame_duration_ms)
+/// L_spriteLoad(texture_handle, sourceX, sourceY, sprite_width, sprite_height)
 /// returns: sprite_handle
 int ScriptingEngine::lua_spriteLoad(lua_State *L)
 {
     int argc = lua_gettop(L);
-    int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
-    int frame_count = lua_tonumberx(L, argc--, NULL);
     int sprite_height = lua_tonumberx(L, argc--, NULL);
     int sprite_width = lua_tonumberx(L, argc--, NULL);
+    int y = lua_tonumberx(L, argc--, NULL);
+    int x = lua_tonumberx(L, argc--, NULL);
     TextureI *texturePointer = (TextureI*)lua_topointer(L, argc--);
 
     if (texturePointer)
     {
         SpriteDescriptor descriptor;
+        descriptor.spriteSrcX = x;
+        descriptor.spriteSrcY = y;
         descriptor.spriteWidth = sprite_width;
         descriptor.spriteHeight = sprite_height;
-        descriptor.frameCount = frame_count;
-        descriptor.frameDuration = frame_duration_ms;
 
         SpriteI *sprite = GetMainEngine()->LoadSprite(texturePointer, descriptor);
         lua_pushlightuserdata(L, sprite);
@@ -213,34 +221,86 @@ int ScriptingEngine::lua_spriteLoad(lua_State *L)
     }
 }
 
-/// L_spriteDraw(sprite_handle, x, y, frame_number)
-int ScriptingEngine::lua_spriteDraw(lua_State *L)
+/// L_spriteAtlasLoad(json_path, texture_path)
+int ScriptingEngine::lua_spriteAtlasLoad(lua_State *L)
 {
     int argc = lua_gettop(L);
-    int frame_number = lua_tonumberx(L, argc--, NULL);
-    int y = lua_tonumberx(L, argc--, NULL);
-    int x = lua_tonumberx(L, argc--, NULL);
-    SpriteI *spritePointer = (SpriteI*)lua_topointer(L, argc--);
+    const char *texture_path = (char *) lua_tostring (L, argc--);
+    const char *json_path = (char *) lua_tostring (L, argc--);
 
-    if (spritePointer)
+    SpriteAtlasI *atlas = GetMainEngine()->SpriteAtlasLoad(json_path, texture_path);
+    lua_pushlightuserdata(L, atlas);
+
+    return 1;
+}
+
+/// L_spriteAtlasGetSprite(atlas_handle, sprite_name)
+/// returns: sprite_handle
+int ScriptingEngine::lua_spriteAtlasGetSprite(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
+    int frame_count = lua_tonumberx(L, argc--, NULL);
+    const char *spriteName = (char *) lua_tostring (L, argc--);
+    SpriteAtlasI *atlasPointer = (SpriteAtlasI*)lua_topointer(L, argc--);
+
+    if (atlasPointer)
     {
-        spritePointer->Draw(x, y, frame_number);
+        SpriteAtlasItemI *spriteAtlasItem = atlasPointer->GetItemForName(spriteName);
+        if (spriteAtlasItem)
+        {
+            SpriteAnimationDescriptor animationDescriptor;
+            animationDescriptor.frameDuration = frame_duration_ms;
+            animationDescriptor.frameCount = frame_count;
+        
+            Sprite *sprite = new Sprite(spriteAtlasItem);
+            if (sprite)
+            {
+                lua_pushlightuserdata(L, sprite);
+                return 1;
+            }
+        }
     }
 
     return 0;
 }
 
-/// L_spriteDrawAnimated(sprite_handle, x, y)
-int ScriptingEngine::lua_spriteDrawAnimated(lua_State *L)
+/// L_spriteDrawCreate(sprite_handle, frame_count, frame_time_in_ms)
+int ScriptingEngine::lua_spriteDrawCreate(lua_State *L)
 {
     int argc = lua_gettop(L);
-    int y = lua_tonumberx(L, argc--, NULL);
-    int x = lua_tonumberx(L, argc--, NULL);
+    int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
+    int frame_count = lua_tonumberx(L, argc--, NULL);
     SpriteI *spritePointer = (SpriteI*)lua_topointer(L, argc--);
 
     if (spritePointer)
     {
-        spritePointer->DrawAnimated(x, y);
+        SpriteAnimationDescriptor desc;
+        desc.frameCount = frame_count;
+        desc.frameDuration = frame_duration_ms;
+
+        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoad(spritePointer, desc);
+        if (sd)
+        {
+            lua_pushlightuserdata(L, sd);
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+/// L_spriteDrawRender(sprite_draw_handle, x, y)
+int ScriptingEngine::lua_spriteDrawRender(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    int y = lua_tonumberx(L, argc--, NULL);
+    int x = lua_tonumberx(L, argc--, NULL);
+    SpriteDrawI *spriteRender = (SpriteDrawI*)lua_topointer(L, argc--);
+
+    if (spriteRender)
+    {
+        spriteRender->Draw(x, y);
     }
 
     return 0;

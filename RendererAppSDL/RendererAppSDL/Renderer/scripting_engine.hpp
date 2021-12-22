@@ -69,15 +69,24 @@ namespace engine
         /// drawText(font_handle, text, x, y, r, g, b, align: "left"|"center"|"right")
         static int lua_drawText(lua_State *L);
 
-        /// L_spriteLoad(texture_handle, sprite_width, sprite_height, frame_count, frame_duration_ms)
+        /// L_spriteLoad(texture_handle, sourceX, sourceY, sprite_width, sprite_height)
         /// returns: sprite_handle
         static int lua_spriteLoad(lua_State *L);
 
-        /// L_spriteDraw(sprite_handle, x, y, frame_number)
-        static int lua_spriteDraw(lua_State *L);
+        /// L_spriteAtlasLoad(json_path, texture_path)
+        /// returns: atlas_handle
+        static int lua_spriteAtlasLoad(lua_State *L);
 
-        /// L_spriteDrawAnimated(sprite_handle, x, y)
-        static int lua_spriteDrawAnimated(lua_State *L);
+        /// L_spriteAtlasGetSprite(atlas_handle, sprite_name)
+        /// returns: sprite_handle
+        static int lua_spriteAtlasGetSprite(lua_State *L);
+
+        /// L_spriteDrawCreate(sprite_handle, frame_count, frame_time_in_ms)
+        /// returns: sprite_draw_handle
+        static int lua_spriteDrawCreate(lua_State *L);
+
+        /// L_spriteDrawRender(sprite_draw_handle, x, y)
+        static int lua_spriteDrawRender(lua_State *L);
 
     private:
         lua_State* L;
