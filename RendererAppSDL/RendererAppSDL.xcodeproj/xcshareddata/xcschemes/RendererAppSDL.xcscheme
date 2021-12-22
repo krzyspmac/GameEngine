@@ -31,7 +31,21 @@
                BlueprintIdentifier = "7F2E2313276F8C51003E6B4E"
                BuildableName = "liblua.a"
                BlueprintName = "lua"
-               ReferencedContainer = "container:../Lua/Lua.xcodeproj">
+               ReferencedContainer = "container:../Libraries/Lua/Lua.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "BE1FA72F07AF4C45004B6283"
+               BuildableName = "libSDL2_image.a"
+               BlueprintName = "Static Library"
+               ReferencedContainer = "container:../Libraries/SDL_image-main/Xcode/SDL_image.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +59,7 @@
                BlueprintIdentifier = "BE48FD6807AFA17000BB41DA"
                BuildableName = "libSDL2_ttf.a"
                BlueprintName = "Static Library"
-               ReferencedContainer = "container:Dependencies/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
+               ReferencedContainer = "container:../Libraries/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

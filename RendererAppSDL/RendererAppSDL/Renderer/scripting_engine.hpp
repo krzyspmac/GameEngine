@@ -14,9 +14,9 @@
 
 #ifdef __cplusplus
 extern "C" {
-    #include "../../../Lua/code/src/lua.h"
-    #include "../../../Lua/code/src/lualib.h"
-    #include "../../../Lua/code/src/lauxlib.h"
+    #include "lua.h"
+    #include "lualib.h"
+    #include "lauxlib.h"
 }
 #endif //__cplusplus
 

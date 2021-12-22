@@ -5,12 +5,12 @@
       location = "group:RendererAppSDL.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../Lua/Lua.xcodeproj">
+      location = "group:../Libraries/Lua/Lua.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Dependencies/SDL_image-main/Xcode/SDL_image.xcodeproj">
+      location = "group:../Libraries/SDL_image-main/Xcode/SDL_image.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Dependencies/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
+      location = "group:../Libraries/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
    </FileRef>
 </Workspace>
