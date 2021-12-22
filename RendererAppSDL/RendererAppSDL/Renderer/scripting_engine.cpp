@@ -47,34 +47,37 @@ void ScriptingEngine::loadFile(std::string fname)
 
 void ScriptingEngine::registerFunctions()
 {
-    lua_pushcclosure(L, &ScriptingEngine::lua_textureLoad, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_textureLoad, 0);
     lua_setglobal (L, "L_textureLoad");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_unloadTexture, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_unloadTexture, 0);
     lua_setglobal (L, "unloadTexture");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_loadFont, 0);
-    lua_setglobal (L, "loadFont");
+    lua_pushcclosure(L, &ScriptingEngine::L_loadFont, 0);
+    lua_setglobal (L, "L_loadFont");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_drawText, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_drawText, 0);
     lua_setglobal (L, "drawText");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_drawTexture, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_drawTexture, 0);
     lua_setglobal (L, "drawTexture");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteLoad, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_spriteLoad, 0);
     lua_setglobal (L, "L_spriteLoad");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteAtlasLoad, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_spriteAtlasLoad, 0);
     lua_setglobal (L, "L_spriteAtlasLoad");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteAtlasGetSprite, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_spriteAtlasGetSprite, 0);
     lua_setglobal (L, "L_spriteAtlasGetSprite");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDrawCreate, 0);
-    lua_setglobal (L, "L_spriteDrawCreate");
+    lua_pushcclosure(L, &ScriptingEngine::L_spriteDrawStaticCreate, 0);
+    lua_setglobal (L, "L_spriteDrawStaticCreate");
 
-    lua_pushcclosure(L, &ScriptingEngine::lua_spriteDrawRender, 0);
+    lua_pushcclosure(L, &ScriptingEngine::L_spriteDrawAnimatedCreate, 0);
+    lua_setglobal (L, "L_spriteDrawAnimatedCreate");
+
+    lua_pushcclosure(L, &ScriptingEngine::L_spriteDrawRender, 0);
     lua_setglobal (L, "L_spriteDrawRender");
 };
 
@@ -99,7 +102,7 @@ void ScriptingEngine::callUpdate()
 }
 
 /// loadTexture(name)
-int ScriptingEngine::lua_textureLoad(lua_State *L)
+int ScriptingEngine::L_textureLoad(lua_State *L)
 {
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
@@ -112,7 +115,7 @@ int ScriptingEngine::lua_textureLoad(lua_State *L)
 }
 
 /// unloadtexture(texture_handle)
-int ScriptingEngine::lua_unloadTexture(lua_State *L)
+int ScriptingEngine::L_unloadTexture(lua_State *L)
 {
     int argc = lua_gettop(L);
     TextureI *texturePointer = (TextureI*)lua_topointer(L, argc-0);
@@ -126,7 +129,7 @@ int ScriptingEngine::lua_unloadTexture(lua_State *L)
 }
 
 /// drawTexture(texture_handle, x, y)
-int ScriptingEngine::lua_drawTexture(lua_State *L)
+int ScriptingEngine::L_drawTexture(lua_State *L)
 {
     int argc = lua_gettop(L);
     int y = lua_tonumberx(L, argc--, NULL);
@@ -141,9 +144,9 @@ int ScriptingEngine::lua_drawTexture(lua_State *L)
     return 0;
 }
 
-/// loadFont(font_name)
+/// L_loadFont(font_name)
 /// returns: font_handle
-int ScriptingEngine::lua_loadFont(lua_State *L)
+int ScriptingEngine::L_loadFont(lua_State *L)
 {
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
@@ -155,7 +158,7 @@ int ScriptingEngine::lua_loadFont(lua_State *L)
 }
 
 /// drawText(font_handle, x, y, r, g, b, align: "left"|"center"|"right")
-int ScriptingEngine::lua_drawText(lua_State *L)
+int ScriptingEngine::L_drawText(lua_State *L)
 {
     int argc = lua_gettop(L);
 
@@ -194,7 +197,7 @@ int ScriptingEngine::lua_drawText(lua_State *L)
 
 /// L_spriteLoad(texture_handle, sourceX, sourceY, sprite_width, sprite_height)
 /// returns: sprite_handle
-int ScriptingEngine::lua_spriteLoad(lua_State *L)
+int ScriptingEngine::L_spriteLoad(lua_State *L)
 {
     int argc = lua_gettop(L);
     int sprite_height = lua_tonumberx(L, argc--, NULL);
@@ -222,7 +225,7 @@ int ScriptingEngine::lua_spriteLoad(lua_State *L)
 }
 
 /// L_spriteAtlasLoad(json_path, texture_path)
-int ScriptingEngine::lua_spriteAtlasLoad(lua_State *L)
+int ScriptingEngine::L_spriteAtlasLoad(lua_State *L)
 {
     int argc = lua_gettop(L);
     const char *texture_path = (char *) lua_tostring (L, argc--);
@@ -236,7 +239,7 @@ int ScriptingEngine::lua_spriteAtlasLoad(lua_State *L)
 
 /// L_spriteAtlasGetSprite(atlas_handle, sprite_name)
 /// returns: sprite_handle
-int ScriptingEngine::lua_spriteAtlasGetSprite(lua_State *L)
+int ScriptingEngine::L_spriteAtlasGetSprite(lua_State *L)
 {
     int argc = lua_gettop(L);
     int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
@@ -265,8 +268,28 @@ int ScriptingEngine::lua_spriteAtlasGetSprite(lua_State *L)
     return 0;
 }
 
-/// L_spriteDrawCreate(sprite_handle, frame_count, frame_time_in_ms)
-int ScriptingEngine::lua_spriteDrawCreate(lua_State *L)
+/// L_spriteDrawCreate(sprite_handle)
+int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    SpriteI *spritePointer = (SpriteI*)lua_topointer(L, argc--);
+
+    if (spritePointer)
+    {
+        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadStatic(spritePointer);
+        if (sd)
+        {
+            lua_pushlightuserdata(L, sd);
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+/// L_spriteDrawAnimatedCreate(sprite_handle, frame_count, frame_duration_ms)
+/// returns: sprite_draw_handle
+int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
 {
     int argc = lua_gettop(L);
     int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
@@ -275,11 +298,7 @@ int ScriptingEngine::lua_spriteDrawCreate(lua_State *L)
 
     if (spritePointer)
     {
-        SpriteAnimationDescriptor desc;
-        desc.frameCount = frame_count;
-        desc.frameDuration = frame_duration_ms;
-
-        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoad(spritePointer, desc);
+        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadAnimated(spritePointer, frame_count, frame_duration_ms);
         if (sd)
         {
             lua_pushlightuserdata(L, sd);
@@ -291,7 +310,7 @@ int ScriptingEngine::lua_spriteDrawCreate(lua_State *L)
 }
 
 /// L_spriteDrawRender(sprite_draw_handle, x, y)
-int ScriptingEngine::lua_spriteDrawRender(lua_State *L)
+int ScriptingEngine::L_spriteDrawRender(lua_State *L)
 {
     int argc = lua_gettop(L);
     int y = lua_tonumberx(L, argc--, NULL);
@@ -300,7 +319,10 @@ int ScriptingEngine::lua_spriteDrawRender(lua_State *L)
 
     if (spriteRender)
     {
-        spriteRender->Draw(x, y);
+        if (dynamic_cast<SpriteDrawI*>(spriteRender))
+        {
+            spriteRender->Draw(x, y);
+        }
     }
 
     return 0;

@@ -33,7 +33,7 @@ namespace engine {
             sp.spriteSrcX = x;
             sp.spriteSrcY = y;
             sp.spriteWidth = w;
-            sp.spriteHeight = w;
+            sp.spriteHeight = h;
             return sp;
         };
 
@@ -50,7 +50,7 @@ namespace engine {
     class SpriteAtlasI
     {
     public:
-        SpriteAtlasI(std::string filename) { }
+        SpriteAtlasI(std::string jsonFilename, std::string textureFilename) { }
 
     public:
         virtual std::string &GetFilename() = 0;

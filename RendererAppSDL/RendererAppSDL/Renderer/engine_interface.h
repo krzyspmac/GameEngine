@@ -96,9 +96,6 @@ namespace engine
         /// Unloads all sprites.
         virtual void DisposeAllSprites() = 0;
 
-        /// Draw the sprite.
-        virtual void SpriteDraw(SpriteI *sprite, int x, int y) = 0;
-
     /// Sprite atlas
     public:
 
@@ -119,7 +116,10 @@ namespace engine
     public:
 
         /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoad(SpriteI *sprite, SpriteAnimationDescriptor animation) = 0;
+        virtual SpriteDrawI *SpriteDrawLoadStatic(SpriteI *sprite) = 0;
+
+        /// Creates or gets a drawing handle for a sprite
+        virtual SpriteDrawI *SpriteDrawLoadAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs) = 0;
 
         /// Unloads the sprite draw.
         virtual void SpriteDrawUnload(SpriteDrawI *spriteDraw) = 0;

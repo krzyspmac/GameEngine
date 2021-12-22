@@ -16,7 +16,10 @@ end)
 
 
 
-myTexture = nil
+backgroundTexture = nil
+backgroundSprite = nil
+backgroundRenderer = nil
+
 myFont = nil
 
 walkTexture = nil
@@ -25,24 +28,26 @@ walkRenderer = nil
 
 atlas = nil
 atlasSprite = nil
+atlasSpriteRenderer = nil
 
 function init()
-    myTexture = L_textureLoad("background.jpg")
-    myFont = loadFont("EnterCommand.ttf")
-    walkTexture = L_textureLoad("sheriff.png")
-    walkSprite = L_spriteLoad(walkTexture, 0, 0, 68, 158)
-    walkRenderer = L_spriteDrawCreate(walkSprite, 9, 100)
+    backgroundTexture = L_textureLoad("background.jpg")
+    backgroundSprite = L_spriteLoad(backgroundTexture, 0, 0, 800, 600)
+    backgroundRenderer = L_spriteDrawStaticCreate(backgroundSprite)
     
-    --atlas = L_spriteAtlasLoad("image.json", "image.png")
-    --atlasSprite = L_spriteAtlasGetSprite(atlas, "/characters/sheriff.png", 9, 100)
+    myFont = L_loadFont("EnterCommand.ttf")
+    
+    atlas = L_spriteAtlasLoad("image.json", "image.png")
+    atlasSprite = L_spriteAtlasGetSprite(atlas, "/characters/sheriff.png", 9, 100)
+    atlasSpriteRenderer = L_spriteDrawAnimatedCreate(atlasSprite, 9, 100)
 end
 
 function update ()
     
     coroutine.resume(co)
 
-	L_spriteDrawRender(walkRenderer, 40, 40)
+	L_spriteDrawRender(backgroundRenderer, 0, 0)
+	L_spriteDrawRender(atlasSpriteRenderer, 40, 50)
 
---    drawTexture(myTexture, 0, 0)
---	drawText(myFont, "Lua in a C++ Engine! " .. a, 10, 10, 100, 100, 100, "left")
+	drawText(myFont, "Lua in a C++ Engine! " .. a, 10, 10, 100, 100, 100, "left")
 end

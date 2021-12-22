@@ -24,12 +24,6 @@ namespace engine
         { };
 
         Sprite(SpriteAtlasItemI *spriteAtlasItem);
-
-        /// Ask the engine provider to draw the sprite.
-        void Draw(int x, int y, int frameNumber = 0);
-
-        /// Draw the sprite animated.
-        void DrawAnimated(int x, int y);
     };
 }; // namespace engine
 

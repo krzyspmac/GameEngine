@@ -14,7 +14,7 @@ static char *readFile(std::string);
 using namespace engine;
 
 SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
-: SpriteAtlasI(jsonFilename)
+: SpriteAtlasI(jsonFilename, textureFilename)
 {
     std::string jsonConvertedPath = GetMainEngine()->getFileAccess().getBundledFilepath(jsonFilename.c_str());
     std::string textureConvertedPath = GetMainEngine()->getFileAccess().getBundledFilepath(textureFilename.c_str());
@@ -43,6 +43,7 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
                 m_items.emplace_back(SpriteAtlasItemI(texture, x, y, w, h, rotated, filename));
             }
 
+            m_filename = jsonFilename;
             cJSON_Delete(root);
             free(jsonText);
         }

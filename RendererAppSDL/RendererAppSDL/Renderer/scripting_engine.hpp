@@ -54,39 +54,43 @@ namespace engine
 
         /// lua_textureLoad(name)
         /// returns: texture_handle
-        static int lua_textureLoad(lua_State *L);
+        static int L_textureLoad(lua_State *L);
 
         /// unloadtexture(texture_handle)
-        static int lua_unloadTexture(lua_State *L);
+        static int L_unloadTexture(lua_State *L);
 
         /// drawTexture(texture_handle, x, y)
-        static int lua_drawTexture(lua_State *L);
+        static int L_drawTexture(lua_State *L);
 
-        /// loadFont(font_name)
+        /// L_loadFont(font_name)
         /// returns: font_handle
-        static int lua_loadFont(lua_State *L);
+        static int L_loadFont(lua_State *L);
 
         /// drawText(font_handle, text, x, y, r, g, b, align: "left"|"center"|"right")
-        static int lua_drawText(lua_State *L);
+        static int L_drawText(lua_State *L);
 
         /// L_spriteLoad(texture_handle, sourceX, sourceY, sprite_width, sprite_height)
         /// returns: sprite_handle
-        static int lua_spriteLoad(lua_State *L);
+        static int L_spriteLoad(lua_State *L);
 
         /// L_spriteAtlasLoad(json_path, texture_path)
         /// returns: atlas_handle
-        static int lua_spriteAtlasLoad(lua_State *L);
+        static int L_spriteAtlasLoad(lua_State *L);
 
         /// L_spriteAtlasGetSprite(atlas_handle, sprite_name)
         /// returns: sprite_handle
-        static int lua_spriteAtlasGetSprite(lua_State *L);
+        static int L_spriteAtlasGetSprite(lua_State *L);
 
-        /// L_spriteDrawCreate(sprite_handle, frame_count, frame_time_in_ms)
+        /// L_spriteDrawStaticCreate(sprite_handle)
         /// returns: sprite_draw_handle
-        static int lua_spriteDrawCreate(lua_State *L);
+        static int L_spriteDrawStaticCreate(lua_State *L);
+
+        /// L_spriteDrawAnimatedCreate(sprite_handle, frame_count, frame_duration_ms)
+        /// returns: sprite_draw_handle
+        static int L_spriteDrawAnimatedCreate(lua_State *L);
 
         /// L_spriteDrawRender(sprite_draw_handle, x, y)
-        static int lua_spriteDrawRender(lua_State *L);
+        static int L_spriteDrawRender(lua_State *L);
 
     private:
         lua_State* L;

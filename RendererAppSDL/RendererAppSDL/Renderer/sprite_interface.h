@@ -36,12 +36,6 @@ namespace engine
         ///
         SpriteDescriptor &GetDescriptor() { return m_spriteDescriptor; };
 
-        /// Draw the sprite.
-        virtual void Draw(int x, int y, int frameNumber = 0) = 0;
-
-        /// Draw the sprite animated.
-        virtual void DrawAnimated(int x, int y) = 0;
-
     protected:
         TextureI *m_texture;
         SpriteDescriptor m_spriteDescriptor;

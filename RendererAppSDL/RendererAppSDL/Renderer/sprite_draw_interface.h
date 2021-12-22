@@ -16,8 +16,8 @@ namespace engine
     class SpriteDrawI
     {
     public:
-        SpriteDrawI(SpriteI *sprite, SpriteAnimationDescriptor animation)
-            : m_sprite(sprite), m_animation(animation)
+        SpriteDrawI(SpriteI *sprite)
+            : m_sprite(sprite)
         { };
 
     public:
@@ -25,7 +25,6 @@ namespace engine
 
     protected:
         SpriteI *m_sprite;
-        SpriteAnimationDescriptor m_animation;
     };
 };
 

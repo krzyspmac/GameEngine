@@ -25,7 +25,7 @@
 		7F42607627736A0400E0DC09 /* image.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F42607427736A0400E0DC09 /* image.json */; };
 		7F42607727736A0400E0DC09 /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F42607527736A0400E0DC09 /* image.png */; };
 		7F42607927736A6D00E0DC09 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42607827736A6D00E0DC09 /* libcjson.a */; };
-		7F42607E27739BA000E0DC09 /* sprite_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F42607C27739BA000E0DC09 /* sprite_draw.cpp */; };
+		7F42607E27739BA000E0DC09 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F42607C27739BA000E0DC09 /* sprite_draw_static.cpp */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7FB6C2CF2772574100ADAEF1 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */; };
 		7FB6C2D42772786800ADAEF1 /* walk-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB6C2D32772786800ADAEF1 /* walk-left.png */; };
@@ -36,6 +36,7 @@
 		7FEDC9BC2770F7330009E6E5 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9BB2770F7330009E6E5 /* background.jpg */; };
 		7FEDC9C327711C9F0009E6E5 /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEDC9C127711C9F0009E6E5 /* font.cpp */; };
 		7FEDC9C527711D8C0009E6E5 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */; };
+		7FFE54592773AFA30046D532 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FFE54572773AFA30046D532 /* sprite_draw_animated.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,8 +88,8 @@
 		7F42607827736A6D00E0DC09 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F42607A277379EC00E0DC09 /* sprite_interface_defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_interface_defs.h; sourceTree = "<group>"; };
 		7F42607B277397D900E0DC09 /* sprite_draw_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_draw_interface.h; sourceTree = "<group>"; };
-		7F42607C27739BA000E0DC09 /* sprite_draw.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw.cpp; sourceTree = "<group>"; };
-		7F42607D27739BA000E0DC09 /* sprite_draw.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw.hpp; sourceTree = "<group>"; };
+		7F42607C27739BA000E0DC09 /* sprite_draw_static.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_static.cpp; sourceTree = "<group>"; };
+		7F42607D27739BA000E0DC09 /* sprite_draw_static.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_static.hpp; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7FB6C2CC2772566000ADAEF1 /* event_provider_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = event_provider_interface.h; sourceTree = "<group>"; };
 		7FB6C2CD2772574100ADAEF1 /* event_provider.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = event_provider.cpp; sourceTree = "<group>"; };
@@ -110,6 +111,8 @@
 		7FEDC9C127711C9F0009E6E5 /* font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font.cpp; sourceTree = "<group>"; };
 		7FEDC9C227711C9F0009E6E5 /* font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = font.hpp; sourceTree = "<group>"; };
 		7FEDC9C427711D8B0009E6E5 /* EnterCommand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnterCommand.ttf; sourceTree = "<group>"; };
+		7FFE54572773AFA30046D532 /* sprite_draw_animated.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_animated.cpp; sourceTree = "<group>"; };
+		7FFE54582773AFA30046D532 /* sprite_draw_animated.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_animated.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,8 +209,10 @@
 				7F426072277368F900E0DC09 /* sprite_atlas.hpp */,
 				7F426071277368F900E0DC09 /* sprite_atlas.cpp */,
 				7F42607B277397D900E0DC09 /* sprite_draw_interface.h */,
-				7F42607C27739BA000E0DC09 /* sprite_draw.cpp */,
-				7F42607D27739BA000E0DC09 /* sprite_draw.hpp */,
+				7F42607D27739BA000E0DC09 /* sprite_draw_static.hpp */,
+				7F42607C27739BA000E0DC09 /* sprite_draw_static.cpp */,
+				7FFE54582773AFA30046D532 /* sprite_draw_animated.hpp */,
+				7FFE54572773AFA30046D532 /* sprite_draw_animated.cpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -326,12 +331,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F3CAB082770951B00E0D74C /* file_access.mm in Sources */,
-				7F42607E27739BA000E0DC09 /* sprite_draw.cpp in Sources */,
+				7F42607E27739BA000E0DC09 /* sprite_draw_static.cpp in Sources */,
 				7F3CAB132770964000E0D74C /* RendererEntry.cpp in Sources */,
 				7FEDC9C327711C9F0009E6E5 /* font.cpp in Sources */,
 				7F3CAB0A2770951B00E0D74C /* engine.cpp in Sources */,
 				7F3CAB0B2770951B00E0D74C /* engine_provider.cpp in Sources */,
 				7FB6C2DA2772883400ADAEF1 /* sprite.cpp in Sources */,
+				7FFE54592773AFA30046D532 /* sprite_draw_animated.cpp in Sources */,
 				7FB6C2CF2772574100ADAEF1 /* event_provider.cpp in Sources */,
 				7F3CAB092770951B00E0D74C /* scripting_engine.cpp in Sources */,
 				7F426073277368F900E0DC09 /* sprite_atlas.cpp in Sources */,

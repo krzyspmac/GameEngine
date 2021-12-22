@@ -42,14 +42,14 @@ namespace engine
         SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor);
         void UnloadSprite(SpriteI *sprite);
         void DisposeAllSprites();
-        void SpriteDraw(SpriteI *sprite, int x, int y);
 
         SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
         SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename);
         void SpriteAtlasUnload(SpriteAtlasI *atlas);
         void SpriteAtlasDisposeAll();
 
-        SpriteDrawI *SpriteDrawLoad(SpriteI *sprite, SpriteAnimationDescriptor animation);
+        SpriteDrawI *SpriteDrawLoadStatic(SpriteI *sprite);
+        SpriteDrawI *SpriteDrawLoadAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs);
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
         void SpriteDrawDisposeAll();
 

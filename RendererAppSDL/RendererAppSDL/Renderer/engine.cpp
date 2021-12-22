@@ -10,7 +10,8 @@
 #include "sprite.hpp"
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas.hpp"
-#include "sprite_draw.hpp"
+#include "sprite_draw_static.hpp"
+#include "sprite_draw_animated.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -181,7 +182,7 @@ FontI *Engine::LoadFont(std::string name)
             return result;
         }
     }
-    return NULL;
+    return result;
 }
 
 FontI *Engine::GetFont(std::string name)
@@ -233,11 +234,6 @@ void Engine::DisposeAllSprites()
     m_sprites.clear();
 }
 
-void Engine::SpriteDraw(SpriteI *sprite, int x, int y)
-{
-    sprite->Draw(x, y);
-}
-
 SpriteAtlasI *Engine::SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename)
 {
     SpriteAtlasI *atlas = SpriteAtlasGet(jsonFilename);
@@ -285,15 +281,27 @@ void Engine::SpriteAtlasDisposeAll()
     m_sprites.clear();
 }
 
-SpriteDrawI *Engine::SpriteDrawLoad(SpriteI *sprite, SpriteAnimationDescriptor animation)
+SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteI *sprite)
 {
-    engine::SpriteDraw *sd = new engine::SpriteDraw(sprite, animation);
+    engine::SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite);
 
     if (sd)
     {
         m_spriteDraws.emplace_back(std::move(sd));
     }
     return sd;
+}
+
+SpriteDrawI *Engine::SpriteDrawLoadAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs)
+{
+    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprite, frameCount, frameAnimationDurationMs);
+
+    if (sd)
+    {
+        m_spriteDraws.emplace_back(std::move(sd));
+    }
+    return sd;
+
 }
 
 void Engine::SpriteDrawUnload(SpriteDrawI *spriteDraw)

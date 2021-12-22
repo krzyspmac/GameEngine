@@ -13,10 +13,10 @@
 namespace engine
 {
 
-    class SpriteDraw: public SpriteDrawI
+    class SpriteDrawStatic: public SpriteDrawI
     {
     public:
-        SpriteDraw(SpriteI *sprite, SpriteAnimationDescriptor animation);
+        SpriteDrawStatic(SpriteI *sprite);
 
     public:
         void Draw(int x, int y);
