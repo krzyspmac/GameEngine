@@ -44,6 +44,8 @@
 		7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13824C277505B600ED6D67 /* common_engine_impl.h */; };
 		7F13828A277505B600ED6D67 /* common_engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138250277505B600ED6D67 /* common_engine.h */; };
 		7F13828B277505B600ED6D67 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
+		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
+		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		7F138251277505B600ED6D67 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		7F1382A727750AC000ED6D67 /* common_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_sdl.h; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
+		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,9 +135,9 @@
 		7F13821B277505B600ED6D67 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
-				7F13821C277505B600ED6D67 /* texture.cpp */,
 				7F13821D277505B600ED6D67 /* texture_interface.h */,
 				7F13821E277505B600ED6D67 /* texture.hpp */,
+				7F13821C277505B600ED6D67 /* texture.cpp */,
 			);
 			path = Textures;
 			sourceTree = "<group>";
@@ -141,9 +145,9 @@
 		7F13821F277505B600ED6D67 /* Scripting */ = {
 			isa = PBXGroup;
 			children = (
-				7F138220277505B600ED6D67 /* scripting_engine.cpp */,
 				7F138221277505B600ED6D67 /* scripting_engine_provider_interface.h */,
 				7F138222277505B600ED6D67 /* scripting_engine.hpp */,
+				7F138220277505B600ED6D67 /* scripting_engine.cpp */,
 			);
 			path = Scripting;
 			sourceTree = "<group>";
@@ -164,9 +168,11 @@
 		7F13822A277505B600ED6D67 /* File Access */ = {
 			isa = PBXGroup;
 			children = (
-				7F13822B277505B600ED6D67 /* file_access.mm */,
-				7F13822C277505B600ED6D67 /* file_access.hpp */,
 				7F13822D277505B600ED6D67 /* file_access_provider.h */,
+				7F13822C277505B600ED6D67 /* file_access.hpp */,
+				7F13822B277505B600ED6D67 /* file_access.mm */,
+				7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */,
+				7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */,
 			);
 			path = "File Access";
 			sourceTree = "<group>";
@@ -203,8 +209,8 @@
 		7F13823F277505B600ED6D67 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				7F138240277505B600ED6D67 /* engine.hpp */,
 				7F138241277505B600ED6D67 /* engine_interface.h */,
+				7F138240277505B600ED6D67 /* engine.hpp */,
 				7F138242277505B600ED6D67 /* engine.cpp */,
 			);
 			path = Engine;
@@ -333,7 +339,9 @@
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
+				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F13826D277505B600ED6D67 /* sprite.cpp in Sources */,
+				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F138253277505B600ED6D67 /* texture.cpp in Sources */,
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
 				7F138277277505B600ED6D67 /* font.cpp in Sources */,

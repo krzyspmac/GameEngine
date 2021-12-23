@@ -38,7 +38,7 @@ namespace engine
         void closeState();
 
         ///
-        void loadFile(std::string fname);
+        void loadFile(FileMemoryBufferStreamI*);
 
         ///
         void registerFunctions();

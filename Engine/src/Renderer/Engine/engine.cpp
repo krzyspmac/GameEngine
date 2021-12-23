@@ -47,17 +47,22 @@ Engine::~Engine()
 
 void Engine::setup()
 {
+    m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
 #if SHOW_FPS
     m_fpsFont = LoadFont("EnterCommand.ttf");
 #endif
 
+    std::unique_ptr<FileMemoryBufferStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
+
     m_scriptingEngine.newState();
-    m_scriptingEngine.loadFile(m_fileAccess.getBundledFilepath("main.lua"));
+    m_scriptingEngine.loadFile(streamBuffer.get());
     m_scriptingEngine.registerFunctions();
     m_scriptingEngine.callInit();
 
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
+
+//    delete streamBuffer;
 
 //    SpriteAtlasI *atlas = SpriteAtlasLoad("image.json", "image.png");
 ////    SpriteAtlas *atlas = new SpriteAtlas("image.json", "image.png");

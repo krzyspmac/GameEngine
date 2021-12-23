@@ -9,6 +9,7 @@
 #define scripting_enging_provider_interface_h
 
 #include "engine_provider_interface.h"
+#include "file_access_provider.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,7 +36,7 @@ namespace engine
         virtual void closeState() = 0;
 
         ///
-        virtual void loadFile(std::string fname) = 0;
+        virtual void loadFile(FileMemoryBufferStreamI*) = 0;
 
         ///
         virtual void registerFunctions() = 0;

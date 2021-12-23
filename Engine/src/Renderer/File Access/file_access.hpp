@@ -16,9 +16,30 @@ namespace engine
     class FileAccess : public FileAccessI
     {
     public:
-        std::string getBundlePath();
-    
+        FileAccess();
+
+        int LoadPackedFile(std::string filename);
+
+        int LoadDirectory(std::string directory);
+
+        std::string GetResourcesDirectory();
+
+    public:
+        FileMemoryBufferStreamI *GetAccess(std::string filename);
+
+    public:
         std::string getBundledFilepath(const char *value);
+
+        std::string loadText(std::string filename);
+
+        FileMemoryBufferStreamI *LoadBufferStream(const char *filename);
+
+    private:
+        std::string GetFullPath(std::string filename);
+
+    private:
+        FILE *m_gPackFile;
+        std::string m_dataDirectory;
     };
 };
 

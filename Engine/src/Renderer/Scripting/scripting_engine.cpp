@@ -28,9 +28,9 @@ void ScriptingEngine::closeState()
     lua_close(L);
 }
 
-void ScriptingEngine::loadFile(std::string fname)
+void ScriptingEngine::loadFile(FileMemoryBufferStreamI *bufferStream)
 {
-    if(luaL_loadfile(this->L, fname.c_str()) == 0)
+    if (luaL_loadbufferx(this->L, (const char*)bufferStream->GetMemory(), bufferStream->GetSize(), "script", NULL) == 0)
     {
         // Call priming lua_pcall
         int iErr = lua_pcall(L, 0, 0, 0);
