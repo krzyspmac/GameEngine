@@ -10,6 +10,7 @@
 
 #include "texture_interface.h"
 #include "font_interface.h"
+#include "file_access_provider.h"
 #include "common.h"
 
 namespace engine
@@ -81,7 +82,7 @@ namespace engine
 
         /// Load a font. The ownership
         /// of the texture is passed to the caller.
-        virtual FontI *LoadFont(std::string name) = 0;
+        virtual FontI *LoadFont(std::string name, FileMemoryBufferStreamI *) = 0;
 
         /// Draws a text using a specified font.
         virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;

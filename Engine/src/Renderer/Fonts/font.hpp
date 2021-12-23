@@ -11,6 +11,7 @@
 #include "common.h"
 #include "font_interface.h"
 #include "common_engine_impl.h"
+#include "file_access_provider.h"
 
 namespace engine
 {
@@ -25,7 +26,7 @@ namespace engine
     class Font: FontI
     {
     public:
-        Font(SDL_APP *engineHandle, std::string filename);
+        Font(SDL_APP *engineHandle, std::string filename, FileMemoryBufferStreamI *stream);
         ~Font();
 
         SDL_Texture *getFontTexture() { return m_fontTexture; };

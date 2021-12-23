@@ -137,9 +137,9 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
     }
 }
 
-FontI *EngineProvider::LoadFont(std::string name)
+FontI *EngineProvider::LoadFont(std::string name, FileMemoryBufferStreamI *stream)
 {
-    return (FontI*)new Font(m_engineHandle, name);
+    return (FontI*)new Font(m_engineHandle, name, stream);
 }
 
 void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
@@ -147,12 +147,5 @@ void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r
     Font *fontImpl = (Font*)font;
     fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
-
-//void EngineProvider::DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...)
-//{
-////    bgfx::dbgTextPrintf(0, 1, 0x0f, "Color can be changed with ANSI \x1b[9;me\x1b[10;ms\x1b[11;mc\x1b[12;ma\x1b[13;mp\x1b[14;me\x1b[0m code too.");
-//
-//    bgfx::dbgTextPrintf(_x, _y, _attr, _format);
-//};
-
+    
 };

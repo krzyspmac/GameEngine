@@ -180,7 +180,8 @@ FontI *Engine::LoadFont(std::string name)
     FontI *result = GetFont(name);
     if (!result)
     {
-        result = m_engineProvider.LoadFont(name);
+        std::unique_ptr<FileMemoryBufferStreamI> stream(m_fileAccess.GetAccess(name));
+        result = m_engineProvider.LoadFont(name, stream.get());
         if (result)
         {
             m_fonts.emplace_back(std::move(result));

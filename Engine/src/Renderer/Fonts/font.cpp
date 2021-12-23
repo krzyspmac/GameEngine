@@ -17,12 +17,18 @@ static int nextGlyph(const char *str, int *i, char *glyphBuffer);
 static SDL_Color white = {255, 255, 255, 255};
 static SDL_Texture *toTexture(engine::SDL_APP app, SDL_Surface *surface, int destroySurface);
 
-Font::Font(engine::SDL_APP *engineHandle, std::string filename)
+Font::Font(engine::SDL_APP *engineHandle, std::string filename, FileMemoryBufferStreamI *stream)
 : FontI(filename)
 {
     std::cout << "Loading font " << filename << std::endl;
+
+    SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
+    if (!ops)
+    {
+        return;
+    }
     
-    m_font = TTF_OpenFont(filename.c_str(), FONT_SIZE);
+    m_font = TTF_OpenFontRW(ops, 1, FONT_SIZE); //TTF_OpenFont(filename.c_str(), FONT_SIZE);
     if (m_font == NULL)
     {
         std::cout << "Could not open font " << filename << std::endl;
@@ -45,10 +51,10 @@ Font::Font(engine::SDL_APP *engineHandle, std::string filename)
     while ((n = nextGlyph(characters, &i, glyphBuffer)) != 0)
     {
         if (n >= MAX_GLYPHS)
-            {
+        {
             printf("Glyph '%s' index exceeds array size (%d >= %d)\n", glyphBuffer, n, MAX_GLYPHS);
             exit(1);
-            }
+        }
 
         text = TTF_RenderUTF8_Blended(m_font, glyphBuffer, white);
 
@@ -61,10 +67,10 @@ Font::Font(engine::SDL_APP *engineHandle, std::string filename)
             dest.y += dest.h + 1;
 
             if (dest.y + dest.h >= FONT_TEXTURE_SIZE)
-                {
+            {
                 SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_CRITICAL, "Out of glyph space in %dx%d font atlas texture map.", FONT_TEXTURE_SIZE, FONT_TEXTURE_SIZE);
                 exit(1);
-                }
+            }
             }
 
         SDL_BlitSurface(text, NULL, surface, &dest);
