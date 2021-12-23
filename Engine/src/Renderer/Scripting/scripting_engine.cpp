@@ -107,8 +107,7 @@ int ScriptingEngine::L_textureLoad(lua_State *L)
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
 
-    std::string path = GetMainEngine()->getFileAccess().getBundledFilepath(msgX);
-    TextureI *texture = GetMainEngine()->LoadTexture(path);
+    TextureI *texture = GetMainEngine()->LoadTexture(msgX);
     lua_pushlightuserdata(L, texture);
 
     return 1;

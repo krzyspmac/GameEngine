@@ -10,6 +10,7 @@
 
 #include "texture_interface.h"
 #include "sprite_interface_defs.h"
+#include "file_access_provider.h"
 
 namespace engine {
 

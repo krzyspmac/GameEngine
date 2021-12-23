@@ -9,20 +9,17 @@
 #include "engine.hpp"
 #include "cJSON.h"
 
-static char *readFile(std::string);
-
 using namespace engine;
 
 SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
 : SpriteAtlasI(jsonFilename, textureFilename)
 {
-    std::string jsonConvertedPath = GetMainEngine()->getFileAccess().getBundledFilepath(jsonFilename.c_str());
-    std::string textureConvertedPath = GetMainEngine()->getFileAccess().getBundledFilepath(textureFilename.c_str());
+    std::unique_ptr<FileMemoryBufferStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonFilename));
 
-    TextureI *texture = GetMainEngine()->LoadTexture(textureConvertedPath);
+    TextureI *texture = GetMainEngine()->LoadTexture(textureFilename);
     if (texture)
     {
-        char *jsonText = readFile(jsonConvertedPath.c_str());
+        char *jsonText = (char*)stream.get()->GetMemory();
         if (jsonText)
         {
             cJSON *root, *node;
@@ -45,7 +42,6 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
 
             m_filename = jsonFilename;
             cJSON_Delete(root);
-            free(jsonText);
         }
     }
 }
@@ -65,28 +61,4 @@ SpriteAtlasItemI *SpriteAtlas::GetItemForName(std::string name)
     }
 
     return NULL;
-}
-
-char *readFile(std::string filename)
-{
-    char *buffer = NULL;
-    long length;
-    FILE *file;
-
-    file = fopen(filename.c_str(), "rb");
-
-    if (file)
-    {
-        fseek(file, 0, SEEK_END);
-        length = ftell(file);
-        fseek(file, 0, SEEK_SET);
-
-        buffer = (char*)malloc(length);
-        memset(buffer, 0, length);
-        fread(buffer, 1, length, file);
-
-        fclose(file);
-    }
-
-    return buffer;
 }

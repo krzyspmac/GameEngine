@@ -18,13 +18,15 @@ namespace engine
     class FileMemoryBufferStreamI
     {
     public:
-        FileMemoryBufferStreamI() { };
+        FileMemoryBufferStreamI(std::string filename): filename(filename) { };
         virtual ~FileMemoryBufferStreamI() { }; // memory descrutor moved to derived classes
 
+        std::string &GetFilename() { return filename; };
         void *GetMemory() { return memory; };
         long &GetSize() { return size; };
 
     protected:
+        std::string filename;
         void *memory;
         long size;
     };

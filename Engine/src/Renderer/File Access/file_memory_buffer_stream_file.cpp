@@ -10,7 +10,7 @@
 using namespace engine;
 
 FileMemoryBufferStreamFromFile::FileMemoryBufferStreamFromFile(std::string filename)
-    : FileMemoryBufferStreamI()
+    : FileMemoryBufferStreamI(filename)
 {
     FILE *fp = fopen(filename.c_str(), "r");
     if (fp)

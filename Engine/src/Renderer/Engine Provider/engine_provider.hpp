@@ -40,7 +40,7 @@ class EngineProvider : public EngineProviderI
         void RenderPresent();
 
     public:
-        TextureI *LoadTexture(std::string name);
+        TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *);
         void UnloadTexture(TextureI *texture);
         void DrawTexture(TextureI *texture, int x, int y);
         void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH);

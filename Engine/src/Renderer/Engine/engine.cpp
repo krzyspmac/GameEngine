@@ -61,17 +61,6 @@ void Engine::setup()
 
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
-
-//    delete streamBuffer;
-
-//    SpriteAtlasI *atlas = SpriteAtlasLoad("image.json", "image.png");
-////    SpriteAtlas *atlas = new SpriteAtlas("image.json", "image.png");
-//    SpriteAtlasItemI *item = atlas->GetItemForName("/characters/sheriff.png");
-////    SpriteI *s = 
-//    if (item)
-//        {
-//
-//        }
 }
 
 int Engine::doInput()
@@ -122,12 +111,13 @@ void Engine::update()
     m_engineProvider.Delay(1);
 }
 
-TextureI *Engine::LoadTexture(std::string name)
+TextureI *Engine::LoadTexture(std::string filename)
 {
-    TextureI *result = GetTexture(name);
+    TextureI *result = GetTexture(filename);
     if (!result)
     {
-        result = m_engineProvider.LoadTexture(name);
+        std::unique_ptr<FileMemoryBufferStreamI> stream(m_fileAccess.GetAccess(filename));
+        result = m_engineProvider.LoadTexture(filename, stream.get());
         if (result)
         {
             m_textures.emplace_back(std::move(result));

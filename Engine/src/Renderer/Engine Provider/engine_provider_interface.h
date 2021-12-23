@@ -64,7 +64,7 @@ namespace engine
 
         /// A concrete instance should load the texture. The ownership
         /// of the texture is passed to the caller.
-        virtual TextureI *LoadTexture(std::string name) = 0;
+        virtual TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *) = 0;
 
         /// A concrete instance should unload the texture.
         virtual void UnloadTexture(TextureI *texture) = 0;

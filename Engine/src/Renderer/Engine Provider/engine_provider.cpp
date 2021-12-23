@@ -52,12 +52,18 @@ void EngineProvider::RenderPresent()
     SDL_RenderPresent(m_engineHandle->renderer);
 }
 
-TextureI *EngineProvider::LoadTexture(std::string filename)
+TextureI *EngineProvider::LoadTexture(std::string filename, FileMemoryBufferStreamI *stream)
 {
     SDL_Texture *textureHandle;
-    
+
+    SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
+    if (!ops)
+    {
+        return NULL;
+    }
+
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename.c_str());
-    textureHandle = IMG_LoadTexture(m_engineHandle->renderer, filename.c_str());
+    textureHandle = IMG_LoadTexture_RW(m_engineHandle->renderer, ops, 1);
 
     if (textureHandle != NULL)
     {
@@ -147,5 +153,5 @@ void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r
     Font *fontImpl = (Font*)font;
     fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
-    
+
 };
