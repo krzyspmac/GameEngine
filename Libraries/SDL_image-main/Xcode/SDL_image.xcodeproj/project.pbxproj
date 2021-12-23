@@ -498,7 +498,7 @@
 					/Library/Frameworks/SDL.framework/Headers,
 				);
 				HEADER_SEARCH_PATHS_QUOTED = "\"$(SRCROOT)/Frameworks/webp.framework/Headers\"";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = SDL2_image;
 				SDKROOT = macosx;
@@ -516,7 +516,6 @@
 				INFOPLIST_FILE = "Info-Framework.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					webp,
@@ -619,7 +618,7 @@
 					/Library/Frameworks/SDL.framework/Headers,
 				);
 				HEADER_SEARCH_PATHS_QUOTED = "\"$(SRCROOT)/Frameworks/webp.framework/Headers\"";
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = SDL2_image;
 				SDKROOT = macosx;
 				SEPARATE_STRIP = YES;
@@ -638,7 +637,6 @@
 				INFOPLIST_FILE = "Info-Framework.plist";
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				OTHER_LDFLAGS = (
 					"-weak_framework",
 					webp,

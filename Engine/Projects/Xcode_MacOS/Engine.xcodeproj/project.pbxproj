@@ -7,23 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F138252277505B600ED6D67 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
 		7F138253277505B600ED6D67 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
 		7F138254277505B600ED6D67 /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821D277505B600ED6D67 /* texture_interface.h */; };
 		7F138255277505B600ED6D67 /* texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821E277505B600ED6D67 /* texture.hpp */; };
-		7F138256277505B600ED6D67 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
 		7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
 		7F138258277505B600ED6D67 /* scripting_engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138221277505B600ED6D67 /* scripting_engine_provider_interface.h */; };
 		7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
 		7F13825A277505B600ED6D67 /* engine_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138224277505B600ED6D67 /* engine_provider.hpp */; };
-		7F13825B277505B600ED6D67 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138225277505B600ED6D67 /* event_provider.cpp */; };
 		7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138225277505B600ED6D67 /* event_provider.cpp */; };
 		7F13825D277505B600ED6D67 /* event_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138226277505B600ED6D67 /* event_provider.hpp */; };
 		7F13825E277505B600ED6D67 /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138227277505B600ED6D67 /* event_provider_interface.h */; };
 		7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138228277505B600ED6D67 /* engine_provider_interface.h */; };
-		7F138260277505B600ED6D67 /* engine_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138229277505B600ED6D67 /* engine_provider.cpp */; };
 		7F138261277505B600ED6D67 /* engine_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138229277505B600ED6D67 /* engine_provider.cpp */; };
-		7F138262277505B600ED6D67 /* file_access.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13822B277505B600ED6D67 /* file_access.mm */; };
 		7F138263277505B600ED6D67 /* file_access.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13822B277505B600ED6D67 /* file_access.mm */; };
 		7F138264277505B600ED6D67 /* file_access.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822C277505B600ED6D67 /* file_access.hpp */; };
 		7F138265277505B600ED6D67 /* file_access_provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822D277505B600ED6D67 /* file_access_provider.h */; };
@@ -31,45 +26,25 @@
 		7F138267277505B600ED6D67 /* sprite_draw_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138230277505B600ED6D67 /* sprite_draw_interface.h */; };
 		7F138268277505B600ED6D67 /* sprite_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138231277505B600ED6D67 /* sprite_interface.h */; };
 		7F138269277505B600ED6D67 /* sprite_atlas.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138232277505B600ED6D67 /* sprite_atlas.hpp */; };
-		7F13826A277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */; };
 		7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */; };
-		7F13826C277505B600ED6D67 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138234277505B600ED6D67 /* sprite.cpp */; };
 		7F13826D277505B600ED6D67 /* sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138234277505B600ED6D67 /* sprite.cpp */; };
 		7F13826E277505B600ED6D67 /* sprite_draw_animated.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */; };
 		7F13826F277505B600ED6D67 /* sprite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138236277505B600ED6D67 /* sprite.hpp */; };
 		7F138270277505B600ED6D67 /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138237277505B600ED6D67 /* sprite_atlas_interface.h */; };
-		7F138271277505B600ED6D67 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_draw_static.cpp */; };
 		7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_draw_static.cpp */; };
 		7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138239277505B600ED6D67 /* sprite_interface_defs.h */; };
-		7F138274277505B600ED6D67 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823A277505B600ED6D67 /* sprite_atlas.cpp */; };
 		7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823A277505B600ED6D67 /* sprite_atlas.cpp */; };
-		7F138276277505B600ED6D67 /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823C277505B600ED6D67 /* font.cpp */; };
 		7F138277277505B600ED6D67 /* font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823C277505B600ED6D67 /* font.cpp */; };
 		7F138278277505B600ED6D67 /* font_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13823D277505B600ED6D67 /* font_interface.h */; };
 		7F138279277505B600ED6D67 /* font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13823E277505B600ED6D67 /* font.hpp */; };
 		7F13827A277505B600ED6D67 /* engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138240277505B600ED6D67 /* engine.hpp */; };
 		7F13827B277505B600ED6D67 /* engine_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138241277505B600ED6D67 /* engine_interface.h */; };
-		7F13827C277505B600ED6D67 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138242277505B600ED6D67 /* engine.cpp */; };
 		7F13827D277505B600ED6D67 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138242277505B600ED6D67 /* engine.cpp */; };
 		7F13827E277505B600ED6D67 /* defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138243277505B600ED6D67 /* defs.h */; };
 		7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13824C277505B600ED6D67 /* common_engine_impl.h */; };
 		7F13828A277505B600ED6D67 /* common_engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138250277505B600ED6D67 /* common_engine.h */; };
 		7F13828B277505B600ED6D67 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
-		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		7F3CAAFA2770947500E0D74C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7F1382152775059B00ED6D67 /* libEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,7 +86,6 @@
 		7F138250277505B600ED6D67 /* common_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_engine.h; sourceTree = "<group>"; };
 		7F138251277505B600ED6D67 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		7F1382A727750AC000ED6D67 /* common_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_sdl.h; sourceTree = "<group>"; };
-		7F3CAAE1277093D500E0D74C /* RendererAppSDL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RendererAppSDL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -120,14 +94,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F3CAADE277093D500E0D74C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,7 +222,6 @@
 		7F3CAAE2277093D500E0D74C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F3CAAE1277093D500E0D74C /* RendererAppSDL.app */,
 				7F1382152775059B00ED6D67 /* libEngine.a */,
 			);
 			name = Products;
@@ -326,24 +291,6 @@
 			productReference = 7F1382152775059B00ED6D67 /* libEngine.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		7F3CAAE0277093D500E0D74C /* RendererAppSDL */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "RendererAppSDL" */;
-			buildPhases = (
-				7F3CAADD277093D500E0D74C /* Sources */,
-				7F3CAADE277093D500E0D74C /* Frameworks */,
-				7F3CAADF277093D500E0D74C /* Resources */,
-				7F3CAAFA2770947500E0D74C /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = RendererAppSDL;
-			productName = RendererAppSDL;
-			productReference = 7F3CAAE1277093D500E0D74C /* RendererAppSDL.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -354,9 +301,6 @@
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					7F1382142775059B00ED6D67 = {
-						CreatedOnToolsVersion = 13.1;
-					};
-					7F3CAAE0277093D500E0D74C = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
@@ -374,21 +318,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F3CAAE0277093D500E0D74C /* RendererAppSDL */,
 				7F1382142775059B00ED6D67 /* Engine */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		7F3CAADF277093D500E0D74C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7F1382122775059B00ED6D67 /* Sources */ = {
@@ -409,31 +342,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7F3CAADD277093D500E0D74C /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F138260277505B600ED6D67 /* engine_provider.cpp in Sources */,
-				7F13826A277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
-				7F138274277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
-				7F138271277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
-				7F13825B277505B600ED6D67 /* event_provider.cpp in Sources */,
-				7F13826C277505B600ED6D67 /* sprite.cpp in Sources */,
-				7F138252277505B600ED6D67 /* texture.cpp in Sources */,
-				7F138262277505B600ED6D67 /* file_access.mm in Sources */,
-				7F138276277505B600ED6D67 /* font.cpp in Sources */,
-				7F138256277505B600ED6D67 /* scripting_engine.cpp in Sources */,
-				7F13827C277505B600ED6D67 /* engine.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		7F1382172775059B00ED6D67 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FQAVWUP3;
 				EXECUTABLE_PREFIX = lib;
@@ -445,7 +359,6 @@
 		7F1382182775059B00ED6D67 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 75FQAVWUP3;
 				EXECUTABLE_PREFIX = lib;
@@ -515,7 +428,7 @@
 					"$(SRCROOT)/../../../Libraries/SDL_ttf-main",
 					"$(SRCROOT)/../../../Libraries/cJson/cJson",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -582,7 +495,7 @@
 					"$(SRCROOT)/../../../Libraries/SDL_ttf-main",
 					"$(SRCROOT)/../../../Libraries/cJson/cJson",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -590,58 +503,6 @@
 					webp,
 				);
 				SDKROOT = macosx;
-			};
-			name = Release;
-		};
-		7F3CAAF2277093D600E0D74C /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = RendererAppSDL/MacOS/RendererAppSDL.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 75FQAVWUP3;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainNibFile = MainMenu;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.RendererAppSDL;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-			};
-			name = Debug;
-		};
-		7F3CAAF3277093D600E0D74C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = RendererAppSDL/MacOS/RendererAppSDL.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 75FQAVWUP3;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainNibFile = MainMenu;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.RendererAppSDL;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -662,15 +523,6 @@
 			buildConfigurations = (
 				7F3CAAEF277093D600E0D74C /* Debug */,
 				7F3CAAF0277093D600E0D74C /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "RendererAppSDL" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F3CAAF2277093D600E0D74C /* Debug */,
-				7F3CAAF3277093D600E0D74C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

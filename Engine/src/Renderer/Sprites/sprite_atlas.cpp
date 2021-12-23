@@ -50,6 +50,10 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
     }
 }
 
+SpriteAtlas::~SpriteAtlas()
+{
+}
+
 SpriteAtlasItemI *SpriteAtlas::GetItemForName(std::string name)
 {
     for(auto it = std::begin(m_items); it != std::end(m_items); ++it)

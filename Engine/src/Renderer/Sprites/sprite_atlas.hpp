@@ -17,6 +17,7 @@ namespace engine {
     {
     public:
         SpriteAtlas(std::string jsonFilename, std::string textureFilename);
+        ~SpriteAtlas();
 
         SpriteAtlasItemI *GetItemForName(std::string name);
 
