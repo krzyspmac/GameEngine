@@ -1,0 +1,15 @@
+[{
+		"filename":	"/characters/sheriff.png",
+		"x":	0,
+		"y":	0,
+		"w":	614,
+		"h":	158,
+		"rotated":	0
+	}, {
+		"filename":	"/characters/walk-left.png",
+		"x":	615,
+		"y":	0,
+		"w":	66,
+		"h":	54,
+		"rotated":	0
+	}]
