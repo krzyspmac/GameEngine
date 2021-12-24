@@ -1,4 +1,3 @@
-
 print("Total init")
 a = 1
 

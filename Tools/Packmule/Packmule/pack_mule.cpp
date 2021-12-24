@@ -78,7 +78,7 @@ void PackMule::SavePack()
     FILE *fp = fopen(m_outfile.c_str(), "wb");
     if (fp)
     {
-        int32_t count = (int32_t)m_files.size();
+        int64_t count = (int64_t)m_files.size();
         size_t packItemSize = sizeof(PacItem) * count;
 
         PacItem *items = (PacItem*)malloc(packItemSize);
@@ -86,8 +86,9 @@ void PackMule::SavePack()
         {
             bzero(items, packItemSize);
 
-            fwrite(&count, sizeof(int32_t), 1, fp);
-            uint64_t totalOffset = packItemSize;
+            fwrite(&count, sizeof(int64_t), 1, fp);
+            uint64_t initialOffset = ftell(fp);
+            uint64_t totalOffset = initialOffset+packItemSize;
 
             for(auto it = std::begin(m_files); it != std::end(m_files); ++it)
             {

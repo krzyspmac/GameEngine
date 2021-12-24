@@ -36,14 +36,14 @@ std::string FileWrapper::GetFullPath()
 
 void *FileWrapper::LoadIntoMemory()
 {
-    FILE *fp = fopen(GetFullPath().c_str(), "r");
+    FILE *fp = fopen(GetFullPath().c_str(), "rb");
     if (fp)
     {
         fseek(fp, 0, SEEK_END);
         long size = ftell(fp);
         fseek(fp, 0, SEEK_SET);
 
-        buffer = malloc(size + 1);
+        buffer = malloc(size);
         fread(buffer, size, 1, fp);
 
         fclose(fp);

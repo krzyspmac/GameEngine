@@ -28,16 +28,26 @@ public:
 
     /// Setup with given data. Copies data.
     PackList(PacItem *items, int numItem);
+
+    /// Get item at an index; Returns NULL if out of bounds.
     PacItem *GetItemAtIndex(int index);
+
+    /// Get an item by its filename. Returns NULL if not found.
     PacItem *GetItemNamed(std::string);
 
+    /// Load the memory for the item. Memory management is
+    /// passed to the caller. FILE *fp must be open and exist.
+    void *LoadMemory(PacItem *);
+
+    /// Print the file table.
     void PrintTable();
 
     ~PackList();
 
 private:
+    FILE *m_fp;
     PacItem *m_items;
-    int m_numItems;
+    int64_t m_numItems;
 };
 
 class PackBundle

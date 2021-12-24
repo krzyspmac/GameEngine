@@ -56,7 +56,9 @@ int main(int argc, char * argv[]) {
         {
             PackList *packList = new PackList(fp);
             packList->PrintTable();
-        
+
+            PacItem *lua = packList->GetItemNamed("main.lua");
+            void *mmm = packList->LoadMemory(lua);
             delete packList;
             fclose(fp);
         }

@@ -9,7 +9,8 @@
 
 PackList::PackList(FILE *fp)
 {
-    fread(&m_numItems, sizeof(int32_t), 1, fp);
+    m_fp = fp;
+    fread(&m_numItems, sizeof(int64_t), 1, fp);
     m_items = (PacItem*)malloc(sizeof(PacItem) * m_numItems);
     fread(m_items, sizeof(PacItem), m_numItems, fp);
 }
@@ -60,5 +61,21 @@ void PackList::PrintTable()
     {
         PacItem *item = GetItemAtIndex(i);
         std::cout << item->m_filename << ", " << item->size << " bytes" << std::endl;
+    }
+}
+
+void *PackList::LoadMemory(PacItem *item)
+{
+    if(item)
+    {
+        fseek(m_fp, 0, SEEK_SET);
+        fseek(m_fp, item->offset, SEEK_SET);
+        void *memory = malloc(item->size);
+        fread(memory, item->size, 1, m_fp);
+        return memory;
+    }
+    else
+    {
+        return NULL;
     }
 }
