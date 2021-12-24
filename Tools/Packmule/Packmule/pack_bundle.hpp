@@ -29,6 +29,7 @@ public:
     /// Setup with given data. Copies data.
     PackList(PacItem *items, int numItem);
     PacItem *GetItemAtIndex(int index);
+    PacItem *GetItemNamed(std::string);
 
     void PrintTable();
 

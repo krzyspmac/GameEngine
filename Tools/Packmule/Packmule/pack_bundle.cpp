@@ -31,14 +31,32 @@ PackList::~PackList()
 
 PacItem *PackList::GetItemAtIndex(int index)
 {
-    return m_items + index;
+    if (index < m_numItems)
+    {
+        return m_items + index;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+PacItem *PackList::GetItemNamed(std::string filename)
+{
+    for(int i = 0; i < m_numItems; i++)
+    {
+        PacItem *item = GetItemAtIndex(i);
+        if (item && strcmp(item->m_filename, filename.c_str()) == 0)
+        {
+            return item;
+        }
+    }
+    return NULL;
 }
 
 void PackList::PrintTable()
 {
-    int i = 0;
-
-    for(i = 0; i < m_numItems; i++)
+    for(int i = 0; i < m_numItems; i++)
     {
         PacItem *item = GetItemAtIndex(i);
         std::cout << item->m_filename << ", " << item->size << " bytes" << std::endl;
