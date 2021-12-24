@@ -16,17 +16,15 @@
 		7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AE27750B5B00ED6D67 /* liblua.a */; };
 		7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B027750B5B00ED6D67 /* libSDL2_image.a */; };
 		7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */; };
-		7F1382BE27750BA500ED6D67 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382B527750BA500ED6D67 /* main.lua */; };
-		7F1382BF27750BA500ED6D67 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382B627750BA500ED6D67 /* characters.json */; };
-		7F1382C027750BA500ED6D67 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382B727750BA500ED6D67 /* characters.png */; };
-		7F1382C127750BA500ED6D67 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382B827750BA500ED6D67 /* background.jpg */; };
-		7F1382C227750BA500ED6D67 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382B927750BA500ED6D67 /* EnterCommand.ttf */; };
-		7F1382C327750BA500ED6D67 /* walk-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382BC27750BA500ED6D67 /* walk-left.png */; };
-		7F1382C427750BA500ED6D67 /* sheriff.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382BD27750BA500ED6D67 /* sheriff.png */; };
 		7F1382C527750BBC00ED6D67 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; };
 		7F1382C627750BBC00ED6D67 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7F1382C827750C0800ED6D67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F1382C727750C0800ED6D67 /* main.mm */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7F7967EA2775F78D003ABD3E /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E52775F78D003ABD3E /* main.lua */; };
+		7F7967EB2775F78D003ABD3E /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E62775F78D003ABD3E /* characters.json */; };
+		7F7967EC2775F78D003ABD3E /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E72775F78D003ABD3E /* characters.png */; };
+		7F7967ED2775F78D003ABD3E /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E82775F78D003ABD3E /* background.jpg */; };
+		7F7967EE2775F78D003ABD3E /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E92775F78D003ABD3E /* EnterCommand.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -57,16 +55,14 @@
 		7F1382AE27750B5B00ED6D67 /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382B027750B5B00ED6D67 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1382B527750BA500ED6D67 /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.lua; sourceTree = "<group>"; };
-		7F1382B627750BA500ED6D67 /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
-		7F1382B727750BA500ED6D67 /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
-		7F1382B827750BA500ED6D67 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
-		7F1382B927750BA500ED6D67 /* EnterCommand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnterCommand.ttf; sourceTree = "<group>"; };
-		7F1382BC27750BA500ED6D67 /* walk-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "walk-left.png"; sourceTree = "<group>"; };
-		7F1382BD27750BA500ED6D67 /* sheriff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sheriff.png; sourceTree = "<group>"; };
 		7F1382C727750C0800ED6D67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = SOURCE_ROOT; };
 		7F3CAAE1277093D500E0D74C /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F7967E52775F78D003ABD3E /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.lua; sourceTree = "<group>"; };
+		7F7967E62775F78D003ABD3E /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
+		7F7967E72775F78D003ABD3E /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
+		7F7967E82775F78D003ABD3E /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		7F7967E92775F78D003ABD3E /* EnterCommand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnterCommand.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,41 +122,11 @@
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
 		};
-		7F1382B427750BA500ED6D67 /* Game Data Src */ = {
-			isa = PBXGroup;
-			children = (
-				7F1382B527750BA500ED6D67 /* main.lua */,
-				7F1382B627750BA500ED6D67 /* characters.json */,
-				7F1382B727750BA500ED6D67 /* characters.png */,
-				7F1382B827750BA500ED6D67 /* background.jpg */,
-				7F1382B927750BA500ED6D67 /* EnterCommand.ttf */,
-				7F1382BA27750BA500ED6D67 /* atlas */,
-			);
-			path = "Game Data Src";
-			sourceTree = "<group>";
-		};
-		7F1382BA27750BA500ED6D67 /* atlas */ = {
-			isa = PBXGroup;
-			children = (
-				7F1382BB27750BA500ED6D67 /* characters */,
-			);
-			path = atlas;
-			sourceTree = "<group>";
-		};
-		7F1382BB27750BA500ED6D67 /* characters */ = {
-			isa = PBXGroup;
-			children = (
-				7F1382BC27750BA500ED6D67 /* walk-left.png */,
-				7F1382BD27750BA500ED6D67 /* sheriff.png */,
-			);
-			path = characters;
-			sourceTree = "<group>";
-		};
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
 				7F13828C277507C500ED6D67 /* src */,
-				7F1382B427750BA500ED6D67 /* Game Data Src */,
+				7F7967E42775F78D003ABD3E /* out */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
 				7F3CAAE2277093D500E0D74C /* Products */,
 			);
@@ -186,6 +152,19 @@
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F7967E42775F78D003ABD3E /* out */ = {
+			isa = PBXGroup;
+			children = (
+				7F7967E52775F78D003ABD3E /* main.lua */,
+				7F7967E62775F78D003ABD3E /* characters.json */,
+				7F7967E72775F78D003ABD3E /* characters.png */,
+				7F7967E82775F78D003ABD3E /* background.jpg */,
+				7F7967E92775F78D003ABD3E /* EnterCommand.ttf */,
+			);
+			name = out;
+			path = "Game Resources/out";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,14 +226,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
-				7F1382C227750BA500ED6D67 /* EnterCommand.ttf in Resources */,
-				7F1382BE27750BA500ED6D67 /* main.lua in Resources */,
-				7F1382C027750BA500ED6D67 /* characters.png in Resources */,
-				7F1382C127750BA500ED6D67 /* background.jpg in Resources */,
-				7F1382C427750BA500ED6D67 /* sheriff.png in Resources */,
+				7F7967EE2775F78D003ABD3E /* EnterCommand.ttf in Resources */,
+				7F7967EA2775F78D003ABD3E /* main.lua in Resources */,
+				7F7967EC2775F78D003ABD3E /* characters.png in Resources */,
+				7F7967ED2775F78D003ABD3E /* background.jpg in Resources */,
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
-				7F1382BF27750BA500ED6D67 /* characters.json in Resources */,
-				7F1382C327750BA500ED6D67 /* walk-left.png in Resources */,
+				7F7967EB2775F78D003ABD3E /* characters.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
