@@ -3,7 +3,40 @@
 		"json": "brett.json",
 		"texture": "brett.png"
 	},
+	"standRight": {
+		"animationDelay": 100,
+		"body": [
+			{
+				"sprite": "rstand_body1",
+				"headOffsetX": 0,
+				"headOffsetY": 0,
+				"offsetX": 4,
+				"offsetY": 0
+			}
+		],
+		"head": [
+			{
+				"sprite": "rstand_head1"
+			},
+			{
+				"sprite": "rstand_head2"
+			},
+			{
+				"sprite": "rstand_head3"
+			},
+			{
+				"sprite": "rstand_head4"
+			},
+			{
+				"sprite": "rstand_head5"
+			},
+			{
+				"sprite": "rstand_head6"
+			}
+		]
+	},
 	"walkRight": {
+		"animationDelay": 100,
 		"body": [
 			{
 				"sprite": "rwalk_body1",

@@ -10,6 +10,8 @@
 #include "character_renderer.hpp"
 #include "cJSON.h"
 
+static int cJSON_GetObjectItemValueInt(cJSON * object, const char *string);
+
 using namespace engine;
 
 Character::Character(std::string jsonDefinition)
@@ -20,7 +22,7 @@ Character::Character(std::string jsonDefinition)
     char *jsonSource = (char*)stream.get()->GetMemory();
     if (jsonSource)
     {
-        cJSON *root, *node;
+        cJSON *root;
         SpriteAtlasI * atlas = NULL;
 
         root = cJSON_Parse(jsonSource);
@@ -39,42 +41,75 @@ Character::Character(std::string jsonDefinition)
                 }
             }
 
-            cJSON *walkRight = cJSON_GetObjectItem(root, "walkRight");
-            if (walkRight)
-            {
-                cJSON *body = cJSON_GetObjectItem(walkRight, "body");
-                if (body)
-                {
-                    for (node = body->child ; node != NULL ; node = node->next)
-                    {
-                        char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
-                        int headOffsetX = cJSON_GetObjectItem(node, "headOffsetX")->valueint;
-                        int headOffsetY = cJSON_GetObjectItem(node, "headOffsetY")->valueint;
-
-                        SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
-                        m_characterRenderer->AppendBodyWalkAnimationFrame(RIGHT, sprite, headOffsetX, headOffsetY);
-                    }
-                }
-
-                cJSON *head = cJSON_GetObjectItem(walkRight, "head");
-                if (head)
-                {
-                    for (node = head->child ; node != NULL ; node = node->next)
-                    {
-                        char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
-
-                        SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
-                        m_characterRenderer->AppendHeadAnimationFrame(RIGHT, sprite);
-                    }
-                }
-            }
+            ProcessBodyParts(cJSON_GetObjectItem(root, "walkRight"), atlas, RIGHT);
+            ProcessBodyParts(cJSON_GetObjectItem(root, "standRight"), atlas, STAND_RIGHT);
 
             cJSON_Delete(root);
         }
     }
 }
 
+void Character::ProcessBodyParts(void *rootPtr, SpriteAtlasI * atlas, CharacterWalkDirection walkState)
+{
+    cJSON *bodyPartRoot, *node;
+
+    bodyPartRoot = (cJSON*)rootPtr;
+
+    if (bodyPartRoot)
+    {
+        int animationDelay = cJSON_GetObjectItemValueInt(bodyPartRoot, "animationDelay");
+
+        cJSON *body = cJSON_GetObjectItem(bodyPartRoot, "body");
+        if (body)
+        {
+            for (node = body->child ; node != NULL ; node = node->next)
+            {
+                char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
+                int headOffsetX = cJSON_GetObjectItemValueInt(node, "headOffsetX");
+                int headOffsetY = cJSON_GetObjectItemValueInt(node, "headOffsetY");
+                int offsetX = cJSON_GetObjectItemValueInt(node, "offsetX");
+                int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
+
+                SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
+                m_characterRenderer->AppendBodyWalkAnimationFrame(walkState, sprite, offsetX, offsetY, headOffsetX, headOffsetY);
+            }
+        }
+
+        cJSON *head = cJSON_GetObjectItem(bodyPartRoot, "head");
+        if (head)
+        {
+            for (node = head->child ; node != NULL ; node = node->next)
+            {
+                char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
+                int offsetX = cJSON_GetObjectItemValueInt(node, "offsetX");
+                int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
+
+                SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
+                m_characterRenderer->AppendHeadAnimationFrame(walkState, sprite, offsetX, offsetY);
+            }
+        }
+
+        m_characterRenderer->GetRenderer(walkState).SetBodyAnimationDelay(animationDelay);
+        m_characterRenderer->GetRenderer(walkState).SetHeadAnimationDelay(animationDelay);
+    }
+
+}
+
 void Character::Draw(int x, int y)
 {
-    m_characterRenderer->Draw(x, y);
+    m_characterRenderer->DrawBody(STAND_RIGHT, true, x, y);
+    m_characterRenderer->DrawHead(STAND_RIGHT, true, x, y);
+}
+
+int cJSON_GetObjectItemValueInt(cJSON * object, const char *string)
+{
+    cJSON *obj = cJSON_GetObjectItem(object, string);
+    if (obj)
+    {
+        return obj->valueint;
+    }
+    else
+    {
+        return 0;
+    }
 }

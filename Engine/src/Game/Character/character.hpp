@@ -18,6 +18,9 @@ namespace engine
     public:
         Character(std::string jsonDefinition);
 
+    private:
+        void ProcessBodyParts(void*, SpriteAtlasI*, CharacterWalkDirection);
+        
     public:
         void Draw(int x, int y);
     };

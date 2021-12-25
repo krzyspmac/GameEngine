@@ -20,12 +20,11 @@ namespace engine {
 
     public:
         CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction);
-        void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int headOffsetX, int headOffsetY);
-        void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite);
+        void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY);
+        void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY);
 
-        void Draw(int x, int y);
-        void DrawBody(int x, int y);
-        void DrawHead(int x, int y);
+        void DrawBody(CharacterWalkDirection, bool isAnimating, int x, int y);
+        void DrawHead(CharacterWalkDirection, bool isAnimating, int x, int y);
 
     private:
         int m_headOffsetX;

@@ -22,32 +22,34 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection dir
     {
         case RIGHT:
             return m_walkR;
+        case STAND_RIGHT:
+            return m_standR;
     }
 
     return m_walkR;
 }
 
-void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int headOffsetX, int headOffsetY)
+void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY)
 {
     CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
 
-    CharacterBodyRenderer *bodyRenderer = new CharacterBodyRenderer(sprite);
+    CharacterBodyRenderer *bodyRenderer = new CharacterBodyRenderer(sprite, offsetX, offsetY);
     bodyRenderer->SetHeadOffsetX(headOffsetX);
     bodyRenderer->SetHeadOffsetY(headOffsetY);
 
     characterRenderer.AppendBodyRenderer(bodyRenderer);
 }
 
-void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite)
+void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY)
 {
     CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
-    CharacterHeadRenderer *headRenderer = new CharacterHeadRenderer(sprite);
+    CharacterHeadRenderer *headRenderer = new CharacterHeadRenderer(sprite, offsetX, offsetY);
     characterRenderer.AppendHeadRenderer(headRenderer);
 }
 
-void CharacterRenderer::DrawBody(int x, int y)
+void CharacterRenderer::DrawBody(CharacterWalkDirection direction, bool isAnimating, int x, int y)
 {
-    CharacterWalkRenderer &renderer = GetRenderer(RIGHT);
+    CharacterWalkRenderer &renderer = GetRenderer(direction);
     if (!renderer.GetBodyAnimationCount())
     {
         return;
@@ -58,7 +60,7 @@ void CharacterRenderer::DrawBody(int x, int y)
 
     Uint32 ticks = SDL_GetTicks();
     Uint32 seconds = ticks / renderer.GetBodyAnimationDelay();
-    Uint32 spriteNo = seconds % renderer.GetBodyAnimationCount();
+    Uint32 spriteNo = isAnimating ? (seconds % renderer.GetBodyAnimationCount()) : 0;
     CharacterBodyRenderer *bodyRenderer = renderer.GetBodyRendererAtIndex(spriteNo);
     SpriteAtlasItemI *spriteItem = bodyRenderer->GetSprite();
     m_headOffsetX = bodyRenderer->GetHeadOffsetX();
@@ -66,8 +68,8 @@ void CharacterRenderer::DrawBody(int x, int y)
 
     GetMainEngine()->getProvider().DrawTexture(
        spriteItem->GetTexture(),
-        x + ceil(m_scale *((m_maxWidth - spriteItem->getWidth())/2)),
-        y + ceil(m_scale *((m_maxHeight - spriteItem->getHeight())/2)),
+        x + ceil(m_scale *((m_maxWidth - spriteItem->getWidth())/2)) + (m_scale * bodyRenderer->GetBodyOffsetX()),
+        y + ceil(m_scale *((m_maxHeight - spriteItem->getHeight())/2)) + (m_scale * bodyRenderer->GetBodyOffsetY()),
         spriteItem->getX(),
         spriteItem->getY(),
         spriteItem->getWidth(),
@@ -76,9 +78,9 @@ void CharacterRenderer::DrawBody(int x, int y)
     );
 }
 
-void CharacterRenderer::DrawHead(int x, int y)
+void CharacterRenderer::DrawHead(CharacterWalkDirection direction, bool isAnimating, int x, int y)
 {
-    CharacterWalkRenderer &renderer = GetRenderer(RIGHT);
+    CharacterWalkRenderer &renderer = GetRenderer(direction);
     if (!renderer.GetHeadAnimationCount())
     {
         return;
@@ -88,7 +90,7 @@ void CharacterRenderer::DrawHead(int x, int y)
 
     Uint32 ticks = SDL_GetTicks();
     Uint32 seconds = ticks / renderer.GetHeadAnimationDelay();
-    Uint32 spriteNo = seconds % renderer.GetHeadAnimationCount();
+    Uint32 spriteNo = isAnimating ? (seconds % renderer.GetHeadAnimationCount()) : 0;
     SpriteAtlasItemI *spriteItem = renderer.GetHeadRendererAtIndex(spriteNo)->GetSprite();
 
     GetMainEngine()->getProvider().DrawTexture(
@@ -101,12 +103,6 @@ void CharacterRenderer::DrawHead(int x, int y)
         spriteItem->getHeight(),
         m_scale
     );
-}
-
-void CharacterRenderer::Draw(int x, int y)
-{
-    DrawBody(x, y);
-    DrawHead(x, y);
 }
 
 #pragma mark - CharacterWalkRenderer

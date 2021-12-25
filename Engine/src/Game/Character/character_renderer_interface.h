@@ -14,6 +14,7 @@ namespace engine
 {
     typedef enum
     {
+        STAND_RIGHT,
         RIGHT
     } CharacterWalkDirection;
 
@@ -25,11 +26,20 @@ namespace engine
     class CharacterBodyPartRendererI
     {
     public:
-        CharacterBodyPartRendererI(SpriteAtlasItemI *sprite) : m_bodySprite(sprite) { };
+        CharacterBodyPartRendererI(SpriteAtlasItemI *sprite, int offsetX, int offsetY) : m_bodySprite(sprite), m_bodyOffsetX(offsetX), m_bodyOffsetY(offsetY) { };
 
         SpriteAtlasItemI *GetSprite() { return m_bodySprite; };
+
+        void SetBodyOffsetX(int value) { m_bodyOffsetX = value; };
+        void SetBodyOffsetY(int value) { m_bodyOffsetY = value; };
+
+        int &GetBodyOffsetX() { return m_bodyOffsetX; };
+        int &GetBodyOffsetY() { return m_bodyOffsetY; };
+
     protected:
         SpriteAtlasItemI *m_bodySprite;
+        int m_bodyOffsetX;
+        int m_bodyOffsetY;
     };
 
     /// Describes a frame of the body renderer. Each body frame
@@ -37,8 +47,8 @@ namespace engine
     class CharacterBodyRenderer: public CharacterBodyPartRendererI
     {
     public:
-        CharacterBodyRenderer(SpriteAtlasItemI *sprite)
-            : CharacterBodyPartRendererI(sprite), m_headOffsetX(0), m_headOffsetY(0)
+        CharacterBodyRenderer(SpriteAtlasItemI *sprite, int offsetX, int offsetY)
+            : CharacterBodyPartRendererI(sprite, offsetX, offsetY), m_headOffsetX(0), m_headOffsetY(0)
         { };
 
         void SetHeadOffsetX(int &value) { m_headOffsetX = value; };
@@ -54,8 +64,8 @@ namespace engine
     class CharacterHeadRenderer: public CharacterBodyPartRendererI
     {
     public:
-        CharacterHeadRenderer(SpriteAtlasItemI *sprite)
-            : CharacterBodyPartRendererI(sprite)
+        CharacterHeadRenderer(SpriteAtlasItemI *sprite, int offsetX, int offsetY)
+            : CharacterBodyPartRendererI(sprite, offsetX, offsetY)
         { };
 
     };
@@ -118,24 +128,22 @@ namespace engine
         virtual CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction) = 0;
 
         /// Appends a frame of animation.
-        virtual void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int headOffsetX, int headOffsetY) = 0;
+        virtual void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY) = 0;
 
         /// Appends a frame of animation.
-        virtual void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite) = 0;
-
-        /// Draw the character.
-        virtual void Draw(int x, int y) = 0;
+        virtual void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY) = 0;
 
         /// Draw the body
-        virtual void DrawBody(int x, int y) = 0;
+        virtual void DrawBody(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
 
         /// Draw the head
-        virtual void DrawHead(int x, int y) = 0;
+        virtual void DrawHead(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
 
     protected:
         SpriteAtlasI *m_characterAtlas;
         int m_scale;
 
+        CharacterWalkRenderer m_standR;
         CharacterWalkRenderer m_walkR;
     };
 };
