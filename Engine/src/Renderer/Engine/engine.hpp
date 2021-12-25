@@ -14,6 +14,7 @@
 #import "engine_provider_interface.h"
 #import "file_access_provider.h"
 #import "scripting_engine_provider_interface.h"
+#import "character_renderer_interface.h"
 #import "character_interface.h"
 
 namespace engine
@@ -66,7 +67,8 @@ namespace engine
         char m_fpsBuffer[256];
         FontI *m_fpsFont;
     #endif
-        CharacterRendererI *m_character;
+//        CharacterRendererI *m_character;
+        CharacterI *m_character;
     };
 }
 

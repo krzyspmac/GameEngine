@@ -1,0 +1,70 @@
+{
+	"atlas": {
+		"json": "brett.json",
+		"texture": "brett.png"
+	},
+	"walkRight": {
+		"body": [
+			{
+				"sprite": "rwalk_body1",
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body2",
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body3",
+				"headOffsetX": 1,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body4",
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body5",
+				"headOffsetX": 1,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body6",
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body7",
+				"headOffsetX": 1,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "rwalk_body8",
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			}
+		],
+		"head": [
+			{
+				"sprite": "rstand_head1"
+			},
+			{
+				"sprite": "rstand_head2"
+			},
+			{
+				"sprite": "rstand_head3"
+			},
+			{
+				"sprite": "rstand_head4"
+			},
+			{
+				"sprite": "rstand_head5"
+			},
+			{
+				"sprite": "rstand_head6"
+			}
+		]
+	}
+}

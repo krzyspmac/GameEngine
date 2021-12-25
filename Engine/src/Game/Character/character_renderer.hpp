@@ -5,11 +5,11 @@
 //  Created by krzysp on 25/12/2021.
 //
 
-#ifndef character_hpp
-#define character_hpp
+#ifndef character_renderer_hpp
+#define character_renderer_hpp
 
 #include <iostream>
-#include "character_interface.h"
+#include "character_renderer_interface.h"
 
 namespace engine {
 
@@ -33,4 +33,4 @@ namespace engine {
     };
 };
 
-#endif /* character_hpp */
+#endif /* character_renderer_hpp */

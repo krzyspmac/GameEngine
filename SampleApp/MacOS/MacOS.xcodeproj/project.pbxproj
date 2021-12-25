@@ -24,6 +24,7 @@
 		7F64287B2777716200EE9E2C /* brett.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F6428792777716200EE9E2C /* brett.json */; };
 		7F64287F27777E0D00EE9E2C /* background.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F64287D27777E0D00EE9E2C /* background.json */; };
 		7F64288027777E0D00EE9E2C /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F64287E27777E0D00EE9E2C /* background.png */; };
+		7F6428902777CB3000EE9E2C /* brett_character.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F64288F2777CB3000EE9E2C /* brett_character.json */; };
 		7F7967EA2775F78D003ABD3E /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E52775F78D003ABD3E /* main.lua */; };
 		7F7967EB2775F78D003ABD3E /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E62775F78D003ABD3E /* characters.json */; };
 		7F7967EC2775F78D003ABD3E /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E72775F78D003ABD3E /* characters.png */; };
@@ -66,6 +67,7 @@
 		7F6428792777716200EE9E2C /* brett.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brett.json; sourceTree = "<group>"; };
 		7F64287D27777E0D00EE9E2C /* background.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = background.json; sourceTree = "<group>"; };
 		7F64287E27777E0D00EE9E2C /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		7F64288F2777CB3000EE9E2C /* brett_character.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brett_character.json; sourceTree = "<group>"; };
 		7F7967E52775F78D003ABD3E /* main.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.lua; sourceTree = "<group>"; };
 		7F7967E62775F78D003ABD3E /* characters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = characters.json; sourceTree = "<group>"; };
 		7F7967E72775F78D003ABD3E /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		7F7967E42775F78D003ABD3E /* out */ = {
 			isa = PBXGroup;
 			children = (
+				7F64288F2777CB3000EE9E2C /* brett_character.json */,
 				7F64287D27777E0D00EE9E2C /* background.json */,
 				7F64287E27777E0D00EE9E2C /* background.png */,
 				7F6428792777716200EE9E2C /* brett.json */,
@@ -242,6 +245,7 @@
 				7F7967EE2775F78D003ABD3E /* EnterCommand.ttf in Resources */,
 				7F7967EA2775F78D003ABD3E /* main.lua in Resources */,
 				7F7967EC2775F78D003ABD3E /* characters.png in Resources */,
+				7F6428902777CB3000EE9E2C /* brett_character.json in Resources */,
 				7F64287F27777E0D00EE9E2C /* background.json in Resources */,
 				7F7967ED2775F78D003ABD3E /* background.jpg in Resources */,
 				7F64287A2777716200EE9E2C /* brett.png in Resources */,

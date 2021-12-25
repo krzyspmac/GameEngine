@@ -43,6 +43,9 @@
 		7F13828B277505B600ED6D67 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
 		7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character_renderer.hpp */; };
+		7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
+		7F64288D2777C59D00EE9E2C /* character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288B2777C59D00EE9E2C /* character.cpp */; };
+		7F64288E2777C59D00EE9E2C /* character.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288C2777C59D00EE9E2C /* character.hpp */; };
 		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
@@ -89,7 +92,10 @@
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F64288227779CD400EE9E2C /* character_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_renderer.cpp; sourceTree = "<group>"; };
 		7F64288327779CD400EE9E2C /* character_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_renderer.hpp; sourceTree = "<group>"; };
-		7F64288627779CED00EE9E2C /* character_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_interface.h; sourceTree = "<group>"; };
+		7F64288627779CED00EE9E2C /* character_renderer_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_renderer_interface.h; sourceTree = "<group>"; };
+		7F6428882777C51D00EE9E2C /* character_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_interface.h; sourceTree = "<group>"; };
+		7F64288B2777C59D00EE9E2C /* character.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character.cpp; sourceTree = "<group>"; };
+		7F64288C2777C59D00EE9E2C /* character.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character.hpp; sourceTree = "<group>"; };
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
@@ -245,9 +251,12 @@
 		7F64288127779CCA00EE9E2C /* Character */ = {
 			isa = PBXGroup;
 			children = (
-				7F64288627779CED00EE9E2C /* character_interface.h */,
+				7F64288627779CED00EE9E2C /* character_renderer_interface.h */,
 				7F64288327779CD400EE9E2C /* character_renderer.hpp */,
 				7F64288227779CD400EE9E2C /* character_renderer.cpp */,
+				7F6428882777C51D00EE9E2C /* character_interface.h */,
+				7F64288C2777C59D00EE9E2C /* character.hpp */,
+				7F64288B2777C59D00EE9E2C /* character.cpp */,
 			);
 			path = Character;
 			sourceTree = "<group>";
@@ -277,8 +286,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F64288E2777C59D00EE9E2C /* character.hpp in Headers */,
 				7F138264277505B600ED6D67 /* file_access.hpp in Headers */,
 				7F13826E277505B600ED6D67 /* sprite_draw_animated.hpp in Headers */,
+				7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */,
 				7F138266277505B600ED6D67 /* sprite_draw_static.hpp in Headers */,
 				7F138270277505B600ED6D67 /* sprite_atlas_interface.h in Headers */,
 				7F138255277505B600ED6D67 /* texture.hpp in Headers */,
@@ -368,6 +379,7 @@
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
+				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,

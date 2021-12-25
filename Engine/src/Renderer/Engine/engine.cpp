@@ -12,7 +12,7 @@
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
 #include "character_renderer.hpp"
-
+#include "character.hpp"
 #ifdef __cplusplus
 extern "C" {
     #include "../../../Lua/code/src/lua.h"
@@ -64,6 +64,7 @@ void Engine::setup()
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
 
+    /*
     SpriteAtlasI *atlas = SpriteAtlasLoad("brett.json", "brett.png");
 
     std::vector<SpriteAtlasItemI*> walkR;
@@ -153,6 +154,11 @@ void Engine::setup()
         atlas->GetItemForName("rstand_head6")
     );
     m_character->GetRenderer(RIGHT).SetHeadAnimationDelay(1000);
+     */
+
+    m_character = new Character("brett_character.json");
+    m_character->GetCharacterRenderer()->GetRenderer(RIGHT).SetBodyAnimationDelay(100);
+    m_character->GetCharacterRenderer()->GetRenderer(RIGHT).SetHeadAnimationDelay(100);
 }
 
 int Engine::doInput()
