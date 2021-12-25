@@ -10,29 +10,40 @@
 
 using namespace engine;
 
-SpriteDrawAnimated::SpriteDrawAnimated(SpriteAtlasItemI *spriteAtlasItem, int frameAnimationDurationMs)
-: SpriteDrawI(spriteAtlasItem), m_frameCount(0), m_frameAnimationDurationMs(frameAnimationDurationMs)
+SpriteDrawAnimated::SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale)
+: SpriteDrawI(scale), m_sprites(sprites), m_maxWidth(0), m_maxHeight(0), m_frameAnimationDurationMs(frameAnimationDurationMs)
 {
+    PrepareAnimation();
+}
 
+void SpriteDrawAnimated::PrepareAnimation()
+{
+    m_maxWidth = 0;
+    m_maxHeight = 0;
+
+    for (int i = 0; i < m_sprites.size(); i++)
+    {
+        SpriteAtlasItemI *item = m_sprites.at(i);
+        m_maxWidth = std::max(m_maxWidth, item->getWidth());
+        m_maxHeight = std::max(m_maxHeight, item->getHeight());
+    }
 }
 
 void SpriteDrawAnimated::Draw(int x, int y)
 {
-//    SpriteDescriptor &descriptor = m_sprite->GetDescriptor();
-//
-//    Uint32 ticks = SDL_GetTicks();
-//    Uint32 seconds = ticks / m_frameAnimationDurationMs;
-//    Uint32 spriteNo = seconds % m_frameCount;
-//
-//    Uint32 frameWidth = descriptor.spriteWidth / m_frameCount;
-//
-//    GetMainEngine()->getProvider().DrawTexture(
-//        m_sprite->GetTexture(),
-//        x,
-//        y,
-//        descriptor.spriteSrcX + (frameWidth * spriteNo),
-//        descriptor.spriteSrcY,
-//        frameWidth,
-//        descriptor.spriteHeight
-//    );
+    Uint32 ticks = SDL_GetTicks();
+    Uint32 seconds = ticks / m_frameAnimationDurationMs;
+    Uint32 spriteNo = 0;//seconds % m_sprites.size();
+    SpriteAtlasItemI *spriteItem = m_sprites.at(spriteNo);
+
+    GetMainEngine()->getProvider().DrawTexture(
+       spriteItem->GetTexture(),
+        x + ceil(m_scale *((m_maxWidth - spriteItem->getWidth())/2)),
+        y + ceil(m_scale *((m_maxHeight - spriteItem->getHeight())/2)),
+        spriteItem->getX(),
+        spriteItem->getY(),
+        spriteItem->getWidth(),
+        spriteItem->getHeight(),
+        m_scale
+    );
 }

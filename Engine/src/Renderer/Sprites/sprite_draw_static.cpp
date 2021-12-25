@@ -10,10 +10,9 @@
 
 using namespace engine;
 
-SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem)
-    : SpriteDrawI(spriteAtlasItem)
+SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale)
+    : SpriteDrawI(scale), m_sprite(spriteAtlasItem)
 {
-
 }
 
 void SpriteDrawStatic::Draw(int x, int y)
@@ -25,6 +24,7 @@ void SpriteDrawStatic::Draw(int x, int y)
        m_sprite->getX(),
        m_sprite->getY(),
        m_sprite->getWidth(),
-       m_sprite->getHeight()
+       m_sprite->getHeight(),
+       m_scale
     );
 }

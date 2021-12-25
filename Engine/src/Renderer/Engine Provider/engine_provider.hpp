@@ -43,7 +43,7 @@ class EngineProvider : public EngineProviderI
         TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *);
         void UnloadTexture(TextureI *texture);
         void DrawTexture(TextureI *texture, int x, int y);
-        void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH);
+        void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, int scale);
 
         FontI *LoadFont(std::string name, FileMemoryBufferStreamI *);
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);

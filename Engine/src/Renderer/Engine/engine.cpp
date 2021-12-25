@@ -11,6 +11,7 @@
 #include "sprite_atlas.hpp"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
+#include "character.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,6 +43,8 @@ Engine::~Engine()
     DisposeAllTextures();
     SpriteAtlasDisposeAll();
     SpriteDrawDisposeAll();
+
+    delete m_character;
 }
 
 void Engine::setup()
@@ -60,6 +63,40 @@ void Engine::setup()
 
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
+
+    SpriteAtlasI *atlas = SpriteAtlasLoad("brett.json", "brett.png");
+
+    std::vector<SpriteAtlasItemI*> walkR;
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body1"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body2"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body3"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body4"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body5"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body6"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body7"));
+    walkR.emplace_back(atlas->GetItemForName("rwalk_body8"));
+
+    std::vector<SpriteAtlasItemI*> headR;
+    headR.emplace_back(atlas->GetItemForName("rstand_head1"));
+    headR.emplace_back(atlas->GetItemForName("rstand_head2"));
+    headR.emplace_back(atlas->GetItemForName("rstand_head3"));
+    headR.emplace_back(atlas->GetItemForName("rstand_head4"));
+    headR.emplace_back(atlas->GetItemForName("rstand_head5"));
+    headR.emplace_back(atlas->GetItemForName("rstand_head6"));
+
+    m_character = new Character(atlas, 3);
+    m_character->SetWalkR(walkR, 100);
+    m_character->SetHeadR(headR, 100);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body1", 2, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body2", 3, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body3", 1, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body4", 2, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body5", 1, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body6", 2, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body7", 1, 0);
+    m_character->SetHeadOffsetForSpriteNamed("rwalk_body8", 2, 0);
+
+
 }
 
 int Engine::doInput()
@@ -94,6 +131,7 @@ void Engine::update()
     m_engineProvider.ClearRender();
 
     m_scriptingEngine.callUpdate();
+    m_character->Draw(10, 200);
 
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
@@ -251,9 +289,9 @@ void Engine::SpriteAtlasDisposeAll()
     m_atlas.clear();
 }
 
-SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite)
+SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale)
 {
-    engine::SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite);
+    engine::SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite, scale);
 
     if (sd)
     {
@@ -262,9 +300,9 @@ SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite)
     return sd;
 }
 
-SpriteDrawI *Engine::SpriteDrawLoadAnimated(SpriteAtlasItemI *sprite, int frameAnimationDurationMs)
+SpriteDrawI *Engine::SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale)
 {
-    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprite, frameAnimationDurationMs);
+    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, scale);
 
     if (sd)
     {

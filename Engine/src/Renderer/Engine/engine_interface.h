@@ -115,10 +115,10 @@ namespace engine
     public:
 
         /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite) = 0;
+        virtual SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale) = 0;
 
         /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoadAnimated(SpriteAtlasItemI *sprite, int frameAnimationDurationMs) = 0;
+        virtual SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale) = 0;
 
         /// Unloads the sprite draw.
         virtual void SpriteDrawUnload(SpriteDrawI *spriteDraw) = 0;

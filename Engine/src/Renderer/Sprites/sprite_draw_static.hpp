@@ -16,10 +16,13 @@ namespace engine
     class SpriteDrawStatic: public SpriteDrawI
     {
     public:
-        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem);
+        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale);
 
     public:
         void Draw(int x, int y);
+
+    private:
+        SpriteAtlasItemI *m_sprite;
     };
 };
 

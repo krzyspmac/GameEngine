@@ -77,11 +77,11 @@ namespace engine
         /// returns: sprite_handle
         static int L_spriteAtlasGetSprite(lua_State *L);
 
-        /// L_spriteDrawStaticCreate(sprite_handle)
+        /// L_spriteDrawStaticCreate(sprite_handle, scale)
         /// returns: sprite_draw_handle
         static int L_spriteDrawStaticCreate(lua_State *L);
 
-        /// L_spriteDrawAnimatedCreate(sprite_handle, frame_duration_ms)
+        /// L_spriteDrawAnimatedCreate(frame_duration_ms, scale, sprite_handle1, ...)
         /// returns: sprite_draw_handle
         static int L_spriteDrawAnimatedCreate(lua_State *L);
 

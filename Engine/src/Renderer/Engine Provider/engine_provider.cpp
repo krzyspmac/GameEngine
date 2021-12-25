@@ -115,7 +115,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH)
+void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, int scale)
 {
     if (texture != NULL)
     {
@@ -127,8 +127,8 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
 
         dest.x = x;
         dest.y = y;
-        dest.w = srcW;
-        dest.h = srcH;
+        dest.w = srcW * scale;
+        dest.h = srcH * scale;
 
         src.x = srcX;
         src.y = srcY;

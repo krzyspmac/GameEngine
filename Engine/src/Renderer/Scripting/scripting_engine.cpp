@@ -224,15 +224,16 @@ int ScriptingEngine::L_spriteAtlasGetSprite(lua_State *L)
     return 0;
 }
 
-/// L_spriteDrawCreate(sprite_handle)
+/// L_spriteDrawCreate(sprite_handle, scale)
 int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
 {
     int argc = lua_gettop(L);
+    int scale = lua_tonumberx(L, argc--, NULL);
     SpriteAtlasItemI *spritePointer = (SpriteAtlasItemI*)lua_topointer(L, argc--);
 
     if (spritePointer)
     {
-        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadStatic(spritePointer);
+        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadStatic(spritePointer, scale);
         if (sd)
         {
             lua_pushlightuserdata(L, sd);
@@ -243,25 +244,32 @@ int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
     return 0;
 }
 
-/// L_spriteDrawAnimatedCreate(sprite_handle, frame_count, frame_duration_ms)
+/// L_spriteDrawAnimatedCreate(frame_duration_ms, scale, sprite_handle1, ...)
 /// returns: sprite_draw_handle
 int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
 {
     int argc = lua_gettop(L);
-    int frame_duration_ms = lua_tonumberx(L, argc--, NULL);
-    SpriteAtlasItemI *spritePointer = (SpriteAtlasItemI*)lua_topointer(L, argc--);
+    std::vector<SpriteAtlasItemI*> sprites;
+    int i;
 
-    if (spritePointer)
-    {
-        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadAnimated(spritePointer, frame_duration_ms);
-        if (sd)
-        {
-            lua_pushlightuserdata(L, sd);
-            return 1;
-        }
+    for (i = 3; i <= argc; i++) {
+        SpriteAtlasItemI *spritePointer = (SpriteAtlasItemI*)lua_topointer(L, i);
+        sprites.emplace_back(spritePointer);
     }
 
-    return 0;
+    int frame_duration_ms = lua_tonumberx(L, 1, NULL);
+    int scale = lua_tonumberx(L, 2, NULL);
+
+    SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadAnimated(sprites, frame_duration_ms, scale);
+    if (sd)
+    {
+        lua_pushlightuserdata(L, sd);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 /// L_spriteDrawRender(sprite_draw_handle, x, y)

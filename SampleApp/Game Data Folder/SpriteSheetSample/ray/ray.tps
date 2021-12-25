@@ -26,7 +26,7 @@
             </struct>
         </array>
         <key>allowRotation</key>
-        <false/>
+        <true/>
         <key>shapeDebug</key>
         <false/>
         <key>dpi</key>
@@ -78,7 +78,7 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>0</uint>
+        <uint>1</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
@@ -106,7 +106,7 @@
         <key>algorithmSettings</key>
         <struct type="AlgorithmSettings">
             <key>algorithm</key>
-            <enum type="AlgorithmSettings::AlgorithmId">Basic</enum>
+            <enum type="AlgorithmSettings::AlgorithmId">MaxRects</enum>
             <key>freeSizeMode</key>
             <enum type="AlgorithmSettings::AlgorithmFreeSizeMode">Best</enum>
             <key>sizeConstraints</key>
@@ -136,7 +136,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>../../../../../../../../Desktop/brett.json</filename>
+                <filename></filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -153,9 +153,9 @@
             <string></string>
         </struct>
         <key>autoAliasEnabled</key>
-        <false/>
-        <key>trimSpriteNames</key>
         <true/>
+        <key>trimSpriteNames</key>
+        <false/>
         <key>prependSmartFolderName</key>
         <false/>
         <key>autodetectAnimations</key>
@@ -167,13 +167,13 @@
             <key>scaleMode</key>
             <enum type="ScaleMode">Smooth</enum>
             <key>extrude</key>
-            <uint>0</uint>
+            <uint>1</uint>
             <key>trimThreshold</key>
             <uint>1</uint>
             <key>trimMargin</key>
             <uint>1</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">None</enum>
+            <enum type="SpriteSettings::TrimMode">Trim</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -184,96 +184,9 @@
             <false/>
         </struct>
         <key>individualSpriteSettings</key>
-        <map type="IndividualSpriteSettingsMap">
-            <key type="filename">sprites/rstand_head1.png</key>
-            <key type="filename">sprites/rstand_head2.png</key>
-            <key type="filename">sprites/rstand_head3.png</key>
-            <key type="filename">sprites/rstand_head4.png</key>
-            <key type="filename">sprites/rstand_head5.png</key>
-            <key type="filename">sprites/rstand_head6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>6,9,13,17</rect>
-                <key>scale9Paddings</key>
-                <rect>6,9,13,17</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">sprites/rwalk_body1.png</key>
-            <key type="filename">sprites/rwalk_body5.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>4,12,7,23</rect>
-                <key>scale9Paddings</key>
-                <rect>4,12,7,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">sprites/rwalk_body2.png</key>
-            <key type="filename">sprites/rwalk_body6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>5,12,11,23</rect>
-                <key>scale9Paddings</key>
-                <rect>5,12,11,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">sprites/rwalk_body3.png</key>
-            <key type="filename">sprites/rwalk_body7.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>8,12,17,23</rect>
-                <key>scale9Paddings</key>
-                <rect>8,12,17,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">sprites/rwalk_body4.png</key>
-            <key type="filename">sprites/rwalk_body8.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>7,12,13,23</rect>
-                <key>scale9Paddings</key>
-                <rect>7,12,13,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-        </map>
+        <map type="IndividualSpriteSettingsMap"/>
         <key>fileList</key>
-        <array>
-            <filename>sprites</filename>
-        </array>
+        <array/>
         <key>ignoreFileList</key>
         <array/>
         <key>replaceList</key>

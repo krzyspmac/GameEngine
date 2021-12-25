@@ -28,9 +28,10 @@ backgroundSprite = nil
 backgroundSkySprite = nil
 backgroundSkyRenderer = nil
 
-atlas = nil
-atlasSprite = nil
-atlasSpriteRenderer = nil
+brettAtlas = nil
+
+brettWalkRSpriteRenderer = nil
+brettWalkRHeadRenderer = nil
 
 function init()
 --    backgroundTexture = L_textureLoad("background.jpg")
@@ -42,14 +43,26 @@ function init()
     backgroundAtlas = L_spriteAtlasLoad("background.json", "background.png")
     
     backgroundSkySprite = L_spriteAtlasGetSprite(backgroundAtlas, "sky.png")    
-	backgroundSkyRenderer = L_spriteDrawStaticCreate(backgroundSkySprite)
+	backgroundSkyRenderer = L_spriteDrawStaticCreate(backgroundSkySprite, 2)
 	
 	backgroundSprite = L_spriteAtlasGetSprite(backgroundAtlas, "background.png")
-	backgroundRenderer = L_spriteDrawStaticCreate(backgroundSprite)
+	backgroundRenderer = L_spriteDrawStaticCreate(backgroundSprite, 1)
     
-   atlas = L_spriteAtlasLoad("brett.json", "brett.png")
-   atlasSprite = L_spriteAtlasGetSprite(atlas, "rwalk_body1")
-   atlasSpriteRenderer = L_spriteDrawAnimatedCreate(atlasSprite, 100)
+    brettAtlas = L_spriteAtlasLoad("brett.json", "brett.png")
+    brettWalkRSpriteRenderer = L_spriteDrawAnimatedCreate(100, 3,
+ 	  	L_spriteAtlasGetSprite(brettAtlas, "rwalk_body1"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body2"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body3"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body4"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body5"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body6"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body7"),
+		L_spriteAtlasGetSprite(brettAtlas, "rwalk_body8")
+	)
+	
+    brettWalkRHeadRenderer = L_spriteDrawAnimatedCreate(100, 3,
+ 	  	L_spriteAtlasGetSprite(brettAtlas, "rstand_head1")
+	)
 end
 
 function update ()
@@ -58,7 +71,8 @@ function update ()
 
 	L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
 	L_spriteDrawRender(backgroundRenderer, 0, 0)
---	L_spriteDrawRender(atlasSpriteRenderer, 40, 50)
+	--L_spriteDrawRender(brettWalkRSpriteRenderer, 40, 150)
+	--L_spriteDrawRender(brettWalkRHeadRenderer, 42, 45)
 
---	drawText(myFont, "Lua in a C++ Engine! " .. a, 10, 10, 100, 100, 100, "left")
+	drawText(myFont, "Lua in a C++ Engine! " .. a, 10, 10, 100, 100, 100, "left")
 end

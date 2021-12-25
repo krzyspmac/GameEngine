@@ -16,15 +16,14 @@ namespace engine
     class SpriteDrawI
     {
     public:
-        SpriteDrawI(SpriteAtlasItemI *spriteAtlasItem)
-            : m_sprite(spriteAtlasItem)
-        { };
+        /// Scale applies to width and height. Does not modify x no y.
+        SpriteDrawI(int scale): m_scale(scale) {};
 
     public:
         virtual void Draw(int x, int y) = 0;
 
     protected:
-        SpriteAtlasItemI *m_sprite;
+        int m_scale;
     };
 };
 

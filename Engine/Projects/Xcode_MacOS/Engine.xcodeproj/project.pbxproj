@@ -41,6 +41,8 @@
 		7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13824C277505B600ED6D67 /* common_engine_impl.h */; };
 		7F13828A277505B600ED6D67 /* common_engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138250277505B600ED6D67 /* common_engine.h */; };
 		7F13828B277505B600ED6D67 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
+		7F64288427779CD400EE9E2C /* character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character.cpp */; };
+		7F64288527779CD400EE9E2C /* character.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character.hpp */; };
 		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
@@ -85,6 +87,9 @@
 		7F138251277505B600ED6D67 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		7F1382A727750AC000ED6D67 /* common_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_sdl.h; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F64288227779CD400EE9E2C /* character.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character.cpp; sourceTree = "<group>"; };
+		7F64288327779CD400EE9E2C /* character.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character.hpp; sourceTree = "<group>"; };
+		7F64288627779CED00EE9E2C /* character_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_interface.h; sourceTree = "<group>"; };
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
@@ -237,9 +242,20 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		7F64288127779CCA00EE9E2C /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				7F64288627779CED00EE9E2C /* character_interface.h */,
+				7F64288327779CD400EE9E2C /* character.hpp */,
+				7F64288227779CD400EE9E2C /* character.cpp */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
 		7FDDAF9A2776872100578F86 /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				7F64288127779CCA00EE9E2C /* Character */,
 				7FDDAF9B2776872A00578F86 /* Room */,
 			);
 			path = Game;
@@ -271,6 +287,7 @@
 				7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */,
 				7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */,
 				7F13825A277505B600ED6D67 /* engine_provider.hpp in Headers */,
+				7F64288527779CD400EE9E2C /* character.hpp in Headers */,
 				7F13827E277505B600ED6D67 /* defs.h in Headers */,
 				7F138267277505B600ED6D67 /* sprite_draw_interface.h in Headers */,
 				7F138258277505B600ED6D67 /* scripting_engine_provider_interface.h in Headers */,
@@ -349,6 +366,7 @@
 				7F138261277505B600ED6D67 /* engine_provider.cpp in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
+				7F64288427779CD400EE9E2C /* character.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,

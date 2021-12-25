@@ -1,6 +1,54 @@
 {"frames": [
 
 {
+	"filename": "rstand_head1",
+	"frame": {"x":72,"y":0,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
+	"sourceSize": {"w":25,"h":35}
+},
+{
+	"filename": "rstand_head2",
+	"frame": {"x":97,"y":0,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
+	"sourceSize": {"w":25,"h":35}
+},
+{
+	"filename": "rstand_head3",
+	"frame": {"x":0,"y":47,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
+	"sourceSize": {"w":25,"h":35}
+},
+{
+	"filename": "rstand_head4",
+	"frame": {"x":25,"y":47,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
+	"sourceSize": {"w":25,"h":35}
+},
+{
+	"filename": "rstand_head5",
+	"frame": {"x":50,"y":47,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
+	"sourceSize": {"w":25,"h":35}
+},
+{
+	"filename": "rstand_head6",
+	"frame": {"x":75,"y":47,"w":25,"h":35},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":25,"h":35},
+	"sourceSize": {"w":25,"h":35}
+},
+{
 	"filename": "rwalk_body1",
 	"frame": {"x":0,"y":0,"w":15,"h":47},
 	"rotated": false,
@@ -10,7 +58,7 @@
 },
 {
 	"filename": "rwalk_body2",
-	"frame": {"x":15,"y":0,"w":21,"h":47},
+	"frame": {"x":30,"y":0,"w":21,"h":47},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":47},
@@ -18,7 +66,7 @@
 },
 {
 	"filename": "rwalk_body3",
-	"frame": {"x":36,"y":0,"w":33,"h":46},
+	"frame": {"x":54,"y":82,"w":33,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":46},
@@ -26,7 +74,7 @@
 },
 {
 	"filename": "rwalk_body4",
-	"frame": {"x":69,"y":0,"w":27,"h":46},
+	"frame": {"x":0,"y":82,"w":27,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":46},
@@ -34,7 +82,7 @@
 },
 {
 	"filename": "rwalk_body5",
-	"frame": {"x":96,"y":0,"w":15,"h":47},
+	"frame": {"x":15,"y":0,"w":15,"h":47},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":15,"h":47},
@@ -42,7 +90,7 @@
 },
 {
 	"filename": "rwalk_body6",
-	"frame": {"x":111,"y":0,"w":21,"h":47},
+	"frame": {"x":51,"y":0,"w":21,"h":47},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":21,"h":47},
@@ -50,7 +98,7 @@
 },
 {
 	"filename": "rwalk_body7",
-	"frame": {"x":132,"y":0,"w":33,"h":46},
+	"frame": {"x":87,"y":82,"w":33,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":46},
@@ -58,7 +106,7 @@
 },
 {
 	"filename": "rwalk_body8",
-	"frame": {"x":165,"y":0,"w":27,"h":46},
+	"frame": {"x":27,"y":82,"w":27,"h":46},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":27,"h":46},
@@ -69,8 +117,8 @@
 	"version": "1.0",
 	"image": "brett.png",
 	"format": "RGBA8888",
-	"size": {"w":192,"h":47},
+	"size": {"w":122,"h":128},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:6c403c8e1e5ba1f2ffe012b653d38d04:77d34d08398a109d03d1721245af15ff:975d465dc688e1036d4c21fd1bb06182$"
+	"smartupdate": "$TexturePacker:SmartUpdate:309a0e23860d4326534938f0e806d9de:f63fc3da0b9255bb72fa18d615645231:975d465dc688e1036d4c21fd1bb06182$"
 }
 }

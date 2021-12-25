@@ -62,7 +62,7 @@ int RendererEntry::initSDL()
         exit(1);
     }
 
-    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
+    SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY, "nearest", SDL_HINT_OVERRIDE);
     m_app.renderer = SDL_CreateRenderer(m_app.window, -1, rendererFlags);
 
     if (!m_app.renderer)

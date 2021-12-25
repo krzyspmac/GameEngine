@@ -9,6 +9,7 @@
 #define sprite_draw_animated_hpp
 
 #include "sprite_draw_interface.h"
+#include "sprite_atlas_interface.h"
 
 namespace engine
 {
@@ -17,14 +18,17 @@ namespace engine
     {
     public:
         /// Asumming consecutive frames are laid out on the x-axis only!
-        SpriteDrawAnimated(SpriteAtlasItemI *spriteAtlasItem, int frameAnimationDurationMs);
+        SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale);
 
     public:
+        void PrepareAnimation();
         void Draw(int x, int y);
 
     private:
-        int m_frameCount;
         int m_frameAnimationDurationMs;
+        std::vector<SpriteAtlasItemI*> m_sprites;
+        int m_maxWidth;
+        int m_maxHeight;
     };
 
 };

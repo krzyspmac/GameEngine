@@ -14,6 +14,7 @@
 #import "engine_provider_interface.h"
 #import "file_access_provider.h"
 #import "scripting_engine_provider_interface.h"
+#import "character_interface.h"
 
 namespace engine
 {
@@ -44,8 +45,8 @@ namespace engine
         void SpriteAtlasUnload(SpriteAtlasI *atlas);
         void SpriteAtlasDisposeAll();
 
-        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
-        SpriteDrawI *SpriteDrawLoadAnimated(SpriteAtlasItemI *sprite, int frameAnimationDurationMs);
+        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale);
+        SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale);
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
         void SpriteDrawDisposeAll();
 
@@ -65,6 +66,7 @@ namespace engine
         char m_fpsBuffer[256];
         FontI *m_fpsFont;
     #endif
+        CharacterI *m_character;
     };
 }
 
