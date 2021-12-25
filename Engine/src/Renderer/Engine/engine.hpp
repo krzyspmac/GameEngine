@@ -66,7 +66,7 @@ namespace engine
         char m_fpsBuffer[256];
         FontI *m_fpsFont;
     #endif
-        CharacterI *m_character;
+        CharacterRendererI *m_character;
     };
 }
 

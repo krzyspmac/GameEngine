@@ -13,15 +13,15 @@
 
 namespace engine {
 
-    class Character: public CharacterI
+    class CharacterRenderer: public CharacterRendererI
     {
     public:
-        Character(SpriteAtlasI *characterAtlas, int scale);
+        CharacterRenderer(SpriteAtlasI *characterAtlas, int scale);
 
     public:
-        void SetWalkR(std::vector<SpriteAtlasItemI*> &sprites, int animationDelayMs);
-        void SetHeadR(std::vector<SpriteAtlasItemI*> &sprites, int animationDelayMs);
-        void SetHeadOffsetForSpriteNamed(std::string spriteName, int offsetX, int offsetY);
+        CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction);
+        void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int headOffsetX, int headOffsetY);
+        void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite);
 
         void Draw(int x, int y);
         void DrawBody(int x, int y);

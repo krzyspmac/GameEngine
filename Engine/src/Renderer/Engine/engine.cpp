@@ -11,7 +11,7 @@
 #include "sprite_atlas.hpp"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
-#include "character.hpp"
+#include "character_renderer.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -84,19 +84,75 @@ void Engine::setup()
     headR.emplace_back(atlas->GetItemForName("rstand_head5"));
     headR.emplace_back(atlas->GetItemForName("rstand_head6"));
 
-    m_character = new Character(atlas, 3);
-    m_character->SetWalkR(walkR, 100);
-    m_character->SetHeadR(headR, 100);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body1", 2, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body2", 3, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body3", 1, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body4", 2, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body5", 1, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body6", 2, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body7", 1, 0);
-    m_character->SetHeadOffsetForSpriteNamed("rwalk_body8", 2, 0);
+    m_character = new CharacterRenderer(atlas, 3);
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body1"),
+        2, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body2"),
+        3, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body3"),
+        1, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body4"),
+        2, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body5"),
+        1, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body6"),
+        2, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body7"),
+        1, 0
+    );
+    m_character->AppendBodyWalkAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rwalk_body8"),
+        2, 0
+    );
+    m_character->GetRenderer(RIGHT).SetBodyAnimationDelay(100);
+    
 
-
+    m_character->AppendHeadAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rstand_head1")
+    );
+    m_character->AppendHeadAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rstand_head2")
+    );
+    m_character->AppendHeadAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rstand_head3")
+    );
+    m_character->AppendHeadAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rstand_head4")
+    );
+    m_character->AppendHeadAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rstand_head5")
+    );
+    m_character->AppendHeadAnimationFrame(
+        RIGHT,
+        atlas->GetItemForName("rstand_head6")
+    );
+    m_character->GetRenderer(RIGHT).SetHeadAnimationDelay(1000);
 }
 
 int Engine::doInput()

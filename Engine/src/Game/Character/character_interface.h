@@ -14,7 +14,7 @@ namespace engine
 {
     typedef enum
     {
-
+        RIGHT
     } CharacterWalkDirection;
 
     /// Describes the character body renderer that includes
@@ -32,6 +32,8 @@ namespace engine
         SpriteAtlasItemI *m_bodySprite;
     };
 
+    /// Describes a frame of the body renderer. Each body frame
+    /// can have custom head offset.
     class CharacterBodyRenderer: public CharacterBodyPartRendererI
     {
     public:
@@ -62,11 +64,14 @@ namespace engine
     class CharacterWalkRenderer
     {
     public:
-        CharacterWalkRenderer() { };
+        CharacterWalkRenderer()
+            : m_bodyMaxWidth(0), m_bodyMaxHeight(0), m_bodyAnimationDelay(0),
+              m_headMaxWidth(0), m_headMaxHeight(0), m_headAnimationDelay(0)
+        { };
 
         /// Will take ownershiop of the object.
         void AppendBodyRenderer(CharacterBodyRenderer* value);
-        void SetBodyAnimationDelay(int &delay) { m_bodyAnimationDelay = delay; };
+        void SetBodyAnimationDelay(int delay) { m_bodyAnimationDelay = delay; };
         unsigned long GetBodyAnimationCount() { return m_bodyRenderers.size(); }
         CharacterBodyRenderer *GetBodyRendererAtIndex(int index) { return m_bodyRenderers.at(index).get(); };
         int &GetBodyAnimationDelay() { return m_bodyAnimationDelay; };
@@ -74,7 +79,7 @@ namespace engine
         int &GetBodyMaxHeight() { return m_bodyMaxHeight; };
 
         void AppendHeadRenderer(CharacterHeadRenderer* value);
-        void SetHeadAnimationDelay(int &delay) { m_headAnimationDelay = delay; };
+        void SetHeadAnimationDelay(int delay) { m_headAnimationDelay = delay; };
         unsigned long GetHeadAnimationCount() { return m_headRenderers.size(); }
         CharacterHeadRenderer *GetHeadRendererAtIndex(int index) { return m_headRenderers.at(index).get(); };
         int &GetHeadAnimationDelay() { return m_headAnimationDelay; };
@@ -99,25 +104,24 @@ namespace engine
     /// side for instance.
     /// Upon concrete instance creation CharacterBodyRendererI are being created and those
     /// are being rendered. Those can receive position tweak if needed.
-    class CharacterI
+    class CharacterRendererI
     {
     public:
-        CharacterI(SpriteAtlasI *characterAtlas, int scale): m_characterAtlas(characterAtlas), m_scale(scale) {};
+        CharacterRendererI(SpriteAtlasI *characterAtlas, int scale)
+            : m_characterAtlas(characterAtlas), m_scale(scale) {};
 
-        virtual ~CharacterI() {
-            delete m_walkR;
-            delete m_headR;
+        virtual ~CharacterRendererI() {
         };
 
     public:
-        /// Assume the head is completely stationary. The body can have different offset.
-        virtual void SetHeadR(std::vector<SpriteAtlasItemI*> &sprites, int animationDelayMs) = 0;
+        /// Returns the "right" walking animation;
+        virtual CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction) = 0;
 
-        /// Set different animations.
-        virtual void SetWalkR(std::vector<SpriteAtlasItemI*> &sprites, int animationDelayMs) = 0;
+        /// Appends a frame of animation.
+        virtual void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int headOffsetX, int headOffsetY) = 0;
 
-        /// Set custom offset for head renderer for a particular head sprite.
-        virtual void SetHeadOffsetForSpriteNamed(std::string spriteName, int offsetX, int offsetY) = 0;
+        /// Appends a frame of animation.
+        virtual void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite) = 0;
 
         /// Draw the character.
         virtual void Draw(int x, int y) = 0;
@@ -132,8 +136,7 @@ namespace engine
         SpriteAtlasI *m_characterAtlas;
         int m_scale;
 
-        CharacterWalkRenderer *m_walkR;
-        CharacterWalkRenderer *m_headR;
+        CharacterWalkRenderer m_walkR;
     };
 };
 
