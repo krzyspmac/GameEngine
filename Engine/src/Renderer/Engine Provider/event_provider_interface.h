@@ -13,6 +13,7 @@ namespace engine
 
 typedef enum {
     EVENT_NONE = 0,
+    EVENT_KEYDOWN,
     EVENT_QUIT,
 } EVENT;
 

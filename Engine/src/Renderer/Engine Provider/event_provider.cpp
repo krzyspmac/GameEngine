@@ -26,7 +26,9 @@ static EVENT SDLEvent2EVENT(SDL_Event *event)
     {
         case SDL_QUIT:
             return EVENT_QUIT;
-            break;
+
+        case SDL_KEYDOWN:
+            return EVENT_KEYDOWN;
 
         default:
             break;

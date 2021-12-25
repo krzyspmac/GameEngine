@@ -79,6 +79,12 @@ int Engine::doInput()
                 break;
             }
 
+            case EVENT_KEYDOWN:
+            {
+                m_character->Change();
+                break;
+            }
+
             case EVENT_QUIT:
             {
                 return 1;

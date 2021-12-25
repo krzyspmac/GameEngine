@@ -95,10 +95,24 @@ void Character::ProcessBodyParts(void *rootPtr, SpriteAtlasI * atlas, CharacterW
 
 }
 
+static CharacterWalkDirection state = STAND_RIGHT;
+
 void Character::Draw(int x, int y)
 {
-    m_characterRenderer->DrawBody(STAND_RIGHT, true, x, y);
-    m_characterRenderer->DrawHead(STAND_RIGHT, true, x, y);
+    m_characterRenderer->DrawBody(state, true, x, y);
+    m_characterRenderer->DrawHead(state, true, x, y);
+}
+
+void Character::Change()
+{
+    if (state != STAND_RIGHT)
+    {
+        state = STAND_RIGHT;
+    }
+    else
+    {
+        state = RIGHT;
+    }
 }
 
 int cJSON_GetObjectItemValueInt(cJSON * object, const char *string)

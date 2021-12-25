@@ -30,6 +30,8 @@ namespace engine
         /// Draw the character.
         virtual void Draw(int x, int y) = 0;
 
+        virtual void Change() = 0;
+
     protected:
         CharacterRendererI *m_characterRenderer;
     };
