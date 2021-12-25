@@ -8,7 +8,7 @@
 #ifndef sprite_draw_interface_h
 #define sprite_draw_interface_h
 
-#include "sprite_interface.h"
+#include "sprite_atlas_interface.h"
 
 namespace engine
 {
@@ -16,15 +16,15 @@ namespace engine
     class SpriteDrawI
     {
     public:
-        SpriteDrawI(SpriteI *sprite)
-            : m_sprite(sprite)
+        SpriteDrawI(SpriteAtlasItemI *spriteAtlasItem)
+            : m_sprite(spriteAtlasItem)
         { };
 
     public:
         virtual void Draw(int x, int y) = 0;
 
     protected:
-        SpriteI *m_sprite;
+        SpriteAtlasItemI *m_sprite;
     };
 };
 

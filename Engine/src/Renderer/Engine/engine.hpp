@@ -39,24 +39,19 @@ namespace engine
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
         void DisposeAllFonts();
 
-        SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor);
-        void UnloadSprite(SpriteI *sprite);
-        void DisposeAllSprites();
-
         SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
         SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename);
         void SpriteAtlasUnload(SpriteAtlasI *atlas);
         void SpriteAtlasDisposeAll();
 
-        SpriteDrawI *SpriteDrawLoadStatic(SpriteI *sprite);
-        SpriteDrawI *SpriteDrawLoadAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs);
+        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
+        SpriteDrawI *SpriteDrawLoadAnimated(SpriteAtlasItemI *sprite, int frameAnimationDurationMs);
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
         void SpriteDrawDisposeAll();
 
     private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
-        std::vector<std::unique_ptr<SpriteI>> m_sprites;
         std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;
         std::vector<std::unique_ptr<SpriteDrawI>> m_spriteDraws;
 

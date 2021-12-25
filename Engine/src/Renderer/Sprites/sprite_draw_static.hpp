@@ -16,7 +16,7 @@ namespace engine
     class SpriteDrawStatic: public SpriteDrawI
     {
     public:
-        SpriteDrawStatic(SpriteI *sprite);
+        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem);
 
     public:
         void Draw(int x, int y);

@@ -19,31 +19,42 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
     TextureI *texture = GetMainEngine()->LoadTexture(textureFilename);
     if (texture)
     {
-        char *jsonText = (char*)stream.get()->GetMemory();
-        if (jsonText)
+        char *jsonSrouce = (char*)stream.get()->GetMemory();
+        if (jsonSrouce)
         {
-            cJSON *root, *node;
-            char *filename;
-            int x, y, w, h, rotated;
-            root = cJSON_Parse(jsonText);
+            cJSON *root, *frames, *node, *singleFrame;
+            char *filename, *rotated;
+            int x, y, w, h;
 
-            for (node = root->child ; node != NULL ; node = node->next)
+            root = cJSON_Parse(jsonSrouce);
+            if (root)
             {
-                filename = cJSON_GetObjectItem(node, "filename")->valuestring;
-                x = cJSON_GetObjectItem(node, "x")->valueint;
-                y = cJSON_GetObjectItem(node, "y")->valueint;
-                w = cJSON_GetObjectItem(node, "w")->valueint;
-                h = cJSON_GetObjectItem(node, "h")->valueint;
-                rotated = cJSON_GetObjectItem(node, "rotated")->valueint;
+                frames = cJSON_GetObjectItem(root, "frames");
+                if (frames)
+                {
+                    for (node = frames->child ; node != NULL ; node = node->next)
+                    {
+                        singleFrame = cJSON_GetObjectItem(node, "frame");
+                        if (singleFrame)
+                        {
+                            filename = cJSON_GetObjectItem(node, "filename")->valuestring;
+                            x = cJSON_GetObjectItem(singleFrame, "x")->valueint;
+                            y = cJSON_GetObjectItem(singleFrame, "y")->valueint;
+                            w = cJSON_GetObjectItem(singleFrame, "w")->valueint;
+                            h = cJSON_GetObjectItem(singleFrame, "h")->valueint;
+                            rotated = cJSON_GetObjectItem(node, "rotated")->string;
 
-                this->m_texture = texture;
-                m_items.emplace_back(SpriteAtlasItemI(texture, x, y, w, h, rotated, filename));
-            }
+                            this->m_texture = texture;
+                            m_items.emplace_back(SpriteAtlasItemI(texture, x, y, w, h, strcmp(rotated, "true") == 0, filename));
+                        }; // single frame
+                    }; // for
+                }; // frame
+            }; // root
 
             m_filename = jsonFilename;
             cJSON_Delete(root);
-        }
-    }
+        }; // jsonSrouce
+    }; // texture
 }
 
 SpriteAtlas::~SpriteAtlas()

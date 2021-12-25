@@ -17,7 +17,7 @@ namespace engine
     {
     public:
         /// Asumming consecutive frames are laid out on the x-axis only!
-        SpriteDrawAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs);
+        SpriteDrawAnimated(SpriteAtlasItemI *spriteAtlasItem, int frameAnimationDurationMs);
 
     public:
         void Draw(int x, int y);

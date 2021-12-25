@@ -13,7 +13,6 @@
 #include "file_access_provider.h"
 #include "scripting_engine_provider_interface.h"
 #include "event_provider_interface.h"
-#include "sprite_interface.h"
 #include "sprite_draw_interface.h"
 
 namespace engine
@@ -87,14 +86,14 @@ namespace engine
     /// Sprites
     public:
 
-        /// Loads a sprite and stores it in the sprite cache.
-        virtual SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor) = 0;
-
-        /// Unloads a sprite. Does not unload the texture.
-        virtual void UnloadSprite(SpriteI *sprite) = 0;
-
-        /// Unloads all sprites.
-        virtual void DisposeAllSprites() = 0;
+//        /// Loads a sprite and stores it in the sprite cache.
+//        virtual SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor) = 0;
+//
+//        /// Unloads a sprite. Does not unload the texture.
+//        virtual void UnloadSprite(SpriteI *sprite) = 0;
+//
+//        /// Unloads all sprites.
+//        virtual void DisposeAllSprites() = 0;
 
     /// Sprite atlas
     public:
@@ -116,10 +115,10 @@ namespace engine
     public:
 
         /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoadStatic(SpriteI *sprite) = 0;
+        virtual SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite) = 0;
 
         /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoadAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs) = 0;
+        virtual SpriteDrawI *SpriteDrawLoadAnimated(SpriteAtlasItemI *sprite, int frameAnimationDurationMs) = 0;
 
         /// Unloads the sprite draw.
         virtual void SpriteDrawUnload(SpriteDrawI *spriteDraw) = 0;

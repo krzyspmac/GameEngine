@@ -28,6 +28,12 @@ namespace engine {
         TextureI *GetTexture() { return m_texture; };
 
         ///
+        int &getX() { return x; }
+        int &getY() { return y; }
+        int &getWidth() { return w; }
+        int &getHeight() { return h; }
+
+        ///
         SpriteDescriptor GetSpriteDescriptor()
         {
             SpriteDescriptor sp;

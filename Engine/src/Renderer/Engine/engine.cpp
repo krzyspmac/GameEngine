@@ -7,7 +7,6 @@
 
 #include "engine.hpp"
 #include "font.hpp"
-#include "sprite.hpp"
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas.hpp"
 #include "sprite_draw_static.hpp"
@@ -38,7 +37,7 @@ Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, Scripti
 
 Engine::~Engine()
 {
-    DisposeAllSprites();
+//    DisposeAllSprites();
     DisposeAllFonts();
     DisposeAllTextures();
     SpriteAtlasDisposeAll();
@@ -205,31 +204,6 @@ void Engine::DisposeAllFonts()
     std::cout << "DisposeAllFonts not implemented" << std::endl;
 }
 
-SpriteI *Engine::LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor)
-{
-    Sprite *sprite = new Sprite(texture, spriteDescriptor);
-    m_sprites.emplace_back(std::move(sprite));
-    return sprite;
-}
-
-void Engine::UnloadSprite(SpriteI *sprite)
-{
-    for(auto it = std::begin(m_sprites); it != std::end(m_sprites); ++it)
-    {
-        SpriteI *item = it->get();
-        if (item == sprite)
-        {
-            m_sprites.erase(it);
-            break;
-        }
-    }
-}
-
-void Engine::DisposeAllSprites()
-{
-    m_sprites.clear();
-}
-
 SpriteAtlasI *Engine::SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename)
 {
     SpriteAtlasI *atlas = SpriteAtlasGet(jsonFilename);
@@ -274,10 +248,10 @@ void Engine::SpriteAtlasUnload(SpriteAtlasI *atlas)
 
 void Engine::SpriteAtlasDisposeAll()
 {
-    m_sprites.clear();
+    m_atlas.clear();
 }
 
-SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteI *sprite)
+SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite)
 {
     engine::SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite);
 
@@ -288,9 +262,9 @@ SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteI *sprite)
     return sd;
 }
 
-SpriteDrawI *Engine::SpriteDrawLoadAnimated(SpriteI *sprite, int frameCount, int frameAnimationDurationMs)
+SpriteDrawI *Engine::SpriteDrawLoadAnimated(SpriteAtlasItemI *sprite, int frameAnimationDurationMs)
 {
-    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprite, frameCount, frameAnimationDurationMs);
+    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprite, frameAnimationDurationMs);
 
     if (sd)
     {

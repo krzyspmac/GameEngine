@@ -10,23 +10,21 @@
 
 using namespace engine;
 
-SpriteDrawStatic::SpriteDrawStatic(SpriteI *sprite)
-    : SpriteDrawI(sprite)
+SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem)
+    : SpriteDrawI(spriteAtlasItem)
 {
 
 }
 
 void SpriteDrawStatic::Draw(int x, int y)
 {
-    SpriteDescriptor &descriptor = m_sprite->GetDescriptor();
-
     GetMainEngine()->getProvider().DrawTexture(
-        m_sprite->GetTexture(),
-        x,
-        y,
-        descriptor.spriteSrcX,
-        descriptor.spriteSrcY,
-        descriptor.spriteWidth,
-        descriptor.spriteHeight
+       m_sprite->GetTexture(),
+       x,
+       y,
+       m_sprite->getX(),
+       m_sprite->getY(),
+       m_sprite->getWidth(),
+       m_sprite->getHeight()
     );
 }
