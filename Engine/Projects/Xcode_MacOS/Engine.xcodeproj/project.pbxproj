@@ -46,6 +46,8 @@
 		7F13828B277505B600ED6D67 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
 		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
+		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
+		7FDDAF9F2776873900578F86 /* room.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FDDAF9D2776873900578F86 /* room.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,8 @@
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
+		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
+		7FDDAF9D2776873900578F86 /* room.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = room.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +116,7 @@
 				7F138250277505B600ED6D67 /* common_engine.h */,
 				7F13824C277505B600ED6D67 /* common_engine_impl.h */,
 				7F1382A727750AC000ED6D67 /* common_sdl.h */,
+				7FDDAF9A2776872100578F86 /* Game */,
 				7F13821A277505B600ED6D67 /* Renderer */,
 			);
 			name = src;
@@ -241,6 +246,23 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		7FDDAF9A2776872100578F86 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				7FDDAF9B2776872A00578F86 /* Room */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		7FDDAF9B2776872A00578F86 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				7FDDAF9D2776873900578F86 /* room.hpp */,
+				7FDDAF9C2776873900578F86 /* room.cpp */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -254,6 +276,7 @@
 				7F138266277505B600ED6D67 /* sprite_draw_static.hpp in Headers */,
 				7F138270277505B600ED6D67 /* sprite_atlas_interface.h in Headers */,
 				7F138255277505B600ED6D67 /* texture.hpp in Headers */,
+				7FDDAF9F2776873900578F86 /* room.hpp in Headers */,
 				7F138278277505B600ED6D67 /* font_interface.h in Headers */,
 				7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */,
 				7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */,
@@ -336,6 +359,7 @@
 			files = (
 				7F138261277505B600ED6D67 /* engine_provider.cpp in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
+				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
