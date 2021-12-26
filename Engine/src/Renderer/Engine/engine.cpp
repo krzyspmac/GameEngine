@@ -116,6 +116,9 @@ int Engine::doInput()
     m_mousePosition.x /= m_viewportScale;
     m_mousePosition.y /= m_viewportScale;
 
+    m_mousePosition.x -= m_viewportOffset.x;
+    m_mousePosition.y -= m_viewportOffset.y;
+
     return 0;
 }
 
@@ -141,11 +144,10 @@ void Engine::update()
     // Pop the buffer texture. Blit the render to the screen.
     m_engineProvider.RendererTargetPop();
 
-    int offsetX, offsetY;
-    ApplyScaleTransformations(&offsetX, &offsetY);
+    ApplyScaleTransformations();
 
     // Draw the back buffer texture
-    m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY);
+    m_engineProvider.DrawTexture(m_bufferTexture, m_viewportOffset.x, m_viewportOffset.y);
 
     // Render the current stack
     m_engineProvider.RenderPresent();
@@ -182,7 +184,7 @@ void Engine::RenderScene()
     m_engineProvider.DrawText(m_fpsFont, mousePos, 200, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
 
-void Engine::ApplyScaleTransformations(int *offsetX, int *offsetY)
+void Engine::ApplyScaleTransformations()
 {
     // Apply scaling transformation due to possible window resize
     int windowW, windowH;
@@ -198,8 +200,10 @@ void Engine::ApplyScaleTransformations(int *offsetX, int *offsetY)
     int targetWidth = m_viewportSize.width * m_viewportScale;
     int targetHeight = m_viewportSize.height * m_viewportScale;
 
-    *offsetX = ((windowW - targetWidth) / 2)/m_viewportScale;
-    *offsetY = ((windowH - targetHeight) / 2)/m_viewportScale;
+    m_viewportOffset = OriginMake(
+        ((windowW - targetWidth) / 2)/m_viewportScale,
+        ((windowH - targetHeight) / 2)/m_viewportScale
+    );
 }
 
 void Engine::MouseClicked()

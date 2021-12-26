@@ -54,7 +54,7 @@ namespace engine
 
     private:
         void RenderScene();
-        void ApplyScaleTransformations(int *offsetX, int *offsetY);
+        void ApplyScaleTransformations();
         void MeasurePerformanceStart();
         void MeasurePerformanceEnd();
 
@@ -75,6 +75,7 @@ namespace engine
 
         TextureTargetI *m_bufferTexture;
         float m_viewportScale;
+        Origin m_viewportOffset;
 
     #if SHOW_FPS
         char m_fpsBuffer[256];
