@@ -28,7 +28,7 @@ Font::Font(engine::SDL_APP *engineHandle, std::string filename, FileMemoryBuffer
         return;
     }
     
-    m_font = TTF_OpenFontRW(ops, 1, FONT_SIZE); //TTF_OpenFont(filename.c_str(), FONT_SIZE);
+    m_font = TTF_OpenFontRW(ops, 1, FONT_SIZE*5); //TTF_OpenFont(filename.c_str(), FONT_SIZE);
     if (m_font == NULL)
     {
         std::cout << "Could not open font " << filename << std::endl;

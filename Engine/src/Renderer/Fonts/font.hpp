@@ -16,8 +16,8 @@
 namespace engine
 {
 
-    #define FONT_SIZE            48
-    #define FONT_TEXTURE_SIZE    512
+    #define FONT_SIZE            15
+    #define FONT_TEXTURE_SIZE    1024
     #define MAX_GLYPHS           400
     #define MAX_GLYPH_SIZE       8
     #define MAX_WORD_LENGTH      32

@@ -135,6 +135,9 @@ namespace engine
         /// Sets the draw color.
         virtual void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) = 0;
 
+        /// Sets the render scale.
+        virtual void RenderSetScale(float scaleX, float scaleY) = 0;
+
         /// Draw a rectangle.
         virtual void RenderDrawRect(Engine_Rect*) = 0;
 

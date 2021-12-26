@@ -156,6 +156,10 @@ void Engine::update()
     // Draw the back buffer texture
     m_engineProvider.DrawTexture(m_bufferTexture, m_viewportOffset.x, m_viewportOffset.y);
 
+    // Draw the texts
+    m_engineProvider.RenderSetScale(1.0f, 1.0f);
+    RenderSceneTexts();
+
     // Render the current stack
     m_engineProvider.RenderPresent();
 
@@ -179,18 +183,19 @@ void Engine::MeasurePerformanceEnd()
     m_engineProvider.Delay(floor(m_fpsCapInverse - m_milliseconds));
 }
 
-static char mousePos[256];
-
 void Engine::RenderScene()
 {
     m_scriptingEngine.callUpdate();
     m_characterMover->Update();
+}
 
+void Engine::RenderSceneTexts()
+{
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
     m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
-
+    static char mousePos[256];
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
     m_engineProvider.DrawText(m_fpsFont, mousePos, 200, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
@@ -206,7 +211,7 @@ void Engine::ApplyScaleTransformations()
     scaleY = (float)windowH / (float)m_viewportSize.height;
 
     m_viewportScale = std::min(scaleX, scaleY);
-    SDL_RenderSetScale(((EngineProvider&)m_engineProvider).GetRendererHandle()->renderer, m_viewportScale, m_viewportScale);
+    m_engineProvider.RenderSetScale(m_viewportScale, m_viewportScale);
 
     int targetWidth = m_viewportSize.width * m_viewportScale;
     int targetHeight = m_viewportSize.height * m_viewportScale;

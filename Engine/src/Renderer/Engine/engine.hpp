@@ -59,6 +59,7 @@ namespace engine
 
     private:
         void RenderScene();
+        void RenderSceneTexts();
         void ApplyScaleTransformations();
         void MeasurePerformanceStart();
         void MeasurePerformanceEnd();

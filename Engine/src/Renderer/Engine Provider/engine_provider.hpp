@@ -62,6 +62,7 @@ namespace engine
         void RenderClear();
 
         void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+        void RenderSetScale(float scaleX, float scaleY);
         void RenderDrawRect(Engine_Rect*);
         void RenderDrawLine(int x1, int y1, int x2, int y2);
 

@@ -253,6 +253,11 @@ void EngineProvider::RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
     SDL_SetRenderDrawColor(m_engineHandle->renderer, r, g, b, a);
 }
 
+void EngineProvider::RenderSetScale(float scaleX, float scaleY)
+{
+    SDL_RenderSetScale(m_engineHandle->renderer, scaleX, scaleY);
+}
+
 void EngineProvider::RenderDrawRect(Engine_Rect *rect)
 {
     SDL_RenderDrawRect(m_engineHandle->renderer, (SDL_Rect*)rect);
