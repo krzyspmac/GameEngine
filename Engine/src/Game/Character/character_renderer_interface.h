@@ -134,7 +134,7 @@ namespace engine
     class CharacterRendererI
     {
     public:
-        CharacterRendererI(SpriteAtlasI *characterAtlas, int scale)
+        CharacterRendererI(SpriteAtlasI *characterAtlas, float scale)
             : m_characterAtlas(characterAtlas), m_scale(scale), m_bufferTexture(NULL) {};
 
         virtual ~CharacterRendererI() {
@@ -164,7 +164,7 @@ namespace engine
 
     protected:
         SpriteAtlasI *m_characterAtlas;
-        int m_scale;
+        float m_scale;
 
         CharacterWalkRenderer m_standR;
         CharacterWalkRenderer m_walkR;

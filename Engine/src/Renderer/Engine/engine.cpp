@@ -69,7 +69,7 @@ void Engine::setup()
     m_engineProvider.ClearRender();
 
     m_character = new Character("brett_character.json");
-    m_character->SetScale(3.0);
+    m_character->SetScale(2.5);
 }
 
 int Engine::doInput()
@@ -119,7 +119,7 @@ void Engine::update()
     m_engineProvider.ClearRender();
 
     m_scriptingEngine.callUpdate();
-    m_character->Draw(200, 280);
+    m_character->Draw(100, 480);
 
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);

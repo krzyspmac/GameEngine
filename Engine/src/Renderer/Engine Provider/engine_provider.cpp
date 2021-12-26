@@ -140,7 +140,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, int scale)
+void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
 {
     if (texture != NULL)
     {
@@ -150,32 +150,21 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
         SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
         SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
 
-        dest.x = x;
-        dest.y = y;
-        dest.w = srcW * scale;
-        dest.h = srcH * scale;
+        dest.x = x / scale;
+        dest.y = y / scale;
+        dest.w = srcW;
+        dest.h = srcH;
 
         src.x = srcX;
         src.y = srcY;
         src.w = srcW;
         src.h = srcH;
 
-        SDL_Point point;
-        point.x = 0.5;
-        point.y = 0.5;
-
-//        SDL_Texture* auxtexture = SDL_CreateTexture(m_engineHandle->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 500, 500);
-//        SDL_SetTextureBlendMode(auxtexture, SDL_BLENDMODE_BLEND);
-//        SDL_SetRenderTarget(m_engineHandle->renderer, auxtexture);
-//        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, &src, &dest);
-
-//        SDL_SetRenderTarget
-//        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &point, SDL_FLIP_HORIZONTAL);
-
-//        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
-        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &point, SDL_FLIP_NONE);
-
-//        SDL_DestroyTexture(auxtexture);
+        float originalScaleX, originalScaleY;
+        SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
+        SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
+        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, &src, &dest);
+        SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
     else
     {
@@ -183,7 +172,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale, bool flipHorizontal)
+void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
 {
     if (texture != NULL)
     {
@@ -192,10 +181,8 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, in
         SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
         SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
 
-        dest.x = x;
-        dest.y = y;
-        dest.w *= scale;
-        dest.h *= scale;
+        dest.x = x / scale;
+        dest.y = y / scale;
 
         switch (anchorPoint)
         {
@@ -207,7 +194,11 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, in
                 break;
         }
 
+        float originalScaleX, originalScaleY;
+        SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
+        SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
         SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
 }
 

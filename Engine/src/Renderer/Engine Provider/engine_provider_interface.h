@@ -96,11 +96,11 @@ namespace engine
 
         /// A concrete instance will draw the texture on screen
         /// at given coordinates from the given source rect.
-        virtual void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, int scale) = 0;
+        virtual void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale) = 0;
 
         /// Draws a texture ona specific anchor point. Helpful for character drawing where the origin point
         /// is a the bottom.
-        virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale, bool flipHorizontal) = 0;
+        virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal) = 0;
 
     /// Fonts
     public:

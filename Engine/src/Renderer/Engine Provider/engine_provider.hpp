@@ -47,8 +47,8 @@ namespace engine
 
         void UnloadTexture(TextureI *texture);
         void DrawTexture(TextureI *texture, int x, int y);
-        void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, int scale);
-        void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale, bool flipHorizontal);
+        void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale);
+        void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal);
 
         FontI *LoadFont(std::string name, FileMemoryBufferStreamI *);
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
