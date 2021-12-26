@@ -184,7 +184,7 @@ int ScriptingEngine::L_drawText(lua_State *L)
             align = TEXT_ALIGN_RIGHT;
         }
 
-        GetMainEngine()->DrawText(fontPointer, text, x, y, r, g, b, align);
+        GetMainEngine()->getProvider().DrawText(fontPointer, text, x, y, r, g, b, align);
     }
 
     return 0;

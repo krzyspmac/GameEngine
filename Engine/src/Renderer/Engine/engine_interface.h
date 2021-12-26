@@ -63,9 +63,6 @@ namespace engine
         /// `LoadTexture`.
         virtual TextureI *GetTexture(std::string name) = 0;
 
-        /// A concrete instance draws the texture.
-        virtual void DrawTexture(TextureI *texture, int x, int y) = 0;
-
         /// A concrete instance should unlaod the texture and
         /// remove it from the cache.
         virtual void UnloadTexture(TextureI *texture) = 0;
@@ -83,22 +80,8 @@ namespace engine
         /// Gets the previously loaded font or returns nil;
         virtual FontI *GetFont(std::string name) = 0;
 
-        virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;
-
         /// Disposes of all fonts.
         virtual void DisposeAllFonts() = 0;
-
-    /// Sprites
-    public:
-
-//        /// Loads a sprite and stores it in the sprite cache.
-//        virtual SpriteI *LoadSprite(TextureI *texture, SpriteDescriptor spriteDescriptor) = 0;
-//
-//        /// Unloads a sprite. Does not unload the texture.
-//        virtual void UnloadSprite(SpriteI *sprite) = 0;
-//
-//        /// Unloads all sprites.
-//        virtual void DisposeAllSprites() = 0;
 
     /// Sprite atlas
     public:

@@ -123,7 +123,7 @@ void Engine::update()
 
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
-    DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
+    m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
 
     // Pop the buffer texture. Blit the render to the screen.
@@ -194,11 +194,6 @@ TextureI *Engine::GetTexture(std::string name)
     return NULL;
 }
 
-void Engine::DrawTexture(TextureI *texture, int x, int y)
-{
-    m_engineProvider.DrawTexture(texture, x, y);
-}
-
 void Engine::UnloadTexture(TextureI *texture)
 {
     for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
@@ -246,11 +241,6 @@ FontI *Engine::GetFont(std::string name)
     }
 
     return NULL;
-}
-
-void Engine::DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
-{
-    m_engineProvider.DrawText(font, text, x, y, r, g, b, align);
 }
 
 void Engine::DisposeAllFonts()

@@ -34,13 +34,11 @@ namespace engine
         TextureI *LoadTexture(std::string name);
         TextureTargetI *CreateTargetTexture(int width, int height);
         TextureI *GetTexture(std::string name);
-        void DrawTexture(TextureI *texture, int x, int y);
         void UnloadTexture(TextureI *texture);
         void DisposeAllTextures();
 
         FontI *LoadFont(std::string name);
         FontI *GetFont(std::string name);
-        void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
         void DisposeAllFonts();
 
         SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
