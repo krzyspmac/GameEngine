@@ -59,6 +59,9 @@ namespace engine
         /// Wait ms
         virtual void Delay(Uint32 ms) = 0;
 
+        /// Get the current window size.
+        virtual void GetWindowSize(int *w, int *h) = 0;
+
     /// Renderer related
     public:
 
@@ -82,7 +85,7 @@ namespace engine
         /// A concrete instance should create the target texture. A target texture
         /// is able to be rendered upon so a partial render can be developed.
         /// The ownership of the texture is passed to the caller.
-        virtual TextureI *CreateTargetTexture(int width, int height) = 0;
+        virtual TextureTargetI *CreateTargetTexture(int width, int height) = 0;
 
         /// A concrete instance should unload the texture.
         virtual void UnloadTexture(TextureI *texture) = 0;
@@ -109,16 +112,22 @@ namespace engine
         /// Draws a text using a specified font.
         virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;
 
-    /// Render specific
+    /// Renderer specific
     public:
-        
+
         /// Sets the render target to a target texture. All rendering goes
-        /// there until a `ClearRenderTarget` is called. The texture
+        /// there until a `RenderTargetClear` is called. The texture
         /// must be created as a target texture.
-        virtual void SetRenderTarget(TextureI *targetTexture) = 0;
+        virtual void RendererTargetPush(TextureTargetI *targetTexture) = 0;
+
+        /// Pops the renderer target texture from the stack and returned
+        /// to the previous one or the main renderer if the stack is empty.
+        virtual void RendererTargetPop() = 0;
+        
+        virtual void RenderTargetSet(TextureI *targetTexture) = 0;
 
         /// Clears the render target so the final render can be applied.
-        virtual void ClearRenderTarget() = 0;
+        virtual void RenderTargetClear() = 0;
 
         /// Clears the buffer before drawing a new frame.
         virtual void RenderClear() = 0;

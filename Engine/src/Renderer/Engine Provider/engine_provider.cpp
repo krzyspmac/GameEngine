@@ -8,6 +8,8 @@
 #include "engine_provider.hpp"
 #include "texture.hpp"
 #include "font.hpp"
+#include "texture_target.hpp"
+#include "SDL.h"
 
 /// Defaults
 
@@ -45,6 +47,11 @@ void EngineProvider::GetMousePosition(int *x, int *y)
 void EngineProvider::Delay(Uint32 ms)
 {
     SDL_Delay(ms);
+}
+
+void EngineProvider::GetWindowSize(int *w, int *h)
+{
+    SDL_GetWindowSize(m_engineHandle->window, w, h);
 }
 
 void EngineProvider::SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
@@ -86,12 +93,12 @@ TextureI *EngineProvider::LoadTexture(std::string filename, FileMemoryBufferStre
     }
 }
 
-TextureI *EngineProvider::CreateTargetTexture(int width, int height)
+TextureTargetI *EngineProvider::CreateTargetTexture(int width, int height)
 {
     SDL_Texture* textureHandle = SDL_CreateTexture(m_engineHandle->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     SDL_SetTextureBlendMode(textureHandle, SDL_BLENDMODE_BLEND);
-    Texture *texture = new Texture(textureHandle, "");
-    return (TextureI*)texture;
+    TextureTarget *texture = new TextureTarget(textureHandle);
+    return (TextureTargetI*)texture;
 }
 
 void EngineProvider::UnloadTexture(TextureI *texture)
@@ -215,12 +222,32 @@ void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r
     fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
 
-void EngineProvider::SetRenderTarget(TextureI *targetTexture)
+void EngineProvider::RendererTargetPush(TextureTargetI *targetTexture)
+{
+    m_rendererStack.push_back(targetTexture);
+    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+}
+
+void EngineProvider::RendererTargetPop()
+{
+    m_rendererStack.pop_back();
+    if (m_rendererStack.size() > 0)
+    {
+        TextureI *targetTexture = m_rendererStack.at(m_rendererStack.size()-1);
+        SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+    }
+    else
+    {
+        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
+    }
+}
+
+void EngineProvider::RenderTargetSet(TextureI *targetTexture)
 {
     SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
 }
 
-void EngineProvider::ClearRenderTarget()
+void EngineProvider::RenderTargetClear()
 {
     SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
 }

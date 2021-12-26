@@ -30,6 +30,9 @@ namespace engine
         /// Draw the character. The origin aligned to the bottom center part of the character.
         virtual void Draw(int x, int y) = 0;
 
+        /// Set the character scale
+        virtual void SetScale(float scale) = 0;
+
         virtual void Change() = 0;
 
     protected:

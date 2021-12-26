@@ -201,7 +201,7 @@ void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int
     CharacterWalkRenderer &renderer = GetRenderer(state);
 
     // Set the buffer texture as the current rendering target
-    GetMainEngine()->SetRenderTarget(m_bufferTexture);
+    provider.RendererTargetPush(m_bufferTexture);
 
     // Clear the buffer textures with a clear color
     provider.RenderSetColor(255, 255, 255, 0);
@@ -218,10 +218,10 @@ void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int
 
     // Clear the render target so that the final pass can be pushed
     // to the graphics card.
-    GetMainEngine()->ClearRenderTarget();
+    provider.RendererTargetPop();
 
     // Draw the buffer texture.
-    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, 200, 300, m_scale, renderer.GetIsReversed());
+    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, x, y, m_scale, renderer.GetIsReversed());
 }
 
 #pragma mark - CharacterWalkRenderer

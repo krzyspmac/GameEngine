@@ -21,8 +21,8 @@ namespace engine
     {
     public:
         ///
-        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider)
-        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider)
+        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize)
+        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_viewportSize(viewportSize)
         { }
 
         /// The main setup. All engine components should be
@@ -55,7 +55,7 @@ namespace engine
         /// A concrete instance should create the texture. The texture
         /// *is not* added to a cache and the ownershop is passed onto the
         /// caller.
-        virtual TextureI *CreateTargetTexture(int width, int height) = 0;
+        virtual TextureTargetI *CreateTargetTexture(int width, int height) = 0;
 
         /// A concrete instance should get the existing texture
         /// by comparing texture name. Otherwise returns NULL.
@@ -131,16 +131,6 @@ namespace engine
         /// Unloads all.
         virtual void SpriteDrawDisposeAll() = 0;
 
-    /// Renderer specific
-    public:
-
-        /// Sets the render target to a target texture. All rendering goes
-        /// there until a `ClearRenderTarget` is called.
-        virtual void SetRenderTarget(TextureI *targetTexture) = 0;
-
-        /// Clears the render target so the final render can be applied.
-        virtual void ClearRenderTarget() = 0;
-
     public:
         ///
         EngineProviderI& getProvider() { return m_engineProvider; };
@@ -152,6 +142,7 @@ namespace engine
         FileAccessI& getFileAccess() { return m_fileAccess; };
 
     protected:
+        Size m_viewportSize;
         EngineProviderI &m_engineProvider;
         FileAccessI &m_fileAccess;
         ScriptingEngineI &m_scriptingEngine;

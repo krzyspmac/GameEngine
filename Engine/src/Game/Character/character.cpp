@@ -37,7 +37,7 @@ Character::Character(std::string jsonDefinition)
                 atlas = GetMainEngine()->SpriteAtlasLoad(atlasFilename, atlasTexture);
                 if (atlas)
                 {
-                    m_characterRenderer = new CharacterRenderer(atlas, 3);
+                    m_characterRenderer = new CharacterRenderer(atlas, 1);
                 }
             }
 
@@ -144,6 +144,12 @@ void Character::ProcessHeadFrame(void *nodePtr, SpriteAtlasI *atlas, CharacterWa
     m_characterRenderer->AppendHeadAnimationFrame(walkState, sprite, offsetX, offsetY);
     m_characterRenderer->GetRenderer(walkState).SetReversed(reversed);
 }
+
+void Character::SetScale(float scale)
+{
+    m_characterRenderer->SetScale(scale);
+}
+
 
 static CharacterWalkDirection state = STAND_RIGHT;//STAND_RIGHT;
 

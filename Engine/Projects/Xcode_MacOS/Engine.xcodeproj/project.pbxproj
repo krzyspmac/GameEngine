@@ -152,8 +152,8 @@
 				7F13821D277505B600ED6D67 /* texture_interface.h */,
 				7F13821E277505B600ED6D67 /* texture.hpp */,
 				7F13821C277505B600ED6D67 /* texture.cpp */,
-				7F64289127787C2E00EE9E2C /* texture_target.cpp */,
 				7F64289227787C2E00EE9E2C /* texture_target.hpp */,
+				7F64289127787C2E00EE9E2C /* texture_target.cpp */,
 			);
 			path = Textures;
 			sourceTree = "<group>";

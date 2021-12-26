@@ -24,6 +24,8 @@ namespace engine
         void ProcessHeadFrame(void*, SpriteAtlasI *atlas, CharacterWalkDirection walkState, bool reversed);
 
     public:
+        void SetScale(float scale);
+
         void Draw(int x, int y);
 
         void Change();

@@ -26,6 +26,8 @@ namespace engine {
         void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY);
         void PrepareCharacter();
 
+        void SetScale(float scale) { m_scale = scale; };
+
         void DrawBody(CharacterWalkRenderer&, bool isAnimating);
         void DrawHead(CharacterWalkRenderer&, bool isAnimating);
         void Draw(CharacterWalkDirection, bool isAnimating, int x, int y);

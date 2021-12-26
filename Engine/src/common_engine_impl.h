@@ -14,16 +14,20 @@
 namespace engine
 {
 
-typedef struct {
-    SDL_Renderer *renderer;
-    SDL_Window *window;
-} SDL_APP;
+    typedef struct {
+        SDL_Renderer *renderer;
+        SDL_Window *window;
+    } SDL_APP;
 
-typedef struct {
-    int x;
-    int y;
-} MOUSE_POSITION;
+    typedef struct Size {
+        int width;
+        int height;
+    } Size;
 
+    typedef struct {
+        int x;
+        int y;
+    } MOUSE_POSITION;
 }
 
 #endif /* common_engine_impl_h */

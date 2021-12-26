@@ -13,9 +13,10 @@
 namespace engine
 {
 
-    class TextureTarget: public TextureI
+    class TextureTarget: public TextureTargetI
     {
-
+    public:
+        TextureTarget(void *textureHandle);
     };
 };
 

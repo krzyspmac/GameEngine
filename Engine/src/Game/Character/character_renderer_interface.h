@@ -156,6 +156,9 @@ namespace engine
         /// buffer texture rendered.
         virtual void PrepareCharacter() = 0;
 
+        /// Sets the scale.
+        virtual void SetScale(float scale) = 0;
+
         /// Draw all the character.
         virtual void Draw(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
 
@@ -175,7 +178,7 @@ namespace engine
         CharacterWalkRenderer m_walkB;
         CharacterWalkRenderer m_standB;
 
-        TextureI *m_bufferTexture;
+        TextureTargetI *m_bufferTexture;
     };
 };
 

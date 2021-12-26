@@ -6,3 +6,11 @@
 //
 
 #include "texture_target.hpp"
+
+using namespace engine;
+
+TextureTarget::TextureTarget(void *textureHandle)
+: TextureTargetI(textureHandle)
+{
+    
+}

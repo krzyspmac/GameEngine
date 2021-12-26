@@ -13,6 +13,8 @@
 #include "sprite_draw_animated.hpp"
 #include "character_renderer.hpp"
 #include "character.hpp"
+#include "engine_provider.hpp"
+
 #ifdef __cplusplus
 extern "C" {
     #include "../../../Lua/code/src/lua.h"
@@ -30,20 +32,20 @@ engine::EngineI *GetMainEngine()
     return sharedEngine;
 }
 
-Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider)
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider)
+Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, viewportSize)
 {
     sharedEngine = this;
 }
 
 Engine::~Engine()
 {
-//    DisposeAllSprites();
     DisposeAllFonts();
     DisposeAllTextures();
     SpriteAtlasDisposeAll();
     SpriteDrawDisposeAll();
 
+    delete m_bufferTexture;
     delete m_character;
 }
 
@@ -53,6 +55,8 @@ void Engine::setup()
 #if SHOW_FPS
     m_fpsFont = LoadFont("EnterCommand.ttf");
 #endif
+
+    m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
 
     std::unique_ptr<FileMemoryBufferStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
 
@@ -65,6 +69,7 @@ void Engine::setup()
     m_engineProvider.ClearRender();
 
     m_character = new Character("brett_character.json");
+    m_character->SetScale(3.0);
 }
 
 int Engine::doInput()
@@ -99,18 +104,50 @@ int Engine::doInput()
 
 void Engine::update()
 {
+    // Calculate performance
     m_performanceStart = m_engineProvider.GetPerformanceCounter();
 
-    m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
+    // Clear the window background
+    m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
+    m_engineProvider.ClearRender();
+
+    // Push the buffer texture. All scene will be rendered to a buffer texture
+    m_engineProvider.RendererTargetPush(m_bufferTexture);
+
+    // Clear the game background
+    m_engineProvider.SetRenderBackgroundColor(255, 0, 0, 120);
     m_engineProvider.ClearRender();
 
     m_scriptingEngine.callUpdate();
-    m_character->Draw(10, 200);
+    m_character->Draw(200, 280);
 
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
     DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
+
+    // Pop the buffer texture. Blit the render to the screen.
+    m_engineProvider.RendererTargetPop();
+
+    int windowW, windowH;
+    m_engineProvider.GetWindowSize(&windowW, &windowH);
+
+    float scaleX, scaleY;
+
+    scaleX = (float)windowW / (float)m_viewportSize.width;
+    scaleY = (float)windowH / (float)m_viewportSize.height;
+
+    float scale = std::min(scaleX, scaleY);
+    SDL_RenderSetScale(((EngineProvider&)m_engineProvider).GetRendererHandle()->renderer, scale, scale);
+
+    float aspectRatio = (float)m_viewportSize.width / (float)m_viewportSize.height;
+    int targetWidth = m_viewportSize.width * scale;
+    int targetHeight = m_viewportSize.height * scale;
+
+    int offsetX = (windowW - targetWidth) / 2;
+    int offsetY = (windowH - targetHeight) / 2;
+
+    m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY, 0, 0, m_viewportSize.width, m_viewportSize.height, 1);
 
     m_engineProvider.RenderPresent();
 
@@ -138,7 +175,7 @@ TextureI *Engine::LoadTexture(std::string filename)
     return result;
 }
 
-TextureI *Engine::CreateTargetTexture(int width, int height)
+TextureTargetI *Engine::CreateTargetTexture(int width, int height)
 {
     return m_engineProvider.CreateTargetTexture(width, height);
 }
@@ -307,14 +344,4 @@ void Engine::SpriteDrawUnload(SpriteDrawI *spriteDraw)
 void Engine::SpriteDrawDisposeAll()
 {
     m_spriteDraws.empty();
-}
-
-void Engine::SetRenderTarget(TextureI *targetTexture)
-{
-    m_engineProvider.SetRenderTarget(targetTexture);
-}
-
-void Engine::ClearRenderTarget()
-{
-    m_engineProvider.ClearRenderTarget();
 }

@@ -15,9 +15,11 @@
 
 #define SCREEN_WIDTH  640
 #define SCREEN_HEIGHT 480
+#define ASPECT_RATIO (640/480)
 
-namespace engine
-{
+static int resizingEventWatcher(void* data, SDL_Event* event);
+
+using namespace engine;
 
 RendererEntry::RendererEntry()
 {
@@ -30,7 +32,11 @@ RendererEntry::RendererEntry()
     this->m_engineProvider = ep;
     this->m_scriptingEngine = se;
     this->m_eventProvider = eventProvider;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider);
+
+    Size viewportSize;
+    viewportSize.width = SCREEN_WIDTH;
+    viewportSize.height = SCREEN_HEIGHT;
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, viewportSize);
 }
 
 int RendererEntry::initSDL()
@@ -61,6 +67,8 @@ int RendererEntry::initSDL()
         printf("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
         exit(1);
     }
+
+    SDL_SetWindowResizable(m_app.window, SDL_TRUE);
 
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY, "nearest", SDL_HINT_OVERRIDE);
     m_app.renderer = SDL_CreateRenderer(m_app.window, -1, rendererFlags);
@@ -123,4 +131,13 @@ void RendererEntry::main(int argc, const char *argv[])
     }
 }
 
-}; // namespace
+static int resizingEventWatcher(void* data, SDL_Event* event) {
+//  if (event->type == SDL_WINDOWEVENT &&
+//      event->window.event == SDL_WINDOWEVENT_RESIZED) {
+//    SDL_Window* win = SDL_GetWindowFromID(event->window.windowID);
+//    if (win == (SDL_Window*)data) {
+//      printf("resizing.....\n");
+//    }
+//  }
+  return 0;
+}

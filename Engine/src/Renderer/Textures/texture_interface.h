@@ -23,11 +23,18 @@ namespace engine
         void *getTextureHandle() { return m_textureHandle; };
         std::string &getTextureName() { return m_textureName; };
 
-    private:
+    protected:
         void *m_textureHandle;
         std::string m_textureName;
     };
 
+    class TextureTargetI: public TextureI
+    {
+    public:
+        TextureTargetI(void *textureHandle)
+        : TextureI(textureHandle, "")
+        { };
+    };
 };
 
 #endif /* texture_interface_h */

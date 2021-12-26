@@ -24,7 +24,7 @@ namespace engine
     {
     public:
         ///
-        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider);
+        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize);
 
         ~Engine();
 
@@ -32,7 +32,7 @@ namespace engine
         int doInput();
         void update();
         TextureI *LoadTexture(std::string name);
-        TextureI *CreateTargetTexture(int width, int height);
+        TextureTargetI *CreateTargetTexture(int width, int height);
         TextureI *GetTexture(std::string name);
         void DrawTexture(TextureI *texture, int x, int y);
         void UnloadTexture(TextureI *texture);
@@ -53,9 +53,6 @@ namespace engine
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
         void SpriteDrawDisposeAll();
 
-        void SetRenderTarget(TextureI *targetTexture);
-        void ClearRenderTarget();
-
     private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
@@ -68,11 +65,12 @@ namespace engine
         float m_seconds;
         float m_previousFps; // only when CALC_FPS set
 
+        TextureTargetI *m_bufferTexture;
+
     #if SHOW_FPS
         char m_fpsBuffer[256];
         FontI *m_fpsFont;
     #endif
-//        CharacterRendererI *m_character;
         CharacterI *m_character;
     };
 }

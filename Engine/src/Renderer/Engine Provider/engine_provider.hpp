@@ -13,6 +13,7 @@
 #include "engine_provider_interface.h"
 #include "texture_interface.h"
 #include "font_interface.h"
+#include "texture_target.hpp"
 
 namespace engine
 {
@@ -30,6 +31,7 @@ namespace engine
         Uint64 GetPerformanceCounter();
         void GetMousePosition(int *x, int *y);
         void Delay(Uint32 ms);
+        void GetWindowSize(int *w, int *h);
 
     public:
         engine::SDL_APP *GetRendererHandle() { return m_engineHandle; };
@@ -41,7 +43,7 @@ namespace engine
 
     public:
         TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *);
-        TextureI *CreateTargetTexture(int width, int height);
+        TextureTargetI *CreateTargetTexture(int width, int height);
 
         void UnloadTexture(TextureI *texture);
         void DrawTexture(TextureI *texture, int x, int y);
@@ -52,8 +54,11 @@ namespace engine
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
 
     public:
-        void SetRenderTarget(TextureI *targetTexture);
-        void ClearRenderTarget();
+        void RendererTargetPush(TextureTargetI *targetTexture);
+        void RendererTargetPop();
+
+        void RenderTargetSet(TextureI *targetTexture);
+        void RenderTargetClear();
         void RenderClear();
 
         void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -62,6 +67,7 @@ namespace engine
 
     private:
         engine::SDL_APP *m_engineHandle;
+        std::vector<TextureI*> m_rendererStack;
     };
 
 };
