@@ -17,8 +17,6 @@
 #define SCREEN_HEIGHT 480
 #define ASPECT_RATIO (640/480)
 
-static int resizingEventWatcher(void* data, SDL_Event* event);
-
 using namespace engine;
 
 RendererEntry::RendererEntry()
@@ -69,6 +67,7 @@ int RendererEntry::initSDL()
     }
 
     SDL_SetWindowResizable(m_app.window, SDL_TRUE);
+//    SDL_SetWindowFullscreen(m_app.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY, "nearest", SDL_HINT_OVERRIDE);
     m_app.renderer = SDL_CreateRenderer(m_app.window, -1, rendererFlags);
@@ -129,15 +128,4 @@ void RendererEntry::main(int argc, const char *argv[])
         doInput();
         doScene();
     }
-}
-
-static int resizingEventWatcher(void* data, SDL_Event* event) {
-//  if (event->type == SDL_WINDOWEVENT &&
-//      event->window.event == SDL_WINDOWEVENT_RESIZED) {
-//    SDL_Window* win = SDL_GetWindowFromID(event->window.windowID);
-//    if (win == (SDL_Window*)data) {
-//      printf("resizing.....\n");
-//    }
-//  }
-  return 0;
 }

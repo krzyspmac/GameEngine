@@ -143,11 +143,11 @@ void Engine::update()
     int targetWidth = m_viewportSize.width * scale;
     int targetHeight = m_viewportSize.height * scale;
 
-    int offsetX = (windowW - targetWidth) / 2;
-    int offsetY = (windowH - targetHeight) / 2;
+    int offsetX = ((windowW - targetWidth) / 2)/scale;
+    int offsetY = ((windowH - targetHeight) / 2)/scale;
 
     // Draw the back buffer texture
-    m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY, 0, 0, m_viewportSize.width, m_viewportSize.height, 1);
+    m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY);
 
     // Render the current stack
     m_engineProvider.RenderPresent();
