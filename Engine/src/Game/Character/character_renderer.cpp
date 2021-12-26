@@ -46,20 +46,34 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection dir
 
 void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY)
 {
-    CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
+    if (sprite)
+    {
+        CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
 
-    CharacterBodyRenderer *bodyRenderer = new CharacterBodyRenderer(sprite, offsetX, offsetY);
-    bodyRenderer->SetHeadOffsetX(headOffsetX);
-    bodyRenderer->SetHeadOffsetY(headOffsetY);
+        CharacterBodyRenderer *bodyRenderer = new CharacterBodyRenderer(sprite, offsetX, offsetY);
+        bodyRenderer->SetHeadOffsetX(headOffsetX);
+        bodyRenderer->SetHeadOffsetY(headOffsetY);
 
-    characterRenderer.AppendBodyRenderer(bodyRenderer);
+        characterRenderer.AppendBodyRenderer(bodyRenderer);
+    }
+    else
+    {
+        std::cout << "No Sprite for walk" << std::endl;
+    }
 }
 
 void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY)
 {
-    CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
-    CharacterHeadRenderer *headRenderer = new CharacterHeadRenderer(sprite, offsetX, offsetY);
-    characterRenderer.AppendHeadRenderer(headRenderer);
+    if (sprite)
+    {
+        CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
+        CharacterHeadRenderer *headRenderer = new CharacterHeadRenderer(sprite, offsetX, offsetY);
+        characterRenderer.AppendHeadRenderer(headRenderer);
+    }
+    else
+    {
+        std::cout << "No Sprite for walk" << std::endl;
+    }
 }
 
 void CharacterRenderer::PrepareCharacter()
