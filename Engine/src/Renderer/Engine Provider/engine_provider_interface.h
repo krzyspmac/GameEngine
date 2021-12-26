@@ -97,7 +97,7 @@ namespace engine
 
         /// Draws a texture ona specific anchor point. Helpful for character drawing where the origin point
         /// is a the bottom.
-        virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale) = 0;
+        virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale, bool flipHorizontal) = 0;
 
     /// Fonts
     public:

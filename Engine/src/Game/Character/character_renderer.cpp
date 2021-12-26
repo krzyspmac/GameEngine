@@ -84,9 +84,8 @@ void CharacterRenderer::PrepareCharacter()
     m_bufferTexture = GetMainEngine()->CreateTargetTexture(m_bodyWidth, m_bodyHeight);
 }
 
-void CharacterRenderer::DrawBody(CharacterWalkDirection direction, bool isAnimating)
+void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimating)
 {
-    CharacterWalkRenderer &renderer = GetRenderer(direction);
     if (!renderer.GetBodyAnimationCount())
     {
         return;
@@ -119,9 +118,8 @@ void CharacterRenderer::DrawBody(CharacterWalkDirection direction, bool isAnimat
     );
 }
 
-void CharacterRenderer::DrawHead(CharacterWalkDirection direction, bool isAnimating)
+void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimating)
 {
-    CharacterWalkRenderer &renderer = GetRenderer(direction);
     if (!renderer.GetHeadAnimationCount())
     {
         return;
@@ -177,6 +175,9 @@ void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int
     // Get the engine provider. All drawing functions go through there.
     EngineProviderI &provider = GetMainEngine()->getProvider();
 
+    // Get the current walk renderer.
+    CharacterWalkRenderer &renderer = GetRenderer(state);
+
     // Set the buffer texture as the current rendering target
     GetMainEngine()->SetRenderTarget(m_bufferTexture);
 
@@ -185,8 +186,8 @@ void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int
     GetMainEngine()->getProvider().RenderClear();
 
     // Render the body, then the head
-    DrawBody(state, isAnimating);
-    DrawHead(state, isAnimating);
+    DrawBody(renderer, isAnimating);
+    DrawHead(renderer, isAnimating);
 
     // Render display artifacts
     provider.RenderSetColor(255, 255, 255, 120);
@@ -198,7 +199,7 @@ void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int
     GetMainEngine()->ClearRenderTarget();
 
     // Draw the buffer texture.
-    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, 200, 300, m_scale);
+    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, 200, 300, m_scale, renderer.GetIsReversed());
 }
 
 #pragma mark - CharacterWalkRenderer

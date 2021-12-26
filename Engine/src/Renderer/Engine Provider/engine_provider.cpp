@@ -9,7 +9,18 @@
 #include "texture.hpp"
 #include "font.hpp"
 
+/// Defaults
+
+static SDL_Point flipPoint;
+
 using namespace engine;
+
+EngineProvider::EngineProvider(engine::SDL_APP *engineHandle)
+: EngineProviderI(), m_engineHandle(engineHandle)
+{
+    flipPoint.x = 0.5;
+    flipPoint.y = 0.5;
+}
 
 Uint64 EngineProvider::GetTicks()
 {
@@ -165,7 +176,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale)
+void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale, bool flipHorizontal)
 {
     if (texture != NULL)
     {
@@ -189,11 +200,7 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, in
                 break;
         }
 
-//        SDL_Point point;
-//        point.x = 0.5;
-//        point.y = 0.5;
-
-        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, NULL, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
     }
 }
 

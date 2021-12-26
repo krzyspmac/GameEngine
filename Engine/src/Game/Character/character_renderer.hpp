@@ -26,8 +26,8 @@ namespace engine {
         void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, bool reversed);
         void PrepareCharacter();
 
-        void DrawBody(CharacterWalkDirection, bool isAnimating);
-        void DrawHead(CharacterWalkDirection, bool isAnimating);
+        void DrawBody(CharacterWalkRenderer&, bool isAnimating);
+        void DrawHead(CharacterWalkRenderer&, bool isAnimating);
         void Draw(CharacterWalkDirection, bool isAnimating, int x, int y);
 
         void DrawBoundingBox(EngineProviderI &provider);
