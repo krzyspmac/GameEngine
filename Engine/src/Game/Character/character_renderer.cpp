@@ -39,6 +39,10 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection dir
             return m_walkF;
         case STAND_FORWARD:
             return m_standF;
+        case BACKWARD:
+            return m_walkB;
+        case STAND_BACKWARD:
+            return m_standB;
     }
 
     return m_walkR;

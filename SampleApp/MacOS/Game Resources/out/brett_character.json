@@ -100,6 +100,38 @@
 			}
 		]
 	},
+	"standForward": {
+		"animationDelay": 100,
+		"body": [
+			{
+				"sprite": "fstand_body1",
+				"offsetX": 5,
+				"offsetY": 0,
+				"headOffsetX": 4,
+				"headOffsetY": 0
+			}
+		],
+		"head": [
+			{
+				"sprite": "fstand_head1"
+			},
+			{
+				"sprite": "fstand_head2"
+			},
+			{
+				"sprite": "fstand_head3"
+			},
+			{
+				"sprite": "fstand_head4"
+			},
+			{
+				"sprite": "fstand_head5"
+			},
+			{
+				"sprite": "fstand_head6"
+			}
+		]
+	},
 	"walkForward": {
 		"animationDelay": 100,
 		"body": [
@@ -171,6 +203,65 @@
 			},
 			{
 				"sprite": "fstand_head6"
+			}
+		]
+	},
+	"walkBackward": {
+		"animationDelay": 100,
+		"body": [
+			{
+				"sprite": "bwalk_body1",
+				"offsetX": 5,
+				"offsetY": 0,
+				"headOffsetX": 4,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body2",
+				"offsetX": 5,
+				"headOffsetX": 4,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body3",
+				"offsetX": 5,
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body4",
+				"offsetX": 5,
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body5",
+				"offsetX": 5,
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body6",
+				"offsetX": 5,
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body7",
+				"offsetX": 5,
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "bwalk_body8",
+				"offsetX": 5,
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			}
+		],
+		"head": [
+			{
+				"sprite": "bstand_head1"
 			}
 		]
 	}

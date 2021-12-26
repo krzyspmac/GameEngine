@@ -76,6 +76,10 @@ Character::Character(std::string jsonDefinition)
             cJSON *standForwardNode = cJSON_GetObjectItem(root, "standForward");
             ProcessBodyParts(standForwardNode, atlas, STAND_FORWARD, false);
 
+            // Backward
+            cJSON *walkBackwardNode = cJSON_GetObjectItem(root, "walkBackward");
+            ProcessBodyParts(walkBackwardNode, atlas, BACKWARD, false);
+
             cJSON_Delete(root);
             m_characterRenderer->PrepareCharacter();
         }
@@ -151,7 +155,7 @@ void Character::Draw(int x, int y)
 void Character::Change()
 {
     state = CharacterWalkDirection((int)state+1);
-    if (state > STAND_FORWARD)
+    if (state > BACKWARD)
     {
         state = STAND_RIGHT;
     }
