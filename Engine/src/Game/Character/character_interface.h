@@ -27,7 +27,7 @@ namespace engine
     public:
         CharacterRendererI *GetCharacterRenderer() { return m_characterRenderer; };
 
-        /// Draw the character.
+        /// Draw the character. The origin aligned to the bottom center part of the character.
         virtual void Draw(int x, int y) = 0;
 
         virtual void Change() = 0;
