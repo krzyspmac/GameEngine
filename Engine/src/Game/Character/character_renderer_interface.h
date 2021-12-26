@@ -19,7 +19,10 @@ namespace engine
         RIGHT                   = 2,
 
         LEFT                    = 3,
-        STAND_LEFT              = 4
+        STAND_LEFT              = 4,
+
+        FORWARD                 = 5,
+        STAND_FORWARD           = 6
     } CharacterWalkDirection;
 
     /// Describes the character body renderer that includes
@@ -162,6 +165,9 @@ namespace engine
 
         CharacterWalkRenderer m_walkL;
         CharacterWalkRenderer m_standL;
+
+        CharacterWalkRenderer m_walkF;
+        CharacterWalkRenderer m_standF;
 
         TextureI *m_bufferTexture;
     };

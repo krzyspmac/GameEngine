@@ -35,6 +35,10 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection dir
             return m_walkL;
         case STAND_LEFT:
             return m_standL;
+        case FORWARD:
+            return m_walkF;
+        case STAND_FORWARD:
+            return m_standF;
     }
 
     return m_walkR;
@@ -105,6 +109,8 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
     SpriteAtlasItemI *spriteItem = bodyRenderer->GetSprite();
     m_headOffsetX = bodyRenderer->GetHeadOffsetX();
     m_headOffsetY = bodyRenderer->GetHeadOffsetY();
+
+    printf("spriteNo = %d\n", spriteNo);
 
     GetMainEngine()->getProvider().DrawTexture(
        spriteItem->GetTexture(),

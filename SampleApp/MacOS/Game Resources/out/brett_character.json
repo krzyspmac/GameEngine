@@ -99,5 +99,79 @@
 				"sprite": "rstand_head6"
 			}
 		]
+	},
+	"walkForward": {
+		"animationDelay": 100,
+		"body": [
+			{
+				"sprite": "fwalk_body1",
+				"offsetX": 5,
+				"offsetY": 0,
+				"headOffsetX": 4,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body2",
+				"offsetX": 5,
+				"headOffsetX": 4,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body3",
+				"offsetX": 5,
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body4",
+				"offsetX": 5,
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body5",
+				"offsetX": 5,
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body6",
+				"offsetX": 5,
+				"headOffsetX": 2,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body7",
+				"offsetX": 5,
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			},
+			{
+				"sprite": "fwalk_body8",
+				"offsetX": 5,
+				"headOffsetX": 3,
+				"headOffsetY": 0
+			}
+		],
+		"head": [
+			{
+				"sprite": "fstand_head1"
+			},
+			{
+				"sprite": "fstand_head2"
+			},
+			{
+				"sprite": "fstand_head3"
+			},
+			{
+				"sprite": "fstand_head4"
+			},
+			{
+				"sprite": "fstand_head5"
+			},
+			{
+				"sprite": "fstand_head6"
+			}
+		]
 	}
 }

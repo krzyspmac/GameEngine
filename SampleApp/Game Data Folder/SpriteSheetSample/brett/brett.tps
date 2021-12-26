@@ -185,6 +185,78 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">sprites/fstand_head1.png</key>
+            <key type="filename">sprites/fstand_head2.png</key>
+            <key type="filename">sprites/fstand_head3.png</key>
+            <key type="filename">sprites/fstand_head4.png</key>
+            <key type="filename">sprites/fstand_head5.png</key>
+            <key type="filename">sprites/fstand_head6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>6,9,13,18</rect>
+                <key>scale9Paddings</key>
+                <rect>6,9,13,18</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">sprites/fwalk_body1.png</key>
+            <key type="filename">sprites/fwalk_body5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>6,12,11,23</rect>
+                <key>scale9Paddings</key>
+                <rect>6,12,11,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">sprites/fwalk_body2.png</key>
+            <key type="filename">sprites/fwalk_body3.png</key>
+            <key type="filename">sprites/fwalk_body6.png</key>
+            <key type="filename">sprites/fwalk_body7.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,12,10,23</rect>
+                <key>scale9Paddings</key>
+                <rect>5,12,10,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">sprites/fwalk_body4.png</key>
+            <key type="filename">sprites/fwalk_body8.png</key>
+            <key type="filename">sprites/rwalk_body2.png</key>
+            <key type="filename">sprites/rwalk_body6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>5,12,11,23</rect>
+                <key>scale9Paddings</key>
+                <rect>5,12,11,23</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">sprites/rstand_body1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -233,22 +305,6 @@
                 <rect>4,12,7,23</rect>
                 <key>scale9Paddings</key>
                 <rect>4,12,7,23</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">sprites/rwalk_body2.png</key>
-            <key type="filename">sprites/rwalk_body6.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>5,12,11,23</rect>
-                <key>scale9Paddings</key>
-                <rect>5,12,11,23</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
