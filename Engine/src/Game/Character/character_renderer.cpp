@@ -128,8 +128,6 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
     m_headOffsetX = bodyRenderer->GetHeadOffsetX();
     m_headOffsetY = bodyRenderer->GetHeadOffsetY();
 
-    printf("spriteNo = %d\n", spriteNo);
-
     GetMainEngine()->getProvider().DrawTexture(
        spriteItem->GetTexture(),
         /*x + */ceil(1 *((m_maxWidth - spriteItem->getWidth())/2)) + + (1 * bodyRenderer->GetBodyOffsetX()),
