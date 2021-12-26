@@ -37,6 +37,7 @@ Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, Scripti
 : EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, viewportSize), m_viewportScale(1)
 {
     sharedEngine = this;
+    SetCapRate(60);
 }
 
 Engine::~Engine()
@@ -74,6 +75,12 @@ void Engine::setup()
 
     m_characterMover = new CharacterMover(m_character);
     m_characterMover->PlaceCharacter(OriginMake(100, 480));
+}
+
+void Engine::SetCapRate(int fps)
+{
+    m_fpsCap = fps;
+    m_fpsCapInverse = 1.0f / (float)fps;
 }
 
 int Engine::doInput()
@@ -166,8 +173,13 @@ void Engine::MeasurePerformanceEnd()
     m_performanceEnd = m_engineProvider.GetPerformanceCounter();
     m_performanceDelta = m_performanceEnd - m_performanceStart;
     m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
+    m_milliseconds = m_seconds * 1000;
     m_previousFps = 1.0f / m_seconds;
+
+    m_engineProvider.Delay(floor(m_fpsCapInverse - m_milliseconds));
 }
+
+static char mousePos[256];
 
 void Engine::RenderScene()
 {
@@ -179,7 +191,6 @@ void Engine::RenderScene()
     m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
 
-    char mousePos[256];
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
     m_engineProvider.DrawText(m_fpsFont, mousePos, 200, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 }

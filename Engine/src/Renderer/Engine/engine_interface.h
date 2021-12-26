@@ -37,6 +37,11 @@ namespace engine
         /// Engine magic happens there.
         virtual void update() = 0;
 
+    /// Behaviour
+    public:
+        /// Sets the cap rate. Default is 60.
+        virtual void SetCapRate(int fps) = 0;
+
     /// Helper methods to deal with engine provider functionality
     /// so that things that need be cashed are cached propery.
     /// Also multiple methods should be called on-demant by the

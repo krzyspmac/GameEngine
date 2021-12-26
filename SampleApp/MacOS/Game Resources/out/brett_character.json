@@ -4,7 +4,7 @@
 		"texture": "brett.png"
 	},
 	"standRight": {
-		"animationDelay": 100,
+		"animationDelay": 50,
 		"body": [
 			{
 				"sprite": "rstand_body1",
@@ -36,7 +36,7 @@
 		]
 	},
 	"walkRight": {
-		"animationDelay": 100,
+		"animationDelay": 50,
 		"body": [
 			{
 				"sprite": "rwalk_body1",
@@ -101,7 +101,7 @@
 		]
 	},
 	"standForward": {
-		"animationDelay": 100,
+		"animationDelay": 50,
 		"body": [
 			{
 				"sprite": "fstand_body1",
@@ -133,7 +133,7 @@
 		]
 	},
 	"walkForward": {
-		"animationDelay": 100,
+		"animationDelay": 50,
 		"body": [
 			{
 				"sprite": "fwalk_body1",
@@ -207,7 +207,7 @@
 		]
 	},
 	"walkBackward": {
-		"animationDelay": 100,
+		"animationDelay": 50,
 		"body": [
 			{
 				"sprite": "bwalk_body1",
@@ -266,7 +266,7 @@
 		]
 	},
 	"standBackward": {
-		"animationDelay": 100,
+		"animationDelay": 50,
 		"body": [
 			{
 				"sprite": "bstand_body1",

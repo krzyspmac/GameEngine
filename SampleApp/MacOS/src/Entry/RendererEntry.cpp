@@ -13,8 +13,8 @@
 #include "engine.hpp"
 #include "common_sdl.h"
 
-#define SCREEN_WIDTH  640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH  1280
+#define SCREEN_HEIGHT 720
 #define ASPECT_RATIO (640/480)
 
 using namespace engine;

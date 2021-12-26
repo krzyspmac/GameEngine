@@ -17,7 +17,9 @@ SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale)
 
 void SpriteDrawStatic::Draw(int x, int y)
 {
-    GetMainEngine()->getProvider().DrawTexture(
+    EngineProviderI &provider = GetMainEngine()->getProvider();
+
+    provider.DrawTexture(
        m_sprite->GetTexture(),
        x,
        y,

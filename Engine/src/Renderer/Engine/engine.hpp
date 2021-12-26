@@ -26,12 +26,17 @@ namespace engine
     public:
         ///
         Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize);
-
         ~Engine();
 
+    public:
         void setup();
         int doInput();
         void update();
+
+    public:
+        void SetCapRate(int fps);
+
+    public:
         TextureI *LoadTexture(std::string name);
         TextureTargetI *CreateTargetTexture(int width, int height);
         TextureI *GetTexture(std::string name);
@@ -71,10 +76,14 @@ namespace engine
         Uint64 m_performanceEnd;
         Uint64 m_performanceDelta;
         float m_seconds;
+        float m_milliseconds;
         float m_previousFps; // only when CALC_FPS set
 
+        int m_fpsCap;
+        float m_fpsCapInverse;
+
         TextureTargetI *m_bufferTexture;
-        float m_viewportScale;
+        float m_viewportScale; // scaled to fit the window
         Origin m_viewportOffset;
 
     #if SHOW_FPS
