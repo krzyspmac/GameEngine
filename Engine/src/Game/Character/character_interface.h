@@ -13,9 +13,10 @@
 namespace engine
 {
 
+    /// Should render the character, do animations for the walking stances.
     class CharacterI {
     public:
-        CharacterI(): m_characterRenderer(NULL) { };
+        CharacterI(): m_characterRenderer(NULL), m_talking(false), m_isWalking(false), m_walkState(STAND_RIGHT) { };
 
         virtual ~CharacterI() {
             if (m_characterRenderer)
@@ -24,6 +25,7 @@ namespace engine
             };
         }
 
+    /// Character rendering
     public:
         CharacterRendererI *GetCharacterRenderer() { return m_characterRenderer; };
 
@@ -35,8 +37,33 @@ namespace engine
 
         virtual void Change() = 0;
 
+    /// Character actions
+    public:
+        /// Set the character to `talk`. This turns on the walking animation
+        /// for the current renderer.
+        void SetTalking(bool value) { m_talking = value; };
+
+        ///
+        bool IsTalking() { return m_talking; };
+
+        /// Set tha character to `walk`. This turns on the walking animation
+        /// for the current renderer.
+        void SetWalking(bool value) { m_isWalking = value; };
+
+        ///
+        bool IsWalking() { return m_isWalking; };
+
+        /// Set the state of the character animation.
+        void SetWalkState(CharacterWalkState state) { m_walkState = state; };
+
+        ///
+        CharacterWalkState GetWalkState() { return m_walkState; };
+
     protected:
         CharacterRendererI *m_characterRenderer;
+        bool m_talking;
+        bool m_isWalking;
+        CharacterWalkState m_walkState;
     };
 };
 

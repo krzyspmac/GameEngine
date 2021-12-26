@@ -19,9 +19,9 @@ namespace engine
         Character(std::string jsonDefinition);
 
     private:
-        void ProcessBodyParts(void*, SpriteAtlasI*, CharacterWalkDirection, bool reversed);
-        void ProcessBodyFrame(void*, SpriteAtlasI *atlas, CharacterWalkDirection walkState, bool reversed);
-        void ProcessHeadFrame(void*, SpriteAtlasI *atlas, CharacterWalkDirection walkState, bool reversed);
+        void ProcessBodyParts(void*, SpriteAtlasI*, CharacterWalkState, bool reversed);
+        void ProcessBodyFrame(void*, SpriteAtlasI *atlas, CharacterWalkState walkState, bool reversed);
+        void ProcessHeadFrame(void*, SpriteAtlasI *atlas, CharacterWalkState walkState, bool reversed);
 
     public:
         void SetScale(float scale);

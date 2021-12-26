@@ -58,6 +58,9 @@ namespace engine
         void MeasurePerformanceEnd();
 
     private:
+        void MouseClicked();
+
+    private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
         std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;
@@ -70,6 +73,7 @@ namespace engine
         float m_previousFps; // only when CALC_FPS set
 
         TextureTargetI *m_bufferTexture;
+        float m_viewportScale;
 
     #if SHOW_FPS
         char m_fpsBuffer[256];

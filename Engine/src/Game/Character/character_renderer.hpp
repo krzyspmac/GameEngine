@@ -21,16 +21,16 @@ namespace engine {
         ~CharacterRenderer();
         
     public:
-        CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction);
-        void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY);
-        void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY);
+        CharacterWalkRenderer &GetRenderer(CharacterWalkState direction);
+        void AppendBodyWalkAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY);
+        void AppendHeadAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY);
         void PrepareCharacter();
 
         void SetScale(float scale) { m_scale = scale; };
 
         void DrawBody(CharacterWalkRenderer&, bool isAnimating);
         void DrawHead(CharacterWalkRenderer&, bool isAnimating);
-        void Draw(CharacterWalkDirection, bool isAnimating, int x, int y);
+        void Draw(CharacterWalkState, bool isWalking, bool isTalking, int x, int y);
 
         void DrawBoundingBox(EngineProviderI &provider);
         void DrawOriginCrosshair(EngineProviderI &provider);

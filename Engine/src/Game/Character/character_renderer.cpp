@@ -23,7 +23,7 @@ CharacterRenderer::~CharacterRenderer()
     GetMainEngine()->UnloadTexture(m_bufferTexture);
 }
 
-CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection direction)
+CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState direction)
 {
     switch (direction)
     {
@@ -48,7 +48,7 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection dir
     return m_walkR;
 }
 
-void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY)
+void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY)
 {
     if (sprite)
     {
@@ -66,7 +66,7 @@ void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection dire
     }
 }
 
-void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY)
+void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY)
 {
     if (sprite)
     {
@@ -82,8 +82,8 @@ void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection directio
 
 void CharacterRenderer::PrepareCharacter()
 {
-    CharacterWalkDirection directions[] = { STAND_RIGHT, RIGHT, STAND_LEFT, LEFT };
-    int directionsCount = sizeof(directions) / sizeof(CharacterWalkDirection);
+    CharacterWalkState directions[] = { STAND_RIGHT, RIGHT, STAND_LEFT, LEFT };
+    int directionsCount = sizeof(directions) / sizeof(CharacterWalkState);
 
     int maxBodyWidth = 0;
     int maxBodyHeight = 0;
@@ -92,7 +92,7 @@ void CharacterRenderer::PrepareCharacter()
 
     for (int i = 0; i < directionsCount; i++)
     {
-        CharacterWalkDirection state = (CharacterWalkDirection)directions[i];
+        CharacterWalkState state = (CharacterWalkState)directions[i];
         CharacterWalkRenderer &characterRenderer = GetRenderer(state);
         maxBodyWidth = std::max(maxBodyWidth, characterRenderer.GetBodyMaxWidth());
         maxBodyHeight = std::max(maxBodyHeight, characterRenderer.GetBodyMaxHeight());
@@ -192,7 +192,7 @@ void CharacterRenderer::DrawOriginCrosshair(EngineProviderI &provider)
     provider.RenderDrawLine(midPosX, m_bodyHeight - length, midPosX + arrowLength, m_bodyHeight - arrowLength);
 }
 
-void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int x, int y)
+void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTalking, int x, int y)
 {
     // Get the engine provider. All drawing functions go through there.
     EngineProviderI &provider = GetMainEngine()->getProvider();
@@ -208,8 +208,8 @@ void CharacterRenderer::Draw(CharacterWalkDirection state, bool isAnimating, int
     GetMainEngine()->getProvider().RenderClear();
 
     // Render the body, then the head
-    DrawBody(renderer, isAnimating);
-    DrawHead(renderer, isAnimating);
+    DrawBody(renderer, isWalking);
+    DrawHead(renderer, isTalking);
 
     // Render display artifacts
     provider.RenderSetColor(255, 255, 255, 120);

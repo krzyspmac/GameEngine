@@ -26,7 +26,7 @@ namespace engine
 
         BACKWARD                = 7,
         STAND_BACKWARD          = 8
-    } CharacterWalkDirection;
+    } CharacterWalkState;
 
     /// Describes the character body renderer that includes
     /// the relation between the body and the head. The relation
@@ -142,13 +142,13 @@ namespace engine
 
     public:
         /// Returns the "right" walking animation;
-        virtual CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction) = 0;
+        virtual CharacterWalkRenderer &GetRenderer(CharacterWalkState direction) = 0;
 
         /// Appends a frame of animation.
-        virtual void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY) = 0;
+        virtual void AppendBodyWalkAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY) = 0;
 
         /// Appends a frame of animation.
-        virtual void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY) = 0;
+        virtual void AppendHeadAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY) = 0;
 
         /// Preprares the character buffer textures & others. The character is being
         /// drawn in parts and the the parts are being drawn to a buffer texture.
@@ -160,7 +160,7 @@ namespace engine
         virtual void SetScale(float scale) = 0;
 
         /// Draw all the character.
-        virtual void Draw(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
+        virtual void Draw(CharacterWalkState, bool isWalking, bool isTalking, int x, int y) = 0;
 
     protected:
         SpriteAtlasI *m_characterAtlas;

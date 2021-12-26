@@ -33,7 +33,7 @@ engine::EngineI *GetMainEngine()
 }
 
 Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize)
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, viewportSize)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, viewportSize), m_viewportScale(1)
 {
     sharedEngine = this;
 }
@@ -97,6 +97,7 @@ int Engine::doInput()
 
             case EVENT_MOUSEUP:
             {
+                MouseClicked();
                 break;
             }
 
@@ -108,6 +109,8 @@ int Engine::doInput()
     };
 
     m_engineProvider.GetMousePosition(&m_mousePosition.x, &m_mousePosition.y);
+    m_mousePosition.x /= m_viewportScale;
+    m_mousePosition.y /= m_viewportScale;
 
     return 0;
 }
@@ -169,11 +172,15 @@ void Engine::RenderScene()
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
     m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
+
+    char mousePos[256];
+    sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
+    m_engineProvider.DrawText(m_fpsFont, mousePos, 200, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
 
 void Engine::ApplyScaleTransformations(int *offsetX, int *offsetY)
 {
-        // Apply scaling transformation due to possible window resize
+    // Apply scaling transformation due to possible window resize
     int windowW, windowH;
     m_engineProvider.GetWindowSize(&windowW, &windowH);
 
@@ -181,14 +188,19 @@ void Engine::ApplyScaleTransformations(int *offsetX, int *offsetY)
     scaleX = (float)windowW / (float)m_viewportSize.width;
     scaleY = (float)windowH / (float)m_viewportSize.height;
 
-    float scale = std::min(scaleX, scaleY);
-    SDL_RenderSetScale(((EngineProvider&)m_engineProvider).GetRendererHandle()->renderer, scale, scale);
+    m_viewportScale = std::min(scaleX, scaleY);
+    SDL_RenderSetScale(((EngineProvider&)m_engineProvider).GetRendererHandle()->renderer, m_viewportScale, m_viewportScale);
 
-    int targetWidth = m_viewportSize.width * scale;
-    int targetHeight = m_viewportSize.height * scale;
+    int targetWidth = m_viewportSize.width * m_viewportScale;
+    int targetHeight = m_viewportSize.height * m_viewportScale;
 
-    *offsetX = ((windowW - targetWidth) / 2)/scale;
-    *offsetY = ((windowH - targetHeight) / 2)/scale;
+    *offsetX = ((windowW - targetWidth) / 2)/m_viewportScale;
+    *offsetY = ((windowH - targetHeight) / 2)/m_viewportScale;
+}
+
+void Engine::MouseClicked()
+{
+    m_character->SetTalking(!m_character->IsTalking());
 }
 
 TextureI *Engine::LoadTexture(std::string filename)
