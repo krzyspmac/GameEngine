@@ -41,15 +41,41 @@ Character::Character(std::string jsonDefinition)
                 }
             }
 
-            ProcessBodyParts(cJSON_GetObjectItem(root, "walkRight"), atlas, RIGHT);
-            ProcessBodyParts(cJSON_GetObjectItem(root, "standRight"), atlas, STAND_RIGHT);
+            // Right
+            cJSON *walkRightNode = cJSON_GetObjectItem(root, "walkRight");
+            ProcessBodyParts(walkRightNode, atlas, RIGHT, false);
+
+            cJSON *standRightNode = cJSON_GetObjectItem(root, "standRight");
+            ProcessBodyParts(standRightNode, atlas, STAND_RIGHT, false);
+
+            // Left
+            cJSON *walkLeftNode = cJSON_GetObjectItem(root, "walkLeft");
+            if (walkLeftNode)
+            {
+                ProcessBodyParts(walkLeftNode, atlas, LEFT, false);
+            }
+            else
+            {
+                ProcessBodyParts(walkRightNode, atlas, LEFT, true);
+            }
+
+            cJSON *standLeftNode = cJSON_GetObjectItem(root, "standLeft");
+            if (walkLeftNode)
+            {
+                ProcessBodyParts(standLeftNode, atlas, STAND_LEFT, false);
+            }
+            else
+            {
+                ProcessBodyParts(standRightNode, atlas, STAND_LEFT, true);
+            }
 
             cJSON_Delete(root);
+            m_characterRenderer->PrepareCharacter();
         }
     }
 }
 
-void Character::ProcessBodyParts(void *rootPtr, SpriteAtlasI * atlas, CharacterWalkDirection walkState)
+void Character::ProcessBodyParts(void *rootPtr, SpriteAtlasI * atlas, CharacterWalkDirection walkState, bool reversed)
 {
     cJSON *bodyPartRoot, *node;
 
@@ -64,14 +90,7 @@ void Character::ProcessBodyParts(void *rootPtr, SpriteAtlasI * atlas, CharacterW
         {
             for (node = body->child ; node != NULL ; node = node->next)
             {
-                char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
-                int headOffsetX = cJSON_GetObjectItemValueInt(node, "headOffsetX");
-                int headOffsetY = cJSON_GetObjectItemValueInt(node, "headOffsetY");
-                int offsetX = cJSON_GetObjectItemValueInt(node, "offsetX");
-                int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
-
-                SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
-                m_characterRenderer->AppendBodyWalkAnimationFrame(walkState, sprite, offsetX, offsetY, headOffsetX, headOffsetY);
+                ProcessBodyFrame(node, atlas, walkState, reversed);
             }
         }
 
@@ -80,38 +99,54 @@ void Character::ProcessBodyParts(void *rootPtr, SpriteAtlasI * atlas, CharacterW
         {
             for (node = head->child ; node != NULL ; node = node->next)
             {
-                char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
-                int offsetX = cJSON_GetObjectItemValueInt(node, "offsetX");
-                int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
-
-                SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
-                m_characterRenderer->AppendHeadAnimationFrame(walkState, sprite, offsetX, offsetY);
+                ProcessHeadFrame(node, atlas, walkState, reversed);
             }
         }
 
         m_characterRenderer->GetRenderer(walkState).SetBodyAnimationDelay(animationDelay);
         m_characterRenderer->GetRenderer(walkState).SetHeadAnimationDelay(animationDelay);
     }
-
 }
 
-static CharacterWalkDirection state = STAND_RIGHT;
+void Character::ProcessBodyFrame(void *nodePtr, SpriteAtlasI *atlas, CharacterWalkDirection walkState, bool reversed)
+{
+    cJSON *node = (cJSON*)nodePtr;
+    char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
+    int headOffsetX = cJSON_GetObjectItemValueInt(node, "headOffsetX");
+    int headOffsetY = cJSON_GetObjectItemValueInt(node, "headOffsetY");
+    int offsetX = cJSON_GetObjectItemValueInt(node, "offsetX");
+    int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
+
+    SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
+    m_characterRenderer->AppendBodyWalkAnimationFrame(walkState, sprite, offsetX, offsetY, headOffsetX, headOffsetY, reversed);
+    m_characterRenderer->GetRenderer(walkState).SetReversed(reversed);
+}
+
+void Character::ProcessHeadFrame(void *nodePtr, SpriteAtlasI *atlas, CharacterWalkDirection walkState, bool reversed)
+{
+    cJSON *node = (cJSON*)nodePtr;
+    char *spriteFilename = cJSON_GetObjectItem(node, "sprite")->valuestring;
+    int offsetX = cJSON_GetObjectItemValueInt(node, "offsetX");
+    int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
+
+    SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
+    m_characterRenderer->AppendHeadAnimationFrame(walkState, sprite, offsetX, offsetY, reversed);
+    m_characterRenderer->GetRenderer(walkState).SetReversed(reversed);
+}
+
+static CharacterWalkDirection state = STAND_RIGHT;//STAND_RIGHT;
 
 void Character::Draw(int x, int y)
 {
-    m_characterRenderer->DrawBody(state, true, x, y);
-    m_characterRenderer->DrawHead(state, true, x, y);
+    m_characterRenderer->Draw(state, true, x, y);
 }
 
 void Character::Change()
 {
-    if (state != STAND_RIGHT)
+    state = CharacterWalkDirection((int)state+1);
+    if (state > STAND_LEFT)
     {
         state = STAND_RIGHT;
-    }
-    else
-    {
-        state = RIGHT;
     }
 }
 

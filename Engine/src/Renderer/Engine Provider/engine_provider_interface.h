@@ -15,6 +15,18 @@
 
 namespace engine
 {
+    typedef struct Engine_Rect
+    {
+        int x, y;
+        int w, h;
+    } Engine_Rect;
+
+    typedef enum Anchor_Point
+    {
+        ANCHOR_TOP_LEFT,        // default
+        ANCHOR_BOTTOM_CENTER    // for character drwaing
+    } Anchor_Point;
+
     /// EngineProviderI declares an abstraction for low-level
     /// drawing functions. Those are bare-bones only.
     /// EngineI provides further concrete instances where
@@ -62,9 +74,15 @@ namespace engine
     /// Textures
     public:
 
-        /// A concrete instance should load the texture. The ownership
+        /// A concrete instance should load the texture from the filename using
+        /// the default internal file access classes. The ownership
         /// of the texture is passed to the caller.
         virtual TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *) = 0;
+
+        /// A concrete instance should create the target texture. A target texture
+        /// is able to be rendered upon so a partial render can be developed.
+        /// The ownership of the texture is passed to the caller.
+        virtual TextureI *CreateTargetTexture(int width, int height) = 0;
 
         /// A concrete instance should unload the texture.
         virtual void UnloadTexture(TextureI *texture) = 0;
@@ -77,6 +95,10 @@ namespace engine
         /// at given coordinates from the given source rect.
         virtual void DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, int scale) = 0;
 
+        /// Draws a texture ona specific anchor point. Helpful for character drawing where the origin point
+        /// is a the bottom.
+        virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale) = 0;
+
     /// Fonts
     public:
 
@@ -87,8 +109,29 @@ namespace engine
         /// Draws a text using a specified font.
         virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;
 
-        ///
-//        virtual void DrawDebugText(uint16_t _x, uint16_t _y, uint8_t _attr, const char* _format, ...) = 0;
+    /// Render specific
+    public:
+        
+        /// Sets the render target to a target texture. All rendering goes
+        /// there until a `ClearRenderTarget` is called. The texture
+        /// must be created as a target texture.
+        virtual void SetRenderTarget(TextureI *targetTexture) = 0;
+
+        /// Clears the render target so the final render can be applied.
+        virtual void ClearRenderTarget() = 0;
+
+        /// Clears the buffer before drawing a new frame.
+        virtual void RenderClear() = 0;
+
+        /// Sets the draw color.
+        virtual void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) = 0;
+
+        /// Draw a rectangle.
+        virtual void RenderDrawRect(Engine_Rect*) = 0;
+
+        /// Draw a rectangle.
+        virtual void RenderDrawLine(int x1, int y1, int x2, int y2) = 0;
+
     };
 };
 

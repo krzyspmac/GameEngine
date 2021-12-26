@@ -9,13 +9,17 @@
 #define character_interface_h
 
 #include "sprite_atlas_interface.h"
+#include "texture_target.hpp"
 
 namespace engine
 {
     typedef enum
     {
-        STAND_RIGHT,
-        RIGHT
+        STAND_RIGHT             = 1,
+        RIGHT                   = 2,
+
+        LEFT                    = 3,
+        STAND_LEFT              = 4
     } CharacterWalkDirection;
 
     /// Describes the character body renderer that includes
@@ -26,7 +30,9 @@ namespace engine
     class CharacterBodyPartRendererI
     {
     public:
-        CharacterBodyPartRendererI(SpriteAtlasItemI *sprite, int offsetX, int offsetY) : m_bodySprite(sprite), m_bodyOffsetX(offsetX), m_bodyOffsetY(offsetY) { };
+        CharacterBodyPartRendererI(SpriteAtlasItemI *sprite, int offsetX, int offsetY, bool reversed)
+            : m_bodySprite(sprite), m_bodyOffsetX(offsetX), m_bodyOffsetY(offsetY), m_reversed(reversed)
+        { };
 
         SpriteAtlasItemI *GetSprite() { return m_bodySprite; };
 
@@ -40,6 +46,7 @@ namespace engine
         SpriteAtlasItemI *m_bodySprite;
         int m_bodyOffsetX;
         int m_bodyOffsetY;
+        bool m_reversed;
     };
 
     /// Describes a frame of the body renderer. Each body frame
@@ -47,8 +54,8 @@ namespace engine
     class CharacterBodyRenderer: public CharacterBodyPartRendererI
     {
     public:
-        CharacterBodyRenderer(SpriteAtlasItemI *sprite, int offsetX, int offsetY)
-            : CharacterBodyPartRendererI(sprite, offsetX, offsetY), m_headOffsetX(0), m_headOffsetY(0)
+        CharacterBodyRenderer(SpriteAtlasItemI *sprite, int offsetX, int offsetY, bool reversed)
+            : CharacterBodyPartRendererI(sprite, offsetX, offsetY, reversed), m_headOffsetX(0), m_headOffsetY(0)
         { };
 
         void SetHeadOffsetX(int &value) { m_headOffsetX = value; };
@@ -64,8 +71,8 @@ namespace engine
     class CharacterHeadRenderer: public CharacterBodyPartRendererI
     {
     public:
-        CharacterHeadRenderer(SpriteAtlasItemI *sprite, int offsetX, int offsetY)
-            : CharacterBodyPartRendererI(sprite, offsetX, offsetY)
+        CharacterHeadRenderer(SpriteAtlasItemI *sprite, int offsetX, int offsetY, bool reversed)
+            : CharacterBodyPartRendererI(sprite, offsetX, offsetY, reversed)
         { };
 
     };
@@ -76,7 +83,7 @@ namespace engine
     public:
         CharacterWalkRenderer()
             : m_bodyMaxWidth(0), m_bodyMaxHeight(0), m_bodyAnimationDelay(0),
-              m_headMaxWidth(0), m_headMaxHeight(0), m_headAnimationDelay(0)
+              m_headMaxWidth(0), m_headMaxHeight(0), m_headAnimationDelay(0), m_isReversed(false)
         { };
 
         /// Will take ownershiop of the object.
@@ -96,6 +103,9 @@ namespace engine
         int &GetHeadMaxWidth() { return m_headMaxWidth; };
         int &GetHeadMaxHeight() { return m_headMaxHeight; };
 
+        void SetReversed(bool value) { m_isReversed = value; };
+        bool GetIsReversed() { return m_isReversed; }
+
     private:
         std::vector<std::unique_ptr<CharacterBodyRenderer>> m_bodyRenderers;
         int m_bodyAnimationDelay;
@@ -106,6 +116,8 @@ namespace engine
         int m_headAnimationDelay;
         int m_headMaxWidth;
         int m_headMaxHeight;
+
+        bool m_isReversed;
     };
 
     /// Describes the character body. The character is made of the body and the head.
@@ -118,7 +130,7 @@ namespace engine
     {
     public:
         CharacterRendererI(SpriteAtlasI *characterAtlas, int scale)
-            : m_characterAtlas(characterAtlas), m_scale(scale) {};
+            : m_characterAtlas(characterAtlas), m_scale(scale), m_bufferTexture(NULL) {};
 
         virtual ~CharacterRendererI() {
         };
@@ -128,16 +140,19 @@ namespace engine
         virtual CharacterWalkRenderer &GetRenderer(CharacterWalkDirection direction) = 0;
 
         /// Appends a frame of animation.
-        virtual void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY) = 0;
+        virtual void AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY, bool reversed) = 0;
 
         /// Appends a frame of animation.
-        virtual void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY) = 0;
+        virtual void AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, bool reversed) = 0;
 
-        /// Draw the body
-        virtual void DrawBody(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
+        /// Preprares the character buffer textures & others. The character is being
+        /// drawn in parts and the the parts are being drawn to a buffer texture.
+        /// Only after all the parts rendered on to the buffer texture is the
+        /// buffer texture rendered.
+        virtual void PrepareCharacter() = 0;
 
-        /// Draw the head
-        virtual void DrawHead(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
+        /// Draw all the character.
+        virtual void Draw(CharacterWalkDirection, bool isAnimating, int x, int y) = 0;
 
     protected:
         SpriteAtlasI *m_characterAtlas;
@@ -145,6 +160,11 @@ namespace engine
 
         CharacterWalkRenderer m_standR;
         CharacterWalkRenderer m_walkR;
+
+        CharacterWalkRenderer m_walkL;
+        CharacterWalkRenderer m_standL;
+
+        TextureI *m_bufferTexture;
     };
 };
 

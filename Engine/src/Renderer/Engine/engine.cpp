@@ -138,6 +138,11 @@ TextureI *Engine::LoadTexture(std::string filename)
     return result;
 }
 
+TextureI *Engine::CreateTargetTexture(int width, int height)
+{
+    return m_engineProvider.CreateTargetTexture(width, height);
+}
+
 TextureI *Engine::GetTexture(std::string name)
 {
     for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
@@ -302,4 +307,14 @@ void Engine::SpriteDrawUnload(SpriteDrawI *spriteDraw)
 void Engine::SpriteDrawDisposeAll()
 {
     m_spriteDraws.empty();
+}
+
+void Engine::SetRenderTarget(TextureI *targetTexture)
+{
+    m_engineProvider.SetRenderTarget(targetTexture);
+}
+
+void Engine::ClearRenderTarget()
+{
+    m_engineProvider.ClearRenderTarget();
 }

@@ -52,6 +52,11 @@ namespace engine
         /// texture by using `UnloadTexture` or `DisposeAllTextures`.
         virtual TextureI *LoadTexture(std::string name) = 0;
 
+        /// A concrete instance should create the texture. The texture
+        /// *is not* added to a cache and the ownershop is passed onto the
+        /// caller.
+        virtual TextureI *CreateTargetTexture(int width, int height) = 0;
+
         /// A concrete instance should get the existing texture
         /// by comparing texture name. Otherwise returns NULL.
         /// In such a case you must load the texture by using
@@ -125,6 +130,16 @@ namespace engine
 
         /// Unloads all.
         virtual void SpriteDrawDisposeAll() = 0;
+
+    /// Renderer specific
+    public:
+
+        /// Sets the render target to a target texture. All rendering goes
+        /// there until a `ClearRenderTarget` is called.
+        virtual void SetRenderTarget(TextureI *targetTexture) = 0;
+
+        /// Clears the render target so the final render can be applied.
+        virtual void ClearRenderTarget() = 0;
 
     public:
         ///

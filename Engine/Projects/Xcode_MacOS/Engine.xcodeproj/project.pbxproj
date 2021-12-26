@@ -46,6 +46,8 @@
 		7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
 		7F64288D2777C59D00EE9E2C /* character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288B2777C59D00EE9E2C /* character.cpp */; };
 		7F64288E2777C59D00EE9E2C /* character.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288C2777C59D00EE9E2C /* character.hpp */; };
+		7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64289127787C2E00EE9E2C /* texture_target.cpp */; };
+		7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289227787C2E00EE9E2C /* texture_target.hpp */; };
 		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
@@ -96,6 +98,8 @@
 		7F6428882777C51D00EE9E2C /* character_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_interface.h; sourceTree = "<group>"; };
 		7F64288B2777C59D00EE9E2C /* character.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character.cpp; sourceTree = "<group>"; };
 		7F64288C2777C59D00EE9E2C /* character.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character.hpp; sourceTree = "<group>"; };
+		7F64289127787C2E00EE9E2C /* texture_target.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_target.cpp; sourceTree = "<group>"; };
+		7F64289227787C2E00EE9E2C /* texture_target.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_target.hpp; sourceTree = "<group>"; };
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
@@ -148,6 +152,8 @@
 				7F13821D277505B600ED6D67 /* texture_interface.h */,
 				7F13821E277505B600ED6D67 /* texture.hpp */,
 				7F13821C277505B600ED6D67 /* texture.cpp */,
+				7F64289127787C2E00EE9E2C /* texture_target.cpp */,
+				7F64289227787C2E00EE9E2C /* texture_target.hpp */,
 			);
 			path = Textures;
 			sourceTree = "<group>";
@@ -165,12 +171,12 @@
 		7F138223277505B600ED6D67 /* Engine Provider */ = {
 			isa = PBXGroup;
 			children = (
+				7F138228277505B600ED6D67 /* engine_provider_interface.h */,
 				7F138224277505B600ED6D67 /* engine_provider.hpp */,
+				7F138229277505B600ED6D67 /* engine_provider.cpp */,
 				7F138225277505B600ED6D67 /* event_provider.cpp */,
 				7F138226277505B600ED6D67 /* event_provider.hpp */,
 				7F138227277505B600ED6D67 /* event_provider_interface.h */,
-				7F138228277505B600ED6D67 /* engine_provider_interface.h */,
-				7F138229277505B600ED6D67 /* engine_provider.cpp */,
 			);
 			path = "Engine Provider";
 			sourceTree = "<group>";
@@ -301,6 +307,7 @@
 				7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */,
 				7F13827E277505B600ED6D67 /* defs.h in Headers */,
 				7F138267277505B600ED6D67 /* sprite_draw_interface.h in Headers */,
+				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
 				7F138258277505B600ED6D67 /* scripting_engine_provider_interface.h in Headers */,
 				7F138279277505B600ED6D67 /* font.hpp in Headers */,
 				7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */,
@@ -384,6 +391,7 @@
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
+				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
 				7F138253277505B600ED6D67 /* texture.cpp in Sources */,
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
 				7F138277277505B600ED6D67 /* font.cpp in Sources */,

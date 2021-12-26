@@ -9,8 +9,7 @@
 #include "texture.hpp"
 #include "font.hpp"
 
-namespace engine
-{
+using namespace engine;
 
 Uint64 EngineProvider::GetTicks()
 {
@@ -76,6 +75,14 @@ TextureI *EngineProvider::LoadTexture(std::string filename, FileMemoryBufferStre
     }
 }
 
+TextureI *EngineProvider::CreateTargetTexture(int width, int height)
+{
+    SDL_Texture* textureHandle = SDL_CreateTexture(m_engineHandle->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
+    SDL_SetTextureBlendMode(textureHandle, SDL_BLENDMODE_BLEND);
+    Texture *texture = new Texture(textureHandle, "");
+    return (TextureI*)texture;
+}
+
 void EngineProvider::UnloadTexture(TextureI *texture)
 {
     if (texture != NULL)
@@ -135,11 +142,58 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
         src.w = srcW;
         src.h = srcH;
 
-        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, &src, &dest);
+        SDL_Point point;
+        point.x = 0.5;
+        point.y = 0.5;
+
+//        SDL_Texture* auxtexture = SDL_CreateTexture(m_engineHandle->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, 500, 500);
+//        SDL_SetTextureBlendMode(auxtexture, SDL_BLENDMODE_BLEND);
+//        SDL_SetRenderTarget(m_engineHandle->renderer, auxtexture);
+//        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, &src, &dest);
+
+//        SDL_SetRenderTarget
+//        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &point, SDL_FLIP_HORIZONTAL);
+
+//        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
+        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &point, SDL_FLIP_NONE);
+
+//        SDL_DestroyTexture(auxtexture);
     }
     else
     {
         std::cout << "No texture to draw" << std::endl;
+    }
+}
+
+void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, int scale)
+{
+    if (texture != NULL)
+    {
+        SDL_Rect dest;
+
+        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
+        SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
+
+        dest.x = x;
+        dest.y = y;
+        dest.w *= scale;
+        dest.h *= scale;
+
+        switch (anchorPoint)
+        {
+            case ANCHOR_TOP_LEFT:
+                break;
+            case ANCHOR_BOTTOM_CENTER:
+                dest.x -= dest.w / 2;
+                dest.y -= dest.h;
+                break;
+        }
+
+//        SDL_Point point;
+//        point.x = 0.5;
+//        point.y = 0.5;
+
+        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, NULL, SDL_FLIP_NONE);
     }
 }
 
@@ -154,4 +208,32 @@ void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r
     fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
 
-};
+void EngineProvider::SetRenderTarget(TextureI *targetTexture)
+{
+    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+}
+
+void EngineProvider::ClearRenderTarget()
+{
+    SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
+}
+
+void EngineProvider::RenderClear()
+{
+    SDL_RenderClear(m_engineHandle->renderer);
+}
+
+void EngineProvider::RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+    SDL_SetRenderDrawColor(m_engineHandle->renderer, r, g, b, a);
+}
+
+void EngineProvider::RenderDrawRect(Engine_Rect *rect)
+{
+    SDL_RenderDrawRect(m_engineHandle->renderer, (SDL_Rect*)rect);
+}
+
+void EngineProvider::RenderDrawLine(int x1, int y1, int x2, int y2)
+{
+    SDL_RenderDrawLine(m_engineHandle->renderer, x1, y1, x2, y2);
+}

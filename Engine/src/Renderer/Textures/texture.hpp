@@ -17,7 +17,7 @@ namespace engine
 class Texture: TextureI
 {
 public:
-    Texture(void *textureHandle, std::string &textureName)
+    Texture(void *textureHandle, std::string textureName)
         : TextureI(textureHandle, textureName)
     {
     }

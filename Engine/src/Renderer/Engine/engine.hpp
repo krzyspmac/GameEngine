@@ -16,6 +16,7 @@
 #import "scripting_engine_provider_interface.h"
 #import "character_renderer_interface.h"
 #import "character_interface.h"
+#import "texture_target.hpp"
 
 namespace engine
 {
@@ -31,6 +32,7 @@ namespace engine
         int doInput();
         void update();
         TextureI *LoadTexture(std::string name);
+        TextureI *CreateTargetTexture(int width, int height);
         TextureI *GetTexture(std::string name);
         void DrawTexture(TextureI *texture, int x, int y);
         void UnloadTexture(TextureI *texture);
@@ -50,6 +52,9 @@ namespace engine
         SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale);
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
         void SpriteDrawDisposeAll();
+
+        void SetRenderTarget(TextureI *targetTexture);
+        void ClearRenderTarget();
 
     private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
