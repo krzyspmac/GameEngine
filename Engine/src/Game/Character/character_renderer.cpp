@@ -40,21 +40,21 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkDirection dir
     return m_walkR;
 }
 
-void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY, bool reversed)
+void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY)
 {
     CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
 
-    CharacterBodyRenderer *bodyRenderer = new CharacterBodyRenderer(sprite, offsetX, offsetY, reversed);
+    CharacterBodyRenderer *bodyRenderer = new CharacterBodyRenderer(sprite, offsetX, offsetY);
     bodyRenderer->SetHeadOffsetX(headOffsetX);
     bodyRenderer->SetHeadOffsetY(headOffsetY);
 
     characterRenderer.AppendBodyRenderer(bodyRenderer);
 }
 
-void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, bool reversed)
+void CharacterRenderer::AppendHeadAnimationFrame(CharacterWalkDirection direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY)
 {
     CharacterWalkRenderer &characterRenderer = GetRenderer(direction);
-    CharacterHeadRenderer *headRenderer = new CharacterHeadRenderer(sprite, offsetX, offsetY, reversed);
+    CharacterHeadRenderer *headRenderer = new CharacterHeadRenderer(sprite, offsetX, offsetY);
     characterRenderer.AppendHeadRenderer(headRenderer);
 }
 

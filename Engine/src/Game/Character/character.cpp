@@ -118,7 +118,7 @@ void Character::ProcessBodyFrame(void *nodePtr, SpriteAtlasI *atlas, CharacterWa
     int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
 
     SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
-    m_characterRenderer->AppendBodyWalkAnimationFrame(walkState, sprite, offsetX, offsetY, headOffsetX, headOffsetY, reversed);
+    m_characterRenderer->AppendBodyWalkAnimationFrame(walkState, sprite, offsetX, offsetY, headOffsetX, headOffsetY);
     m_characterRenderer->GetRenderer(walkState).SetReversed(reversed);
 }
 
@@ -130,7 +130,7 @@ void Character::ProcessHeadFrame(void *nodePtr, SpriteAtlasI *atlas, CharacterWa
     int offsetY = cJSON_GetObjectItemValueInt(node, "offsetY");
 
     SpriteAtlasItemI *sprite = atlas->GetItemForName(spriteFilename);
-    m_characterRenderer->AppendHeadAnimationFrame(walkState, sprite, offsetX, offsetY, reversed);
+    m_characterRenderer->AppendHeadAnimationFrame(walkState, sprite, offsetX, offsetY);
     m_characterRenderer->GetRenderer(walkState).SetReversed(reversed);
 }
 
