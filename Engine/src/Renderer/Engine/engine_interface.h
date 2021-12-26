@@ -131,7 +131,7 @@ namespace engine
         ScriptingEngineI &m_scriptingEngine;
         EventProviderI &m_eventProvider;
 
-        engine::MOUSE_POSITION m_mousePosition;
+        engine::Origin m_mousePosition;
     };
 
 };

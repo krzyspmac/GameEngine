@@ -14,6 +14,7 @@
 #include "character_renderer.hpp"
 #include "character.hpp"
 #include "engine_provider.hpp"
+#include "character_mover.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -70,6 +71,9 @@ void Engine::setup()
 
     m_character = new Character("brett_character.json");
     m_character->SetScale(2);
+
+    m_characterMover = new CharacterMover(m_character);
+    m_characterMover->PlaceCharacter(OriginMake(100, 480));
 }
 
 int Engine::doInput()
@@ -166,7 +170,7 @@ void Engine::MeasurePerformanceEnd()
 void Engine::RenderScene()
 {
     m_scriptingEngine.callUpdate();
-    m_character->Draw(100, 480);
+    m_characterMover->Update();
 
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
@@ -201,6 +205,7 @@ void Engine::ApplyScaleTransformations(int *offsetX, int *offsetY)
 void Engine::MouseClicked()
 {
     m_character->SetTalking(!m_character->IsTalking());
+    m_characterMover->MoveCharacter(m_mousePosition);
 }
 
 TextureI *Engine::LoadTexture(std::string filename)

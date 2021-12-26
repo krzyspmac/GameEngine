@@ -8,7 +8,6 @@
 #ifndef common_engine_impl_h
 #define common_engine_impl_h
 
-//#import "common.h"
 #import "SDL.h"
 
 namespace engine
@@ -27,7 +26,14 @@ namespace engine
     typedef struct {
         int x;
         int y;
-    } MOUSE_POSITION;
+    } Origin;
+
+    inline Origin OriginMake(int x, int y) {
+        Origin result;
+        result.x = x;
+        result.y = y;
+        return result;;
+    };
 }
 
 #endif /* common_engine_impl_h */

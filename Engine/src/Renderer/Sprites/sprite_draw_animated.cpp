@@ -31,9 +31,9 @@ void SpriteDrawAnimated::PrepareAnimation()
 
 void SpriteDrawAnimated::Draw(int x, int y)
 {
-    Uint32 ticks = SDL_GetTicks();
-    Uint32 seconds = ticks / m_frameAnimationDurationMs;
-    Uint32 spriteNo = 0;//seconds % m_sprites.size();
+    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 seconds = ticks / m_frameAnimationDurationMs;
+    Uint64 spriteNo = seconds % m_sprites.size();
     SpriteAtlasItemI *spriteItem = m_sprites.at(spriteNo);
 
     GetMainEngine()->getProvider().DrawTexture(

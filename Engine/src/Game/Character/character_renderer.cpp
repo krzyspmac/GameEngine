@@ -115,8 +115,8 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
 
     int m_maxWidth = renderer.GetBodyMaxWidth();
 
-    Uint32 ticks = SDL_GetTicks();
-    Uint32 seconds = ticks / renderer.GetBodyAnimationDelay();
+    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 seconds = ticks / renderer.GetBodyAnimationDelay();
     Uint32 frameCount = (Uint32)renderer.GetBodyAnimationCount();
     Uint32 frameNo = //renderer.GetIsReversed()
         //? (frameCount-1) - (seconds % frameCount)
@@ -149,8 +149,8 @@ void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimati
 
     int m_maxWidth = renderer.GetHeadMaxWidth();
 
-    Uint32 ticks = SDL_GetTicks();
-    Uint32 seconds = ticks / renderer.GetHeadAnimationDelay();
+    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 seconds = ticks / renderer.GetHeadAnimationDelay();
     Uint32 frameCount = (Uint32)renderer.GetHeadAnimationCount();
     Uint32 frameNo = //renderer.GetIsReversed()
         //? (frameCount-1) - (seconds % frameCount)

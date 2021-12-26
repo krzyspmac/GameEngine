@@ -48,6 +48,7 @@
 		7F64288E2777C59D00EE9E2C /* character.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288C2777C59D00EE9E2C /* character.hpp */; };
 		7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64289127787C2E00EE9E2C /* texture_target.cpp */; };
 		7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289227787C2E00EE9E2C /* texture_target.hpp */; };
+		7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428992778CCCB00EE9E2C /* character_mover.cpp */; };
 		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
@@ -100,6 +101,9 @@
 		7F64288C2777C59D00EE9E2C /* character.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character.hpp; sourceTree = "<group>"; };
 		7F64289127787C2E00EE9E2C /* texture_target.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_target.cpp; sourceTree = "<group>"; };
 		7F64289227787C2E00EE9E2C /* texture_target.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_target.hpp; sourceTree = "<group>"; };
+		7F6428982778CC3400EE9E2C /* character_mover_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_mover_interface.h; sourceTree = "<group>"; };
+		7F6428992778CCCB00EE9E2C /* character_mover.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_mover.cpp; sourceTree = "<group>"; };
+		7F64289A2778CCCB00EE9E2C /* character_mover.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_mover.hpp; sourceTree = "<group>"; };
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
@@ -267,10 +271,21 @@
 			path = Character;
 			sourceTree = "<group>";
 		};
+		7F6428972778CC1D00EE9E2C /* Character Movement */ = {
+			isa = PBXGroup;
+			children = (
+				7F6428982778CC3400EE9E2C /* character_mover_interface.h */,
+				7F64289A2778CCCB00EE9E2C /* character_mover.hpp */,
+				7F6428992778CCCB00EE9E2C /* character_mover.cpp */,
+			);
+			path = "Character Movement";
+			sourceTree = "<group>";
+		};
 		7FDDAF9A2776872100578F86 /* Game */ = {
 			isa = PBXGroup;
 			children = (
 				7F64288127779CCA00EE9E2C /* Character */,
+				7F6428972778CC1D00EE9E2C /* Character Movement */,
 				7FDDAF9B2776872A00578F86 /* Room */,
 			);
 			path = Game;
@@ -389,6 +404,7 @@
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
+				7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,

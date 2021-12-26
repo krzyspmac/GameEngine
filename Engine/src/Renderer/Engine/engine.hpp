@@ -17,6 +17,7 @@
 #import "character_renderer_interface.h"
 #import "character_interface.h"
 #import "texture_target.hpp"
+#import "character_mover_interface.h"
 
 namespace engine
 {
@@ -80,6 +81,7 @@ namespace engine
         FontI *m_fpsFont;
     #endif
         CharacterI *m_character;
+        CharacterMoverI *m_characterMover;
     };
 }
 
