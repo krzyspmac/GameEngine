@@ -74,7 +74,37 @@ void Engine::setup()
     m_character->SetScale(2);
 
     m_characterMover = new CharacterMover(m_character);
-    m_characterMover->PlaceCharacter(OriginMake(100, 480));
+    m_characterMover->PlaceCharacter(OriginMake(100, 450));
+
+    std::vector<Vector2> polygon1List;
+    polygon1List.push_back( Vector2Make(0, 393) );
+    polygon1List.push_back( Vector2Make(557, 368) );
+    polygon1List.push_back( Vector2Make(742, 295) );
+    polygon1List.push_back( Vector2Make(590, 267) );
+    polygon1List.push_back( Vector2Make(292, 254) );
+    polygon1List.push_back( Vector2Make(0, 254) );
+    polygon1List.push_back( Vector2Make(0, 393) );
+    Polygon polygon1(polygon1List);
+
+    std::vector<Vector2> polygon2List;
+    polygon2List.push_back( Vector2Make(0, 487) );
+    polygon2List.push_back( Vector2Make(212, 466) );
+    polygon2List.push_back( Vector2Make(624, 446) );
+    polygon2List.push_back( Vector2Make(908, 319) );
+    polygon2List.push_back( Vector2Make(873, 259) );
+    polygon2List.push_back( Vector2Make(703, 229) );
+    polygon2List.push_back( Vector2Make(689, 0) );
+    polygon2List.push_back( Vector2Make(1280, 0) );
+    polygon2List.push_back( Vector2Make(1280, 540) );
+    polygon2List.push_back( Vector2Make(0, 540) );
+//    polygon2List.push_back( Vector2Make(0, 540) );
+    Polygon polygon2(polygon2List);
+
+    std::vector<Polygon> polygonList;
+    polygonList.push_back(polygon1);
+    polygonList.push_back(polygon2);
+
+    m_walkingBoxes = new WalkingBoxes(polygonList);
 }
 
 void Engine::SetCapRate(int fps)
@@ -187,6 +217,8 @@ void Engine::RenderScene()
 {
     m_scriptingEngine.callUpdate();
     m_characterMover->Update();
+
+    m_walkingBoxes->Draw();
 }
 
 void Engine::RenderSceneTexts()
@@ -224,8 +256,8 @@ void Engine::ApplyScaleTransformations()
 
 void Engine::MouseClicked()
 {
-    m_character->SetTalking(!m_character->IsTalking());
-    m_characterMover->MoveCharacter(m_mousePosition);
+//    m_character->SetTalking(!m_character->IsTalking());
+//    m_characterMover->MoveCharacter(m_mousePosition);
 }
 
 TextureI *Engine::LoadTexture(std::string filename)

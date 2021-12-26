@@ -31,7 +31,27 @@ namespace engine
         int y;
     } Origin;
 
-    inline Origin OriginMake(int x, int y) {
+    typedef struct
+    {
+        float x;
+        float y;
+    } Vector2;
+
+    inline Vector2 Vector2Make(float x, float y)
+    {
+        Vector2 result;
+        result.x = x;
+        result.y = y;
+        return result;;
+    };
+
+    inline bool Vector2Equals(Vector2 &first, Vector2 &second)
+    {
+        return first.x == second.x && first.y == second.y;
+    };
+
+    inline Origin OriginMake(int x, int y)
+    {
         Origin result;
         result.x = x;
         result.y = y;

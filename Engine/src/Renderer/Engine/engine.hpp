@@ -18,6 +18,7 @@
 #import "character_interface.h"
 #import "texture_target.hpp"
 #import "character_mover_interface.h"
+#import "walking_boxes.hpp"
 
 namespace engine
 {
@@ -93,6 +94,7 @@ namespace engine
     #endif
         CharacterI *m_character;
         CharacterMoverI *m_characterMover;
+        WalkingBoxes *m_walkingBoxes;
     };
 }
 
