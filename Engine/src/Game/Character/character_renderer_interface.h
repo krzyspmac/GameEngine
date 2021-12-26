@@ -180,6 +180,30 @@ namespace engine
 
         TextureTargetI *m_bufferTexture;
     };
-};
+
+    inline CharacterWalkState CharacterWalkStateGetStanding(CharacterWalkState state)
+    {
+        switch (state)
+        {
+            case STAND_RIGHT:
+                return STAND_RIGHT;
+            case RIGHT:
+                return STAND_RIGHT;
+            case LEFT:
+                return STAND_LEFT;
+            case STAND_LEFT:
+                return STAND_LEFT;
+            case FORWARD:
+                return STAND_FORWARD;
+            case STAND_FORWARD:
+                return STAND_FORWARD;
+            case BACKWARD:
+                return STAND_BACKWARD;
+            case STAND_BACKWARD:
+                return STAND_BACKWARD;
+        }
+    }
+
+}; // namespace
 
 #endif /* character_interface_h */

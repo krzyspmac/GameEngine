@@ -80,6 +80,9 @@ Character::Character(std::string jsonDefinition)
             cJSON *walkBackwardNode = cJSON_GetObjectItem(root, "walkBackward");
             ProcessBodyParts(walkBackwardNode, atlas, BACKWARD, false);
 
+            cJSON *standBackwardNode = cJSON_GetObjectItem(root, "standBackward");
+            ProcessBodyParts(standBackwardNode, atlas, STAND_BACKWARD, false);
+
             cJSON_Delete(root);
             m_characterRenderer->PrepareCharacter();
         }

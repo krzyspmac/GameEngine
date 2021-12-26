@@ -13,17 +13,20 @@
 namespace engine
 {
 
-    typedef struct {
+    typedef struct
+    {
         SDL_Renderer *renderer;
         SDL_Window *window;
     } SDL_APP;
 
-    typedef struct Size {
+    typedef struct Size
+    {
         int width;
         int height;
     } Size;
 
-    typedef struct {
+    typedef struct
+    {
         int x;
         int y;
     } Origin;
@@ -34,6 +37,19 @@ namespace engine
         result.y = y;
         return result;;
     };
+
+    inline Origin OriginGetDiff(Origin &first, Origin &second)
+    {
+        Origin result;
+        result.x = first.x - second.x;
+        result.y = first.y - second.y;
+        return result;
+    }
+
+    inline bool OriginEquals(Origin &first, Origin &second)
+    {
+        return first.x == second.x && first.y == second.y;
+    }
 }
 
 #endif /* common_engine_impl_h */

@@ -107,7 +107,7 @@
 				"sprite": "fstand_body1",
 				"offsetX": 5,
 				"offsetY": 0,
-				"headOffsetX": 4,
+				"headOffsetX": 5,
 				"headOffsetY": 0
 			}
 		],
@@ -256,6 +256,23 @@
 				"sprite": "bwalk_body8",
 				"offsetX": 5,
 				"headOffsetX": 3,
+				"headOffsetY": 0
+			}
+		],
+		"head": [
+			{
+				"sprite": "bstand_head1"
+			}
+		]
+	},
+	"standBackward": {
+		"animationDelay": 100,
+		"body": [
+			{
+				"sprite": "bstand_body1",
+				"offsetX": 3,
+				"offsetY": 0,
+				"headOffsetX": 4,
 				"headOffsetY": 0
 			}
 		],

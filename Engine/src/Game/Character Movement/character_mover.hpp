@@ -25,6 +25,9 @@ namespace engine
 
     private:
         bool ShouldMove();
+
+    private:
+        Uint64 m_lastChecked;
     };
 };
 
