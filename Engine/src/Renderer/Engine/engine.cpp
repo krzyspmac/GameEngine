@@ -129,34 +129,34 @@ void Engine::update()
     // Pop the buffer texture. Blit the render to the screen.
     m_engineProvider.RendererTargetPop();
 
+    // Apply scaling transformation due to possible window resize
     int windowW, windowH;
     m_engineProvider.GetWindowSize(&windowW, &windowH);
 
     float scaleX, scaleY;
-
     scaleX = (float)windowW / (float)m_viewportSize.width;
     scaleY = (float)windowH / (float)m_viewportSize.height;
 
     float scale = std::min(scaleX, scaleY);
     SDL_RenderSetScale(((EngineProvider&)m_engineProvider).GetRendererHandle()->renderer, scale, scale);
 
-    float aspectRatio = (float)m_viewportSize.width / (float)m_viewportSize.height;
     int targetWidth = m_viewportSize.width * scale;
     int targetHeight = m_viewportSize.height * scale;
 
     int offsetX = (windowW - targetWidth) / 2;
     int offsetY = (windowH - targetHeight) / 2;
 
+    // Draw the back buffer texture
     m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY, 0, 0, m_viewportSize.width, m_viewportSize.height, 1);
 
+    // Render the current stack
     m_engineProvider.RenderPresent();
 
+    // Calculate performance
     m_performanceEnd = m_engineProvider.GetPerformanceCounter();
     m_performanceDelta = m_performanceEnd - m_performanceStart;
     m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
     m_previousFps = 1.0f / m_seconds;
-
-    m_engineProvider.Delay(1);
 }
 
 TextureI *Engine::LoadTexture(std::string filename)
