@@ -14,6 +14,10 @@ namespace engine
 typedef enum {
     EVENT_NONE = 0,
     EVENT_KEYDOWN,
+
+    EVENT_MOUSEMOVE,
+    EVENT_MOUSEUP,
+
     EVENT_QUIT,
 } EVENT;
 

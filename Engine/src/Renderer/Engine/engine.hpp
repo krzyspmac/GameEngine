@@ -52,6 +52,12 @@ namespace engine
         void SpriteDrawDisposeAll();
 
     private:
+        void RenderScene();
+        void ApplyScaleTransformations(int *offsetX, int *offsetY);
+        void MeasurePerformanceStart();
+        void MeasurePerformanceEnd();
+
+    private:
         std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
         std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;

@@ -30,6 +30,12 @@ static EVENT SDLEvent2EVENT(SDL_Event *event)
         case SDL_KEYDOWN:
             return EVENT_KEYDOWN;
 
+        case SDL_MOUSEMOTION:
+            return EVENT_MOUSEMOVE;
+
+        case SDL_MOUSEBUTTONUP:
+            return EVENT_MOUSEUP;
+
         default:
             break;
     }

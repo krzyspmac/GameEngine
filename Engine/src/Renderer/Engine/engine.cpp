@@ -69,7 +69,7 @@ void Engine::setup()
     m_engineProvider.ClearRender();
 
     m_character = new Character("brett_character.json");
-    m_character->SetScale(2.5);
+    m_character->SetScale(2);
 }
 
 int Engine::doInput()
@@ -90,6 +90,16 @@ int Engine::doInput()
                 break;
             }
 
+            case EVENT_MOUSEMOVE:
+            {
+                break;
+            }
+
+            case EVENT_MOUSEUP:
+            {
+                break;
+            }
+
             case EVENT_QUIT:
             {
                 return 1;
@@ -105,7 +115,7 @@ int Engine::doInput()
 void Engine::update()
 {
     // Calculate performance
-    m_performanceStart = m_engineProvider.GetPerformanceCounter();
+    MeasurePerformanceStart();
 
     // Clear the window background
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
@@ -118,6 +128,40 @@ void Engine::update()
     m_engineProvider.SetRenderBackgroundColor(255, 0, 0, 120);
     m_engineProvider.ClearRender();
 
+    // Render scene
+    RenderScene();
+
+    // Pop the buffer texture. Blit the render to the screen.
+    m_engineProvider.RendererTargetPop();
+
+    int offsetX, offsetY;
+    ApplyScaleTransformations(&offsetX, &offsetY);
+
+    // Draw the back buffer texture
+    m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY);
+
+    // Render the current stack
+    m_engineProvider.RenderPresent();
+
+    // Calculate performance
+    MeasurePerformanceEnd();
+}
+
+void Engine::MeasurePerformanceStart()
+{
+    m_performanceStart = m_engineProvider.GetPerformanceCounter();
+}
+
+void Engine::MeasurePerformanceEnd()
+{
+    m_performanceEnd = m_engineProvider.GetPerformanceCounter();
+    m_performanceDelta = m_performanceEnd - m_performanceStart;
+    m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
+    m_previousFps = 1.0f / m_seconds;
+}
+
+void Engine::RenderScene()
+{
     m_scriptingEngine.callUpdate();
     m_character->Draw(100, 480);
 
@@ -125,11 +169,11 @@ void Engine::update()
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
     m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
+}
 
-    // Pop the buffer texture. Blit the render to the screen.
-    m_engineProvider.RendererTargetPop();
-
-    // Apply scaling transformation due to possible window resize
+void Engine::ApplyScaleTransformations(int *offsetX, int *offsetY)
+{
+        // Apply scaling transformation due to possible window resize
     int windowW, windowH;
     m_engineProvider.GetWindowSize(&windowW, &windowH);
 
@@ -143,20 +187,8 @@ void Engine::update()
     int targetWidth = m_viewportSize.width * scale;
     int targetHeight = m_viewportSize.height * scale;
 
-    int offsetX = ((windowW - targetWidth) / 2)/scale;
-    int offsetY = ((windowH - targetHeight) / 2)/scale;
-
-    // Draw the back buffer texture
-    m_engineProvider.DrawTexture(m_bufferTexture, offsetX, offsetY);
-
-    // Render the current stack
-    m_engineProvider.RenderPresent();
-
-    // Calculate performance
-    m_performanceEnd = m_engineProvider.GetPerformanceCounter();
-    m_performanceDelta = m_performanceEnd - m_performanceStart;
-    m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
-    m_previousFps = 1.0f / m_seconds;
+    *offsetX = ((windowW - targetWidth) / 2)/scale;
+    *offsetY = ((windowH - targetHeight) / 2)/scale;
 }
 
 TextureI *Engine::LoadTexture(std::string filename)
