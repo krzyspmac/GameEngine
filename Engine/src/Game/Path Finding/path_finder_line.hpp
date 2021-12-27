@@ -18,7 +18,7 @@ namespace engine
     class Line
     {
     public:
-        Line(Vector2 p1, Vector2 p2)
+        Line(Vector2 &p1, Vector2 &p2)
             : p1(p1), p2(p2)
         {
             length = sqrt(pow(p1.x - p1.y, 2) + pow(p2.x - p2.y, 2));

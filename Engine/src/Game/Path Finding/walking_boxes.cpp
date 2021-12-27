@@ -60,8 +60,6 @@ void WalkingBoxes::Prepare()
         }
     }
 
-
-
     // At the end add all the polygon lines as those are parts of the
     // grid as well.
     for (auto cPoint = std::begin(m_polygons); cPoint != std::end(m_polygons); ++cPoint)
