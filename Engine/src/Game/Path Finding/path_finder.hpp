@@ -30,6 +30,7 @@ namespace engine
 
     private:
         bool IntersectsAnyline(Line &line);
+        bool PointInsidePolygons(Vector2 &point, Polygon **outPolygon);
         void DrawLine(Line&);
         void DrawPoint(Vector2&);
 

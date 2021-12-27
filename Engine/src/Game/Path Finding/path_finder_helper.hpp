@@ -19,6 +19,7 @@ namespace engine
     public:
         static bool IsIntersecting(Vector2 a, Vector2 b, Vector2 c, Vector2 d);
         static bool IsVertexPoint(Vector2 &point, std::vector<Vector2> &points);
+        static std::vector<Line*> IntersectsLines(Line &myLine, std::vector<Line> &m_allLines);
         static bool IntersectsAnyline(Line &myLine, std::vector<Vector2> &m_allPoint, std::vector<Line> &m_allLines);
         static bool IsPointWithingViewport(Vector2 &point);
         static char get_line_intersection(float p0_x, float p0_y, float p1_x, float p1_y,

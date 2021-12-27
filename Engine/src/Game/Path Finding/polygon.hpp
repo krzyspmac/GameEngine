@@ -24,6 +24,9 @@ namespace engine
         std::vector<Line> &GetLines() { return m_lines; };
         bool ContainsLine(Line&);
         std::vector<Vector2> &GetPoints() { return m_points; };
+        bool IsPointVertex(Vector2&);
+        bool IsPointInside(Vector2&);
+        bool NearestPointOutsideFrom(Vector2 &point, Vector2 *outPoint);
     private:
         std::vector<Vector2> m_points;
         std::vector<Line> m_lines;

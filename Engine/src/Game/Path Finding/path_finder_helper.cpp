@@ -71,6 +71,36 @@ bool PathFinderUtils::IntersectsAnyline(Line &myLine, std::vector<Vector2> &m_al
     return intersects;
 }
 
+std::vector<Line*> PathFinderUtils::IntersectsLines(Line &myLine, std::vector<Line> &m_allLines)
+{
+    std::vector<Line*> result;
+
+    Vector2 &p0 = myLine.GetP1();
+    Vector2 &p1 = myLine.GetP2();
+
+    for (auto lit = std::begin(m_allLines); lit != std::end(m_allLines); ++lit)
+    {
+        Line &line = *lit;
+        Vector2 &p2 = line.GetP1();
+        Vector2 &p3 = line.GetP2();
+
+        float i_x;
+        float i_y;
+
+        if (get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
+        {
+            Vector2 intersectionPoint;
+            intersectionPoint.x = i_x;
+            intersectionPoint.y = i_y;
+
+            Line *line = &(*lit);
+            result.emplace_back(line);
+        }
+    }
+
+    return result;
+}
+
 bool PathFinderUtils::IsPointWithingViewport(Vector2 &point)
 {
     Size &viewportSize = GetMainEngine()->GetViewport();

@@ -15,6 +15,8 @@
 
 using namespace engine;
 
+static Vector2 recalculatedPosition = Vector2Zero();
+
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
 : m_polygons(polygonList)
 {
@@ -199,6 +201,8 @@ void PathFinder::Draw()
         provider.RenderSetColor(255, 255, 0, 255);
         provider.RenderDrawLine(nodePoint.x, nodePoint.y, nextNodePoint.x, nextNodePoint.y);
     }
+
+    DrawPoint(recalculatedPosition);
 }
 
 void PathFinder::DrawLine(Line &line)
@@ -215,15 +219,58 @@ void PathFinder::DrawPoint(Vector2 &point)
     provider.RenderDrawPoint(point.x, point.y);
 }
 
+bool PathFinder::PointInsidePolygons(Vector2 &point, Polygon **outPolygon)
+{
+    for (auto it = std::begin(m_polygons); it != std::end(m_polygons); ++it)
+    {
+        bool containsPoint = it->IsPointInside(point);
+        if (containsPoint)
+        {
+            if (outPolygon)
+            {
+                *outPolygon = &(*it);
+            }
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void PathFinder::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
 {
     m_startPosition = fromPoint;
     m_targetPosition = toPoint;
 
-    Line myLine(fromPoint, toPoint);
+    Line myLine(fromPoint, m_targetPosition);
 
     // should check if the point is not iside a polygon; if so - snap it out of it
+    EngineProviderI &provider = GetMainEngine()->getProvider();
+    Uint64 start = provider.GetTicks();
 
+    // TODO: needs work due to issues with offending vertices when snapping out of the polygon
+    Polygon *offendingPolygon = NULL;
+    if (PointInsidePolygons(m_targetPosition, &offendingPolygon))
+    {
+//        Vector2 recalculated;
+//        if (offendingPolygon->NearestPointOutsideFrom(m_targetPosition, &recalculated))
+//        {
+//            if (!PointInsidePolygons(recalculated, NULL))
+//            {
+//                m_targetPosition = recalculated;
+//                recalculatedPosition = m_targetPosition;
+//            }
+//            else
+//            {
+                // cannot walk there!
+                return;
+//            }
+//        }
+    }
+
+    Uint64 end = provider.GetTicks();
+    Uint64 delta = end - start;
+    printf("contains point took %d ms\n", delta);
 
     // Can a clear line of slight be established?
     bool intersects = IntersectsAnyline(myLine);
@@ -242,13 +289,11 @@ void PathFinder::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
 
         EngineProviderI &provider = GetMainEngine()->getProvider();
         Uint64 start = provider.GetTicks();
-        m_lineGraph->DistanceToPoint(this, fromPoint, toPoint, &m_tempPathStack);
+        m_lineGraph->DistanceToPoint(this, fromPoint, m_targetPosition, &m_tempPathStack);
         Uint64 end = provider.GetTicks();
         Uint64 delta = end - start;
         printf("calculate took %d ms\n", delta);
     }
-
-    printf("asdda");
 }
 
 void PathFinder::DidStart(float initialDistance)
@@ -273,6 +318,9 @@ void PathFinder::DidFind()
 
         m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
         m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
-        m_calculatedPath.push_back(m_targetPosition);
+        if (!PointInsidePolygons(m_targetPosition, NULL))
+        {
+            m_calculatedPath.push_back(m_targetPosition);
+        }
     }
 }

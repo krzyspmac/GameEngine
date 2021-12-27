@@ -45,10 +45,20 @@ namespace engine
         return result;;
     };
 
+    inline Vector2 Vector2Zero()
+    {
+        return Vector2Make(0, 0);
+    }
+
     inline bool Vector2Equals(Vector2 &first, Vector2 &second)
     {
         return first.x == second.x && first.y == second.y;
     };
+
+    inline float Vector2Distance(Vector2 &p1, Vector2 &p2)
+    {
+        return sqrt(pow(p1.x - p1.y, 2) + pow(p2.x - p2.y, 2));
+    }
 
     inline Origin OriginMake(int x, int y)
     {
