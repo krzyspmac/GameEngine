@@ -19,13 +19,16 @@ namespace engine
         WalkingBoxes(std::vector<Polygon> polygonList);
 
     public:
+        void Prepare();
         void Draw();
 
     private:
-        void DrawLine(Vector2 &p1, Vector2 &p2);
+        bool IntersectsAnyline(Line &line);
+        void DrawLine(Line&);
 
     private:
         std::vector<Polygon> m_polygons;
+        std::vector<Line> m_connectionLines;
     };
 };
 
