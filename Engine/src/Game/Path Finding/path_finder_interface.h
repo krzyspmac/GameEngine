@@ -71,6 +71,7 @@ namespace engine
     {
     public:
         PathFinderGraphI(std::vector<Line> lines): m_connectingLines(lines) { };
+        virtual ~PathFinderGraphI() { };
 
     public:
         virtual void DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;

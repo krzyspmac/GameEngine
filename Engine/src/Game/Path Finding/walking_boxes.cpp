@@ -14,136 +14,6 @@
 
 using namespace engine;
 
-static int max_iteration = 1024;
-static int cur_iteration = 0;
-/*
-class LineGraph
-{
-public:
-    LineGraph(std::vector<Line> lines): m_connectingLines(lines)
-    {
-        Prepare();
-    };
-
-public:
-
-    PathFinderLineGraphNodeI *GetNodeForPoint(Vector2 &point)
-    {
-        for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
-        {
-            PathFinderLineGraphNodeI *node = it->get();
-            Vector2 *nodePoint = node->GetPoint();
-            if (Vector2Equals(point, *nodePoint))
-            {
-                return node;
-            }
-
-        }
-        return NULL;
-    }
-
-    void Prepare()
-    {
-        // Store a list of graph nodes. The number of nodes is equal to the number of lines.
-        for (auto it = std::begin(m_connectingLines); it != std::end(m_connectingLines); ++it)
-        {
-            Line *line = &(*it);
-            Vector2 &p1 = line->GetP1();
-            Vector2 &p2 = line->GetP2();
-
-            PathFinderLineGraphNodeI *nodeP1 = GetNodeForPoint(p1);
-            if (!nodeP1)
-            {
-                nodeP1 = new PathFinderLineGraphNode(&(p1));
-                m_nodes.emplace_back(std::move(nodeP1));
-            }
-
-            PathFinderLineGraphNodeI *nodeP2 = GetNodeForPoint(p2);
-            if (!nodeP2)
-            {
-                nodeP2 = new PathFinderLineGraphNode(&(p2));
-                m_nodes.emplace_back(std::move(nodeP2));
-            }
-        }
-
-        // Go through each point node and check if it connects, via line,
-        // to any other node.
-        for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
-        {
-            PathFinderLineGraphNodeI *node = it->get();
-            Vector2 *nodePoint = node->GetPoint();
-
-            for (auto pit = std::begin(m_nodes); pit != std::end(m_nodes); ++pit)
-            {
-                PathFinderLineGraphNodeI *otherNode = pit->get();
-                Vector2 *otherNodePoint = otherNode->GetPoint();
-
-                if (node == otherNode)
-                {
-                    // skip the same items
-                    continue;
-                }
-
-                for (auto lit = std::begin(m_connectingLines); lit != std::end(m_connectingLines); ++lit)
-                {
-                    Line &line = *lit;
-                    if (line.HasVertex(*nodePoint) && line.HasVertex(*otherNodePoint))
-                    {
-                        if (!node->HasConnectionWithPoint(otherNodePoint))
-                        {
-                            node->AddConnection(otherNode);
-                        }
-                    }
-                }
-            }
-        }
-    };
-
-    float DistanceToPoint(WalkingBoxes *sender, Vector2 &startingPoint, Vector2 &targetPoint, float startingDistance, std::vector<PathFinderLineGraphNodeI*> *pathStack)
-    {
-        pathStack->clear();
-        cur_iteration = 0;
-
-        for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
-        {
-            if (++cur_iteration >= max_iteration) {
-                return false;
-            }
-
-            PathFinderLineGraphNodeI *node = it->get();
-            Vector2 &point = *node->GetPoint();
-
-            if (!PathFinderUtils::IsPointWithingViewport(point))
-            {
-                continue;
-            }
-
-            // Check if we can see the first node
-            Line lineToFirstNode(startingPoint, point);
-
-            if (PathFinderUtils::IntersectsAnyline(lineToFirstNode, sender->GetAllPoint(), sender->GetAllLines()))
-            {
-                continue;
-            }
-
-            sender->DidStart(lineToFirstNode.GetLength());
-
-            node->DistanceToPoint(sender, targetPoint, pathStack);
-        }
-        return 0;
-    }
-
-    std::vector<std::unique_ptr<PathFinderLineGraphNodeI>>& GetNodes() { return m_nodes; };
-
-public:
-    std::vector<Line> m_connectingLines;
-    std::vector<std::unique_ptr<PathFinderLineGraphNodeI>> m_nodes;
-
-    std::vector<PathFinderLineGraphNodeI*> m_path;
-};
-
-*/
-
 std::vector<PathFinderLineGraphNodeI*> pathStack;
 
 WalkingBoxes::WalkingBoxes(std::vector<Polygon> polygonList)
@@ -156,6 +26,11 @@ WalkingBoxes::WalkingBoxes(std::vector<Polygon> polygonList)
     Uint64 end = provider.GetTicks();
     Uint64 delta = end - start;
     printf("Prepare took %d ms", delta);
+}
+
+WalkingBoxes::~WalkingBoxes()
+{
+    delete m_lineGraph;
 }
 
 void WalkingBoxes::Prepare()
@@ -390,7 +265,6 @@ void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
     bool intersects = IntersectsAnyline(myLine);
     if (!intersects)
     {
-        m_path.push_back(myLine);
     }
     else
     {

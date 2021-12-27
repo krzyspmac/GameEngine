@@ -19,7 +19,8 @@ namespace engine
     {
     public:
         WalkingBoxes(std::vector<Polygon> polygonList);
-
+        ~WalkingBoxes();
+        
     public:
         void Prepare();
         void Draw();
@@ -47,13 +48,11 @@ namespace engine
         std::vector<Polygon> m_polygons;
         std::vector<Line> m_connectionLines;
         std::vector<Vector2> m_points;
-        std::vector<Line> m_path;
 
         std::vector<Vector2> m_allPoint;
         std::vector<Line> m_allLines;
 
         PathFinderGraphI *m_lineGraph;
-
         std::vector<std::vector<void*>> m_arrayOfNodesArray;
     };
 };
