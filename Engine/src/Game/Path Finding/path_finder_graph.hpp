@@ -25,6 +25,9 @@ namespace engine
 
     public:
         void DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack);
+
+    private:
+        int m_curIteration;
     };
 };
 

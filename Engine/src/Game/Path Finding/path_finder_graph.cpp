@@ -11,8 +11,7 @@
 
 using namespace engine;
 
-static int max_iteration = 1024;
-static int cur_iteration = 0;
+#define MAX_ITERATION 1024
 
 PathFinderGraph::PathFinderGraph(std::vector<Line> lines)
 : PathFinderGraphI(lines)
@@ -95,11 +94,11 @@ void PathFinderGraph::Prepare()
 void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
 {
     pathStack->clear();
-    cur_iteration = 0;
+    m_curIteration = 0;
 
     for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
     {
-        if (++cur_iteration >= max_iteration) {
+        if (++m_curIteration >= MAX_ITERATION) {
             return;
         }
 
