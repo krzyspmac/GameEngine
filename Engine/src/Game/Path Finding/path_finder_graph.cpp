@@ -7,6 +7,7 @@
 
 #include "path_finder_graph.hpp"
 #include "path_finder_line_graph_node.hpp"
+#include "path_finder_helper.hpp"
 
 using namespace engine;
 
@@ -36,7 +37,7 @@ PathFinderLineGraphNodeI *PathFinderGraph::GetNodeForPoint(Vector2 &point)
 
 void PathFinderGraph::Prepare()
 {
-    // Store a list of graph nodes. The number of nodes is equal to the number of lines.
+    // Store a list of graph nodes. The number of nodes is equal to the cout of vertices in each line.
     for (auto it = std::begin(m_connectingLines); it != std::end(m_connectingLines); ++it)
     {
         Line *line = &(*it);

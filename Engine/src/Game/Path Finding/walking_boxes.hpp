@@ -47,13 +47,18 @@ namespace engine
     private:
         std::vector<Polygon> m_polygons;
         std::vector<Line> m_connectionLines;
-        std::vector<Vector2> m_points;
 
         std::vector<Vector2> m_allPoint;
         std::vector<Line> m_allLines;
 
+        // path claculation
         PathFinderGraphI *m_lineGraph;
-        std::vector<std::vector<void*>> m_arrayOfNodesArray;
+        Vector2 m_startPosition;
+        Vector2 m_targetPosition;
+        std::vector<Vector2> m_calculatedPath;
+        float m_startingDistance;
+        float m_maxDistance;
+        std::vector<PathFinderLineGraphNodeI*> m_tempPathStack;
     };
 };
 

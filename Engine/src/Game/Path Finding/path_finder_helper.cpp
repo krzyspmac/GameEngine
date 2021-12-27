@@ -110,3 +110,17 @@ char PathFinderUtils::get_line_intersection(float p0_x, float p0_y, float p1_x, 
 
     return 0; // No collision
 }
+
+std::vector<Vector2> PathFinderUtils::ListOfNodesToVectors(std::vector<PathFinderLineGraphNodeI*> *list)
+{
+    std::vector<Vector2> result;
+
+    for (auto lit = std::begin(*list); lit != std::end(*list); ++lit)
+    {
+        PathFinderLineGraphNodeI *node = *lit;
+        Vector2 *vec = node->GetPoint();
+        result.push_back(Vector2Make(vec->x, vec->y));
+    }
+
+    return result;
+}

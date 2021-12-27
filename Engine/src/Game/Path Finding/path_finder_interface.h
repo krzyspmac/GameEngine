@@ -11,7 +11,6 @@
 #include <iostream>
 #include "common_engine_impl.h"
 #include "path_finder_line.hpp"
-#include "path_finder_helper.hpp"
 
 namespace engine
 {

@@ -9,12 +9,11 @@
 #include "engine_provider_interface.h"
 #include "engine_interface.h"
 #include "path_finder_line_graph_node.hpp"
+#include "path_finder_helper.hpp"
 #include <iostream>
 #include <limits>
 
 using namespace engine;
-
-std::vector<PathFinderLineGraphNodeI*> pathStack;
 
 WalkingBoxes::WalkingBoxes(std::vector<Polygon> polygonList)
 : m_polygons(polygonList)
@@ -60,8 +59,8 @@ void WalkingBoxes::Prepare()
         }
     }
 
-    // At the end add all the polygon lines as those are parts of the
-    // grid as well.
+    // At the beginning add all the polygon lines. Those will be the connecting lines
+    // as well.
     for (auto cPoint = std::begin(m_polygons); cPoint != std::end(m_polygons); ++cPoint)
     {
         Polygon &polygon = *cPoint;
@@ -189,50 +188,17 @@ void WalkingBoxes::Draw()
         }
     }
 
-//
-//    for (auto it = std::begin(m_points); it != std::end(m_points); ++it)
-//    {
-//        provider.RenderSetColor(0, 255, 255, 255);
-//        DrawPoint(*it);
-//    }
-//
-//    for (auto lit = std::begin(m_path); lit != std::end(m_path); ++lit)
-//    {
-//        provider.RenderSetColor(255, 255, 0, 255);
-//        DrawLine(*lit);
-//    }
-
-#if 1 // render path
-
-    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
-    Uint64 seconds = ticks / 3000;
-    Uint32 frameCount = m_arrayOfNodesArray.size();
-    Uint32 frameNo = (seconds % frameCount);
-
-    int pos = frameNo;
-    if (pos < m_arrayOfNodesArray.size())
+    for (int i = 0; i < m_calculatedPath.size(); i++)
     {
-        std::vector<void*> &pathTaken = m_arrayOfNodesArray.at(pos);
-
-        for (int i = 0; i < pathTaken.size(); i++)
+        if (i + 1 >= m_calculatedPath.size())
         {
-            if (i + 1 >= pathTaken.size())
-            {
-                break;
-            }
-            PathFinderLineGraphNodeI *node = (PathFinderLineGraphNodeI*)pathTaken.at(i);
-            PathFinderLineGraphNodeI *nextNode = (PathFinderLineGraphNodeI*)pathTaken.at(i+1);
-
-            Vector2 nodePoint = *node->GetPoint();
-            Vector2 nextNodePoint = *nextNode->GetPoint();
-
-            Line line(nodePoint, nextNodePoint);
-            provider.RenderSetColor(255, 255, 0, 255);
-            provider.RenderDrawLine(nodePoint.x, nodePoint.y, nextNodePoint.x, nextNodePoint.y);
-
+            break;
         }
+        Vector2 &nodePoint = m_calculatedPath.at(i);
+        Vector2 &nextNodePoint = m_calculatedPath.at(i+1);
+        provider.RenderSetColor(255, 255, 0, 255);
+        provider.RenderDrawLine(nodePoint.x, nodePoint.y, nextNodePoint.x, nextNodePoint.y);
     }
-#endif
 }
 
 void WalkingBoxes::DrawLine(Line &line)
@@ -249,29 +215,37 @@ void WalkingBoxes::DrawPoint(Vector2 &point)
     provider.RenderDrawPoint(point.x, point.y);
 }
 
-static float distance = 0;
-static float maxDistance = 0;
-
 void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
 {
-    m_points.push_back(toPoint);
+    m_startPosition = fromPoint;
+    m_targetPosition = toPoint;
 
     Line myLine(fromPoint, toPoint);
 
     // should check if the point is not iside a polygon; if so - snap it out of it
 
+
+    // Can a clear line of slight be established?
     bool intersects = IntersectsAnyline(myLine);
     if (!intersects)
     {
+        m_calculatedPath.clear();
+        m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
+        m_calculatedPath.push_back(m_targetPosition);
     }
     else
     {
         // Go through each point and connected points until a clear
         // line of slight can be established between the testing
         // point and the target provided.
-        maxDistance = std::numeric_limits<float>().max()-1;
+        m_maxDistance = std::numeric_limits<float>().max()-1;
 
-        m_lineGraph->DistanceToPoint(this, fromPoint, toPoint, &pathStack);
+        EngineProviderI &provider = GetMainEngine()->getProvider();
+        Uint64 start = provider.GetTicks();
+        m_lineGraph->DistanceToPoint(this, fromPoint, toPoint, &m_tempPathStack);
+        Uint64 end = provider.GetTicks();
+        Uint64 delta = end - start;
+        printf("calculate took %d ms\n", delta);
     }
 
     printf("asdda");
@@ -279,32 +253,26 @@ void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
 
 void WalkingBoxes::DidStart(float initialDistance)
 {
-    distance = initialDistance;
+    m_startingDistance = initialDistance;
 }
 
 void WalkingBoxes::DidFind()
 {
     bool shouldAddPath = false;
 
-    float thisPathDistance = PathFinderLineGraphNode::RPathDistance(&pathStack) + distance;
-    if (thisPathDistance < maxDistance)
+    float thisPathDistance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance;
+    if (thisPathDistance < m_maxDistance)
     {
-        maxDistance = thisPathDistance;
+        m_maxDistance = thisPathDistance;
         shouldAddPath = true;
     }
 
     if (shouldAddPath)
     {
-        m_arrayOfNodesArray.clear();
+        m_calculatedPath.clear();
 
-        std::vector<void*> nodes;
-        for (auto it = std::begin(pathStack); it != std::end(pathStack); ++it)
-        {
-            PathFinderLineGraphNodeI *node = *it;
-            nodes.emplace_back(node);
-        }
-        m_arrayOfNodesArray.emplace_back(nodes);
-
-        printf("Found at %d steps, distance = %f\n", nodes.size(), thisPathDistance);
+        m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
+        m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
+        m_calculatedPath.push_back(m_targetPosition);
     }
 }

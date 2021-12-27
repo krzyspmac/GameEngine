@@ -6,6 +6,7 @@
 //
 
 #include "path_finder_line_graph_node.hpp"
+#include "path_finder_helper.hpp"
 
 using namespace engine;
 
@@ -56,7 +57,7 @@ void PathFinderLineGraphNode::RPathClearUpTo(std::vector<PathFinderLineGraphNode
         }
     }
 
-    for (int i = pathStack->size()-1; i > foundIndex; i--)
+    for (size_t i = pathStack->size()-1; i > foundIndex; i--)
     {
         pathStack->pop_back();
     }
@@ -108,24 +109,23 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
     Line targetLine(*m_point, targetPoint);
     if (!PathFinderUtils::IntersectsAnyline(targetLine, sender->GetAllPoint(), sender->GetAllLines()))
     {
-            // If there's a connection and we're not crossing any other lines it's a hit!
+        // If there's a connection and we're not crossing any other lines it's a hit!
         sender->DidFind();
         return;
     }
 
     if (m_connectingNodes.size() < 1)
     {
-            // Can't go anywhere further.
+        // Can't go anywhere further.
         return;
     }
 
     for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
     {
-            // clear all traversed point up to certain point; should be somewhere at the end
+        // clear all traversed point up to certain point; should be somewhere at the end
         PathFinderLineGraphNode::RPathClearUpTo(pathStack, this);
 
         PathFinderLineGraphNodeI *node = *it;
-
         if (RPathContains(pathStack, node))
         {
             continue;
