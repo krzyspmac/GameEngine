@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include "common_engine_impl.h"
+#include "path_finder_line.hpp"
+#include "path_finder_helper.hpp"
 
 namespace engine
 {
@@ -44,7 +46,16 @@ namespace engine
 
     public:
         ///
-        virtual Vector2 *GetPoint() = 0;
+        Vector2 *GetPoint() { return m_point; };
+
+        ///
+        virtual void AddConnection(PathFinderLineGraphNodeI *node) = 0;
+
+        ///
+        virtual std::vector<PathFinderLineGraphNodeI*>& GetConnections() = 0;
+
+        ///
+        virtual bool HasConnectionWithPoint(Vector2 *point) = 0;
 
         /// Calcultes the distance from a target point all they way
         /// through all the connecting points.

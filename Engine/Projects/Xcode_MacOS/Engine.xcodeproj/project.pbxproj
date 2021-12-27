@@ -57,6 +57,12 @@
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
 		7FDDAF9F2776873900578F86 /* room.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FDDAF9D2776873900578F86 /* room.hpp */; };
+		7FE2E5C0277A370D00538094 /* path_finder_line_graph_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */; };
+		7FE2E5C1277A370D00538094 /* path_finder_line_graph_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */; };
+		7FE2E5C4277A379B00538094 /* path_finder_line.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5C2277A379B00538094 /* path_finder_line.cpp */; };
+		7FE2E5C5277A379B00538094 /* path_finder_line.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C3277A379B00538094 /* path_finder_line.hpp */; };
+		7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */; };
+		7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +123,12 @@
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
 		7FDDAF9D2776873900578F86 /* room.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = room.hpp; sourceTree = "<group>"; };
 		7FE2E5BD277A31F900538094 /* path_finder_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = path_finder_interface.h; sourceTree = "<group>"; };
+		7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder_line_graph_node.cpp; sourceTree = "<group>"; };
+		7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder_line_graph_node.hpp; sourceTree = "<group>"; };
+		7FE2E5C2277A379B00538094 /* path_finder_line.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder_line.cpp; sourceTree = "<group>"; };
+		7FE2E5C3277A379B00538094 /* path_finder_line.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder_line.hpp; sourceTree = "<group>"; };
+		7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder_helper.cpp; sourceTree = "<group>"; };
+		7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder_helper.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -294,10 +306,16 @@
 			isa = PBXGroup;
 			children = (
 				7FE2E5BD277A31F900538094 /* path_finder_interface.h */,
+				7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */,
+				7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */,
+				7FE2E5C3277A379B00538094 /* path_finder_line.hpp */,
+				7FE2E5C2277A379B00538094 /* path_finder_line.cpp */,
+				7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */,
+				7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */,
 				7F64289F2779183C00EE9E2C /* polygon.hpp */,
 				7F64289E2779183C00EE9E2C /* polygon.cpp */,
-				7F6428A227791A9100EE9E2C /* walking_boxes.cpp */,
 				7F6428A327791A9100EE9E2C /* walking_boxes.hpp */,
+				7F6428A227791A9100EE9E2C /* walking_boxes.cpp */,
 			);
 			path = "Path Finding";
 			sourceTree = "<group>";
@@ -330,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F64288E2777C59D00EE9E2C /* character.hpp in Headers */,
+				7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */,
 				7F6428A527791A9100EE9E2C /* walking_boxes.hpp in Headers */,
 				7F138264277505B600ED6D67 /* file_access.hpp in Headers */,
 				7F13826E277505B600ED6D67 /* sprite_draw_animated.hpp in Headers */,
@@ -348,9 +367,11 @@
 				7F138267277505B600ED6D67 /* sprite_draw_interface.h in Headers */,
 				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
 				7F138258277505B600ED6D67 /* scripting_engine_provider_interface.h in Headers */,
+				7FE2E5C5277A379B00538094 /* path_finder_line.hpp in Headers */,
 				7F138279277505B600ED6D67 /* font.hpp in Headers */,
 				7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */,
 				7F138269277505B600ED6D67 /* sprite_atlas.hpp in Headers */,
+				7FE2E5C1277A370D00538094 /* path_finder_line_graph_node.hpp in Headers */,
 				7F13825D277505B600ED6D67 /* event_provider.hpp in Headers */,
 				7F13828B277505B600ED6D67 /* common.h in Headers */,
 				7F138265277505B600ED6D67 /* file_access_provider.h in Headers */,
@@ -420,6 +441,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */,
 				7F138261277505B600ED6D67 /* engine_provider.cpp in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
@@ -429,6 +451,7 @@
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
+				7FE2E5C0277A370D00538094 /* path_finder_line_graph_node.cpp in Sources */,
 				7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
@@ -437,6 +460,7 @@
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
 				7F138277277505B600ED6D67 /* font.cpp in Sources */,
+				7FE2E5C4277A379B00538094 /* path_finder_line.cpp in Sources */,
 				7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */,
 				7F13827D277505B600ED6D67 /* engine.cpp in Sources */,
 			);

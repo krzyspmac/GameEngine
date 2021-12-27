@@ -8,248 +8,11 @@
 #include "walking_boxes.hpp"
 #include "engine_provider_interface.h"
 #include "engine_interface.h"
+#include "path_finder_line_graph_node.hpp"
 #include <iostream>
 #include <limits>
 
 using namespace engine;
-
-char get_line_intersection(float p0_x, float p0_y, float p1_x, float p1_y,
-                           float p2_x, float p2_y, float p3_x, float p3_y, float *i_x, float *i_y);
-
-bool IsIntersecting(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
-{
-    float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
-    float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
-    float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
-
-    // Detect coincident lines (has a problem, read below)
-    if (denominator == 0) return numerator1 == 0 && numerator2 == 0;
-
-    float r = numerator1 / denominator;
-    float s = numerator2 / denominator;
-
-    return (r >= 0 && r <= 1) && (s >= 0 && s <= 1);
-}
-
-bool IsVertexPoint(Vector2 &point, std::vector<Vector2> &points)
-{
-    for (auto it = std::begin(points); it != std::end(points); ++it)
-    {
-        Vector2 &vp = *it;
-        if (vp.x == point.x && vp.y == point.y)
-        {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool IntersectsAnyline(Line &myLine, std::vector<Vector2> &m_allPoint, std::vector<Line> m_allLines)
-{
-    Vector2 &p0 = myLine.GetP1();
-    Vector2 &p1 = myLine.GetP2();
-
-    bool intersects = false;
-
-    for (auto lit = std::begin(m_allLines); lit != std::end(m_allLines); ++lit)
-    {
-        Line &line = *lit;
-        Vector2 &p2 = line.GetP1();
-        Vector2 &p3 = line.GetP2();
-
-        float i_x;
-        float i_y;
-
-        if (get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
-        {
-            Vector2 intersectionPoint;
-            intersectionPoint.x = i_x;
-            intersectionPoint.y = i_y;
-
-            if (!IsVertexPoint(intersectionPoint, m_allPoint))
-            {
-                intersects = true;
-                break;
-            }
-        }
-    }
-
-    return intersects;
-}
-
-
-static bool LineSegmentsCross(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
-{
-    float denominator = ((b.x - a.x) * (d.y - c.y)) - ((b.y - a.y) * (d.x - c.x));
-
-    if (denominator == 0)
-    {
-        return false;
-    }
-
-    float numerator1 = ((a.y - c.y) * (d.x - c.x)) - ((a.x - c.x) * (d.y - c.y));
-
-    float numerator2 = ((a.y - c.y) * (b.x - a.x)) - ((a.x - c.x) * (b.y - a.y));
-
-    if (numerator1 == 0 || numerator2 == 0)
-    {
-        return false;
-    }
-
-    float r = numerator1 / denominator;
-    float s = numerator2 / denominator;
-
-    return (r > 0 && r < 1) && (s > 0 && s < 1);
-}
-
-bool IsPointWithingViewport(Vector2 &point)
-{
-    Size &viewportSize = GetMainEngine()->GetViewport();
-    if (point.x > 0 && point.x < viewportSize.width && point.y > 0 && point.y < viewportSize.height)
-    {
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
-class LineGraphNode: public PathFinderLineGraphNodeI
-{
-public:
-    LineGraphNode(Vector2 *point): PathFinderLineGraphNodeI(point),  m_point(point)
-    { }
-
-public:
-    Vector2 *GetPoint() { return m_point; };
-
-    void AddConnection(LineGraphNode *node) { m_connectingNodes.emplace_back(node); };
-    std::vector<LineGraphNode*>& GetConnectings() { return m_connectingNodes; };
-    bool HasConnection(Vector2 *point)
-    {
-        Vector2 &targetPoint = *point;
-
-        for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
-        {
-            LineGraphNode *stored = *it;
-            Vector2 *storedPointEx = stored->GetPoint();
-            Vector2 &storedPoint = *(storedPointEx);
-
-            if (Vector2Equals(targetPoint, storedPoint))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    static void RPathClearUpTo(std::vector<PathFinderLineGraphNodeI*> *pathStack, LineGraphNode *upToHere)
-    {
-        int foundIndex = -1;
-
-        for (int i = 0; i < pathStack->size(); i++)
-        {
-            PathFinderLineGraphNodeI *node = pathStack->at(i);
-            if (node == upToHere)
-            {
-                foundIndex = i;
-            }
-        }
-
-        for (int i = pathStack->size()-1; i > foundIndex; i--)
-        {
-            pathStack->pop_back();
-        }
-    }
-
-    static bool RPathContains(std::vector<PathFinderLineGraphNodeI*> *pathStack, LineGraphNode *targetNode)
-    {
-        for (int i = 0; i < pathStack->size(); i++)
-        {
-            PathFinderLineGraphNodeI *node = pathStack->at(i);
-            if (node == targetNode)
-            {
-                return true;;
-            }
-        }
-
-        return false;;
-    }
-
-    static float RPathDistance(std::vector<PathFinderLineGraphNodeI*> *pathStack)
-    {
-        float distance = 0;
-        size_t count = pathStack->size();
-
-        for (int i = 0; i < count; i++)
-        {
-            if (i+1 >= count)
-            {
-                break;;
-            }
-
-            PathFinderLineGraphNodeI *node = pathStack->at(i);
-            PathFinderLineGraphNodeI *nextNode = pathStack->at(i+1);
-
-            Vector2 nodePoint = *node->GetPoint();
-            Vector2 nextNodePoint = *nextNode->GetPoint();
-
-            Line line(nodePoint, nextNodePoint);
-            distance += line.GetLength();
-        }
-
-        return distance;
-    }
-
-    // Go through all the connections until a clear line of sight can be establised
-    // between the current point and  targetPoint. Keep track of travelled distance
-    // and choose the smallest one.
-    // Returns true if the connection can be made
-    void DistanceToPoint(PathFinderBaseI *sender, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
-    {
-        pathStack->emplace_back(this); // put back to the stack; we don't want to traverse the same point again
-
-        Line targetLine(*m_point, targetPoint);
-        if (!IntersectsAnyline(targetLine, sender->GetAllPoint(), sender->GetAllLines()))
-        {
-            // If there's a connection and we're not crossing any other lines it's a hit!
-            sender->DidFind();
-            return;
-        }
-
-        if (m_connectingNodes.size() < 1)
-        {
-            // Can't go anywhere further.
-            return;
-        }
-
-        for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
-        {
-            // clear all traversed point up to certain point; should be somewhere at the end
-            LineGraphNode::RPathClearUpTo(pathStack, this);
-
-            LineGraphNode *node = *it;
-
-            if (RPathContains(pathStack, node))
-            {
-                continue;
-            }
-
-            Vector2 *point = node->GetPoint();
-            if (!IsPointWithingViewport(*point))
-            {
-                continue;
-            }
-
-            node->DistanceToPoint(sender, targetPoint, pathStack);
-        }
-    }
-
-private:
-    Vector2 *m_point;
-    std::vector<LineGraphNode*> m_connectingNodes;
-};
 
 static int max_iteration = 1024;
 static int cur_iteration = 0;
@@ -264,11 +27,11 @@ public:
 
 public:
 
-    LineGraphNode *GetNodeForPoint(Vector2 &point)
+    PathFinderLineGraphNodeI *GetNodeForPoint(Vector2 &point)
     {
         for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
         {
-            LineGraphNode *node = it->get();
+            PathFinderLineGraphNodeI *node = it->get();
             Vector2 *nodePoint = node->GetPoint();
             if (Vector2Equals(point, *nodePoint))
             {
@@ -288,17 +51,17 @@ public:
             Vector2 &p1 = line->GetP1();
             Vector2 &p2 = line->GetP2();
 
-            LineGraphNode *nodeP1 = GetNodeForPoint(p1);
+            PathFinderLineGraphNodeI *nodeP1 = GetNodeForPoint(p1);
             if (!nodeP1)
             {
-                nodeP1 = new LineGraphNode(&(p1));
+                nodeP1 = new PathFinderLineGraphNode(&(p1));
                 m_nodes.emplace_back(std::move(nodeP1));
             }
 
-            LineGraphNode *nodeP2 = GetNodeForPoint(p2);
+            PathFinderLineGraphNodeI *nodeP2 = GetNodeForPoint(p2);
             if (!nodeP2)
             {
-                nodeP2 = new LineGraphNode(&(p2));
+                nodeP2 = new PathFinderLineGraphNode(&(p2));
                 m_nodes.emplace_back(std::move(nodeP2));
             }
         }
@@ -307,12 +70,12 @@ public:
         // to any other node.
         for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
         {
-            LineGraphNode *node = it->get();
+            PathFinderLineGraphNodeI *node = it->get();
             Vector2 *nodePoint = node->GetPoint();
 
             for (auto pit = std::begin(m_nodes); pit != std::end(m_nodes); ++pit)
             {
-                LineGraphNode *otherNode = pit->get();
+                PathFinderLineGraphNodeI *otherNode = pit->get();
                 Vector2 *otherNodePoint = otherNode->GetPoint();
 
                 if (node == otherNode)
@@ -326,7 +89,7 @@ public:
                     Line &line = *lit;
                     if (line.HasVertex(*nodePoint) && line.HasVertex(*otherNodePoint))
                     {
-                        if (!node->HasConnection(otherNodePoint))
+                        if (!node->HasConnectionWithPoint(otherNodePoint))
                         {
                             node->AddConnection(otherNode);
                         }
@@ -347,10 +110,10 @@ public:
                 return false;
             }
 
-            LineGraphNode *node = it->get();
+            PathFinderLineGraphNodeI *node = it->get();
             Vector2 &point = *node->GetPoint();
 
-            if (!IsPointWithingViewport(point))
+            if (!PathFinderUtils::IsPointWithingViewport(point))
             {
                 continue;
             }
@@ -358,7 +121,7 @@ public:
             // Check if we can see the first node
             Line lineToFirstNode(startingPoint, point);
 
-            if (IntersectsAnyline(lineToFirstNode, sender->GetAllPoint(), sender->GetAllLines()))
+            if (PathFinderUtils::IntersectsAnyline(lineToFirstNode, sender->GetAllPoint(), sender->GetAllLines()))
             {
                 continue;
             }
@@ -370,13 +133,13 @@ public:
         return 0;
     }
 
-    std::vector<std::unique_ptr<LineGraphNode>>& GetNodes() { return m_nodes; };
+    std::vector<std::unique_ptr<PathFinderLineGraphNodeI>>& GetNodes() { return m_nodes; };
 
 public:
     std::vector<Line> m_connectingLines;
-    std::vector<std::unique_ptr<LineGraphNode>> m_nodes;
+    std::vector<std::unique_ptr<PathFinderLineGraphNodeI>> m_nodes;
 
-    std::vector<LineGraphNode*> m_path;
+    std::vector<PathFinderLineGraphNodeI*> m_path;
 };
 
 
@@ -470,13 +233,13 @@ void WalkingBoxes::Prepare()
                     float i_x;
                     float i_y;
 
-                    if (get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
+                    if (PathFinderUtils::get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
                     {
                         Vector2 intersectionPoint;
                         intersectionPoint.x = i_x;
                         intersectionPoint.y = i_y;
 
-                        if (!IsVertexPoint(intersectionPoint, m_allPoint))
+                        if (!PathFinderUtils::IsVertexPoint(intersectionPoint, m_allPoint))
                         {
                             intersects = true;
                             break;
@@ -511,13 +274,13 @@ bool WalkingBoxes::IntersectsAnyline(Line &myLine)
         float i_x;
         float i_y;
 
-        if (get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
+        if (PathFinderUtils::get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
         {
             Vector2 intersectionPoint;
             intersectionPoint.x = i_x;
             intersectionPoint.y = i_y;
 
-            if (!IsVertexPoint(intersectionPoint, m_allPoint))
+            if (!PathFinderUtils::IsVertexPoint(intersectionPoint, m_allPoint))
             {
                 intersects = true;
                 break;
@@ -583,8 +346,8 @@ void WalkingBoxes::Draw()
             {
                 break;
             }
-            LineGraphNode *node = (LineGraphNode*)pathTaken.at(i);
-            LineGraphNode *nextNode = (LineGraphNode*)pathTaken.at(i+1);
+            PathFinderLineGraphNodeI *node = (PathFinderLineGraphNodeI*)pathTaken.at(i);
+            PathFinderLineGraphNodeI *nextNode = (PathFinderLineGraphNodeI*)pathTaken.at(i+1);
 
             Vector2 nodePoint = *node->GetPoint();
             Vector2 nextNodePoint = *nextNode->GetPoint();
@@ -654,7 +417,7 @@ void WalkingBoxes::DidFind()
 {
     bool shouldAddPath = false;
 
-    float thisPathDistance = LineGraphNode::RPathDistance(&pathStack) + distance;
+    float thisPathDistance = PathFinderLineGraphNode::RPathDistance(&pathStack) + distance;
     if (thisPathDistance < maxDistance)
     {
         maxDistance = thisPathDistance;
@@ -675,31 +438,4 @@ void WalkingBoxes::DidFind()
 
         printf("Found at %d steps, distance = %f\n", nodes.size(), thisPathDistance);
     }
-}
-
-// Andre LeMothe's "Tricks of the Windows Game Programming Gurus".
-// Returns 1 if the lines intersect, otherwise 0. In addition, if the lines
-// intersect the intersection point may be stored in the floats i_x and i_y.
-char get_line_intersection(float p0_x, float p0_y, float p1_x, float p1_y,
-    float p2_x, float p2_y, float p3_x, float p3_y, float *i_x, float *i_y)
-{
-    float s1_x, s1_y, s2_x, s2_y;
-    s1_x = p1_x - p0_x;     s1_y = p1_y - p0_y;
-    s2_x = p3_x - p2_x;     s2_y = p3_y - p2_y;
-
-    float s, t;
-    s = (-s1_y * (p0_x - p2_x) + s1_x * (p0_y - p2_y)) / (-s2_x * s1_y + s1_x * s2_y);
-    t = ( s2_x * (p0_y - p2_y) - s2_y * (p0_x - p2_x)) / (-s2_x * s1_y + s1_x * s2_y);
-
-    if (s >= 0 && s <= 1 && t >= 0 && t <= 1)
-    {
-        // Collision detected
-        if (i_x != NULL)
-            *i_x = p0_x + (t * s1_x);
-        if (i_y != NULL)
-            *i_y = p0_y + (t * s1_y);
-        return 1;
-    }
-
-    return 0; // No collision
 }
