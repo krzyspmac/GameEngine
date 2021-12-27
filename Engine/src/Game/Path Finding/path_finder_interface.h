@@ -65,6 +65,21 @@ namespace engine
         Vector2 *m_point;
         std::vector<PathFinderLineGraphNodeI*> m_connectingNodes;
     };
+
+    /// Path finder graph
+    class PathFinderGraphI
+    {
+    public:
+        PathFinderGraphI(std::vector<Line> lines): m_connectingLines(lines) { };
+
+    public:
+        virtual void DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;
+        std::vector<std::unique_ptr<PathFinderLineGraphNodeI>>& GetNodes() { return m_nodes; };
+
+    protected:
+        std::vector<Line> m_connectingLines;
+        std::vector<std::unique_ptr<PathFinderLineGraphNodeI>> m_nodes;
+    };
 };
 
 #endif /* path_finder_interface_h */

@@ -10,6 +10,7 @@
 
 #include "polygon.hpp"
 #include "path_finder_interface.h"
+#include "path_finder_graph.hpp"
 
 namespace engine
 {
@@ -51,8 +52,7 @@ namespace engine
         std::vector<Vector2> m_allPoint;
         std::vector<Line> m_allLines;
 
-        void *m_lineGraph;
-        void *m_pathStack;
+        PathFinderGraphI *m_lineGraph;
 
         std::vector<std::vector<void*>> m_arrayOfNodesArray;
     };

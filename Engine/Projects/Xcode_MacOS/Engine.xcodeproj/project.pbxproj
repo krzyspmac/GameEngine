@@ -63,6 +63,8 @@
 		7FE2E5C5277A379B00538094 /* path_finder_line.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C3277A379B00538094 /* path_finder_line.hpp */; };
 		7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */; };
 		7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */; };
+		7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5CA277A3FA900538094 /* path_finder_graph.cpp */; };
+		7FE2E5CD277A3FA900538094 /* path_finder_graph.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5CB277A3FA900538094 /* path_finder_graph.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +131,8 @@
 		7FE2E5C3277A379B00538094 /* path_finder_line.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder_line.hpp; sourceTree = "<group>"; };
 		7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder_helper.cpp; sourceTree = "<group>"; };
 		7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder_helper.hpp; sourceTree = "<group>"; };
+		7FE2E5CA277A3FA900538094 /* path_finder_graph.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder_graph.cpp; sourceTree = "<group>"; };
+		7FE2E5CB277A3FA900538094 /* path_finder_graph.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder_graph.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -312,6 +316,8 @@
 				7FE2E5C2277A379B00538094 /* path_finder_line.cpp */,
 				7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */,
 				7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */,
+				7FE2E5CB277A3FA900538094 /* path_finder_graph.hpp */,
+				7FE2E5CA277A3FA900538094 /* path_finder_graph.cpp */,
 				7F64289F2779183C00EE9E2C /* polygon.hpp */,
 				7F64289E2779183C00EE9E2C /* polygon.cpp */,
 				7F6428A327791A9100EE9E2C /* walking_boxes.hpp */,
@@ -379,6 +385,7 @@
 				7F13827B277505B600ED6D67 /* engine_interface.h in Headers */,
 				7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */,
 				7F138254277505B600ED6D67 /* texture_interface.h in Headers */,
+				7FE2E5CD277A3FA900538094 /* path_finder_graph.hpp in Headers */,
 				7F13825E277505B600ED6D67 /* event_provider_interface.h in Headers */,
 				7F13827A277505B600ED6D67 /* engine.hpp in Headers */,
 			);
@@ -461,6 +468,7 @@
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
 				7F138277277505B600ED6D67 /* font.cpp in Sources */,
 				7FE2E5C4277A379B00538094 /* path_finder_line.cpp in Sources */,
+				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
 				7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */,
 				7F13827D277505B600ED6D67 /* engine.cpp in Sources */,
 			);

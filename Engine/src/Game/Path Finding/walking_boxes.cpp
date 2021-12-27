@@ -16,7 +16,7 @@ using namespace engine;
 
 static int max_iteration = 1024;
 static int cur_iteration = 0;
-
+/*
 class LineGraph
 {
 public:
@@ -142,6 +142,7 @@ public:
     std::vector<PathFinderLineGraphNodeI*> m_path;
 };
 
+*/
 
 std::vector<PathFinderLineGraphNodeI*> pathStack;
 
@@ -255,7 +256,7 @@ void WalkingBoxes::Prepare()
         }
     }
 
-    m_lineGraph = new LineGraph(m_connectionLines);
+    m_lineGraph = new PathFinderGraph(m_connectionLines);
 }
 
 bool WalkingBoxes::IntersectsAnyline(Line &myLine)
@@ -396,13 +397,9 @@ void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
         // Go through each point and connected points until a clear
         // line of slight can be established between the testing
         // point and the target provided.
-        LineGraph *lg = (LineGraph*)m_lineGraph;
         maxDistance = std::numeric_limits<float>().max()-1;
 
-        if (lg->DistanceToPoint(this, fromPoint, toPoint, 0, &pathStack))
-        {
-
-        }
+        m_lineGraph->DistanceToPoint(this, fromPoint, toPoint, &pathStack);
     }
 
     printf("asdda");
