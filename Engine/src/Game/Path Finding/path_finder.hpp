@@ -15,11 +15,11 @@
 namespace engine
 {
 
-    class WalkingBoxes: public PathFinderBaseI
+    class PathFinder: public PathFinderBaseI
     {
     public:
-        WalkingBoxes(std::vector<Polygon> polygonList);
-        ~WalkingBoxes();
+        PathFinder(std::vector<Polygon> polygonList);
+        ~PathFinder();
         
     public:
         void Prepare();
@@ -32,7 +32,6 @@ namespace engine
         bool IntersectsAnyline(Line &line);
         void DrawLine(Line&);
         void DrawPoint(Vector2&);
-
 
     /// PathFinderCallbackI
     public:

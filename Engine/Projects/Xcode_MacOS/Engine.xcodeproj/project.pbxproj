@@ -51,8 +51,8 @@
 		7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428992778CCCB00EE9E2C /* character_mover.cpp */; };
 		7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64289E2779183C00EE9E2C /* polygon.cpp */; };
 		7F6428A12779183C00EE9E2C /* polygon.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289F2779183C00EE9E2C /* polygon.hpp */; };
-		7F6428A427791A9100EE9E2C /* walking_boxes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428A227791A9100EE9E2C /* walking_boxes.cpp */; };
-		7F6428A527791A9100EE9E2C /* walking_boxes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428A327791A9100EE9E2C /* walking_boxes.hpp */; };
+		7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428A227791A9100EE9E2C /* path_finder.cpp */; };
+		7F6428A527791A9100EE9E2C /* path_finder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428A327791A9100EE9E2C /* path_finder.hpp */; };
 		7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
@@ -118,8 +118,8 @@
 		7F64289A2778CCCB00EE9E2C /* character_mover.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_mover.hpp; sourceTree = "<group>"; };
 		7F64289E2779183C00EE9E2C /* polygon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = polygon.cpp; sourceTree = "<group>"; };
 		7F64289F2779183C00EE9E2C /* polygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = polygon.hpp; sourceTree = "<group>"; };
-		7F6428A227791A9100EE9E2C /* walking_boxes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = walking_boxes.cpp; sourceTree = "<group>"; };
-		7F6428A327791A9100EE9E2C /* walking_boxes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = walking_boxes.hpp; sourceTree = "<group>"; };
+		7F6428A227791A9100EE9E2C /* path_finder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder.cpp; sourceTree = "<group>"; };
+		7F6428A327791A9100EE9E2C /* path_finder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder.hpp; sourceTree = "<group>"; };
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
@@ -320,8 +320,8 @@
 				7FE2E5CA277A3FA900538094 /* path_finder_graph.cpp */,
 				7F64289F2779183C00EE9E2C /* polygon.hpp */,
 				7F64289E2779183C00EE9E2C /* polygon.cpp */,
-				7F6428A327791A9100EE9E2C /* walking_boxes.hpp */,
-				7F6428A227791A9100EE9E2C /* walking_boxes.cpp */,
+				7F6428A327791A9100EE9E2C /* path_finder.hpp */,
+				7F6428A227791A9100EE9E2C /* path_finder.cpp */,
 			);
 			path = "Path Finding";
 			sourceTree = "<group>";
@@ -355,7 +355,7 @@
 			files = (
 				7F64288E2777C59D00EE9E2C /* character.hpp in Headers */,
 				7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */,
-				7F6428A527791A9100EE9E2C /* walking_boxes.hpp in Headers */,
+				7F6428A527791A9100EE9E2C /* path_finder.hpp in Headers */,
 				7F138264277505B600ED6D67 /* file_access.hpp in Headers */,
 				7F13826E277505B600ED6D67 /* sprite_draw_animated.hpp in Headers */,
 				7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */,
@@ -454,7 +454,7 @@
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
-				7F6428A427791A9100EE9E2C /* walking_boxes.cpp in Sources */,
+				7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */,
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,

@@ -109,7 +109,7 @@ void Engine::setup()
     polygonList.push_back(polygon1);
     polygonList.push_back(polygon2);
 
-    m_walkingBoxes = new WalkingBoxes(polygonList);
+    m_walkingBoxes = new PathFinder(polygonList);
 }
 
 void Engine::SetCapRate(int fps)

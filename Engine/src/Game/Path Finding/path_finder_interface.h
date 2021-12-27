@@ -42,7 +42,8 @@ namespace engine
         /// Does not assume ownershop of point. Point must
         /// exists throughout the life of PathFinderLineGraphNodeI.
         PathFinderLineGraphNodeI(Vector2 *point): m_point(point) { };
-
+        virtual ~PathFinderLineGraphNodeI() { };
+        
     public:
         ///
         Vector2 *GetPoint() { return m_point; };

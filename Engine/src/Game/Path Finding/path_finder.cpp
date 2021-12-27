@@ -5,7 +5,7 @@
 //  Created by krzysp on 26/12/2021.
 //
 
-#include "walking_boxes.hpp"
+#include "path_finder.hpp"
 #include "engine_provider_interface.h"
 #include "engine_interface.h"
 #include "path_finder_line_graph_node.hpp"
@@ -15,7 +15,7 @@
 
 using namespace engine;
 
-WalkingBoxes::WalkingBoxes(std::vector<Polygon> polygonList)
+PathFinder::PathFinder(std::vector<Polygon> polygonList)
 : m_polygons(polygonList)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
@@ -27,12 +27,12 @@ WalkingBoxes::WalkingBoxes(std::vector<Polygon> polygonList)
     printf("Prepare took %d ms", delta);
 }
 
-WalkingBoxes::~WalkingBoxes()
+PathFinder::~PathFinder()
 {
     delete m_lineGraph;
 }
 
-void WalkingBoxes::Prepare()
+void PathFinder::Prepare()
 {
     // Join all points into one array
     for (auto it = std::begin(m_polygons); it != std::end(m_polygons); ++it)
@@ -131,7 +131,7 @@ void WalkingBoxes::Prepare()
     m_lineGraph = new PathFinderGraph(m_connectionLines);
 }
 
-bool WalkingBoxes::IntersectsAnyline(Line &myLine)
+bool PathFinder::IntersectsAnyline(Line &myLine)
 {
     Vector2 &p0 = myLine.GetP1();
     Vector2 &p1 = myLine.GetP2();
@@ -164,7 +164,7 @@ bool WalkingBoxes::IntersectsAnyline(Line &myLine)
     return intersects;
 }
 
-void WalkingBoxes::Draw()
+void PathFinder::Draw()
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
 
@@ -201,7 +201,7 @@ void WalkingBoxes::Draw()
     }
 }
 
-void WalkingBoxes::DrawLine(Line &line)
+void PathFinder::DrawLine(Line &line)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
     Vector2 &p1 = line.GetP1();
@@ -209,13 +209,13 @@ void WalkingBoxes::DrawLine(Line &line)
     provider.RenderDrawLine(p1.x, p1.y, p2.x, p2.y);
 }
 
-void WalkingBoxes::DrawPoint(Vector2 &point)
+void PathFinder::DrawPoint(Vector2 &point)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
     provider.RenderDrawPoint(point.x, point.y);
 }
 
-void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
+void PathFinder::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
 {
     m_startPosition = fromPoint;
     m_targetPosition = toPoint;
@@ -251,12 +251,12 @@ void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
     printf("asdda");
 }
 
-void WalkingBoxes::DidStart(float initialDistance)
+void PathFinder::DidStart(float initialDistance)
 {
     m_startingDistance = initialDistance;
 }
 
-void WalkingBoxes::DidFind()
+void PathFinder::DidFind()
 {
     bool shouldAddPath = false;
 
