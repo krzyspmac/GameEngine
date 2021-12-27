@@ -9,11 +9,12 @@
 #define walking_boxes_hpp
 
 #include "polygon.hpp"
+#include "path_finder_interface.h"
 
 namespace engine
 {
 
-    class WalkingBoxes
+    class WalkingBoxes: public PathFinderBaseI
     {
     public:
         WalkingBoxes(std::vector<Polygon> polygonList);
@@ -24,15 +25,24 @@ namespace engine
 
     public:
         void CalculatePathTo(Vector2 fromPoint, Vector2 toPoint);
-        void DidStart(float initialDistance);
-        void DidFind();
 
     private:
         bool IntersectsAnyline(Line &line);
         void DrawLine(Line&);
         void DrawPoint(Vector2&);
 
+
+    /// PathFinderCallbackI
     public:
+        void DidStart(float initialDistance);
+        void DidFind();
+
+    /// PathFinderDataI
+    public:
+        std::vector<Vector2> &GetAllPoint() { return m_allPoint; };
+        std::vector<Line> &GetAllLines() { return m_allLines; };
+
+    private:
         std::vector<Polygon> m_polygons;
         std::vector<Line> m_connectionLines;
         std::vector<Vector2> m_points;

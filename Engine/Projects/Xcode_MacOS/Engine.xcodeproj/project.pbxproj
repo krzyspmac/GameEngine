@@ -116,6 +116,7 @@
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
 		7FDDAF9D2776873900578F86 /* room.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = room.hpp; sourceTree = "<group>"; };
+		7FE2E5BD277A31F900538094 /* path_finder_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = path_finder_interface.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +293,7 @@
 		7F64289C2779176400EE9E2C /* Path Finding */ = {
 			isa = PBXGroup;
 			children = (
+				7FE2E5BD277A31F900538094 /* path_finder_interface.h */,
 				7F64289F2779183C00EE9E2C /* polygon.hpp */,
 				7F64289E2779183C00EE9E2C /* polygon.cpp */,
 				7F6428A227791A9100EE9E2C /* walking_boxes.cpp */,

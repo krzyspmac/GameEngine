@@ -115,10 +115,10 @@ bool IsPointWithingViewport(Vector2 &point)
     }
 }
 
-class LineGraphNode
+class LineGraphNode: public PathFinderLineGraphNodeI
 {
 public:
-    LineGraphNode(Vector2 *point) : m_point(point)
+    LineGraphNode(Vector2 *point): PathFinderLineGraphNodeI(point),  m_point(point)
     { }
 
 public:
@@ -144,30 +144,30 @@ public:
         return false;
     }
 
-    static void RPathClearUpTo(std::vector<LineGraphNode*> &pathStack, LineGraphNode *upToHere)
+    static void RPathClearUpTo(std::vector<PathFinderLineGraphNodeI*> *pathStack, LineGraphNode *upToHere)
     {
         int foundIndex = -1;
 
-        for (int i = 0; i < pathStack.size(); i++)
+        for (int i = 0; i < pathStack->size(); i++)
         {
-            LineGraphNode *node = pathStack.at(i);
+            PathFinderLineGraphNodeI *node = pathStack->at(i);
             if (node == upToHere)
             {
                 foundIndex = i;
             }
         }
 
-        for (int i = pathStack.size()-1; i > foundIndex; i--)
+        for (int i = pathStack->size()-1; i > foundIndex; i--)
         {
-            pathStack.pop_back();
+            pathStack->pop_back();
         }
     }
 
-    static bool RPathContains(std::vector<LineGraphNode*> &pathStack, LineGraphNode *targetNode)
+    static bool RPathContains(std::vector<PathFinderLineGraphNodeI*> *pathStack, LineGraphNode *targetNode)
     {
-        for (int i = 0; i < pathStack.size(); i++)
+        for (int i = 0; i < pathStack->size(); i++)
         {
-            LineGraphNode *node = pathStack.at(i);
+            PathFinderLineGraphNodeI *node = pathStack->at(i);
             if (node == targetNode)
             {
                 return true;;
@@ -177,10 +177,10 @@ public:
         return false;;
     }
 
-    static float RPathDistance(std::vector<LineGraphNode*> &pathStack)
+    static float RPathDistance(std::vector<PathFinderLineGraphNodeI*> *pathStack)
     {
         float distance = 0;
-        size_t count = pathStack.size();
+        size_t count = pathStack->size();
 
         for (int i = 0; i < count; i++)
         {
@@ -189,8 +189,8 @@ public:
                 break;;
             }
 
-            LineGraphNode *node = pathStack.at(i);
-            LineGraphNode *nextNode = pathStack.at(i+1);
+            PathFinderLineGraphNodeI *node = pathStack->at(i);
+            PathFinderLineGraphNodeI *nextNode = pathStack->at(i+1);
 
             Vector2 nodePoint = *node->GetPoint();
             Vector2 nextNodePoint = *nextNode->GetPoint();
@@ -206,21 +206,22 @@ public:
     // between the current point and  targetPoint. Keep track of travelled distance
     // and choose the smallest one.
     // Returns true if the connection can be made
-    bool DistanceToPoint(WalkingBoxes *sender, Vector2 &targetPoint, float startingDistance, std::vector<LineGraphNode*> &pathStack)
+    void DistanceToPoint(PathFinderBaseI *sender, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
     {
-        pathStack.emplace_back(this); // put back to the stack; we don't want to traverse the same point again
+        pathStack->emplace_back(this); // put back to the stack; we don't want to traverse the same point again
 
         Line targetLine(*m_point, targetPoint);
-        if (!IntersectsAnyline(targetLine, sender->m_allPoint, sender->m_allLines))
+        if (!IntersectsAnyline(targetLine, sender->GetAllPoint(), sender->GetAllLines()))
         {
             // If there's a connection and we're not crossing any other lines it's a hit!
-            return true;
+            sender->DidFind();
+            return;
         }
 
         if (m_connectingNodes.size() < 1)
         {
             // Can't go anywhere further.
-            return false;
+            return;
         }
 
         for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
@@ -241,15 +242,8 @@ public:
                 continue;
             }
 
-            bool found = node->DistanceToPoint(sender, targetPoint, startingDistance, pathStack);
-            if (found)
-            {
-                sender->DidFind();
-                //return found;
-            }
+            node->DistanceToPoint(sender, targetPoint, pathStack);
         }
-
-        return false;
     }
 
 private:
@@ -342,9 +336,9 @@ public:
         }
     };
 
-    float DistanceToPoint(WalkingBoxes *sender, Vector2 &startingPoint, Vector2 &targetPoint, float startingDistance, std::vector<LineGraphNode*> &pathStack)
+    float DistanceToPoint(WalkingBoxes *sender, Vector2 &startingPoint, Vector2 &targetPoint, float startingDistance, std::vector<PathFinderLineGraphNodeI*> *pathStack)
     {
-        pathStack.clear();
+        pathStack->clear();
         cur_iteration = 0;
 
         for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
@@ -364,19 +358,14 @@ public:
             // Check if we can see the first node
             Line lineToFirstNode(startingPoint, point);
 
-            if (IntersectsAnyline(lineToFirstNode, sender->m_allPoint, sender->m_allLines))
+            if (IntersectsAnyline(lineToFirstNode, sender->GetAllPoint(), sender->GetAllLines()))
             {
                 continue;
             }
 
             sender->DidStart(lineToFirstNode.GetLength());
 
-            bool found = node->DistanceToPoint(sender, targetPoint, startingDistance, pathStack);
-            if (found)
-            {
-                //printf("done, steps=%d, distance=%f!\n", pathStack.size(), LineGraphNode::RPathDistance(pathStack));
-
-            }
+            node->DistanceToPoint(sender, targetPoint, pathStack);
         }
         return 0;
     }
@@ -391,7 +380,7 @@ public:
 };
 
 
-std::vector<LineGraphNode*> pathStack;
+std::vector<PathFinderLineGraphNodeI*> pathStack;
 
 WalkingBoxes::WalkingBoxes(std::vector<Polygon> polygonList)
 : m_polygons(polygonList)
@@ -577,26 +566,11 @@ void WalkingBoxes::Draw()
 //    }
 
 #if 1 // render path
-    LineGraph *lg = (LineGraph*)m_lineGraph;
-
-    std::vector<std::unique_ptr<LineGraphNode>> &nodes = lg->GetNodes();
-
-    for (auto it = std::begin(nodes); it != std::end(nodes); ++it)
-    {
-        LineGraphNode *node = it->get();
-        Vector2 *point = node->GetPoint();
-
-        provider.RenderSetColor(255, 255, 0, 255);
-        DrawPoint(*point);
-    }
-
-
 
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
     Uint64 seconds = ticks / 3000;
     Uint32 frameCount = m_arrayOfNodesArray.size();
     Uint32 frameNo = (seconds % frameCount);
-
 
     int pos = frameNo;
     if (pos < m_arrayOfNodesArray.size())
@@ -616,6 +590,7 @@ void WalkingBoxes::Draw()
             Vector2 nextNodePoint = *nextNode->GetPoint();
 
             Line line(nodePoint, nextNodePoint);
+            provider.RenderSetColor(255, 255, 0, 255);
             provider.RenderDrawLine(nodePoint.x, nodePoint.y, nextNodePoint.x, nextNodePoint.y);
 
         }
@@ -655,21 +630,13 @@ void WalkingBoxes::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
     }
     else
     {
-//        LineGraph lineGraph(m_connectionLines);
-
-//        float maxDistance = std::numeric_limits<float>().max()-1;
-
-//        distance = maxDistance;
-
         // Go through each point and connected points until a clear
         // line of slight can be established between the testing
         // point and the target provided.
         LineGraph *lg = (LineGraph*)m_lineGraph;
         maxDistance = std::numeric_limits<float>().max()-1;
 
-//        float distance =
-
-        if (lg->DistanceToPoint(this, fromPoint, toPoint, 0, pathStack))
+        if (lg->DistanceToPoint(this, fromPoint, toPoint, 0, &pathStack))
         {
 
         }
@@ -687,7 +654,7 @@ void WalkingBoxes::DidFind()
 {
     bool shouldAddPath = false;
 
-    float thisPathDistance = LineGraphNode::RPathDistance(pathStack) + distance;
+    float thisPathDistance = LineGraphNode::RPathDistance(&pathStack) + distance;
     if (thisPathDistance < maxDistance)
     {
         maxDistance = thisPathDistance;
@@ -701,7 +668,7 @@ void WalkingBoxes::DidFind()
         std::vector<void*> nodes;
         for (auto it = std::begin(pathStack); it != std::end(pathStack); ++it)
         {
-            LineGraphNode *node = *it;
+            PathFinderLineGraphNodeI *node = *it;
             nodes.emplace_back(node);
         }
         m_arrayOfNodesArray.emplace_back(nodes);
