@@ -35,8 +35,14 @@ namespace engine
         /// Places the character at position. Does not animate.
         virtual void PlaceCharacter(Origin target) = 0;
 
+        /// Gets the character posittion.
+        virtual Origin& GetCharacterPosition() { return m_origin; };
+
         /// Move the character to a location.
         virtual void MoveCharacter(Origin target) = 0;
+
+        /// Gets the current character's target position.
+        virtual Origin& GetCharacterTargetPosition() { return m_targetOrigin; };
 
     public:
         Origin &GetCurrentOrigin() { return m_origin; };

@@ -144,6 +144,9 @@ namespace engine
         /// Draw a rectangle.
         virtual void RenderDrawLine(int x1, int y1, int x2, int y2) = 0;
 
+        /// Draw a point.
+        virtual void RenderDrawPoint(int x1, int y1) = 0;
+
     };
 };
 

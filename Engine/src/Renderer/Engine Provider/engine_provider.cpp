@@ -267,3 +267,8 @@ void EngineProvider::RenderDrawLine(int x1, int y1, int x2, int y2)
 {
     SDL_RenderDrawLine(m_engineHandle->renderer, x1, y1, x2, y2);
 }
+
+void EngineProvider::RenderDrawPoint(int x1, int y1)
+{
+    SDL_RenderDrawPoint(m_engineHandle->renderer, x1, y1);
+}

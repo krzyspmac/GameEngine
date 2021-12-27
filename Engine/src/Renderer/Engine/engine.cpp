@@ -82,6 +82,11 @@ void Engine::setup()
     polygon1List.push_back( Vector2Make(742, 295) );
     polygon1List.push_back( Vector2Make(590, 267) );
     polygon1List.push_back( Vector2Make(292, 254) );
+    polygon1List.push_back( Vector2Make(291, 300) );
+    polygon1List.push_back( Vector2Make(386, 280) );
+    polygon1List.push_back( Vector2Make(386, 319) );
+    polygon1List.push_back( Vector2Make(206, 353) );
+
     polygon1List.push_back( Vector2Make(0, 254) );
     polygon1List.push_back( Vector2Make(0, 393) );
     Polygon polygon1(polygon1List);
@@ -225,7 +230,7 @@ void Engine::RenderSceneTexts()
 {
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
-    m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
+    //m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
     static char mousePos[256];
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
@@ -258,6 +263,9 @@ void Engine::MouseClicked()
 {
 //    m_character->SetTalking(!m_character->IsTalking());
 //    m_characterMover->MoveCharacter(m_mousePosition);
+    Origin pos = m_characterMover->GetCharacterPosition();
+    Vector2 from = Vector2Make(pos.x, pos.y);
+    m_walkingBoxes->CalculatePathTo(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
 }
 
 TextureI *Engine::LoadTexture(std::string filename)
@@ -434,5 +442,5 @@ void Engine::SpriteDrawUnload(SpriteDrawI *spriteDraw)
 
 void Engine::SpriteDrawDisposeAll()
 {
-    m_spriteDraws.empty();
+    m_spriteDraws.clear();
 }

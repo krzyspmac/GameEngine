@@ -25,6 +25,8 @@ namespace engine
         : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_viewportSize(viewportSize)
         { }
 
+    /// Setup
+    public:
         /// The main setup. All engine components should be
         /// loaded by the concrete class after this call.
         virtual void setup() = 0;
@@ -36,6 +38,10 @@ namespace engine
         /// The main `update` method.
         /// Engine magic happens there.
         virtual void update() = 0;
+
+    /// States
+    public:
+        Size &GetViewport() { return m_viewportSize; };
 
     /// Behaviour
     public:

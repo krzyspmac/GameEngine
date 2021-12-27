@@ -65,6 +65,7 @@ namespace engine
         void RenderSetScale(float scaleX, float scaleY);
         void RenderDrawRect(Engine_Rect*);
         void RenderDrawLine(int x1, int y1, int x2, int y2);
+        void RenderDrawPoint(int x1, int y1);
 
     private:
         engine::SDL_APP *m_engineHandle;
