@@ -24,7 +24,7 @@ namespace engine
     public:
         std::vector<Vector2> &GetPath() { return m_path; };
         virtual std::vector<Line> ToLines() = 0;
-
+        virtual std::string Description() = 0;
     protected:
         std::vector<Vector2> m_path;
     };
@@ -81,6 +81,8 @@ namespace engine
 
         /// Calcultes the distance from a target point all they way
         /// through all the connecting points.
+        /// Upon each loop as `DidStart` will be called with the initial distance.
+        /// Each time a path if found a `DidFind` will be executed.
         virtual void DistanceToPoint(PathFinderBaseI *sender, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;
 
     protected:

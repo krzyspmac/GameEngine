@@ -5,14 +5,15 @@
 //  Created by krzysp on 26/12/2021.
 //
 
+#include <iostream>
+#include <limits>
 #include "path_finder.hpp"
 #include "engine_provider_interface.h"
 #include "engine_interface.h"
 #include "path_finder_line_graph_node.hpp"
 #include "path_finder_helper.hpp"
 #include "path.hpp"
-#include <iostream>
-#include <limits>
+#include "performance.hpp"
 
 #define RENDER_CONNECTION_LINES         1
 #define RENDER_POLYGONS                 1
@@ -25,13 +26,9 @@ static Vector2 recalculatedPosition = Vector2Zero;
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
 : m_polygons(polygonList)
 {
-    EngineProviderI &provider = GetMainEngine()->getProvider();
-
-    Uint64 start = provider.GetTicks();
-    Prepare();
-    Uint64 end = provider.GetTicks();
-    Uint64 delta = end - start;
-    printf("Prepare took %d ms", delta);
+    performanceMeasure("PathFinder::init", [&]{
+        Prepare();
+    });
 }
 
 PathFinder::~PathFinder()
@@ -285,12 +282,9 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
         // point and the target provided.
         m_maxDistance = std::numeric_limits<float>().max()-1;
 
-        EngineProviderI &provider = GetMainEngine()->getProvider();
-        Uint64 start = provider.GetTicks();
-        m_lineGraph->DistanceToPoint(this, fromPoint, m_targetPosition, &m_tempPathStack);
-        Uint64 end = provider.GetTicks();
-        Uint64 delta = end - start;
-        printf("calculate took %d ms\n", delta);
+        performanceMeasure("path", [&](void) {
+            m_lineGraph->DistanceToPoint(this, fromPoint, m_targetPosition, &m_tempPathStack);
+        });
     }
 
     return new Path(m_calculatedPath);
@@ -305,7 +299,19 @@ void PathFinder::DidFind()
 {
     bool shouldAddPath = false;
 
-    float thisPathDistance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance;
+    float endingDistance = 0;
+    if (m_tempPathStack.size() > 0)
+    {
+        if (!PointInsidePolygons(m_targetPosition, NULL))
+        {
+            PathFinderLineGraphNodeI *last = m_tempPathStack.at(m_tempPathStack.size()-1);
+            Line lastLine(*last->GetPoint(), m_targetPosition);
+            endingDistance = lastLine.GetLength();
+        }
+    }
+
+    float thisPathDistance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance + endingDistance;
+
     if (thisPathDistance < m_maxDistance)
     {
         m_maxDistance = thisPathDistance;
@@ -314,6 +320,7 @@ void PathFinder::DidFind()
 
     if (shouldAddPath)
     {
+        printf("CHOSEN with distance = %f\n\n", thisPathDistance);
         m_calculatedPath.clear();
 
         m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
@@ -322,5 +329,7 @@ void PathFinder::DidFind()
         {
             m_calculatedPath.push_back(m_targetPosition);
         }
+
+        Path path(m_calculatedPath);
     }
 }

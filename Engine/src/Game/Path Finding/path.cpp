@@ -28,3 +28,28 @@ std::vector<Line> Path::ToLines()
 
     return result;
 }
+
+std::string Path::Description()
+{
+    std::string result;
+
+    float distance = 0;
+
+    char str[256];
+    Vector2 *previous = nullptr;
+    std::for_each(m_path.begin(), m_path.end(), [&](Vector2 &v) {
+        sprintf(str, " [%1.0f, %1.0f]", v.x, v.y);
+        result += str;
+        if (previous)
+        {
+            distance += Vector2Distance(v, *previous);
+        }
+        previous = &v;
+    });
+
+    sprintf(str, "\n => distance = %f", distance);
+    result += str;
+    result += "\r";
+
+    return result;
+}

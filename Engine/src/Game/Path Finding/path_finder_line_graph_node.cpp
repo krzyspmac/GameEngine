@@ -111,7 +111,6 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
     {
         // If there's a connection and we're not crossing any other lines it's a hit!
         sender->DidFind();
-        return;
     }
 
     if (m_connectingNodes.size() < 1)

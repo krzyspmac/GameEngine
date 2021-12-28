@@ -68,6 +68,8 @@
 		7FE2E5D6277B234E00538094 /* function.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5D4277B234E00538094 /* function.hpp */; };
 		7FE2E5DA277B23BC00538094 /* vector2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5D8277B23BC00538094 /* vector2.hpp */; };
 		7FE2E5DE277B24AD00538094 /* line.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5DC277B24AD00538094 /* line.hpp */; };
+		7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5DF277B3E6E00538094 /* performance.cpp */; };
+		7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5E0277B3E6E00538094 /* performance.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +141,8 @@
 		7FE2E5D4277B234E00538094 /* function.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = function.hpp; sourceTree = "<group>"; };
 		7FE2E5D8277B23BC00538094 /* vector2.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = vector2.hpp; sourceTree = "<group>"; };
 		7FE2E5DC277B24AD00538094 /* line.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = line.hpp; sourceTree = "<group>"; };
+		7FE2E5DF277B3E6E00538094 /* performance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = performance.cpp; sourceTree = "<group>"; };
+		7FE2E5E0277B3E6E00538094 /* performance.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = performance.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +363,8 @@
 				7FE2E5D4277B234E00538094 /* function.hpp */,
 				7FE2E5D8277B23BC00538094 /* vector2.hpp */,
 				7FE2E5DC277B24AD00538094 /* line.hpp */,
+				7FE2E5E0277B3E6E00538094 /* performance.hpp */,
+				7FE2E5DF277B3E6E00538094 /* performance.cpp */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -388,6 +394,7 @@
 				7F13825A277505B600ED6D67 /* engine_provider.hpp in Headers */,
 				7FE2E5D1277B13B000538094 /* path.hpp in Headers */,
 				7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */,
+				7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */,
 				7F13827E277505B600ED6D67 /* defs.h in Headers */,
 				7F138267277505B600ED6D67 /* sprite_draw_interface.h in Headers */,
 				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
@@ -486,6 +493,7 @@
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
 				7F138253277505B600ED6D67 /* texture.cpp in Sources */,
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
+				7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */,
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
 				7F138277277505B600ED6D67 /* font.cpp in Sources */,
 				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
@@ -525,7 +533,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -598,7 +606,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;

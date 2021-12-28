@@ -19,7 +19,7 @@ namespace engine
         Path(): PathI() { };
         Path(std::vector<Vector2> path): PathI(path) { };
         virtual ~Path() { };
-
+        std::string Description();
     public:
         std::vector<Line> ToLines();
     };
