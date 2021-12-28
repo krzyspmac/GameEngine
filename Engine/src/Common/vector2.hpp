@@ -37,7 +37,7 @@ namespace engine
 
     inline float Vector2Distance(Vector2 &p1, Vector2 &p2)
     {
-        return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p2.y, 2));
+        return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
     }
 
     inline Vector2 Vector2GetDiff(Vector2 &first, Vector2 &second)

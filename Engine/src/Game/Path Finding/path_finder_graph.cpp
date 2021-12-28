@@ -93,16 +93,32 @@ void PathFinderGraph::Prepare()
 
 void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
 {
-    pathStack->clear();
     m_curIteration = 0;
+
+    // Get a list of all line-of-sight points that the starting point sees and make that
+    // out starting point list.
+
+    std::vector<PathFinderLineGraphNodeI*> visibleNodes;
 
     for (auto it = std::begin(m_nodes); it != std::end(m_nodes); ++it)
     {
+        PathFinderLineGraphNodeI *node = it->get();
+        Line line(startingPoint, *node->GetPoint());
+        if (!PathFinderUtils::IntersectsAnyline(line, sender->GetAllPoint(), sender->GetAllLines()))
+        {
+            visibleNodes.emplace_back(node);
+        }
+    }
+
+    for (auto it = std::begin(visibleNodes); it != std::end(visibleNodes); ++it)
+    {
+        pathStack->clear();
+
         if (++m_curIteration >= MAX_ITERATION) {
             return;
         }
 
-        PathFinderLineGraphNodeI *node = it->get();
+        PathFinderLineGraphNodeI *node = *it;
         Vector2 &point = *node->GetPoint();
 
         if (!PathFinderUtils::IsPointWithingViewport(point))
