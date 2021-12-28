@@ -14,6 +14,10 @@
 #include <iostream>
 #include <limits>
 
+#define RENDER_CONNECTION_LINES         1
+#define RENDER_POLYGONS                 1
+#define RENDER_CALCULATED_PATH          1
+
 using namespace engine;
 
 static Vector2 recalculatedPosition = Vector2Zero;
@@ -171,39 +175,31 @@ void PathFinder::Draw()
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
 
-    /// redner lines
-    for (auto lit = std::begin(m_connectionLines); lit != std::end(m_connectionLines); ++lit)
-    {
-        provider.RenderSetColor(255, 0, 0, 100);
-        DrawLine(*lit);
-    }
+#if RENDER_CONNECTION_LINES
+    provider.RenderSetColor(255, 0, 0, 100);
+    std::for_each(m_connectionLines.begin(), m_connectionLines.end(), [&](Line &p) { DrawLine(p); });
+#endif
 
-    /// render polygons
-    for (auto it = std::begin(m_polygons); it != std::end(m_polygons); ++it)
-    {
-        Polygon &polygon = *it;
-        std::vector<Line> &lines = polygon.GetLines();
+#if RENDER_POLYGONS
+    provider.RenderSetColor(255, 255, 255, 120);
+    std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &p) {
+        std::for_each(p.GetLines().begin(), p.GetLines().end(), [&](Line &l) {
+            DrawLine(l);
+        });
+    });
+#endif
 
-        for (auto lit = std::begin(lines); lit != std::end(lines); ++lit)
+#if RENDER_CALCULATED_PATH
+    provider.RenderSetColor(255, 255, 0, 255);
+    Vector2 *previous = nullptr;
+    std::for_each(m_calculatedPath.begin(), m_calculatedPath.end(), [&](Vector2 &v) {
+        if (previous)
         {
-            provider.RenderSetColor(255, 255, 255, 120);
-            DrawLine(*lit);
+            provider.RenderDrawLine(previous->x, previous->y, v.x, v.y);
         }
-    }
-
-    for (int i = 0; i < m_calculatedPath.size(); i++)
-    {
-        if (i + 1 >= m_calculatedPath.size())
-        {
-            break;
-        }
-        Vector2 &nodePoint = m_calculatedPath.at(i);
-        Vector2 &nextNodePoint = m_calculatedPath.at(i+1);
-        provider.RenderSetColor(255, 255, 0, 255);
-        provider.RenderDrawLine(nodePoint.x, nodePoint.y, nextNodePoint.x, nextNodePoint.y);
-    }
-
-    DrawPoint(recalculatedPosition);
+        previous = &v;
+    });
+#endif
 }
 
 void PathFinder::DrawLine(Line &line)
