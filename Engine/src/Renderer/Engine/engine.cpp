@@ -74,7 +74,7 @@ void Engine::setup()
     m_character->SetScale(2);
 
     m_characterMover = new CharacterMover(m_character);
-    m_characterMover->PlaceCharacter(OriginMake(100, 450));
+    m_characterMover->PlaceCharacter(Vector2Make(100, 450));
 
     std::vector<Vector2> polygon1List;
     polygon1List.push_back( Vector2Make(0, 393) );
@@ -263,7 +263,7 @@ void Engine::MouseClicked()
 {
 //    m_character->SetTalking(!m_character->IsTalking());
 //    m_characterMover->MoveCharacter(m_mousePosition);
-    Origin pos = m_characterMover->GetCharacterPosition();
+    Vector2 pos = m_characterMover->GetCharacterPosition();
     Vector2 from = Vector2Make(pos.x, pos.y);
     PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
     m_characterMover->MoveCharacterAlongPath(path);

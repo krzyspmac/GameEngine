@@ -39,13 +39,13 @@ namespace engine
         virtual void Draw() = 0;
 
         /// Places the character at position. Does not animate.
-        virtual void PlaceCharacter(Origin target) = 0;
+        virtual void PlaceCharacter(Vector2 target) = 0;
 
         /// Gets the character posittion.
-        virtual Origin& GetCharacterPosition() { return m_origin; };
+        virtual Vector2& GetCharacterPosition() { return m_origin; };
 
         /// Move the character to a location.
-        virtual void MoveCharacter(Origin target) = 0;
+        virtual void MoveCharacter(Vector2 target) = 0;
 
         /// Move the character along a path. Calling this again will clear
         /// the move stack and start again.
@@ -53,16 +53,16 @@ namespace engine
         virtual void MoveCharacterAlongPath(PathI *path) = 0;
 
         /// Gets the current character's target position.
-        virtual Origin& GetCharacterTargetPosition() { return m_targetOrigin; };
+        virtual Vector2& GetCharacterTargetPosition() { return m_targetOrigin; };
 
     public:
-        Origin &GetCurrentOrigin() { return m_origin; };
-        Origin &GetTargetOrigin() { return m_targetOrigin; };
+        Vector2 &GetCurrentOrigin() { return m_origin; };
+        Vector2 &GetTargetOrigin() { return m_targetOrigin; };
 
     protected:
         CharacterI *m_character;
-        Origin m_origin;
-        Origin m_targetOrigin;
+        Vector2 m_origin;
+        Vector2 m_targetOrigin;
     };
 };
 

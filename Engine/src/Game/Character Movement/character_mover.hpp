@@ -30,8 +30,8 @@ namespace engine
 
     public:
         void Update();
-        void PlaceCharacter(Origin target);
-        void MoveCharacter(Origin target);
+        void PlaceCharacter(Vector2 target);
+        void MoveCharacter(Vector2 target);
         void MoveCharacterAlongPath(PathI *path);
 
     private:

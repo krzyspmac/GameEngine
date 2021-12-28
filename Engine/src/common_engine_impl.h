@@ -41,7 +41,7 @@ namespace engine
         return result;;
     };
 
-    inline Origin OriginGetDiff(Origin &first, Origin &second)
+    inline Origin OriginGetDiff(Vector2 &first, Origin &second)
     {
         Origin result;
         result.x = first.x - second.x;
