@@ -91,7 +91,7 @@ void PathFinderGraph::Prepare()
     }
 };
 
-void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
+void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, std::vector<Polygon> &polygons, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
 {
     m_curIteration = 0;
 
@@ -104,7 +104,25 @@ void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, Vector2 &starting
     {
         PathFinderLineGraphNodeI *node = it->get();
         Line line(startingPoint, *node->GetPoint());
-        if (!PathFinderUtils::IntersectsAnyline(line, sender->GetAllPoint(), sender->GetAllLines()))
+
+        bool intersectsAnyLine = PathFinderUtils::IntersectsAnyline(line, sender->GetAllPoint(), sender->GetAllLines());
+        bool intesectsPolygon = false;
+
+        std::for_each(polygons.begin(), polygons.end(), [&](Polygon &poly){
+            if (intesectsPolygon) { return; };
+
+            if (poly.DoesLineIntersect(line))
+            {
+                intesectsPolygon = true;
+            }
+        });
+
+//        if (intesectsPolygon)
+//        {
+//            printf("intersects!");
+//        }
+
+        if (!intersectsAnyLine && !intesectsPolygon)
         {
             visibleNodes.emplace_back(node);
         }
@@ -114,7 +132,8 @@ void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, Vector2 &starting
     {
         pathStack->clear();
 
-        if (++m_curIteration >= MAX_ITERATION) {
+        if (++m_curIteration >= MAX_ITERATION)
+        {
             return;
         }
 

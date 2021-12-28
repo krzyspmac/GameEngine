@@ -177,6 +177,12 @@ void PathFinder::Draw()
         previous = &v;
     });
 #endif
+
+    // Draw each normal vector for each line
+    std::for_each(m_allLines.begin(), m_allLines.end(), [&](Line &l){
+        Line nl = l.MakeNormalLine(10);
+        provider.RenderDrawLine(nl.GetP1().x, nl.GetP1().y, nl.GetP2().x, nl.GetP2().y);
+    });
 }
 
 void PathFinder::DrawLine(Line &line)
@@ -255,7 +261,7 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
         m_calculatedPath.clear();
 
         performanceMeasure("path", [&](void) {
-            m_lineGraph->DistanceToPoint(this, fromPoint, m_targetPosition, &m_tempPathStack);
+            m_lineGraph->DistanceToPoint(this, m_polygons, fromPoint, m_targetPosition, &m_tempPathStack);
         });
     }
 

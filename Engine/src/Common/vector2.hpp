@@ -47,6 +47,42 @@ namespace engine
         result.y = first.y - second.y;
         return result;
     }
+
+    inline Vector2 Vector2PerpendicularClockwise(Vector2& p)
+    {
+        return Vector2Make(p.y, -p.x);
+    }
+
+    inline Vector2 Vector2PerpendicularCounterClockwise(Vector2& p)
+    {
+        return Vector2Make(-p.y, p.x);
+    }
+
+    inline Vector2 Vector2FromLine(Vector2& p1, Vector2& p2)
+    {
+        return Vector2Make(p1.x-p2.x, p1.y-p2.y);
+    }
+
+    inline Vector2 Vector2Normalized(Vector2& value)
+    {
+        Vector2 v = Vector2Make(value.x, value.y);
+
+        float length = sqrt(v.x * v.x + v.y * v.y);
+
+        // normalize vector
+        v.x /= length;
+        v.y /= length;
+
+        return v;
+    }
+
+    inline Vector2 Vector2Scaled(Vector2& value, float scale)
+    {
+        Vector2 v = Vector2Make(value.x, value.y);
+        v.x *= scale;
+        v.y *= scale;
+        return v;
+    }
 };
 
 #endif /* vector2_hpp */

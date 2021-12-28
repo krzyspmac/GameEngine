@@ -10,6 +10,7 @@
 
 #include <iostream>
 #include "common_engine_impl.h"
+#include "polygon.hpp"
 
 namespace engine
 {
@@ -98,7 +99,7 @@ namespace engine
         virtual ~PathFinderGraphI() { };
 
     public:
-        virtual void DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;
+        virtual void DistanceToPoint(PathFinderBaseI *sender, std::vector<Polygon> &polygons, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;
         std::vector<std::unique_ptr<PathFinderLineGraphNodeI>>& GetNodes() { return m_nodes; };
 
     protected:

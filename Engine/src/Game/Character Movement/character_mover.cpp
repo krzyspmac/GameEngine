@@ -26,6 +26,10 @@ void CharacterMover::PlaceCharacter(Vector2 target)
 {
     m_origin = target;
     m_targetOrigin = m_origin;
+    m_path.reset();
+    m_pathCurrentSegmentIndex = -1;
+    m_pathSegments.clear();
+    m_moveType = MOVETYPE_NONE;
 }
 
 void CharacterMover::MoveCharacter(Vector2 target)
@@ -46,6 +50,8 @@ void CharacterMover::MoveCharacterAlongPath(PathI *path)
     }
     else {
         m_moveType = MOVETYPE_NONE;
+        m_path.reset();
+        m_pathSegments.clear();
     }
 }
 
@@ -147,14 +153,19 @@ void CharacterMover::UpdateMovePath()
     Draw();
     m_segmentLastSeconds = seconds;
 
-    if (PathSegmentDidReachEnd())
+    if (!m_pathSegments.empty())
     {
-        if (!PathSegmentRunNext())
+        if (PathSegmentDidReachEnd())
         {
-            m_character->SetWalking(false);
-            m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
-            m_origin = m_pathSegments.back().GetP2();
-            m_moveType = MOVETYPE_NONE;
+            if (!PathSegmentRunNext())
+            {
+                m_character->SetWalking(false);
+                m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
+                m_origin = m_pathSegments.back().GetP2();
+                PlaceCharacter(m_pathSegments.back().GetP2());
+//                m_moveType = MOVETYPE_NONE;
+//                m_path.reset();
+            }
         }
     }
 }

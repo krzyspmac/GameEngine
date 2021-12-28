@@ -25,6 +25,7 @@ namespace engine
         std::vector<Vector2> &GetPoints() { return m_points; };
         bool IsPointVertex(Vector2&);
         bool IsPointInside(Vector2&);
+        bool DoesLineIntersect(Line&);
         bool NearestPointOutsideFrom(Vector2 &point, Vector2 *outPoint);
     private:
         std::vector<Vector2> m_points;

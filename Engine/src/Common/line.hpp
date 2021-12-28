@@ -22,10 +22,18 @@ namespace engine
             : p1(p1), p2(p2)
         {
             length = Vector2Distance(p1, p2);
+            centerPoint = Vector2Make((p2.x+p1.x)/2, (p2.y+p1.y)/2);
+            lineVector = Vector2FromLine(p1, p2);
+
+            normalVector = Vector2PerpendicularClockwise(lineVector);
+            normalVector = Vector2Normalized(normalVector);
         };
 
         Vector2 &GetP1() { return p1; };
         Vector2 &GetP2() { return p2; };
+        Vector2 &GetCenter() { return centerPoint; };
+        Vector2 &GetNormal() { return normalVector; };
+
         float GetLength() { return length; };
 
         friend bool operator== (Line &lhs, Line &rhs)
@@ -49,10 +57,21 @@ namespace engine
             ;
         }
 
+        Line MakeNormalLine(float vectorScale)
+        {
+            Vector2 normal = Vector2Scaled(GetNormal(), vectorScale);
+            Vector2 &lineCenter = GetCenter();
+            Vector2 lineCenterExtended = Vector2Make(lineCenter.x + normal.x, lineCenter.y + normal.y);
+            return Line(lineCenter, lineCenterExtended);
+        }
+
     private:
         Vector2 p1;
         Vector2 p2;
+        Vector2 centerPoint;
+        Vector2 lineVector;
         float length;
+        Vector2 normalVector; // from the middle of the line
     };
 };
 

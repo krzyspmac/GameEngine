@@ -8,6 +8,7 @@
 #include "polygon.hpp"
 #include "path_finder_helper.hpp"
 #include "engine.hpp"
+#include "function.hpp"
 
 #define FLOAT_MAX   32000
 
@@ -82,6 +83,27 @@ bool Polygon::IsPointInside(Vector2 &point)
 
 
     return touchedLines.size() % 2 != 0;
+}
+
+bool Polygon::DoesLineIntersect(Line &line)
+{
+    Vector2 &p1 = line.GetP1();
+    Vector2 &p2 = line.GetP2();
+    float minX = MIN(p1.x, p2.x);
+    float maxX = MAX(p1.x, p2.x);
+    Function f(p1, p2);
+
+    for (float x = minX; x <= maxX; x++)
+    {
+        float y = f.f(x);
+        Vector2 checkPoint = Vector2Make(x, y);
+        if (IsPointInside(checkPoint))
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool Polygon::NearestPointOutsideFrom(Vector2 &point, Vector2 *outPosition)
