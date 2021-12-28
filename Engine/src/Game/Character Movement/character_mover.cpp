@@ -36,10 +36,22 @@ void CharacterMover::MoveCharacter(Vector2 target)
 
 void CharacterMover::MoveCharacterAlongPath(PathI *path)
 {
-    m_moveType = MOVETYPE_ALONG_PATH;
     m_path = std::unique_ptr<PathI>(path);
-    m_pathSegments = m_path->ToLines();
-    SetPathSegment(0);
+
+    if (m_path != nullptr)
+    {
+        m_moveType = MOVETYPE_ALONG_PATH;
+        m_pathSegments = m_path->ToLines();
+        SetPathSegment(0);
+    }
+    else {
+        m_moveType = MOVETYPE_NONE;
+    }
+//    if (path != nullptr && !path->GetPath().empty())
+//    {
+//        m_targetOrigin = path->GetPath().back();
+//        m_origin = m_targetOrigin;
+//    }
 }
 
 void CharacterMover::SetPathSegment(int index)
@@ -231,14 +243,57 @@ void CharacterMover::UpdateMovePath()
         m_origin.x = MIN(m_targetOrigin.x, m_origin.x + (xDelim * animationDistancePerFrame));
     }
 
-    m_origin.y = m_pathCurrentFunction->f(m_origin.x);
+    m_origin.y = (int)m_pathCurrentFunction->f(m_origin.x);
     m_character->SetWalkState(state);
     Draw();
 
-    if (Vector2Equals(m_targetOrigin, m_origin))
+    if (PathSegmentDidReachEnd())
     {
-        m_character->SetWalking(false);
-        m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
+        if (!PathSegmentRunNext())
+        {
+            m_character->SetWalking(false);
+            m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
+        }
+    }
+
+//    if (Vector2Equals(m_targetOrigin, m_origin))
+//    {
+//        m_character->SetWalking(false);
+//        m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
+//    }
+}
+
+bool CharacterMover::PathSegmentDidReachEnd()
+{
+    if (m_pathCurrentSegment != nullptr)
+    {
+        Vector2 &last = m_pathCurrentSegment->GetP2();
+
+        if (Vector2Equals(m_origin, last))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool CharacterMover::PathSegmentRunNext()
+{
+    if (m_pathCurrentIndex + 1 < m_pathSegments.size())
+    {
+        SetPathSegment(m_pathCurrentIndex + 1);
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

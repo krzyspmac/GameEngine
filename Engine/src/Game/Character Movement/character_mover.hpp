@@ -40,6 +40,8 @@ namespace engine
         void UpdateMoveSimple();
         void UpdateMovePath();
         void SetPathSegment(int index);
+        bool PathSegmentDidReachEnd();
+        bool PathSegmentRunNext();
 
     private:
         Uint64 m_lastChecked;
