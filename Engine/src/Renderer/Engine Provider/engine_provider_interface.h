@@ -11,6 +11,7 @@
 #include "texture_interface.h"
 #include "font_interface.h"
 #include "file_access_provider.h"
+#include "vector2.hpp"
 #include "common.h"
 
 namespace engine
@@ -101,6 +102,10 @@ namespace engine
         /// Draws a texture ona specific anchor point. Helpful for character drawing where the origin point
         /// is a the bottom.
         virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal) = 0;
+
+        /// Draws a texture ona specific anchor point. Helpful for character drawing where the origin point
+        /// is a the bottom.
+        virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal) = 0;
 
     /// Fonts
     public:

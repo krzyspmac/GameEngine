@@ -14,6 +14,7 @@
 /// Defaults
 
 static SDL_Point flipPoint;
+static SDL_FPoint flipPointF;
 
 using namespace engine;
 
@@ -22,6 +23,8 @@ EngineProvider::EngineProvider(engine::SDL_APP *engineHandle)
 {
     flipPoint.x = 0.5;
     flipPoint.y = 0.5;
+    flipPointF.x = 0.5;
+    flipPointF.y = 0.5;
 }
 
 Uint64 EngineProvider::GetTicks()
@@ -198,6 +201,39 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, in
         SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
         SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
         SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
+    }
+}
+
+void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
+{
+    if (texture != NULL)
+    {
+        SDL_FRect dest;
+        int textureW, textureH;
+
+        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
+        SDL_QueryTexture(sdlTexture, NULL, NULL, &textureW, &textureH);
+
+        dest.x = position.x / scale;
+        dest.y = position.y / scale;
+        dest.w = textureW;
+        dest.h = textureH;
+
+        switch (anchorPoint)
+        {
+            case ANCHOR_TOP_LEFT:
+                break;
+            case ANCHOR_BOTTOM_CENTER:
+                dest.x -= dest.w / 2;
+                dest.y -= dest.h;
+                break;
+        }
+
+        float originalScaleX, originalScaleY;
+        SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
+        SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
+        SDL_RenderCopyExF(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPointF, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
         SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
 }

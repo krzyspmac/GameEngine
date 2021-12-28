@@ -22,8 +22,8 @@ namespace engine
         /// Does not take ownershop of the object. Memory disposal
         /// moved to the caller. Must exist for the duration of this
         /// instance
-        CharacterMoverI(CharacterI *character)
-        : m_character(character)
+        CharacterMoverI(CharacterI *character, float pixelsPerMillisecond)
+        : m_character(character), m_pixelsPerSecond(pixelsPerMillisecond)
         { }
 
         virtual ~CharacterMoverI() { };
@@ -63,6 +63,7 @@ namespace engine
         CharacterI *m_character;
         Vector2 m_origin;
         Vector2 m_targetOrigin;
+        float m_pixelsPerSecond; // walking speed
     };
 };
 

@@ -30,7 +30,7 @@ namespace engine {
 
         void DrawBody(CharacterWalkRenderer&, bool isAnimating);
         void DrawHead(CharacterWalkRenderer&, bool isAnimating);
-        void Draw(CharacterWalkState, bool isWalking, bool isTalking, int x, int y);
+        void Draw(CharacterWalkState, bool isWalking, bool isTalking, Vector2& position);
 
         void DrawBoundingBox(EngineProviderI &provider);
         void DrawOriginCrosshair(EngineProviderI &provider);

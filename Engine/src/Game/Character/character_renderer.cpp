@@ -192,7 +192,7 @@ void CharacterRenderer::DrawOriginCrosshair(EngineProviderI &provider)
     provider.RenderDrawLine(midPosX, m_bodyHeight - length, midPosX + arrowLength, m_bodyHeight - arrowLength);
 }
 
-void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTalking, int x, int y)
+void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTalking, Vector2& position)
 {
     // Get the engine provider. All drawing functions go through there.
     EngineProviderI &provider = GetMainEngine()->getProvider();
@@ -221,7 +221,8 @@ void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTa
     provider.RendererTargetPop();
 
     // Draw the buffer texture.
-    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, x, y, m_scale, renderer.GetIsReversed());
+//    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, position.x, position.y, m_scale, renderer.GetIsReversed());
+    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, position, m_scale, renderer.GetIsReversed());
 }
 
 #pragma mark - CharacterWalkRenderer

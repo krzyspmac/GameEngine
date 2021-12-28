@@ -18,14 +18,13 @@ namespace engine
     typedef enum
     {
         MOVETYPE_NONE,
-        MOVETYPE_ALONG_PATH,
-        MOVETYPE_SIMPLE
+        MOVETYPE_ALONG_PATH
     } CharacterMoveType;
 
     class CharacterMover: public CharacterMoverI
     {
     public:
-        CharacterMover(CharacterI *character);
+        CharacterMover(CharacterI *character, float pixelsPerMillisecond);
         ~CharacterMover();
 
     public:
@@ -37,20 +36,24 @@ namespace engine
     private:
         void Draw();
         bool ShouldMove();
-        void UpdateMoveSimple();
         void UpdateMovePath();
-        void SetPathSegment(int index);
+        void PathSegmentSet(size_t index);
         bool PathSegmentDidReachEnd();
         bool PathSegmentRunNext();
 
     private:
-        Uint64 m_lastChecked;
         CharacterMoveType m_moveType;
         std::unique_ptr<PathI> m_path;
         std::vector<Line> m_pathSegments;
-        size_t m_pathCurrentIndex;
-        Line *m_pathCurrentSegment;
-        std::unique_ptr<Function> m_pathCurrentFunction;
+        
+        Line    *m_pathCurrentSegment;
+        size_t  m_pathCurrentSegmentIndex;
+
+        Vector2 m_segmentInitialOrigin;
+        Uint64  m_segmentStartTicks;
+        float   m_segmentDistance;
+        float   m_segmentSeconds;
+        double  m_segmentLastSeconds;
     };
 };
 

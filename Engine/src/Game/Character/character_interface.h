@@ -9,6 +9,7 @@
 #define character_interface_hpp
 
 #include "character_renderer_interface.h"
+#include "vector2.hpp"
 
 namespace engine
 {
@@ -25,7 +26,7 @@ namespace engine
         CharacterRendererI *GetCharacterRenderer() { return m_characterRenderer.get(); };
 
         /// Draw the character. The origin aligned to the bottom center part of the character.
-        virtual void Draw(int x, int y) = 0;
+        virtual void Draw(Vector2& position) = 0;
 
         /// Set the character scale
         virtual void SetScale(float scale) = 0;

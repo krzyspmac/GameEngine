@@ -73,7 +73,7 @@ void Engine::setup()
     m_character = new Character("brett_character.json");
     m_character->SetScale(2);
 
-    m_characterMover = new CharacterMover(m_character);
+    m_characterMover = new CharacterMover(m_character, 300.0);
     m_characterMover->PlaceCharacter(Vector2Make(100, 450));
 
     std::vector<Vector2> polygon1List;

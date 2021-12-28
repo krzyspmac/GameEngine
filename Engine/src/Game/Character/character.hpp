@@ -26,7 +26,7 @@ namespace engine
     public:
         void SetScale(float scale);
 
-        void Draw(int x, int y);
+        void Draw(Vector2& position);
 
         void Change();
     };

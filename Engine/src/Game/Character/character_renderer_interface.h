@@ -10,6 +10,7 @@
 
 #include "sprite_atlas_interface.h"
 #include "texture_target.hpp"
+#include "vector2.hpp"
 
 namespace engine
 {
@@ -160,7 +161,7 @@ namespace engine
         virtual void SetScale(float scale) = 0;
 
         /// Draw all the character.
-        virtual void Draw(CharacterWalkState, bool isWalking, bool isTalking, int x, int y) = 0;
+        virtual void Draw(CharacterWalkState, bool isWalking, bool isTalking, Vector2& position) = 0;
 
     protected:
         SpriteAtlasI *m_characterAtlas;

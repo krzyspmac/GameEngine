@@ -156,9 +156,9 @@ void Character::SetScale(float scale)
 
 static CharacterWalkState state = STAND_RIGHT;//STAND_RIGHT;
 
-void Character::Draw(int x, int y)
+void Character::Draw(Vector2& position)
 {
-    m_characterRenderer->Draw(m_walkState, m_isWalking, m_talking, x, y);
+    m_characterRenderer->Draw(m_walkState, m_isWalking, m_talking, position);
 }
 
 void Character::Change()

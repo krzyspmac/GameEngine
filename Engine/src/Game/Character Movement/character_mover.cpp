@@ -12,8 +12,8 @@
 
 using namespace engine;
 
-CharacterMover::CharacterMover(CharacterI *character)
-: CharacterMoverI(character), m_moveType(MOVETYPE_NONE), m_pathCurrentIndex(0), m_pathCurrentFunction(nullptr)
+CharacterMover::CharacterMover(CharacterI *character, float pixelsPerMillisecond)
+: CharacterMoverI(character, pixelsPerMillisecond), m_moveType(MOVETYPE_NONE), m_pathCurrentSegmentIndex(0)
 {
     m_targetOrigin = m_origin;
 }
@@ -30,8 +30,8 @@ void CharacterMover::PlaceCharacter(Vector2 target)
 
 void CharacterMover::MoveCharacter(Vector2 target)
 {
-    m_moveType = MOVETYPE_SIMPLE;
-    m_targetOrigin = target;
+    std::cout << "Not implemented" << std::endl;
+    exit(0);
 }
 
 void CharacterMover::MoveCharacterAlongPath(PathI *path)
@@ -42,32 +42,36 @@ void CharacterMover::MoveCharacterAlongPath(PathI *path)
     {
         m_moveType = MOVETYPE_ALONG_PATH;
         m_pathSegments = m_path->ToLines();
-        SetPathSegment(0);
+        PathSegmentSet(0);
     }
     else {
         m_moveType = MOVETYPE_NONE;
     }
-//    if (path != nullptr && !path->GetPath().empty())
-//    {
-//        m_targetOrigin = path->GetPath().back();
-//        m_origin = m_targetOrigin;
-//    }
 }
 
-void CharacterMover::SetPathSegment(int index)
+void CharacterMover::PathSegmentSet(size_t index)
 {
     if (m_pathSegments.size() > index)
     {
-        m_pathCurrentIndex = index;
+        m_pathCurrentSegmentIndex = index;
         Line &segmentLine = m_pathSegments.at(index);
         m_pathCurrentSegment = &segmentLine;
-        Function *segmentFunction = new Function(segmentLine.GetP1(), segmentLine.GetP2());
-        m_pathCurrentFunction = std::unique_ptr<Function>(segmentFunction);
         m_targetOrigin = segmentLine.GetP2();
+
+        Vector2 &segmentStart = m_pathCurrentSegment->GetP1();
+        Vector2 &segmentEnd = m_pathCurrentSegment->GetP2();
+
+        m_segmentDistance = Vector2Distance(segmentStart, segmentEnd);
+        m_segmentSeconds = m_segmentDistance / m_pixelsPerSecond;
+
+        m_segmentInitialOrigin = segmentLine.GetP1();
+        m_segmentLastSeconds = 0;
+        m_segmentStartTicks = GetMainEngine()->getProvider().GetTicks();
+        m_character->SetWalking(true);
     }
     else
     {
-        m_pathCurrentIndex = -1;
+        m_pathCurrentSegmentIndex = -1;
     }
 }
 
@@ -83,169 +87,65 @@ void CharacterMover::Update()
         case MOVETYPE_NONE:
             Draw();
             return;
-        case MOVETYPE_SIMPLE:
-            UpdateMoveSimple();
-            return;
         case MOVETYPE_ALONG_PATH:
             UpdateMovePath();
             return;;
     }
 }
 
-void CharacterMover::UpdateMoveSimple()
-{
-//    if (!ShouldMove())
-//    {
-//        Draw();
-//        return;
-//    }
-//
-//    /*
-//     UP and DOWN when diff(x) < 10
-//     */
-//
-//    int animationDistancePerFrame = 5;
-//    int m_frameAnimationDurationMs = 10;
-//
-//    Vector2 diff = OriginGetDiff(m_targetOrigin, m_origin);
-//    CharacterWalkState state = m_character->GetWalkState();
-//
-//    if (diff.y != 0)
-//    {
-//        if (diff.y >= 0)
-//        {
-//            state = FORWARD;
-//        }
-//        else
-//        {
-//            state = BACKWARD;
-//        }
-//    }
-//
-//    if (diff.x != 0 && abs(diff.x) > 10)
-//    {
-//        if (diff.x >= 0)
-//        {
-//            state = RIGHT;
-//        }
-//        else
-//        {
-//            state = LEFT;
-//        }
-//    }
-//
-//    int xDelim = m_targetOrigin.x >= m_origin.x ? 1 : -1;
-//    int yDelim = m_targetOrigin.y >= m_origin.y ? 1 : -1;
-//
-//    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
-//    Uint64 seconds = ticks / m_frameAnimationDurationMs;
-//
-//    if (seconds == m_lastChecked)
-//    {
-//        Draw();
-//        return;
-//    }
-//
-//    m_lastChecked = seconds;
-//
-//    m_character->SetWalking(true);
-//
-//    if (xDelim == -1)
-//    {
-//        // Generally walks left
-//        m_origin.x = MAX(m_targetOrigin.x, m_origin.x + (xDelim * animationDistancePerFrame));
-//    }
-//    else if (xDelim == 1)
-//    {
-//        // Generally walks right
-//        m_origin.x = MIN(m_targetOrigin.x, m_origin.x + (xDelim * animationDistancePerFrame));
-//    }
-//
-//    if (yDelim == -1)
-//    {
-//        // Generally walks left
-//        m_origin.y = MAX(m_targetOrigin.y, m_origin.y + (yDelim * animationDistancePerFrame));
-//    }
-//    else if (yDelim == 1)
-//    {
-//        // Generally walks right
-//        m_origin.y = MIN(m_targetOrigin.y, m_origin.y + (yDelim * animationDistancePerFrame));
-//    }
-//
-//    m_character->SetWalkState(state);
-//    Draw();
-//
-//    if (OriginEquals(m_targetOrigin, m_origin))
-//    {
-//        m_character->SetWalking(false);
-//        m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
-//    }
-}
-
 void CharacterMover::UpdateMovePath()
 {
-    // We move by n-px per frame for the current path patr.
-
-    int animationDistancePerFrame = 5;
-    int m_frameAnimationDurationMs = 10;
+    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 ticksDelta = ticks - m_segmentStartTicks;
+    double seconds = ticksDelta / 1000.0;
 
     int xDelim = m_targetOrigin.x >= m_origin.x ? 1 : -1;
-    int yDelim = m_targetOrigin.y >= m_origin.y ? 1 : -1;
+    int yDelim = m_targetOrigin.y >= m_origin.y ? -1 : 1;
 
-    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
-    Uint64 seconds = ticks / m_frameAnimationDurationMs;
+    Vector2 &segmentStart = m_pathCurrentSegment->GetP1();
+    Vector2 &segmentEnd = m_pathCurrentSegment->GetP2();
+    float lesserX = MIN(segmentStart.x, segmentEnd.x);
+    float greaterX = MAX(segmentStart.x, segmentEnd.x);
+    float lesserY = MIN(segmentStart.y, segmentEnd.y);
+    float greaterY = MAX(segmentStart.y, segmentEnd.y);
 
-    Vector2 diff = Vector2GetDiff(m_targetOrigin, m_origin);
+    Vector2 segmentDiff = Vector2GetDiff(segmentStart, segmentEnd);
+
+    double dxPerSecond = fabs(segmentDiff.x) / m_segmentSeconds;
+    m_origin.x = MAX(lesserX, MIN(greaterX, m_segmentInitialOrigin.x + (dxPerSecond * seconds * xDelim)));
+
+    double dyPerSecond = fabs(segmentDiff.y) / m_segmentSeconds;
+    m_origin.y = MAX(lesserY, MIN(greaterY, m_segmentInitialOrigin.y - (dyPerSecond * seconds * yDelim)));
+
     CharacterWalkState state = m_character->GetWalkState();
-    m_character->SetWalking(true);
 
-    if (seconds == m_lastChecked)
+    if (segmentDiff.y != 0)
     {
-        Draw();
-        return;
-    }
-
-    m_lastChecked = seconds;
-
-    if (diff.y != 0)
-    {
-        if (diff.y >= 0)
-        {
-            state = FORWARD;
-        }
-        else
+        if (segmentDiff.y >= 0)
         {
             state = BACKWARD;
         }
+        else
+        {
+            state = FORWARD;
+        }
     }
 
-    if (diff.x != 0 && abs(diff.x) > 10)
+    if (segmentDiff.x != 0 && abs(segmentDiff.x) > 10)
     {
-        if (diff.x >= 0)
-        {
-            state = RIGHT;
-        }
-        else
+        if (segmentDiff.x >= 0)
         {
             state = LEFT;
         }
+        else
+        {
+            state = RIGHT;
+        }
     }
 
-    if (xDelim == -1)
-    {
-        // Generally walks left
-        m_origin.x = MAX(m_targetOrigin.x, m_origin.x + (xDelim * animationDistancePerFrame));
-
-    }
-    else if (xDelim == 1)
-    {
-        // Generally walks right
-        m_origin.x = MIN(m_targetOrigin.x, m_origin.x + (xDelim * animationDistancePerFrame));
-    }
-
-    m_origin.y = (int)m_pathCurrentFunction->f(m_origin.x);
     m_character->SetWalkState(state);
     Draw();
+    m_segmentLastSeconds = seconds;
 
     if (PathSegmentDidReachEnd())
     {
@@ -253,14 +153,10 @@ void CharacterMover::UpdateMovePath()
         {
             m_character->SetWalking(false);
             m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
+            m_origin = m_pathSegments.back().GetP2();
+            m_moveType = MOVETYPE_NONE;
         }
     }
-
-//    if (Vector2Equals(m_targetOrigin, m_origin))
-//    {
-//        m_character->SetWalking(false);
-//        m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
-//    }
 }
 
 bool CharacterMover::PathSegmentDidReachEnd()
@@ -269,7 +165,7 @@ bool CharacterMover::PathSegmentDidReachEnd()
     {
         Vector2 &last = m_pathCurrentSegment->GetP2();
 
-        if (Vector2Equals(m_origin, last))
+        if (m_segmentLastSeconds > m_segmentSeconds || Vector2Equals(m_origin, last))
         {
             return true;
         }
@@ -286,9 +182,9 @@ bool CharacterMover::PathSegmentDidReachEnd()
 
 bool CharacterMover::PathSegmentRunNext()
 {
-    if (m_pathCurrentIndex + 1 < m_pathSegments.size())
+    if (m_pathCurrentSegmentIndex + 1 < m_pathSegments.size())
     {
-        SetPathSegment(m_pathCurrentIndex + 1);
+        PathSegmentSet(m_pathCurrentSegmentIndex + 1);
         return true;
     }
     else
@@ -299,6 +195,5 @@ bool CharacterMover::PathSegmentRunNext()
 
 void CharacterMover::Draw()
 {
-    m_character->Draw(m_origin.x, m_origin.y);
+    m_character->Draw(m_origin);
 }
-
