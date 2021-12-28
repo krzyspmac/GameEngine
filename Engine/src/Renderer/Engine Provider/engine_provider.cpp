@@ -76,7 +76,7 @@ TextureI *EngineProvider::LoadTexture(std::string filename, FileMemoryBufferStre
     SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
     if (!ops)
     {
-        return NULL;
+        return nullptr;
     }
 
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename.c_str());
@@ -89,7 +89,7 @@ TextureI *EngineProvider::LoadTexture(std::string filename, FileMemoryBufferStre
     }
     else
     {
-        return NULL;
+        return nullptr;
     }
 }
 
@@ -103,7 +103,7 @@ TextureTargetI *EngineProvider::CreateTargetTexture(int width, int height)
 
 void EngineProvider::UnloadTexture(TextureI *texture)
 {
-    if (texture != NULL)
+    if (texture != nullptr)
     {
         SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
         if (sdlTexture != NULL)
@@ -123,7 +123,7 @@ void EngineProvider::UnloadTexture(TextureI *texture)
 
 void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
 {
-    if (texture != NULL)
+    if (texture != nullptr)
     {
         SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
         SDL_Rect dest;
@@ -142,7 +142,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
 
 void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
 {
-    if (texture != NULL)
+    if (texture != nullptr)
     {
         SDL_Rect dest;
         SDL_Rect src;

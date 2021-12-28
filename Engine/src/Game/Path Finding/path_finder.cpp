@@ -10,12 +10,13 @@
 #include "engine_interface.h"
 #include "path_finder_line_graph_node.hpp"
 #include "path_finder_helper.hpp"
+#include "path.hpp"
 #include <iostream>
 #include <limits>
 
 using namespace engine;
 
-static Vector2 recalculatedPosition = Vector2Zero();
+static Vector2 recalculatedPosition = Vector2Zero;
 
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
 : m_polygons(polygonList)
@@ -237,7 +238,7 @@ bool PathFinder::PointInsidePolygons(Vector2 &point, Polygon **outPolygon)
     return false;
 }
 
-void PathFinder::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
+PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
 {
     m_startPosition = fromPoint;
     m_targetPosition = toPoint;
@@ -263,7 +264,8 @@ void PathFinder::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
 //            else
 //            {
                 // cannot walk there!
-                return;
+                return NULL;
+                //return Path();
 //            }
 //        }
     }
@@ -294,6 +296,8 @@ void PathFinder::CalculatePathTo(Vector2 fromPoint, Vector2 toPoint)
         Uint64 delta = end - start;
         printf("calculate took %d ms\n", delta);
     }
+
+    return new Path(m_calculatedPath);
 }
 
 void PathFinder::DidStart(float initialDistance)

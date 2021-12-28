@@ -37,7 +37,7 @@ Character::Character(std::string jsonDefinition)
                 atlas = GetMainEngine()->SpriteAtlasLoad(atlasFilename, atlasTexture);
                 if (atlas)
                 {
-                    m_characterRenderer = new CharacterRenderer(atlas, 1);
+                    m_characterRenderer = std::unique_ptr<CharacterRendererI>(new CharacterRenderer(atlas, 1));
                 }
             }
 

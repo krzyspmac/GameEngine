@@ -10,6 +10,7 @@
 
 #include "character_interface.h"
 #include "common_engine_impl.h"
+#include "path_finder_interface.h"
 
 namespace engine
 {
@@ -25,6 +26,8 @@ namespace engine
         : m_character(character)
         { }
 
+        virtual ~CharacterMoverI() { };
+
     public:
         /// Update method must be called from the main loop to
         /// deal with continous character movement.
@@ -32,6 +35,9 @@ namespace engine
         virtual void Update() = 0;
 
     public:
+        /// Draws the character.
+        virtual void Draw() = 0;
+
         /// Places the character at position. Does not animate.
         virtual void PlaceCharacter(Origin target) = 0;
 
@@ -40,6 +46,11 @@ namespace engine
 
         /// Move the character to a location.
         virtual void MoveCharacter(Origin target) = 0;
+
+        /// Move the character along a path. Calling this again will clear
+        /// the move stack and start again.
+        /// Takes ownership of `path`.
+        virtual void MoveCharacterAlongPath(PathI *path) = 0;
 
         /// Gets the current character's target position.
         virtual Origin& GetCharacterTargetPosition() { return m_targetOrigin; };

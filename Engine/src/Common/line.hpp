@@ -1,12 +1,12 @@
 //
-//  path_finder_line.hpp
+//  line.hpp
 //  Engine
 //
-//  Created by krzysp on 27/12/2021.
+//  Created by krzysp on 28/12/2021.
 //
 
-#ifndef path_finder_line_hpp
-#define path_finder_line_hpp
+#ifndef line_hpp
+#define line_hpp
 
 #include <common.h>
 #include "common_engine_impl.h"
@@ -56,4 +56,4 @@ namespace engine
     };
 };
 
-#endif /* path_finder_line_hpp */
+#endif /* line_hpp */

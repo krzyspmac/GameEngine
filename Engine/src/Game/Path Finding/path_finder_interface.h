@@ -10,10 +10,25 @@
 
 #include <iostream>
 #include "common_engine_impl.h"
-#include "path_finder_line.hpp"
 
 namespace engine
 {
+    /// Interface for the path result
+    class PathI
+    {
+    public:
+        PathI() { };
+        PathI(std::vector<Vector2> path): m_path(path) { }
+        virtual ~PathI() { };
+
+    public:
+        std::vector<Vector2> &GetPath() { return m_path; };
+        virtual std::vector<Line> ToLines() = 0;
+
+    protected:
+        std::vector<Vector2> m_path;
+    };
+
     /// Path finder callbacks
     class PathFinderCallbackI
     {
@@ -26,8 +41,15 @@ namespace engine
     class PathFinderDataI
     {
     public:
+        ///
         virtual std::vector<Vector2> &GetAllPoint() = 0;
+
+        ///
         virtual std::vector<Line> &GetAllLines() = 0;
+
+    public:
+        /// Caller is responsible for PathI.
+        virtual PathI *CalculatePath(Vector2 fromPoint, Vector2 toPoint) = 0;
     };
 
     /// Path finder amalgamated interface

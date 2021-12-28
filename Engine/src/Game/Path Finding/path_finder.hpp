@@ -26,7 +26,7 @@ namespace engine
         void Draw();
 
     public:
-        void CalculatePathTo(Vector2 fromPoint, Vector2 toPoint);
+        PathI *CalculatePath(Vector2 fromPoint, Vector2 toPoint);
 
     private:
         bool IntersectsAnyline(Line &line);

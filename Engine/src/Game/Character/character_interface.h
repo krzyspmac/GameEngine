@@ -16,18 +16,13 @@ namespace engine
     /// Should render the character, do animations for the walking stances.
     class CharacterI {
     public:
-        CharacterI(): m_characterRenderer(NULL), m_talking(false), m_isWalking(false), m_walkState(STAND_RIGHT) { };
+        CharacterI(): m_characterRenderer(nullptr), m_talking(false), m_isWalking(false), m_walkState(STAND_RIGHT) { };
 
-        virtual ~CharacterI() {
-            if (m_characterRenderer)
-            {
-                delete m_characterRenderer;
-            };
-        }
+        virtual ~CharacterI() { }
 
     /// Character rendering
     public:
-        CharacterRendererI *GetCharacterRenderer() { return m_characterRenderer; };
+        CharacterRendererI *GetCharacterRenderer() { return m_characterRenderer.get(); };
 
         /// Draw the character. The origin aligned to the bottom center part of the character.
         virtual void Draw(int x, int y) = 0;
@@ -60,7 +55,7 @@ namespace engine
         CharacterWalkState GetWalkState() { return m_walkState; };
 
     protected:
-        CharacterRendererI *m_characterRenderer;
+        std::unique_ptr<CharacterRendererI> m_characterRenderer;
         bool m_talking;
         bool m_isWalking;
         CharacterWalkState m_walkState;
