@@ -266,7 +266,7 @@ void Engine::MouseClicked()
     Vector2 pos = m_characterMover->GetCharacterPosition();
     Vector2 from = Vector2Make(pos.x, pos.y);
     PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
-    m_characterMover->MoveCharacterAlongPath(path);
+//    m_characterMover->MoveCharacterAlongPath(path);
 }
 
 TextureI *Engine::LoadTexture(std::string filename)

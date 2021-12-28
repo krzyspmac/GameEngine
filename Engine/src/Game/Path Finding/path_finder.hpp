@@ -52,7 +52,7 @@ namespace engine
         std::vector<Line> m_allLines;
 
         // path claculation
-        PathFinderGraphI *m_lineGraph;
+        std::unique_ptr<PathFinderGraphI> m_lineGraph;
         Vector2 m_startPosition;
         Vector2 m_targetPosition;
         std::vector<Vector2> m_calculatedPath;

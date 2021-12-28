@@ -32,11 +32,7 @@ bool PathFinderLineGraphNode::HasConnectionWithPoint(Vector2 *point)
 
     for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
     {
-        PathFinderLineGraphNodeI *stored = *it;
-        Vector2 *storedPointEx = stored->GetPoint();
-        Vector2 &storedPoint = *(storedPointEx);
-
-        if (Vector2Equals(targetPoint, storedPoint))
+        if (Vector2Equals(targetPoint, *((*it)->GetPoint())))
         {
             return true;
         }
@@ -54,6 +50,7 @@ void PathFinderLineGraphNode::RPathClearUpTo(std::vector<PathFinderLineGraphNode
         if (node == upToHere)
         {
             foundIndex = i;
+            break;
         }
     }
 
@@ -70,7 +67,7 @@ bool PathFinderLineGraphNode::RPathContains(std::vector<PathFinderLineGraphNodeI
         PathFinderLineGraphNodeI *node = pathStack->at(i);
         if (node == targetNode)
         {
-            return true;;
+            return true;
         }
     }
 

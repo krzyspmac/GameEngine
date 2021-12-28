@@ -21,7 +21,7 @@ namespace engine
         Line(Vector2 &p1, Vector2 &p2)
             : p1(p1), p2(p2)
         {
-            length = sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p2.y, 2));
+            length = Vector2Distance(p1, p2);
         };
 
         Vector2 &GetP1() { return p1; };

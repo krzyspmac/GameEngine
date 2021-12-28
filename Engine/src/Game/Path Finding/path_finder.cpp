@@ -24,7 +24,7 @@ using namespace engine;
 static Vector2 recalculatedPosition = Vector2Zero;
 
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
-: m_polygons(polygonList)
+: m_polygons(polygonList), m_lineGraph(nullptr)
 {
     performanceMeasure("PathFinder::init", [&]{
         Prepare();
@@ -33,51 +33,29 @@ PathFinder::PathFinder(std::vector<Polygon> polygonList)
 
 PathFinder::~PathFinder()
 {
-    delete m_lineGraph;
 }
 
 void PathFinder::Prepare()
 {
-    // Join all points into one array
-    for (auto it = std::begin(m_polygons); it != std::end(m_polygons); ++it)
-    {
-        Polygon &polygon = *it;
-        std::vector<Vector2> points = polygon.GetPoints();
+    // Join all points into one array.
+    std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &p){
+        std::for_each(p.GetPoints().begin(), p.GetPoints().end(), [&](Vector2 &v){
+            m_allPoint.push_back(v);
+        });
+    });
 
-        for (auto pit = std::begin(points); pit != std::end(points); ++pit)
-        {
-            m_allPoint.push_back(*pit);
-        }
-    }
-
-    // Join all lines into one array
-    //std::vector<Line> allLines;
-    for (auto it = std::begin(m_polygons); it != std::end(m_polygons); ++it)
-    {
-        Polygon &polygon = *it;
-        std::vector<Line> lines = polygon.GetLines();
-
-        for (auto pit = std::begin(lines); pit != std::end(lines); ++pit)
-        {
-            m_allLines.push_back(*pit);
-        }
-    }
-
-    // At the beginning add all the polygon lines. Those will be the connecting lines
-    // as well.
-    for (auto cPoint = std::begin(m_polygons); cPoint != std::end(m_polygons); ++cPoint)
-    {
-        Polygon &polygon = *cPoint;
-        std::vector<Line> &polygonLines = polygon.GetLines();
-
-        for (auto pit = std::begin(polygonLines); pit != std::end(polygonLines); ++pit)
-        {
-            m_connectionLines.push_back(*pit);
-        }
-    }
+    // Join all lines into one array.
+    // Also all polygon lines are "connecting" lines, so add them as well.
+    std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &p){
+        std::for_each(p.GetLines().begin(), p.GetLines().end(), [&](Line &l) {
+            m_allLines.push_back(l);
+            m_connectionLines.push_back(l);
+        });
+    });
 
     // Make a line connection from each point in each polygon
     // to each other point in every other polygon.
+    // Get rid of connections that cross any existing line.
     size_t polyCount = m_polygons.size();
     for (int i = 0; i < polyCount; i++)
     {
@@ -132,7 +110,7 @@ void PathFinder::Prepare()
         }
     }
 
-    m_lineGraph = new PathFinderGraph(m_connectionLines);
+    m_lineGraph = std::unique_ptr<PathFinderGraphI>(new PathFinderGraph(m_connectionLines));
 }
 
 bool PathFinder::IntersectsAnyline(Line &myLine)
@@ -142,9 +120,7 @@ bool PathFinder::IntersectsAnyline(Line &myLine)
 
     bool intersects = false;
 
-    for (auto lit = std::begin(m_allLines); lit != std::end(m_allLines); ++lit)
-    {
-        Line &line = *lit;
+    std::all_of(m_allLines.begin(), m_allLines.end(), [&](Line &line){
         Vector2 &p2 = line.GetP1();
         Vector2 &p3 = line.GetP2();
 
@@ -160,10 +136,12 @@ bool PathFinder::IntersectsAnyline(Line &myLine)
             if (!PathFinderUtils::IsVertexPoint(intersectionPoint, m_allPoint))
             {
                 intersects = true;
-                break;
+                return false;
             }
         }
-    }
+
+        return true;
+    });
 
     return intersects;
 }
@@ -174,7 +152,9 @@ void PathFinder::Draw()
 
 #if RENDER_CONNECTION_LINES
     provider.RenderSetColor(255, 0, 0, 100);
-    std::for_each(m_connectionLines.begin(), m_connectionLines.end(), [&](Line &p) { DrawLine(p); });
+    std::for_each(m_connectionLines.begin(), m_connectionLines.end(), [&](Line &p) {
+        DrawLine(p);
+    });
 #endif
 
 #if RENDER_POLYGONS
@@ -227,7 +207,6 @@ bool PathFinder::PointInsidePolygons(Vector2 &point, Polygon **outPolygon)
             return true;
         }
     }
-
     return false;
 }
 
@@ -237,10 +216,6 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
     m_targetPosition = toPoint;
 
     Line myLine(fromPoint, m_targetPosition);
-
-    // should check if the point is not iside a polygon; if so - snap it out of it
-    EngineProviderI &provider = GetMainEngine()->getProvider();
-    Uint64 start = provider.GetTicks();
 
     // TODO: needs work due to issues with offending vertices when snapping out of the polygon
     Polygon *offendingPolygon = NULL;
@@ -263,10 +238,6 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
 //        }
     }
 
-    Uint64 end = provider.GetTicks();
-    Uint64 delta = end - start;
-    printf("contains point took %d ms\n", delta);
-
     // Can a clear line of slight be established?
     bool intersects = IntersectsAnyline(myLine);
     if (!intersects)
@@ -281,6 +252,7 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
         // line of slight can be established between the testing
         // point and the target provided.
         m_maxDistance = std::numeric_limits<float>().max()-1;
+        m_calculatedPath.clear();
 
         performanceMeasure("path", [&](void) {
             m_lineGraph->DistanceToPoint(this, fromPoint, m_targetPosition, &m_tempPathStack);
@@ -297,30 +269,16 @@ void PathFinder::DidStart(float initialDistance)
 
 void PathFinder::DidFind()
 {
-    bool shouldAddPath = false;
+    float endingDistance = (!m_tempPathStack.empty() && !PointInsidePolygons(m_targetPosition, NULL))
+    ?   Vector2Distance(*m_tempPathStack.back()->GetPoint(), m_targetPosition)
+    :   0
+    ;
 
-    float endingDistance = 0;
-    if (m_tempPathStack.size() > 0)
+    float distance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance + endingDistance;
+    if (distance < m_maxDistance)
     {
-        if (!PointInsidePolygons(m_targetPosition, NULL))
-        {
-            PathFinderLineGraphNodeI *last = m_tempPathStack.at(m_tempPathStack.size()-1);
-            Line lastLine(*last->GetPoint(), m_targetPosition);
-            endingDistance = lastLine.GetLength();
-        }
-    }
+        m_maxDistance = distance;
 
-    float thisPathDistance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance + endingDistance;
-
-    if (thisPathDistance < m_maxDistance)
-    {
-        m_maxDistance = thisPathDistance;
-        shouldAddPath = true;
-    }
-
-    if (shouldAddPath)
-    {
-        printf("CHOSEN with distance = %f\n\n", thisPathDistance);
         m_calculatedPath.clear();
 
         m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
@@ -329,7 +287,5 @@ void PathFinder::DidFind()
         {
             m_calculatedPath.push_back(m_targetPosition);
         }
-
-        Path path(m_calculatedPath);
     }
 }
