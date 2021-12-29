@@ -81,7 +81,7 @@ namespace engine
         return v;
     }
 
-    inline Vector2 Vector2Scaled(Vector2& value, float scale)
+    inline Vector2 Vector2Scaled(Vector2 value, float scale)
     {
         Vector2 v = Vector2Make(value.x, value.y);
         v.x *= scale;

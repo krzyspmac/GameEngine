@@ -36,6 +36,7 @@ namespace engine
     public:
         virtual void DidStart(float initialDistance) = 0;
         virtual void DidFind() = 0;
+        virtual void DidFindPath(std::vector<Vector2>) = 0;
     };
 
     /// Path finder data accessors
@@ -68,12 +69,18 @@ namespace engine
     public:
         /// Does not assume ownershop of point. Point must
         /// exists throughout the life of PathFinderLineGraphNodeI.
-        PathFinderLineGraphNodeI(Vector2 *point): m_point(point) { };
+        PathFinderLineGraphNodeI(Vector2 *point): m_point(point), m_normal({0.f, 0.f}) { };
         virtual ~PathFinderLineGraphNodeI() { };
         
     public:
         ///
         Vector2 *GetPoint() { return m_point; };
+
+        ///
+        void SetNormal(Vector2 value) { m_normal = value; };
+
+        ///
+        Vector2 &GetNormal() { return m_normal; };
 
         ///
         virtual void AddConnection(PathFinderLineGraphNodeI *node) = 0;
@@ -92,6 +99,7 @@ namespace engine
 
     protected:
         Vector2 *m_point;
+        Vector2 m_normal;
         std::vector<PathFinderLineGraphNodeI*> m_connectingNodes;
     };
 
@@ -99,7 +107,8 @@ namespace engine
     class PathFinderGraphI
     {
     public:
-        PathFinderGraphI(std::vector<Line> lines): m_connectingLines(lines) { };
+        PathFinderGraphI(std::vector<Polygon> polygons, std::vector<Line> lines)
+        : m_polygons(polygons), m_connectingLines(lines) { };
         virtual ~PathFinderGraphI() { };
 
     public:
@@ -107,6 +116,7 @@ namespace engine
         std::vector<std::unique_ptr<PathFinderLineGraphNodeI>>& GetNodes() { return m_nodes; };
 
     protected:
+        std::vector<Polygon> m_polygons;
         std::vector<Line> m_connectingLines;
         std::vector<std::unique_ptr<PathFinderLineGraphNodeI>> m_nodes;
     };

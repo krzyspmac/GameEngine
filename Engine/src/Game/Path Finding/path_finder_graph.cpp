@@ -8,13 +8,15 @@
 #include "path_finder_graph.hpp"
 #include "path_finder_line_graph_node.hpp"
 #include "path_finder_helper.hpp"
+#include <iostream>
+#include "polygon.hpp"
 
 using namespace engine;
 
 #define MAX_ITERATION 1024
 
-PathFinderGraph::PathFinderGraph(std::vector<Line> lines)
-: PathFinderGraphI(lines)
+PathFinderGraph::PathFinderGraph(std::vector<Polygon> polygons, std::vector<Line> lines)
+: PathFinderGraphI(polygons, lines)
 {
     Prepare();
 }
@@ -29,9 +31,8 @@ PathFinderLineGraphNodeI *PathFinderGraph::GetNodeForPoint(Vector2 &point)
         {
             return node;
         }
-
     }
-    return NULL;
+    return nullptr;
 }
 
 void PathFinderGraph::Prepare()
@@ -57,6 +58,28 @@ void PathFinderGraph::Prepare()
             m_nodes.emplace_back(std::move(nodeP2));
         }
     }
+
+    // Go through polygon lines to create vertex normals
+    std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &poly){
+        std::vector<Line> lines = poly.GetLines();
+        size_t countLines = lines.size();
+        for (size_t i = 0; i < countLines; i++)
+        {
+            if (i+1 >= countLines) { continue; }
+
+            Line &first = lines.at(i);
+            Line &second = lines.at(i+1);
+
+            Vector2 firstNormal = first.GetNormal();
+            Vector2 secondNormal = second.GetNormal();
+            Vector2 avg = Vector2Make((firstNormal.x + secondNormal.x)/1, (firstNormal.y + secondNormal.y)/1);
+            avg = Vector2Normalized(avg);
+
+            PathFinderLineGraphNodeI *node = GetNodeForPoint(first.GetP2());
+            if (node != nullptr) { node->SetNormal(avg); };
+        }
+
+    });
 
     // Go through each point node and check if it connects, via line,
     // to any other node.
@@ -94,6 +117,17 @@ void PathFinderGraph::Prepare()
 void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, std::vector<Polygon> &polygons, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
 {
     m_curIteration = 0;
+
+//    // Check if we have a clear line-of-sight path right at the start.
+//    Line targetLine(startingPoint, targetPoint);
+//    if (PointInsidePolygons(targetPoint, nullptr))
+//    {
+//        return;
+//    }
+//    // TODO: needs work due to issues with offending vertices when snapping out of the polygon
+//    Polygon *offendingPolygon = NULL;
+////    if (PointInsidePolygons(targetPoint, &offendingPolygon))
+
 
     // Get a list of all line-of-sight points that the starting point sees and make that
     // out starting point list.
@@ -157,4 +191,17 @@ void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, std::vector<Polyg
 
         node->DistanceToPoint(sender, targetPoint, pathStack);
     }
+}
+
+bool PathFinderGraph::PointInsidePolygons(Vector2 &point, Polygon **outPolygon)
+{
+    for (auto it = std::begin(m_polygons); it != std::end(m_polygons); ++it)
+    {
+        if (it->IsPointInside(point))
+        {
+            if (outPolygon != nullptr) { *outPolygon = &(*it); };
+            return true;
+        }
+    }
+    return false;
 }

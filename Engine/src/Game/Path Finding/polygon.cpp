@@ -14,72 +14,37 @@
 
 using namespace engine;
 
-class Vector2Sorter {
-    Vector2 startPosition;
-public:
-    Vector2Sorter(Vector2 value) : startPosition(value) { }
-
-    bool operator()(Vector2 &lhs, Vector2 &rhs)
-    {
-        return Vector2Distance(startPosition, lhs) < 0 < Vector2Distance(startPosition, rhs);
-//        return false;//SortFunction(o1, o2, type_ );
-    }
-};
-
 Polygon::Polygon(std::vector<Vector2> points)
 : m_points(points)
 {
-    size_t size = points.size();
-    if (size < 1)
-    {
-        return;
-    }
+    if (points.empty()) { return; }
 
+    /// Make lines out of.
+    size_t size = points.size();
     for (int i = 0; i < size; i++)
     {
-        if (i+1 >= size)
-        {
-            break;
-        }
-
-        Vector2 &p1 = points.at(i);
-        Vector2 &p2 = points.at(i+1);
-        m_lines.push_back(Line(p1, p2));
+        if (i+1 >= size) { break; }
+        m_lines.push_back(Line(points.at(i), points.at(i+1)));
     }
 
+    // Be sure to add the last line.
+    // TODO: check if needed
     Vector2 &first = points.at(0);
     Vector2 &last = points.at(size-1);
-    if (!Vector2Equals(first, last))
-    {
-        m_lines.push_back(Line(last, first));
-    }
+    if (!Vector2Equals(first, last)) { m_lines.push_back(Line(last, first)); }
 
-    size_t countLines = m_lines.size();
-    for (size_t i = 0; i < countLines; i++)
-    {
-        if (i+1 >= countLines) { continue; }
-
-        Line &first = m_lines.at(i);
-        Line &second = m_lines.at(i+1);
-
-        Vector2 firstNormal = first.GetNormal();
-        Vector2 secondNormal = second.GetNormal();
-        Vector2 avg = Vector2Make((firstNormal.x + secondNormal.x)/2, (firstNormal.y + secondNormal.y)/2);
-        avg = Vector2Normalized(avg);
-        first.SetP2OutsideVector(avg);
-        second.SetP1OutsideVector(avg);
-    }
+    // Check if we don't have to flip normals
+    std::for_each(m_lines.begin(), m_lines.end(), [&](Line &l){
+        Vector2 p = Vector2Add(l.GetCenter(), l.GetNormal());
+        if (IsPointInside(p)) { l.InverseNormal(); };
+    });
 }
 
 bool Polygon::ContainsLine(Line &someLine)
 {
     for (auto it = std::begin(m_lines); it != std::end(m_lines); ++it)
     {
-        Line &line = *it;
-        if (line == someLine)
-        {
-            return true;
-        }
+        if (*it == someLine) { return true; }
     }
     return false;
 }
@@ -96,8 +61,6 @@ bool Polygon::IsPointInside(Vector2 &point)
 
     std::vector<Line*> touchedLines = PathFinderUtils::IntersectsLines(rightLine, m_lines);
 
-
-
     return touchedLines.size() % 2 != 0;
 }
 
@@ -113,10 +76,7 @@ bool Polygon::DoesLineIntersect(Line &line)
     {
         float y = f.f(x);
         Vector2 checkPoint = Vector2Make(x, y);
-        if (IsPointInside(checkPoint))
-        {
-            return true;
-        }
+        if (IsPointInside(checkPoint)) { return true; }
     }
 
     return false;
@@ -124,67 +84,6 @@ bool Polygon::DoesLineIntersect(Line &line)
 
 bool Polygon::NearestPointOutsideFrom(Vector2 &point, Vector2 *outPosition)
 {
-    // Brute force for the moment
-    Size &viewportSize = GetMainEngine()->GetViewport();
-    Vector2 temp;
-    std::vector<Vector2> positions;
-//    Vector2 down
-
-    temp = Vector2Make(point.x, point.y);
-    while (temp.y < viewportSize.height)
-    {
-        temp.y += 1;
-        if (!IsPointInside(temp))
-        {
-            positions.push_back(temp);
-            break;
-        }
-    }
-//
-//    temp = Vector2Make(point.x, point.y);
-//    while (temp.y >= 0)
-//    {
-//        temp.y -= 1;
-//        if (!IsPointInside(temp))
-//        {
-//            positions.push_back(temp);
-//            break;
-//        }
-//    }
-//
-//    temp = Vector2Make(point.x, point.y);
-//    while (temp.x >= 0)
-//    {
-//        temp.x -= 1;
-//        if (!IsPointInside(temp))
-//        {
-//            positions.push_back(temp);
-//            break;
-//        }
-//    }
-//
-//    temp = Vector2Make(point.x, point.y);
-//    while (temp.x <= viewportSize.width)
-//    {
-//        temp.x += 1;
-//        if (!IsPointInside(temp))
-//        {
-//            positions.push_back(temp);
-//            break;
-//        }
-//    }
-
-    std::sort(positions.begin(), positions.end(), Vector2Sorter(point) );
-    if (positions.size() > 0)
-    {
-        if (outPosition)
-        {
-            *outPosition = positions.at(0);
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
+    std::cout << "Not implemented" << std::endl;
+    return false;
 }

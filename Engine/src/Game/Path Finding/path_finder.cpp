@@ -110,7 +110,7 @@ void PathFinder::Prepare()
         }
     }
 
-    m_lineGraph = std::unique_ptr<PathFinderGraphI>(new PathFinderGraph(m_connectionLines));
+    m_lineGraph = std::unique_ptr<PathFinderGraphI>(new PathFinderGraph(m_polygons, m_connectionLines));
 }
 
 bool PathFinder::IntersectsAnyline(Line &myLine)
@@ -197,6 +197,15 @@ void PathFinder::Draw()
     });
 
     // Draw each normal vector for each vertice in the graph
+    provider.RenderSetColor(0, 255, 0, 255);
+    for (auto it = std::begin(m_lineGraph->GetNodes()); it != std::end(m_lineGraph->GetNodes()); ++it)
+    {
+        PathFinderLineGraphNodeI *node = it->get();
+        Vector2 normal = Vector2Scaled(node->GetNormal(), 10);
+        Vector2 &p1 = *node->GetPoint();
+        Vector2 p2 = Vector2Add(p1, normal);
+        provider.RenderDrawLine(p1.x, p1.y, p2.x, p2.y);
+    }
 }
 
 void PathFinder::DrawLine(Line &line)
@@ -328,4 +337,43 @@ void PathFinder::DidFind()
             }
         }
     }
+}
+
+void PathFinder::DidFindPath(std::vector<Vector2> path)
+{
+//    float endingDistance = (!path.empty() && !PointInsidePolygons(m_targetPosition, NULL))
+//    ?   Vector2Distance(*m_tempPathStack.back()->GetPoint(), m_targetPosition)
+//    :   0
+//    ;
+//
+//    bool insideAnyPolygon = false;
+//    for (auto it = std::begin(m_tempPathStack); it != std::end(m_tempPathStack); ++it)
+//    {
+//        PathFinderLineGraphNodeI *node = *it;
+//        Vector2 &point = *node->GetPoint();
+//        if (PointInsidePolygons(point, NULL))
+//        {
+//            insideAnyPolygon = true;
+//            break;
+//        }
+//    }
+//
+//    if (!insideAnyPolygon)
+//    {
+//        float distance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance + endingDistance;
+//        if (distance < m_maxDistance)
+//        {
+//            m_maxDistance = distance;
+//
+//            m_calculatedPath.clear();
+//
+//            m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
+//            m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
+//            if (!PointInsidePolygons(m_targetPosition, NULL))
+//            {
+//                m_calculatedPath.push_back(m_targetPosition);
+//            }
+//        }
+//    }
+
 }

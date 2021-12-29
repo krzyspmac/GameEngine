@@ -39,6 +39,7 @@ namespace engine
     public:
         void DidStart(float initialDistance);
         void DidFind();
+        void DidFindPath(std::vector<Vector2>);
 
     /// PathFinderDataI
     public:

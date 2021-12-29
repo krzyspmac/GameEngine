@@ -265,10 +265,11 @@ void Engine::MouseClicked()
 //    m_characterMover->MoveCharacter(m_mousePosition);
     Vector2 pos = m_characterMover->GetCharacterPosition();
     Vector2 from = Vector2Make(pos.x, pos.y);
-    //PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
-    //m_characterMover->MoveCharacterAlongPath(path);
-    Vector2 nudgedPosition = m_walkingBoxes->NudgedPosition(Vector2Make(m_mousePosition.x, m_mousePosition.y));
-    m_characterMover->PlaceCharacter(nudgedPosition);
+    PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
+    m_characterMover->MoveCharacterAlongPath(path);
+
+    //Vector2 nudgedPosition = m_walkingBoxes->NudgedPosition(Vector2Make(m_mousePosition.x, m_mousePosition.y));
+    //m_characterMover->PlaceCharacter(nudgedPosition);
 }
 
 TextureI *Engine::LoadTexture(std::string filename)

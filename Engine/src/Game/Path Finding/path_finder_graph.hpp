@@ -9,6 +9,7 @@
 #define path_finder_graph_hpp
 
 #include "path_finder_interface.h"
+#include "polygon.hpp"
 #include <iostream>
 
 namespace engine
@@ -17,11 +18,12 @@ namespace engine
     class PathFinderGraph: public PathFinderGraphI
     {
     public:
-        PathFinderGraph(std::vector<Line> lines);
+        PathFinderGraph(std::vector<Polygon> polygons, std::vector<Line> lines);
 
     private:
         PathFinderLineGraphNodeI *GetNodeForPoint(Vector2 &point);
         void Prepare();
+        bool PointInsidePolygons(Vector2 &point, Polygon **outPolygon);
 
     public:
         void DistanceToPoint(PathFinderBaseI *sender, std::vector<Polygon> &polygons, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack);
