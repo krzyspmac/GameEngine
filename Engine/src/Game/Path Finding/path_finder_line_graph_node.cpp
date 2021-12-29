@@ -10,12 +10,6 @@
 
 using namespace engine;
 
-PathFinderLineGraphNode::PathFinderLineGraphNode(Vector2 *point)
-: PathFinderLineGraphNodeI(point)
-{
-
-}
-
 void PathFinderLineGraphNode::AddConnection(PathFinderLineGraphNodeI *node)
 {
     m_connectingNodes.emplace_back(node);
@@ -64,14 +58,10 @@ bool PathFinderLineGraphNode::RPathContains(std::vector<PathFinderLineGraphNodeI
 {
     for (int i = 0; i < pathStack->size(); i++)
     {
-        PathFinderLineGraphNodeI *node = pathStack->at(i);
-        if (node == targetNode)
-        {
-            return true;
-        }
+        if (pathStack->at(i) == targetNode) { return true; }
     }
 
-    return false;;
+    return false;
 }
 
 float PathFinderLineGraphNode::RPathDistance(std::vector<PathFinderLineGraphNodeI*> *pathStack)
@@ -81,10 +71,7 @@ float PathFinderLineGraphNode::RPathDistance(std::vector<PathFinderLineGraphNode
 
     for (int i = 0; i < count; i++)
     {
-        if (i+1 >= count)
-        {
-            break;;
-        }
+        if (i+1 >= count) { break; }
 
         PathFinderLineGraphNodeI *node = pathStack->at(i);
         PathFinderLineGraphNodeI *nextNode = pathStack->at(i+1);
@@ -122,17 +109,12 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
         PathFinderLineGraphNode::RPathClearUpTo(pathStack, this);
 
         PathFinderLineGraphNodeI *node = *it;
-        if (RPathContains(pathStack, node))
-        {
-            continue;
-        }
+        if (RPathContains(pathStack, node)) { continue; }
 
         Vector2 *point = node->GetPoint();
-        if (!PathFinderUtils::IsPointWithingViewport(*point))
-        {
-            continue;
-        }
+        if (!PathFinderUtils::IsPointWithingViewport(*point)) { continue; }
 
+        // iterate further
         node->DistanceToPoint(sender, targetPoint, pathStack);
     }
 }

@@ -51,7 +51,7 @@ bool Polygon::ContainsLine(Line &someLine)
 
 bool Polygon::IsPointVertex(Vector2 &point)
 {
-    return PathFinderUtils::IsVertexPoint(point, m_points);
+    return PathFinderUtils::PointListIncludesPoint(point, m_points);
 }
 
 bool Polygon::IsPointInside(Vector2 &point)

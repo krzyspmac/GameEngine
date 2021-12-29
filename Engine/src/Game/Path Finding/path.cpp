@@ -16,10 +16,7 @@ std::vector<Line> Path::ToLines()
 
     for (size_t i = 0; i < size; i++)
     {
-        if (i + 1 >= size)
-        {
-            break;
-        }
+        if (i + 1 >= size) { break; }
 
         Vector2 &first = m_path.at(i);
         Vector2 &second = m_path.at(i+1);

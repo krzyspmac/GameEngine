@@ -17,7 +17,7 @@ namespace engine
     class PathFinderLineGraphNode: public PathFinderLineGraphNodeI
     {
     public:
-        PathFinderLineGraphNode(Vector2 *point);
+        PathFinderLineGraphNode(Vector2 *point): PathFinderLineGraphNodeI(point) { };
 
     public:
         static void RPathClearUpTo(std::vector<PathFinderLineGraphNodeI*> *pathStack, PathFinderLineGraphNodeI *upToHere);

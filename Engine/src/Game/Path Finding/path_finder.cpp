@@ -18,10 +18,10 @@
 #define RENDER_CONNECTION_LINES         1
 #define RENDER_POLYGONS                 1
 #define RENDER_CALCULATED_PATH          1
+#define RENDER_LINE_NORMALS             1
+#define REDNER_VERTEX_NORMAL            1
 
 using namespace engine;
-
-static Vector2 recalculatedPosition = Vector2Zero;
 
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
 : m_polygons(polygonList), m_lineGraph(nullptr)
@@ -88,13 +88,13 @@ void PathFinder::Prepare()
                     float i_x;
                     float i_y;
 
-                    if (PathFinderUtils::get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
+                    if (PathFinderUtils::GetLineIntersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
                     {
                         Vector2 intersectionPoint;
                         intersectionPoint.x = i_x;
                         intersectionPoint.y = i_y;
 
-                        if (!PathFinderUtils::IsVertexPoint(intersectionPoint, m_allPoint))
+                        if (!PathFinderUtils::PointListIncludesPoint(intersectionPoint, m_allPoint))
                         {
                             intersects = true;
                             break;
@@ -127,13 +127,13 @@ bool PathFinder::IntersectsAnyline(Line &myLine)
         float i_x;
         float i_y;
 
-        if (PathFinderUtils::get_line_intersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
+        if (PathFinderUtils::GetLineIntersection(p0.x, p0.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, &i_x, &i_y))
         {
             Vector2 intersectionPoint;
             intersectionPoint.x = i_x;
             intersectionPoint.y = i_y;
 
-            if (!PathFinderUtils::IsVertexPoint(intersectionPoint, m_allPoint))
+            if (!PathFinderUtils::PointListIncludesPoint(intersectionPoint, m_allPoint))
             {
                 intersects = true;
                 return false;
@@ -178,25 +178,14 @@ void PathFinder::Draw()
     });
 #endif
 
-    // Draw each normal vector for each line
+#if RENDER_LINE_NORMALS
     std::for_each(m_allLines.begin(), m_allLines.end(), [&](Line &l){
         Line nl = l.MakeNormalLine(10);
         provider.RenderDrawLine(nl.GetP1().x, nl.GetP1().y, nl.GetP2().x, nl.GetP2().y);
-
-//        Vector2 &p1 = l.GetP1();
-//        Vector2 p1n = Vector2Add(p1, l.GetP1OutsideVector());
-//        p1n = Vector2Scaled(p1n, 2);
-//        Line p1nl(p1, p1n);
-//        provider.RenderDrawLine(p1nl.GetP1().x, p1nl.GetP1().y, p1nl.GetP2().x, p1nl.GetP2().y);
-//
-//        Vector2 &p2 = l.GetP2();
-//        Vector2 p2n = Vector2Add(p2, l.GetP2OutsideVector());
-//        p2n = Vector2Scaled(p2n, 2);
-//        Line p2nl(p2, p2n);
-//        provider.RenderDrawLine(p2nl.GetP1().x, p2nl.GetP1().y, p2nl.GetP2().x, p2nl.GetP2().y);
     });
+#endif
 
-    // Draw each normal vector for each vertice in the graph
+#if REDNER_VERTEX_NORMAL
     provider.RenderSetColor(0, 255, 0, 255);
     for (auto it = std::begin(m_lineGraph->GetNodes()); it != std::end(m_lineGraph->GetNodes()); ++it)
     {
@@ -206,6 +195,7 @@ void PathFinder::Draw()
         Vector2 p2 = Vector2Add(p1, normal);
         provider.RenderDrawLine(p1.x, p1.y, p2.x, p2.y);
     }
+#endif
 }
 
 void PathFinder::DrawLine(Line &line)
@@ -245,27 +235,6 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
     m_targetPosition = toPoint;
 
     Line myLine(fromPoint, m_targetPosition);
-
-    // TODO: needs work due to issues with offending vertices when snapping out of the polygon
-    Polygon *offendingPolygon = NULL;
-    if (PointInsidePolygons(m_targetPosition, &offendingPolygon))
-    {
-//        Vector2 recalculated;
-//        if (offendingPolygon->NearestPointOutsideFrom(m_targetPosition, &recalculated))
-//        {
-//            if (!PointInsidePolygons(recalculated, NULL))
-//            {
-//                m_targetPosition = recalculated;
-//                recalculatedPosition = m_targetPosition;
-//            }
-//            else
-//            {
-                // cannot walk there!
-                return NULL;
-                //return Path();
-//            }
-//        }
-    }
 
     // Can a clear line of slight be established?
     bool intersects = IntersectsAnyline(myLine);
@@ -329,7 +298,7 @@ void PathFinder::DidFind()
 
             m_calculatedPath.clear();
 
-            m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
+            m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack, 3);
             m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
             if (!PointInsidePolygons(m_targetPosition, NULL))
             {
