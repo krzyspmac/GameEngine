@@ -49,7 +49,7 @@ namespace engine
 
         /// Move the character along a path. Calling this again will clear
         /// the move stack and start again.
-        /// Takes ownership of `path`.
+        /// Copies `path` data.
         virtual void MoveCharacterAlongPath(PathI *path) = 0;
 
         /// Gets the current character's target position.

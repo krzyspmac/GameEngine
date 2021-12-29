@@ -7,6 +7,7 @@
 
 #include "path_finder_helper.hpp"
 #include "engine.hpp"
+#include "path.hpp"
 
 using namespace engine;
 
@@ -139,4 +140,25 @@ std::vector<Vector2> PathFinderUtils::ListOfNodesToVectors(std::vector<PathFinde
     }
 
     return result;
+}
+
+std::unique_ptr<PathI> PathFinderUtils::NodesToPath(std::vector<PathFinderLineGraphNodeI*> *nodes, Vector2 startingPostion, Vector2 endingPosition, float nudgeFactor)
+{
+    std::vector<Vector2> points;
+    points.push_back(startingPostion);
+
+    if (nodes != nullptr)
+    {
+        for (auto lit = std::begin(*nodes); lit != std::end(*nodes); ++lit)
+        {
+            PathFinderLineGraphNodeI *node = *lit;
+            Vector2 normal = Vector2Scaled(node->GetNormal(), nudgeFactor);
+            Vector2 nudgedPoint = Vector2Add(*node->GetPoint(), normal);
+            points.push_back(nudgedPoint);
+        }
+    }
+    
+    points.push_back(endingPosition);
+
+    return std::unique_ptr<PathI>(std::move(new Path(points)));
 }

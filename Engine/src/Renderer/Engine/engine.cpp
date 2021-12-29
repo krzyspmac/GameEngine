@@ -102,7 +102,6 @@ void Engine::setup()
     polygon2List.push_back( Vector2Make(1280, 0) );
     polygon2List.push_back( Vector2Make(1280, 540) );
     polygon2List.push_back( Vector2Make(0, 540) );
-//    polygon2List.push_back( Vector2Make(0, 540) );
     Polygon polygon2(polygon2List);
 
     std::vector<Polygon> polygonList;

@@ -25,6 +25,7 @@ namespace engine
     public:
         std::vector<Vector2> &GetPath() { return m_path; };
         virtual std::vector<Line> ToLines() = 0;
+        virtual float GetDistance() = 0;
         virtual std::string Description() = 0;
     protected:
         std::vector<Vector2> m_path;
@@ -34,9 +35,7 @@ namespace engine
     class PathFinderCallbackI
     {
     public:
-        virtual void DidStart(float initialDistance) = 0;
-        virtual void DidFind() = 0;
-        virtual void DidFindPath(std::vector<Vector2>) = 0;
+        virtual void DidFindPath(std::unique_ptr<PathI>&) = 0;
     };
 
     /// Path finder data accessors
@@ -50,6 +49,12 @@ namespace engine
         virtual std::vector<Line> &GetAllLines() = 0;
 
     public:
+        /// Check if a target line intersects any other line.
+        virtual bool IntersectsAnyline(Line &line) = 0;
+
+        /// Checks if a target point is indie any polygon.
+        virtual bool PointInsidePolygons(Vector2 &point, Polygon **outPolygon) = 0;
+
         /// Caller is responsible for PathI.
         virtual PathI *CalculatePath(Vector2 fromPoint, Vector2 toPoint) = 0;
 
@@ -95,7 +100,7 @@ namespace engine
         /// through all the connecting points.
         /// Upon each loop as `DidStart` will be called with the initial distance.
         /// Each time a path if found a `DidFind` will be executed.
-        virtual void DistanceToPoint(PathFinderBaseI *sender, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;
+        virtual void DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack) = 0;
 
     protected:
         Vector2 *m_point;

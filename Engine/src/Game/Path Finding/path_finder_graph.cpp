@@ -118,19 +118,18 @@ void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, std::vector<Polyg
 {
     m_curIteration = 0;
 
-//    // Check if we have a clear line-of-sight path right at the start.
-//    Line targetLine(startingPoint, targetPoint);
-//    if (PointInsidePolygons(targetPoint, nullptr))
-//    {
-//        return;
-//    }
-//    // TODO: needs work due to issues with offending vertices when snapping out of the polygon
-//    Polygon *offendingPolygon = NULL;
-////    if (PointInsidePolygons(targetPoint, &offendingPolygon))
+    // Check if we have a clear line-of-sight path right at the start.
+    Line targetLine(startingPoint, targetPoint);
+    if (sender->PointInsidePolygons(targetPoint, NULL)) { return; }
 
-
-    // Get a list of all line-of-sight points that the starting point sees and make that
-    // out starting point list.
+    // If so it's a hit!
+    if (!sender->IntersectsAnyline(targetLine))
+    {
+        std::vector<PathFinderLineGraphNodeI*> nodes;
+        std::unique_ptr<PathI> path = PathFinderUtils::NodesToPath(&nodes, startingPoint, targetPoint, 3);
+        sender->DidFindPath(path);
+        return;
+    }
 
     std::vector<PathFinderLineGraphNodeI*> visibleNodes;
 
@@ -150,11 +149,6 @@ void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, std::vector<Polyg
                 intesectsPolygon = true;
             }
         });
-
-//        if (intesectsPolygon)
-//        {
-//            printf("intersects!");
-//        }
 
         if (!intersectsAnyLine && !intesectsPolygon)
         {
@@ -187,9 +181,7 @@ void PathFinderGraph::DistanceToPoint(PathFinderBaseI *sender, std::vector<Polyg
             continue;
         }
 
-        sender->DidStart(lineToFirstNode.GetLength());
-
-        node->DistanceToPoint(sender, targetPoint, pathStack);
+        node->DistanceToPoint(sender, startingPoint, targetPoint, pathStack);
     }
 }
 

@@ -40,7 +40,7 @@ void PathFinder::Prepare()
     // Join all points into one array.
     std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &p){
         std::for_each(p.GetPoints().begin(), p.GetPoints().end(), [&](Vector2 &v){
-            m_allPoint.push_back(v);
+            m_allPoints.push_back(v);
         });
     });
 
@@ -94,7 +94,7 @@ void PathFinder::Prepare()
                         intersectionPoint.x = i_x;
                         intersectionPoint.y = i_y;
 
-                        if (!PathFinderUtils::PointListIncludesPoint(intersectionPoint, m_allPoint))
+                        if (!PathFinderUtils::PointListIncludesPoint(intersectionPoint, m_allPoints))
                         {
                             intersects = true;
                             break;
@@ -133,7 +133,7 @@ bool PathFinder::IntersectsAnyline(Line &myLine)
             intersectionPoint.x = i_x;
             intersectionPoint.y = i_y;
 
-            if (!PathFinderUtils::PointListIncludesPoint(intersectionPoint, m_allPoint))
+            if (!PathFinderUtils::PointListIncludesPoint(intersectionPoint, m_allPoints))
             {
                 intersects = true;
                 return false;
@@ -168,14 +168,18 @@ void PathFinder::Draw()
 
 #if RENDER_CALCULATED_PATH
     provider.RenderSetColor(255, 255, 0, 255);
-    Vector2 *previous = nullptr;
-    std::for_each(m_calculatedPath.begin(), m_calculatedPath.end(), [&](Vector2 &v) {
-        if (previous)
-        {
-            provider.RenderDrawLine(previous->x, previous->y, v.x, v.y);
-        }
-        previous = &v;
-    });
+    if (m_calculatedPath != NULL)
+    {
+        Vector2 *previous = nullptr;
+        std::vector<Vector2> &points = m_calculatedPath.get()->GetPath();
+        std::for_each(points.begin(), points.end(), [&](Vector2 &v) {
+            if (previous)
+            {
+                provider.RenderDrawLine(previous->x, previous->y, v.x, v.y);
+            }
+            previous = &v;
+        });
+    }
 #endif
 
 #if RENDER_LINE_NORMALS
@@ -235,29 +239,15 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
     m_targetPosition = toPoint;
 
     Line myLine(fromPoint, m_targetPosition);
+    m_maxDistance = std::numeric_limits<float>().max()-1;
 
-    // Can a clear line of slight be established?
-    bool intersects = IntersectsAnyline(myLine);
-    if (!intersects)
-    {
-        m_calculatedPath.clear();
-        m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
-        m_calculatedPath.push_back(m_targetPosition);
-    }
-    else
-    {
-        // Go through each point and connected points until a clear
-        // line of slight can be established between the testing
-        // point and the target provided.
-        m_maxDistance = std::numeric_limits<float>().max()-1;
-        m_calculatedPath.clear();
+    m_calculatedPath.reset();
 
-        performanceMeasure("path", [&](void) {
-            m_lineGraph->DistanceToPoint(this, m_polygons, fromPoint, m_targetPosition, &m_tempPathStack);
-        });
-    }
+    performanceMeasure("path", [&](void) {
+        m_lineGraph->DistanceToPoint(this, m_polygons, fromPoint, m_targetPosition, &m_tempPathStack);
+    });
 
-    return new Path(m_calculatedPath);
+    return m_calculatedPath.get();
 }
 
 Vector2 PathFinder::NudgedPosition(Vector2 position)
@@ -265,84 +255,12 @@ Vector2 PathFinder::NudgedPosition(Vector2 position)
     return Vector2Zero;
 }
 
-void PathFinder::DidStart(float initialDistance)
+void PathFinder::DidFindPath(std::unique_ptr<PathI> &path)
 {
-    m_startingDistance = initialDistance;
-}
-
-void PathFinder::DidFind()
-{
-    float endingDistance = (!m_tempPathStack.empty() && !PointInsidePolygons(m_targetPosition, NULL))
-    ?   Vector2Distance(*m_tempPathStack.back()->GetPoint(), m_targetPosition)
-    :   0
-    ;
-
-    bool insideAnyPolygon = false;
-    for (auto it = std::begin(m_tempPathStack); it != std::end(m_tempPathStack); ++it)
+    float distance = path->GetDistance();
+    if (distance < m_maxDistance)
     {
-        PathFinderLineGraphNodeI *node = *it;
-        Vector2 &point = *node->GetPoint();
-        if (PointInsidePolygons(point, NULL))
-        {
-            insideAnyPolygon = true;
-            break;
-        }
+        m_maxDistance = distance;
+        m_calculatedPath = std::move(path);
     }
-
-    if (!insideAnyPolygon)
-    {
-        float distance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance + endingDistance;
-        if (distance < m_maxDistance)
-        {
-            m_maxDistance = distance;
-
-            m_calculatedPath.clear();
-
-            m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack, 3);
-            m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
-            if (!PointInsidePolygons(m_targetPosition, NULL))
-            {
-                m_calculatedPath.push_back(m_targetPosition);
-            }
-        }
-    }
-}
-
-void PathFinder::DidFindPath(std::vector<Vector2> path)
-{
-//    float endingDistance = (!path.empty() && !PointInsidePolygons(m_targetPosition, NULL))
-//    ?   Vector2Distance(*m_tempPathStack.back()->GetPoint(), m_targetPosition)
-//    :   0
-//    ;
-//
-//    bool insideAnyPolygon = false;
-//    for (auto it = std::begin(m_tempPathStack); it != std::end(m_tempPathStack); ++it)
-//    {
-//        PathFinderLineGraphNodeI *node = *it;
-//        Vector2 &point = *node->GetPoint();
-//        if (PointInsidePolygons(point, NULL))
-//        {
-//            insideAnyPolygon = true;
-//            break;
-//        }
-//    }
-//
-//    if (!insideAnyPolygon)
-//    {
-//        float distance = PathFinderLineGraphNode::RPathDistance(&m_tempPathStack) + m_startingDistance + endingDistance;
-//        if (distance < m_maxDistance)
-//        {
-//            m_maxDistance = distance;
-//
-//            m_calculatedPath.clear();
-//
-//            m_calculatedPath = PathFinderUtils::ListOfNodesToVectors(&m_tempPathStack);
-//            m_calculatedPath.insert(std::begin(m_calculatedPath), m_startPosition);
-//            if (!PointInsidePolygons(m_targetPosition, NULL))
-//            {
-//                m_calculatedPath.push_back(m_targetPosition);
-//            }
-//        }
-//    }
-
 }

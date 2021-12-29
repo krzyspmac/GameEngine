@@ -10,7 +10,6 @@
 
 #include "common_engine_impl.h"
 #include "path_finder_interface.h"
-
 namespace engine
 {
 
@@ -28,7 +27,7 @@ namespace engine
         void AddConnection(PathFinderLineGraphNodeI *node);
         std::vector<PathFinderLineGraphNodeI*>& GetConnections();
         bool HasConnectionWithPoint(Vector2 *point);
-        void DistanceToPoint(PathFinderBaseI *sender, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack);
+        void DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack);
     };
 
 };

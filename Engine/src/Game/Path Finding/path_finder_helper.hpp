@@ -39,6 +39,13 @@ namespace engine
         /// away from the node verted in order to get rid of the `crossing the polygon when on a
         /// polygon line issue`.
         static std::vector<Vector2> ListOfNodesToVectors(std::vector<PathFinderLineGraphNodeI*>*, float);
+
+        /// Convert a list of nodes to a regular Path. Takes info account the starting & ending points.
+        /// Has the option to "nudge" the position
+        /// away from the node verted in order to get rid of the `crossing the polygon when on a
+        /// polygon line issue`.
+        /// The caller may take ownership of the resulting PathI (std::move).
+        static std::unique_ptr<PathI>NodesToPath(std::vector<PathFinderLineGraphNodeI*> *nodes, Vector2 startingPostion, Vector2 endingPosition, float nudgeFactor);
     };
 };
 

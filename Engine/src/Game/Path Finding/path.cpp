@@ -26,6 +26,20 @@ std::vector<Line> Path::ToLines()
     return result;
 }
 
+float Path::GetDistance()
+{
+    float   distance = 0;
+    size_t  count = m_path.size();
+
+    for (int i = 0; i < count; i++)
+    {
+        if (i+1 >= count) { break; }
+        distance += Vector2Distance(m_path.at(i), m_path.at(i+1));
+    }
+
+    return distance;
+}
+
 std::string Path::Description()
 {
     std::string result;

@@ -37,30 +37,27 @@ namespace engine
 
     /// PathFinderCallbackI
     public:
-        void DidStart(float initialDistance);
-        void DidFind();
-        void DidFindPath(std::vector<Vector2>);
+        void DidFindPath(std::unique_ptr<PathI>&);
 
     /// PathFinderDataI
     public:
-        std::vector<Vector2> &GetAllPoint() { return m_allPoint; };
+        std::vector<Vector2> &GetAllPoint() { return m_allPoints; };
         std::vector<Line> &GetAllLines() { return m_allLines; };
 
     private:
         std::vector<Polygon> m_polygons;
         std::vector<Line> m_connectionLines;
 
-        std::vector<Vector2> m_allPoint;
+        std::vector<Vector2> m_allPoints;
         std::vector<Line> m_allLines;
 
         // path claculation
         std::unique_ptr<PathFinderGraphI> m_lineGraph;
         Vector2 m_startPosition;
         Vector2 m_targetPosition;
-        std::vector<Vector2> m_calculatedPath;
-        float m_startingDistance;
-        float m_maxDistance;
         std::vector<PathFinderLineGraphNodeI*> m_tempPathStack;
+        float m_maxDistance;
+        std::unique_ptr<PathI> m_calculatedPath;
     };
 };
 

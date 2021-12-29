@@ -86,7 +86,7 @@ float PathFinderLineGraphNode::RPathDistance(std::vector<PathFinderLineGraphNode
     return distance;
 }
 
-void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
+void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &startingPoint, Vector2 &targetPoint, std::vector<PathFinderLineGraphNodeI*> *pathStack)
 {
     pathStack->emplace_back(this); // put back to the stack; we don't want to traverse the same point again
 
@@ -94,7 +94,10 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
     if (!PathFinderUtils::IntersectsAnyline(targetLine, sender->GetAllPoint(), sender->GetAllLines()))
     {
         // If there's a connection and we're not crossing any other lines it's a hit!
-        sender->DidFind();
+//        sender->DidFind();
+
+        std::unique_ptr<PathI> path = PathFinderUtils::NodesToPath(pathStack, startingPoint, targetPoint, 3);
+        sender->DidFindPath(path);
     }
 
     if (m_connectingNodes.size() < 1)
@@ -115,6 +118,6 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
         if (!PathFinderUtils::IsPointWithingViewport(*point)) { continue; }
 
         // iterate further
-        node->DistanceToPoint(sender, targetPoint, pathStack);
+        node->DistanceToPoint(sender, startingPoint, targetPoint, pathStack);
     }
 }

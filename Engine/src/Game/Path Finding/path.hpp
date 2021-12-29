@@ -19,6 +19,7 @@ namespace engine
         Path(): PathI() { };
         Path(std::vector<Vector2> path): PathI(path) { };
         virtual ~Path() { };
+        float GetDistance();
         std::string Description();
     public:
         std::vector<Line> ToLines();

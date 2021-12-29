@@ -40,10 +40,9 @@ void CharacterMover::MoveCharacter(Vector2 target)
 
 void CharacterMover::MoveCharacterAlongPath(PathI *path)
 {
-    m_path = std::unique_ptr<PathI>(path);
-
-    if (m_path != nullptr)
+    if (path != nullptr)
     {
+        m_path = std::unique_ptr<PathI>(new Path(path->GetPath()));
         m_moveType = MOVETYPE_ALONG_PATH;
         m_pathSegments = m_path->ToLines();
         PathSegmentSet(0);
