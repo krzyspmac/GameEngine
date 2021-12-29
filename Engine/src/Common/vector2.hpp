@@ -10,6 +10,8 @@
 
 #include <stdio.h>
 #include <math.h>
+#include "general.hpp"
+#include "common.h"
 
 namespace engine
 {
@@ -87,6 +89,22 @@ namespace engine
         v.x *= scale;
         v.y *= scale;
         return v;
+    }
+
+    inline float Vector2Distance2(Vector2 v, Vector2 w)
+    {
+        return sqr(v.x - w.x) + sqr(v.y - w.y);
+    }
+
+    inline float Vector2Distance2Squared(Vector2 p, Vector2 v, Vector2 w)
+    {
+        float l2 = Vector2Distance2(v, w);
+        if (l2 == 0) { return Vector2Distance2(p, v); }
+
+        float t = ((p.x - v.x) * (w.x - v.x) + (p.y - v.y) * (w.y - v.y)) / l2;
+        t = MAX(0, MIN(1, t));
+
+        return Vector2Distance2(p, Vector2Make(v.x + t * (w.x - v.x), v.y + t * (w.y - v.y)));
     }
 };
 

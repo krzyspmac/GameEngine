@@ -69,6 +69,11 @@ namespace engine
             return Line(lineCenter, lineCenterExtended);
         }
 
+        float DistanceToPoint(Vector2 &p)
+        {
+            return sqrt(Vector2Distance2Squared(p, p1, p2));
+        }
+
     private:
         Vector2 p1;
         Vector2 p2;

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include "defs.h"
+#include "general.hpp"
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"

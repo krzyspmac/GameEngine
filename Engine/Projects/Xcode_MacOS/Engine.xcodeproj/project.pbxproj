@@ -143,6 +143,7 @@
 		7FE2E5DC277B24AD00538094 /* line.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = line.hpp; sourceTree = "<group>"; };
 		7FE2E5DF277B3E6E00538094 /* performance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = performance.cpp; sourceTree = "<group>"; };
 		7FE2E5E0277B3E6E00538094 /* performance.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = performance.hpp; sourceTree = "<group>"; };
+		7FF641C6277CC72D0017D86D /* general.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +359,7 @@
 		7FE2E5D2277B233900538094 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7FF641C6277CC72D0017D86D /* general.hpp */,
 				7FE2E5D4277B234E00538094 /* function.hpp */,
 				7FE2E5D8277B23BC00538094 /* vector2.hpp */,
 				7FE2E5DC277B24AD00538094 /* line.hpp */,

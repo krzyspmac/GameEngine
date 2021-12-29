@@ -58,6 +58,9 @@ namespace engine
         std::vector<PathFinderLineGraphNodeI*> m_tempPathStack;
         float m_maxDistance;
         std::unique_ptr<PathI> m_calculatedPath;
+
+        // tmp
+        Line *m_nudgedLine;
     };
 };
 

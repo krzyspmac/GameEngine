@@ -15,16 +15,25 @@
 #include "path.hpp"
 #include "performance.hpp"
 
+#define RENDER_DEBUG_LINES              1
+
 #define RENDER_CONNECTION_LINES         1
+    #define RENDER_CONNECTION_LINES_C   255, 0, 0, 100
 #define RENDER_POLYGONS                 1
+    #define RENDER_POLYGONS_C           255, 255, 255, 120
 #define RENDER_CALCULATED_PATH          1
+    #define RENDER_CALCULATED_PATH_C    255, 255, 0, 255
 #define RENDER_LINE_NORMALS             1
-#define REDNER_VERTEX_NORMAL            1
+    #define RENDER_LINE_NORMALS_C       255, 255, 0, 255
+#define RENDER_VERTEX_NORMAL            1
+    #define RENDER_VERTEX_NORMAL_C      0, 255, 0, 255
+#define RENDER_NUDGED_LINE              1
+    #define RENDER_NUDGED_LINE_C        0, 255, 0, 255
 
 using namespace engine;
 
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
-: m_polygons(polygonList), m_lineGraph(nullptr)
+: m_polygons(polygonList), m_lineGraph(nullptr), m_nudgedLine(nullptr)
 {
     performanceMeasure("PathFinder::init", [&]{
         Prepare();
@@ -148,17 +157,18 @@ bool PathFinder::IntersectsAnyline(Line &myLine)
 
 void PathFinder::Draw()
 {
+#if RENDER_DEBUG_LINES
     EngineProviderI &provider = GetMainEngine()->getProvider();
 
 #if RENDER_CONNECTION_LINES
-    provider.RenderSetColor(255, 0, 0, 100);
+    provider.RenderSetColor(RENDER_CONNECTION_LINES_C);
     std::for_each(m_connectionLines.begin(), m_connectionLines.end(), [&](Line &p) {
         DrawLine(p);
     });
 #endif
 
 #if RENDER_POLYGONS
-    provider.RenderSetColor(255, 255, 255, 120);
+    provider.RenderSetColor(RENDER_POLYGONS_C);
     std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &p) {
         std::for_each(p.GetLines().begin(), p.GetLines().end(), [&](Line &l) {
             DrawLine(l);
@@ -167,7 +177,7 @@ void PathFinder::Draw()
 #endif
 
 #if RENDER_CALCULATED_PATH
-    provider.RenderSetColor(255, 255, 0, 255);
+    provider.RenderSetColor(RENDER_CALCULATED_PATH_C);
     if (m_calculatedPath != NULL)
     {
         Vector2 *previous = nullptr;
@@ -183,14 +193,15 @@ void PathFinder::Draw()
 #endif
 
 #if RENDER_LINE_NORMALS
+    provider.RenderSetColor(RENDER_LINE_NORMALS_C);
     std::for_each(m_allLines.begin(), m_allLines.end(), [&](Line &l){
         Line nl = l.MakeNormalLine(10);
         provider.RenderDrawLine(nl.GetP1().x, nl.GetP1().y, nl.GetP2().x, nl.GetP2().y);
     });
 #endif
 
-#if REDNER_VERTEX_NORMAL
-    provider.RenderSetColor(0, 255, 0, 255);
+#if RENDER_VERTEX_NORMAL
+    provider.RenderSetColor(RENDER_VERTEX_NORMAL_C);
     for (auto it = std::begin(m_lineGraph->GetNodes()); it != std::end(m_lineGraph->GetNodes()); ++it)
     {
         PathFinderLineGraphNodeI *node = it->get();
@@ -200,6 +211,15 @@ void PathFinder::Draw()
         provider.RenderDrawLine(p1.x, p1.y, p2.x, p2.y);
     }
 #endif
+
+#if RENDER_NUDGED_LINE
+    if (m_nudgedLine != nullptr)
+    {
+        provider.RenderDrawLine(m_nudgedLine->GetP1().x, m_nudgedLine->GetP1().y, m_nudgedLine->GetP2().x, m_nudgedLine->GetP2().y);
+    }
+#endif
+
+#endif // RENDER_DEBUG_LINES
 }
 
 void PathFinder::DrawLine(Line &line)
@@ -236,9 +256,8 @@ bool PathFinder::PointInsidePolygons(Vector2 &point, Polygon **outPolygon)
 PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
 {
     m_startPosition = fromPoint;
-    m_targetPosition = toPoint;
+    m_targetPosition = NudgedPosition(toPoint);
 
-    Line myLine(fromPoint, m_targetPosition);
     m_maxDistance = std::numeric_limits<float>().max()-1;
 
     m_calculatedPath.reset();
@@ -252,7 +271,30 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
 
 Vector2 PathFinder::NudgedPosition(Vector2 position)
 {
-    return Vector2Zero;
+    float maxDistance = std::numeric_limits<float>().max()-1;
+
+    std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &poly){
+        std::for_each(poly.GetLines().begin(), poly.GetLines().end(), [&](Line &line){
+            float distance = line.DistanceToPoint(position);
+            if (distance < maxDistance)
+            {
+                maxDistance = distance;
+                m_nudgedLine = &line;
+            }
+        });
+    });
+
+    if (m_nudgedLine != nullptr)
+    {
+        Vector2 normal = m_nudgedLine->GetNormal();
+        Vector2 scaled = Vector2Scaled(normal, maxDistance + 1);
+        Vector2 newPosition = Vector2Add(position, scaled);
+        return newPosition;;
+    }
+    else
+    {
+        return position;
+    }
 }
 
 void PathFinder::DidFindPath(std::unique_ptr<PathI> &path)
