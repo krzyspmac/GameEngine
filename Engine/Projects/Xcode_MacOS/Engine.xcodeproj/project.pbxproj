@@ -70,6 +70,8 @@
 		7FE2E5DE277B24AD00538094 /* line.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5DC277B24AD00538094 /* line.hpp */; };
 		7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5DF277B3E6E00538094 /* performance.cpp */; };
 		7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5E0277B3E6E00538094 /* performance.hpp */; };
+		7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */; };
+		7FF641CD277CE8CB0017D86D /* polygon_loader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -144,6 +146,8 @@
 		7FE2E5DF277B3E6E00538094 /* performance.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = performance.cpp; sourceTree = "<group>"; };
 		7FE2E5E0277B3E6E00538094 /* performance.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = performance.hpp; sourceTree = "<group>"; };
 		7FF641C6277CC72D0017D86D /* general.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
+		7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = polygon_loader.cpp; sourceTree = "<group>"; };
+		7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = polygon_loader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 				7F13824C277505B600ED6D67 /* common_engine_impl.h */,
 				7F1382A727750AC000ED6D67 /* common_sdl.h */,
 				7FE2E5D2277B233900538094 /* Common */,
+				7FF641C9277CE8BC0017D86D /* Loaders */,
 				7FDDAF9A2776872100578F86 /* Game */,
 				7F13821A277505B600ED6D67 /* Renderer */,
 			);
@@ -371,6 +376,15 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		7FF641C9277CE8BC0017D86D /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */,
+				7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */,
+			);
+			path = Loaders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -416,6 +430,7 @@
 				7F138254277505B600ED6D67 /* texture_interface.h in Headers */,
 				7FE2E5CD277A3FA900538094 /* path_finder_graph.hpp in Headers */,
 				7F13825E277505B600ED6D67 /* event_provider_interface.h in Headers */,
+				7FF641CD277CE8CB0017D86D /* polygon_loader.hpp in Headers */,
 				7F13827A277505B600ED6D67 /* engine.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -480,6 +495,7 @@
 				7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */,
 				7F138261277505B600ED6D67 /* engine_provider.cpp in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
+				7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,

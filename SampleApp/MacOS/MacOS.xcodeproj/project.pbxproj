@@ -31,6 +31,7 @@
 		7F7967EC2775F78D003ABD3E /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E72775F78D003ABD3E /* characters.png */; };
 		7F7967ED2775F78D003ABD3E /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E82775F78D003ABD3E /* background.jpg */; };
 		7F7967EE2775F78D003ABD3E /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F7967E92775F78D003ABD3E /* EnterCommand.ttf */; };
+		7FF641C8277CE8A40017D86D /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FF641C7277CE8A40017D86D /* polygons.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +76,7 @@
 		7F7967E72775F78D003ABD3E /* characters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = characters.png; sourceTree = "<group>"; };
 		7F7967E82775F78D003ABD3E /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		7F7967E92775F78D003ABD3E /* EnterCommand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EnterCommand.ttf; sourceTree = "<group>"; };
+		7FF641C7277CE8A40017D86D /* polygons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polygons.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 		7F7967E42775F78D003ABD3E /* out */ = {
 			isa = PBXGroup;
 			children = (
+				7FF641C7277CE8A40017D86D /* polygons.json */,
 				7F6428952778A9FD00EE9E2C /* out.gpack */,
 				7F64288F2777CB3000EE9E2C /* brett_character.json */,
 				7F64287D27777E0D00EE9E2C /* background.json */,
@@ -245,6 +248,7 @@
 			files = (
 				7F64287B2777716200EE9E2C /* brett.json in Resources */,
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
+				7FF641C8277CE8A40017D86D /* polygons.json in Resources */,
 				7F7967EE2775F78D003ABD3E /* EnterCommand.ttf in Resources */,
 				7F7967EA2775F78D003ABD3E /* main.lua in Resources */,
 				7F7967EC2775F78D003ABD3E /* characters.png in Resources */,

@@ -15,6 +15,7 @@
 #include "character.hpp"
 #include "engine_provider.hpp"
 #include "character_mover.hpp"
+#include "polygon_loader.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -76,38 +77,7 @@ void Engine::setup()
     m_characterMover = new CharacterMover(m_character, 300.0);
     m_characterMover->PlaceCharacter(Vector2Make(100, 450));
 
-    std::vector<Vector2> polygon1List;
-    polygon1List.push_back( Vector2Make(0, 393) );
-    polygon1List.push_back( Vector2Make(557, 368) );
-    polygon1List.push_back( Vector2Make(742, 295) );
-    polygon1List.push_back( Vector2Make(590, 267) );
-    polygon1List.push_back( Vector2Make(292, 254) );
-    polygon1List.push_back( Vector2Make(291, 300) );
-    polygon1List.push_back( Vector2Make(386, 280) );
-    polygon1List.push_back( Vector2Make(386, 319) );
-    polygon1List.push_back( Vector2Make(206, 353) );
-
-    polygon1List.push_back( Vector2Make(0, 254) );
-    polygon1List.push_back( Vector2Make(0, 393) );
-    Polygon polygon1(polygon1List);
-
-    std::vector<Vector2> polygon2List;
-    polygon2List.push_back( Vector2Make(0, 487) );
-    polygon2List.push_back( Vector2Make(212, 466) );
-    polygon2List.push_back( Vector2Make(624, 446) );
-    polygon2List.push_back( Vector2Make(908, 319) );
-    polygon2List.push_back( Vector2Make(873, 259) );
-    polygon2List.push_back( Vector2Make(703, 229) );
-    polygon2List.push_back( Vector2Make(689, 0) );
-    polygon2List.push_back( Vector2Make(1280, 0) );
-    polygon2List.push_back( Vector2Make(1280, 540) );
-    polygon2List.push_back( Vector2Make(0, 540) );
-    Polygon polygon2(polygon2List);
-
-    std::vector<Polygon> polygonList;
-    polygonList.push_back(polygon1);
-    polygonList.push_back(polygon2);
-
+    std::vector<Polygon> polygonList = PolygonLoader::Load(GetMainEngine()->getFileAccess().GetAccess("polygons.json"));
     m_walkingBoxes = new PathFinder(polygonList);
 }
 
@@ -260,15 +230,10 @@ void Engine::ApplyScaleTransformations()
 
 void Engine::MouseClicked()
 {
-//    m_character->SetTalking(!m_character->IsTalking());
-//    m_characterMover->MoveCharacter(m_mousePosition);
     Vector2 pos = m_characterMover->GetCharacterPosition();
     Vector2 from = Vector2Make(pos.x, pos.y);
     PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
     m_characterMover->MoveCharacterAlongPath(path);
-
-    //Vector2 nudgedPosition = m_walkingBoxes->NudgedPosition(Vector2Make(m_mousePosition.x, m_mousePosition.y));
-    //m_characterMover->PlaceCharacter(nudgedPosition);
 }
 
 TextureI *Engine::LoadTexture(std::string filename)

@@ -255,6 +255,7 @@ bool PathFinder::PointInsidePolygons(Vector2 &point, Polygon **outPolygon)
 
 PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
 {
+    m_nudgedLine = nullptr;
     m_startPosition = fromPoint;
     m_targetPosition = NudgedPosition(toPoint);
 
@@ -271,30 +272,31 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
 
 Vector2 PathFinder::NudgedPosition(Vector2 position)
 {
-    float maxDistance = std::numeric_limits<float>().max()-1;
+    if (PointInsidePolygons(position, NULL))
+    {
+        float maxDistance = std::numeric_limits<float>().max()-1;
 
-    std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &poly){
-        std::for_each(poly.GetLines().begin(), poly.GetLines().end(), [&](Line &line){
-            float distance = line.DistanceToPoint(position);
-            if (distance < maxDistance)
-            {
-                maxDistance = distance;
-                m_nudgedLine = &line;
-            }
+        std::for_each(m_polygons.begin(), m_polygons.end(), [&](Polygon &poly){
+            std::for_each(poly.GetLines().begin(), poly.GetLines().end(), [&](Line &line){
+                float distance = line.DistanceToPoint(position);
+                if (distance < maxDistance)
+                {
+                    maxDistance = distance;
+                    m_nudgedLine = &line;
+                }
+            });
         });
-    });
 
-    if (m_nudgedLine != nullptr)
-    {
-        Vector2 normal = m_nudgedLine->GetNormal();
-        Vector2 scaled = Vector2Scaled(normal, maxDistance + 1);
-        Vector2 newPosition = Vector2Add(position, scaled);
-        return newPosition;;
+        if (m_nudgedLine != nullptr)
+        {
+            Vector2 normal = m_nudgedLine->GetNormal();
+            Vector2 scaled = Vector2Scaled(normal, maxDistance + 1);
+            Vector2 newPosition = Vector2Add(position, scaled);
+            return newPosition;;
+        }
     }
-    else
-    {
-        return position;
-    }
+
+    return position;
 }
 
 void PathFinder::DidFindPath(std::unique_ptr<PathI> &path)
