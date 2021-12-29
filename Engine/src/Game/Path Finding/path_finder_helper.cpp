@@ -148,8 +148,9 @@ std::vector<Vector2> PathFinderUtils::ListOfNodesToVectors(std::vector<PathFinde
     for (auto lit = std::begin(*list); lit != std::end(*list); ++lit)
     {
         PathFinderLineGraphNodeI *node = *lit;
-        Vector2 *vec = node->GetPoint();
-        result.push_back(Vector2Make(vec->x, vec->y));
+        Vector2 normal = Vector2Scaled(node->GetNormal(), 3);
+        Vector2 nudgedPoint = Vector2Add(*node->GetPoint(), normal);
+        result.push_back(nudgedPoint);
     }
 
     return result;
