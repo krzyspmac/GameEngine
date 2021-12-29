@@ -51,6 +51,7 @@ void CharacterMover::MoveCharacterAlongPath(PathI *path)
         m_moveType = MOVETYPE_NONE;
         m_path.reset();
         m_pathSegments.clear();
+        m_character->SetWalkState(CharacterWalkStateGetStanding(m_character->GetWalkState()));
     }
 }
 
