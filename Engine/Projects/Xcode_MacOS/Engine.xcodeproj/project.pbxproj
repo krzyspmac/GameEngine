@@ -327,8 +327,6 @@
 				7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */,
 				7FE2E5CB277A3FA900538094 /* path_finder_graph.hpp */,
 				7FE2E5CA277A3FA900538094 /* path_finder_graph.cpp */,
-				7F64289F2779183C00EE9E2C /* polygon.hpp */,
-				7F64289E2779183C00EE9E2C /* polygon.cpp */,
 				7F6428A327791A9100EE9E2C /* path_finder.hpp */,
 				7F6428A227791A9100EE9E2C /* path_finder.cpp */,
 				7FE2E5CF277B13B000538094 /* path.hpp */,
@@ -363,6 +361,8 @@
 				7FE2E5D4277B234E00538094 /* function.hpp */,
 				7FE2E5D8277B23BC00538094 /* vector2.hpp */,
 				7FE2E5DC277B24AD00538094 /* line.hpp */,
+				7F64289F2779183C00EE9E2C /* polygon.hpp */,
+				7F64289E2779183C00EE9E2C /* polygon.cpp */,
 				7FE2E5E0277B3E6E00538094 /* performance.hpp */,
 				7FE2E5DF277B3E6E00538094 /* performance.cpp */,
 			);
