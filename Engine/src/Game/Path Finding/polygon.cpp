@@ -53,6 +53,22 @@ Polygon::Polygon(std::vector<Vector2> points)
     {
         m_lines.push_back(Line(last, first));
     }
+
+    size_t countLines = m_lines.size();
+    for (size_t i = 0; i < countLines; i++)
+    {
+        if (i+1 >= countLines) { continue; }
+
+        Line &first = m_lines.at(i);
+        Line &second = m_lines.at(i+1);
+
+        Vector2 firstNormal = first.GetNormal();
+        Vector2 secondNormal = second.GetNormal();
+        Vector2 avg = Vector2Make((firstNormal.x + secondNormal.x)/2, (firstNormal.y + secondNormal.y)/2);
+        avg = Vector2Normalized(avg);
+        first.SetP2OutsideVector(avg);
+        second.SetP1OutsideVector(avg);
+    }
 }
 
 bool Polygon::ContainsLine(Line &someLine)

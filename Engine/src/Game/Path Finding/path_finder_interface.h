@@ -51,6 +51,10 @@ namespace engine
     public:
         /// Caller is responsible for PathI.
         virtual PathI *CalculatePath(Vector2 fromPoint, Vector2 toPoint) = 0;
+
+        /// Modify the starting point to better suit the algorithm. Limit the number
+        /// of errors due to the origin point being on the polygon line.
+        virtual Vector2 NudgedPosition(Vector2 position) = 0;
     };
 
     /// Path finder amalgamated interface

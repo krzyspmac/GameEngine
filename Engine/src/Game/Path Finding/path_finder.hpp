@@ -27,6 +27,7 @@ namespace engine
 
     public:
         PathI *CalculatePath(Vector2 fromPoint, Vector2 toPoint);
+        Vector2 NudgedPosition(Vector2 position);
 
     private:
         bool IntersectsAnyline(Line &line);

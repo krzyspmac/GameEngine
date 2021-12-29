@@ -19,7 +19,7 @@ namespace engine
     {
     public:
         Line(Vector2 &p1, Vector2 &p2)
-            : p1(p1), p2(p2)
+            : p1(p1), p2(p2), p1PointOutsideVector({0, 0}), p2PointOutsideVector({0, 0})
         {
             length = Vector2Distance(p1, p2);
             centerPoint = Vector2Make((p2.x+p1.x)/2, (p2.y+p1.y)/2);
@@ -65,6 +65,21 @@ namespace engine
             return Line(lineCenter, lineCenterExtended);
         }
 
+        void SetP1OutsideVector(Vector2 value) { p1PointOutsideVector = value; };
+        Vector2& GetP1OutsideVector() { return p1PointOutsideVector; };
+
+        void SetP2OutsideVector(Vector2 value) { p2PointOutsideVector = value; };
+        Vector2& GetP2OutsideVector() { return p2PointOutsideVector; };
+
+        float getDistanceWith(const Vector2& point) const {
+//            Vector AB(m_start, m_finish);
+//            Vector AC(m_start, point);
+//            double norm = AB.getNorm();
+//            double area = AB.getCrossProductAsInt(AC);
+//            return std::abs(area / norm);
+            return 0;
+        }
+
     private:
         Vector2 p1;
         Vector2 p2;
@@ -72,6 +87,8 @@ namespace engine
         Vector2 lineVector;
         float length;
         Vector2 normalVector; // from the middle of the line
+        Vector2 p1PointOutsideVector;
+        Vector2 p2PointOutsideVector;
     };
 };
 

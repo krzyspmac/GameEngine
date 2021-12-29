@@ -40,6 +40,11 @@ namespace engine
         return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
     }
 
+    inline Vector2 Vector2Add(Vector2 &p1, Vector2 &p2)
+    {
+        return Vector2Make(p1.x + p2.x, p1.y + p2.y);
+    }
+
     inline Vector2 Vector2GetDiff(Vector2 &first, Vector2 &second)
     {
         Vector2 result;

@@ -182,7 +182,21 @@ void PathFinder::Draw()
     std::for_each(m_allLines.begin(), m_allLines.end(), [&](Line &l){
         Line nl = l.MakeNormalLine(10);
         provider.RenderDrawLine(nl.GetP1().x, nl.GetP1().y, nl.GetP2().x, nl.GetP2().y);
+
+//        Vector2 &p1 = l.GetP1();
+//        Vector2 p1n = Vector2Add(p1, l.GetP1OutsideVector());
+//        p1n = Vector2Scaled(p1n, 2);
+//        Line p1nl(p1, p1n);
+//        provider.RenderDrawLine(p1nl.GetP1().x, p1nl.GetP1().y, p1nl.GetP2().x, p1nl.GetP2().y);
+//
+//        Vector2 &p2 = l.GetP2();
+//        Vector2 p2n = Vector2Add(p2, l.GetP2OutsideVector());
+//        p2n = Vector2Scaled(p2n, 2);
+//        Line p2nl(p2, p2n);
+//        provider.RenderDrawLine(p2nl.GetP1().x, p2nl.GetP1().y, p2nl.GetP2().x, p2nl.GetP2().y);
     });
+
+    // Draw each normal vector for each vertice in the graph
 }
 
 void PathFinder::DrawLine(Line &line)
@@ -266,6 +280,11 @@ PathI *PathFinder::CalculatePath(Vector2 fromPoint, Vector2 toPoint)
     }
 
     return new Path(m_calculatedPath);
+}
+
+Vector2 PathFinder::NudgedPosition(Vector2 position)
+{
+    return Vector2Zero;
 }
 
 void PathFinder::DidStart(float initialDistance)
