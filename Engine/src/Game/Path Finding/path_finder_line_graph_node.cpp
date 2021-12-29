@@ -94,8 +94,6 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
     if (!PathFinderUtils::IntersectsAnyline(targetLine, sender->GetAllPoint(), sender->GetAllLines()))
     {
         // If there's a connection and we're not crossing any other lines it's a hit!
-//        sender->DidFind();
-
         std::unique_ptr<PathI> path = PathFinderUtils::NodesToPath(pathStack, startingPoint, targetPoint, 3);
         sender->DidFindPath(path);
     }

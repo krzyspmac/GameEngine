@@ -33,7 +33,7 @@
 using namespace engine;
 
 PathFinder::PathFinder(std::vector<Polygon> polygonList)
-: m_polygons(polygonList), m_lineGraph(nullptr), m_nudgedLine(nullptr)
+: m_polygons(polygonList), m_lineGraph(nullptr), m_nudgedLine(nullptr), m_nudgedPosition(Vector2Zero)
 {
     performanceMeasure("PathFinder::init", [&]{
         Prepare();
@@ -219,6 +219,9 @@ void PathFinder::Draw()
     }
 #endif
 
+    provider.RenderSetColor(255, 0, 0, 255);
+    provider.RenderDrawPoint(m_nudgedPosition.x, m_nudgedPosition.y);
+
 #endif // RENDER_DEBUG_LINES
 }
 
@@ -290,9 +293,10 @@ Vector2 PathFinder::NudgedPosition(Vector2 position)
         if (m_nudgedLine != nullptr)
         {
             Vector2 normal = m_nudgedLine->GetNormal();
-            Vector2 scaled = Vector2Scaled(normal, maxDistance + 1);
+            Vector2 scaled = Vector2Scaled(normal, maxDistance + 2);
             Vector2 newPosition = Vector2Add(position, scaled);
-            return newPosition;;
+            m_nudgedPosition = newPosition;
+            return newPosition;
         }
     }
 

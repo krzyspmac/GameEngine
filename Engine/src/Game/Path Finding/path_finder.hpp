@@ -61,6 +61,7 @@ namespace engine
 
         // tmp
         Line *m_nudgedLine;
+        Vector2 m_nudgedPosition;
     };
 };
 
