@@ -27,20 +27,24 @@ RendererEntry::RendererEntry()
     EventProvider *eventProvider = new EventProvider();
     EventsManager *eventsManager = new EventsManager(*eventProvider, *ep);
     CharacterManager *characteManager = new CharacterManager();
-    SceneManager *m_sceneManager = new SceneManager();
-
+    SceneManager *sceneManager = new SceneManager();
+    SpriteAtlasManager * spriteAtlasManager = new SpriteAtlasManager();
+    SpriteRendererManager *sprireRendererManager = new SpriteRendererManager();
+    
     this->m_fileAccess = fa;
     this->m_engineProvider = ep;
     this->m_scriptingEngine = se;
     this->m_eventProvider = eventProvider;
     this->m_eventsManager = eventsManager;
     this->m_characterManager = characteManager;
-    this->m_sceneManager = m_sceneManager;
+    this->m_sceneManager = sceneManager;
+    this->m_spriteAtlasManager = spriteAtlasManager;
+    this->m_sprireRendererManager = sprireRendererManager;
 
     Size viewportSize;
     viewportSize.width = SCREEN_WIDTH;
     viewportSize.height = SCREEN_HEIGHT;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, viewportSize);
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, viewportSize);
 }
 
 int RendererEntry::initSDL()

@@ -40,7 +40,7 @@ static int lua_SceneManager_CreateNew(lua_State *L)
     if (dynamic_cast<SceneManager*>(*ptr) == nullptr) { return 0; }
     Scene *scene = (*ptr)->SceneCreateNew();
     scene->ScriptingInterfaceRegisterFunctions(L, scene);
-    lua_pushlightuserdata(L, scene);
+//    lua_pushlightuserdata(L, scene);
     return 1;
 }
 
@@ -53,7 +53,7 @@ static int lua_SceneManager_SceneGetCurrent(lua_State *L)
     if (dynamic_cast<SceneManager*>(*ptr) == nullptr) { return 0; }
     Scene *scene = (*ptr)->SceneGetCurrent();
     scene->ScriptingInterfaceRegisterFunctions(L, scene);
-    lua_pushlightuserdata(L, scene);
+//    lua_pushlightuserdata(L, scene);
     return 1;
 }
 

@@ -19,6 +19,8 @@
 #include "events_manager.hpp"
 #include "character_manager.hpp"
 #include "scene_manager.hpp"
+#include "sprite_atlas_manager.hpp"
+#include "sprite_renderer_manager.hpp"
 
 namespace engine
 {
@@ -51,6 +53,8 @@ private:
     engine::EventsManager *m_eventsManager;
     engine::CharacterManager *m_characterManager;
     engine::SceneManager *m_sceneManager;
+    engine::SpriteAtlasManager *m_spriteAtlasManager;
+    engine::SpriteRendererManager *m_sprireRendererManager;
     engine::Engine *m_engine;
     engine::SDL_APP m_app;
 };

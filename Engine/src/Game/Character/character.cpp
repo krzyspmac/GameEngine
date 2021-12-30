@@ -34,7 +34,7 @@ Character::Character(std::string jsonDefinition)
                 char *atlasFilename = cJSON_GetObjectItem(atlasNode, "json")->valuestring;
                 char *atlasTexture = cJSON_GetObjectItem(atlasNode, "texture")->valuestring;
 
-                atlas = GetMainEngine()->SpriteAtlasLoad(atlasFilename, atlasTexture);
+                atlas = GetMainEngine()->getAtlasManager().SpriteAtlasLoad(atlasFilename, atlasTexture);
                 if (atlas)
                 {
                     m_characterRenderer = std::unique_ptr<CharacterRendererI>(new CharacterRenderer(atlas, 1));

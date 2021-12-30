@@ -37,8 +37,18 @@ engine::EngineI *GetMainEngine()
     return sharedEngine;
 }
 
-Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, SceneManager &sceneManager, Size viewportSize)
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr), m_character(nullptr), m_characterMover(nullptr), m_walkingBoxes(nullptr)
+Engine::Engine(EngineProviderI &engineProvider,
+               FileAccessI &fileAccess,
+               ScriptingEngineI &scriptingEngine,
+               EventProviderI &eventProvider,
+               EventsManager &eventsManager,
+               CharacterManager &characterManager,
+               SceneManager &sceneManager,
+               SpriteAtlasManager &spriteAtlasManager,
+               SpriteRendererManager &spriteRendererManager,
+               Size viewportSize
+               )
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr), m_character(nullptr), m_characterMover(nullptr), m_walkingBoxes(nullptr)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -48,8 +58,8 @@ Engine::~Engine()
 {
     DisposeAllFonts();
     DisposeAllTextures();
-    SpriteAtlasDisposeAll();
-    SpriteDrawDisposeAll();
+//    SpriteAtlasDisposeAll();
+//    SpriteDrawDisposeAll();
 
     delete m_bufferTexture;
     delete m_character;
@@ -369,92 +379,4 @@ FontI *Engine::GetFont(std::string name)
 void Engine::DisposeAllFonts()
 {
     std::cout << "DisposeAllFonts not implemented" << std::endl;
-}
-
-SpriteAtlasI *Engine::SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename)
-{
-    SpriteAtlasI *atlas = SpriteAtlasGet(jsonFilename);
-    if (!atlas)
-    {
-        atlas = new SpriteAtlas(jsonFilename, textureFilename);
-        if (atlas)
-        {
-            m_atlas.emplace_back(std::move(atlas));
-        }
-    }
-
-    return atlas;
-}
-
-SpriteAtlasI *Engine::SpriteAtlasGet(std::string jsonFilename)
-{
-    for(auto it = std::begin(m_atlas); it != std::end(m_atlas); ++it)
-    {
-        SpriteAtlasI *item = it->get();
-        if (item->GetFilename().compare(jsonFilename) == 0)
-        {
-            return item;
-        }
-    }
-
-    return NULL;
-}
-
-void Engine::SpriteAtlasUnload(SpriteAtlasI *atlas)
-{
-    for(auto it = std::begin(m_atlas); it != std::end(m_atlas); ++it)
-    {
-        SpriteAtlasI *item = it->get();
-        if (item == atlas)
-        {
-            m_atlas.erase(it);
-            break;
-        }
-    }
-}
-
-void Engine::SpriteAtlasDisposeAll()
-{
-    m_atlas.clear();
-}
-
-SpriteDrawI *Engine::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale)
-{
-    engine::SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite, scale);
-
-    if (sd)
-    {
-        m_spriteDraws.emplace_back(std::move(sd));
-    }
-    return sd;
-}
-
-SpriteDrawI *Engine::SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale)
-{
-    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, scale);
-
-    if (sd)
-    {
-        m_spriteDraws.emplace_back(std::move(sd));
-    }
-    return sd;
-
-}
-
-void Engine::SpriteDrawUnload(SpriteDrawI *spriteDraw)
-{
-    for(auto it = std::begin(m_spriteDraws); it != std::end(m_spriteDraws); ++it)
-    {
-        SpriteDrawI *item = it->get();
-        if (item == spriteDraw)
-        {
-            m_spriteDraws.erase(it);
-            break;
-        }
-    }
-}
-
-void Engine::SpriteDrawDisposeAll()
-{
-    m_spriteDraws.clear();
 }

@@ -73,3 +73,30 @@ SpriteAtlasItemI *SpriteAtlas::GetItemForName(std::string name)
 
     return NULL;
 }
+
+#pragma mark - Scripting Interface
+
+SCRIPTING_INTERFACE_IMPL_NAME(SpriteAtlas);
+
+static int lua_SpriteAtlas_GetItemForName(lua_State *L)
+{
+    SpriteAtlas **ptr = (SpriteAtlas**)luaL_checkudata(
+        L, 1, SpriteAtlas::ScriptingInterfaceName().c_str()
+    );
+    if (ptr != nullptr && dynamic_cast<SpriteAtlas*>(*ptr) == nullptr) { return 0; }
+
+    std::string filename = luaL_checkstring(L, 2);
+    SpriteAtlasItemI *item = (SpriteAtlasItemI*) (*ptr)->GetItemForName(filename);
+    if (item != nullptr && dynamic_cast<SpriteAtlasItemI*>(item) == nullptr) { return 0; }
+
+    lua_pushlightuserdata(L, item); // return the data; SpriteAtlasItemI is not scriptable
+    return 1;
+}
+
+std::vector<luaL_Reg> SpriteAtlas::ScriptingInterfaceFunctions()
+{
+    std::vector<luaL_Reg> result({
+        { "getItemForName", &lua_SpriteAtlas_GetItemForName}
+    });
+    return result;
+}

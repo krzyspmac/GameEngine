@@ -11,6 +11,7 @@
 #include "texture_interface.h"
 #include "sprite_interface_defs.h"
 #include "file_access_provider.h"
+#include "scripting_engine_provider_interface.h"
 
 namespace engine {
 
@@ -60,8 +61,11 @@ namespace engine {
         SpriteAtlasI(std::string jsonFilename, std::string textureFilename) { }
     
     public:
+
         virtual std::string &GetFilename() = 0;
 
+        /// Get the specific atlas item for the name.
+        _LUA_EXPOSED("getItemForName")
         virtual SpriteAtlasItemI *GetItemForName(std::string name) = 0;
     };
 };

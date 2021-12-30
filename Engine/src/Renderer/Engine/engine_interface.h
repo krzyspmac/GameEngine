@@ -17,6 +17,8 @@
 #include "events_manager.hpp"
 #include "character_manager.hpp"
 #include "scene_manager.hpp"
+#include "sprite_atlas_manager.hpp"
+#include "sprite_renderer_manager.hpp"
 
 namespace engine
 {
@@ -24,8 +26,27 @@ namespace engine
     {
     public:
         ///
-        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, SceneManager &sceneManager,  Size viewportSize)
-        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_eventsManager(eventsManager), m_characterManager(characterManager), m_sceneManager(sceneManager), m_viewportSize(viewportSize)
+        EngineI(EngineProviderI &engineProvider,
+                FileAccessI &fileAccess,
+                ScriptingEngineI &scriptingEngine,
+                EventProviderI &eventProvider,
+                EventsManager &eventsManager,
+                CharacterManager &characterManager,
+                SceneManager &sceneManager,
+                SpriteAtlasManager &spriteAtlasManager,
+                SpriteRendererManager &spriteRendererManager,
+                Size viewportSize
+        )
+        :      m_engineProvider(engineProvider),
+                m_fileAccess(fileAccess),
+                m_scriptingEngine(scriptingEngine),
+                m_eventProvider(eventProvider),
+                m_eventsManager(eventsManager),
+                m_characterManager(characterManager),
+                m_sceneManager(sceneManager),
+                m_spriteAtlasManager(spriteAtlasManager),
+                m_spriteRendererManager(spriteRendererManager),
+                m_viewportSize(viewportSize)
         { }
 
     /// Setup
@@ -97,37 +118,6 @@ namespace engine
         /// Disposes of all fonts.
         virtual void DisposeAllFonts() = 0;
 
-    /// Sprite atlas
-    public:
-
-        /// A concrete instance would load the sprite atlas, its texture (using ::LoadTexture) and the json
-        /// file for individual sprite splices.
-        virtual SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename) = 0;
-
-        ///
-        virtual SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename) = 0;
-
-        ///
-        virtual void SpriteAtlasUnload(SpriteAtlasI *atlas) = 0;
-
-        ///
-        virtual void SpriteAtlasDisposeAll() = 0;
-
-    /// Drawing
-    public:
-
-        /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale) = 0;
-
-        /// Creates or gets a drawing handle for a sprite
-        virtual SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale) = 0;
-
-        /// Unloads the sprite draw.
-        virtual void SpriteDrawUnload(SpriteDrawI *spriteDraw) = 0;
-
-        /// Unloads all.
-        virtual void SpriteDrawDisposeAll() = 0;
-
     /// Providers
     public:
         ///
@@ -139,12 +129,19 @@ namespace engine
         ///
         FileAccessI& getFileAccess() { return m_fileAccess; };
 
+    /// Managers
     public:
         ///
         CharacterManager& getCharacterManager() { return m_characterManager; };
 
         ///
         SceneManager& getSceneManager() { return m_sceneManager; };
+
+        ///
+        SpriteAtlasManager& getAtlasManager() { return m_spriteAtlasManager; };
+
+        ///
+        SpriteRendererManager& getSpriteRendererManager() { return m_spriteRendererManager; };
 
     protected:
         Size m_viewportSize;
@@ -154,6 +151,8 @@ namespace engine
         EventProviderI &m_eventProvider;
         EventsManager &m_eventsManager;
 
+        SpriteAtlasManager &m_spriteAtlasManager;
+        SpriteRendererManager &m_spriteRendererManager;
         SceneManager &m_sceneManager;
         CharacterManager &m_characterManager;
 

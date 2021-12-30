@@ -10,6 +10,8 @@
 #include "scripting_engine.hpp"
 #include "room.hpp"
 #include "character_manager.hpp"
+#include "sprite_atlas_manager.hpp"
+#include "sprite_renderer_manager.hpp"
 
 using namespace engine;
 
@@ -89,6 +91,14 @@ void ScriptingEngine::registerFunctions()
     SceneManager &sceneManager = GetMainEngine()->getSceneManager();
     sceneManager.ScriptingInterfaceRegisterFunctions(L, &sceneManager);
     lua_setglobal(L, "SceneManager");
+
+    SpriteAtlasManager &atlasManager = GetMainEngine()->getAtlasManager();
+    atlasManager.ScriptingInterfaceRegisterFunctions(L, &atlasManager);
+    lua_setglobal(L, "AtlasManager");
+
+    SpriteRendererManager &spriteRendererManager = GetMainEngine()->getSpriteRendererManager();
+    spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
+    lua_setglobal(L, "SpriteRendererManager");
 };
 
 void ScriptingEngine::RegisterFunctions(void *ptr)
@@ -220,7 +230,7 @@ int ScriptingEngine::L_spriteAtlasLoad(lua_State *L)
     const char *texture_path = (char *) lua_tostring (L, argc--);
     const char *json_path = (char *) lua_tostring (L, argc--);
 
-    SpriteAtlasI *atlas = GetMainEngine()->SpriteAtlasLoad(json_path, texture_path);
+    SpriteAtlasI *atlas = GetMainEngine()->getAtlasManager().SpriteAtlasLoad(json_path, texture_path);
     lua_pushlightuserdata(L, atlas);
 
     return 1;
@@ -256,7 +266,7 @@ int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
 
     if (spritePointer)
     {
-        SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadStatic(spritePointer, scale);
+        SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(spritePointer, scale);
         if (sd)
         {
             lua_pushlightuserdata(L, sd);
@@ -283,7 +293,7 @@ int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
     int frame_duration_ms = lua_tonumberx(L, 1, NULL);
     int scale = lua_tonumberx(L, 2, NULL);
 
-    SpriteDrawI *sd = GetMainEngine()->SpriteDrawLoadAnimated(sprites, frame_duration_ms, scale);
+    SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadAnimated(sprites, frame_duration_ms, scale);
     if (sd)
     {
         lua_pushlightuserdata(L, sd);

@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "sprite_atlas_interface.h"
+#include "scripting_engine_provider_interface.h"
 
 namespace engine {
 
@@ -27,6 +28,10 @@ namespace engine {
         std::string m_filename;
         TextureI *m_texture;
         std::vector<SpriteAtlasItemI> m_items;
+
+    /// ScriptingInterface
+    public:
+        SCRIPTING_INTERFACE_HEADERS(SpriteAtlas);
     };
 };
 

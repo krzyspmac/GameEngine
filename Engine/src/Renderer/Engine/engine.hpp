@@ -27,7 +27,17 @@ namespace engine
     {
     public:
         ///
-        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, SceneManager &sceneManager, Size viewportSize);
+        Engine(EngineProviderI &engine,
+               FileAccessI &fileAccess,
+               ScriptingEngineI &scriptingEngine,
+               EventProviderI &eventProvider,
+               EventsManager &eventsManager,
+               CharacterManager &characterManager,
+               SceneManager &sceneManager,
+               SpriteAtlasManager &spriteAtlasManager,
+               SpriteRendererManager &spriteRendererManager,
+               Size viewportSize
+        );
         ~Engine();
 
     public:
@@ -48,16 +58,6 @@ namespace engine
         FontI *LoadFont(std::string name);
         FontI *GetFont(std::string name);
         void DisposeAllFonts();
-
-        SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
-        SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename);
-        void SpriteAtlasUnload(SpriteAtlasI *atlas);
-        void SpriteAtlasDisposeAll();
-
-        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale);
-        SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale);
-        void SpriteDrawUnload(SpriteDrawI *spriteDraw);
-        void SpriteDrawDisposeAll();
 
     private:
         void RenderScene();
