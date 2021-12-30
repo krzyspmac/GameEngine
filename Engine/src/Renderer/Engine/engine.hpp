@@ -19,6 +19,7 @@
 #import "texture_target.hpp"
 #import "character_mover_interface.h"
 #import "path_finder.hpp"
+#import "console_view_interface.h"
 
 namespace engine
 {
@@ -26,7 +27,7 @@ namespace engine
     {
     public:
         ///
-        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize);
+        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, Size viewportSize);
         ~Engine();
 
     public:
@@ -95,6 +96,9 @@ namespace engine
         CharacterI *m_character;
         CharacterMoverI *m_characterMover;
         PathFinder *m_walkingBoxes;
+
+        // Console
+        ConsoleViewI *m_consoleView;
     };
 }
 

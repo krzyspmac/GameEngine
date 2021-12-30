@@ -14,6 +14,7 @@
 #include "scripting_engine_provider_interface.h"
 #include "event_provider_interface.h"
 #include "sprite_draw_interface.h"
+#include "events_manager.hpp"
 
 namespace engine
 {
@@ -21,8 +22,8 @@ namespace engine
     {
     public:
         ///
-        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize)
-        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_viewportSize(viewportSize)
+        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, Size viewportSize)
+        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_eventsManager(eventsManager), m_viewportSize(viewportSize)
         { }
 
     /// Setup
@@ -141,7 +142,7 @@ namespace engine
         FileAccessI &m_fileAccess;
         ScriptingEngineI &m_scriptingEngine;
         EventProviderI &m_eventProvider;
-
+        EventsManager &m_eventsManager;
         engine::Origin m_mousePosition;
     };
 

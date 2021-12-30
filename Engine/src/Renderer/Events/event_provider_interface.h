@@ -26,6 +26,9 @@ typedef enum {
     public:
         EventProviderI() { };
 
+    public:
+        virtual void DoEvent() = 0;
+
         /// Polls the next event and puts in into
         /// &event. Returns 1 if more events need
         /// be processed or 0 if it's done.

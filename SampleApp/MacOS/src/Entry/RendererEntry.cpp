@@ -25,16 +25,18 @@ RendererEntry::RendererEntry()
     EngineProvider *ep = new EngineProvider(&m_app);
     ScriptingEngine *se = new ScriptingEngine();
     EventProvider *eventProvider = new EventProvider();
+    EventsManager *eventsManager = new EventsManager(*eventProvider, *ep);
 
     this->m_fileAccess = fa;
     this->m_engineProvider = ep;
     this->m_scriptingEngine = se;
     this->m_eventProvider = eventProvider;
+    this->m_eventsManager = eventsManager;
 
     Size viewportSize;
     viewportSize.width = SCREEN_WIDTH;
     viewportSize.height = SCREEN_HEIGHT;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, viewportSize);
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, viewportSize);
 }
 
 int RendererEntry::initSDL()

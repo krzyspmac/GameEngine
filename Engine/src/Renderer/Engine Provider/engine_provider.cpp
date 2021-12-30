@@ -299,6 +299,11 @@ void EngineProvider::RenderDrawRect(Engine_Rect *rect)
     SDL_RenderDrawRect(m_engineHandle->renderer, (SDL_Rect*)rect);
 }
 
+void EngineProvider::RenderFillRect(Engine_Rect *rect)
+{
+    SDL_RenderFillRect(m_engineHandle->renderer, (SDL_Rect*)rect);
+}
+
 void EngineProvider::RenderDrawLine(int x1, int y1, int x2, int y2)
 {
     SDL_RenderDrawLine(m_engineHandle->renderer, x1, y1, x2, y2);

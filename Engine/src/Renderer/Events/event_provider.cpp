@@ -20,6 +20,11 @@ int EventProvider::PollEvent(EVENT *event)
     return hasEvent;
 }
 
+void EventProvider::DoEvent()
+{
+    
+}
+
 static EVENT SDLEvent2EVENT(SDL_Event *event)
 {
     switch (event->type)

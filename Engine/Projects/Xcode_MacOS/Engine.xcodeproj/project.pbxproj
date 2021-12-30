@@ -72,6 +72,10 @@
 		7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5E0277B3E6E00538094 /* performance.hpp */; };
 		7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */; };
 		7FF641CD277CE8CB0017D86D /* polygon_loader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */; };
+		7FF641D6277D19C80017D86D /* console_view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641D4277D19C80017D86D /* console_view.cpp */; };
+		7FF641D7277D19C80017D86D /* console_view.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641D5277D19C80017D86D /* console_view.hpp */; };
+		7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641DE277D22E50017D86D /* events_manager.cpp */; };
+		7FF641E1277D22E50017D86D /* events_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641DF277D22E50017D86D /* events_manager.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -148,6 +152,11 @@
 		7FF641C6277CC72D0017D86D /* general.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
 		7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = polygon_loader.cpp; sourceTree = "<group>"; };
 		7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = polygon_loader.hpp; sourceTree = "<group>"; };
+		7FF641D3277D182D0017D86D /* console_view_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = console_view_interface.h; sourceTree = "<group>"; };
+		7FF641D4277D19C80017D86D /* console_view.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = console_view.cpp; sourceTree = "<group>"; };
+		7FF641D5277D19C80017D86D /* console_view.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = console_view.hpp; sourceTree = "<group>"; };
+		7FF641DE277D22E50017D86D /* events_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = events_manager.cpp; sourceTree = "<group>"; };
+		7FF641DF277D22E50017D86D /* events_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = events_manager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +179,6 @@
 				7F13824C277505B600ED6D67 /* common_engine_impl.h */,
 				7F1382A727750AC000ED6D67 /* common_sdl.h */,
 				7FE2E5D2277B233900538094 /* Common */,
-				7FF641C9277CE8BC0017D86D /* Loaders */,
 				7FDDAF9A2776872100578F86 /* Game */,
 				7F13821A277505B600ED6D67 /* Renderer */,
 			);
@@ -181,11 +189,14 @@
 		7F13821A277505B600ED6D67 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				7FF641CE277D17F20017D86D /* Console */,
+				7FF641C9277CE8BC0017D86D /* Loaders */,
 				7F13821B277505B600ED6D67 /* Textures */,
 				7F13821F277505B600ED6D67 /* Scripting */,
 				7F138223277505B600ED6D67 /* Engine Provider */,
 				7F13822A277505B600ED6D67 /* File Access */,
 				7F13822E277505B600ED6D67 /* Sprites */,
+				7FF641D8277D1F780017D86D /* Events */,
 				7F13823B277505B600ED6D67 /* Fonts */,
 				7F13823F277505B600ED6D67 /* Engine */,
 			);
@@ -220,9 +231,6 @@
 				7F138228277505B600ED6D67 /* engine_provider_interface.h */,
 				7F138224277505B600ED6D67 /* engine_provider.hpp */,
 				7F138229277505B600ED6D67 /* engine_provider.cpp */,
-				7F138225277505B600ED6D67 /* event_provider.cpp */,
-				7F138226277505B600ED6D67 /* event_provider.hpp */,
-				7F138227277505B600ED6D67 /* event_provider_interface.h */,
 			);
 			path = "Engine Provider";
 			sourceTree = "<group>";
@@ -385,6 +393,28 @@
 			path = Loaders;
 			sourceTree = "<group>";
 		};
+		7FF641CE277D17F20017D86D /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				7FF641D3277D182D0017D86D /* console_view_interface.h */,
+				7FF641D5277D19C80017D86D /* console_view.hpp */,
+				7FF641D4277D19C80017D86D /* console_view.cpp */,
+			);
+			path = Console;
+			sourceTree = "<group>";
+		};
+		7FF641D8277D1F780017D86D /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				7F138227277505B600ED6D67 /* event_provider_interface.h */,
+				7F138226277505B600ED6D67 /* event_provider.hpp */,
+				7F138225277505B600ED6D67 /* event_provider.cpp */,
+				7FF641DF277D22E50017D86D /* events_manager.hpp */,
+				7FF641DE277D22E50017D86D /* events_manager.cpp */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -405,6 +435,7 @@
 				7F138255277505B600ED6D67 /* texture.hpp in Headers */,
 				7FDDAF9F2776873900578F86 /* room.hpp in Headers */,
 				7F138278277505B600ED6D67 /* font_interface.h in Headers */,
+				7FF641E1277D22E50017D86D /* events_manager.hpp in Headers */,
 				7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */,
 				7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */,
 				7F13825A277505B600ED6D67 /* engine_provider.hpp in Headers */,
@@ -428,6 +459,7 @@
 				7F13827B277505B600ED6D67 /* engine_interface.h in Headers */,
 				7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */,
 				7F138254277505B600ED6D67 /* texture_interface.h in Headers */,
+				7FF641D7277D19C80017D86D /* console_view.hpp in Headers */,
 				7FE2E5CD277A3FA900538094 /* path_finder_graph.hpp in Headers */,
 				7F13825E277505B600ED6D67 /* event_provider_interface.h in Headers */,
 				7FF641CD277CE8CB0017D86D /* polygon_loader.hpp in Headers */,
@@ -492,11 +524,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF641D6277D19C80017D86D /* console_view.cpp in Sources */,
 				7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */,
 				7F138261277505B600ED6D67 /* engine_provider.cpp in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
 				7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
+				7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */,
 				7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */,

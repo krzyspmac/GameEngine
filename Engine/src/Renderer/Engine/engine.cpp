@@ -16,6 +16,7 @@
 #include "engine_provider.hpp"
 #include "character_mover.hpp"
 #include "polygon_loader.hpp"
+#include "console_view.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,6 +25,8 @@ extern "C" {
     #include "../../../Lua/code/src/lauxlib.h"
 }
 #endif //__cplusplus
+
+#define USES_CONSOLE 1
 
 using namespace engine;
 
@@ -34,8 +37,8 @@ engine::EngineI *GetMainEngine()
     return sharedEngine;
 }
 
-Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, Size viewportSize)
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, viewportSize), m_viewportScale(1)
+Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, Size viewportSize)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -50,6 +53,7 @@ Engine::~Engine()
 
     delete m_bufferTexture;
     delete m_character;
+    delete m_consoleView;
 }
 
 void Engine::setup()
@@ -79,6 +83,35 @@ void Engine::setup()
 
     std::vector<Polygon> polygonList = PolygonLoader::Load(GetMainEngine()->getFileAccess().GetAccess("polygons.json"));
     m_walkingBoxes = new PathFinder(polygonList);
+
+#if USES_CONSOLE
+    m_consoleView = new ConsoleView(m_fpsFont, '~');
+#endif
+
+//    EventHolderMouse p([&](Origin &){
+//        exit(0);
+//    });
+
+    // Register events listeners. For simple events - use lambda.
+    // Complex events get their own handler.
+
+    // Register & process mouse events
+    m_eventsManager.RegisterMouseMovedEvents(EventHolderMouseMoved([&](Origin *origin){
+        m_mousePosition = *origin;
+
+        m_mousePosition.x /= m_viewportScale;
+        m_mousePosition.y /= m_viewportScale;
+
+        m_mousePosition.x -= m_viewportOffset.x;
+        m_mousePosition.y -= m_viewportOffset.y;
+    }));
+
+    m_eventsManager.RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *){
+        Vector2 pos = m_characterMover->GetCharacterPosition();
+        Vector2 from = Vector2Make(pos.x, pos.y);
+        PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
+        m_characterMover->MoveCharacterAlongPath(path);
+    }));
 }
 
 void Engine::SetCapRate(int fps)
@@ -89,48 +122,53 @@ void Engine::SetCapRate(int fps)
 
 int Engine::doInput()
 {
-    EVENT event;
-    while (m_eventProvider.PollEvent(&event))
-    {
-        switch (event)
-        {
-            case EVENT_NONE:
-            {
-                break;
-            }
+//    m_eventListener.DoInput();
+//    m_eventProvider.DoEvent();
 
-            case EVENT_KEYDOWN:
-            {
-                m_character->Change();
-                break;
-            }
+    int result = m_eventsManager.DoEvents();
 
-            case EVENT_MOUSEMOVE:
-            {
-                break;
-            }
+//    EVENT event;
+//    while (m_eventProvider.PollEvent(&event))
+//    {
+//        switch (event)
+//        {
+//            case EVENT_NONE:
+//            {
+//                break;
+//            }
+//
+//            case EVENT_KEYDOWN:
+//            {
+//                m_character->Change();
+//                break;
+//            }
+//
+//            case EVENT_MOUSEMOVE:
+//            {
+//                break;
+//            }
+//
+//            case EVENT_MOUSEUP:
+//            {
+//                MouseClicked();
+//                break;
+//            }
+//
+//            case EVENT_QUIT:
+//            {
+//                return 1;
+//            }
+//        };
+//    };
 
-            case EVENT_MOUSEUP:
-            {
-                MouseClicked();
-                break;
-            }
+//    m_engineProvider.GetMousePosition(&m_mousePosition.x, &m_mousePosition.y);
+//    m_mousePosition.x /= m_viewportScale;
+//    m_mousePosition.y /= m_viewportScale;
+//
+//    m_mousePosition.x -= m_viewportOffset.x;
+//    m_mousePosition.y -= m_viewportOffset.y;
 
-            case EVENT_QUIT:
-            {
-                return 1;
-            }
-        };
-    };
-
-    m_engineProvider.GetMousePosition(&m_mousePosition.x, &m_mousePosition.y);
-    m_mousePosition.x /= m_viewportScale;
-    m_mousePosition.y /= m_viewportScale;
-
-    m_mousePosition.x -= m_viewportOffset.x;
-    m_mousePosition.y -= m_viewportOffset.y;
-
-    return 0;
+    return result;
 }
 
 void Engine::update()
@@ -163,6 +201,12 @@ void Engine::update()
     // Draw the texts
     m_engineProvider.RenderSetScale(1.0f, 1.0f);
     RenderSceneTexts();
+
+    // Render the console if possible
+    if (m_consoleView != nullptr && m_consoleView->ShouldPresentConsole())
+    {
+        //m_consoleView->RenderConsole();
+    }
 
     // Render the current stack
     m_engineProvider.RenderPresent();
@@ -199,7 +243,7 @@ void Engine::RenderSceneTexts()
 {
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
-    //m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
+    m_engineProvider.DrawText(m_fpsFont, m_fpsBuffer, 0, 0, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
     static char mousePos[256];
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);

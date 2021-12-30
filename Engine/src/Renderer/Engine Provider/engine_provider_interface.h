@@ -147,6 +147,9 @@ namespace engine
         virtual void RenderDrawRect(Engine_Rect*) = 0;
 
         /// Draw a rectangle.
+        virtual void RenderFillRect(Engine_Rect*) = 0;
+
+        /// Draw a rectangle.
         virtual void RenderDrawLine(int x1, int y1, int x2, int y2) = 0;
 
         /// Draw a point.

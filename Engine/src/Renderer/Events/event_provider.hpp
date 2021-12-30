@@ -18,6 +18,8 @@ namespace engine
     public:
         EventProvider(): EventProviderI() { };
 
+    public:
+        void DoEvent();
         int PollEvent(EVENT *event);
     };
 
