@@ -10,9 +10,9 @@
 #include <SDL_image.h>
 #include "cJSON.h"
 
-static char *sheetTexture;
-static char *sheetJson;
-static char *outFolder;
+static char *sheetTexture = NULL;
+static char *sheetJson = NULL;
+static char *outFolder = NULL;
 
 static void handleCommandLine(int argc, char *argv[])
 {
@@ -33,6 +33,17 @@ static void handleCommandLine(int argc, char *argv[])
             outFolder = argv[i + 1];
         }
     }
+}
+
+static int handleWrongCommandLine()
+{
+    return (sheetTexture == NULL || sheetJson == NULL || outFolder == NULL);
+}
+
+static void printCommandLine()
+{
+    printf("Usage:\n");
+    printf("\t-inTexture [file] -inJson [file] -outFolder [folder]\n");
 }
 
 char *readFile(const char *filename)
@@ -58,6 +69,10 @@ char *readFile(const char *filename)
 
 int main(int argc, const char * argv[]) {
     handleCommandLine(argc, argv);
+    if (handleWrongCommandLine()) {
+        printCommandLine();
+        exit(0);
+    }
 
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG);
@@ -106,6 +121,7 @@ int main(int argc, const char * argv[]) {
         strcat(targetFile, pngExtension);
 
         IMG_SavePNG(imageSurface, targetFile);
+        printf("Saved %s\n", targetFile);
 
         SDL_FreeSurface(imageSurface);
 
