@@ -8,6 +8,8 @@
 #include "common.h"
 #include "sprite_interface_defs.h"
 #include "scripting_engine.hpp"
+#include "room.hpp"
+#include "character_manager.hpp"
 
 using namespace engine;
 
@@ -44,6 +46,7 @@ void ScriptingEngine::loadFile(FileMemoryBufferStreamI *bufferStream)
     }
 }
 
+
 void ScriptingEngine::registerFunctions()
 {
     lua_pushcclosure(L, &ScriptingEngine::L_textureLoad, 0);
@@ -75,7 +78,27 @@ void ScriptingEngine::registerFunctions()
 
     lua_pushcclosure(L, &ScriptingEngine::L_spriteDrawRender, 0);
     lua_setglobal (L, "L_spriteDrawRender");
+
+
+    // Register global objects to be used at the start of the script lifecycle.
+//    CharacterManager **chrMgrPtr = (CharacterManager**)lua_newuserdata(
+//       L, sizeof(CharacterManager*)
+//    );
+    CharacterManager &mgr = GetMainEngine()->getCharacterManager();
+//    *chrMgrPtr = &mgr;
+    mgr.ScriptingInterfaceRegisterFunctions(L, &mgr);
+    lua_setglobal(L, "CharacterManager");
+
 };
+
+void ScriptingEngine::RegisterFunctions(void *ptr)
+{
+    if(ScriptingInterface* si = dynamic_cast<ScriptingInterface*>((ScriptingInterface*)ptr))
+    {
+        //si.ScriptingInterfaceRegisterFunctions(L, si.ScriptingInterfaceName(), si.ScriptingInterfaceFunctions());
+        printf("asd");
+    }
+}
 
 void ScriptingEngine::callInit()
 {

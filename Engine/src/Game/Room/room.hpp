@@ -13,6 +13,11 @@
 namespace engine
 {
 
+    class Room
+    {
+    public:
+        void Render() { };
+    };
 };
 
 #endif /* room_hpp */

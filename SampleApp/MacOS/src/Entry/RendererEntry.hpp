@@ -17,6 +17,7 @@
 #include "engine_interface.h"
 #include "engine.hpp"
 #include "events_manager.hpp"
+#include "character_manager.hpp"
 
 namespace engine
 {
@@ -47,6 +48,7 @@ private:
     engine::ScriptingEngineI *m_scriptingEngine;
     engine::EventProviderI *m_eventProvider;
     engine::EventsManager *m_eventsManager;
+    engine::CharacterManager *m_characterManager;
     engine::Engine *m_engine;
     engine::SDL_APP m_app;
 };

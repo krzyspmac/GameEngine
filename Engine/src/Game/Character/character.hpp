@@ -9,11 +9,12 @@
 #define character_hpp
 
 #include "character_interface.h"
+#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
 
-    class Character: public CharacterI
+    class Character: public CharacterI, public ScriptingInterface
     {
     public:
         Character(std::string jsonDefinition);
@@ -25,10 +26,12 @@ namespace engine
 
     public:
         void SetScale(float scale);
-
         void Draw(Vector2& position);
-
         void Change();
+
+    /// ScriptingInterface
+    public:
+        SCRIPTING_INTERFACE_HEADERS(Character);
     };
 };
 

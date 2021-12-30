@@ -15,6 +15,7 @@
 #include "event_provider_interface.h"
 #include "sprite_draw_interface.h"
 #include "events_manager.hpp"
+#include "character_manager.hpp"
 
 namespace engine
 {
@@ -22,8 +23,8 @@ namespace engine
     {
     public:
         ///
-        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, Size viewportSize)
-        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_eventsManager(eventsManager), m_viewportSize(viewportSize)
+        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, Size viewportSize)
+        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_eventsManager(eventsManager), m_characterManager(characterManager), m_viewportSize(viewportSize)
         { }
 
     /// Setup
@@ -126,6 +127,7 @@ namespace engine
         /// Unloads all.
         virtual void SpriteDrawDisposeAll() = 0;
 
+    /// Providers
     public:
         ///
         EngineProviderI& getProvider() { return m_engineProvider; };
@@ -136,6 +138,10 @@ namespace engine
         ///
         FileAccessI& getFileAccess() { return m_fileAccess; };
 
+    public:
+        ///
+        CharacterManager& getCharacterManager() { return m_characterManager; };
+
     protected:
         Size m_viewportSize;
         EngineProviderI &m_engineProvider;
@@ -143,6 +149,9 @@ namespace engine
         ScriptingEngineI &m_scriptingEngine;
         EventProviderI &m_eventProvider;
         EventsManager &m_eventsManager;
+
+        CharacterManager &m_characterManager;
+
         engine::Origin m_mousePosition;
     };
 

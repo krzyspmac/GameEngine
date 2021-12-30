@@ -9,6 +9,7 @@
 #define character_interface_hpp
 
 #include "character_renderer_interface.h"
+#include "scripting_engine_provider_interface.h"
 #include "vector2.hpp"
 
 namespace engine
@@ -17,12 +18,17 @@ namespace engine
     /// Should render the character, do animations for the walking stances.
     class CharacterI {
     public:
-        CharacterI(): m_characterRenderer(nullptr), m_talking(false), m_isWalking(false), m_walkState(STAND_RIGHT) { };
+        CharacterI(std::string jsonFilename): m_jsonFilename(jsonFilename), m_characterRenderer(nullptr), m_talking(false), m_isWalking(false), m_walkState(STAND_RIGHT) { };
 
         virtual ~CharacterI() { }
 
     /// Character rendering
     public:
+        ///
+        _LUA_EXPOSED("getFilename")
+        std::string GetJsonFilename() { return m_jsonFilename; };
+
+        ///
         CharacterRendererI *GetCharacterRenderer() { return m_characterRenderer.get(); };
 
         /// Draw the character. The origin aligned to the bottom center part of the character.
@@ -56,6 +62,7 @@ namespace engine
         CharacterWalkState GetWalkState() { return m_walkState; };
 
     protected:
+        std::string m_jsonFilename;
         std::unique_ptr<CharacterRendererI> m_characterRenderer;
         bool m_talking;
         bool m_isWalking;

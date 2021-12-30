@@ -37,8 +37,8 @@ engine::EngineI *GetMainEngine()
     return sharedEngine;
 }
 
-Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, Size viewportSize)
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr)
+Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, Size viewportSize)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager,characterManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr), m_character(nullptr), m_characterMover(nullptr), m_walkingBoxes(nullptr)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -75,22 +75,18 @@ void Engine::setup()
     m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
     m_engineProvider.ClearRender();
 
-    m_character = new Character("brett_character.json");
-    m_character->SetScale(2);
-
-    m_characterMover = new CharacterMover(m_character, 300.0);
-    m_characterMover->PlaceCharacter(Vector2Make(100, 450));
-
-    std::vector<Polygon> polygonList = PolygonLoader::Load(GetMainEngine()->getFileAccess().GetAccess("polygons.json"));
-    m_walkingBoxes = new PathFinder(polygonList);
+//    m_character = new Character("brett_character.json");
+//    m_character->SetScale(2);
+//
+//    m_characterMover = new CharacterMover(m_character, 300.0);
+//    m_characterMover->PlaceCharacter(Vector2Make(100, 450));
+//
+//    std::vector<Polygon> polygonList = PolygonLoader::Load(GetMainEngine()->getFileAccess().GetAccess("polygons.json"));
+//    m_walkingBoxes = new PathFinder(polygonList);
 
 #if USES_CONSOLE
     m_consoleView = new ConsoleView(m_fpsFont, '~');
 #endif
-
-//    EventHolderMouse p([&](Origin &){
-//        exit(0);
-//    });
 
     // Register events listeners. For simple events - use lambda.
     // Complex events get their own handler.
@@ -107,10 +103,10 @@ void Engine::setup()
     }));
 
     m_eventsManager.RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *){
-        Vector2 pos = m_characterMover->GetCharacterPosition();
-        Vector2 from = Vector2Make(pos.x, pos.y);
-        PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
-        m_characterMover->MoveCharacterAlongPath(path);
+//        Vector2 pos = m_characterMover->GetCharacterPosition();
+//        Vector2 from = Vector2Make(pos.x, pos.y);
+//        PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
+//        m_characterMover->MoveCharacterAlongPath(path);
     }));
 }
 
@@ -234,9 +230,9 @@ void Engine::MeasurePerformanceEnd()
 void Engine::RenderScene()
 {
     m_scriptingEngine.callUpdate();
-    m_characterMover->Update();
-
-    m_walkingBoxes->Draw();
+//    m_characterManager.
+//    m_characterMover->Update();
+//    m_walkingBoxes->Draw();
 }
 
 void Engine::RenderSceneTexts()

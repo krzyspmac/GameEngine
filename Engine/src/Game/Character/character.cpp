@@ -15,12 +15,12 @@ static int cJSON_GetObjectItemValueInt(cJSON * object, const char *string);
 using namespace engine;
 
 Character::Character(std::string jsonDefinition)
-: CharacterI()
+: CharacterI(jsonDefinition)
 {
     std::unique_ptr<FileMemoryBufferStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonDefinition));
 
     char *jsonSource = (char*)stream.get()->GetMemory();
-    if (jsonSource)
+    if (jsonSource && strlen(jsonSource) > 0)
     {
         cJSON *root;
         SpriteAtlasI * atlas = NULL;
@@ -153,7 +153,6 @@ void Character::SetScale(float scale)
     m_characterRenderer->SetScale(scale);
 }
 
-
 static CharacterWalkState state = STAND_RIGHT;//STAND_RIGHT;
 
 void Character::Draw(Vector2& position)
@@ -181,4 +180,30 @@ int cJSON_GetObjectItemValueInt(cJSON * object, const char *string)
     {
         return 0;
     }
+}
+
+#pragma mark - Scripting
+
+SCRIPTING_INTERFACE_IMPL_NAME(Character);
+
+static int lua_Character_getFilename(lua_State *L)
+{
+    Character **ptr = (Character**)luaL_checkudata(
+        L, 1, Character::ScriptingInterfaceName().c_str()
+     );
+
+    if (ptr == nullptr) { return 0; }
+    if (dynamic_cast<Character*>(*ptr) == nullptr) { return 0; }
+
+    std::string result = (*ptr)->GetJsonFilename();
+    lua_pushstring(L, result.c_str());
+    return 1;
+}
+
+std::vector<luaL_Reg> Character::ScriptingInterfaceFunctions()
+{
+    std::vector<luaL_Reg> result({
+        { "getFilename", &lua_Character_getFilename },
+    });
+    return result;
 }

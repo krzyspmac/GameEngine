@@ -43,6 +43,8 @@ namespace engine
         ///
         void registerFunctions();
 
+        void RegisterFunctions(void *);
+
     /// Default, must-have main lua script functions
     public:
         void callInit();
