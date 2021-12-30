@@ -37,8 +37,8 @@ engine::EngineI *GetMainEngine()
     return sharedEngine;
 }
 
-Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, Size viewportSize)
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager,characterManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr), m_character(nullptr), m_characterMover(nullptr), m_walkingBoxes(nullptr)
+Engine::Engine(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, SceneManager &sceneManager, Size viewportSize)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr), m_character(nullptr), m_characterMover(nullptr), m_walkingBoxes(nullptr)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -230,6 +230,12 @@ void Engine::MeasurePerformanceEnd()
 void Engine::RenderScene()
 {
     m_scriptingEngine.callUpdate();
+
+    Scene *scene = m_sceneManager.SceneGetCurrent();
+    if (scene != nullptr)
+    {
+        scene->RenderScene();
+    }
 //    m_characterManager.
 //    m_characterMover->Update();
 //    m_walkingBoxes->Draw();

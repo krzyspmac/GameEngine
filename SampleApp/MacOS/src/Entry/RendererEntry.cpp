@@ -27,6 +27,7 @@ RendererEntry::RendererEntry()
     EventProvider *eventProvider = new EventProvider();
     EventsManager *eventsManager = new EventsManager(*eventProvider, *ep);
     CharacterManager *characteManager = new CharacterManager();
+    SceneManager *m_sceneManager = new SceneManager();
 
     this->m_fileAccess = fa;
     this->m_engineProvider = ep;
@@ -34,11 +35,12 @@ RendererEntry::RendererEntry()
     this->m_eventProvider = eventProvider;
     this->m_eventsManager = eventsManager;
     this->m_characterManager = characteManager;
+    this->m_sceneManager = m_sceneManager;
 
     Size viewportSize;
     viewportSize.width = SCREEN_WIDTH;
     viewportSize.height = SCREEN_HEIGHT;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, viewportSize);
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, viewportSize);
 }
 
 int RendererEntry::initSDL()

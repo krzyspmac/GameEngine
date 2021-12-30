@@ -81,14 +81,14 @@ void ScriptingEngine::registerFunctions()
 
 
     // Register global objects to be used at the start of the script lifecycle.
-//    CharacterManager **chrMgrPtr = (CharacterManager**)lua_newuserdata(
-//       L, sizeof(CharacterManager*)
-//    );
     CharacterManager &mgr = GetMainEngine()->getCharacterManager();
 //    *chrMgrPtr = &mgr;
     mgr.ScriptingInterfaceRegisterFunctions(L, &mgr);
     lua_setglobal(L, "CharacterManager");
 
+    SceneManager &sceneManager = GetMainEngine()->getSceneManager();
+    sceneManager.ScriptingInterfaceRegisterFunctions(L, &sceneManager);
+    lua_setglobal(L, "SceneManager");
 };
 
 void ScriptingEngine::RegisterFunctions(void *ptr)

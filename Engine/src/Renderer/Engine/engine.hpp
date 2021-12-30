@@ -27,7 +27,7 @@ namespace engine
     {
     public:
         ///
-        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, Size viewportSize);
+        Engine(EngineProviderI &engine, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, SceneManager &sceneManager, Size viewportSize);
         ~Engine();
 
     public:

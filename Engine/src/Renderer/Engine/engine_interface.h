@@ -16,6 +16,7 @@
 #include "sprite_draw_interface.h"
 #include "events_manager.hpp"
 #include "character_manager.hpp"
+#include "scene_manager.hpp"
 
 namespace engine
 {
@@ -23,8 +24,8 @@ namespace engine
     {
     public:
         ///
-        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, Size viewportSize)
-        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_eventsManager(eventsManager), m_characterManager(characterManager), m_viewportSize(viewportSize)
+        EngineI(EngineProviderI &engineProvider, FileAccessI &fileAccess, ScriptingEngineI &scriptingEngine, EventProviderI &eventProvider, EventsManager &eventsManager, CharacterManager &characterManager, SceneManager &sceneManager,  Size viewportSize)
+        : m_engineProvider(engineProvider), m_fileAccess(fileAccess), m_scriptingEngine(scriptingEngine), m_eventProvider(eventProvider), m_eventsManager(eventsManager), m_characterManager(characterManager), m_sceneManager(sceneManager), m_viewportSize(viewportSize)
         { }
 
     /// Setup
@@ -142,6 +143,9 @@ namespace engine
         ///
         CharacterManager& getCharacterManager() { return m_characterManager; };
 
+        ///
+        SceneManager& getSceneManager() { return m_sceneManager; };
+
     protected:
         Size m_viewportSize;
         EngineProviderI &m_engineProvider;
@@ -150,6 +154,7 @@ namespace engine
         EventProviderI &m_eventProvider;
         EventsManager &m_eventsManager;
 
+        SceneManager &m_sceneManager;
         CharacterManager &m_characterManager;
 
         engine::Origin m_mousePosition;
