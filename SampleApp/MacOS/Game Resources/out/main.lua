@@ -32,12 +32,16 @@ function customLoading()
 	
 	character = scene:LoadCharacter("brett_character.json")
 	character:SetScale(3)
-	character:PlaceAt(200, 100)
+	character:PlaceAt(100, 450)
 	local x, y = character:GetPosition()
 	print(x)
 	print(y)
+	character:SetInverseWalkbox("polygons.json")
+--	character:WalkTo(716, 373)
+	scene:SetMainCharacter(character)
+	character:SetWalkingSpeed(400)
 	
-	character:WalkTo(1200, 700)
+--	character:WalkTo(852, 226)
 end
 
 function helperLoading()
@@ -60,5 +64,5 @@ end
 
 function update ()
 	--L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
-character:DrawAt(100, 200)
+--character:DrawAt(100, 200)
 end

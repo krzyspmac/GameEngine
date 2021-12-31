@@ -45,6 +45,11 @@ namespace engine
         */
         void RenderScene();
 
+        /**
+         Called by the engine. Reacts to mouse clicks.
+         */
+        void MouseClicked(Vector2 pos);
+
     public:
         /** @name Exposed APIs
          */
@@ -68,6 +73,12 @@ namespace engine
          */
         CharacterRepresentation *LoadCharacter(std::string jsonFilename);
 
+        /**
+         Sets the character as main. By default the character reacts to mouse clicks
+         and walks the path unless specified otherwise.
+         */
+        void SetMainCharacter(CharacterRepresentation*);
+
         ///@}
     public:
         /** @name Exposed APIs
@@ -84,6 +95,7 @@ namespace engine
     private:
         std::vector<SpriteDrawStatic*> m_staticSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
+        CharacterRepresentation *m_mainCharacter;
 
     /// ScriptingInterface
     public:

@@ -71,6 +71,12 @@ namespace engine
          Sets the current inverse walk boxes, a list of plygons
          where the character can't go.
          */
+        void SetInverseWalkbox(std::string polygonJsonFilename);
+
+        /**
+         Sets the character crossing speed. In pixels per millisecond.
+         */
+        void SetCharacterWalkingSpeed(float pixelsInMilliseconds);
 
         /**
          Renders the character as needed. This is the main method

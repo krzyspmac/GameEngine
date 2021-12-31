@@ -40,8 +40,11 @@ int EventsManager::DoEvents()
 
             case EVENT_MOUSEUP:
             {
+                Origin mouse;
+                m_engineProvider.GetMousePosition(&mouse.x, &mouse.y);
+
                 std::for_each(m_mouseClicks.begin(), m_mouseClicks.end(), [&](EventHolderMouseClicked &l) {
-                    l.Process(nullptr);
+                    l.Process(&mouse);
                 });
                 break;
             }

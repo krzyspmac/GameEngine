@@ -183,7 +183,7 @@ void PathFinder::Draw()
         Vector2 *previous = nullptr;
         std::vector<Vector2> &points = m_calculatedPath.get()->GetPath();
         std::for_each(points.begin(), points.end(), [&](Vector2 &v) {
-            if (previous)
+            if (previous != nullptr)
             {
                 provider.RenderDrawLine(previous->x, previous->y, v.x, v.y);
             }

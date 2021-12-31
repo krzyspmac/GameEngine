@@ -7,6 +7,9 @@
 
 #include "character_representation.hpp"
 #include "character_mover.hpp"
+#include "polygon_loader.hpp"
+#include "engine.hpp"
+#include "polygon.hpp"
 
 using namespace engine;
 
@@ -44,9 +47,12 @@ Vector2& CharacterRepresentation::GetPosition()
 void CharacterRepresentation::WalkTo(Vector2& position)
 {
     PathFinder *pf = m_pathFinder.get();
-    if (pf != nullptr)
-    {
+    CharacterMoverI *cm = m_mover.get();
 
+    if (pf != nullptr && cm != nullptr)
+    {
+        PathI *path = pf->CalculatePath(cm->GetCharacterPosition(), position);
+        m_mover->MoveCharacterAlongPath(path);
     }
     else
     {
@@ -54,9 +60,26 @@ void CharacterRepresentation::WalkTo(Vector2& position)
     }
 }
 
+void CharacterRepresentation::SetInverseWalkbox(std::string polygonJsonFilename)
+{
+    std::vector<Polygon> polygonList = PolygonLoader::Load(GetMainEngine()->getFileAccess().GetAccess(polygonJsonFilename));
+    m_pathFinder = std::unique_ptr<PathFinder>(new PathFinder(polygonList));
+}
+
+void CharacterRepresentation::SetCharacterWalkingSpeed(float pixelsInMilliseconds)
+{
+    m_mover->SetWalkingSpeed(pixelsInMilliseconds);
+}
+
 void CharacterRepresentation::Render()
 {
     m_mover->Update();
+
+    PathFinder *pf = m_pathFinder.get();
+    if (pf != nullptr)
+    {
+        pf->Draw();
+    }
 }
 
 #pragma mark - Scripting Interface
@@ -110,6 +133,22 @@ static int lua_CharacterRepresentation_WalkTo(lua_State *L)
     return 0;
 }
 
+static int lua_CharacterRepresentation_SetInverseWalkbox(lua_State *L)
+{
+    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
+    const char *jsonFilename = lua_tostring(L, 2);
+    sender->SetInverseWalkbox(jsonFilename);
+    return 0;
+}
+
+static int lua_CharacterRepresentation_SetWalkingSpeed(lua_State *L)
+{
+    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
+    float x = lua_tonumberx(L, 2, nullptr);
+    sender->SetCharacterWalkingSpeed(x);
+    return 0;
+}
+
 std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -117,7 +156,9 @@ std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
         {"PlaceAt", &lua_CharacterRepresentation_PlaceAt},
         {"GetPosition", &lua_CharacterRepresentation_GetPosition},
         {"SetScale", &lua_CharacterRepresentation_SetScale},
-        {"WalkTo", &lua_CharacterRepresentation_WalkTo}
+        {"SetInverseWalkbox", &lua_CharacterRepresentation_SetInverseWalkbox},
+        {"WalkTo", &lua_CharacterRepresentation_WalkTo},
+        {"SetWalkingSpeed", &lua_CharacterRepresentation_SetWalkingSpeed}
     });
     return result;
 }

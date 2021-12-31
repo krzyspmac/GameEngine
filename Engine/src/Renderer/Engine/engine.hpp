@@ -93,10 +93,6 @@ namespace engine
         char m_fpsBuffer[256];
         FontI *m_fpsFont;
     #endif
-        CharacterI *m_character;
-        CharacterMoverI *m_characterMover;
-        PathFinder *m_walkingBoxes;
-
         // Console
         ConsoleViewI *m_consoleView;
     };

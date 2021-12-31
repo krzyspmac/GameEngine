@@ -58,6 +58,7 @@ namespace engine
     public:
         Vector2 &GetCurrentOrigin() { return m_origin; };
         Vector2 &GetTargetOrigin() { return m_targetOrigin; };
+        void SetWalkingSpeed(float val) { m_pixelsPerSecond = val; };
 
     protected:
         CharacterI *m_character;

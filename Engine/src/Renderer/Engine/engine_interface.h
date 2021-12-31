@@ -143,6 +143,9 @@ namespace engine
         ///
         SpriteRendererManager& getSpriteRendererManager() { return m_spriteRendererManager; };
 
+        ///
+        EventsManager& getEventsManager() { return m_eventsManager; };
+
     protected:
         Size m_viewportSize;
         EngineProviderI &m_engineProvider;

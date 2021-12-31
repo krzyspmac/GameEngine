@@ -56,7 +56,7 @@ namespace engine
         /// Checks if a target point is indie any polygon.
         virtual bool PointInsidePolygons(Vector2 &point, Polygon **outPolygon) = 0;
 
-        /// Caller is responsible for PathI.
+        /// Result is kept internally. The caller should make a copy.
         virtual PathI *CalculatePath(Vector2 fromPoint, Vector2 toPoint) = 0;
 
         /// Modify the starting point to better suit the algorithm. Limit the number

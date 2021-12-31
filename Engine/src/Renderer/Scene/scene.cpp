@@ -13,12 +13,36 @@ using namespace engine;
 
 Scene::Scene()
 {
+    GetMainEngine()->getEventsManager().RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *mouse){
+        Origin *clicked = (Origin*)mouse;
+        Vector2 pos;
+        pos.x = (*clicked).x;
+        pos.y = (*clicked).y;
 
+        MouseClicked(pos);
+//        Vector2 pos = ->GetCharacterPosition();
+//        Vector2 from = Vector2Make(pos.x, pos.y);
+//        PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
+//        m_characterMover->MoveCharacterAlongPath(path);
+    }));
 }
 
 Scene::~Scene()
 {
 
+}
+
+void Scene::MouseClicked(Vector2 pos)
+{
+    if (m_mainCharacter != nullptr)
+    {
+        m_mainCharacter->WalkTo(pos);
+    }
+}
+
+void Scene::SetMainCharacter(CharacterRepresentation *rep)
+{
+    m_mainCharacter = rep;
 }
 
 SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlas *atlas, std::string name)
@@ -102,12 +126,21 @@ static int lua_Scene_LoadCharacter(lua_State *L)
     return 1;
 }
 
+static int lua_Scene_SetMainCharacter(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    CharacterRepresentation *chr = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 2);
+    scene->SetMainCharacter(chr);
+    return 0;
+}
+
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         {"AddSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic},
         {"LoadSpriteStatic", &lua_Scene_LoadSpriteDrawStatic},
-        {"LoadCharacter", &lua_Scene_LoadCharacter}
+        {"LoadCharacter", &lua_Scene_LoadCharacter},
+        {"SetMainCharacter", &lua_Scene_SetMainCharacter}
     });
     return result;
 }
