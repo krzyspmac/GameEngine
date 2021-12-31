@@ -96,7 +96,7 @@ static int lua_SpriteAtlas_GetItemForName(lua_State *L)
 std::vector<luaL_Reg> SpriteAtlas::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "getItemForName", &lua_SpriteAtlas_GetItemForName}
+        { "GetItemForName", &lua_SpriteAtlas_GetItemForName}
     });
     return result;
 }

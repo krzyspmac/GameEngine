@@ -82,7 +82,7 @@ static int lua_SpriteAtlas_SpriteAtlasLoad(lua_State *L)
 std::vector<luaL_Reg> SpriteAtlasManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "spriteAtlasLoad", &lua_SpriteAtlas_SpriteAtlasLoad}
+        { "SpriteAtlasLoad", &lua_SpriteAtlas_SpriteAtlasLoad}
     });
     return result;
 }

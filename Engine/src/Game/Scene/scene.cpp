@@ -25,7 +25,7 @@ SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlas *atlas, std::string name)
     SpriteAtlasItemI *item = atlas->GetItemForName(name);
     if (item != nullptr)
     {
-        SpriteDrawStatic *renderer = (SpriteDrawStatic*)GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(item, 1);
+        SpriteDrawStatic *renderer = (SpriteDrawStatic*)GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(item);
         if (renderer != nullptr)
         {
             AddSpriteDrawStatic(renderer);
@@ -82,7 +82,7 @@ static int lua_Scene_LoadSpriteDrawStatic(lua_State *L)
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        {"addSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic},
+        {"AddSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic},
         {"LoadSpriteStatic", &lua_Scene_LoadSpriteDrawStatic}
     });
     return result;

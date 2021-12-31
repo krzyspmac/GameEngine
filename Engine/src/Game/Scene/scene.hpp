@@ -62,7 +62,7 @@ namespace engine
         ///@{
         /**
          Add a sprite renderer to the list of game objects.
-         \include SampleSprite1.lua
+         \include SampleSpriteStatic-lowlevel.lua
          \ingroup API_EXPOSED
          */
         void AddSpriteDrawStatic(SpriteDrawStatic*);

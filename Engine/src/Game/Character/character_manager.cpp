@@ -73,7 +73,7 @@ static int lua_CharacterManager_loadCharacter(lua_State *L)
 std::vector<luaL_Reg> CharacterManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "loadCharacter", &lua_CharacterManager_loadCharacter },
+        { "LoadCharacter", &lua_CharacterManager_loadCharacter },
     });
     return result;
 }

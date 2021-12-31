@@ -203,7 +203,7 @@ static int lua_Character_getFilename(lua_State *L)
 std::vector<luaL_Reg> Character::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "getFilename", &lua_Character_getFilename },
+        { "GetFilename", &lua_Character_getFilename },
     });
     return result;
 }

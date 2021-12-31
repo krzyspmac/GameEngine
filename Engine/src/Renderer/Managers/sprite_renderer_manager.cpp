@@ -12,9 +12,9 @@
 
 using namespace engine;
 
-SpriteDrawI *SpriteRendererManager::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale)
+SpriteDrawI *SpriteRendererManager::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite)
 {
-    SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite, scale);
+    SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite, 1);
 
     if (sd)
     {
@@ -24,9 +24,9 @@ SpriteDrawI *SpriteRendererManager::SpriteDrawLoadStatic(SpriteAtlasItemI *sprit
     return sd;
 }
 
-SpriteDrawI *SpriteRendererManager::SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale)
+SpriteDrawI *SpriteRendererManager::SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
 {
-    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, scale);
+    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, 1);
 
     if (sd)
     {
@@ -62,13 +62,11 @@ static int lua_SpriteRendererManager_spriteDrawLoadStatic(lua_State *L)
 {
     SpriteRendererManager *spriteRendererManager = ScriptingEngineI::GetScriptingObjectPtr<SpriteRendererManager>(L, 1);
     SpriteAtlasItemI *atlasItem = ScriptingEngineI::GetNormalObjectPtr<SpriteAtlasItemI>(L, 2);
-    float scale = lua_tonumberx(L, 3, NULL);
 
-    SpriteDrawStatic *result = (SpriteDrawStatic*)spriteRendererManager->SpriteDrawLoadStatic(atlasItem, scale);
+    SpriteDrawStatic *result = (SpriteDrawStatic*)spriteRendererManager->SpriteDrawLoadStatic(atlasItem);
     if (result == nullptr) { return 0; };
 
     result->ScriptingInterfaceRegisterFunctions(L, result);
-
     //lua_pushlightuserdata(L, result); // SpriteDrawStatic not scriptable for now
     return 1;
 }
@@ -76,7 +74,7 @@ static int lua_SpriteRendererManager_spriteDrawLoadStatic(lua_State *L)
 std::vector<luaL_Reg> SpriteRendererManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "spriteDrawLoadStatic", &lua_SpriteRendererManager_spriteDrawLoadStatic}
+        { "SpriteDrawLoadStatic", &lua_SpriteRendererManager_spriteDrawLoadStatic}
     });
     return result;
 }

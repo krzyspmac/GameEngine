@@ -1,6 +1,6 @@
 function init()
-	local atlas = AtlasManager:spriteAtlasLoad( "background.json", "background.png" )
-	local scene = SceneManager:sceneCreateNew()
+	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
+	local scene = SceneManager:SceneCreateNew()
 
 	local backgroudnSpr = scene:LoadSpriteStatic(atlas, "sky.png")
 	backgroudnSpr:SetScale(3)

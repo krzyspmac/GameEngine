@@ -14,27 +14,26 @@ function customLoading()
 --	backgroundSkySprite = L_spriteAtlasGetSprite(backgroundAtlas, "sky.png")    
 --	backgroundSkyRenderer = L_spriteDrawStaticCreate(backgroundSkySprite, 2)
 	
-	local scene = SceneManager:sceneCreateNew()
-	
-	-- Custom loading: scene atlas -> atlas item -> sprite renderer
-	local sceneAtlas = AtlasManager:spriteAtlasLoad( "background.json", "background.png" )
+	local scene = SceneManager:SceneCreateNew()
 
-	background = SpriteRendererManager:spriteDrawLoadStatic(
-		sceneAtlas:getItemForName("sky.png")
-	  , 3
+	local sceneAtlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
+
+	background = SpriteRendererManager:SpriteDrawLoadStatic(
+		sceneAtlas:GetItemForName("sky.png")
 	)
-	scene:addSpriteDrawStatic(background)
+	background:SetScale(2)
+	scene:AddSpriteDrawStatic(background)
 
-	rv = SpriteRendererManager:spriteDrawLoadStatic(
-		sceneAtlas:getItemForName("background.png")
-	  , 2
-	)	
-	scene:addSpriteDrawStatic(rv)
+	rv = SpriteRendererManager:SpriteDrawLoadStatic(
+		sceneAtlas:GetItemForName("background.png")
+	)
+	rv:SetScale(2)
+	scene:AddSpriteDrawStatic(rv)
 end
 
 function helperLoading()
-	local atlas = AtlasManager:spriteAtlasLoad( "background.json", "background.png" )
-	local scene = SceneManager:sceneCreateNew()
+	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
+	local scene = SceneManager:SceneCreateNew()
 
 	local backgroudnSpr = scene:LoadSpriteStatic(atlas, "sky.png")
 	backgroudnSpr:SetScale(3)
@@ -44,7 +43,7 @@ function helperLoading()
 end
 
 function init()
-	--customLoading()
+--	customLoading()
 	helperLoading()
 end
 

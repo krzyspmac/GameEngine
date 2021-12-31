@@ -71,9 +71,9 @@ static int lua_SceneManager_SceneUnloadCurrent(lua_State *L)
 std::vector<luaL_Reg> SceneManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "sceneCreateNew", &lua_SceneManager_CreateNew },
-        { "sceneGetCurrent", &lua_SceneManager_SceneGetCurrent },
-        { "sceneUnloadCurrent", &lua_SceneManager_SceneUnloadCurrent }
+        { "SceneCreateNew", &lua_SceneManager_CreateNew },
+        { "SceneGetCurrent", &lua_SceneManager_SceneGetCurrent },
+        { "SceneUnloadCurrent", &lua_SceneManager_SceneUnloadCurrent }
     });
     return result;
 }

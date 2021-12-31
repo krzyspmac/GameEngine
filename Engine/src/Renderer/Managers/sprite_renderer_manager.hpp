@@ -20,11 +20,11 @@ namespace engine
         /// Creates or gets a drawing handle for a sprite.
         /// The result is cached.
         _LUA_EXPOSED("spriteDrawLoadStatic")
-        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite, int scale);
+        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
 
         /// Creates or gets a drawing handle for a sprite
         _LUA_EXPOSED("spriteDrawLoadAnimated")
-        SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale);
+        SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
 
         /// Unloads the sprite draw.
         _LUA_EXPOSED("spriteDrawUnload")

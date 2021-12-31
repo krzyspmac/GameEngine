@@ -261,12 +261,11 @@ int ScriptingEngine::L_spriteAtlasGetSprite(lua_State *L)
 int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
 {
     int argc = lua_gettop(L);
-    int scale = lua_tonumberx(L, argc--, NULL);
     SpriteAtlasItemI *spritePointer = (SpriteAtlasItemI*)lua_topointer(L, argc--);
 
     if (spritePointer)
     {
-        SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(spritePointer, scale);
+        SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(spritePointer);
         if (sd)
         {
             lua_pushlightuserdata(L, sd);
@@ -291,9 +290,8 @@ int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
     }
 
     int frame_duration_ms = lua_tonumberx(L, 1, NULL);
-    int scale = lua_tonumberx(L, 2, NULL);
 
-    SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadAnimated(sprites, frame_duration_ms, scale);
+    SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadAnimated(sprites, frame_duration_ms);
     if (sd)
     {
         lua_pushlightuserdata(L, sd);
