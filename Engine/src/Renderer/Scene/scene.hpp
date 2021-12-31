@@ -8,16 +8,6 @@
 #ifndef scene_hpp
 #define scene_hpp
 
-/**
-
-\mainpage Some Project
-
-...
-
-See \ref API_EXPOSED "Public API" for details on these functions.
-
-*/
-
 #include "scripting_engine_provider_interface.h"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
@@ -27,13 +17,11 @@ See \ref API_EXPOSED "Public API" for details on these functions.
 
 namespace engine
 {
-    /**
-     \ingroup API_EXPOSED
-     */
     class Scene
     {
     ///
     public:
+
         Scene();
         ~Scene();
 
@@ -51,10 +39,6 @@ namespace engine
         void MouseClicked(Vector2 pos);
 
     public:
-        /** @name Exposed APIs
-         */
-        ///@{
-        ///
         /**
          Helper method to oad the sprite and puts it into the stack.
          Uses SpriteRendererManager.
@@ -78,19 +62,14 @@ namespace engine
          and walks the path unless specified otherwise.
          */
         void SetMainCharacter(CharacterRepresentation*);
-
-        ///@}
     public:
-        /** @name Exposed APIs
-         */
-        ///@{
         /**
          Add a sprite renderer to the list of game objects.
          \include SampleSpriteStatic-lowlevel.lua
          \ingroup API_EXPOSED
          */
         void AddSpriteDrawStatic(SpriteDrawStatic*);
-        ///@}
+
     /// Variables
     private:
         std::vector<SpriteDrawStatic*> m_staticSprites;

@@ -20,18 +20,16 @@ namespace engine
     class SpriteDrawStatic: public SpriteDrawI, public ScriptingInterface
     {
     public:
+        /** @private */
         SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale);
 
     public:
     public:
-        /** @name Exposed APIs
-         */
-        ///@{
         /**
          Sets the scale.
          \ingroup API_EXPOSED
          */
-        void SetScale(float x);
+         void SetScale(float x);
 
         /**
          Draws the sprite.
@@ -44,7 +42,6 @@ namespace engine
          \ingroup API_EXPOSED
          */
         void Draw();
-        ///@}
     public:
 
     private:

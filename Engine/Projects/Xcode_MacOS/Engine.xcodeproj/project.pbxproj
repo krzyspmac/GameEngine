@@ -157,6 +157,7 @@
 		7FCAE7CA277E543E004A6107 /* sprite_renderer_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_renderer_manager.hpp; sourceTree = "<group>"; };
 		7FCAE7CE277F5872004A6107 /* character_representation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_representation.cpp; sourceTree = "<group>"; };
 		7FCAE7CF277F5872004A6107 /* character_representation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_representation.hpp; sourceTree = "<group>"; };
+		7FCAE7D2277F85BF004A6107 /* doxygen_main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = doxygen_main.h; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
 		7FDDAF9D2776873900578F86 /* room.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = room.hpp; sourceTree = "<group>"; };
 		7FE2E5BD277A31F900538094 /* path_finder_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = path_finder_interface.h; sourceTree = "<group>"; };
@@ -197,6 +198,7 @@
 		7F138219277505B600ED6D67 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				7FCAE7D2277F85BF004A6107 /* doxygen_main.h */,
 				7F138243277505B600ED6D67 /* defs.h */,
 				7F138251277505B600ED6D67 /* common.h */,
 				7F138250277505B600ED6D67 /* common_engine.h */,

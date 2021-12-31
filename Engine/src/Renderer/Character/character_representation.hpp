@@ -29,10 +29,16 @@ namespace engine
         std::unique_ptr<PathFinder> m_pathFinder;
 
     public:
+        /** @private */
         CharacterRepresentation(CharacterI *);
+
+        /** @private */
         ~CharacterRepresentation();
-        
+
+        /** @private */
         CharacterI *GetCharacter() { return m_character; };
+
+        /** @private */
         CharacterMoverI *GetMover() { return m_mover.get(); };
 
     public:

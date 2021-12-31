@@ -20,20 +20,19 @@ namespace engine
     class SpriteAtlas: public SpriteAtlasI
     {
     public:
+        /** @private */
         SpriteAtlas(std::string jsonFilename, std::string textureFilename);
+
+        /** @private */
         ~SpriteAtlas();
 
-        /** @name Exposed APIs
-         */
-        ///@{
         /**
          Get the specific atlas item for the name.
          \ingroup API_EXPOSED
          */
         SpriteAtlasItemI *GetItemForName(std::string name);
-        ///@}
-        
-        ///
+
+        /** @private */
         std::string &GetFilename() { return m_filename; };
 
     private:
@@ -43,9 +42,7 @@ namespace engine
 
     /// ScriptingInterface
     public:
-        /**
-         @private
-         */
+        /** @private */
         SCRIPTING_INTERFACE_HEADERS(SpriteAtlas);
     };
 };

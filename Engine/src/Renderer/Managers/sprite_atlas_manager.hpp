@@ -13,28 +13,36 @@
 
 namespace engine
 {
-
-    /// A manager for sprite atlases. Loads the textures, keeps them for
-    /// future reference.
-    _LUA_EXPOSED("SpriteAtlasManager")
+    /**
+     SpriteAtlasManager
+     \addtogroup API_GLOBALS
+     */
+    /**
+     A manager for sprite atlases. Loads the textures, keeps them for
+     future reference.
+     \ingroup API_EXPOSED
+     */
     class SpriteAtlasManager
     {
     public:
-        /// A concrete instance would load the sprite atlas, its texture (using ::LoadTexture) and the json
-        /// file for individual sprite splices.
-        _LUA_EXPOSED("spriteAtlasLoad")
+        /**
+         Loads sprite atlas, its texture and the json
+         file for individual sprite splices.
+         \ingroup API_EXPOSED
+        */
         SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
 
-        ///
-        _LUA_EXPOSED("spriteAtlasGet")
+        /**
+         Gets the specific atlas item using the name provided.
+        */
         SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename);
 
-        ///
-        _LUA_EXPOSED("spriteAtlasUnload")
+        /**
+        */
         void SpriteAtlasUnload(SpriteAtlasI *atlas);
 
-        ///
-        _LUA_EXPOSED("spriteAtlasDisposeAll")
+        /**
+        */
         void SpriteAtlasDisposeAll();
 
     private:
@@ -42,6 +50,7 @@ namespace engine
 
     /// ScriptingInterface
     public:
+        /** @private */
         SCRIPTING_INTERFACE_HEADERS(SpriteAtlasManager);
     };
 };

@@ -21,6 +21,7 @@ namespace engine
     class Character: public CharacterI, public ScriptingInterface
     {
     public:
+        /** @private */
         Character(std::string jsonDefinition);
 
     private:
