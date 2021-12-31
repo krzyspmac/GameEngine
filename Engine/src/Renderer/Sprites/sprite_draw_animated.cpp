@@ -29,7 +29,7 @@ void SpriteDrawAnimated::PrepareAnimation()
     }
 }
 
-void SpriteDrawAnimated::Draw(int x, int y)
+void SpriteDrawAnimated::DrawAt(int x, int y)
 {
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
     Uint64 seconds = ticks / m_frameAnimationDurationMs;
@@ -50,5 +50,5 @@ void SpriteDrawAnimated::Draw(int x, int y)
 
 void SpriteDrawAnimated::Draw()
 {
-    Draw(m_position.x, m_position.y);
+    DrawAt(m_position.x, m_position.y);
 }

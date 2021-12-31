@@ -44,7 +44,7 @@ void Scene::RenderScene()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
-        (*it)->Draw(0, 0);
+        (*it)->DrawAt(0, 0);
     };
 }
 

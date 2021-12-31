@@ -20,15 +20,19 @@ namespace engine
         CharacterManager() { };
 
     public:
-        /// Loads or gets the character previously loaded. `jsonFilename` must exist
-        /// in the game files as well as any other files referenced by the json.
-        /// Loaded characters are kept in memory by the manager. No need to take
-        /// ownership of the intances.
-        _LUA_EXPOSED("loadCharacter")
+        /**
+         Loads or gets the character previously loaded. `jsonFilename` must exist
+         in the game files as well as any other files referenced by the json.
+         Loaded characters are kept in memory by the manager. No need to take
+         ownership of the intances.
+         \ingroup API_EXPOSED
+         */
         CharacterI* LoadCharacter(std::string jsonFilename);
 
-        /// Unloads the character and its texture sheet.
-        _LUA_EXPOSED("unloadCharacter")
+        /**
+         Unloads the character and its texture sheet.
+         \ingroup API_EXPOSED
+         */
         void UnloadCharacter(CharacterI*);
 
     private:

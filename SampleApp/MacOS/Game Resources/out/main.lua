@@ -40,11 +40,13 @@ function helperLoading()
 	
 	local tructSpr = scene:LoadSpriteStatic(atlas, "background.png")
 	tructSpr:SetScale(2)
+	
+	print (CharacterManager)
 end
 
 function init()
---	customLoading()
-	helperLoading()
+	customLoading()
+--	helperLoading()
 end
 
 function update ()

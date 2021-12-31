@@ -24,7 +24,7 @@ namespace engine
         /**
          Draws the sprite at a given coordinates.
          */
-        virtual void Draw(int x, int y) = 0;
+        virtual void DrawAt(int x, int y) = 0;
 
         /**
          Draws the sprite at the stored coorindates that were

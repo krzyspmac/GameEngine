@@ -209,11 +209,15 @@
 		7F13821A277505B600ED6D67 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				7F6428972778CC1D00EE9E2C /* Character Movement */,
+				7F64289C2779176400EE9E2C /* Path Finding */,
 				7FCAE7CD277E5605004A6107 /* Managers */,
+				7FCAE7BC277E36C7004A6107 /* Scene */,
+				7F64288127779CCA00EE9E2C /* Character */,
+				7F13821F277505B600ED6D67 /* Scripting */,
 				7FF641CE277D17F20017D86D /* Console */,
 				7FF641C9277CE8BC0017D86D /* Loaders */,
 				7F13821B277505B600ED6D67 /* Textures */,
-				7F13821F277505B600ED6D67 /* Scripting */,
 				7F138223277505B600ED6D67 /* Engine Provider */,
 				7F13822A277505B600ED6D67 /* File Access */,
 				7F13822E277505B600ED6D67 /* Sprites */,
@@ -399,10 +403,6 @@
 		7FDDAF9A2776872100578F86 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				7F64288127779CCA00EE9E2C /* Character */,
-				7F6428972778CC1D00EE9E2C /* Character Movement */,
-				7F64289C2779176400EE9E2C /* Path Finding */,
-				7FCAE7BC277E36C7004A6107 /* Scene */,
 				7FDDAF9B2776872A00578F86 /* Room */,
 			);
 			path = Game;

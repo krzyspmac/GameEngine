@@ -15,7 +15,7 @@ SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale)
 {
 }
 
-void SpriteDrawStatic::Draw(int x, int y)
+void SpriteDrawStatic::DrawAt(int x, int y)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
 
@@ -38,7 +38,7 @@ void SpriteDrawStatic::SetScale(float x)
 
 void SpriteDrawStatic::Draw()
 {
-    Draw(m_position.x, m_position.y);
+    DrawAt(m_position.x, m_position.y);
 }
 
 #pragma mark - Scripting Interface
@@ -53,10 +53,28 @@ static int lua_SpriteDrawStatic_SetScale(lua_State *L)
     return 0;
 }
 
+static int lua_SpriteDrawStatic_DrawAt(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    float x = lua_tonumberx(L, 2, NULL);
+    float y = lua_tonumberx(L, 3, NULL);
+    spr->DrawAt(x, y);
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_Draw(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    spr->Draw();
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        {"SetScale", &lua_SpriteDrawStatic_SetScale}
+        {"SetScale", &lua_SpriteDrawStatic_SetScale},
+        {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
+        {"Draw", &lua_SpriteDrawStatic_Draw}
     });
     return result;
 }

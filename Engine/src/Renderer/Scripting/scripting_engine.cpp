@@ -315,7 +315,7 @@ int ScriptingEngine::L_spriteDrawRender(lua_State *L)
     {
         if (dynamic_cast<SpriteDrawI*>(spriteRender))
         {
-            spriteRender->Draw(x, y);
+            spriteRender->DrawAt(x, y);
         }
     }
 
