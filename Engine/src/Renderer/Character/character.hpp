@@ -14,6 +14,10 @@
 namespace engine
 {
 
+    /**
+     Default game character.
+     \ingroup API_EXPOSED
+     */
     class Character: public CharacterI, public ScriptingInterface
     {
     public:
@@ -25,12 +29,23 @@ namespace engine
         void ProcessHeadFrame(void*, SpriteAtlasI *atlas, CharacterWalkState walkState, bool reversed);
 
     public:
+        /**
+         Set the scale.
+         \ingroup API_EXPOSED
+         */
         void SetScale(float scale);
+
+        /**
+         Draw the character at position.
+         \ingroup API_EXPOSED
+         */
         void Draw(Vector2& position);
-        void Change();
 
     /// ScriptingInterface
     public:
+        /**
+         @private
+         */
         SCRIPTING_INTERFACE_HEADERS(Character);
     };
 };

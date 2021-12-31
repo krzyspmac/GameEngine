@@ -19,6 +19,7 @@ namespace engine
     {
     public:
         PathI() { };
+        PathI(Vector2 from, Vector2 to) { };
         PathI(std::vector<Vector2> path): m_path(path) { }
         virtual ~PathI() { };
 

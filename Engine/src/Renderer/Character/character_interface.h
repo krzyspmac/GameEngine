@@ -15,7 +15,10 @@
 namespace engine
 {
 
-    /// Should render the character, do animations for the walking stances.
+    /**
+     Renders the character. Uses CharacteMoverI and WalkingBoxes to deal with
+     proper walking animations.
+     */
     class CharacterI {
     public:
         CharacterI(std::string jsonFilename): m_jsonFilename(jsonFilename), m_characterRenderer(nullptr), m_talking(false), m_isWalking(false), m_walkState(STAND_RIGHT) { };
@@ -24,8 +27,6 @@ namespace engine
 
     /// Character rendering
     public:
-        ///
-        _LUA_EXPOSED("getFilename")
         std::string GetJsonFilename() { return m_jsonFilename; };
 
         ///
@@ -36,8 +37,6 @@ namespace engine
 
         /// Set the character scale
         virtual void SetScale(float scale) = 0;
-
-        virtual void Change() = 0;
 
     /// Character actions
     public:
@@ -60,6 +59,10 @@ namespace engine
 
         ///
         CharacterWalkState GetWalkState() { return m_walkState; };
+
+    /// Helper methods use additional classes to facilitate rendering, animation
+    /// and path finding.
+    public:
 
     protected:
         std::string m_jsonFilename;

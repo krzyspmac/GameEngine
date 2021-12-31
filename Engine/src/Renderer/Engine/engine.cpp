@@ -239,13 +239,14 @@ void Engine::MeasurePerformanceEnd()
 
 void Engine::RenderScene()
 {
-    m_scriptingEngine.callUpdate();
-
     Scene *scene = m_sceneManager.SceneGetCurrent();
     if (scene != nullptr)
     {
         scene->RenderScene();
     }
+
+    m_scriptingEngine.callUpdate();
+
 //    m_characterManager.
 //    m_characterMover->Update();
 //    m_walkingBoxes->Draw();

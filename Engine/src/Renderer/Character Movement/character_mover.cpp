@@ -34,8 +34,8 @@ void CharacterMover::PlaceCharacter(Vector2 target)
 
 void CharacterMover::MoveCharacter(Vector2 target)
 {
-    std::cout << "Not implemented" << std::endl;
-    exit(0);
+    Path staticPath = Path(m_origin, target);
+    MoveCharacterAlongPath(&staticPath);
 }
 
 void CharacterMover::MoveCharacterAlongPath(PathI *path)

@@ -11,6 +11,7 @@
 #include <iostream>
 #include "scripting_engine_provider_interface.h"
 #include "character_interface.h"
+#include "character_representation.hpp"
 
 namespace engine
 {
@@ -27,20 +28,21 @@ namespace engine
          ownership of the intances.
          \ingroup API_EXPOSED
          */
-        CharacterI* LoadCharacter(std::string jsonFilename);
+        CharacterRepresentation* LoadCharacter(std::string jsonFilename);
 
         /**
          Unloads the character and its texture sheet.
          \ingroup API_EXPOSED
          */
-        void UnloadCharacter(CharacterI*);
+        void UnloadCharacter(CharacterRepresentation*);
 
     private:
-        CharacterI* LoadCharacterNew(std::string jsonFilename);
-        CharacterI* GetCharacter(std::string jsonFilename);
+        CharacterRepresentation* LoadCharacterNew(std::string jsonFilename);
+        CharacterRepresentation* GetCharacter(std::string jsonFilename);
 
     private:
         std::vector<std::unique_ptr<CharacterI>> m_characters;
+        std::vector<std::unique_ptr<CharacterRepresentation>> m_representations;
 
     /// ScriptingInterface
     public:

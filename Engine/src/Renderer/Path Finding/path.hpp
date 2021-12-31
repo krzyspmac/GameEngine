@@ -17,6 +17,7 @@ namespace engine
     {
     public:
         Path(): PathI() { };
+        Path(Vector2 from, Vector2 to);
         Path(std::vector<Vector2> path): PathI(path) { };
         virtual ~Path() { };
         float GetDistance();

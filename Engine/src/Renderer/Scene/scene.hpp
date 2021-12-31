@@ -22,6 +22,7 @@ See \ref API_EXPOSED "Public API" for details on these functions.
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
 #include "sprite_atlas.hpp"
+#include "character_representation.hpp"
 #include <iostream>
 
 namespace engine
@@ -48,14 +49,26 @@ namespace engine
         /** @name Exposed APIs
          */
         ///@{
+        ///
         /**
          Helper method to oad the sprite and puts it into the stack.
+         Uses SpriteRendererManager.
          \include SampleSpriteStatic-helper.lua
          \ingroup API_EXPOSED
          \see Scene::AddSpriteDrawStatic.
          */
         SpriteDrawStatic *LoadSpriteStatic(SpriteAtlas *atlas, std::string name);
 
+        /**
+         Loads the character and puts it in cache. Loads the appropriate atlas and
+         atlas items referenced by the json file.
+         Uses CharacterManager.
+         To move the character you should use CharacterMover.
+         \ingroup API_EXPOSED
+         */
+        CharacterRepresentation *LoadCharacter(std::string jsonFilename);
+
+        ///@}
     public:
         /** @name Exposed APIs
          */
@@ -70,6 +83,7 @@ namespace engine
     /// Variables
     private:
         std::vector<SpriteDrawStatic*> m_staticSprites;
+        std::vector<CharacterRepresentation*> m_characterRepresentations;
 
     /// ScriptingInterface
     public:

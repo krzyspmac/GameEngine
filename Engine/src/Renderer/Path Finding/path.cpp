@@ -9,6 +9,13 @@
 
 using namespace engine;
 
+Path::Path(Vector2 from, Vector2 to)
+: PathI(from, to)
+{
+    m_path.push_back(from);
+    m_path.push_back(to);
+}
+
 std::vector<Line> Path::ToLines()
 {
     std::vector<Line> result;

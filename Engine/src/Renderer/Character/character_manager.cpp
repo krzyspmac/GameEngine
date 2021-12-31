@@ -8,12 +8,13 @@
 #include "character_manager.hpp"
 #include "scripting_engine.hpp"
 #include "character.hpp"
+#include "character_mover.hpp"
 
 using namespace engine;
 
-CharacterI* CharacterManager::LoadCharacter(std::string jsonFilename)
+CharacterRepresentation* CharacterManager::LoadCharacter(std::string jsonFilename)
 {
-    CharacterI *character = GetCharacter(jsonFilename);
+    CharacterRepresentation *character = GetCharacter(jsonFilename);
     if (!character)
     {
         character = LoadCharacterNew(jsonFilename);
@@ -21,25 +22,32 @@ CharacterI* CharacterManager::LoadCharacter(std::string jsonFilename)
     return character;
 }
 
-CharacterI* CharacterManager::LoadCharacterNew(std::string jsonFilename)
+CharacterRepresentation* CharacterManager::LoadCharacterNew(std::string jsonFilename)
 {
     Character *character = new Character(jsonFilename);
     if (character != nullptr)
     {
-        m_characters.emplace_back(std::move(character));
+        CharacterRepresentation *rep = new CharacterRepresentation(character);
+        m_representations.emplace_back(std::unique_ptr<CharacterRepresentation>(std::move(rep)));
+        return rep;
     }
-    return character;
+    else
+    {
+        return nullptr;
+    }
 }
 
 void UnloadCharacter(CharacterI*);
 
-CharacterI* CharacterManager::GetCharacter(std::string jsonFilename)
+CharacterRepresentation* CharacterManager::GetCharacter(std::string jsonFilename)
 {
-    for (auto it = m_characters.begin(); it != m_characters.end(); it++)
+    for (auto it = m_representations.begin(); it != m_representations.end(); ++it)
     {
-        if (it->get()->GetJsonFilename().compare(jsonFilename) == 0)
+        CharacterRepresentation *rep = it->get();
+        CharacterI *chr = rep->GetCharacter();
+        if (chr && chr->GetJsonFilename().compare(jsonFilename) == 0)
         {
-            return it->get();
+            return rep;
         }
     }
     return nullptr;
@@ -51,22 +59,22 @@ SCRIPTING_INTERFACE_IMPL_NAME(CharacterManager);
 
 static int lua_CharacterManager_loadCharacter(lua_State *L)
 {
-    // TODO: should check if proper params are in proper places!
-    CharacterManager **ptr = (CharacterManager**)luaL_checkudata(
-        L, 1, CharacterManager::ScriptingInterfaceName().c_str()
-     );
-    std::string jsonName = luaL_checkstring(L, 2);
-
-    Character *character = (Character*)(*ptr)->LoadCharacter(jsonName);
-    if (character != nullptr)
-    {
-        character->ScriptingInterfaceRegisterFunctions(L, character);
-    }
-    else
-    {
-        lua_pushnil(L);
-    }
-
+//    // TODO: should check if proper params are in proper places!
+//    CharacterManager **ptr = (CharacterManager**)luaL_checkudata(
+//        L, 1, CharacterManager::ScriptingInterfaceName().c_str()
+//     );
+//    std::string jsonName = luaL_checkstring(L, 2);
+//
+//    Character *character = (Character*)(*ptr)->LoadCharacter(jsonName);
+//    if (character != nullptr)
+//    {
+//        character->ScriptingInterfaceRegisterFunctions(L, character);
+//    }
+//    else
+//    {
+//        lua_pushnil(L);
+//    }
+//
     return 1;
 }
 

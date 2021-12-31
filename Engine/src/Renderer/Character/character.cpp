@@ -153,20 +153,9 @@ void Character::SetScale(float scale)
     m_characterRenderer->SetScale(scale);
 }
 
-static CharacterWalkState state = STAND_RIGHT;//STAND_RIGHT;
-
 void Character::Draw(Vector2& position)
 {
     m_characterRenderer->Draw(m_walkState, m_isWalking, m_talking, position);
-}
-
-void Character::Change()
-{
-    state = CharacterWalkState((int)state+1);
-    if (state > BACKWARD)
-    {
-        state = STAND_RIGHT;
-    }
 }
 
 int cJSON_GetObjectItemValueInt(cJSON * object, const char *string)
@@ -200,10 +189,30 @@ static int lua_Character_getFilename(lua_State *L)
     return 1;
 }
 
+static int lua_Character_DrawAt(lua_State *L)
+{
+    Character *chr = ScriptingEngineI::GetScriptingObjectPtr<Character>(L, 1);
+    float x = lua_tonumberx(L, 2, NULL);
+    float y = lua_tonumberx(L, 3, NULL);
+    Vector2 pos = {x, y};
+    chr->Draw(pos);
+    return 0;
+}
+
+static int lua_Character_SetScale(lua_State *L)
+{
+    Character *chr = ScriptingEngineI::GetScriptingObjectPtr<Character>(L, 1);
+    float scale = lua_tonumberx(L, 2, NULL);
+    chr->SetScale(scale);
+    return 0;
+}
+
 std::vector<luaL_Reg> Character::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         { "GetFilename", &lua_Character_getFilename },
+        { "DrawAt", &lua_Character_DrawAt },
+        { "SetScale", &lua_Character_SetScale },
     });
     return result;
 }
