@@ -8,6 +8,16 @@
 #ifndef scene_hpp
 #define scene_hpp
 
+/**
+
+\mainpage Some Project
+
+...
+
+See \ref API_EXPOSED "Public API" for details on these functions.
+
+*/
+
 #include "scripting_engine_provider_interface.h"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
@@ -15,6 +25,9 @@
 
 namespace engine
 {
+    /**
+     \ingroup API_EXPOSED
+     */
     class Scene
     {
     ///
@@ -24,20 +37,26 @@ namespace engine
 
     /// Rederer
     public:
-        /// Render the scene including all the objects that have been
-        /// added to it.
+        /**
+         Render the scene including all the objects that have been
+         added to it.
+        */
         void RenderScene();
 
-    /// Helper setup with smaller boilerplate
     public:
         
-    /// Setup using originally exposed functions.
     public:
-        ///
-        _LUA_EXPOSED("addSpriteDrawStatic")
+        /**
+         Add a sprite renderer to the list of game objects.
+         \include SampleSprite1.lua
+         \ingroup API_EXPOSED
+         */
         void AddSpriteDrawStatic(SpriteDrawStatic*);
 
-        ///
+        /**
+         Add a sprite renderer to the list of game objects.
+         \ingroup API_EXPOSED
+         */
         void AddSpriteDrawAnimated(SpriteDrawAnimated*);
 
     /// Variables
@@ -46,6 +65,7 @@ namespace engine
 
     /// ScriptingInterface
     public:
+        /// @private
         SCRIPTING_INTERFACE_HEADERS(Scene);
     };
 };

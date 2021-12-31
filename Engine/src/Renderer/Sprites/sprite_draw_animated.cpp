@@ -47,3 +47,8 @@ void SpriteDrawAnimated::Draw(int x, int y)
         m_scale
     );
 }
+
+void SpriteDrawAnimated::Draw()
+{
+    Draw(m_position.x, m_position.y);
+}

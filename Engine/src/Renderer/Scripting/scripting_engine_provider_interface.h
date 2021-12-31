@@ -116,7 +116,7 @@ namespace engine
         };
 
     /// Documentation helper macros
-    #define _LUA_EXPOSED(x) /// Exposed to LUA under x
+    #define _LUA_EXPOSED(x) ///  \ingroup public_api Exposed to LUA under x
 };
 
 #endif /* scripting_enging_provider_interface_h */

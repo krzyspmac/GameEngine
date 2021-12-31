@@ -30,3 +30,8 @@ void SpriteDrawStatic::Draw(int x, int y)
        m_scale
     );
 }
+
+void SpriteDrawStatic::Draw()
+{
+    Draw(m_position.x, m_position.y);
+}

@@ -20,6 +20,7 @@ namespace engine
 
     public:
         void Draw(int x, int y);
+        void Draw();
 
     private:
         SpriteAtlasItemI *m_sprite;

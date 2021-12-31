@@ -21,9 +21,12 @@ namespace engine
         SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale);
 
     public:
-        void PrepareAnimation();
         void Draw(int x, int y);
+        void Draw();
 
+    private:
+        void PrepareAnimation();
+        
     private:
         int m_frameAnimationDurationMs;
         std::vector<SpriteAtlasItemI*> m_sprites;

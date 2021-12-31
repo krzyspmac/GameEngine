@@ -9,6 +9,7 @@
 #define sprite_draw_interface_h
 
 #include "sprite_atlas_interface.h"
+#include "common_engine_impl.h"
 
 namespace engine
 {
@@ -17,13 +18,27 @@ namespace engine
     {
     public:
         /// Scale applies to width and height. Does not modify x no y.
-        SpriteDrawI(int scale): m_scale(scale) {};
+        SpriteDrawI(int scale): m_scale(scale), m_position(Vector2Zero) {};
 
     public:
+        /**
+         Draws the sprite at a given coordinates.
+         */
         virtual void Draw(int x, int y) = 0;
+
+        /**
+         Draws the sprite at the stored coorindates that were
+         previously set.
+         */
+        virtual void Draw() = 0;
+
+    public:
+        void SetPosition(Vector2 pos) { m_position = pos; };
+        Vector2& GetPosition() { return m_position; };
 
     protected:
         int m_scale;
+        Vector2 m_position;
     };
 };
 
