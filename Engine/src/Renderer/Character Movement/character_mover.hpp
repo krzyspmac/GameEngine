@@ -8,7 +8,6 @@
 #ifndef character_mover_hpp
 #define character_mover_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "character_mover_interface.h"
 #include "common_engine_impl.h"
 #include "function.hpp"
@@ -55,10 +54,6 @@ namespace engine
         float   m_segmentDistance;
         float   m_segmentSeconds;
         double  m_segmentLastSeconds;
-
-    /// ScriptingInterface
-    public:
-        SCRIPTING_INTERFACE_HEADERS(CharacterMover);
     };
 };
 

@@ -208,20 +208,3 @@ void CharacterMover::Draw()
 {
     m_character->Draw(m_origin);
 }
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(CharacterMover);
-
-static int lua_CharacterManager_loadCharacter(lua_State *L)
-{
-    return 1;
-}
-
-std::vector<luaL_Reg> CharacterMover::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-//        { "loadCharacter", &lua_CharacterManager_loadCharacter },
-    });
-    return result;
-}
