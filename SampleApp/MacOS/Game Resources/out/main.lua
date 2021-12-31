@@ -36,8 +36,8 @@ function helperLoading()
 end
 
 function init()
-	--customLoading()
-	helperLoading()
+	customLoading()
+	--helperLoading()
 end
 
 function update ()

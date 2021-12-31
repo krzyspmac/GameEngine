@@ -8,6 +8,7 @@
 #ifndef sprite_draw_hpp
 #define sprite_draw_hpp
 
+#include "scripting_engine_provider_interface.h"
 #include "sprite_draw_interface.h"
 
 namespace engine
@@ -24,6 +25,11 @@ namespace engine
 
     private:
         SpriteAtlasItemI *m_sprite;
+
+    /// ScriptingInterface
+    public:
+        /// @private
+        SCRIPTING_INTERFACE_HEADERS(SpriteDrawStatic);
     };
 };
 

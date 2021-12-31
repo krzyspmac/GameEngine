@@ -35,3 +35,15 @@ void SpriteDrawStatic::Draw()
 {
     Draw(m_position.x, m_position.y);
 }
+
+#pragma mark - Scripting Interface
+
+SCRIPTING_INTERFACE_IMPL_NAME(SpriteDrawStatic);
+
+std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
+{
+    std::vector<luaL_Reg> result({
+//        {"addSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic}
+    });
+    return result;
+}

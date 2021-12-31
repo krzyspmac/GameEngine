@@ -6,6 +6,7 @@
 //
 
 #include "scene.hpp"
+#include "scripting_engine.hpp"
 
 using namespace engine;
 
@@ -39,20 +40,15 @@ void Scene::RenderScene()
 
 #pragma mark - Scripting Interface
 
+#define SCRIPTING_GET_OBJECT_PTR (class)
+
 SCRIPTING_INTERFACE_IMPL_NAME(Scene);
 
 static int lua_Scene_AddSpriteDrawStatic(lua_State *L)
 {
-    Scene **ptr = (Scene**)luaL_checkudata(
-        L, 1, Scene::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<Scene*>(*ptr) == nullptr) { return 0; }
-
-    SpriteDrawStatic *sprite = (SpriteDrawStatic*)lua_topointer(L, 2);
-    if (sprite != nullptr && dynamic_cast<SpriteDrawStatic*>(sprite) == nullptr) { return 0; }
-
-    (*ptr)->AddSpriteDrawStatic(sprite);
-
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    SpriteDrawStatic *sprite = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 2);
+    scene->AddSpriteDrawStatic(sprite);
     return 0;
 }
 

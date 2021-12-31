@@ -94,7 +94,6 @@ namespace engine
         lua_State* L;
         EngineProviderI *m_engineProvider;
     };
-
 };
 
 #endif /* scriptint_engine_hpp */

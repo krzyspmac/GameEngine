@@ -51,6 +51,28 @@ namespace engine
 
         virtual void callUpdate() = 0;
 
+    public:
+        /**
+         Retrieves a scriptable object from the LUA stack if an object
+         supports scripting.
+         */
+        template<typename T>
+        static T *GetScriptingObjectPtr(lua_State *L, int index)
+        {
+            T **ptr = (T**)luaL_checkudata(
+              L, index, T::ScriptingInterfaceName().c_str()
+            );
+            return *ptr;
+        };
+
+        /**
+         Retrieves ordinary pointer is an object is not scriptable.
+         */
+        template<typename T>
+        static T *GetNormalObjectPtr(lua_State *L, int index)
+        {
+            return (T*)lua_topointer(L, index);
+        };
     };
 
     /// Provides an interface for the classes to

@@ -58,20 +58,16 @@ SCRIPTING_INTERFACE_IMPL_NAME(SpriteRendererManager);
 
 static int lua_SpriteRendererManager_spriteDrawLoadStatic(lua_State *L)
 {
-    SpriteRendererManager **ptr = (SpriteRendererManager**)luaL_checkudata(
-        L, 1, SpriteRendererManager::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SpriteRendererManager*>(*ptr) == nullptr) { return 0; }
-
-    SpriteAtlasItemI *atlasItem = (SpriteAtlasItemI*)lua_topointer(L, 2);
-    if (ptr != nullptr && dynamic_cast<SpriteAtlasItemI*>(atlasItem) == nullptr) { return 0; }
-
+    SpriteRendererManager *spriteRendererManager = ScriptingEngineI::GetScriptingObjectPtr<SpriteRendererManager>(L, 1);
+    SpriteAtlasItemI *atlasItem = ScriptingEngineI::GetNormalObjectPtr<SpriteAtlasItemI>(L, 2);
     float scale = lua_tonumberx(L, 3, NULL);
 
-    SpriteDrawStatic *result = (SpriteDrawStatic*)(*ptr)->SpriteDrawLoadStatic(atlasItem, scale);
+    SpriteDrawStatic *result = (SpriteDrawStatic*)spriteRendererManager->SpriteDrawLoadStatic(atlasItem, scale);
     if (result == nullptr) { return 0; };
 
-    lua_pushlightuserdata(L, result); // SpriteDrawStatic not scriptable for now
+    result->ScriptingInterfaceRegisterFunctions(L, result);
+
+    //lua_pushlightuserdata(L, result); // SpriteDrawStatic not scriptable for now
     return 1;
 }
 
