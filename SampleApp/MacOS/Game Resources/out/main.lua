@@ -54,12 +54,18 @@ function helperLoading()
 	local tructSpr = scene:LoadSpriteStatic(atlas, "background.png")
 	tructSpr:SetScale(2)
 	
-	print (CharacterManager)
+	local character = scene:LoadCharacter("brett_character.json")
+	character:SetScale(3)
+	character:PlaceAt(100,450)
+	character:SetInverseWalkbox("polygons.json")
+	character:SetWalkingSpeed(400)
+	scene:SetMainCharacter(character)
+
 end
 
 function init()
-	customLoading()
---	helperLoading()
+--	customLoading()
+	helperLoading()
 end
 
 function update ()
