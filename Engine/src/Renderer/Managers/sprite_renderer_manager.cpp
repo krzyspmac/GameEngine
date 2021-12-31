@@ -8,6 +8,7 @@
 #include "sprite_renderer_manager.hpp"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
+#include "engine.hpp"
 
 using namespace engine;
 
@@ -17,6 +18,7 @@ SpriteDrawI *SpriteRendererManager::SpriteDrawLoadStatic(SpriteAtlasItemI *sprit
 
     if (sd)
     {
+//        GetMainEngine()->getScripting().RegisterScriptingObject(sd);
         m_spriteDraws.emplace_back(std::move(sd));
     }
     return sd;

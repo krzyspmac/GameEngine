@@ -23,9 +23,24 @@ namespace engine
 {
     class ScriptingEngineI
     {
+        void *m_engineState;
     public:
         ///
         ScriptingEngineI() { }
+
+        /**
+         Get the internal engine state. This is based on implementation.
+         The default scripting engine works on LUA so an internal LUA state
+         will be returned.
+         */
+        void *GetEngineState() { return m_engineState; };
+
+        /**
+         Sets the internal engine state. This is based on implementation.
+         The default scripting engine works on LUA so an internal LUA state
+         is used here
+         */
+        void SetEngineState(void *state) { m_engineState = state; };
 
         ///
         /// Creates a new L for lua.
@@ -41,10 +56,6 @@ namespace engine
         ///
         virtual void registerFunctions() = 0;
 
-        /// Register functions for an object if that object implements
-        /// ScriptingInterface.
-        virtual void RegisterFunctions(void *) = 0;
-
     /// Default, must-have main lua script functions
     public:
         virtual void callInit() = 0;
@@ -55,6 +66,7 @@ namespace engine
         /**
          Retrieves a scriptable object from the LUA stack if an object
          supports scripting.
+         TODO: should not be in the interface!
          */
         template<typename T>
         static T *GetScriptingObjectPtr(lua_State *L, int index)
@@ -67,6 +79,7 @@ namespace engine
 
         /**
          Retrieves ordinary pointer is an object is not scriptable.
+         TODO: should not be in the interface!
          */
         template<typename T>
         static T *GetNormalObjectPtr(lua_State *L, int index)

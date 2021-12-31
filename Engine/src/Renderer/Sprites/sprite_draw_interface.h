@@ -32,6 +32,8 @@ namespace engine
          */
         virtual void Draw() = 0;
 
+        void SetScale(float x) { m_scale = x; };
+
     public:
         void SetPosition(Vector2 pos) { m_position = pos; };
         Vector2& GetPosition() { return m_position; };

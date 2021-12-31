@@ -64,8 +64,9 @@ namespace engine {
 
         virtual std::string &GetFilename() = 0;
 
-        /// Get the specific atlas item for the name.
-        _LUA_EXPOSED("getItemForName")
+        /**
+         Get the SpriteAtlasItemI if that item exists in the atlas json.
+         */
         virtual SpriteAtlasItemI *GetItemForName(std::string name) = 0;
     };
 };

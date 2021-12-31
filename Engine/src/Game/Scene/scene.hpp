@@ -21,6 +21,7 @@ See \ref API_EXPOSED "Public API" for details on these functions.
 #include "scripting_engine_provider_interface.h"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
+#include "sprite_atlas.hpp"
 #include <iostream>
 
 namespace engine
@@ -44,21 +45,28 @@ namespace engine
         void RenderScene();
 
     public:
-        
+        /** @name Exposed APIs
+         */
+        ///@{
+        /**
+         Helper method to oad the sprite and puts it into the stack.
+         \include SampleSpriteStatic-helper.lua
+         \ingroup API_EXPOSED
+         \see Scene::AddSpriteDrawStatic.
+         */
+        SpriteDrawStatic *LoadSpriteStatic(SpriteAtlas *atlas, std::string name);
+
     public:
+        /** @name Exposed APIs
+         */
+        ///@{
         /**
          Add a sprite renderer to the list of game objects.
          \include SampleSprite1.lua
          \ingroup API_EXPOSED
          */
         void AddSpriteDrawStatic(SpriteDrawStatic*);
-
-        /**
-         Add a sprite renderer to the list of game objects.
-         \ingroup API_EXPOSED
-         */
-        void AddSpriteDrawAnimated(SpriteDrawAnimated*);
-
+        ///@}
     /// Variables
     private:
         std::vector<SpriteDrawStatic*> m_staticSprites;

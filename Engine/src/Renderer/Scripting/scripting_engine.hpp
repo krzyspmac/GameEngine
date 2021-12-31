@@ -25,6 +25,7 @@ namespace engine
 
     class ScriptingEngine : public ScriptingEngineI
     {
+
     public:
         ///
         ScriptingEngine();
@@ -43,7 +44,10 @@ namespace engine
         ///
         void registerFunctions();
 
-        void RegisterFunctions(void *);
+        void RegisterFunctions(ScriptingInterface *);
+
+    public:
+        lua_State* GetL() { return L; };
 
     /// Default, must-have main lua script functions
     public:

@@ -12,16 +12,28 @@
 #include "sprite_atlas_interface.h"
 #include "scripting_engine_provider_interface.h"
 
-namespace engine {
-
+namespace engine
+{
+    /**
+     \ingroup API_EXPOSED
+     */
     class SpriteAtlas: public SpriteAtlasI
     {
     public:
         SpriteAtlas(std::string jsonFilename, std::string textureFilename);
         ~SpriteAtlas();
 
+        /** @name Exposed APIs
+         */
+        ///@{
+        /**
+         Get the specific atlas item for the name.
+         \ingroup API_EXPOSED
+         */
         SpriteAtlasItemI *GetItemForName(std::string name);
-
+        ///@}
+        
+        ///
         std::string &GetFilename() { return m_filename; };
 
     private:
@@ -31,6 +43,9 @@ namespace engine {
 
     /// ScriptingInterface
     public:
+        /**
+         @private
+         */
         SCRIPTING_INTERFACE_HEADERS(SpriteAtlas);
     };
 };

@@ -1,4 +1,4 @@
-function setup()
+function init()
 	local scene = SceneManager:sceneCreateNew()
 	
 	local sceneAtlas = AtlasManager:spriteAtlasLoad( "background.json", "background.png" )
@@ -10,6 +10,3 @@ function setup()
 	scene:addSpriteDrawStatic(background)
 end
 
-function init()
-	helperLoading()
-end

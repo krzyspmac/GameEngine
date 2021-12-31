@@ -22,6 +22,7 @@ ScriptingEngine::ScriptingEngine()
 void ScriptingEngine::newState()
 {
     this->L = luaL_newstate();
+    SetEngineState(this->L);
     luaL_openlibs(L);
     luaopen_base(L);
 }
@@ -47,7 +48,6 @@ void ScriptingEngine::loadFile(FileMemoryBufferStreamI *bufferStream)
         std::cout << "Final:" << lua_tostring(L, -1) << "\n";
     }
 }
-
 
 void ScriptingEngine::registerFunctions()
 {
@@ -101,14 +101,14 @@ void ScriptingEngine::registerFunctions()
     lua_setglobal(L, "SpriteRendererManager");
 };
 
-void ScriptingEngine::RegisterFunctions(void *ptr)
-{
-    if(ScriptingInterface* si = dynamic_cast<ScriptingInterface*>((ScriptingInterface*)ptr))
-    {
-        //si.ScriptingInterfaceRegisterFunctions(L, si.ScriptingInterfaceName(), si.ScriptingInterfaceFunctions());
-        printf("asd");
-    }
-}
+//void ScriptingEngine::RegisterFunctions(void *ptr)
+//{
+//    if(ScriptingInterface* si = dynamic_cast<ScriptingInterface*>((ScriptingInterface*)ptr))
+//    {
+//        //si.ScriptingInterfaceRegisterFunctions(L, si.ScriptingInterfaceName(), si.ScriptingInterfaceFunctions());
+//        printf("asd");
+//    }
+//}
 
 void ScriptingEngine::callInit()
 {

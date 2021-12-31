@@ -31,6 +31,11 @@ void SpriteDrawStatic::Draw(int x, int y)
     );
 }
 
+void SpriteDrawStatic::SetScale(float x)
+{
+    SpriteDrawI::SetScale(x);
+}
+
 void SpriteDrawStatic::Draw()
 {
     Draw(m_position.x, m_position.y);
@@ -40,10 +45,18 @@ void SpriteDrawStatic::Draw()
 
 SCRIPTING_INTERFACE_IMPL_NAME(SpriteDrawStatic);
 
+static int lua_SpriteDrawStatic_SetScale(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    float scale = lua_tonumberx(L, 2, NULL);
+    spr->SetScale(scale);
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-//        {"addSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic}
+        {"SetScale", &lua_SpriteDrawStatic_SetScale}
     });
     return result;
 }
