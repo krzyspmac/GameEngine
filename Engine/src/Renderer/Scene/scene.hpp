@@ -35,30 +35,33 @@ namespace engine
         /**
          Render the scene including all the objects that have been
          added to it.
+         @private
         */
         void RenderScene();
 
         /**
          Called by the engine. Reacts to mouse clicks.
+         @private
          */
         void MouseClicked(Vector2 pos);
 
     public:
         /**
+         \brief Load a sprite renderer.
+
          Helper method to oad the sprite and puts it into the stack.
          Uses SpriteRendererManager.
          \include SampleSpriteStatic-helper.lua
-         \ingroup API_EXPOSED
          \see Scene::AddSpriteDrawStatic.
          */
         SpriteDrawStatic *LoadSpriteStatic(SpriteAtlas *atlas, std::string name);
 
         /**
-         Loads the character and puts it in cache. Loads the appropriate atlas and
-         atlas items referenced by the json file.
-         Uses CharacterManager.
-         To move the character you should use CharacterMover.
-         \ingroup API_EXPOSED
+         \brief Load a character representation.
+
+         The character representation is loaded and put into cache.
+         Loads the appropriate atlas and atlas items referenced by the json file.
+         Uses CharacterManager, SpriteRendererManager and others.
          */
         CharacterRepresentation *LoadCharacter(std::string jsonFilename);
 
@@ -73,12 +76,21 @@ namespace engine
         void SetMainCharacter(CharacterRepresentation*);
 
         /**
+         \brief Register a sprite renderer.
+
          Add a sprite renderer to the list of game objects.
          \include SampleSpriteStatic-lowlevel.lua
-         \ingroup API_EXPOSED
          */
         void AddSpriteDrawStatic(SpriteDrawStatic*);
 
+        /**
+         \brief Set a mouse down function.
+
+         Registers a `mouse down` function. Only one can exist for the scene.
+         Calling this multiple times keeps the last one only.
+         The function must take two parameters: x & y (float).
+         \include Scene_MouseDown.lua
+         */
         void SetMouseDownFunction(std::string);
 
     /// ScriptingInterface
