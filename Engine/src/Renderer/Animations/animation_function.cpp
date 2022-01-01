@@ -12,9 +12,10 @@
 
 using namespace engine;
 
-AnimationFunction::AnimationFunction(std::unique_ptr<AnimationCurveFunctionI> curve, double seconds, int functionUpdateRef, int functionEndRef)
+AnimationFunction::AnimationFunction(std::unique_ptr<AnimationCurveFunctionI> curve, double seconds, int delay, int functionUpdateRef, int functionEndRef)
     :   m_engineProvider(GetMainEngine()->getProvider()),
         m_time(GetMainEngine()->getTime()),
+        m_secondsDelay(delay),
         m_secondsTotal(seconds),
         m_secondsStart(-1),
         m_val(curve->GetMin()),
@@ -72,7 +73,7 @@ void AnimationFunction::ReleaseMem()
 
 void AnimationFunction::Update()
 {
-    double diffSeconds = m_time.GetFrameStartSec() - m_secondsStart;
+    double diffSeconds = MAX(m_time.GetFrameStartSec() - m_secondsStart - m_secondsDelay, 0);
     double progress = diffSeconds / m_secondsTotal;
 
     m_val = m_curve->f(progress);

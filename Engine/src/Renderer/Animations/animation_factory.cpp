@@ -10,10 +10,10 @@
 
 using namespace engine;
 
-AnimationFunction *AnimationFactory::CreateLinear(float min, float max, double seconds, int functionUpdateRef, int functionEndRef)
+AnimationFunction *AnimationFactory::CreateLinear(float min, float max, double seconds, int delay, int functionUpdateRef, int functionEndRef)
 {
     AnimationCurveFunctionI *linear = new AnimationCurveFunctionLinear(min, max);
-    AnimationFunction *function = new AnimationFunction(std::unique_ptr<AnimationCurveFunctionI>(linear), seconds, functionUpdateRef, functionEndRef);
+    AnimationFunction *function = new AnimationFunction(std::unique_ptr<AnimationCurveFunctionI>(linear), seconds, delay, functionUpdateRef, functionEndRef);
     return function;
 }
 
@@ -27,9 +27,10 @@ static int lua_AnimationFactory_CreateLinear(lua_State *L)
     float min = lua_tonumberx(L, 2, nullptr);
     float max = lua_tonumberx(L, 3, nullptr);
     double seconds = lua_tonumberx(L, 4, nullptr);
+    double delay = lua_tonumberx(L, 5, nullptr);
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
     int functionUpdateRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    AnimationFunction *function = obj->CreateLinear(min, max, seconds, functionUpdateRef, functionEndRef);
+    AnimationFunction *function = obj->CreateLinear(min, max, seconds, delay, functionUpdateRef, functionEndRef);
     function->ScriptingInterfaceRegisterFunctions(L, function);
     return 1;
 }

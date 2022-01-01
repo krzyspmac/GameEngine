@@ -61,7 +61,7 @@ function helperLoading()
 	
 	backgroudnSpr:SetAlpha(0)
 	
-	fadeInAnimation = AnimationFactory:CreateLinear(0, 255, 5,
+	fadeInAnimation = AnimationFactory:CreateLinear(0, 255, 0.5, 2,
 		function(val)
 			backgroudnSpr:SetAlpha(val)
 		end,

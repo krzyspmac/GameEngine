@@ -40,6 +40,7 @@ namespace engine
         EngineProviderI &m_engineProvider;
         Time &m_time;
         std::unique_ptr<AnimationCurveFunctionI> m_curve;
+        double m_secondsDelay;
         double m_secondsTotal;
         double m_secondsStart;
         double m_secondsPassed;
@@ -51,7 +52,7 @@ namespace engine
         /**
          @private
          */
-        AnimationFunction(std::unique_ptr<AnimationCurveFunctionI> curve, double seconds, int functionUpdateRef, int functionEndRef);
+        AnimationFunction(std::unique_ptr<AnimationCurveFunctionI> curve, double seconds, int delay, int functionUpdateRef, int functionEndRef);
         /** @private */
         ~AnimationFunction();
 

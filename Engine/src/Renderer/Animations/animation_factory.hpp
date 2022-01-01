@@ -45,6 +45,7 @@ namespace engine
          @param min -   animate from this value
          @param max -   animate to this value
          @param seconds - animate over this many seconds
+         @param delay - initial delay in seconds
          @param functionUpdateRef - script function that gets called
             each time an update is needed (linked to fps)
          @param functionEndRef - script function that gets called
@@ -52,7 +53,7 @@ namespace engine
 
          \include AnimationFactory_CreateLinear.lua
          */
-        AnimationFunction *CreateLinear(float min, float max, double seconds, int functionUpdateRef, int functionEndRef);
+        AnimationFunction *CreateLinear(float min, float max, double seconds, int delay, int functionUpdateRef, int functionEndRef);
 
     /// ScriptingInterface
     public:
