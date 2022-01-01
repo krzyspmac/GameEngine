@@ -12,13 +12,18 @@
 #include "sprite_interface_defs.h"
 #include "file_access_provider.h"
 #include "scripting_engine_provider_interface.h"
+#include "common_engine_impl.h"
 
 namespace engine {
 
     class SpriteAtlasItemI
     {
     public:
-        SpriteAtlasItemI(TextureI *texture, int x, int y, int w, int h, bool rotated, std::string filename): m_texture(texture), x(x), y(y), w(w), h(h), rotated(rotated), m_filename(filename) { };
+        SpriteAtlasItemI(TextureI *texture, int x, int y, int w, int h, bool rotated, std::string filename)
+            :   m_texture(texture),
+                x(x), y(y), w(w), h(h),
+                m_size({w, h}),
+                rotated(rotated), m_filename(filename) { };
 
     public:
 
@@ -29,10 +34,11 @@ namespace engine {
         TextureI *GetTexture() { return m_texture; };
 
         ///
-        int &getX() { return x; }
-        int &getY() { return y; }
-        int &getWidth() { return w; }
-        int &getHeight() { return h; }
+        int &GetX() { return x; }
+        int &GetY() { return y; }
+        int &GetWidth() { return w; }
+        int &GetHeight() { return h; }
+        Size &GetSize() { return m_size; };
 
         ///
         SpriteDescriptor GetSpriteDescriptor()
@@ -50,6 +56,7 @@ namespace engine {
         int y;
         int w;
         int h;
+        Size m_size;
         bool rotated;
         std::string m_filename;
         TextureI *m_texture;

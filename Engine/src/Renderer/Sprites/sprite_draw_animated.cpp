@@ -24,8 +24,8 @@ void SpriteDrawAnimated::PrepareAnimation()
     for (int i = 0; i < m_sprites.size(); i++)
     {
         SpriteAtlasItemI *item = m_sprites.at(i);
-        m_maxWidth = std::max(m_maxWidth, item->getWidth());
-        m_maxHeight = std::max(m_maxHeight, item->getHeight());
+        m_maxWidth = std::max(m_maxWidth, item->GetWidth());
+        m_maxHeight = std::max(m_maxHeight, item->GetHeight());
     }
 }
 
@@ -38,12 +38,12 @@ void SpriteDrawAnimated::DrawAt(int x, int y)
 
     GetMainEngine()->getProvider().DrawTexture(
        spriteItem->GetTexture(),
-        x + ceil(m_scale *((m_maxWidth - spriteItem->getWidth())/2)),
-        y + ceil(m_scale *((m_maxHeight - spriteItem->getHeight())/2)),
-        spriteItem->getX(),
-        spriteItem->getY(),
-        spriteItem->getWidth(),
-        spriteItem->getHeight(),
+        x + ceil(m_scale *((m_maxWidth - spriteItem->GetWidth())/2)),
+        y + ceil(m_scale *((m_maxHeight - spriteItem->GetHeight())/2)),
+        spriteItem->GetX(),
+        spriteItem->GetY(),
+        spriteItem->GetWidth(),
+        spriteItem->GetHeight(),
         m_scale
     );
 }

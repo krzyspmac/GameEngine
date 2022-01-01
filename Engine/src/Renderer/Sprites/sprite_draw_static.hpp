@@ -49,7 +49,10 @@ namespace engine
          */
         uint8_t GetAlpha() { return SpriteDrawI::GetAlpha(); };
 
-        void GetFunction();
+        /**
+         Get width & size of the sprite.
+         */
+        Size& GetSize() { return m_sprite->GetSize(); };
 
         /**
          Draws the sprite.
