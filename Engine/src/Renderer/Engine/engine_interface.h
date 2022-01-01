@@ -22,6 +22,7 @@
 #include "periodic_updates_manager.hpp"
 #include "animation_factory.hpp"
 #include "time.hpp"
+#include "engine_state.hpp"
 
 namespace engine
 {
@@ -159,7 +160,11 @@ namespace engine
         ///
         AnimationFactory& getAnimationFactory() { return m_animationFactory; };
 
+        ///
         PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };
+
+        ///
+        EngineState& getEngineState() { return m_engineState; };
 
     /// Other states
     public:
@@ -181,6 +186,7 @@ namespace engine
         Time m_time;
         AnimationFactory m_animationFactory;
         PeriodicUpdatesManager m_periodicUpdatesManager;
+        EngineState m_engineState;
     };
 
 };

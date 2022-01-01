@@ -58,15 +58,6 @@ static int lua_SpriteDrawStatic_SetScale(lua_State *L)
     return 0;
 }
 
-static int lua_SpriteDrawStatic_DrawAt(lua_State *L)
-{
-    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
-    float x = lua_tonumberx(L, 2, NULL);
-    float y = lua_tonumberx(L, 3, NULL);
-    spr->DrawAt(x, y);
-    return 0;
-}
-
 static int lua_SpriteDrawStatic_SetAlpha(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
@@ -83,6 +74,34 @@ static int lua_SpriteDrawStatic_GetAlpha(lua_State *L)
     return 1;
 }
 
+static int lua_SpriteDrawStatic_GetSize(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    Size size = spr->GetSize();
+    lua_pushnumber(L, size.width);
+    lua_pushnumber(L, size.height);
+    return 2;
+}
+
+static int lua_SpriteDrawStatic_SetPosition(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    float x = lua_tonumberx(L, 2, nullptr);
+    float y = lua_tonumberx(L, 2, nullptr);
+    Vector2 pos = {x, y};
+    spr->SetPosition(pos);
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_DrawAt(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    float x = lua_tonumberx(L, 2, NULL);
+    float y = lua_tonumberx(L, 3, NULL);
+    spr->DrawAt(x, y);
+    return 0;
+}
+
 static int lua_SpriteDrawStatic_Draw(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
@@ -94,9 +113,11 @@ std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         {"SetScale", &lua_SpriteDrawStatic_SetScale},
-        {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
         {"SetAlpha", &lua_SpriteDrawStatic_SetAlpha},
         {"GetAlpha", &lua_SpriteDrawStatic_GetAlpha},
+        {"GetSize", &lua_SpriteDrawStatic_GetSize},
+        {"SetPosition", &lua_SpriteDrawStatic_SetPosition},
+        {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
         {"Draw", &lua_SpriteDrawStatic_Draw}
     });
     return result;

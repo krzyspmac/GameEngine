@@ -25,6 +25,7 @@ namespace engine
     class CharacterRepresentation
     {
         CharacterI *m_character;
+        bool m_hidden;
         std::unique_ptr<CharacterMoverI> m_mover;
         std::unique_ptr<PathFinder> m_pathFinder;
 
@@ -83,6 +84,11 @@ namespace engine
          Sets the character crossing speed. In pixels per millisecond.
          */
         void SetCharacterWalkingSpeed(float pixelsInMilliseconds);
+
+        /**
+         Sets the character's visibility.
+         */
+        void SetHidden(bool value);
 
         /**
          Renders the character as needed. This is the main method

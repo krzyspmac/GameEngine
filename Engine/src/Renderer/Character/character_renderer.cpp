@@ -130,12 +130,12 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
 
     GetMainEngine()->getProvider().DrawTexture(
        spriteItem->GetTexture(),
-        /*x + */ceil(1 *((m_maxWidth - spriteItem->getWidth())/2)) + + (1 * bodyRenderer->GetBodyOffsetX()),
+        /*x + */ceil(1 *((m_maxWidth - spriteItem->GetWidth())/2)) + + (1 * bodyRenderer->GetBodyOffsetX()),
         /*y + */m_headHeadHeight,
-        spriteItem->getX(),
-        spriteItem->getY(),
-        spriteItem->getWidth(),
-        spriteItem->getHeight(),
+        spriteItem->GetX(),
+        spriteItem->GetY(),
+        spriteItem->GetWidth(),
+        spriteItem->GetHeight(),
         1
     );
 }
@@ -161,12 +161,12 @@ void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimati
 
     GetMainEngine()->getProvider().DrawTexture(
        spriteItem->GetTexture(),
-        /*0 + */ceil((m_maxWidth - spriteItem->getWidth())/2) + m_headOffsetX,
+        /*0 + */ceil((m_maxWidth - spriteItem->GetWidth())/2) + m_headOffsetX,
         /*0 + */m_headOffsetY,
-        spriteItem->getX(),
-        spriteItem->getY(),
-        spriteItem->getWidth(),
-        spriteItem->getHeight(),
+        spriteItem->GetX(),
+        spriteItem->GetY(),
+        spriteItem->GetWidth(),
+        spriteItem->GetHeight(),
         1
     );
 }
@@ -230,13 +230,13 @@ void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTa
 void CharacterWalkRenderer::AppendBodyRenderer(CharacterBodyRenderer* value)
 {
     m_bodyRenderers.emplace_back(std::move(value));
-    m_bodyMaxWidth = std::max(m_bodyMaxWidth, value->GetSprite()->getWidth());
-    m_bodyMaxHeight = std::max(m_bodyMaxHeight, value->GetSprite()->getHeight());
+    m_bodyMaxWidth = std::max(m_bodyMaxWidth, value->GetSprite()->GetWidth());
+    m_bodyMaxHeight = std::max(m_bodyMaxHeight, value->GetSprite()->GetHeight());
 }
 
 void CharacterWalkRenderer::AppendHeadRenderer(CharacterHeadRenderer* value)
 {
     m_headRenderers.emplace_back(std::move(value));
-    m_headMaxWidth = std::max(m_headMaxWidth, value->GetSprite()->getWidth());
-    m_headMaxHeight = std::max(m_headMaxHeight, value->GetSprite()->getHeight());
+    m_headMaxWidth = std::max(m_headMaxWidth, value->GetSprite()->GetWidth());
+    m_headMaxHeight = std::max(m_headMaxHeight, value->GetSprite()->GetHeight());
 }

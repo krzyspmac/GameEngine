@@ -10,6 +10,7 @@ function loadSprites()
 	character:PlaceAt(100,450)
 	character:SetInverseWalkbox("polygons.json")
 	character:SetWalkingSpeed(400)
+	character:SetHidden(true)
 	--scene:SetMainCharacter(character)
 	scene:SetMouseDownFunction(mouseDown)
 
@@ -23,6 +24,43 @@ function loadSprites()
 	truck:SetScale(2)
 	truck:SetAlpha(0)
 	
+	-- texts
+	local textsAtlas = AtlasManager:SpriteAtlasLoad("textx.json", "textx.png")
+	text = scene:LoadSpriteStatic(textsAtlas, "demo_text.png")
+	local textScale = 3
+	text:SetScale(textScale)
+	local vpW, vpH = EngineState:GetViewportSize()
+	local tW, tH = text:GetSize()
+	text:SetPosition(((vpW - tW*textScale)/2), ((vpH - tH*textScale)/2))
+	text:SetAlpha(0)
+	
+	-- animations
+	textFadeInAnim = nil
+	textFadeOutAnim = nil
+	
+	textFadeInAnim = AnimationFactory:CreateLinear(0, 255, 1, 1,
+		function(v)
+			text:SetAlpha(v)
+		end,
+		function()
+			textFadeInAnim:ReleaseMem()
+			textFadeOutAnim:Start()
+		end
+	)
+	textFadeInAnim:Start()
+	
+	textFadeOutAnim = AnimationFactory:CreateLinear(255, 0, 1, 1,
+		function(v)
+			text:SetAlpha(v)
+		end,
+		function()
+			textFadeOutAnim:ReleaseMem()
+			
+		fadeInAnimation:Start()
+		truckAnim:Start()
+		end
+	)
+	
 	fadeInAnimation = AnimationFactory:CreateLinear(0, 255, 0.5, 1.5,
 		function(val)
 			sky:SetAlpha(val)
@@ -32,17 +70,17 @@ function loadSprites()
 			initialAnimationDone = true
 		end
 	)
-	fadeInAnimation:Start()
-	
+
 	truckAnim = AnimationFactory:CreateLinear(0, 255, 1, 0.5,
 		function(val)
 			truck:SetAlpha(val)
 		end,
 		function()
 			truckAnim:ReleaseMem()
+			
+			character:SetHidden(false)
 		end
 	)
-	truckAnim:Start()
 end
 
 function init()

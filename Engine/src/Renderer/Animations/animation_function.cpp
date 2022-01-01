@@ -79,7 +79,7 @@ void AnimationFunction::Update()
     m_val = m_curve->f(progress);
     CallbackExecute();
 
-    if (m_val >= m_curve->GetMax())
+    if (diffSeconds >= m_secondsTotal)
     {
         Stop();
     }

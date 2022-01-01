@@ -14,7 +14,7 @@
 using namespace engine;
 
 CharacterRepresentation::CharacterRepresentation(CharacterI *character)
-: m_character(character)
+: m_character(character), m_hidden(false)
 {
     m_mover = std::unique_ptr<CharacterMoverI>(new CharacterMover(m_character, 100));
 }
@@ -71,8 +71,15 @@ void CharacterRepresentation::SetCharacterWalkingSpeed(float pixelsInMillisecond
     m_mover->SetWalkingSpeed(pixelsInMilliseconds);
 }
 
+void CharacterRepresentation::SetHidden(bool value)
+{
+    m_hidden = value;
+}
+
 void CharacterRepresentation::Render()
 {
+    if (m_hidden) { return; }
+
     m_mover->Update();
 
     PathFinder *pf = m_pathFinder.get();
@@ -149,6 +156,14 @@ static int lua_CharacterRepresentation_SetWalkingSpeed(lua_State *L)
     return 0;
 }
 
+static int lua_CharacterRepresentation_SetHidden(lua_State *L)
+{
+    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
+    bool x = lua_toboolean(L, 2);
+    sender->SetHidden(x);
+    return 0;
+}
+
 std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -158,7 +173,8 @@ std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
         {"SetScale", &lua_CharacterRepresentation_SetScale},
         {"SetInverseWalkbox", &lua_CharacterRepresentation_SetInverseWalkbox},
         {"WalkTo", &lua_CharacterRepresentation_WalkTo},
-        {"SetWalkingSpeed", &lua_CharacterRepresentation_SetWalkingSpeed}
+        {"SetWalkingSpeed", &lua_CharacterRepresentation_SetWalkingSpeed},
+        {"SetHidden", &lua_CharacterRepresentation_SetHidden}
     });
     return result;
 }

@@ -8,6 +8,9 @@
 #ifndef animation_curve_function_interface_h
 #define animation_curve_function_interface_h
 
+#include <stdio.h>
+#include <math.h>
+
 namespace engine
 {
     class AnimationCurveFunctionI
@@ -17,7 +20,7 @@ namespace engine
         float m_max;
         float m_diff;
     public:
-        AnimationCurveFunctionI(float min, float max) : m_min(min), m_max(max), m_diff(m_max - m_min) { };
+        AnimationCurveFunctionI(float min, float max) : m_min(min), m_max(max), m_diff(fabsf(m_max - m_min)) { };
         virtual ~AnimationCurveFunctionI() { };
         
         float GetMin() { return m_min; };

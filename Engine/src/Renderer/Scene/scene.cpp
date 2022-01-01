@@ -22,16 +22,11 @@ Scene::Scene()
         pos.y = (*clicked).y;
 
         MouseClicked(pos);
-//        Vector2 pos = ->GetCharacterPosition();
-//        Vector2 from = Vector2Make(pos.x, pos.y);
-//        PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
-//        m_characterMover->MoveCharacterAlongPath(path);
     }));
 }
 
 Scene::~Scene()
 {
-
 }
 
 void Scene::MouseClicked(Vector2 pos)
@@ -49,15 +44,6 @@ void Scene::MouseClicked(Vector2 pos)
             lua_pushnumber(L, pos.y);
             return 2;
         });
-
-//        lua_State *L = ((ScriptingEngine&)GetMainEngine()->getScripting()).GetL();
-//        lua_getglobal(L, m_mouseDownFunctionName.c_str());  /* function to be called */
-//        lua_pushnumber(L, pos.x);
-//        lua_pushnumber(L, pos.y);
-//        if (lua_pcall(L, 2, 0, 0) != 0)
-//        {
-//            std::cout << "Error:" << lua_tostring(L, -1) << "\n";
-//        }
     }
 }
 
@@ -102,7 +88,9 @@ void Scene::RenderScene()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
-        (*it)->DrawAt(0, 0);
+        SpriteDrawI *sprite = (*it);
+        Vector2& pos = sprite->GetPosition();
+        (*it)->DrawAt(pos.x, pos.y);
     };
 
     for (auto it = m_characterRepresentations.begin(); it != m_characterRepresentations.end(); ++it)

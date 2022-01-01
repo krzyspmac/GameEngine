@@ -14,6 +14,7 @@
 #include "sprite_renderer_manager.hpp"
 #include "animation_factory.hpp"
 #include "time.hpp"
+#include "engine_state.hpp"
 
 using namespace engine;
 
@@ -109,6 +110,10 @@ void ScriptingEngine::registerFunctions()
     AnimationFactory &animationFactory = GetMainEngine()->getAnimationFactory();
     animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
     lua_setglobal(L, "AnimationFactory");
+
+    EngineState &engineState = GetMainEngine()->getEngineState();
+    engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);
+    lua_setglobal(L, "EngineState");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)
