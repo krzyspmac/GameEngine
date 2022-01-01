@@ -117,6 +117,12 @@ namespace engine
         /// Draws a text using a specified font.
         virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;
 
+    /// Effects
+    public:
+
+        /// Set the alpha mod of the texture.
+        virtual void TextureAlphaSetMod(TextureI *texture, uint8_t alpha) = 0;
+
     /// Renderer specific
     public:
 

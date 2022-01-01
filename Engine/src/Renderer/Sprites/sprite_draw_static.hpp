@@ -14,9 +14,6 @@
 namespace engine
 {
 
-    /**
-     \ingroup API_EXPOSED
-     */
     class SpriteDrawStatic: public SpriteDrawI, public ScriptingInterface
     {
     public:
@@ -27,19 +24,34 @@ namespace engine
     public:
         /**
          Sets the scale.
-         \ingroup API_EXPOSED
          */
-         void SetScale(float x);
+        void SetScale(float x);
+
+        /**
+         Sets the position for the sprite.
+         */
+        void SetPosition(Vector2 &pos) { m_position = pos; };
+
+        /**
+         Gets the current position for the sprite.
+         */
+        Vector2& GetPosition() { return m_position; };
+
+        /**
+         Sets the alpha. Values range from 0-255.
+         Default value is 255.
+         */
+        void SetAlpha(uint8_t val) { SpriteDrawI::SetAlpha(val); };
+
+        uint8_t GetAlpha() { return SpriteDrawI::GetAlpha(); };
 
         /**
          Draws the sprite.
-         \ingroup API_EXPOSED
          */
         void DrawAt(int x, int y);
 
         /**
          Draws the sprite.
-         \ingroup API_EXPOSED
          */
         void Draw();
     public:

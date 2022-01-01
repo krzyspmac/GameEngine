@@ -7,6 +7,7 @@
 
 #include "sprite_draw_static.hpp"
 #include "common_engine.h"
+#include "common.h"
 
 using namespace engine;
 
@@ -18,9 +19,12 @@ SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale)
 void SpriteDrawStatic::DrawAt(int x, int y)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
+    TextureI *texture = m_sprite->GetTexture();
+
+    provider.TextureAlphaSetMod(texture, m_alpha);
 
     provider.DrawTexture(
-       m_sprite->GetTexture(),
+       texture,
        x,
        y,
        m_sprite->getX(),
@@ -62,6 +66,22 @@ static int lua_SpriteDrawStatic_DrawAt(lua_State *L)
     return 0;
 }
 
+static int lua_SpriteDrawStatic_SetAlpha(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    float x = MAX(0, MIN(255, lua_tonumberx(L, 2, NULL)));
+    spr->SetAlpha(x);
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_GetAlpha(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    float x = spr->GetAlpha();
+    lua_pushnumber(L, x);
+    return 1;
+}
+
 static int lua_SpriteDrawStatic_Draw(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
@@ -74,7 +94,9 @@ std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
     std::vector<luaL_Reg> result({
         {"SetScale", &lua_SpriteDrawStatic_SetScale},
         {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
-        {"Draw", &lua_SpriteDrawStatic_Draw}
+        {"SetAlpha", &lua_SpriteDrawStatic_SetAlpha},
+        {"GetAlpha", &lua_SpriteDrawStatic_GetAlpha},
+        {"Draw", &lua_SpriteDrawStatic_Draw},
     });
     return result;
 }

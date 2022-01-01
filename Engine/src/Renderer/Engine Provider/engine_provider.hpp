@@ -55,6 +55,8 @@ namespace engine
         FontI *LoadFont(std::string name, FileMemoryBufferStreamI *);
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
 
+        void TextureAlphaSetMod(TextureI *texture, uint8_t alpha);
+
     public:
         void RendererTargetPush(TextureTargetI *targetTexture);
         void RendererTargetPop();

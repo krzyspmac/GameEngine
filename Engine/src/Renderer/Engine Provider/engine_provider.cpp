@@ -249,6 +249,14 @@ void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r
     fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
 
+void EngineProvider::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
+{
+    if (SDL_SetTextureAlphaMod((SDL_Texture*)texture->getTextureHandle(), alpha) == -1)
+    {
+        std::cout << "Error. SDL_SetTextureAlphaMod not supported by the renderer" << std::endl;
+    }
+}
+
 void EngineProvider::RendererTargetPush(TextureTargetI *targetTexture)
 {
     m_rendererStack.push_back(targetTexture);

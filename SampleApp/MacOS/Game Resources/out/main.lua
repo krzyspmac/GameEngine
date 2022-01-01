@@ -48,7 +48,7 @@ function helperLoading()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
 
-	local backgroudnSpr = scene:LoadSpriteStatic(atlas, "sky.png")
+	backgroudnSpr = scene:LoadSpriteStatic(atlas, "sky.png")
 	backgroudnSpr:SetScale(3)
 	
 	local tructSpr = scene:LoadSpriteStatic(atlas, "background.png")
@@ -60,8 +60,10 @@ function helperLoading()
 	character:SetInverseWalkbox("polygons.json")
 	character:SetWalkingSpeed(400)
 	
-	scene:SetMainCharacter(character)
+	--scene:SetMainCharacter(character)
 	scene:SetMouseDownFunction("mouseDown")
+	
+	backgroudnSpr:SetAlpha(0)
 end
 
 function init()
@@ -69,14 +71,37 @@ function init()
 	helperLoading()
 end
 
+animationStart = nil
+alpha = 0
+alpha_max = 255
+alpha_speed_per_second = 100 -- change per second
+
+animationCo = coroutine.create(function ()
+	while alpha < alpha_max do
+		second_change = Time:GetFrameStartSec() - animationStart
+		alpha = math.max(0, math.min(255, alpha_speed_per_second * second_change))
+		coroutine.yield()
+	end
+	animationStart = nil
+end)
+
 function mouseDown(x, y)
 	print ("mouse down " .. x .. ", " .. y)
-	character:WalkTo(x, y)
+--	character:WalkTo(x, y)
+	animationStart = Time:GetFrameStartSec()
+	coroutine.resume(animationCo)
 end
 
 function update ()
 	--L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
 --character:DrawAt(100, 200)
 --	print(Time:GetEngineStart())
-	print(Time:GetFrameDeltaSec())
+--	print(Time:GetFrameDeltaSec())
+	--print(backgroudnSpr:GetAlpha())
+	
+--	backgroudnSpr:SetAlpha(120)
+	if animationStart then
+		backgroudnSpr:SetAlpha(alpha)
+		print(coroutine.resume(animationCo))
+	end
 end

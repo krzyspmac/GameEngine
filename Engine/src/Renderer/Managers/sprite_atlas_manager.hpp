@@ -20,7 +20,6 @@ namespace engine
     /**
      A manager for sprite atlases. Loads the textures, keeps them for
      future reference.
-     \ingroup API_EXPOSED
      */
     class SpriteAtlasManager
     {
@@ -28,7 +27,6 @@ namespace engine
         /**
          Loads sprite atlas, its texture and the json
          file for individual sprite splices.
-         \ingroup API_EXPOSED
         */
         SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
 
