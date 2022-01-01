@@ -15,8 +15,8 @@ public API.
 */
 
 /**
-\defgroup API_GLOBALS
-\brief
+\defgroup API_GLOBALS Global Variables
+\brief A list of globally available variables to be used in LUA scripts.
 */
 
 /**

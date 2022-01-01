@@ -14,6 +14,14 @@
 
 namespace engine
 {
+    /**
+     SpriteRendererManager
+     \addtogroup API_GLOBALS
+     */
+    /**
+     Manages a list of sprite renderers. Those are used by the current
+     scene to render the appropriate sprites at particular timeframes.
+     */
     class SpriteRendererManager
     {
     public:

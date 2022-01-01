@@ -15,6 +15,15 @@
 
 namespace engine
 {
+    /**
+     CharacterManager
+     \addtogroup API_GLOBALS
+     */
+    /**
+     Manages a list of character representations. Allows loading of the characters
+     from specific json files. Keeps a list of character representations
+     available for future use.
+     */
     class CharacterManager: public ScriptingInterface
     {
     public:

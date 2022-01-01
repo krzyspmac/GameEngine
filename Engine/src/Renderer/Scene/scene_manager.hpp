@@ -14,6 +14,14 @@
 namespace engine
 {
 
+    /**
+     SceneManager
+     \addtogroup API_GLOBALS
+     */
+    /**
+     Manages the scene. Loading a new scene should unload the previous
+     scene's resources.
+     */
     class SceneManager
     {
     public:
