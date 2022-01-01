@@ -45,7 +45,8 @@ void AnimationFunction::Stop()
 
     ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
     se.CallRegistryFunction(m_endFuncRef, [&](lua_State *L){
-        return 0;
+        this->ScriptingInterfaceRegisterFunctions(L, this);
+        return 1;
     });
 }
 

@@ -35,12 +35,16 @@ function loadSprites()
 	text:SetAlpha(0)
 	
 	-- animations	
+	animateIntro()
+end
+
+function animateIntro()
 	textFadeInAnim = AnimationFactory:CreateLinear(0, 255, 1, 1,
 		function(v)
 			text:SetAlpha(v)
 		end,
-		function()
-			textFadeInAnim:ReleaseMem()
+		function(anim)
+			anim:ReleaseMem()
 			textFadeOutAnim:Start()
 		end
 	)
@@ -50,11 +54,11 @@ function loadSprites()
 		function(v)
 			text:SetAlpha(v)
 		end,
-		function()
-			textFadeOutAnim:ReleaseMem()
+		function(anim)
+			anim:ReleaseMem()
 			
-		fadeInAnimation:Start()
-		truckAnim:Start()
+			fadeInAnimation:Start()
+			truckAnim:Start()
 		end
 	)
 	
@@ -62,8 +66,8 @@ function loadSprites()
 		function(val)
 			sky:SetAlpha(val)
 		end,
-		function()
-			fadeInAnimation:ReleaseMem()
+		function(anim)
+			anim:ReleaseMem()
 			initialAnimationDone = true
 		end
 	)
@@ -72,8 +76,8 @@ function loadSprites()
 		function(val)
 			truck:SetAlpha(val)
 		end,
-		function()
-			truckAnim:ReleaseMem()
+		function(anim)
+			anim:ReleaseMem()
 			
 			character:SetHidden(false)
 		end
