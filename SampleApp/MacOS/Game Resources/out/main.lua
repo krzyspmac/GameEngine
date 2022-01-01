@@ -34,10 +34,7 @@ function loadSprites()
 	text:SetPosition(((vpW - tW*textScale)/2), ((vpH - tH*textScale)/2))
 	text:SetAlpha(0)
 	
-	-- animations
-	textFadeInAnim = nil
-	textFadeOutAnim = nil
-	
+	-- animations	
 	textFadeInAnim = AnimationFactory:CreateLinear(0, 255, 1, 1,
 		function(v)
 			text:SetAlpha(v)
