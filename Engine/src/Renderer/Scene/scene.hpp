@@ -23,7 +23,7 @@ namespace engine
         std::vector<SpriteDrawStatic*> m_staticSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
         CharacterRepresentation *m_mainCharacter;
-        std::string m_mouseDownFunctionName;
+        int m_mouseDownFunctionRef;
     ///
     public:
 
@@ -91,7 +91,7 @@ namespace engine
          The function must take two parameters: x & y (float).
          \include Scene_MouseDown.lua
          */
-        void SetMouseDownFunction(std::string);
+        void SetMouseDownFunction(int mouseFunctionRef);
 
     /// ScriptingInterface
     public:

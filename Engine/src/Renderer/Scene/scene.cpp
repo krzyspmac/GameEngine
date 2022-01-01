@@ -13,7 +13,7 @@
 using namespace engine;
 
 Scene::Scene()
-: m_mainCharacter(nullptr), m_mouseDownFunctionName("")
+: m_mainCharacter(nullptr), m_mouseDownFunctionRef(-1)
 {
     GetMainEngine()->getEventsManager().RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
@@ -41,16 +41,23 @@ void Scene::MouseClicked(Vector2 pos)
         m_mainCharacter->WalkTo(pos);
     }
 
-    if (!m_mouseDownFunctionName.empty())
+    if (m_mouseDownFunctionRef > -1)
     {
-        lua_State *L = ((ScriptingEngine&)GetMainEngine()->getScripting()).GetL();
-        lua_getglobal(L, m_mouseDownFunctionName.c_str());  /* function to be called */
-        lua_pushnumber(L, pos.x);
-        lua_pushnumber(L, pos.y);
-        if (lua_pcall(L, 2, 0, 0) != 0)
-        {
-            std::cout << "Error:" << lua_tostring(L, -1) << "\n";
-        }
+        ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
+        se.CallRegistryFunction(m_mouseDownFunctionRef, [&](lua_State *L){
+            lua_pushnumber(L, pos.x);
+            lua_pushnumber(L, pos.y);
+            return 2;
+        });
+
+//        lua_State *L = ((ScriptingEngine&)GetMainEngine()->getScripting()).GetL();
+//        lua_getglobal(L, m_mouseDownFunctionName.c_str());  /* function to be called */
+//        lua_pushnumber(L, pos.x);
+//        lua_pushnumber(L, pos.y);
+//        if (lua_pcall(L, 2, 0, 0) != 0)
+//        {
+//            std::cout << "Error:" << lua_tostring(L, -1) << "\n";
+//        }
     }
 }
 
@@ -86,9 +93,9 @@ CharacterRepresentation *Scene::LoadCharacter(std::string jsonFilename)
     return rep;
 }
 
-void Scene::SetMouseDownFunction(std::string functionName)
+void Scene::SetMouseDownFunction(int mouseFunctionRef)
 {
-    m_mouseDownFunctionName = functionName;
+    m_mouseDownFunctionRef = mouseFunctionRef;
 }
 
 void Scene::RenderScene()
@@ -156,8 +163,8 @@ static int lua_Scene_SetMainCharacter(lua_State *L)
 static int lua_Scene_SetMouseDownFunction(lua_State *L)
 {
     Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
-    const char *functionName = lua_tostring(L, 2);
-    scene->SetMouseDownFunction(functionName);
+    int functionRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    scene->SetMouseDownFunction(functionRef);
     return 0;
 }
 
