@@ -244,6 +244,7 @@ void Engine::RenderScene()
         scene->RenderScene();
     }
 
+    m_periodicUpdatesManager.Update();
     m_scriptingEngine.callUpdate();
 }
 

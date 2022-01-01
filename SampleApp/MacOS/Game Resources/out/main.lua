@@ -10,10 +10,6 @@ print("Total init")
 --brettAtlas = nil
 
 function customLoading()
---	backgroundAtlas = L_spriteAtlasLoad("background.json", "background.png")    
---	backgroundSkySprite = L_spriteAtlasGetSprite(backgroundAtlas, "sky.png")    
---	backgroundSkyRenderer = L_spriteDrawStaticCreate(backgroundSkySprite, 2)
-	
 	local scene = SceneManager:SceneCreateNew()
 
 	local sceneAtlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
@@ -40,9 +36,9 @@ function customLoading()
 --	character:WalkTo(716, 373)
 	scene:SetMainCharacter(character)
 	character:SetWalkingSpeed(400)
-	
---	character:WalkTo(852, 226)
 end
+
+initialAnimationDone = false
 
 function helperLoading()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
@@ -64,44 +60,33 @@ function helperLoading()
 	scene:SetMouseDownFunction("mouseDown")
 	
 	backgroudnSpr:SetAlpha(0)
+	
+	fadeInAnimation = AnimationFactory:CreateLinear(0, 255, 5,
+		function(val)
+			backgroudnSpr:SetAlpha(val)
+		end,
+		function()
+			fadeInAnimation:ReleaseMem()
+			fadeInAnimation = nil
+			initialAnimationDone = true
+		end
+	)
+	fadeInAnimation:Start()
 end
 
 function init()
---	customLoading()
+	--customLoading()
 	helperLoading()
 end
 
-animationStart = nil
-alpha = 0
-alpha_max = 255
-alpha_speed_per_second = 100 -- change per second
-
-animationCo = coroutine.create(function ()
-	while alpha < alpha_max do
-		second_change = Time:GetFrameStartSec() - animationStart
-		alpha = math.max(0, math.min(255, alpha_speed_per_second * second_change))
-		coroutine.yield()
-	end
-	animationStart = nil
-end)
-
 function mouseDown(x, y)
+	if initialAnimationDone ~= true then
+		return
+	end
 	print ("mouse down " .. x .. ", " .. y)
---	character:WalkTo(x, y)
-	animationStart = Time:GetFrameStartSec()
-	coroutine.resume(animationCo)
+	character:WalkTo(x, y)
 end
 
 function update ()
 	--L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
---character:DrawAt(100, 200)
---	print(Time:GetEngineStart())
---	print(Time:GetFrameDeltaSec())
-	--print(backgroudnSpr:GetAlpha())
-	
---	backgroudnSpr:SetAlpha(120)
-	if animationStart then
-		backgroudnSpr:SetAlpha(alpha)
-		print(coroutine.resume(animationCo))
-	end
 end

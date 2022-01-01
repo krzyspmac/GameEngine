@@ -43,7 +43,13 @@ namespace engine
          */
         void SetAlpha(uint8_t val) { SpriteDrawI::SetAlpha(val); };
 
+        /**
+         Gets the curernt alpha. Values range from 0-255.
+         Default value is 255.
+         */
         uint8_t GetAlpha() { return SpriteDrawI::GetAlpha(); };
+
+        void GetFunction();
 
         /**
          Draws the sprite.

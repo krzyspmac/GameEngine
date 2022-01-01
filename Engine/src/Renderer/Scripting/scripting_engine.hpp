@@ -47,6 +47,20 @@ namespace engine
     public:
         lua_State* GetL() { return L; };
 
+        /**
+         Calls a registry function that is a code that has been created
+         in LUA when passing a `function` as a parameter, i.e.:
+         	f = function()
+            end)
+
+         Allows the aller to put in parameters if needed. Call with a lambda,
+         register the parameters as necessary and return the number of parameters
+         added.
+
+         Checks if funcRef >= 0, otherwise does nothing.
+         */
+        void CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda);
+
     /// Default, must-have main lua script functions
     public:
         void callInit();

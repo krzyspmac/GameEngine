@@ -12,6 +12,7 @@
 #include "character_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
+#include "animation_factory.hpp"
 #include "time.hpp"
 
 using namespace engine;
@@ -104,7 +105,29 @@ void ScriptingEngine::registerFunctions()
     Time &time = GetMainEngine()->getTime();
     time.ScriptingInterfaceRegisterFunctions(L, &time);
     lua_setglobal(L, "Time");
+
+    AnimationFactory &animationFactory = GetMainEngine()->getAnimationFactory();
+    animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
+    lua_setglobal(L, "AnimationFactory");
 };
+
+void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)
+{
+    if (funcRef <= -1) { return; };
+
+    /* push the callback onto the stack using the Lua reference we */
+    /* stored in the registry */
+    lua_rawgeti( L, LUA_REGISTRYINDEX, funcRef );
+
+    int paramCount(lambda(L));
+
+    /* call the callback */
+    /* NOTE: This is using the one we duplicated with lua_pushvalue */
+    if ( 0 != lua_pcall( L, paramCount, 0, 0 ) ) {
+        printf("Failed to call the callback!\n %s\n", lua_tostring( L, -1 ) );
+        return;
+    }
+}
 
 void ScriptingEngine::callInit()
 {

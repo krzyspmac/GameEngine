@@ -19,6 +19,8 @@
 #include "scene_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
+#include "periodic_updates_manager.hpp"
+#include "animation_factory.hpp"
 #include "time.hpp"
 
 namespace engine
@@ -120,6 +122,9 @@ namespace engine
         /// Disposes of all fonts.
         virtual void DisposeAllFonts() = 0;
 
+    /// Animations & Periodic Updates
+    public:
+
     /// Providers
     public:
         ///
@@ -151,6 +156,14 @@ namespace engine
         ///
         Time& getTime() { return m_time; };
 
+        ///
+        AnimationFactory& getAnimationFactory() { return m_animationFactory; };
+
+        PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };
+
+    /// Other states
+    public:
+
     protected:
         Size m_viewportSize;
         EngineProviderI &m_engineProvider;
@@ -166,6 +179,8 @@ namespace engine
 
         engine::Origin m_mousePosition;
         Time m_time;
+        AnimationFactory m_animationFactory;
+        PeriodicUpdatesManager m_periodicUpdatesManager;
     };
 
 };

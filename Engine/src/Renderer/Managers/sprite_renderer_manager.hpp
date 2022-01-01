@@ -47,6 +47,7 @@ namespace engine
 
     /// ScriptingInterface
     public:
+        /** @private */
         SCRIPTING_INTERFACE_HEADERS(SpriteRendererManager);
     };
 };
