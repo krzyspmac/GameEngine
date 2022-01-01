@@ -13,12 +13,17 @@
 #include "sprite_draw_animated.hpp"
 #include "sprite_atlas.hpp"
 #include "character_representation.hpp"
+#include "common.h"
 #include <iostream>
 
 namespace engine
 {
     class Scene
     {
+        std::vector<SpriteDrawStatic*> m_staticSprites;
+        std::vector<CharacterRepresentation*> m_characterRepresentations;
+        CharacterRepresentation *m_mainCharacter;
+        std::string m_mouseDownFunctionName;
     ///
     public:
 
@@ -58,11 +63,15 @@ namespace engine
         CharacterRepresentation *LoadCharacter(std::string jsonFilename);
 
         /**
+         \brief Main character setter.
+         
          Sets the character as main. By default the character reacts to mouse clicks
-         and walks the path unless specified otherwise.
+         and walks the path unless specified otherwise. If `SetMainCharacter` is not
+         called with a proper CharacterRepresentation the script must walk the
+         character on its own. \see SetMouseDownFunction.
          */
         void SetMainCharacter(CharacterRepresentation*);
-    public:
+
         /**
          Add a sprite renderer to the list of game objects.
          \include SampleSpriteStatic-lowlevel.lua
@@ -70,11 +79,7 @@ namespace engine
          */
         void AddSpriteDrawStatic(SpriteDrawStatic*);
 
-    /// Variables
-    private:
-        std::vector<SpriteDrawStatic*> m_staticSprites;
-        std::vector<CharacterRepresentation*> m_characterRepresentations;
-        CharacterRepresentation *m_mainCharacter;
+        void SetMouseDownFunction(std::string);
 
     /// ScriptingInterface
     public:

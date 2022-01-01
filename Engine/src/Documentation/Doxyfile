@@ -891,7 +891,9 @@ INPUT                  = ../Renderer/Scene/scene.hpp \
                          ../Renderer/Managers/sprite_renderer_manager.cpp \
                          ../Renderer/Managers/sprite_renderer_manager.hpp \
                          ../Renderer/Managers/sprite_atlas_manager.cpp \
-                         ../doxygen_main.h
+                         ../doxygen_main.h \
+                         ../Renderer/States/time.cpp \
+                         ../Renderer/States/time.hpp
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

@@ -54,13 +54,14 @@ function helperLoading()
 	local tructSpr = scene:LoadSpriteStatic(atlas, "background.png")
 	tructSpr:SetScale(2)
 	
-	local character = scene:LoadCharacter("brett_character.json")
+	character = scene:LoadCharacter("brett_character.json")
 	character:SetScale(3)
 	character:PlaceAt(100,450)
 	character:SetInverseWalkbox("polygons.json")
 	character:SetWalkingSpeed(400)
+	
 	scene:SetMainCharacter(character)
-
+	scene:SetMouseDownFunction("mouseDown")
 end
 
 function init()
@@ -68,7 +69,14 @@ function init()
 	helperLoading()
 end
 
+function mouseDown(x, y)
+	print ("mouse down " .. x .. ", " .. y)
+	character:WalkTo(x, y)
+end
+
 function update ()
 	--L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
 --character:DrawAt(100, 200)
+--	print(Time:GetEngineStart())
+	print(Time:GetFrameDeltaSec())
 end

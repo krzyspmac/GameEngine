@@ -8,10 +8,12 @@
 #include "scene.hpp"
 #include "scripting_engine.hpp"
 #include "character.hpp"
+#include "scripting_engine.hpp"
 
 using namespace engine;
 
 Scene::Scene()
+: m_mainCharacter(nullptr), m_mouseDownFunctionName("")
 {
     GetMainEngine()->getEventsManager().RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
@@ -37,6 +39,18 @@ void Scene::MouseClicked(Vector2 pos)
     if (m_mainCharacter != nullptr)
     {
         m_mainCharacter->WalkTo(pos);
+    }
+
+    if (!m_mouseDownFunctionName.empty())
+    {
+        lua_State *L = ((ScriptingEngine&)GetMainEngine()->getScripting()).GetL();
+        lua_getglobal(L, m_mouseDownFunctionName.c_str());  /* function to be called */
+        lua_pushnumber(L, pos.x);
+        lua_pushnumber(L, pos.y);
+        if (lua_pcall(L, 2, 0, 0) != 0)
+        {
+            std::cout << "Error:" << lua_tostring(L, -1) << "\n";
+        }
     }
 }
 
@@ -70,6 +84,11 @@ CharacterRepresentation *Scene::LoadCharacter(std::string jsonFilename)
     CharacterRepresentation *rep = GetMainEngine()->getCharacterManager().LoadCharacter(jsonFilename);
     m_characterRepresentations.emplace_back(rep);
     return rep;
+}
+
+void Scene::SetMouseDownFunction(std::string functionName)
+{
+    m_mouseDownFunctionName = functionName;
 }
 
 void Scene::RenderScene()
@@ -134,13 +153,22 @@ static int lua_Scene_SetMainCharacter(lua_State *L)
     return 0;
 }
 
+static int lua_Scene_SetMouseDownFunction(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    const char *functionName = lua_tostring(L, 2);
+    scene->SetMouseDownFunction(functionName);
+    return 0;
+}
+
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         {"AddSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic},
         {"LoadSpriteStatic", &lua_Scene_LoadSpriteDrawStatic},
         {"LoadCharacter", &lua_Scene_LoadCharacter},
-        {"SetMainCharacter", &lua_Scene_SetMainCharacter}
+        {"SetMainCharacter", &lua_Scene_SetMainCharacter},
+        {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
     });
     return result;
 }

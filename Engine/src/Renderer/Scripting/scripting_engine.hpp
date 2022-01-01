@@ -44,8 +44,6 @@ namespace engine
         ///
         void registerFunctions();
 
-        void RegisterFunctions(ScriptingInterface *);
-
     public:
         lua_State* GetL() { return L; };
 

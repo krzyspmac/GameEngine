@@ -12,6 +12,7 @@
 #include "character_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
+#include "time.hpp"
 
 using namespace engine;
 
@@ -99,16 +100,11 @@ void ScriptingEngine::registerFunctions()
     SpriteRendererManager &spriteRendererManager = GetMainEngine()->getSpriteRendererManager();
     spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
     lua_setglobal(L, "SpriteRendererManager");
-};
 
-//void ScriptingEngine::RegisterFunctions(void *ptr)
-//{
-//    if(ScriptingInterface* si = dynamic_cast<ScriptingInterface*>((ScriptingInterface*)ptr))
-//    {
-//        //si.ScriptingInterfaceRegisterFunctions(L, si.ScriptingInterfaceName(), si.ScriptingInterfaceFunctions());
-//        printf("asd");
-//    }
-//}
+    Time &time = GetMainEngine()->getTime();
+    time.ScriptingInterfaceRegisterFunctions(L, &time);
+    lua_setglobal(L, "Time");
+};
 
 void ScriptingEngine::callInit()
 {

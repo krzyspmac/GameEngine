@@ -88,6 +88,9 @@ void Engine::setup()
     m_consoleView = new ConsoleView(m_fpsFont, '~');
 #endif
 
+    // Register proper time
+    m_time.Prepare();
+
     // Register events listeners. For simple events - use lambda.
     // Complex events get their own handler.
 
@@ -169,6 +172,9 @@ int Engine::doInput()
 
 void Engine::update()
 {
+    // Update the time object
+    m_time.PreUpdate();
+
     // Calculate performance
     MeasurePerformanceStart();
 
@@ -209,6 +215,9 @@ void Engine::update()
 
     // Calculate performance
     MeasurePerformanceEnd();
+
+    // Update the time object
+    m_time.PostUpdate();
 }
 
 void Engine::MeasurePerformanceStart()

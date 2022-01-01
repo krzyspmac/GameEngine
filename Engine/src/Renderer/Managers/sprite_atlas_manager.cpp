@@ -57,7 +57,6 @@ void SpriteAtlasManager::SpriteAtlasDisposeAll()
     m_atlas.clear();
 }
 
-
 #pragma mark - Scripting Interface
 
 SCRIPTING_INTERFACE_IMPL_NAME(SpriteAtlasManager);

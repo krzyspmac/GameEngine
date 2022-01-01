@@ -19,6 +19,7 @@
 #include "scene_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
+#include "time.hpp"
 
 namespace engine
 {
@@ -37,7 +38,7 @@ namespace engine
                 SpriteRendererManager &spriteRendererManager,
                 Size viewportSize
         )
-        :      m_engineProvider(engineProvider),
+        :       m_engineProvider(engineProvider),
                 m_fileAccess(fileAccess),
                 m_scriptingEngine(scriptingEngine),
                 m_eventProvider(eventProvider),
@@ -46,7 +47,8 @@ namespace engine
                 m_sceneManager(sceneManager),
                 m_spriteAtlasManager(spriteAtlasManager),
                 m_spriteRendererManager(spriteRendererManager),
-                m_viewportSize(viewportSize)
+                m_viewportSize(viewportSize),
+                m_time(engineProvider)
         { }
 
     /// Setup
@@ -146,6 +148,9 @@ namespace engine
         ///
         EventsManager& getEventsManager() { return m_eventsManager; };
 
+        ///
+        Time& getTime() { return m_time; };
+
     protected:
         Size m_viewportSize;
         EngineProviderI &m_engineProvider;
@@ -160,6 +165,7 @@ namespace engine
         CharacterManager &m_characterManager;
 
         engine::Origin m_mousePosition;
+        Time m_time;
     };
 
 };
