@@ -20,6 +20,7 @@ namespace engine
 {
     class Scene
     {
+        EngineProviderI& m_engineProvider;
         std::vector<SpriteDrawStatic*> m_staticSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
         CharacterRepresentation *m_mainCharacter;

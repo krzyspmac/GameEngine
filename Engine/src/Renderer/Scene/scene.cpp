@@ -13,7 +13,9 @@
 using namespace engine;
 
 Scene::Scene()
-: m_mainCharacter(nullptr), m_mouseDownFunctionRef(-1)
+:   m_mainCharacter(nullptr),
+    m_mouseDownFunctionRef(-1),
+    m_engineProvider(GetMainEngine()->getProvider())
 {
     GetMainEngine()->getEventsManager().RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
@@ -164,6 +166,7 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
         {"LoadCharacter", &lua_Scene_LoadCharacter},
         {"SetMainCharacter", &lua_Scene_SetMainCharacter},
         {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
+
     });
     return result;
 }

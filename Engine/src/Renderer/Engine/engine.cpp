@@ -67,6 +67,10 @@ Engine::~Engine()
 
 void Engine::setup()
 {
+    // Register time helper for future reference.
+    // Needed to scripts at the start of execution.
+    m_time.Prepare();
+
     m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
 #if SHOW_FPS
     m_fpsFont = LoadFont("EnterCommand.ttf");
@@ -81,15 +85,12 @@ void Engine::setup()
     m_scriptingEngine.registerFunctions();
     m_scriptingEngine.callInit();
 
-    m_engineProvider.SetRenderBackgroundColor(96, 128, 255, 255);
+    m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
 
 #if USES_CONSOLE
     m_consoleView = new ConsoleView(m_fpsFont, '~');
 #endif
-
-    // Register proper time
-    m_time.Prepare();
 
     // Register events listeners. For simple events - use lambda.
     // Complex events get their own handler.
@@ -103,13 +104,6 @@ void Engine::setup()
 
         m_mousePosition.x -= m_viewportOffset.x;
         m_mousePosition.y -= m_viewportOffset.y;
-    }));
-
-    m_eventsManager.RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *){
-//        Vector2 pos = m_characterMover->GetCharacterPosition();
-//        Vector2 from = Vector2Make(pos.x, pos.y);
-//        PathI *path = m_walkingBoxes->CalculatePath(from, Vector2Make(m_mousePosition.x, m_mousePosition.y));
-//        m_characterMover->MoveCharacterAlongPath(path);
     }));
 }
 
@@ -186,7 +180,7 @@ void Engine::update()
     m_engineProvider.RendererTargetPush(m_bufferTexture);
 
     // Clear the game background
-    m_engineProvider.SetRenderBackgroundColor(255, 0, 0, 120);
+    m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
 
     // Render scene

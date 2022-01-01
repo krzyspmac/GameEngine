@@ -28,6 +28,14 @@ namespace engine
         int height;
     } Size;
 
+    typedef struct Color
+    {
+        int r;
+        int g;
+        int b;
+        int a;
+    } Color;
+
     typedef struct
     {
         int x;
