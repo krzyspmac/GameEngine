@@ -8,7 +8,7 @@
 #ifndef common_engine_impl_h
 #define common_engine_impl_h
 
-#import "SDL.h"
+#include "SDL.h"
 #include "general.hpp"
 #include "vector2.hpp"
 #include "line.hpp"
