@@ -9,8 +9,7 @@
 #define RendererEntry_hpp
 
 #include <stdio.h>
-//#include "common.h"
-#include "common_engine_impl.h"
+#include "common.h"
 #include "file_access_provider.h"
 #include "engine_provider_interface.h"
 #include "scripting_engine_provider_interface.h"

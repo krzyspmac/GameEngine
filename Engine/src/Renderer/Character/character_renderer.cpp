@@ -6,9 +6,7 @@
 //
 
 #include "character_renderer.hpp"
-#include "common_engine.h"
-
-#include "engine_provider.hpp" // temp
+#include "engine.hpp"
 #include <SDL.h>
 
 using namespace engine;

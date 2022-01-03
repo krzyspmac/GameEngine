@@ -5,11 +5,14 @@
 #include <vector>
 #include <functional>
 #include <algorithm>
+
+#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+#define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+
 #include "defs.h"
 #include "general.hpp"
-#include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
+#include "common_sdl.h"
+
 #ifdef __cplusplus
 extern "C" {
     #include "lua.h"
@@ -17,8 +20,5 @@ extern "C" {
     #include "lauxlib.h"
 }
 #endif
-
-#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
-#define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
 
 #endif // COMMON_H_HEADER_GUARD

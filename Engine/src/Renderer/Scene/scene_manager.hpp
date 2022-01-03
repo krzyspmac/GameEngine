@@ -29,15 +29,15 @@ namespace engine
 
     public:
         /// Creates a new scene. Removes the old one and removes it data.
-        _LUA_EXPOSED("sceneCreateNew")
+        /// \ingroup API_EXPOSED
         Scene* SceneCreateNew();
 
         /// Get the current scene.
-        _LUA_EXPOSED("sceneGetCurrent")
+        /// \ingroup API_EXPOSED
         Scene* SceneGetCurrent() { return m_currentScene.get(); };
 
         /// Unload the current scene.
-        _LUA_EXPOSED("sceneUnloadCurrent")
+        /// \ingroup API_EXPOSED
         void SceneUnloadCurrent();
         
     private:

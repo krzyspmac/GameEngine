@@ -7,6 +7,7 @@
 
 #include "sprite_draw_animated.hpp"
 #include "common_engine.h"
+#include "engine.hpp"
 
 using namespace engine;
 

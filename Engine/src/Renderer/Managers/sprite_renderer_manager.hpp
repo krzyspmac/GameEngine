@@ -27,19 +27,19 @@ namespace engine
     public:
         /// Creates or gets a drawing handle for a sprite.
         /// The result is cached.
-        _LUA_EXPOSED("spriteDrawLoadStatic")
+        /// \ingroup API_EXPOSED
         SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
 
         /// Creates or gets a drawing handle for a sprite
-        _LUA_EXPOSED("spriteDrawLoadAnimated")
+        /// \ingroup API_EXPOSED
         SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
 
         /// Unloads the sprite draw.
-        _LUA_EXPOSED("spriteDrawUnload")
+        /// \ingroup API_EXPOSED
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
 
         /// Unloads all.
-        _LUA_EXPOSED("spriteDrawDisposeAll")
+        /// \ingroup API_EXPOSED
         void SpriteDrawDisposeAll();
 
     private:

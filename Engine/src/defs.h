@@ -10,6 +10,4 @@
 
 #define SHOW_FPS    1   /* shows the FPS on the screen */
 
-#define _LUA_EXPOSED(x) ///  \ingroup public_api Exposed to LUA under x
-
 #endif /* defs_h */

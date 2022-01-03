@@ -8,7 +8,6 @@
 #ifndef engine_interface_h
 #define engine_interface_h
 
-#include "common_engine_impl.h"
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
 #include "scripting_engine_provider_interface.h"

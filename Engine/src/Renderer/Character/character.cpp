@@ -6,8 +6,8 @@
 //
 
 #include "character.hpp"
-#include "common_engine.h"
 #include "character_renderer.hpp"
+#include "engine.hpp"
 #include "cJSON.h"
 
 static int cJSON_GetObjectItemValueInt(cJSON * object, const char *string);

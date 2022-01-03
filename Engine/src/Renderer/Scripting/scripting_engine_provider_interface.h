@@ -150,9 +150,6 @@ namespace engine
                                                                                     \
             lua_setmetatable(L, -2);                                                \
         };
-
-    /// Documentation helper macros
-    #define _LUA_EXPOSED(x) ///  \ingroup public_api Exposed to LUA under x
 };
 
 #endif /* scripting_enging_provider_interface_h */
