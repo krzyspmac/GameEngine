@@ -51,7 +51,7 @@ Engine::Engine(EngineProviderI &engineProvider,
 : EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr)
 {
     sharedEngine = this;
-    SetCapRate(15);
+    SetCapRate(60);
 }
 
 Engine::~Engine()
@@ -110,7 +110,7 @@ void Engine::setup()
 void Engine::SetCapRate(int fps)
 {
     m_fpsCap = fps;
-    m_fpsCapInverse = 1.0f / (float)fps;
+    m_fpsCapInverse = (1.0f / (float)fps) * 1000.f;
 }
 
 int Engine::doInput()
@@ -207,11 +207,11 @@ void Engine::update()
     // Render the current stack
     m_engineProvider.RenderPresent();
 
-    // Calculate performance
-    MeasurePerformanceEnd();
-
     // Update the time object
     m_time.PostUpdate();
+
+    // Calculate performance
+    MeasurePerformanceEnd();
 }
 
 void Engine::MeasurePerformanceStart()
@@ -227,7 +227,6 @@ void Engine::MeasurePerformanceEnd()
     m_milliseconds = m_seconds * 1000;
     m_previousFps = 1.0f / m_seconds;
 
-    
     m_engineProvider.Delay(MAX(0, floor(m_fpsCapInverse - m_milliseconds)));
 }
 
