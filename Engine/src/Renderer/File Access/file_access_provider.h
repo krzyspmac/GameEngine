@@ -23,12 +23,12 @@ namespace engine
 
         std::string &GetFilename() { return filename; };
         void *GetMemory() { return memory; };
-        __int64 &GetSize() { return size; };
+        int64_t &GetSize() { return size; };
 
     protected:
         std::string filename;
         void *memory;
-        __int64 size;
+        int64_t size;
     };
 
     /// Mapped file system onto the FileMemoryBufferStreamI

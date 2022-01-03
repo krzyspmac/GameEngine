@@ -145,6 +145,7 @@ namespace engine
                 });                                                                 \
                                                                                     \
                 luaL_setfuncs(L, classFunctions, 0);                                \
+                free(classFunctions);\
             }                                                                       \
                                                                                     \
             lua_setmetatable(L, -2);                                                \

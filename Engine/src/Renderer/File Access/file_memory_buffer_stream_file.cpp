@@ -17,8 +17,11 @@ FileMemoryBufferStreamFromFile::FileMemoryBufferStreamFromFile(std::string filen
     if (fp)
     {
         fseek(fp, 0, SEEK_END);
-        //size = ftell(fp);
+#if __APPLE__
+        size = ftell(fp);
+#else
         size = _ftelli64(fp);
+#endif
         fseek(fp, 0, SEEK_SET);
 
         memory = malloc(size + 1);

@@ -78,12 +78,12 @@ namespace engine
         Uint64 m_performanceStart;
         Uint64 m_performanceEnd;
         Uint64 m_performanceDelta;
-        float m_seconds;
-        float m_milliseconds;
-        float m_previousFps; // only when CALC_FPS set
+        double m_seconds;
+        double m_milliseconds;
+        double m_previousFps; // only when CALC_FPS set
 
         int m_fpsCap;
-        float m_fpsCapInverse;
+        double m_fpsCapInverse;
 
         TextureTargetI *m_bufferTexture;
         float m_viewportScale; // scaled to fit the window
