@@ -34,7 +34,7 @@ namespace engine
 
         FileMemoryBufferStreamI *LoadBufferStream(const char *filename);
 
-    private:
+    public:
         std::string GetFullPath(std::string filename);
 
     private:

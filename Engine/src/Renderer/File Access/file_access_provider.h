@@ -85,6 +85,10 @@ namespace engine
         /// If no packed data is presetend the system will try to load the data
         /// from the file system. The ownership is passed onto the caller.
         virtual FileMemoryBufferStreamI *LoadBufferStream(const char *filename) = 0;
+
+    public:
+        // tmp
+        virtual std::string GetFullPath(std::string filename) = 0;
     };
 };
 

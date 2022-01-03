@@ -284,8 +284,9 @@ TextureI *Engine::LoadTexture(std::string filename)
     TextureI *result = GetTexture(filename);
     if (!result)
     {
-        std::unique_ptr<FileMemoryBufferStreamI> stream(m_fileAccess.GetAccess(filename));
-        result = m_engineProvider.LoadTexture(filename, stream.get());
+//        std::unique_ptr<FileMemoryBufferStreamI> stream(m_fileAccess.GetAccess(filename));
+//        result = m_engineProvider.LoadTexture(filename, stream.get());
+        result = m_engineProvider.LoadTexture(m_fileAccess.GetFullPath(filename), nullptr);
         if (result)
         {
             m_textures.emplace_back(std::move(result));
