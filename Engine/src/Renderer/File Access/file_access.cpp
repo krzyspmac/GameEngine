@@ -19,7 +19,7 @@
 
 #include "file_access_provider.h"
 
-namespace fs = std::filesystem;
+//namespace fs = std::filesystem;
 
 inline char separator()
 {
@@ -35,7 +35,7 @@ using namespace engine;
 FileAccess::FileAccess()
     : FileAccessI(), m_gPackFile(NULL)
 {
-
+    LoadDirectory("C:\\Users\\Krzysiek\\Documents\\GitHub\\GameEngine\\SampleApp\\MacOS\\Game Resources\\out>");
 }
 
 int FileAccess::LoadPackedFile(std::string filename)
@@ -57,6 +57,7 @@ std::string FileAccess::GetResourcesDirectory()
     std::string cString = std::string(resources.UTF8String);
     return cString;
 #endif
+    return "C:\\Users\\Krzysiek\\Documents\\GitHub\\GameEngine\\SampleApp\\MacOS\\Game Resources\\out";
 }
 
 std::string FileAccess::GetFullPath(std::string filename)
@@ -99,6 +100,7 @@ std::string FileAccess::getBundledFilepath(const char *value)
 
     return cString;
 #endif
+    return "";
 };
 
 std::string FileAccess::loadText(std::string filename)

@@ -9,7 +9,7 @@
 #define polygon_loader_hpp
 
 #include "file_access_provider.h"
-#import "polygon.hpp"
+#include "polygon.hpp"
 
 namespace engine
 {

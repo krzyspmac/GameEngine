@@ -6,6 +6,7 @@
 //
 
 #include "file_access_provider.h"
+#include <stdio.h>
 
 using namespace engine;
 
@@ -16,10 +17,13 @@ FileMemoryBufferStreamFromFile::FileMemoryBufferStreamFromFile(std::string filen
     if (fp)
     {
         fseek(fp, 0, SEEK_END);
-        size = ftell(fp);
+        //size = ftell(fp);
+        size = _ftelli64(fp);
         fseek(fp, 0, SEEK_SET);
 
         memory = malloc(size + 1);
+        memset(memory, '\0', size + 1);
+        
         fread(memory, size, 1, fp);
 
         fclose(fp);

@@ -37,7 +37,13 @@ void ScriptingEngine::closeState()
 
 void ScriptingEngine::loadFile(FileMemoryBufferStreamI *bufferStream)
 {
-    if (luaL_loadbufferx(this->L, (const char*)bufferStream->GetMemory(), bufferStream->GetSize(), "script", NULL) == 0)
+    const char* txt = (const char*)bufferStream->GetMemory();
+    char p[55000];
+    memcpy_s(p, 55000, txt, bufferStream->GetSize());
+    size_t s = bufferStream->GetSize();
+    size_t tt = strlen(txt);
+
+    if (luaL_loadbufferx(this->L, (const char*)bufferStream->GetMemory(), /*bufferStream->GetSize()*/tt, "script", NULL) == 0)
     {
         // Call priming lua_pcall
         int iErr = lua_pcall(L, 0, 0, 0);

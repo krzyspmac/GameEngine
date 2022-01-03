@@ -137,7 +137,7 @@ namespace engine
                 std::vector<luaL_Reg> functions = ScriptingInterfaceFunctions();    \
                 functions.push_back({nullptr, nullptr});                            \
                                                                                     \
-                luaL_Reg classFunctions[functions.size()];                          \
+                luaL_Reg *classFunctions = (luaL_Reg*)malloc(functions.size() * sizeof(luaL_Reg));                          \
                 int i = 0;                                                          \
                 std::for_each(functions.begin(), functions.end(), [&](luaL_Reg &reg){ \
                     luaL_Reg regItem = { reg.name, reg.func };                      \

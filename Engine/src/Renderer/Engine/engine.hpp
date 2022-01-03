@@ -8,18 +8,18 @@
 #ifndef engine_hpp
 #define engine_hpp
 
-#import "defs.h"
-#import "common.h"
-#import "engine_interface.h"
-#import "engine_provider_interface.h"
-#import "file_access_provider.h"
-#import "scripting_engine_provider_interface.h"
-#import "character_renderer_interface.h"
-#import "character_interface.h"
-#import "texture_target.hpp"
-#import "character_mover_interface.h"
-#import "path_finder.hpp"
-#import "console_view_interface.h"
+#include "defs.h"
+#include "common.h"
+#include "engine_interface.h"
+#include "engine_provider_interface.h"
+#include "file_access_provider.h"
+#include "scripting_engine_provider_interface.h"
+#include "character_renderer_interface.h"
+#include "character_interface.h"
+#include "texture_target.hpp"
+#include "character_mover_interface.h"
+#include "path_finder.hpp"
+#include "console_view_interface.h"
 
 namespace engine
 {

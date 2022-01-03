@@ -11,7 +11,8 @@
 
 using namespace engine;
 
-static char *characters = "Ö&|_# POfileorTBFS:handWCpygt2015-6,JwsbuGNUL3.Emj@c/\"IV\\RMD8+v?x;=%!AYq()'kH[]KzQX4Z79*àéí¡Çóè·úïçüºòÉÒÍÀ°æåøÆÅØ<>öÄäßÜá¿ñÁÊûâîôÈêùœÙìëęąłćżńśźŻŚŁĆÖ";
+//static char *characters = "Ö&|_# POfileorTBFS:handWCpygt2015-6,JwsbuGNUL3.Emj@c/\"IV\\RMD8+v?x;=%!AYq()'kH[]KzQX4Z79*àéí¡Çóè·úïçüºòÉÒÍÀ°æåøÆÅØ<>öÄäßÜá¿ñÁÊûâîôÈêùœÙìëęąłćżńśźŻŚŁĆÖ";
+static char characters[4096] = "01234567890abcdefghijklmnoprstuwxyzABCDEFGHIJKLMNOPRSTUWXYZ";
 
 static int nextGlyph(const char *str, int *i, char *glyphBuffer);
 static SDL_Color white = {255, 255, 255, 255};

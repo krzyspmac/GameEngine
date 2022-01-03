@@ -1,5 +1,10 @@
 #include "renderer_entry.h"
 #include <iostream>
+#include "file_access.hpp"
+#include "engine_provider.hpp"
+#include "scripting_engine.hpp"
+#include "event_provider.hpp"
+#include "engine.hpp"
 #include "common_sdl.h"
 
 using namespace engine;
@@ -10,9 +15,33 @@ using namespace engine;
 
 
 ///
+
 RendererEntry::RendererEntry()
 {
+    FileAccess* fa = new FileAccess();
+    EngineProvider* ep = new EngineProvider(&m_app);
+    ScriptingEngine* se = new ScriptingEngine();
+    EventProvider* eventProvider = new EventProvider();
+    EventsManager* eventsManager = new EventsManager(*eventProvider, *ep);
+    CharacterManager* characteManager = new CharacterManager();
+    SceneManager* sceneManager = new SceneManager();
+    SpriteAtlasManager* spriteAtlasManager = new SpriteAtlasManager();
+    SpriteRendererManager* sprireRendererManager = new SpriteRendererManager();
 
+    this->m_fileAccess = fa;
+    this->m_engineProvider = ep;
+    this->m_scriptingEngine = se;
+    this->m_eventProvider = eventProvider;
+    this->m_eventsManager = eventsManager;
+    this->m_characterManager = characteManager;
+    this->m_sceneManager = sceneManager;
+    this->m_spriteAtlasManager = spriteAtlasManager;
+    this->m_sprireRendererManager = sprireRendererManager;
+
+    Size viewportSize;
+    viewportSize.width = SCREEN_WIDTH;
+    viewportSize.height = SCREEN_HEIGHT;
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, viewportSize);
 }
 
 int RendererEntry::initSDL()
@@ -65,22 +94,30 @@ int RendererEntry::initSDL()
 
 void RendererEntry::destroy()
 {
-
+    delete (m_engine);
+    SDL_DestroyRenderer(m_app.renderer);
+    SDL_DestroyWindow(m_app.window);
+    TTF_Quit();
+    SDL_Quit();
 }
 
 void RendererEntry::prepare()
 {
-
+    m_engine->setup();
 }
 
 void RendererEntry::doInput()
 {
-
+    if (m_engine->doInput())
+    {
+        destroy();
+        exit(0);
+    }
 }
 
 void RendererEntry::doScene()
 {
-
+    m_engine->update();
 }
 void RendererEntry::doMain(int argc, char* argv[])
 {
