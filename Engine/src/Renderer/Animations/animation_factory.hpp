@@ -8,7 +8,7 @@
 #ifndef animation_factory_hpp
 #define animation_factory_hpp
 
-#include "animation_function.hpp"
+#include "value_animator.hpp"
 #include "scripting_engine_provider_interface.h"
 #include "callable.hpp"
 
@@ -57,7 +57,7 @@ namespace engine
 
          \include AnimationFactory_CreateLinear.lua
          */
-        AnimationFunction *CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
+        ValueAnimator *CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
 
     /// ScriptingInterface
     public:

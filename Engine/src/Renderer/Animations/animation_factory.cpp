@@ -11,7 +11,7 @@
 
 using namespace engine;
 
-AnimationFunction *AnimationFactory::CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
+ValueAnimator *AnimationFactory::CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
 {
     CallableCurveLamba *s = new CallableCurveLamba(min, max, [&](float min, float max, float progress){
         float m_diff = fabsf(max - min);
@@ -24,7 +24,7 @@ AnimationFunction *AnimationFactory::CreateLinear(float min, float max, double s
             return min + MAX(0, MIN(max, progress * m_diff));
         };
     });
-    AnimationFunction *function = new AnimationFunction(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
+    ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
     return function;
     return nullptr;
 }
@@ -42,7 +42,7 @@ static int lua_AnimationFactory_CreateLinear(lua_State *L)
     double delay = lua_tonumberx(L, 5, nullptr);
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
     int functionUpdateRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    AnimationFunction *function = obj->CreateLinear(min, max, seconds, delay, functionUpdateRef, functionEndRef);
+    ValueAnimator *function = obj->CreateLinear(min, max, seconds, delay, functionUpdateRef, functionEndRef);
     function->ScriptingInterfaceRegisterFunctions(L, function);
     return 1;
 }

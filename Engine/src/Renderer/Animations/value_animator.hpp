@@ -9,7 +9,6 @@
 #define animation_function_hpp
 
 #include "scripting_engine_provider_interface.h"
-#include "animator_curve_function_interface.h"
 #include "engine_provider_interface.h"
 #include "time.hpp"
 #include "callable.hpp"
@@ -17,7 +16,7 @@
 namespace engine
 {
     /**
-     An abstrzct interface to define the udpate method to be
+     An abstract interface to define the udpate method to be
      called on frame render.
      */
     class AnimationPeriodicUpdateI
@@ -28,19 +27,20 @@ namespace engine
 
     /**
      Provides a way to animate a value from point a to point b
-     along a certain curve. Use AnimationFactory to create a concrete
-     instance.
+     along a certain curve. ValueAnimator does not animate object
+     properties (like "alpha"). It only provides a way to animate
+     values. \see AnimationFactory to create a concrete property
+     animator.
 
-     The AnimationFunction takes min, max, the curve function and the
-     duration. Using those values it will a proper function result
-     by using AnimationFunction::f().
+     The ValueAnimator takes min, max, the curve function and the
+     duration.
 
      The script is resposible for memory management.
      \see AnimationFactory::ReleaseMem()
 
      \see AnimationFactory.
      */
-    class AnimationFunction: public AnimationPeriodicUpdateI
+    class ValueAnimator: public AnimationPeriodicUpdateI
     {
         EngineProviderI &m_engineProvider;
         Time &m_time;
@@ -57,9 +57,10 @@ namespace engine
         /**
          @private
          */
-        AnimationFunction(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance  functionEndRef);
+        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance  functionEndRef);
+        
         /** @private */
-        ~AnimationFunction();
+        ~ValueAnimator();
 
     public:
         /**
@@ -75,7 +76,7 @@ namespace engine
         void Stop();
 
         /**
-         Returns current value calcualted when AnimationFunction::Start was initiated
+         Returns current value calcualted when ValueAnimator::Start was initiated
          */
         float GetValue();
 
@@ -97,7 +98,7 @@ namespace engine
     /// ScriptingInterface
     public:
         /// @private
-        SCRIPTING_INTERFACE_HEADERS(AnimationFunction);
+        SCRIPTING_INTERFACE_HEADERS(ValueAnimator);
     };
 };
 
