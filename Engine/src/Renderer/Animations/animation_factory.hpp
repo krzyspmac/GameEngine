@@ -10,6 +10,7 @@
 
 #include "animation_function.hpp"
 #include "scripting_engine_provider_interface.h"
+#include "callable.hpp"
 
 namespace engine
 {
@@ -56,7 +57,7 @@ namespace engine
 
          \include AnimationFactory_CreateLinear.lua
          */
-        AnimationFunction *CreateLinear(float min, float max, double seconds, int delay, int functionUpdateRef, int functionEndRef);
+        AnimationFunction *CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
 
     /// ScriptingInterface
     public:

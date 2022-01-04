@@ -12,7 +12,7 @@
 
 using namespace engine;
 
-AnimationFunction::AnimationFunction(std::unique_ptr<AnimationCurveFunctionI> curve, double seconds, int delay, int functionUpdateRef, int functionEndRef)
+AnimationFunction::AnimationFunction(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
     :   m_engineProvider(GetMainEngine()->getProvider()),
         m_time(GetMainEngine()->getTime()),
         m_secondsDelay(delay),
@@ -43,8 +43,7 @@ void AnimationFunction::Stop()
     m_isStopped = true;
     GetMainEngine()->getPeriodicUpdatesManager().Remove(this);
 
-    ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
-    se.CallRegistryFunction(m_endFuncRef, [&](lua_State *L){
+    m_endFuncRef.PerformCall([&](lua_State *L){
         this->ScriptingInterfaceRegisterFunctions(L, this);
         return 1;
     });
@@ -57,13 +56,7 @@ float AnimationFunction::GetValue()
 
 void AnimationFunction::CallbackExecute()
 {
-    if (m_updateFuncRef < 0) { return; };
-
-    ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
-    se.CallRegistryFunction(m_updateFuncRef, [&](lua_State *L){
-        lua_pushnumber(L, m_val);
-        return 1;
-    });
+    m_updateFuncRef.PerformCall(m_val);
 }
 
 void AnimationFunction::ReleaseMem()

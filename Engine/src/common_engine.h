@@ -14,5 +14,6 @@
 #include "engine_provider_interface.h"
 #include "scripting_engine_provider_interface.h"
 #include "engine_interface.h"
+#include "scripting_engine.hpp"
 
 #endif /* engine_common_h */

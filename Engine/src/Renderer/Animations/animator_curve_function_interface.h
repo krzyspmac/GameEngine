@@ -1,12 +1,12 @@
 //
-//  animation_curve_function_interface.h
+//  animator_curve_function_interface_h
 //  Engine
 //
 //  Created by krzysp on 01/01/2022.
 //
 
-#ifndef animation_curve_function_interface_h
-#define animation_curve_function_interface_h
+#ifndef animator_curve_function_interface_h
+#define animator_curve_function_interface_h
 
 #include <stdio.h>
 #include <math.h>
@@ -29,4 +29,4 @@ namespace engine
     };
 };
 
-#endif /* animation_curve_function_interface_h */
+#endif /* animator_curve_function_interface_h */

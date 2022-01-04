@@ -6,15 +6,27 @@
 //
 
 #include "animation_factory.hpp"
-#include "animation_curve_function_linear.hpp"
+#include "common_engine.h"
+#include "callable.hpp"
 
 using namespace engine;
 
-AnimationFunction *AnimationFactory::CreateLinear(float min, float max, double seconds, int delay, int functionUpdateRef, int functionEndRef)
+AnimationFunction *AnimationFactory::CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
 {
-    AnimationCurveFunctionI *linear = new AnimationCurveFunctionLinear(min, max);
-    AnimationFunction *function = new AnimationFunction(std::unique_ptr<AnimationCurveFunctionI>(linear), seconds, delay, functionUpdateRef, functionEndRef);
+    CallableCurveLamba *s = new CallableCurveLamba(min, max, [&](float min, float max, float progress){
+        float m_diff = fabsf(max - min);
+        if (min > max)
+        {
+            return min - progress * m_diff;
+        }
+        else
+        {
+            return min + MAX(0, MIN(max, progress * m_diff));
+        };
+    });
+    AnimationFunction *function = new AnimationFunction(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
     return function;
+    return nullptr;
 }
 
 #pragma mark - Scripting Interface

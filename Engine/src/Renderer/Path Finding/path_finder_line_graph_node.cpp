@@ -104,18 +104,47 @@ void PathFinderLineGraphNode::DistanceToPoint(PathFinderBaseI *sender, Vector2 &
         return;
     }
 
+    // tmp; take the shortest distance from the connected nodes
+    float distance = std::numeric_limits<float>().max()-1;
+
+    PathFinderLineGraphNodeI *shortest = nullptr;
     for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
     {
-        // clear all traversed point up to certain point; should be somewhere at the end
-        PathFinderLineGraphNode::RPathClearUpTo(pathStack, this);
-
         PathFinderLineGraphNodeI *node = *it;
         if (RPathContains(pathStack, node)) { continue; }
 
         Vector2 *point = node->GetPoint();
         if (!PathFinderUtils::IsPointWithingViewport(*point)) { continue; }
 
-        // iterate further
-        node->DistanceToPoint(sender, startingPoint, targetPoint, pathStack);
+
+        Line l(*(this->GetPoint()), *point);
+        float thisDistance = l.GetLength();
+        if (thisDistance < distance)
+        {
+            distance = thisDistance;
+            shortest = *it;
+        }
+    }
+
+    if (shortest != nullptr)
+    {
+        shortest->DistanceToPoint(sender, startingPoint, targetPoint, pathStack);
+    }
+    else
+    {
+        for (auto it = std::begin(m_connectingNodes); it != std::end(m_connectingNodes); ++it)
+        {
+                // clear all traversed point up to certain point; should be somewhere at the end
+            PathFinderLineGraphNode::RPathClearUpTo(pathStack, this);
+
+            PathFinderLineGraphNodeI *node = *it;
+            if (RPathContains(pathStack, node)) { continue; }
+
+            Vector2 *point = node->GetPoint();
+            if (!PathFinderUtils::IsPointWithingViewport(*point)) { continue; }
+
+            // iterate further
+            node->DistanceToPoint(sender, startingPoint, targetPoint, pathStack);
+        }
     }
 }

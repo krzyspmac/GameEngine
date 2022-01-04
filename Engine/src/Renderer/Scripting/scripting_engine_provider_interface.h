@@ -21,9 +21,14 @@ extern "C" {
 
 namespace engine
 {
+
+    /**
+     Define a general script state. For LUA this would be lua_State*
+     */
+    typedef void* SCRIPT_STATE;
+
     class ScriptingEngineI
     {
-        void *m_engineState;
     public:
         ///
         ScriptingEngineI() { }
@@ -33,14 +38,7 @@ namespace engine
          The default scripting engine works on LUA so an internal LUA state
          will be returned.
          */
-        void *GetEngineState() { return m_engineState; };
-
-        /**
-         Sets the internal engine state. This is based on implementation.
-         The default scripting engine works on LUA so an internal LUA state
-         is used here
-         */
-        void SetEngineState(void *state) { m_engineState = state; };
+        virtual void *GetState() = 0;
 
         ///
         /// Creates a new L for lua.
@@ -68,6 +66,7 @@ namespace engine
          supports scripting.
          TODO: should not be in the interface!
          */
+        
         template<typename T>
         static T *GetScriptingObjectPtr(lua_State *L, int index)
         {
@@ -86,6 +85,20 @@ namespace engine
         {
             return (T*)lua_topointer(L, index);
         };
+
+        /**
+         Calls a registry function that is a code that has been created
+         in LUA when passing a `function` as a parameter, i.e.:
+             f = function()
+            end)
+
+         Allows the aller to put in parameters if needed. Call with a lambda,
+         register the parameters as necessary and return the number of parameters
+         added.
+
+         Checks if funcRef >= 0, otherwise does nothing.
+         */
+        virtual void CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda) = 0;
     };
 
     /// Provides an interface for the classes to
@@ -110,7 +123,7 @@ namespace engine
     #define SCRIPTING_INTERFACE_HEADERS(className) public:            \
         static std::string ScriptingInterfaceName();                  \
         static std::vector<luaL_Reg> ScriptingInterfaceFunctions();   \
-        static void ScriptingInterfaceRegisterFunctions(lua_State *L, className*);
+        void ScriptingInterfaceRegisterFunctions(lua_State *L, className*);
 
     #define SCRIPTING_INTERFACE_IMPL_NAME(className)                                \
         std::string className::ScriptingInterfaceName() {                           \

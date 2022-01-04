@@ -82,6 +82,20 @@ function animateIntro()
 			character:SetHidden(false)
 		end
 	)
+	
+--	local introAnim = AnimationSquence:DoAnimations('simultaneus', function()
+--			talkAnim:Start()
+--		end,
+--	, 	textFadeInAnim
+--	, 	rockfalling
+--	)
+--
+--	local talkAnim = AnimationSquence:DoAnimations('sequence', function()
+--			finish()
+--		end,
+--	, 	chuckTalk1,
+--	, 	chuckTalk2
+--	)
 end
 
 function init()

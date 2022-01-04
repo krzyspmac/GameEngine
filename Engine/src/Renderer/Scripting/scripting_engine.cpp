@@ -18,14 +18,27 @@
 
 using namespace engine;
 
+/// Main accessor for easy access.
+static ScriptingEngine *sharedEngine = NULL;
+
+engine::ScriptingEngine *GetScripting()
+{
+    return sharedEngine;
+}
+
 ScriptingEngine::ScriptingEngine()
 {
+    sharedEngine = this;
+}
+
+void *ScriptingEngine::GetState()
+{
+    return this->L;
 }
 
 void ScriptingEngine::newState()
 {
     this->L = luaL_newstate();
-    SetEngineState(this->L);
     luaL_openlibs(L);
     luaopen_base(L);
 }

@@ -30,35 +30,16 @@ namespace engine
         ///
         ScriptingEngine();
 
-        ///
-        /// Creates a new L for lua.
         void newState();
-
-        /// Closes and frees memory taken
-        /// by the script
         void closeState();
-
-        ///
         void loadFile(FileMemoryBufferStreamI*);
-
-        ///
         void registerFunctions();
 
     public:
         lua_State* GetL() { return L; };
 
-        /**
-         Calls a registry function that is a code that has been created
-         in LUA when passing a `function` as a parameter, i.e.:
-         	f = function()
-            end)
+        void *GetState();
 
-         Allows the aller to put in parameters if needed. Call with a lambda,
-         register the parameters as necessary and return the number of parameters
-         added.
-
-         Checks if funcRef >= 0, otherwise does nothing.
-         */
         void CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda);
 
     /// Default, must-have main lua script functions
@@ -110,6 +91,8 @@ namespace engine
         lua_State* L;
         EngineProviderI *m_engineProvider;
     };
+
+    extern engine::ScriptingEngine *GetScripting();
 };
 
 #endif /* scriptint_engine_hpp */

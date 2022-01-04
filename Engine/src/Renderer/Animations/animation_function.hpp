@@ -9,12 +9,17 @@
 #define animation_function_hpp
 
 #include "scripting_engine_provider_interface.h"
-#include "animation_curve_function_interface.h"
+#include "animator_curve_function_interface.h"
 #include "engine_provider_interface.h"
 #include "time.hpp"
+#include "callable.hpp"
 
 namespace engine
 {
+    /**
+     An abstrzct interface to define the udpate method to be
+     called on frame render.
+     */
     class AnimationPeriodicUpdateI
     {
     public:
@@ -39,20 +44,20 @@ namespace engine
     {
         EngineProviderI &m_engineProvider;
         Time &m_time;
-        std::unique_ptr<AnimationCurveFunctionI> m_curve;
+        std::unique_ptr<CallableCurveLamba> m_curve;
         double m_secondsDelay;
         double m_secondsTotal;
         double m_secondsStart;
         double m_secondsPassed;
         double m_val;
-        int m_updateFuncRef;
-        int m_endFuncRef;
+        CallableScriptFunctionNumber m_updateFuncRef;
+        CallableScriptFunctionSciptableInstance m_endFuncRef;
         bool m_isStopped;
     public:
         /**
          @private
          */
-        AnimationFunction(std::unique_ptr<AnimationCurveFunctionI> curve, double seconds, int delay, int functionUpdateRef, int functionEndRef);
+        AnimationFunction(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance  functionEndRef);
         /** @private */
         ~AnimationFunction();
 
