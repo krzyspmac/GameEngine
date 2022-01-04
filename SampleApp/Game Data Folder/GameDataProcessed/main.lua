@@ -39,49 +39,60 @@ function loadSprites()
 end
 
 function animateIntro()
-	textFadeInAnim = ValueAnimatorFactory:CreateLinear(0, 255, 1, 1,
-		function(v)
-			text:SetAlpha(v)
-		end,
-		function(anim)
-			anim:ReleaseMem()
-			textFadeOutAnim:Start()
-		end
-	)
-	textFadeInAnim:Start()
-	
-	textFadeOutAnim = ValueAnimatorFactory:CreateLinear(255, 0, 1, 1,
-		function(v)
-			text:SetAlpha(v)
-		end,
-		function(anim)
-			anim:ReleaseMem()
-			
-			fadeInAnimation:Start()
-			truckAnim:Start()
-		end
-	)
-	
-	fadeInAnimation = ValueAnimatorFactory:CreateLinear(0, 255, 0.5, 1.5,
-		function(val)
-			sky:SetAlpha(val)
-		end,
-		function(anim)
-			anim:ReleaseMem()
-			initialAnimationDone = true
-		end
-	)
+--	textFadeInAnim = ValueAnimatorFactory:CreateLinear(0, 255, 1, 1,
+--		function(v)
+--			text:SetAlpha(v)
+--		end,
+--		function(anim)
+--			anim:ReleaseMem()
+--			textFadeOutAnim:Start()
+--		end
+--	)
+--	textFadeInAnim:Start()
+--	
+--	textFadeOutAnim = ValueAnimatorFactory:CreateLinear(255, 0, 1, 1,
+--		function(v)
+--			text:SetAlpha(v)
+--		end,
+--		function(anim)
+--			anim:ReleaseMem()
+--			
+--			fadeInAnimation:Start()
+--			truckAnim:Start()
+--		end
+--	)
+--	
+--	fadeInAnimation = ValueAnimatorFactory:CreateLinear(0, 255, 0.5, 1.5,
+--		function(val)
+--			sky:SetAlpha(val)
+--		end,
+--		function(anim)
+--			anim:ReleaseMem()
+--			initialAnimationDone = true
+--		end
+--	)
+--
+--	truckAnim = ValueAnimatorFactory:CreateLinear(0, 255, 1, 0.5,
+--		function(val)
+--			truck:SetAlpha(val)
+--		end,
+--		function(anim)
+--			anim:ReleaseMem()
+--			
+--			character:SetHidden(false)
+--		end
+--	)
 
-	truckAnim = ValueAnimatorFactory:CreateLinear(0, 255, 1, 0.5,
-		function(val)
-			truck:SetAlpha(val)
-		end,
-		function(anim)
-			anim:ReleaseMem()
-			
-			character:SetHidden(false)
-		end
-	)
+	skyFadeIn = PropertyAnimatorFactory:FadeIn(sky, 1, 2, function()
+		truckFadeIn:Start()	
+	end)
+	
+	truckFadeIn = PropertyAnimatorFactory:FadeIn(truck, 0, 0.5, function(sender)
+		print("done")
+	end)
+	
+	
+	skyFadeIn:Start()
 	
 --	local introAnim = AnimationSquence:DoAnimations('simultaneus', function()
 --			talkAnim:Start()

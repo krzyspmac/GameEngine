@@ -47,16 +47,34 @@ namespace engine
         double m_secondsPassed;
         double m_val;
         CallableScriptFunctionNumber m_updateFuncRef;
+        std::function<void(float)> m_functionUpdate;
         CallableScriptFunctionSciptableInstance m_endFuncRef;
+        std::function<void(ValueAnimator*)> m_endFunc;
         bool m_isStopped;
     public:
         /**
          @private
          */
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
-        
+
+        /**
+         @private
+         */
+        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef);
+
         /** @private */
         ~ValueAnimator();
+
+    public:
+        void SetFunctionUpdate(CallableScriptFunctionNumber f) { m_updateFuncRef = f; };
+        void SetFunctionUpdate(std::function<void(float)> f) { m_functionUpdate = f; };
+        void SetFunctionFinish(CallableScriptFunctionSciptableInstance f) { m_endFuncRef = f; };
+        void SetFunctionFinish(std::function<void(ValueAnimator*)> f) { m_endFunc = f; };
+
+        CallableScriptFunctionNumber GetunctionUpdateRef() { return m_updateFuncRef; };
+        std::function<void(float)> GetFunctionUpdate() { return m_functionUpdate; };
+        CallableScriptFunctionSciptableInstance GetFunctionFinishRef() { return m_endFuncRef; };
+        std::function<void(ValueAnimator*)> GetFunctionFinish() { return m_endFunc; };
 
     /// AnimatableI
     public:

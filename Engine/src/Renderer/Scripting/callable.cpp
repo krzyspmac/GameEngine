@@ -36,6 +36,8 @@ CallableScriptFunctionParamless::CallableScriptFunctionParamless(CallableScriptF
 
 void CallableScriptFunctionParamless::PerformCall()
 {
+    if (!CanCall()) { return; };
+    
     ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
     se.CallRegistryFunction(GetFunctionRef(), [&](lua_State *L){
         return 0;
@@ -52,7 +54,7 @@ CallableScriptFunctionNumber::CallableScriptFunctionNumber(CallableScriptFunctio
 
 void CallableScriptFunctionNumber::PerformCall(float val)
 {
-    if (m_ref < -1) { return; };
+    if (!CanCall()) { return; };
 
     ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
     se.CallRegistryFunction((int)GetFunctionRef(), [&](lua_State *L){
@@ -71,8 +73,8 @@ CallableScriptFunctionSciptableInstance::CallableScriptFunctionSciptableInstance
 
 void CallableScriptFunctionSciptableInstance::PerformCall(std::function<int(lua_State*)> block)
 {
-    if (m_ref < -1) { return; };
-
+    if (!CanCall()) { return; };
+    
     ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
     se.CallRegistryFunction((int)GetFunctionRef(), [&](lua_State *L){
         return block(L);

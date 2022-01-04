@@ -20,6 +20,7 @@
 #include "sprite_renderer_manager.hpp"
 #include "periodic_updates_manager.hpp"
 #include "value_animator_factory.hpp"
+#include "property_animator_factory.hpp"
 #include "time.hpp"
 #include "engine_state.hpp"
 
@@ -157,7 +158,10 @@ namespace engine
         Time& getTime() { return m_time; };
 
         ///
-        ValueAnimatorFactory& getAnimationFactory() { return m_animationFactory; };
+        ValueAnimatorFactory& getValueAnimatorFactory() { return m_valueAnimatorFactory; };
+
+        ///
+        PropertyAnimatorFactory& getPropertyAnimatorFactory() { return m_propertyAnimatorFactory; };
 
         ///
         PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };
@@ -183,7 +187,8 @@ namespace engine
 
         engine::Origin m_mousePosition;
         Time m_time;
-        ValueAnimatorFactory m_animationFactory;
+        ValueAnimatorFactory m_valueAnimatorFactory;
+        PropertyAnimatorFactory m_propertyAnimatorFactory;
         PeriodicUpdatesManager m_periodicUpdatesManager;
         EngineState m_engineState;
     };

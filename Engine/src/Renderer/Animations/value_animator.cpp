@@ -13,15 +13,33 @@
 using namespace engine;
 
 ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
-    :   m_engineProvider(GetMainEngine()->getProvider()),
-        m_time(GetMainEngine()->getTime()),
-        m_secondsDelay(delay),
-        m_secondsTotal(seconds),
-        m_secondsStart(-1),
-        m_val(curve->GetMin()),
-        m_updateFuncRef(functionUpdateRef),
-        m_endFuncRef(functionEndRef),
-        m_isStopped(true)
+    : m_engineProvider(GetMainEngine()->getProvider())
+    , m_time(GetMainEngine()->getTime())
+    , m_secondsDelay(delay)
+    , m_secondsTotal(seconds)
+    , m_secondsStart(-1)
+    , m_val(curve->GetMin())
+    , m_updateFuncRef(functionUpdateRef)
+    , m_functionUpdate(nullptr)
+    , m_endFuncRef(functionEndRef)
+    , m_endFunc(nullptr)
+    , m_isStopped(true)
+{
+    m_curve = std::move(curve);
+}
+
+ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, std::function<void(float)> functionUpdate, std::function<void(ValueAnimator*)> functionEnd)
+    : m_engineProvider(GetMainEngine()->getProvider())
+    , m_time(GetMainEngine()->getTime())
+    , m_secondsDelay(delay)
+    , m_secondsTotal(seconds)
+    , m_secondsStart(-1)
+    , m_val(curve->GetMin())
+    , m_updateFuncRef(CallableScriptFunctionNumber(-1))
+    , m_functionUpdate(functionUpdate)
+    , m_endFuncRef(CallableScriptFunctionSciptableInstance(-1))
+    , m_endFunc(functionEnd)
+    , m_isStopped(true)
 {
     m_curve = std::move(curve);
 }
@@ -43,10 +61,18 @@ void ValueAnimator::Stop()
     m_isStopped = true;
     GetMainEngine()->getPeriodicUpdatesManager().Remove(this);
 
-    m_endFuncRef.PerformCall([&](lua_State *L){
-        this->ScriptingInterfaceRegisterFunctions(L, this);
-        return 1;
-    });
+    if (m_endFuncRef.CanCall())
+    {
+        m_endFuncRef.PerformCall([&](lua_State *L){
+            this->ScriptingInterfaceRegisterFunctions(L, this);
+            return 1;
+        });
+    }
+
+    if (m_endFunc != nullptr)
+    {
+        m_endFunc(this);
+    }
 }
 
 float ValueAnimator::GetValue()
@@ -56,7 +82,15 @@ float ValueAnimator::GetValue()
 
 void ValueAnimator::CallbackExecute()
 {
-    m_updateFuncRef.PerformCall(m_val);
+    if (m_updateFuncRef.CanCall())
+    {
+        m_updateFuncRef.PerformCall(m_val);
+    }
+
+    if (m_functionUpdate != nullptr)
+    {
+        m_functionUpdate(m_val);
+    }
 }
 
 void ValueAnimator::ReleaseMem()

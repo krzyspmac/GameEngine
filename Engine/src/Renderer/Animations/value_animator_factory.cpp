@@ -27,7 +27,26 @@ ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double s
     });
     ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
     return function;
-    return nullptr;
+}
+
+ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef)
+{
+    CallableCurveLamba *s = new CallableCurveLamba(min, max, [&](float min, float max, float progress){
+        float m_diff = fabsf(max - min);
+        if (min > max)
+        {
+            float result = min - progress * m_diff;
+            return result;
+        }
+        else
+        {
+            return min + MAX(0, MIN(max, progress * m_diff));
+        }
+    });
+
+    ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
+
+    return function;
 }
 
 #pragma mark - Scripting Interface

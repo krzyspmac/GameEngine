@@ -53,6 +53,12 @@ namespace engine
          @private
          */
         virtual CallableScriptFunctionRef& GetFunctionRef() = 0;
+
+        /**
+         Available only in C++
+         @private
+         */
+        virtual bool CanCall() = 0;
         /// override and provide some kind of perform function method
     };
 };

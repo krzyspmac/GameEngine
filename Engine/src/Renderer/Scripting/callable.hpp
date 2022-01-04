@@ -40,7 +40,9 @@ namespace engine
      */
     class CallableScriptFunctionParamless: public CallableScriptFunctionI
     {
-        CallableScriptFunctionRef m_ref;
+        CallableScriptFunctionRef m_ref = -1;
+    public:
+        static CallableScriptFunctionParamless none;
     public:
         /**
          Construct a callable function by providing a reference for it.
@@ -70,6 +72,12 @@ namespace engine
          @private
          */
         void PerformCall();
+
+        /**
+         Available only in C++
+         @private
+         */
+        bool CanCall() { return m_ref != -1; };
     };
 
     /**
@@ -77,7 +85,9 @@ namespace engine
      */
     class CallableScriptFunctionNumber: public CallableScriptFunctionI
     {
-        CallableScriptFunctionRef m_ref;
+        CallableScriptFunctionRef m_ref = - 1;
+    public:
+        static CallableScriptFunctionNumber none;
     public:
         /**
          Construct a callable function by providing a reference for it.
@@ -102,6 +112,12 @@ namespace engine
          @private
          */
         void PerformCall(float val);
+
+        /**
+         Available only in C++
+         @private
+         */
+        bool CanCall() { return m_ref != -1; };
     };
 
     /**
@@ -110,7 +126,9 @@ namespace engine
      */
     class CallableScriptFunctionSciptableInstance: public CallableScriptFunctionI
     {
-        CallableScriptFunctionRef m_ref;
+        CallableScriptFunctionRef m_ref = -1;
+    public:
+        static CallableScriptFunctionSciptableInstance none;
     public:
         /**
          Construct a callable function by providing a reference for it.
@@ -138,7 +156,12 @@ namespace engine
          @private
          */
         void PerformCall(std::function<int(lua_State*)> block);
-
+        
+        /**
+         Available only in C++
+         @private
+         */
+        bool CanCall() { return m_ref != -1; };
     };
 
 };
