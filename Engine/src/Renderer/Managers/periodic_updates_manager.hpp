@@ -8,7 +8,8 @@
 #ifndef periodic_updates_manager_hpp
 #define periodic_updates_manager_hpp
 
-#include "animation_factory.hpp"
+#include "animation.h"
+#include "common.h"
 
 namespace engine
 {

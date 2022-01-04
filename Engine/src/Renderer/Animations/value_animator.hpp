@@ -12,35 +12,31 @@
 #include "engine_provider_interface.h"
 #include "time.hpp"
 #include "callable.hpp"
+#include "animation.h"
+#include "memory.h"
 
 namespace engine
 {
     /**
-     An abstract interface to define the udpate method to be
-     called on frame render.
-     */
-    class AnimationPeriodicUpdateI
-    {
-    public:
-        virtual void Update() = 0;
-    };
-
-    /**
      Provides a way to animate a value from point a to point b
      along a certain curve. ValueAnimator does not animate object
      properties (like "alpha"). It only provides a way to animate
-     values. \see AnimationFactory to create a concrete property
+     values. \see ValueAnimatorFactory to create a concrete property
      animator.
 
-     The ValueAnimator takes min, max, the curve function and the
-     duration.
+     The ValueAnimator takes min, max, the curve function the
+     duration and two callbacks: the update function and the finish
+     function.
 
      The script is resposible for memory management.
-     \see AnimationFactory::ReleaseMem()
+     \see ValueAnimatorFactory::ReleaseMem()
 
-     \see AnimationFactory.
+     \see ValueAnimatorFactory.
      */
-    class ValueAnimator: public AnimationPeriodicUpdateI
+    class ValueAnimator
+        : public AnimationPeriodicUpdateI
+        , public AnimatableI
+        , public MemoryI
     {
         EngineProviderI &m_engineProvider;
         Time &m_time;
@@ -57,11 +53,12 @@ namespace engine
         /**
          @private
          */
-        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance  functionEndRef);
+        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
         
         /** @private */
         ~ValueAnimator();
 
+    /// AnimatableI
     public:
         /**
          Starts the animation. Adds the animation to the default engine run loop so
@@ -75,21 +72,24 @@ namespace engine
          */
         void Stop();
 
+    /// MemoryI
+    public:
+        /**
+         Relase the memory if this object.
+         */
+        void ReleaseMem();
+
+    public:
         /**
          Returns current value calcualted when ValueAnimator::Start was initiated
+         @private
          */
         float GetValue();
 
+    private:
+
         /** @private */
         void CallbackExecute();
-
-        /**
-         Releases this object. This is necessary as the created instance is not
-         kept anywhere in the cache. The script is resposible for the memory
-         management.
-         Also stops the animation.
-         */
-        void ReleaseMem();
 
     // AnimationPeriodicUpdateI
     public:

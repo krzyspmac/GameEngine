@@ -1,12 +1,12 @@
 //
-//  animation_factory.hpp
+//  value_animator_factory.hpp
 //  Engine
 //
 //  Created by krzysp on 01/01/2022.
 //
 
-#ifndef animation_factory_hpp
-#define animation_factory_hpp
+#ifndef value_animator_factory_hpp
+#define value_animator_factory_hpp
 
 #include "value_animator.hpp"
 #include "scripting_engine_provider_interface.h"
@@ -15,33 +15,29 @@
 namespace engine
 {
     /**
-     AnimationFactory
+     ValueAnimatorFactory
      \addtogroup API_GLOBALS
      */
     /**
-     Provides different concrete animation instances
-     to be used to change values along preffered curves.
+     Provides different concrete value animator instances
+     to be used to change values along preferred curves.
 
      Starting an animation adds it to the
-     frame update queue and the animation is automatic.
-     If the value or time interval is exeeded the animation
+     frame update queue and the animator is automatic.
+     If the value or time interval is exeeded the animator
      ends automatically and gets removed from the update queue.
-
-     The caller is resposible for the memory allocated when
-     creating animators. Call `ReleaseMem` on received
-     animation functions when no longer needing them.
      */
-    class AnimationFactory
+    class ValueAnimatorFactory
     {
     public:
         /** @private */
-        AnimationFactory() { };
+        ValueAnimatorFactory() { };
 
     public:
         /**
-         Creates an animation function `linear` that animates
+         Creates an animator function `linear` that changes
          a value from min to max over certain seconds. Takes
-         `functionRef` as a scripting function parameter.
+         two functions as parameters (update and end).
 
          @param min -   animate from this value
          @param max -   animate to this value
@@ -62,8 +58,8 @@ namespace engine
     /// ScriptingInterface
     public:
         /// @private
-        SCRIPTING_INTERFACE_HEADERS(AnimationFactory);
+        SCRIPTING_INTERFACE_HEADERS(ValueAnimatorFactory);
     };
 };
 
-#endif /* animation_factory_hpp */
+#endif /* value_animator_factory_hpp */

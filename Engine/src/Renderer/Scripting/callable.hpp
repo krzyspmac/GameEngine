@@ -31,6 +31,7 @@ namespace engine
     public:
         float GetMin() { return m_min; };
         float GetMax() { return m_max; };
+        float GetDiff() { return m_diff; };
         float f(float progress);
     };
 

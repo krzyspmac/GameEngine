@@ -62,7 +62,7 @@ void ValueAnimator::CallbackExecute()
 void ValueAnimator::ReleaseMem()
 {
     if (!m_isStopped) { Stop(); };
-    delete this;
+    MemoryI::ReleaseMem();
 }
 
 void ValueAnimator::Update()

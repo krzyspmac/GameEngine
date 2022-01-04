@@ -12,7 +12,7 @@
 #include "character_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
-#include "animation_factory.hpp"
+#include "value_animator_factory.hpp"
 #include "time.hpp"
 #include "engine_state.hpp"
 
@@ -126,9 +126,9 @@ void ScriptingEngine::registerFunctions()
     time.ScriptingInterfaceRegisterFunctions(L, &time);
     lua_setglobal(L, "Time");
 
-    AnimationFactory &animationFactory = GetMainEngine()->getAnimationFactory();
+    ValueAnimatorFactory &animationFactory = GetMainEngine()->getAnimationFactory();
     animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
-    lua_setglobal(L, "AnimationFactory");
+    lua_setglobal(L, "ValueAnimatorFactory");
 
     EngineState &engineState = GetMainEngine()->getEngineState();
     engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);
