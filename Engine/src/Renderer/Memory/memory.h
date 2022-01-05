@@ -8,6 +8,8 @@
 #ifndef memory_h
 #define memory_h
 
+#include "common.h"
+
 namespace engine
 {
 
@@ -26,6 +28,32 @@ namespace engine
     public:
         virtual ~MemoryI() { };
         void ReleaseMem() { delete this; };
+    };
+
+    /**
+     An abstract interface to implement a shared memory pool
+     that keeps dangling objects that the game script might
+     not have manually removed.
+     
+     The pool should be drained when there's no danger of removal
+     objects in use.
+     */
+    class MemoryReleasePoolI
+    {
+    public:
+        /** @private */
+        virtual ~MemoryReleasePoolI() { };
+        
+        /**
+         Store an object in the pool.
+         */
+        virtual void Sink(MemoryI*) = 0;
+        
+        /**
+         Drain the pool, calling ReleaseMem on all
+         members.
+         */
+        virtual void Drain() = 0;
     };
 
 }; // namespace engine

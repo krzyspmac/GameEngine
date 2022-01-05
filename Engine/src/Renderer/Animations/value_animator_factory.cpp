@@ -26,6 +26,7 @@ ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double s
         }
     });
     ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
+    GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
 
@@ -45,7 +46,7 @@ ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double s
     });
 
     ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
-
+    GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
 

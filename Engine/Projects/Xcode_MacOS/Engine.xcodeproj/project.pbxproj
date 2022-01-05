@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
 		7F138253277505B600ED6D67 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
 		7F138254277505B600ED6D67 /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821D277505B600ED6D67 /* texture_interface.h */; };
 		7F138255277505B600ED6D67 /* texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821E277505B600ED6D67 /* texture.hpp */; };
@@ -107,6 +108,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4C255DDB27858CBA00D0B30A /* release_pool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = release_pool.cpp; sourceTree = "<group>"; };
+		4C255DDC27858CBA00D0B30A /* release_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = release_pool.hpp; sourceTree = "<group>"; };
 		7F1382152775059B00ED6D67 /* libEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F13821C277505B600ED6D67 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
 		7F13821D277505B600ED6D67 /* texture_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_interface.h; sourceTree = "<group>"; };
@@ -514,6 +517,8 @@
 			isa = PBXGroup;
 			children = (
 				7FF21D732784DDE0005C52C4 /* memory.h */,
+				4C255DDC27858CBA00D0B30A /* release_pool.hpp */,
+				4C255DDB27858CBA00D0B30A /* release_pool.cpp */,
 			);
 			path = Memory;
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 				7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */,
 				7FCAE7D6278073B9004A6107 /* time.cpp in Sources */,
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
+				4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7FE2E5C0277A370D00538094 /* path_finder_line_graph_node.cpp in Sources */,

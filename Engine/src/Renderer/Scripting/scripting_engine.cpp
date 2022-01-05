@@ -138,6 +138,10 @@ void ScriptingEngine::registerFunctions()
     EngineState &engineState = GetMainEngine()->getEngineState();
     engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);
     lua_setglobal(L, "EngineState");
+    
+    MemoryReleasePool &releasePool = GetMainEngine()->getReleasePool();
+    releasePool.ScriptingInterfaceRegisterFunctions(L, &releasePool);
+    lua_setglobal(L, "MemoryReleasePool");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)
