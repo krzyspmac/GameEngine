@@ -12,7 +12,7 @@
 
 using namespace engine;
 
-ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
+ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
     : m_engineProvider(GetMainEngine()->getProvider())
     , m_time(GetMainEngine()->getTime())
     , m_secondsDelay(delay)
@@ -28,7 +28,7 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double s
     m_curve = std::move(curve);
 }
 
-ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, std::function<void(float)> functionUpdate, std::function<void(ValueAnimator*)> functionEnd)
+ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, std::function<void(float)> functionUpdate, std::function<void(ValueAnimator*)> functionEnd)
     : m_engineProvider(GetMainEngine()->getProvider())
     , m_time(GetMainEngine()->getTime())
     , m_secondsDelay(delay)

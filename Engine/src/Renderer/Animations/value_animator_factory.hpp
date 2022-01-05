@@ -11,6 +11,7 @@
 #include "value_animator.hpp"
 #include "scripting_engine_provider_interface.h"
 #include "callable.hpp"
+#include "animation_curve_factory.hpp"
 
 namespace engine
 {
@@ -38,54 +39,33 @@ namespace engine
          Creates an animator function `linear` that changes
          a value from min to max over certain seconds. Takes
          two functions as parameters (update and end).
-
+         
          @param min -   animate from this value
          @param max -   animate to this value
          @param seconds - animate over this many seconds
          @param delay - initial delay in seconds
          @param functionUpdateRef - script function that gets called
-            each time an update is needed (linked to fps). Reveived
-            paramters include the value computed.
+         each time an update is needed (linked to fps). Reveived
+         paramters include the value computed.
          @param functionEndRef - script function that gets called
-            when the animation is finished. Received parameter
-            includes `self` as in the animation so the script
-            can release it.
-
+         when the animation is finished. Received parameter
+         includes `self` as in the animation so the script
+         can release it.
+         
          \include AnimationFactory_CreateLinear.lua
          */
-        ValueAnimator *CreateLinear(float min,
-                                    float max,
-                                    double seconds,
-                                    int delay,
-                                    CallableScriptFunctionNumber functionUpdateRef,
-                                    CallableScriptFunctionSciptableInstance functionEndRef);
+        ValueAnimator *Create(CallableCurveLamba *curve,
+                              float delay,
+                              float duration,
+                              CallableScriptFunctionNumber functionUpdateRef,
+                              CallableScriptFunctionSciptableInstance functionEndRef);
 
-        /**
-         Creates an animator function `linear` that changes
-         a value from min to max over certain seconds. Takes
-         two functions as parameters (update and end).
-
-         @param min -   animate from this value
-         @param max -   animate to this value
-         @param seconds - animate over this many seconds
-         @param delay - initial delay in seconds
-         @param functionUpdateRef - script function that gets called
-            each time an update is needed (linked to fps). Reveived
-            paramters include the value computed.
-         @param functionEndRef - script function that gets called
-            when the animation is finished. Received parameter
-            includes `self` as in the animation so the script
-            can release it.
-
-         \include AnimationFactory_CreateLinear.lua
-         */
-        ValueAnimator *CreateLinear(
-                                    float min,
-                                    float max,
-                                    double seconds,
-                                    int delay,
-                                    std::function<void(float)> functionUpdateRef,
-                                    std::function<void(ValueAnimator*)> functionEndRef);
+        /** @private */
+        ValueAnimator *Create(CallableCurveLamba *curve,
+                              float delay,
+                              float duration,
+                              std::function<void(float)> functionUpdateRef,
+                              std::function<void(ValueAnimator*)> functionEndRef);
 
     /// ScriptingInterface
     public:

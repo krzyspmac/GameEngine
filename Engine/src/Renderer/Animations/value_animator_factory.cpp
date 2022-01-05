@@ -8,28 +8,38 @@
 #include "value_animator_factory.hpp"
 #include "common_engine.h"
 #include "callable.hpp"
-#include "animation_static.hpp"
+#include "animation_curve_factory.hpp"
 
 using namespace engine;
 
-ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
+ValueAnimator *ValueAnimatorFactory::Create(
+       CallableCurveLamba *curve
+     , float delay
+     , float duration
+     , CallableScriptFunctionNumber functionUpdateRef
+     , CallableScriptFunctionSciptableInstance functionEndRef)
 {
     ValueAnimator *function = new ValueAnimator(
-        std::unique_ptr<CallableCurveLamba>(new CallableCurveLamba(min, max, functionLinearCurve))
-      , seconds
+        std::unique_ptr<CallableCurveLamba>(curve)
       , delay
+      , duration
       , functionUpdateRef
       , functionEndRef);
     GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
 
-ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef)
-{    
+ValueAnimator *ValueAnimatorFactory::Create(
+      CallableCurveLamba *curve
+    , float delay
+    , float duration
+    , std::function<void(float)> functionUpdateRef
+    , std::function<void(ValueAnimator*)> functionEndRef)
+{
     ValueAnimator *function = new ValueAnimator(
-        std::unique_ptr<CallableCurveLamba>(new CallableCurveLamba(min, max, functionLinearCurve))
-      , seconds
+        std::unique_ptr<CallableCurveLamba>(curve)
       , delay
+      , duration
       , functionUpdateRef
       , functionEndRef);
     GetMainEngine()->getReleasePool().Sink(function);
@@ -49,7 +59,12 @@ static int lua_AnimationFactory_CreateLinear(lua_State *L)
     double delay = lua_tonumberx(L, 5, nullptr);
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
     int functionUpdateRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    ValueAnimator *function = obj->CreateLinear(min, max, seconds, delay, functionUpdateRef, functionEndRef);
+    ValueAnimator *function = obj->Create(
+        new CallableCurveLamba(min, max, AnimationCurveFactory::Create(LINEAR))
+      , delay
+      , seconds
+      , functionUpdateRef
+      , functionEndRef);
     function->ScriptingInterfaceRegisterFunctions(L, function);
     return 1;
 }

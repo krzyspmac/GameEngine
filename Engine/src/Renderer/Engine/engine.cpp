@@ -17,7 +17,7 @@
 #include "character_mover.hpp"
 #include "polygon_loader.hpp"
 #include "console_view.hpp"
-#include "animation_static.hpp"
+#include "animation_curve_factory.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -53,7 +53,7 @@ Engine::Engine(EngineProviderI &engineProvider,
 {
     sharedEngine = this;
     SetCapRate(60);
-    SetupStaticCurves();
+    AnimationCurveFactory::Prepare();
 }
 
 Engine::~Engine()

@@ -58,8 +58,8 @@ namespace engine
          @private
          */
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
-                      double seconds,
                       int delay,
+                      double seconds,
                       CallableScriptFunctionNumber functionUpdateRef,
                       CallableScriptFunctionSciptableInstance functionEndRef);
 
@@ -68,8 +68,8 @@ namespace engine
          @private
          */
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
-                      double seconds,
                       int delay,
+                      double seconds,
                       std::function<void(float)> functionUpdateRef,
                       std::function<void(ValueAnimator*)> functionEndRef);
 

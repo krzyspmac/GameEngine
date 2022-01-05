@@ -84,13 +84,17 @@ function animateIntro()
 --	)
 
 	skyFadeIn = PropertyAnimatorFactory:FadeIn(sky, 1, 2, function()
+		skyFadeOut:Start()
+	end)
+	
+	skyFadeOut = PropertyAnimatorFactory:FadeOut(sky, 1, 2, function()
 		truckFadeIn:Start()	
 	end)
 	
 	truckFadeIn = PropertyAnimatorFactory:FadeIn(truck, 0, 0.5, function(sender)
-		print("done")
-		skyFadeIn:ReleaseMem()
---		truckFadeIn:ReleaseMem()
+		MemoryReleasePool:Drain()
+		character:SetHidden(false)
+		initialAnimationDone = true
 	end)
 	
 	
