@@ -113,6 +113,46 @@ void ValueAnimator::Update()
     }
 }
 
+void ValueAnimator::SetFunctionUpdate(CallableScriptFunctionNumber f)
+{
+    m_updateFuncRef = f;
+}
+
+void ValueAnimator::SetFunctionUpdate(std::function<void(float)> f)
+{
+    m_updateFunc = f;
+}
+
+void ValueAnimator::SetFunctionFinish(CallableScriptFunctionSciptableInstance f)
+{
+    m_endFuncRef = f;
+}
+
+void ValueAnimator::SetFunctionFinish(std::function<void(ValueAnimator*)> f)
+{
+    m_endFunc = f;
+}
+
+CallableScriptFunctionNumber ValueAnimator::GetunctionUpdateRef()
+{
+    return m_updateFuncRef;
+}
+
+std::function<void(float)> ValueAnimator::GetFunctionUpdate()
+{
+    return m_updateFunc;
+}
+
+CallableScriptFunctionSciptableInstance ValueAnimator::GetFunctionFinishRef()
+{
+    return m_endFuncRef;
+}
+
+std::function<void(ValueAnimator*)> ValueAnimator::GetFunctionFinish()
+{
+    return m_endFunc;
+}
+
 #pragma mark - Scripting Interface
 
 SCRIPTING_INTERFACE_IMPL_NAME(ValueAnimator);

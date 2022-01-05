@@ -57,27 +57,35 @@ namespace engine
          Create the value animator with callaback as script functions.
          @private
          */
-        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
+        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
+                      double seconds,
+                      int delay,
+                      CallableScriptFunctionNumber functionUpdateRef,
+                      CallableScriptFunctionSciptableInstance functionEndRef);
 
         /**
          Create the value animator with callaback as C++ lambdas.
          @private
          */
-        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef);
+        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
+                      double seconds,
+                      int delay,
+                      std::function<void(float)> functionUpdateRef,
+                      std::function<void(ValueAnimator*)> functionEndRef);
 
         /** @private */
         ~ValueAnimator();
 
     public:
-        void SetFunctionUpdate(CallableScriptFunctionNumber f) { m_updateFuncRef = f; };
-        void SetFunctionUpdate(std::function<void(float)> f) { m_updateFunc = f; };
-        void SetFunctionFinish(CallableScriptFunctionSciptableInstance f) { m_endFuncRef = f; };
-        void SetFunctionFinish(std::function<void(ValueAnimator*)> f) { m_endFunc = f; };
+        void SetFunctionUpdate(CallableScriptFunctionNumber f);
+        void SetFunctionUpdate(std::function<void(float)> f);
+        void SetFunctionFinish(CallableScriptFunctionSciptableInstance f);
+        void SetFunctionFinish(std::function<void(ValueAnimator*)> f);
 
-        CallableScriptFunctionNumber GetunctionUpdateRef() { return m_updateFuncRef; };
-        std::function<void(float)> GetFunctionUpdate() { return m_updateFunc; };
-        CallableScriptFunctionSciptableInstance GetFunctionFinishRef() { return m_endFuncRef; };
-        std::function<void(ValueAnimator*)> GetFunctionFinish() { return m_endFunc; };
+        CallableScriptFunctionNumber GetunctionUpdateRef();
+        std::function<void(float)> GetFunctionUpdate();
+        CallableScriptFunctionSciptableInstance GetFunctionFinishRef();
+        std::function<void(ValueAnimator*)> GetFunctionFinish();
 
     /// AnimatableI
     public:
