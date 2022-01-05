@@ -12,7 +12,12 @@
 
 using namespace engine;
 
-PropertyAnimator *PropertyAnimatorFactory::FadeIn(SpriteDrawI *sprite, std::string curveType, float delay, float duration, CallableScriptFunctionSciptableInstance fFinishRef)
+PropertyAnimator *PropertyAnimatorFactory
+    ::FadeIn( SpriteDrawI *sprite
+            , std::string curveType
+            , float delay
+            , float duration
+            , CallableScriptFunctionSciptableInstance fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 255, AnimationCurveFactory::Create(curveType));
@@ -29,7 +34,12 @@ PropertyAnimator *PropertyAnimatorFactory::FadeIn(SpriteDrawI *sprite, std::stri
     return result;
 }
 
-PropertyAnimator *PropertyAnimatorFactory::FadeIn(SpriteDrawI *sprite, AnimationCurveType curveType, float delay, float duration, std::function<void(void)> fFinishRef)
+PropertyAnimator *PropertyAnimatorFactory
+    ::FadeIn(  SpriteDrawI *sprite
+             , AnimationCurveType curveType
+             , float delay
+             , float duration
+             , std::function<void(void)> fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 255, AnimationCurveFactory::Create(curveType));
@@ -45,7 +55,12 @@ PropertyAnimator *PropertyAnimatorFactory::FadeIn(SpriteDrawI *sprite, Animation
     return result;
 }
 
-PropertyAnimator *PropertyAnimatorFactory::FadeOut(SpriteDrawI *sprite, std::string curveType, float delay, float duration, CallableScriptFunctionSciptableInstance fFinishRef)
+PropertyAnimator *PropertyAnimatorFactory
+    ::FadeOut(  SpriteDrawI *sprite
+              , std::string curveType
+              , float delay
+              , float duration
+              , CallableScriptFunctionSciptableInstance fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(255, 0, AnimationCurveFactory::Create(curveType));
@@ -62,7 +77,12 @@ PropertyAnimator *PropertyAnimatorFactory::FadeOut(SpriteDrawI *sprite, std::str
     return result;
 }
 
-PropertyAnimator *PropertyAnimatorFactory::FadeOut(SpriteDrawI *sprite, AnimationCurveType curveType, float delay, float duration, std::function<void(void)> fFinishRef)
+PropertyAnimator *PropertyAnimatorFactory
+    ::FadeOut(SpriteDrawI *sprite
+              , AnimationCurveType curveType
+              , float delay
+              , float duration
+              , std::function<void(void)> fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(255, 0, AnimationCurveFactory::Create(curveType));
