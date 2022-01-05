@@ -46,7 +46,7 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int dela
 
 ValueAnimator::~ValueAnimator()
 {
-    printf("AnimationFunction released\n");
+    printf("ValueAnimator released\n");
 }
 
 void ValueAnimator::Start()

@@ -19,15 +19,17 @@ namespace engine
     /**
      Provides a way to animate properties by using ValueAnimator
      concrete instances.
+     Takes ownership of the value animator.
      */
     class PropertyAnimator: public AnimatableI, public MemoryI
     {
-        ValueAnimator *m_valueAnimator;
+        std::unique_ptr<ValueAnimator> m_valueAnimator;
         SpriteDrawI *m_sprite;
 
     public:
         PropertyAnimator(SpriteDrawI *sprite, ValueAnimator *valueAnimator);
-
+        ~PropertyAnimator();
+        
     public: // AnimatableI
         /**
          Starts the animation. Adds the animation to the default engine run loop so

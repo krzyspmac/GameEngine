@@ -118,8 +118,16 @@ static int lua_PropertyAnimatorFactory_FadeIn(lua_State *L)
     }
 
     PropertyAnimator *result = obj->FadeIn(spriteDraw, "linear", delay, duration, function);
-    result->ScriptingInterfaceRegisterFunctions(L, result);
-    return 1;
+    if (result != nullptr)
+    {
+        GetMainEngine()->getReleasePool().Sink(result);
+        result->ScriptingInterfaceRegisterFunctions(L, result);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 static int lua_PropertyAnimatorFactory_FadeOut(lua_State *L)
@@ -138,8 +146,16 @@ static int lua_PropertyAnimatorFactory_FadeOut(lua_State *L)
     }
 
     PropertyAnimator *result = obj->FadeOut(spriteDraw, "linear", delay, duration, function);
-    result->ScriptingInterfaceRegisterFunctions(L, result);
-    return 1;
+    if (result)
+    {
+        GetMainEngine()->getReleasePool().Sink(result);
+        result->ScriptingInterfaceRegisterFunctions(L, result);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 std::vector<luaL_Reg> PropertyAnimatorFactory::ScriptingInterfaceFunctions()

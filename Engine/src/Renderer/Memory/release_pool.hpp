@@ -25,6 +25,8 @@ namespace engine
      
      A good practice would be to drain the pool once the scene changes
      so that a new scene starts with a new set of objects.
+     
+     Generally only for objects available to the script functions.
      */
     class MemoryReleasePool: public MemoryReleasePoolI
     {

@@ -25,7 +25,6 @@ ValueAnimator *ValueAnimatorFactory::Create(
       , duration
       , functionUpdateRef
       , functionEndRef);
-    GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
 
@@ -42,7 +41,6 @@ ValueAnimator *ValueAnimatorFactory::Create(
       , duration
       , functionUpdateRef
       , functionEndRef);
-    GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
 
@@ -50,7 +48,7 @@ ValueAnimator *ValueAnimatorFactory::Create(
 
 SCRIPTING_INTERFACE_IMPL_NAME(ValueAnimatorFactory);
 
-static int lua_AnimationFactory_CreateLinear(lua_State *L)
+static int lua_ValueAnimatorFactory_CreateLinear(lua_State *L)
 {
     ValueAnimatorFactory *obj = ScriptingEngineI::GetScriptingObjectPtr<ValueAnimatorFactory>(L, 1);
     float min = lua_tonumberx(L, 2, nullptr);
@@ -65,14 +63,23 @@ static int lua_AnimationFactory_CreateLinear(lua_State *L)
       , seconds
       , functionUpdateRef
       , functionEndRef);
-    function->ScriptingInterfaceRegisterFunctions(L, function);
-    return 1;
+    
+    if (function != nullptr)
+    {
+        GetMainEngine()->getReleasePool().Sink(function);
+        function->ScriptingInterfaceRegisterFunctions(L, function);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 std::vector<luaL_Reg> ValueAnimatorFactory::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        {"CreateLinear", &lua_AnimationFactory_CreateLinear},
+        {"CreateLinear", &lua_ValueAnimatorFactory_CreateLinear},
     });
     return result;
 }

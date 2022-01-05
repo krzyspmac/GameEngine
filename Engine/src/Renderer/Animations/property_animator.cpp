@@ -11,8 +11,13 @@ using namespace engine;
 
 PropertyAnimator::PropertyAnimator(SpriteDrawI *sprite, ValueAnimator *valueAnimator)
     : m_sprite(sprite)
-    , m_valueAnimator(valueAnimator)
+    , m_valueAnimator(std::move(valueAnimator))
 {
+}
+
+PropertyAnimator::~PropertyAnimator()
+{
+    printf("PropertyAnimator released\n");
 }
 
 void PropertyAnimator::Start()

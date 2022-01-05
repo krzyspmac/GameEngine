@@ -92,7 +92,6 @@ function animateIntro()
 	end)
 	
 	truckFadeIn = PropertyAnimatorFactory:FadeIn(truck, 0, 0.5, function(sender)
-		MemoryReleasePool:Drain()
 		character:SetHidden(false)
 		initialAnimationDone = true
 	end)
@@ -120,11 +119,13 @@ function init()
 end
 
 function mouseDown(x, y)
-	if initialAnimationDone ~= true then
-		return
-	end
-	print ("mouse down " .. x .. ", " .. y)
-	character:WalkTo(x, y)
+	MemoryReleasePool:Drain()
+
+--	if initialAnimationDone ~= true then
+--		return
+--	end
+--	print ("mouse down " .. x .. ", " .. y)
+--	character:WalkTo(x, y)
 end
 
 function update ()
