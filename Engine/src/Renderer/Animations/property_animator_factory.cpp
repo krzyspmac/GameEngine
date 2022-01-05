@@ -142,7 +142,6 @@ static int lua_PropertyAnimatorFactory_FadeOut(lua_State *L)
     return 1;
 }
 
-
 std::vector<luaL_Reg> PropertyAnimatorFactory::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
