@@ -27,7 +27,7 @@ void PropertyAnimator::Stop()
 
 void PropertyAnimator::ReleaseMem()
 {
-    MemoryI::ReleaseMem();
+    MemoryI::FreeMem();
 }
 
 #pragma mark - Scripting Interface

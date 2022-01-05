@@ -32,7 +32,7 @@ void MemoryReleasePool::Drain()
     for (int i = 0; i < count; i++)
     {
         MemoryI *obj = m_pool.at(i);
-        obj->ReleaseMem();
+        obj->FreeMem();
     }
     m_pool.clear();
 }

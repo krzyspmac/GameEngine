@@ -54,13 +54,15 @@ void ValueAnimator::Start()
     m_secondsStart = m_time.GetFrameStartSec();
     m_isStopped = false;
     GetMainEngine()->getPeriodicUpdatesManager().Add(this);
+    this->Keep();
 }
 
 void ValueAnimator::Stop()
 {
     m_isStopped = true;
     GetMainEngine()->getPeriodicUpdatesManager().Remove(this);
-
+    this->Release();
+    
     if (m_endFuncRef.CanCall())
     {
         m_endFuncRef.PerformCall([&](lua_State *L){
@@ -96,7 +98,7 @@ void ValueAnimator::CallbackExecute()
 void ValueAnimator::ReleaseMem()
 {
     if (!m_isStopped) { Stop(); };
-    MemoryI::ReleaseMem();
+    MemoryI::FreeMem();
 }
 
 void ValueAnimator::Update()

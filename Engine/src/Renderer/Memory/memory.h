@@ -22,12 +22,19 @@ namespace engine
      (or scene change) the ReleaseQueue is drained. The Queue
      should contain only those object that fit the "dangling
      in memory" criterion.
+     
+     Some object may `keep` the objects for longer thus preventing
+     the MemoryI::ReleaseMem() function from actually releasing the object.
      */
     class MemoryI
     {
+        int m_counter;
     public:
+        MemoryI() : m_counter(0) { };
         virtual ~MemoryI() { };
-        void ReleaseMem() { delete this; };
+        void Keep() { m_counter++; };
+        void Release() { m_counter--; };
+        void FreeMem() { if (m_counter <= 0) delete this; };
     };
 
     /**
