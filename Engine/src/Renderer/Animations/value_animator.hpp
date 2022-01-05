@@ -22,9 +22,10 @@ namespace engine
      along a certain curve. ValueAnimator does not animate object
      properties (like "alpha"). It only provides a way to animate
      values. \see ValueAnimatorFactory to create a concrete property
+     animator and \see PropertyAnimatorFactory to create a property
      animator.
 
-     The ValueAnimator takes min, max, the curve function the
+     The ValueAnimator takes min, max, the curve function, the
      duration and two callbacks: the update function and the finish
      function.
 
@@ -47,17 +48,19 @@ namespace engine
         double m_secondsPassed;
         double m_val;
         CallableScriptFunctionNumber m_updateFuncRef;
-        std::function<void(float)> m_functionUpdate;
+        std::function<void(float)> m_updateFunc;
         CallableScriptFunctionSciptableInstance m_endFuncRef;
         std::function<void(ValueAnimator*)> m_endFunc;
         bool m_isStopped;
     public:
         /**
+         Create the value animator with callaback as script functions.
          @private
          */
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
 
         /**
+         Create the value animator with callaback as C++ lambdas.
          @private
          */
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef);
@@ -67,12 +70,12 @@ namespace engine
 
     public:
         void SetFunctionUpdate(CallableScriptFunctionNumber f) { m_updateFuncRef = f; };
-        void SetFunctionUpdate(std::function<void(float)> f) { m_functionUpdate = f; };
+        void SetFunctionUpdate(std::function<void(float)> f) { m_updateFunc = f; };
         void SetFunctionFinish(CallableScriptFunctionSciptableInstance f) { m_endFuncRef = f; };
         void SetFunctionFinish(std::function<void(ValueAnimator*)> f) { m_endFunc = f; };
 
         CallableScriptFunctionNumber GetunctionUpdateRef() { return m_updateFuncRef; };
-        std::function<void(float)> GetFunctionUpdate() { return m_functionUpdate; };
+        std::function<void(float)> GetFunctionUpdate() { return m_updateFunc; };
         CallableScriptFunctionSciptableInstance GetFunctionFinishRef() { return m_endFuncRef; };
         std::function<void(ValueAnimator*)> GetFunctionFinish() { return m_endFunc; };
 

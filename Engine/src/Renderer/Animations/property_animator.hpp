@@ -12,6 +12,7 @@
 #include "value_animator.hpp"
 #include "sprite_draw_interface.h"
 #include "animation.h"
+#include "memory.h"
 
 namespace engine
 {
@@ -19,7 +20,7 @@ namespace engine
      Provides a way to animate properties by using ValueAnimator
      concrete instances.
      */
-    class PropertyAnimator: public AnimatableI
+    class PropertyAnimator: public AnimatableI, public MemoryI
     {
         ValueAnimator *m_valueAnimator;
         SpriteDrawI *m_sprite;
@@ -39,6 +40,12 @@ namespace engine
          Stops the animation.
          */
         void Stop();
+        
+    public: // MemoryI
+        /**
+         Release this object.
+         */
+        void ReleaseMem();
 
     /// ScriptingInterface
     public:

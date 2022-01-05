@@ -89,6 +89,8 @@ function animateIntro()
 	
 	truckFadeIn = PropertyAnimatorFactory:FadeIn(truck, 0, 0.5, function(sender)
 		print("done")
+		skyFadeIn:ReleaseMem()
+--		truckFadeIn:ReleaseMem()
 	end)
 	
 	

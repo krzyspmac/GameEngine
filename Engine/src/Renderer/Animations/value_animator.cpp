@@ -20,7 +20,7 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double s
     , m_secondsStart(-1)
     , m_val(curve->GetMin())
     , m_updateFuncRef(functionUpdateRef)
-    , m_functionUpdate(nullptr)
+    , m_updateFunc(nullptr)
     , m_endFuncRef(functionEndRef)
     , m_endFunc(nullptr)
     , m_isStopped(true)
@@ -36,7 +36,7 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, double s
     , m_secondsStart(-1)
     , m_val(curve->GetMin())
     , m_updateFuncRef(CallableScriptFunctionNumber(-1))
-    , m_functionUpdate(functionUpdate)
+    , m_updateFunc(functionUpdate)
     , m_endFuncRef(CallableScriptFunctionSciptableInstance(-1))
     , m_endFunc(functionEnd)
     , m_isStopped(true)
@@ -87,9 +87,9 @@ void ValueAnimator::CallbackExecute()
         m_updateFuncRef.PerformCall(m_val);
     }
 
-    if (m_functionUpdate != nullptr)
+    if (m_updateFunc != nullptr)
     {
-        m_functionUpdate(m_val);
+        m_updateFunc(m_val);
     }
 }
 
