@@ -53,7 +53,12 @@ namespace engine
 
          \include AnimationFactory_CreateLinear.lua
          */
-        ValueAnimator *CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef);
+        ValueAnimator *CreateLinear(float min,
+                                    float max,
+                                    double seconds,
+                                    int delay,
+                                    CallableScriptFunctionNumber functionUpdateRef,
+                                    CallableScriptFunctionSciptableInstance functionEndRef);
 
         /**
          Creates an animator function `linear` that changes
@@ -74,7 +79,13 @@ namespace engine
 
          \include AnimationFactory_CreateLinear.lua
          */
-        ValueAnimator *CreateLinear(float min, float max, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef);
+        ValueAnimator *CreateLinear(
+                                    float min,
+                                    float max,
+                                    double seconds,
+                                    int delay,
+                                    std::function<void(float)> functionUpdateRef,
+                                    std::function<void(ValueAnimator*)> functionEndRef);
 
     /// ScriptingInterface
     public:

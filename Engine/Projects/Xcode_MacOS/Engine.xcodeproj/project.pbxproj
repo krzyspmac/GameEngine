@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
+		4C255DE02785994300D0B30A /* animation_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDE2785994300D0B30A /* animation_static.cpp */; };
+		4C255DE12785994300D0B30A /* animation_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DDF2785994300D0B30A /* animation_static.hpp */; };
 		7F138253277505B600ED6D67 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
 		7F138254277505B600ED6D67 /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821D277505B600ED6D67 /* texture_interface.h */; };
 		7F138255277505B600ED6D67 /* texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821E277505B600ED6D67 /* texture.hpp */; };
@@ -110,6 +112,8 @@
 /* Begin PBXFileReference section */
 		4C255DDB27858CBA00D0B30A /* release_pool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = release_pool.cpp; sourceTree = "<group>"; };
 		4C255DDC27858CBA00D0B30A /* release_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = release_pool.hpp; sourceTree = "<group>"; };
+		4C255DDE2785994300D0B30A /* animation_static.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_static.cpp; sourceTree = "<group>"; };
+		4C255DDF2785994300D0B30A /* animation_static.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_static.hpp; sourceTree = "<group>"; };
 		7F1382152775059B00ED6D67 /* libEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F13821C277505B600ED6D67 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
 		7F13821D277505B600ED6D67 /* texture_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_interface.h; sourceTree = "<group>"; };
@@ -477,6 +481,8 @@
 				7FF21D742784E99A005C52C4 /* property_animator.cpp */,
 				7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */,
 				7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */,
+				4C255DDF2785994300D0B30A /* animation_static.hpp */,
+				4C255DDE2785994300D0B30A /* animation_static.cpp */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -604,6 +610,7 @@
 				7F13828A277505B600ED6D67 /* common_engine.h in Headers */,
 				7F13827B277505B600ED6D67 /* engine_interface.h in Headers */,
 				7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */,
+				4C255DE12785994300D0B30A /* animation_static.hpp in Headers */,
 				7F138254277505B600ED6D67 /* texture_interface.h in Headers */,
 				7F869FC32780F6F800E8CB01 /* engine_state.hpp in Headers */,
 				7FF641D7277D19C80017D86D /* console_view.hpp in Headers */,
@@ -712,6 +719,7 @@
 				7FCC81BD2780A0C8003025CB /* value_animator_factory.cpp in Sources */,
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
 				7F138277277505B600ED6D67 /* font.cpp in Sources */,
+				4C255DE02785994300D0B30A /* animation_static.cpp in Sources */,
 				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
 				7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */,
 				7F869FC22780F6F800E8CB01 /* engine_state.cpp in Sources */,

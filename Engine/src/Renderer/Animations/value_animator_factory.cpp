@@ -8,44 +8,30 @@
 #include "value_animator_factory.hpp"
 #include "common_engine.h"
 #include "callable.hpp"
+#include "animation_static.hpp"
 
 using namespace engine;
 
 ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double seconds, int delay, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
 {
-    CallableCurveLamba *s = new CallableCurveLamba(min, max, [&](float min, float max, float progress){
-        float m_diff = fabsf(max - min);
-        if (min > max)
-        {
-            float result = min - progress * m_diff;
-            return result;
-        }
-        else
-        {
-            return min + MAX(0, MIN(max, progress * m_diff));
-        }
-    });
-    ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
+    ValueAnimator *function = new ValueAnimator(
+        std::unique_ptr<CallableCurveLamba>(new CallableCurveLamba(min, max, functionLinearCurve))
+      , seconds
+      , delay
+      , functionUpdateRef
+      , functionEndRef);
     GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
 
 ValueAnimator *ValueAnimatorFactory::CreateLinear(float min, float max, double seconds, int delay, std::function<void(float)> functionUpdateRef, std::function<void(ValueAnimator*)> functionEndRef)
-{
-    CallableCurveLamba *s = new CallableCurveLamba(min, max, [&](float min, float max, float progress){
-        float m_diff = fabsf(max - min);
-        if (min > max)
-        {
-            float result = min - progress * m_diff;
-            return result;
-        }
-        else
-        {
-            return min + MAX(0, MIN(max, progress * m_diff));
-        }
-    });
-
-    ValueAnimator *function = new ValueAnimator(std::unique_ptr<CallableCurveLamba>(s), seconds, delay, functionUpdateRef, functionEndRef);
+{    
+    ValueAnimator *function = new ValueAnimator(
+        std::unique_ptr<CallableCurveLamba>(new CallableCurveLamba(min, max, functionLinearCurve))
+      , seconds
+      , delay
+      , functionUpdateRef
+      , functionEndRef);
     GetMainEngine()->getReleasePool().Sink(function);
     return function;
 }
