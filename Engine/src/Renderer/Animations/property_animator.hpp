@@ -21,7 +21,9 @@ namespace engine
      concrete instances.
      Takes ownership of the value animator.
      */
-    class PropertyAnimator: public AnimatableI, public MemoryI
+    class PropertyAnimator
+        : public AnimatableI
+        , public MemoryI
     {
         std::unique_ptr<ValueAnimator> m_valueAnimator;
         SpriteDrawI *m_sprite;
@@ -47,7 +49,7 @@ namespace engine
         /**
          Release this object.
          */
-        void ReleaseMem();
+        void FreeMem();
 
     /// ScriptingInterface
     public:

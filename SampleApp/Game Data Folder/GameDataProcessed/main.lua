@@ -83,21 +83,21 @@ function animateIntro()
 --		end
 --	)
 
-	skyFadeIn = PropertyAnimatorFactory:FadeIn(sky, 1, 2, function()
-		skyFadeOut:Start()
-	end)
-	
-	skyFadeOut = PropertyAnimatorFactory:FadeOut(sky, 1, 2, function()
-		truckFadeIn:Start()	
-	end)
-	
-	truckFadeIn = PropertyAnimatorFactory:FadeIn(truck, 0, 0.5, function(sender)
-		character:SetHidden(false)
-		initialAnimationDone = true
-	end)
-	
-	
-	skyFadeIn:Start()
+--	skyFadeIn = PropertyAnimatorFactory:FadeIn(sky, 1, 2, function()
+--		skyFadeOut:Start()
+--	end)
+--	
+--	skyFadeOut = PropertyAnimatorFactory:FadeOut(sky, 1, 2, function()
+--		truckFadeIn:Start()	
+--	end)
+--	
+--	truckFadeIn = PropertyAnimatorFactory:FadeIn(truck, 0, 0.5, function(sender)
+--		character:SetHidden(false)
+--		initialAnimationDone = true
+--	end)
+--	
+--	
+--	skyFadeIn:Start()
 	
 --	local introAnim = AnimationSquence:DoAnimations('simultaneus', function()
 --			talkAnim:Start()
@@ -112,6 +112,16 @@ function animateIntro()
 --	, 	chuckTalk1,
 --	, 	chuckTalk2
 --	)
+
+	local group = AnimationGroupFactory:GroupAnimations(
+		'asd'
+	, 	PropertyAnimatorFactory:FadeIn(truck, 0, 1)
+	, 	PropertyAnimatorFactory:FadeIn(sky, 0.5, 5)
+	, 	function()
+			print("did finish")
+		end
+	)
+	group:Start()
 end
 
 function init()

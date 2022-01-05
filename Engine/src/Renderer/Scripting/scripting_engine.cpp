@@ -16,6 +16,7 @@
 #include "property_animator_factory.hpp"
 #include "time.hpp"
 #include "engine_state.hpp"
+#include "animation_group_factory.hpp"
 
 using namespace engine;
 
@@ -142,6 +143,10 @@ void ScriptingEngine::registerFunctions()
     MemoryReleasePool &releasePool = GetMainEngine()->getReleasePool();
     releasePool.ScriptingInterfaceRegisterFunctions(L, &releasePool);
     lua_setglobal(L, "MemoryReleasePool");
+    
+    AnimationGroupFactory &animationGroupFactory = GetMainEngine()->getAnimationGroupFactory();
+    animationGroupFactory.ScriptingInterfaceRegisterFunctions(L, &animationGroupFactory);
+    lua_setglobal(L, "AnimationGroupFactory");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)

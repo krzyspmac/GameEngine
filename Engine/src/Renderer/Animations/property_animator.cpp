@@ -10,9 +10,17 @@
 using namespace engine;
 
 PropertyAnimator::PropertyAnimator(SpriteDrawI *sprite, ValueAnimator *valueAnimator)
-    : m_sprite(sprite)
+    : AnimatableI()
+    , m_sprite(sprite)
     , m_valueAnimator(std::move(valueAnimator))
 {
+    m_valueAnimator.get()->AnimatableSetFinishLambda([&](AnimatableI *sender){
+        auto lambda = this->AnimatableGetFinishLambda();
+        if (lambda != nullptr)
+        {
+            lambda(this);
+        }
+    });
 }
 
 PropertyAnimator::~PropertyAnimator()
@@ -30,7 +38,7 @@ void PropertyAnimator::Stop()
     m_valueAnimator->Stop();
 }
 
-void PropertyAnimator::ReleaseMem()
+void PropertyAnimator::FreeMem()
 {
     MemoryI::FreeMem();
 }
@@ -53,10 +61,10 @@ static int lua_PropertyAnimator_Stop(lua_State *L)
     return 1;
 }
 
-static int lua_PropertyAnimator_ReleaseMem(lua_State *L)
+static int lua_PropertyAnimator_FreeMem(lua_State *L)
 {
     PropertyAnimator *obj = ScriptingEngineI::GetScriptingObjectPtr<PropertyAnimator>(L, 1);
-    obj->ReleaseMem();
+    obj->FreeMem();
     return 1;
 }
 
@@ -65,7 +73,7 @@ std::vector<luaL_Reg>PropertyAnimator::ScriptingInterfaceFunctions()
     std::vector<luaL_Reg> result({
           {"Start",         &lua_PropertyAnimator_Start}
         , {"Stop",          &lua_PropertyAnimator_Stop}
-        , {"ReleaseMem",    &lua_PropertyAnimator_ReleaseMem}
+        , {"FreeMem",       &lua_PropertyAnimator_FreeMem}
     });
     return result;
 }

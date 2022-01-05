@@ -13,7 +13,9 @@
 using namespace engine;
 
 ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
-    : m_engineProvider(GetMainEngine()->getProvider())
+    : AnimatableI()
+    , MemoryI()
+    , m_engineProvider(GetMainEngine()->getProvider())
     , m_time(GetMainEngine()->getTime())
     , m_secondsDelay(delay)
     , m_secondsTotal(seconds)
@@ -29,7 +31,9 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int dela
 }
 
 ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, std::function<void(float)> functionUpdate, std::function<void(ValueAnimator*)> functionEnd)
-    : m_engineProvider(GetMainEngine()->getProvider())
+    : AnimatableI()
+    , MemoryI()
+    , m_engineProvider(GetMainEngine()->getProvider())
     , m_time(GetMainEngine()->getTime())
     , m_secondsDelay(delay)
     , m_secondsTotal(seconds)
@@ -61,7 +65,11 @@ void ValueAnimator::Stop()
 {
     m_isStopped = true;
     GetMainEngine()->getPeriodicUpdatesManager().Remove(this);
-    this->Release();
+    
+    if (m_animatableFinishL != nullptr)
+    {
+        m_animatableFinishL(this);
+    }
     
     if (m_endFuncRef.CanCall())
     {
@@ -75,6 +83,8 @@ void ValueAnimator::Stop()
     {
         m_endFunc(this);
     }
+    
+    this->Release();
 }
 
 float ValueAnimator::GetValue()

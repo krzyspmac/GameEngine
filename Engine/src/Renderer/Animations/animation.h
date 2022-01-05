@@ -8,6 +8,8 @@
 #ifndef animation_h
 #define animation_h
 
+#include "common.h"
+
 namespace engine
 {
     /**
@@ -27,7 +29,15 @@ namespace engine
      */
     class AnimatableI
     {
+    protected:
+        std::function<void(AnimatableI*)> m_animatableFinishL;
+        bool m_isRunning;
     public:
+        AnimatableI()
+            : m_animatableFinishL(nullptr)
+            , m_isRunning(false)
+        { };
+        
         /**
          Starts the animation.
          */
@@ -37,6 +47,33 @@ namespace engine
          Stops the animation.
          */
         virtual void Stop() = 0;
+        
+        /**
+         Is the animation running?
+         */
+        bool IsRunning() { return m_isRunning; };
+        
+        /**
+         Registers one delegate for the animation finish state.
+         */
+        void AnimatableSetFinishLambda(std::function<void(AnimatableI*)> l) { m_animatableFinishL = l; };
+        
+        /**
+         */
+        std::function<void(AnimatableI*)> AnimatableGetFinishLambda() { return m_animatableFinishL; };
+    };
+
+    /**
+     Defines an abstract interface for an animation block.
+     */
+    class AnimationGroupI
+    {
+    public:
+        typedef enum
+        {
+            ANIMATION_SIMULTANEUS
+          , ANIMATION_SEQUENCE
+        } AnimationGroupMode;
     };
 
 }; // namespace engine

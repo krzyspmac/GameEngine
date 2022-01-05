@@ -24,6 +24,7 @@
 #include "time.hpp"
 #include "engine_state.hpp"
 #include "release_pool.hpp"
+#include "animation_group_factory.hpp"
 
 namespace engine
 {
@@ -172,6 +173,9 @@ namespace engine
         
         ///
         MemoryReleasePool& getReleasePool() { return m_releasePool; };
+        
+        ///
+        AnimationGroupFactory& getAnimationGroupFactory() { return m_animationGroupFactory; };
 
     /// Other states
     public:
@@ -195,6 +199,7 @@ namespace engine
         PropertyAnimatorFactory m_propertyAnimatorFactory;
         PeriodicUpdatesManager m_periodicUpdatesManager;
         EngineState m_engineState;
+        AnimationGroupFactory m_animationGroupFactory;
         MemoryReleasePool m_releasePool;
     };
 
