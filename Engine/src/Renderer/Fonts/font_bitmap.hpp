@@ -13,6 +13,7 @@
 #include "font_interface.h"
 #include "common_engine_impl.h"
 #include "vector2.hpp"
+#include "texture_interface.h"
 
 namespace engine
 {
@@ -38,9 +39,10 @@ namespace engine
 
     typedef struct
     {
+        std::string m_textureFilename;
         FontBitmapDescriptorInfo info;
         FontBitmapDescriptorCommon common;
-    } FontBitmapDescriptor;
+    } FontBitmapInfo;
 
     class FontBitmapGlyph
     {
@@ -60,29 +62,59 @@ namespace engine
         auto& GetXAdvance() { return m_xAdvance; };
     };
 
+    typedef struct
+    {
+        int first;
+        int second;
+        int amount;
+    } FontBitmapGlyphKerning;
+
     /**
      Declares a concrete instance for rendering bitmpa fonts
      using a sprite atlas sheet and a .fnt file in text format.
      */
-    class FontBitmap: public FontI
+    class FontBitmapDescriptor
     {
-        FontBitmapDescriptor m_sDescriptor;
+        FontBitmapInfo m_sDescriptor;
         std::vector<FontBitmapGlyph> m_glyphs;
+        std::vector<FontBitmapGlyphKerning> m_kerning;
 
         void Prepare(std::string fntFile);
         void BuildDescriptorFace(KeyValueProperties&);
         void BuildDescriptorCommon(KeyValueProperties&);
+        void BuildDescriptorKerning(KeyValueProperties&);
+    public:
+        /**
+         Create a bitmap bit.
+         @private
+         @param fntFile     - path to a FNT file (in text format)
+         @param fontAtlas   - path to the bitmap containing the font sprite sheet.
+         */
+        FontBitmapDescriptor(std::string fntFile, std::string fontAtlas);
+
+        auto& GetDescriptor() { return m_sDescriptor; };
+
+        FontBitmapGlyph *GetGlyph(char&);
+
+        int GetKerningAmount(int first, int second);
+    };
+
+    /**
+     Declares the rendering engine for the font.
+     */
+    class FontBitmapRepresentation: FontI
+    {
+        FontBitmapDescriptor m_font;
+        TextureI *m_texture;
     public:
         /**
          Create a bitmap bit.
          @param fntFile     - path to a FNT file (in text format)
          @param fontAtlas   - path to the bitmap containing the font sprite sheet.
          */
-        FontBitmap(std::string fntFile, std::string fontAtlas);
+        FontBitmapRepresentation(std::string fntFile, std::string fontAtlas);
 
-        auto& GetDescriptor() { return m_sDescriptor; };
-
-        void DrawAt(std::string, float, float, int, int, int, int, TEXT_ALIGNMENT);
+        void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align);
     };
 };
 

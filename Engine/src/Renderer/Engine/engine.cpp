@@ -39,8 +39,6 @@ engine::EngineI *GetMainEngine()
     return sharedEngine;
 }
 
-static FontBitmap *bitmapFont = nullptr;
-
 Engine::Engine(EngineProviderI &engineProvider,
                FileAccessI &fileAccess,
                ScriptingEngineI &scriptingEngine,
@@ -110,10 +108,6 @@ void Engine::setup()
         m_mousePosition.x -= m_viewportOffset.x;
         m_mousePosition.y -= m_viewportOffset.y;
     }));
-
-    std::string fnt = m_fileAccess.GetFullPath("DialogFont.fnt");
-    std::string texture = m_fileAccess.GetFullPath("DialogFont.png");
-    bitmapFont = new FontBitmap(fnt, texture);
 }
 
 void Engine::SetCapRate(int fps)
