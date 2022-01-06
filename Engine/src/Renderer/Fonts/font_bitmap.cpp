@@ -157,6 +157,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
         EngineProviderI& provider = GetMainEngine()->getProvider();
         auto& fontDescriptor = m_font.GetDescriptor();
         auto& charSpacing = fontDescriptor.info.spacing;
+        float scale = 0.75;
 
 //        SDL_SetTextureColorMod((SDL_Texture*)m_texture->getTextureHandle(), (Uint8)200, (Uint8)0, (Uint8)0);
 
@@ -180,15 +181,15 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
                 Size& offset = glyph->GetOffset();
 
                 provider.DrawTexture(m_texture,
-                                     x + offset.width - m_font.GetKerningAmount(previousC, c),
-                                     y + offset.height,
+                                     x + (offset.width * scale) - (m_font.GetKerningAmount(previousC, c) * scale),
+                                     y + (offset.height * scale),
                                      r.origin.x,
                                      r.origin.y,
                                      r.size.width,
                                      r.size.height,
-                                     1);
+                                     scale);
 
-                x += glyph->GetXAdvance() + charSpacing.x;
+                x += (glyph->GetXAdvance() + charSpacing.x) * scale;
             }
 
             previousC = c;
