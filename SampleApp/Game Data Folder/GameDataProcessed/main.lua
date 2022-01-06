@@ -4,6 +4,9 @@ function loadSprites()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
 	
+	local roomAtlas = AtlasManager:SpriteAtlasLoad( "fireplace.json", "fireplace.png" )
+
+	
 	-- character
 	character = scene:LoadCharacter("brett_character.json")
 	character:SetScale(3)
@@ -17,12 +20,16 @@ function loadSprites()
 	-- sky
 	sky = scene:LoadSpriteStatic(atlas, "sky.png")
 	sky:SetScale(3)
-	sky:SetAlpha(0)
+	sky:SetAlpha(255)
 
 	-- truck
 	truck = scene:LoadSpriteStatic(atlas, "background.png")
 	truck:SetScale(2)
 	truck:SetAlpha(0)
+	
+	-- room
+	bg = scene:LoadSpriteStatic(roomAtlas, "fireplace_room")
+	bg:SetScale(4)
 	
 	-- texts
 	local textsAtlas = AtlasManager:SpriteAtlasLoad("textx.json", "textx.png")
@@ -117,8 +124,6 @@ function animateIntro()
 		'sequence'
 	,	PropertyAnimatorFactory:FadeIn(text, 0, 3)
 	,	PropertyAnimatorFactory:FadeOut(text, 0, 1)
-	, 	PropertyAnimatorFactory:FadeIn(truck, 5, 3)
-	, 	PropertyAnimatorFactory:FadeIn(sky, 0.5, 5)
 	, 	function()
 			print("did finish")
 			character:SetHidden(false)

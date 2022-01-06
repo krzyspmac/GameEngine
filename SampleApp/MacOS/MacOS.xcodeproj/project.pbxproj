@@ -22,6 +22,8 @@
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7F849921278760FA004127CB /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
 		7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
+		7F8499292787798B004127CB /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
+		7F84992A2787798B004127CB /* fireplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499282787798B004127CB /* fireplace.json */; };
 		7F869FD52783970400E8CB01 /* brett.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC52783970400E8CB01 /* brett.png */; };
 		7F869FD62783970400E8CB01 /* brett_character.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC62783970400E8CB01 /* brett_character.json */; };
 		7F869FD72783970400E8CB01 /* textx.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC72783970400E8CB01 /* textx.png */; };
@@ -73,6 +75,8 @@
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F84991F278760FA004127CB /* DialogFont_retro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DialogFont_retro.png; sourceTree = "<group>"; };
 		7F849920278760FA004127CB /* DialogFont_retro.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DialogFont_retro.fnt; sourceTree = "<group>"; };
+		7F8499272787798B004127CB /* fireplace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireplace.png; sourceTree = "<group>"; };
+		7F8499282787798B004127CB /* fireplace.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fireplace.json; sourceTree = "<group>"; };
 		7F869FC52783970400E8CB01 /* brett.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = brett.png; sourceTree = "<group>"; };
 		7F869FC62783970400E8CB01 /* brett_character.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = brett_character.json; sourceTree = "<group>"; };
 		7F869FC72783970400E8CB01 /* textx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = textx.png; sourceTree = "<group>"; };
@@ -183,6 +187,8 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7F8499282787798B004127CB /* fireplace.json */,
+				7F8499272787798B004127CB /* fireplace.png */,
 				7F849920278760FA004127CB /* DialogFont_retro.fnt */,
 				7F84991F278760FA004127CB /* DialogFont_retro.png */,
 				7F869FC52783970400E8CB01 /* brett.png */,
@@ -269,11 +275,13 @@
 				7F849921278760FA004127CB /* DialogFont_retro.png in Resources */,
 				7F869FDE2783970400E8CB01 /* background.png in Resources */,
 				7F869FD82783970400E8CB01 /* background.json in Resources */,
+				7F8499292787798B004127CB /* fireplace.png in Resources */,
 				7F869FDB2783970400E8CB01 /* room1.json in Resources */,
 				7F869FD72783970400E8CB01 /* textx.png in Resources */,
 				7F869FD92783970400E8CB01 /* main.lua in Resources */,
 				7F869FD62783970400E8CB01 /* brett_character.json in Resources */,
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
+				7F84992A2787798B004127CB /* fireplace.json in Resources */,
 				7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */,
 				7F869FDC2783970400E8CB01 /* characters.png in Resources */,
 				7F869FE32783970400E8CB01 /* polygons.json in Resources */,
