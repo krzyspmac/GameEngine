@@ -42,12 +42,18 @@ namespace engine
         int y;
     } Origin;
 
+    typedef struct
+    {
+        Origin origin;
+        Size size;
+    } Rect;
+
     inline Origin OriginMake(int x, int y)
     {
         Origin result;
         result.x = x;
         result.y = y;
-        return result;;
+        return result;
     };
 
     inline Origin OriginGetDiff(Vector2 &first, Origin &second)

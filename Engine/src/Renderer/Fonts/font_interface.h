@@ -22,7 +22,8 @@ namespace engine
     {
     public:
         FontI(std::string filename): m_fontName(filename) { }
-
+        virtual ~FontI() { };
+        
         /**
          Retrieve the font name. Usually the name of the defining the font.
          */

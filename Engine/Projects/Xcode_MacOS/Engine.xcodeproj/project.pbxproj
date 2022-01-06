@@ -66,6 +66,8 @@
 		7F84990A278713BB004127CB /* animation_group_sequence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F849908278713BB004127CB /* animation_group_sequence.hpp */; };
 		7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F84990B27872F28004127CB /* font_bitmap.cpp */; };
 		7F84990E27872F28004127CB /* font_bitmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F84990C27872F28004127CB /* font_bitmap.hpp */; };
+		7F8499152787464F004127CB /* key_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F8499132787464F004127CB /* key_value.cpp */; };
+		7F8499162787464F004127CB /* key_value.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F8499142787464F004127CB /* key_value.hpp */; };
 		7F869FBA2780C41F00E8CB01 /* periodic_updates_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FB82780C41F00E8CB01 /* periodic_updates_manager.cpp */; };
 		7F869FBB2780C41F00E8CB01 /* periodic_updates_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FB92780C41F00E8CB01 /* periodic_updates_manager.hpp */; };
 		7F869FC22780F6F800E8CB01 /* engine_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FC02780F6F800E8CB01 /* engine_state.cpp */; };
@@ -184,6 +186,8 @@
 		7F849908278713BB004127CB /* animation_group_sequence.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_sequence.hpp; sourceTree = "<group>"; };
 		7F84990B27872F28004127CB /* font_bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font_bitmap.cpp; sourceTree = "<group>"; };
 		7F84990C27872F28004127CB /* font_bitmap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = font_bitmap.hpp; sourceTree = "<group>"; };
+		7F8499132787464F004127CB /* key_value.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = key_value.cpp; sourceTree = "<group>"; };
+		7F8499142787464F004127CB /* key_value.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = key_value.hpp; sourceTree = "<group>"; };
 		7F869FB82780C41F00E8CB01 /* periodic_updates_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = periodic_updates_manager.cpp; sourceTree = "<group>"; };
 		7F869FB92780C41F00E8CB01 /* periodic_updates_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = periodic_updates_manager.hpp; sourceTree = "<group>"; };
 		7F869FC02780F6F800E8CB01 /* engine_state.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_state.cpp; sourceTree = "<group>"; };
@@ -539,6 +543,8 @@
 				7F64289E2779183C00EE9E2C /* polygon.cpp */,
 				7FE2E5E0277B3E6E00538094 /* performance.hpp */,
 				7FE2E5DF277B3E6E00538094 /* performance.cpp */,
+				7F8499142787464F004127CB /* key_value.hpp */,
+				7F8499132787464F004127CB /* key_value.cpp */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -607,6 +613,7 @@
 				7F138255277505B600ED6D67 /* texture.hpp in Headers */,
 				7FDDAF9F2776873900578F86 /* room.hpp in Headers */,
 				7F869FBB2780C41F00E8CB01 /* periodic_updates_manager.hpp in Headers */,
+				7F8499162787464F004127CB /* key_value.hpp in Headers */,
 				7F138278277505B600ED6D67 /* font_interface.h in Headers */,
 				7FF641E1277D22E50017D86D /* events_manager.hpp in Headers */,
 				7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */,
@@ -745,6 +752,7 @@
 				7FE2E5D0277B13B000538094 /* path.cpp in Sources */,
 				7F869FBA2780C41F00E8CB01 /* periodic_updates_manager.cpp in Sources */,
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
+				7F8499152787464F004127CB /* key_value.cpp in Sources */,
 				7F138253277505B600ED6D67 /* texture.cpp in Sources */,
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
 				7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */,
