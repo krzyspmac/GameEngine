@@ -11,6 +11,7 @@
 #include "common.h"
 #include "scripting_engine_provider_interface.h"
 #include "animation_group_simulateneus.hpp"
+#include "animation_group_sequence.hpp"
 #include "animation.h"
 #include "property_animator.hpp"
 
@@ -23,10 +24,15 @@ namespace engine
     {
     public:
         /**
-         Create an animation group for the current mode.
+         Create an animation group for the simultaneus mode.
          */
         AnimationGroupSimultaneus* GroupAnimationsSimulataneus(CallableScriptFunctionSciptableInstance, std::vector<AnimatableI*>);
-        
+
+        /**
+         Create an animation group for the sequence mode.
+         */
+        AnimationGroupSequence* GroupAnimationsSequence(CallableScriptFunctionSciptableInstance, std::vector<AnimatableI*>);
+
     /// ScriptingInterface
     public:
         /// @private

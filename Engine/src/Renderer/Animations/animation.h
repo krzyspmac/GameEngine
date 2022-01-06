@@ -74,6 +74,18 @@ namespace engine
             ANIMATION_SIMULTANEUS
           , ANIMATION_SEQUENCE
         } AnimationGroupMode;
+
+        static AnimationGroupMode GetGroupTypeFromString(std::string type)
+        {
+            if (type.compare("simultaneus") == 0)
+            {
+                return ANIMATION_SIMULTANEUS;
+            }
+            else
+            {
+                return ANIMATION_SEQUENCE;
+            }
+        }
     };
 
 }; // namespace engine

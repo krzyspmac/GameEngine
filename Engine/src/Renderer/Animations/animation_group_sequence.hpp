@@ -1,12 +1,12 @@
 //
-//  animation_group_simulateneus
+//  animation_group_sequence.hpp
 //  Engine
 //
-//  Created by x180611 on 05/01/2022.
+//  Created by krzysp on 06/01/2022.
 //
 
-#ifndef animation_group_simulateneus_hpp
-#define animation_group_simulateneus_hpp
+#ifndef animation_group_sequence_hpp
+#define animation_group_sequence_hpp
 
 #include "common.h"
 #include "animation.h"
@@ -16,42 +16,46 @@
 
 namespace engine
 {
+
     /**
      Defines an animation group that can animate AnimatableI items in
-     simultaneus mode.
+     sequence mode.
 
-     Simultaneus mode runs all animations and waits for their collective end.
+     Sequence runs each animation in order and waits for all animations to
+     finish.
      */
-    class AnimationGroupSimultaneus
+    class AnimationGroupSequence
         : public AnimationGroupI
         , public MemoryI
     {
         std::vector<AnimatableI*> m_animatables;
-        size_t m_cAnimatablesRunning;
+        size_t m_iCurrentAnimatable;
         CallableScriptFunctionSciptableInstance m_scriptableGroupFinishFn;
     public:
-        virtual ~AnimationGroupSimultaneus() { printf("Release animation group\n"); };
-        
+        virtual ~AnimationGroupSequence() { printf("Release animation group\n"); };
+
         /**
          Create an animation group given a mode a list of objects.
          */
-        AnimationGroupSimultaneus(CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
-                                  std::vector<AnimatableI*>
-                                  );
+        AnimationGroupSequence(CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
+                               std::vector<AnimatableI*>
+                               );
 
     public: // AnimatableI
         void Start();
         void Stop();
-        
+
     private:
         void Prepare();
+        void PlayCurrent();
+        void PlayNext();
         void DidFinish();
-        
+
     /// ScriptingInterface
     public:
         /// @private
-        SCRIPTING_INTERFACE_HEADERS(AnimationGroupSimultaneus);
+        SCRIPTING_INTERFACE_HEADERS(AnimationGroupSequence);
     };
 };
 
-#endif /* animation_group_simulateneus */
+#endif /* animation_group_sequence_hpp */

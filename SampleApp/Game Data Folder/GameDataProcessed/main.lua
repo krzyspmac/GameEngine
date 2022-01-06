@@ -114,9 +114,10 @@ function animateIntro()
 --	)
 
 	local group = AnimationGroupFactory:GroupAnimations(
-		'asd'
+		'sequence'
 	,	PropertyAnimatorFactory:FadeIn(text, 0, 3)
-	, 	PropertyAnimatorFactory:FadeIn(truck, 0, 1)
+	,	PropertyAnimatorFactory:FadeOut(text, 0, 1)
+	, 	PropertyAnimatorFactory:FadeIn(truck, 5, 3)
 	, 	PropertyAnimatorFactory:FadeIn(sky, 0.5, 5)
 	, 	function()
 			print("did finish")

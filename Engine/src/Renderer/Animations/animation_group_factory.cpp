@@ -12,10 +12,18 @@
 using namespace engine;
 
 AnimationGroupSimultaneus* AnimationGroupFactory::GroupAnimationsSimulataneus(
-CallableScriptFunctionSciptableInstance scriptableFinishFn
+      CallableScriptFunctionSciptableInstance finishFn
     , std::vector<AnimatableI*> args)
 {
-    AnimationGroupSimultaneus *group = new AnimationGroupSimultaneus(scriptableFinishFn, args);
+    AnimationGroupSimultaneus *group = new AnimationGroupSimultaneus(finishFn, args);
+    return group;
+}
+
+AnimationGroupSequence* AnimationGroupFactory::GroupAnimationsSequence(
+      CallableScriptFunctionSciptableInstance finishFn
+    , std::vector<AnimatableI*> args)
+{
+    AnimationGroupSequence *group = new AnimationGroupSequence(finishFn, args);
     return group;
 }
 
@@ -38,30 +46,33 @@ static int lua_AnimationGroup_GroupAnimations(lua_State *L)
     
     int finishFuncEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
 
-    AnimationGroupSimultaneus *group = new AnimationGroupSimultaneus(finishFuncEndRef, list);
-    if (group != nullptr)
+    AnimationGroupI::AnimationGroupMode groupMode = AnimationGroupI::GetGroupTypeFromString(mode);
+    switch (groupMode)
     {
-        group->ScriptingInterfaceRegisterFunctions(L, group);
-        GetMainEngine()->getReleasePool().Sink(group);
-        return 1;
+        case AnimationGroupI::ANIMATION_SIMULTANEUS:
+        {
+            AnimationGroupSimultaneus *group = obj->GroupAnimationsSimulataneus(finishFuncEndRef, list);
+            if (group != nullptr)
+            {
+                group->ScriptingInterfaceRegisterFunctions(L, group);
+                GetMainEngine()->getReleasePool().Sink(group);
+                return 1;
+            }
+            break;
+        }
+        case AnimationGroupI::ANIMATION_SEQUENCE:
+        {
+            AnimationGroupSequence *group = obj->GroupAnimationsSequence(finishFuncEndRef, list);
+            if (group != nullptr)
+            {
+                group->ScriptingInterfaceRegisterFunctions(L, group);
+                GetMainEngine()->getReleasePool().Sink(group);
+                return 1;
+            }
+            break;
+        }
     }
-    else
-    {
-        return 0;
-    }
-}
 
-static int lua_AnimationGroup_Stop(lua_State *L)
-{
-//    AnimationGroup *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroup>(L, 1);
-//    obj->Stop();
-    return 0;
-}
-
-static int lua_AnimationGroup_FreeMem(lua_State *L)
-{
-//    AnimationGroup *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroup>(L, 1);
-//    obj->FreeMem();
     return 0;
 }
 

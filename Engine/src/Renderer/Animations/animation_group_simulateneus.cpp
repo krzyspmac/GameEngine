@@ -16,6 +16,7 @@ AnimationGroupSimultaneus::AnimationGroupSimultaneus(CallableScriptFunctionScipt
     , m_cAnimatablesRunning(0)
 {
     m_animatables = args;
+    Prepare();
 }
 
 void AnimationGroupSimultaneus::Start()
