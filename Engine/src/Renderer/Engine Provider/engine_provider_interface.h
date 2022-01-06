@@ -81,7 +81,7 @@ namespace engine
         /// A concrete instance should load the texture from the filename using
         /// the default internal file access classes. The ownership
         /// of the texture is passed to the caller.
-        virtual TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *) = 0;
+        virtual TextureI *LoadTexture(std::string name, FileStreamI *) = 0;
 
         /// A concrete instance should create the target texture. A target texture
         /// is able to be rendered upon so a partial render can be developed.
@@ -112,7 +112,7 @@ namespace engine
 
         /// Load a font. The ownership
         /// of the texture is passed to the caller.
-        virtual FontI *LoadFont(std::string name, FileMemoryBufferStreamI *) = 0;
+        virtual FontI *LoadFont(std::string name, FileStreamI *) = 0;
 
         /// Draws a text using a specified font.
         virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;

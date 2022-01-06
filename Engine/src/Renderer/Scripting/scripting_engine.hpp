@@ -32,7 +32,7 @@ namespace engine
 
         void newState();
         void closeState();
-        void loadFile(FileMemoryBufferStreamI*);
+        void loadFile(FileStreamI*);
         void registerFunctions();
 
     public:

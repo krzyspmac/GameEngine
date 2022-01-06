@@ -82,7 +82,7 @@ std::string FileAccess::GetFullPath(std::string filename)
     }
 }
 
-FileMemoryBufferStreamI *FileAccess::GetAccess(std::string filename)
+FileStreamI *FileAccess::GetAccess(std::string filename)
 {
     return new FileMemoryBufferStreamFromFile(GetFullPath(filename));
 }
@@ -111,7 +111,7 @@ std::string FileAccess::loadText(std::string filename)
     return str;
 }
 
-FileMemoryBufferStreamI *FileAccess::LoadBufferStream(const char *filename)
+FileStreamI *FileAccess::LoadBufferStream(const char *filename)
 {
     return NULL;
 }

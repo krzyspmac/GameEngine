@@ -23,14 +23,15 @@ namespace engine
     #define MAX_WORD_LENGTH      32
     #define MAX_LINE_LENGTH      1024
 
-    class Font: FontI
+    class FontTTF: FontI
     {
     public:
-        Font(SDL_APP *engineHandle, std::string filename, FileMemoryBufferStreamI *stream);
-        ~Font();
+        FontTTF(SDL_APP *engineHandle, std::string filename, FileStreamI *stream);
+        ~FontTTF();
 
         SDL_Texture *getFontTexture() { return m_fontTexture; };
 
+        void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align);
         void DrawText(engine::SDL_APP *engineHandle, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
         void calcTextDimensions(char *text, int *w, int *h);
 

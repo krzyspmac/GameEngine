@@ -14,7 +14,7 @@ using namespace engine;
 SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
 : SpriteAtlasI(jsonFilename, textureFilename)
 {
-    std::unique_ptr<FileMemoryBufferStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonFilename));
+    std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonFilename));
 
     TextureI *texture = GetMainEngine()->LoadTexture(textureFilename);
     if (texture)

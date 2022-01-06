@@ -5,7 +5,7 @@
 //  Created by krzysp on 20/12/2021.
 //
 
-#include "font.hpp"
+#include "font_ttf.hpp"
 #include "engine.hpp"
 #include "common_engine_impl.h"
 
@@ -18,7 +18,7 @@ static int nextGlyph(const char *str, int *i, char *glyphBuffer);
 static SDL_Color white = {255, 255, 255, 255};
 static SDL_Texture *toTexture(engine::SDL_APP app, SDL_Surface *surface, int destroySurface);
 
-Font::Font(engine::SDL_APP *engineHandle, std::string filename, FileMemoryBufferStreamI *stream)
+FontTTF::FontTTF(engine::SDL_APP *engineHandle, std::string filename, FileStreamI *stream)
 : FontI(filename)
 {
     std::cout << "Loading font " << filename << std::endl;
@@ -86,7 +86,7 @@ Font::Font(engine::SDL_APP *engineHandle, std::string filename, FileMemoryBuffer
     m_fontTexture = toTexture(*engineHandle, surface, 1);
 }
 
-Font::~Font()
+FontTTF::~FontTTF()
 {
     if (m_fontTexture != NULL)
     {
@@ -98,7 +98,7 @@ Font::~Font()
     }
 }
 
-void Font::DrawText(engine::SDL_APP *engineHandle, std::string stdText, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
+void FontTTF::DrawText(engine::SDL_APP *engineHandle, std::string stdText, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
 {
     int i, w, h, n;
     SDL_Rect *glyph, dest;
@@ -138,7 +138,12 @@ void Font::DrawText(engine::SDL_APP *engineHandle, std::string stdText, int x, i
     }
 }
 
-void Font::calcTextDimensions(char *text, int *w, int *h)
+void FontTTF::DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align)
+{
+    // not implemented
+}
+
+void FontTTF::calcTextDimensions(char *text, int *w, int *h)
 {
     int i, n;
     SDL_Rect *g;

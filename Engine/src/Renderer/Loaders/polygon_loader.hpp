@@ -17,7 +17,7 @@ namespace engine
     class PolygonLoader
     {
     public:
-        static std::vector<Polygon> Load(FileMemoryBufferStreamI *stream);
+        static std::vector<Polygon> Load(FileStreamI *stream);
     };
 };
 

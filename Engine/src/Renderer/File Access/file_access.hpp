@@ -25,14 +25,14 @@ namespace engine
         std::string GetResourcesDirectory();
 
     public:
-        FileMemoryBufferStreamI *GetAccess(std::string filename);
+        FileStreamI *GetAccess(std::string filename);
 
     public:
         std::string getBundledFilepath(const char *value);
 
         std::string loadText(std::string filename);
 
-        FileMemoryBufferStreamI *LoadBufferStream(const char *filename);
+        FileStreamI *LoadBufferStream(const char *filename);
 
     public:
         std::string GetFullPath(std::string filename);

@@ -15,11 +15,11 @@ namespace engine
     /// Most of the file in the game system should be
     /// packed so the FileMemoryBuffer encapsulates
     /// data neede for the buffer stream.
-    class FileMemoryBufferStreamI
+    class FileStreamI
     {
     public:
-        FileMemoryBufferStreamI(std::string filename): filename(filename) { };
-        virtual ~FileMemoryBufferStreamI() { }; // memory descrutor moved to derived classes
+        FileStreamI(std::string filename): filename(filename) { };
+        virtual ~FileStreamI() { };
 
         std::string &GetFilename() { return filename; };
         void *GetMemory() { return memory; };
@@ -33,7 +33,7 @@ namespace engine
 
     /// Mapped file system onto the FileMemoryBufferStreamI
     /// when no packed data exists.
-    class FileMemoryBufferStreamFromFile: public FileMemoryBufferStreamI
+    class FileMemoryBufferStreamFromFile: public FileStreamI
     {
     public:
         FileMemoryBufferStreamFromFile(std::string filename);
@@ -41,7 +41,7 @@ namespace engine
     };
 
     /// Memory access for the file chunk in the packed system.
-    class FileMemoryBufferStreamFromBundle: public FileMemoryBufferStreamI
+    class FileMemoryBufferStreamFromBundle: public FileStreamI
     {
 
     };
@@ -73,7 +73,7 @@ namespace engine
         /// will be returned. In case of a packaed resource file this will
         /// return FileMemoryBufferStreamFromBundle.
         /// Memory ownership is passed to the caller.
-        virtual FileMemoryBufferStreamI *GetAccess(std::string filename) = 0;
+        virtual FileStreamI *GetAccess(std::string filename) = 0;
 
     public:
         /// Get a file path for a specific name. Main bundle will be used.
@@ -84,7 +84,7 @@ namespace engine
         /// Load a buffer stream for a specific chunk named `filename`.
         /// If no packed data is presetend the system will try to load the data
         /// from the file system. The ownership is passed onto the caller.
-        virtual FileMemoryBufferStreamI *LoadBufferStream(const char *filename) = 0;
+        virtual FileStreamI *LoadBufferStream(const char *filename) = 0;
 
     public:
         // tmp

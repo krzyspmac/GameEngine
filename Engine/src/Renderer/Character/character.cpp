@@ -17,7 +17,7 @@ using namespace engine;
 Character::Character(std::string jsonDefinition)
 : CharacterI(jsonDefinition)
 {
-    std::unique_ptr<FileMemoryBufferStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonDefinition));
+    std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonDefinition));
 
     char *jsonSource = (char*)stream.get()->GetMemory();
     if (jsonSource && strlen(jsonSource) > 0)

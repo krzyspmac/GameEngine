@@ -7,7 +7,7 @@
 
 #include "engine_provider.hpp"
 #include "texture.hpp"
-#include "font.hpp"
+#include "font_ttf.hpp"
 #include "texture_target.hpp"
 #include "SDL.h"
 
@@ -72,7 +72,7 @@ void EngineProvider::RenderPresent()
     SDL_RenderPresent(m_engineHandle->renderer);
 }
 
-TextureI *EngineProvider::LoadTexture(std::string filename, FileMemoryBufferStreamI *stream)
+TextureI *EngineProvider::LoadTexture(std::string filename, FileStreamI *stream)
 {
     SDL_Texture *textureHandle;
 
@@ -239,14 +239,14 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Ve
     }
 }
 
-FontI *EngineProvider::LoadFont(std::string name, FileMemoryBufferStreamI *stream)
+FontI *EngineProvider::LoadFont(std::string name, FileStreamI *stream)
 {
-    return (FontI*)new Font(m_engineHandle, name, stream);
+    return (FontI*)new FontTTF(m_engineHandle, name, stream);
 }
 
 void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
 {
-    Font *fontImpl = (Font*)font;
+    FontTTF *fontImpl = (FontTTF*)font;
     fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
 

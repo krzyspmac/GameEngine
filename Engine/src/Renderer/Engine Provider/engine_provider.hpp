@@ -43,7 +43,7 @@ namespace engine
         void RenderPresent();
 
     public:
-        TextureI *LoadTexture(std::string name, FileMemoryBufferStreamI *);
+        TextureI *LoadTexture(std::string name, FileStreamI *);
         TextureTargetI *CreateTargetTexture(int width, int height);
 
         void UnloadTexture(TextureI *texture);
@@ -52,7 +52,7 @@ namespace engine
         void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal);
         void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal);
 
-        FontI *LoadFont(std::string name, FileMemoryBufferStreamI *);
+        FontI *LoadFont(std::string name, FileStreamI *);
         void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align);
 
         void TextureAlphaSetMod(TextureI *texture, uint8_t alpha);

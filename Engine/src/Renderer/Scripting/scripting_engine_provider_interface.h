@@ -49,7 +49,7 @@ namespace engine
         virtual void closeState() = 0;
 
         ///
-        virtual void loadFile(FileMemoryBufferStreamI*) = 0;
+        virtual void loadFile(FileStreamI*) = 0;
 
         ///
         virtual void registerFunctions() = 0;
