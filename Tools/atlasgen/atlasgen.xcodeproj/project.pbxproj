@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7F4172B4277330C100B6AE24 /* atlasGen.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F4172B3277330C100B6AE24 /* atlasGen.c */; };
+		7F4172D427733EB700B6AE24 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172D327733EB700B6AE24 /* SDL2.framework */; };
+		7F4172D627733EE600B6AE24 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172D527733EE600B6AE24 /* libSDL2_image.a */; };
+		7F4172D827733EF000B6AE24 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F4172D727733EF000B6AE24 /* Metal.framework */; };
+		7F42606627733F8B00E0DC09 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606527733F8B00E0DC09 /* libcjson.a */; };
+		7F42606827733F9C00E0DC09 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606727733F9C00E0DC09 /* Quartz.framework */; };
+		7F42606A27733FAB00E0DC09 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F42606927733FAB00E0DC09 /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7F4172A6277330A600B6AE24 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		7F4172A8277330A600B6AE24 /* atlasgen */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = atlasgen; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F4172B2277330C100B6AE24 /* atlasGen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = atlasGen.h; sourceTree = "<group>"; };
+		7F4172B3277330C100B6AE24 /* atlasGen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = atlasGen.c; sourceTree = "<group>"; };
+		7F4172D127733E2F00B6AE24 /* structs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = structs.h; sourceTree = "<group>"; };
+		7F4172D227733E4C00B6AE24 /* defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = defs.h; sourceTree = "<group>"; };
+		7F4172D327733EB700B6AE24 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		7F4172D527733EE600B6AE24 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F4172D727733EF000B6AE24 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F42606527733F8B00E0DC09 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F42606727733F9C00E0DC09 /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		7F42606927733FAB00E0DC09 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7F4172A5277330A600B6AE24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F42606A27733FAB00E0DC09 /* Cocoa.framework in Frameworks */,
+				7F42606827733F9C00E0DC09 /* Quartz.framework in Frameworks */,
+				7F42606627733F8B00E0DC09 /* libcjson.a in Frameworks */,
+				7F4172D827733EF000B6AE24 /* Metal.framework in Frameworks */,
+				7F4172D627733EE600B6AE24 /* libSDL2_image.a in Frameworks */,
+				7F4172D427733EB700B6AE24 /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7F41729F277330A600B6AE24 = {
+			isa = PBXGroup;
+			children = (
+				7F4172AA277330A600B6AE24 /* atlasgen */,
+				7F4172B5277330CF00B6AE24 /* Frameworks */,
+				7F4172A9277330A600B6AE24 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7F4172A9277330A600B6AE24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7F4172A8277330A600B6AE24 /* atlasgen */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7F4172AA277330A600B6AE24 /* atlasgen */ = {
+			isa = PBXGroup;
+			children = (
+				7F4172D227733E4C00B6AE24 /* defs.h */,
+				7F4172D127733E2F00B6AE24 /* structs.h */,
+				7F4172B2277330C100B6AE24 /* atlasGen.h */,
+				7F4172B3277330C100B6AE24 /* atlasGen.c */,
+			);
+			path = atlasgen;
+			sourceTree = "<group>";
+		};
+		7F4172B5277330CF00B6AE24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7F42606927733FAB00E0DC09 /* Cocoa.framework */,
+				7F42606727733F9C00E0DC09 /* Quartz.framework */,
+				7F42606527733F8B00E0DC09 /* libcjson.a */,
+				7F4172D727733EF000B6AE24 /* Metal.framework */,
+				7F4172D527733EE600B6AE24 /* libSDL2_image.a */,
+				7F4172D327733EB700B6AE24 /* SDL2.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F4172A7277330A600B6AE24 /* atlasgen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F4172AF277330A600B6AE24 /* Build configuration list for PBXNativeTarget "atlasgen" */;
+			buildPhases = (
+				7F4172A4277330A600B6AE24 /* Sources */,
+				7F4172A5277330A600B6AE24 /* Frameworks */,
+				7F4172A6277330A600B6AE24 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = atlasgen;
+			productName = atlasgen;
+			productReference = 7F4172A8277330A600B6AE24 /* atlasgen */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7F4172A0277330A600B6AE24 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					7F4172A7277330A600B6AE24 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 7F4172A3277330A600B6AE24 /* Build configuration list for PBXProject "atlasgen" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7F41729F277330A600B6AE24;
+			productRefGroup = 7F4172A9277330A600B6AE24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7F4172A7277330A600B6AE24 /* atlasgen */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7F4172A4277330A600B6AE24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F4172B4277330C100B6AE24 /* atlasGen.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7F4172AD277330A600B6AE24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks",
+					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
+					"$(SRCROOT)/../../Libraries/SDL_image-main",
+					"$(SRCROOT)/../../Libraries/cJson/cJson",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		7F4172AE277330A600B6AE24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks",
+					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
+					"$(SRCROOT)/../../Libraries/SDL_image-main",
+					"$(SRCROOT)/../../Libraries/cJson/cJson",
+				);
+				LD_RUNPATH_SEARCH_PATHS = "$(SRCROOT)/../../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		7F4172B0277330A600B6AE24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					webp,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7F4172B1277330A600B6AE24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Manual;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					webp,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7F4172A3277330A600B6AE24 /* Build configuration list for PBXProject "atlasgen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F4172AD277330A600B6AE24 /* Debug */,
+				7F4172AE277330A600B6AE24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F4172AF277330A600B6AE24 /* Build configuration list for PBXNativeTarget "atlasgen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F4172B0277330A600B6AE24 /* Debug */,
+				7F4172B1277330A600B6AE24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7F4172A0277330A600B6AE24 /* Project object */;
+}

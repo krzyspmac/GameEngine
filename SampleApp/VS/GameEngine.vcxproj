@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{0d1219bd-0e40-497e-bb8e-9401012aebfb}</ProjectGuid>
+    <RootNamespace>GameEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)..\..\Engine\src;$(SolutionDir)..\..\Engine\src\Common;$(SolutionDir)..\..\Engine\src\Game\Room;$(SolutionDir)..\..\Engine\src\Renderer\Animations;$(SolutionDir)..\..\Engine\src\Renderer\Character;$(SolutionDir)..\..\Engine\src\Renderer\Character Movement;$(SolutionDir)..\..\Engine\src\Renderer\Console;$(SolutionDir)..\..\Engine\src\Renderer\Engine;$(SolutionDir)..\..\Engine\src\Renderer\Engine Provider;$(SolutionDir)..\..\Engine\src\Renderer\Events;$(SolutionDir)..\..\Engine\src\Renderer\File Access;$(SolutionDir)..\..\Engine\src\Renderer\Fonts;$(SolutionDir)..\..\Engine\src\Renderer\Loaders;$(SolutionDir)..\..\Engine\src\Renderer\Managers;$(SolutionDir)..\..\Engine\src\Renderer\Path Finding;$(SolutionDir)..\..\Engine\src\Renderer\Scripting;$(SolutionDir)..\..\Engine\src\Renderer\Scene;$(SolutionDir)..\..\Engine\src\Renderer\Sprites;$(SolutionDir)..\..\Engine\src\Renderer\States;$(SolutionDir)..\..\Engine\src\Renderer\Textures;$(SolutionDir)..\..\Libraries\Lua\code\src;$(SolutionDir)..\..\Libraries\cJson\cJson;$(SolutionDir)..\..\Frameworks\Windows\SDL2-debug\include;$(SolutionDir)..\..\Frameworks\Windows\SDL2_image-devel\include;$(SolutionDir)..\..\Frameworks\Windows\SDL2_ttf-devel\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)..\..\Frameworks\Windows\SDL2-debug\lib\x64;$(SolutionDir)..\..\Frameworks\Windows\SDL2_ttf-devel\lib\x64;$(SolutionDir)..\..\Frameworks\Windows\SDL2_image-devel\lib\x64;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Build\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Build\Intermediary\$(Platform)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Engine\src\Common\performance.cpp" />
+    <ClCompile Include="..\..\Engine\src\Common\polygon.cpp" />
+    <ClCompile Include="..\..\Engine\src\Game\Room\room.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Animations\animation_curve_function_linear.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Animations\animation_factory.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Animations\animation_function.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Character Movement\character_mover.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Character\character.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Character\character_manager.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Character\character_renderer.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Character\character_representation.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Console\console_view.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Engine Provider\engine_provider.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Engine\engine.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Events\event_provider.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\File Access\file_access.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\File Access\file_memory_buffer_stream_file.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\File Access\file_memory_buffer_stream_resource.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Fonts\font.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Loaders\polygon_loader.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Managers\events_manager.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Managers\periodic_updates_manager.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Managers\sprite_atlas_manager.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Managers\sprite_renderer_manager.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Path Finding\path.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Path Finding\path_finder.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Path Finding\path_finder_graph.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Path Finding\path_finder_helper.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Path Finding\path_finder_line_graph_node.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Scene\scene.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Scene\scene_manager.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Scripting\scripting_engine.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Sprites\sprite_atlas.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Sprites\sprite_draw_animated.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Sprites\sprite_draw_static.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\States\engine_state.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\States\time.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Textures\texture.cpp" />
+    <ClCompile Include="..\..\Engine\src\Renderer\Textures\texture_target.cpp" />
+    <ClCompile Include="..\..\Libraries\cJson\cJson\cJSON.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lapi.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lauxlib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lbaselib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lcode.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lcorolib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lctype.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ldblib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ldebug.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ldo.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ldump.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lfunc.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lgc.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\linit.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\liolib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\llex.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lmathlib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lmem.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\loadlib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lobject.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lopcodes.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\loslib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lparser.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lstate.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lstring.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lstrlib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ltable.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ltablib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\ltm.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lundump.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lutf8lib.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lvm.c" />
+    <ClCompile Include="..\..\Libraries\Lua\code\src\lzio.c" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\renderer_entry.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Engine\src\common.h" />
+    <ClInclude Include="..\..\Engine\src\Common\function.hpp" />
+    <ClInclude Include="..\..\Engine\src\Common\general.hpp" />
+    <ClInclude Include="..\..\Engine\src\Common\line.hpp" />
+    <ClInclude Include="..\..\Engine\src\Common\performance.hpp" />
+    <ClInclude Include="..\..\Engine\src\Common\polygon.hpp" />
+    <ClInclude Include="..\..\Engine\src\Common\vector2.hpp" />
+    <ClInclude Include="..\..\Engine\src\common_engine.h" />
+    <ClInclude Include="..\..\Engine\src\common_engine_impl.h" />
+    <ClInclude Include="..\..\Engine\src\common_sdl.h" />
+    <ClInclude Include="..\..\Engine\src\defs.h" />
+    <ClInclude Include="..\..\Engine\src\doxygen_main.h" />
+    <ClInclude Include="..\..\Engine\src\Game\Room\room.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Animations\animation_curve_function_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Animations\animation_curve_function_linear.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Animations\animation_factory.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Animations\animation_function.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character Movement\character_mover.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character Movement\character_mover_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character\character.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character\character_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character\character_manager.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character\character_renderer.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character\character_renderer_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Character\character_representation.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Console\console_view.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Console\console_view_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Engine Provider\engine_provider.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Engine Provider\engine_provider_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Engine\engine.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Engine\engine_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Events\event_provider.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Events\event_provider_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\File Access\file_access.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\File Access\file_access_provider.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Fonts\font.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Fonts\font_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Loaders\polygon_loader.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Managers\events_manager.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Managers\periodic_updates_manager.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Managers\sprite_atlas_manager.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Managers\sprite_renderer_manager.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Path Finding\path.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Path Finding\path_finder.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Path Finding\path_finder_graph.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Path Finding\path_finder_helper.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Path Finding\path_finder_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Path Finding\path_finder_line_graph_node.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Scene\scene.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Scene\scene_manager.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Scripting\scripting_engine.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Scripting\scripting_engine_provider_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Sprites\sprite_atlas.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Sprites\sprite_atlas_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Sprites\sprite_draw_animated.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Sprites\sprite_draw_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Sprites\sprite_draw_static.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Sprites\sprite_interface_defs.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\States\engine_state.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\States\time.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Textures\texture.hpp" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Textures\texture_interface.h" />
+    <ClInclude Include="..\..\Engine\src\Renderer\Textures\texture_target.hpp" />
+    <ClInclude Include="..\..\Libraries\cJson\cJson\cJSON.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lapi.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lauxlib.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lcode.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lctype.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\ldebug.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\ldo.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lfunc.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lgc.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\ljumptab.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\llex.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\llimits.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lmem.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lobject.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lopcodes.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lopnames.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lparser.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lprefix.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lstate.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lstring.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\ltable.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\ltm.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lua.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lua.hpp" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\luaconf.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lualib.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lundump.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lvm.h" />
+    <ClInclude Include="..\..\Libraries\Lua\code\src\lzio.h" />
+    <ClInclude Include="src\renderer_entry.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Engine\src\Renderer\File Access\file_access.mm" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

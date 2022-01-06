@@ -1,0 +1,28 @@
+{"frames": [
+
+{
+	"filename": "background.png",
+	"frame": {"x":0,"y":0,"w":640,"h":268},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":268},
+	"sourceSize": {"w":640,"h":268}
+},
+{
+	"filename": "sky.png",
+	"frame": {"x":0,"y":268,"w":481,"h":155},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":481,"h":155},
+	"sourceSize": {"w":481,"h":155}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "background.png",
+	"format": "RGBA8888",
+	"size": {"w":640,"h":423},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:e0c0d048e8af5d102775b3638aadf291:63bbfe83b3c8cfa2801f4f8a118ec31c:2ba65c328dea799e4d80739630892abf$"
+}
+}
