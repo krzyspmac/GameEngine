@@ -10,7 +10,7 @@
 
 #include "common.h"
 #include "scripting_engine_provider_interface.h"
-#include "animation_group.hpp"
+#include "animation_group_simulateneus.hpp"
 #include "animation.h"
 #include "property_animator.hpp"
 
@@ -22,13 +22,10 @@ namespace engine
     class AnimationGroupFactory
     {
     public:
-        AnimationGroup* GroupAnimations(AnimationGroupI::AnimationGroupMode mode,
-                                        CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
-                                        std::vector<AnimatableI*>);
-        
-        AnimationGroup* GroupAnimations(std::string mode,
-                                        CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
-                                        std::vector<AnimatableI*>);
+        /**
+         Create an animation group for the current mode.
+         */
+        AnimationGroupSimultaneus* GroupAnimationsSimulataneus(CallableScriptFunctionSciptableInstance, std::vector<AnimatableI*>);
         
     /// ScriptingInterface
     public:

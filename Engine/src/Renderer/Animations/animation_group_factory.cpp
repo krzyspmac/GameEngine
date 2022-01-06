@@ -6,26 +6,16 @@
 //
 
 #include "animation_group_factory.hpp"
-#include "animation_group.hpp"
+#include "animation_group_simulateneus.hpp"
 #include "engine.hpp"
 
 using namespace engine;
 
-AnimationGroup* AnimationGroupFactory::GroupAnimations(
-      AnimationGroupI::AnimationGroupMode mode
-    , CallableScriptFunctionSciptableInstance scriptableFinishFn
+AnimationGroupSimultaneus* AnimationGroupFactory::GroupAnimationsSimulataneus(
+CallableScriptFunctionSciptableInstance scriptableFinishFn
     , std::vector<AnimatableI*> args)
 {
-    AnimationGroup *group = new AnimationGroup(mode, scriptableFinishFn, args);
-    return group;
-}
-
-AnimationGroup* AnimationGroupFactory::GroupAnimations(
-      std::string mode
-    , CallableScriptFunctionSciptableInstance scriptableFinishFn
-    , std::vector<AnimatableI*> args)
-{
-    AnimationGroup *group = new AnimationGroup(mode, scriptableFinishFn, args);
+    AnimationGroupSimultaneus *group = new AnimationGroupSimultaneus(scriptableFinishFn, args);
     return group;
 }
 
@@ -47,8 +37,8 @@ static int lua_AnimationGroup_GroupAnimations(lua_State *L)
     }
     
     int finishFuncEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    
-    AnimationGroup *group = new AnimationGroup(mode, finishFuncEndRef, list);
+
+    AnimationGroupSimultaneus *group = new AnimationGroupSimultaneus(finishFuncEndRef, list);
     if (group != nullptr)
     {
         group->ScriptingInterfaceRegisterFunctions(L, group);

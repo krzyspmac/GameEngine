@@ -1,12 +1,12 @@
 //
-//  animation_group.hpp
+//  animation_group_simulateneus
 //  Engine
 //
 //  Created by x180611 on 05/01/2022.
 //
 
-#ifndef animation_group_hpp
-#define animation_group_hpp
+#ifndef animation_group_simulateneus_hpp
+#define animation_group_simulateneus_hpp
 
 #include "common.h"
 #include "animation.h"
@@ -24,29 +24,22 @@ namespace engine
      Sequence runs each animation in order and waits for all animations to
      finish.
      */
-    class AnimationGroup
+    class AnimationGroupSimultaneus
         : public AnimationGroupI
-        , public AnimatableI
         , public MemoryI
     {
         std::vector<AnimatableI*> m_animatables;
         size_t m_cAnimatablesRunning;
-        CallableScriptFunctionSciptableInstance m_scriptableFinishFn;
+        CallableScriptFunctionSciptableInstance m_scriptableGroupFinishFn;
     public:
-        virtual ~AnimationGroup() { printf("Release animation group\n"); };
+        virtual ~AnimationGroupSimultaneus() { printf("Release animation group\n"); };
         
         /**
          Create an animation group given a mode a list of objects.
          */
-        AnimationGroup(AnimationGroupMode,
-                       CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
-                       std::vector<AnimatableI*>
-                       );
-        
-        AnimationGroup(std::string mode,
-                       CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
-                       std::vector<AnimatableI*>
-                       );
+        AnimationGroupSimultaneus(CallableScriptFunctionSciptableInstance m_scriptableFinishFn,
+                                  std::vector<AnimatableI*>
+                                  );
 
     public: // AnimatableI
         void Start();
@@ -59,8 +52,8 @@ namespace engine
     /// ScriptingInterface
     public:
         /// @private
-        SCRIPTING_INTERFACE_HEADERS(AnimationGroup);
+        SCRIPTING_INTERFACE_HEADERS(AnimationGroupSimultaneus);
     };
 };
 
-#endif /* animation_group_hpp */
+#endif /* animation_group_simulateneus */

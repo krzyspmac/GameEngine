@@ -66,7 +66,7 @@ namespace engine
     /**
      Defines an abstract interface for an animation block.
      */
-    class AnimationGroupI
+    class AnimationGroupI: public AnimatableI
     {
     public:
         typedef enum

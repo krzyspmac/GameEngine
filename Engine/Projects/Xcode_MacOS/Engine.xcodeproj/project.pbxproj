@@ -10,8 +10,8 @@
 		4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
 		4C255DE427859E3100D0B30A /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
 		4C255DE527859E3100D0B30A /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
-		4C255DE82785BABB00D0B30A /* animation_group.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE62785BABB00D0B30A /* animation_group.cpp */; };
-		4C255DE92785BABB00D0B30A /* animation_group.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE72785BABB00D0B30A /* animation_group.hpp */; };
+		4C255DE82785BABB00D0B30A /* animation_group_simulateneus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */; };
+		4C255DE92785BABB00D0B30A /* animation_group_simulateneus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */; };
 		4C255DEC2785CA9100D0B30A /* animation_group_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */; };
 		4C255DED2785CA9100D0B30A /* animation_group_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */; };
 		7F138253277505B600ED6D67 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
@@ -118,8 +118,8 @@
 		4C255DDC27858CBA00D0B30A /* release_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = release_pool.hpp; sourceTree = "<group>"; };
 		4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_curve_factory.cpp; sourceTree = "<group>"; };
 		4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_curve_factory.hpp; sourceTree = "<group>"; };
-		4C255DE62785BABB00D0B30A /* animation_group.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group.cpp; sourceTree = "<group>"; };
-		4C255DE72785BABB00D0B30A /* animation_group.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group.hpp; sourceTree = "<group>"; };
+		4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group_simulateneus.cpp; sourceTree = "<group>"; };
+		4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_simulateneus.hpp; sourceTree = "<group>"; };
 		4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group_factory.cpp; sourceTree = "<group>"; };
 		4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_factory.hpp; sourceTree = "<group>"; };
 		7F1382152775059B00ED6D67 /* libEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -491,8 +491,8 @@
 				7FF21D742784E99A005C52C4 /* property_animator.cpp */,
 				7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */,
 				7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */,
-				4C255DE72785BABB00D0B30A /* animation_group.hpp */,
-				4C255DE62785BABB00D0B30A /* animation_group.cpp */,
+				4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */,
+				4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */,
 				4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */,
 				4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */,
 			);
@@ -588,7 +588,7 @@
 				7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */,
 				7F138266277505B600ED6D67 /* sprite_draw_static.hpp in Headers */,
 				7FA2AB39277DD1A600AED89D /* character_manager.hpp in Headers */,
-				4C255DE92785BABB00D0B30A /* animation_group.hpp in Headers */,
+				4C255DE92785BABB00D0B30A /* animation_group_simulateneus.hpp in Headers */,
 				7F6428A12779183C00EE9E2C /* polygon.hpp in Headers */,
 				7FCAE7C4277E3A68004A6107 /* scene.hpp in Headers */,
 				7F138270277505B600ED6D67 /* sprite_atlas_interface.h in Headers */,
@@ -704,7 +704,7 @@
 				7FF21D762784E99A005C52C4 /* property_animator.cpp in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */,
 				7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */,
-				4C255DE82785BABB00D0B30A /* animation_group.cpp in Sources */,
+				4C255DE82785BABB00D0B30A /* animation_group_simulateneus.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */,
 				7FCAE7C7277E4EAA004A6107 /* sprite_atlas_manager.cpp in Sources */,

@@ -1,36 +1,24 @@
 //
-//  animation_group.cpp
+//  animation_group_simulateneus.cpp
 //  Engine
 //
 //  Created by x180611 on 05/01/2022.
 //
 
-#include "animation_group.hpp"
+#include "animation_group_simulateneus.hpp"
 
 using namespace engine;
 
-AnimationGroup::AnimationGroup(AnimationGroupMode mode, CallableScriptFunctionSciptableInstance scriptableFinishFn, std::vector<AnimatableI*> args)
+AnimationGroupSimultaneus::AnimationGroupSimultaneus(CallableScriptFunctionSciptableInstance scriptableFinishFn, std::vector<AnimatableI*> args)
     : AnimationGroupI()
     , MemoryI()
-    , m_scriptableFinishFn(scriptableFinishFn)
+    , m_scriptableGroupFinishFn(scriptableFinishFn)
     , m_cAnimatablesRunning(0)
 {
     m_animatables = args;
 }
 
-AnimationGroup::AnimationGroup(std::string mode,
-    CallableScriptFunctionSciptableInstance scriptableFinishFn,
-    std::vector<AnimatableI*> args)
-    : AnimationGroupI()
-    , MemoryI()
-    , m_scriptableFinishFn(scriptableFinishFn)
-    , m_cAnimatablesRunning(0)
-{
-    m_animatables = args;
-    Prepare();
-}
-
-void AnimationGroup::Start()
+void AnimationGroupSimultaneus::Start()
 {
     for (auto it = m_animatables.begin(); it != m_animatables.end(); ++it)
     {
@@ -43,7 +31,7 @@ void AnimationGroup::Start()
     }
 }
 
-void AnimationGroup::Stop()
+void AnimationGroupSimultaneus::Stop()
 {
     for (auto it = m_animatables.begin(); it != m_animatables.end(); ++it)
     {
@@ -56,7 +44,7 @@ void AnimationGroup::Stop()
     }
 }
 
-void AnimationGroup::Prepare()
+void AnimationGroupSimultaneus::Prepare()
 {
     for (auto it = m_animatables.begin(); it != m_animatables.end(); ++it)
     {
@@ -71,15 +59,15 @@ void AnimationGroup::Prepare()
     }
 }
 
-void AnimationGroup::DidFinish()
+void AnimationGroupSimultaneus::DidFinish()
 {
     if (m_animatableFinishL != nullptr)
     {
         m_animatableFinishL(this);
     }
-    if (m_scriptableFinishFn.CanCall())
+    if (m_scriptableGroupFinishFn.CanCall())
     {
-        m_scriptableFinishFn.PerformCall([&](lua_State *L){
+        m_scriptableGroupFinishFn.PerformCall([&](lua_State *L){
             this->ScriptingInterfaceRegisterFunctions(L, this);
             return 1;
         });
@@ -88,30 +76,30 @@ void AnimationGroup::DidFinish()
 
 #pragma mark - Scripting Interface
 
-SCRIPTING_INTERFACE_IMPL_NAME(AnimationGroup);
+SCRIPTING_INTERFACE_IMPL_NAME(AnimationGroupSimultaneus);
 
 static int lua_AnimationGroup_Start(lua_State *L)
 {
-    AnimationGroup *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroup>(L, 1);
+    AnimationGroupSimultaneus *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroupSimultaneus>(L, 1);
     obj->Start();
     return 0;
 }
 
 static int lua_AnimationGroup_Stop(lua_State *L)
 {
-    AnimationGroup *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroup>(L, 1);
+    AnimationGroupSimultaneus *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroupSimultaneus>(L, 1);
     obj->Stop();
     return 0;
 }
 
 static int lua_AnimationGroup_FreeMem(lua_State *L)
 {
-    AnimationGroup *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroup>(L, 1);
+    AnimationGroupSimultaneus *obj = ScriptingEngineI::GetScriptingObjectPtr<AnimationGroupSimultaneus>(L, 1);
     obj->FreeMem();
     return 0;
 }
 
-std::vector<luaL_Reg>AnimationGroup::ScriptingInterfaceFunctions()
+std::vector<luaL_Reg>AnimationGroupSimultaneus::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
           {"Start",         &lua_AnimationGroup_Start}
