@@ -22,8 +22,17 @@ namespace engine
     {
     public:
         FontI(std::string filename): m_fontName(filename) { }
-
+        virtual ~FontI() { };
+        
+        /**
+         Retrieve the font name. Usually the name of the defining the font.
+         */
         std::string &getFontName() { return m_fontName; };
+
+        /**
+         Draw the font. Uses the current engine provider.
+         */
+        virtual void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align) = 0;
 
     private:
         std::string m_fontName;

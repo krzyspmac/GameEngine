@@ -11,7 +11,7 @@
 using namespace engine;
 
 FileMemoryBufferStreamFromFile::FileMemoryBufferStreamFromFile(std::string filename)
-    : FileMemoryBufferStreamI(filename)
+    : FileStreamI(filename)
 {
     FILE *fp = fopen(filename.c_str(), "r");
     if (fp)

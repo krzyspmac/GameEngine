@@ -6,7 +6,8 @@
 //
 
 #include "engine.hpp"
-#include "font.hpp"
+#include "font_ttf.hpp"
+#include "font_bitmap.hpp"
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas.hpp"
 #include "sprite_draw_static.hpp"
@@ -80,7 +81,7 @@ void Engine::setup()
 
     m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
 
-    std::unique_ptr<FileMemoryBufferStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
+    std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
 
     m_scriptingEngine.newState();
     m_scriptingEngine.loadFile(streamBuffer.get());
@@ -341,7 +342,7 @@ FontI *Engine::LoadFont(std::string name)
     FontI *result = GetFont(name);
     if (!result)
     {
-        std::unique_ptr<FileMemoryBufferStreamI> stream(m_fileAccess.GetAccess(name));
+        std::unique_ptr<FileStreamI> stream(m_fileAccess.GetAccess(name));
         result = m_engineProvider.LoadFont(name, stream.get());
         if (result)
         {

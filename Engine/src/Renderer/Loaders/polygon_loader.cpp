@@ -10,7 +10,7 @@
 
 using namespace engine;
 
-std::vector<Polygon> PolygonLoader::Load(FileMemoryBufferStreamI *stream)
+std::vector<Polygon> PolygonLoader::Load(FileStreamI *stream)
 {
     do {
         std::vector<Polygon> outputPolygons;

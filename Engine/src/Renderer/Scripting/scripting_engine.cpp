@@ -50,7 +50,7 @@ void ScriptingEngine::closeState()
     lua_close(L);
 }
 
-void ScriptingEngine::loadFile(FileMemoryBufferStreamI *bufferStream)
+void ScriptingEngine::loadFile(FileStreamI *bufferStream)
 {
 //    const char* txt = (const char*)bufferStream->GetMemory();
 //    char p[55000];
