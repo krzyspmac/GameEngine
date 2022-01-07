@@ -87,7 +87,7 @@ static int lua_SpriteDrawStatic_SetPosition(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
     float x = lua_tonumberx(L, 2, nullptr);
-    float y = lua_tonumberx(L, 2, nullptr);
+    float y = lua_tonumberx(L, 3, nullptr);
     Vector2 pos = {x, y};
     spr->SetPosition(pos);
     return 0;

@@ -40,6 +40,8 @@
 		7F869FE22783970400E8CB01 /* textx.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD22783970400E8CB01 /* textx.json */; };
 		7F869FE32783970400E8CB01 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
 		7F869FE42783970400E8CB01 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
+		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
+		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -93,6 +95,8 @@
 		7F869FD22783970400E8CB01 /* textx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = textx.json; sourceTree = "<group>"; };
 		7F869FD32783970400E8CB01 /* polygons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polygons.json; sourceTree = "<group>"; };
 		7F869FD42783970400E8CB01 /* room1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room1.png; sourceTree = "<group>"; };
+		7FB8226B2788DB33008F0F7A /* parlor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parlor.png; sourceTree = "<group>"; };
+		7FB8226C2788DB34008F0F7A /* parlor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parlor.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +191,8 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7FB8226C2788DB34008F0F7A /* parlor.json */,
+				7FB8226B2788DB33008F0F7A /* parlor.png */,
 				7F8499282787798B004127CB /* fireplace.json */,
 				7F8499272787798B004127CB /* fireplace.png */,
 				7F849920278760FA004127CB /* DialogFont_retro.fnt */,
@@ -271,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
+				7FB8226D2788DB34008F0F7A /* parlor.png in Resources */,
 				7F869FE02783970400E8CB01 /* EnterCommand.ttf in Resources */,
 				7F849921278760FA004127CB /* DialogFont_retro.png in Resources */,
 				7F869FDE2783970400E8CB01 /* background.png in Resources */,
@@ -280,6 +287,7 @@
 				7F869FD72783970400E8CB01 /* textx.png in Resources */,
 				7F869FD92783970400E8CB01 /* main.lua in Resources */,
 				7F869FD62783970400E8CB01 /* brett_character.json in Resources */,
+				7FB8226E2788DB34008F0F7A /* parlor.json in Resources */,
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
 				7F84992A2787798B004127CB /* fireplace.json in Resources */,
 				7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */,
