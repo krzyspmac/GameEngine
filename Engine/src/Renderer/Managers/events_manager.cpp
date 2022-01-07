@@ -12,8 +12,15 @@ using namespace engine;
 int EventsManager::DoEvents()
 {
     EVENT event;
-    while (m_eventProvider.PollEvent(&event))
+    SDL_Event originalEvent;
+
+    while (m_eventProvider.PollEvent(&event, &originalEvent))
     {
+        for (auto& hndlr : m_generalInput)
+        {
+            hndlr.Process(&originalEvent);
+        }
+
         switch (event)
         {
             case EVENT_NONE:
@@ -67,4 +74,9 @@ void EventsManager::RegisterMouseMovedEvents(EventHolderMouseMoved val)
 void EventsManager::RegisterMouseClickedEvents(EventHolderMouseClicked val)
 {
     m_mouseClicks.push_back(val);
+}
+
+void EventsManager::RegisterGeneralInputEvents(EventHolderSDLEvent val)
+{
+    m_generalInput.push_back(val);
 }

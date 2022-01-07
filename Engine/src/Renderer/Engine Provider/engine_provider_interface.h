@@ -63,6 +63,9 @@ namespace engine
         /// Get the current window size.
         virtual void GetWindowSize(int *w, int *h) = 0;
 
+        /// Get the renderer output size
+        virtual void GetRendererOutputSize(int *w, int *h) = 0;
+
     /// Renderer related
     public:
 

@@ -19,4 +19,7 @@
    <FileRef
       location = "group:../../Libraries/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../../Libraries/imgui/imgui.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -11,12 +11,13 @@ using namespace engine;
 
 static EVENT SDLEvent2EVENT(SDL_Event *event);
 
-int EventProvider::PollEvent(EVENT *event)
+int EventProvider::PollEvent(EVENT *event, SDL_Event *originalEvent)
 {
     SDL_Event m_event;
 
     int hasEvent = SDL_PollEvent(&m_event);
     *event = SDLEvent2EVENT(&m_event);
+    *originalEvent = m_event;
     return hasEvent;
 }
 

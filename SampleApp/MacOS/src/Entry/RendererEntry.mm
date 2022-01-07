@@ -30,7 +30,8 @@ RendererEntry::RendererEntry()
     SceneManager *sceneManager = new SceneManager();
     SpriteAtlasManager * spriteAtlasManager = new SpriteAtlasManager();
     SpriteRendererManager *sprireRendererManager = new SpriteRendererManager();
-    
+    ConsoleRenderer *consoleRenderer = new ConsoleRenderer();
+
     this->m_fileAccess = fa;
     this->m_engineProvider = ep;
     this->m_scriptingEngine = se;
@@ -40,11 +41,12 @@ RendererEntry::RendererEntry()
     this->m_sceneManager = sceneManager;
     this->m_spriteAtlasManager = spriteAtlasManager;
     this->m_sprireRendererManager = sprireRendererManager;
+    this->m_consoleRenderer = consoleRenderer;
 
     Size viewportSize;
     viewportSize.width = SCREEN_WIDTH;
     viewportSize.height = SCREEN_HEIGHT;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, viewportSize);
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, *this->m_consoleRenderer, viewportSize);
 }
 
 int RendererEntry::initSDL()
@@ -80,6 +82,7 @@ int RendererEntry::initSDL()
 //    SDL_SetWindowFullscreen(m_app.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY, "nearest", SDL_HINT_OVERRIDE);
+    SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal");
     m_app.renderer = SDL_CreateRenderer(m_app.window, -1, rendererFlags);
 
     if (!m_app.renderer)
@@ -135,7 +138,10 @@ void RendererEntry::main(int argc, const char *argv[])
     
     while(1)
     {
-        doInput();
-        doScene();
+        @autoreleasepool
+        {
+            doInput();
+            doScene();
+        }
     }
 }

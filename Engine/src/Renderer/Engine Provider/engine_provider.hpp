@@ -33,6 +33,7 @@ namespace engine
         void GetMousePosition(int *x, int *y);
         void Delay(Uint32 ms);
         void GetWindowSize(int *w, int *h);
+        void GetRendererOutputSize(int *w, int *h);
 
     public:
         engine::SDL_APP *GetRendererHandle() { return m_engineHandle; };

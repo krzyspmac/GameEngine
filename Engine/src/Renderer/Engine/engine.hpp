@@ -36,6 +36,7 @@ namespace engine
                SceneManager &sceneManager,
                SpriteAtlasManager &spriteAtlasManager,
                SpriteRendererManager &spriteRendererManager,
+               ConsoleRendererI &consoleRenderer,
                Size viewportSize
         );
         ~Engine();

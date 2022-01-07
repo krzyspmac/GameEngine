@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F138297277507C500ED6D67 /* RendererEntry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntry.cpp */; };
+		7F138297277507C500ED6D67 /* RendererEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntry.mm */; };
 		7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
@@ -42,6 +42,7 @@
 		7F869FE42783970400E8CB01 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
 		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
+		7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB824112788F8FC008F0F7A /* libimgui.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,7 +61,7 @@
 
 /* Begin PBXFileReference section */
 		7F138290277507C500ED6D67 /* RendererEntry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererEntry.hpp; sourceTree = "<group>"; };
-		7F138291277507C500ED6D67 /* RendererEntry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RendererEntry.cpp; sourceTree = "<group>"; };
+		7F138291277507C500ED6D67 /* RendererEntry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntry.mm; sourceTree = "<group>"; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F13829E2775082800ED6D67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		7F869FD42783970400E8CB01 /* room1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room1.png; sourceTree = "<group>"; };
 		7FB8226B2788DB33008F0F7A /* parlor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parlor.png; sourceTree = "<group>"; };
 		7FB8226C2788DB34008F0F7A /* parlor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parlor.json; sourceTree = "<group>"; };
+		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */,
 				7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */,
 				7F1382AD27750B5B00ED6D67 /* libEngine.a in Frameworks */,
 				7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */,
@@ -131,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				7F138290277507C500ED6D67 /* RendererEntry.hpp */,
-				7F138291277507C500ED6D67 /* RendererEntry.cpp */,
+				7F138291277507C500ED6D67 /* RendererEntry.mm */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FB824112788F8FC008F0F7A /* libimgui.a */,
 				7F1382AA27750B5B00ED6D67 /* libcjson.a */,
 				7F1382AC27750B5B00ED6D67 /* libEngine.a */,
 				7F1382AE27750B5B00ED6D67 /* liblua.a */,
@@ -311,7 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1382C827750C0800ED6D67 /* main.mm in Sources */,
-				7F138297277507C500ED6D67 /* RendererEntry.cpp in Sources */,
+				7F138297277507C500ED6D67 /* RendererEntry.mm in Sources */,
 				7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

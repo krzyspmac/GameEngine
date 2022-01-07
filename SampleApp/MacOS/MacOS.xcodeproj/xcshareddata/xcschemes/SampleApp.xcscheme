@@ -90,6 +90,20 @@
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7FB823F12788F886008F0F7A"
+               BuildableName = "libimgui.a"
+               BlueprintName = "imgui"
+               ReferencedContainer = "container:../../Libraries/imgui/imgui.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

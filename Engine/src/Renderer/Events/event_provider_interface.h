@@ -8,18 +8,20 @@
 #ifndef event_provider_interface_h
 #define event_provider_interface_h
 
+#include "common.h"
+
 namespace engine
 {
 
-typedef enum {
-    EVENT_NONE = 0,
-    EVENT_KEYDOWN,
+    typedef enum {
+        EVENT_NONE = 0,
+        EVENT_KEYDOWN,
 
-    EVENT_MOUSEMOVE,
-    EVENT_MOUSEUP,
+        EVENT_MOUSEMOVE,
+        EVENT_MOUSEUP,
 
-    EVENT_QUIT,
-} EVENT;
+        EVENT_QUIT,
+    } EVENT;
 
     class EventProviderI
     {
@@ -32,7 +34,7 @@ typedef enum {
         /// Polls the next event and puts in into
         /// &event. Returns 1 if more events need
         /// be processed or 0 if it's done.
-        virtual int PollEvent(EVENT *event) = 0;
+        virtual int PollEvent(EVENT *event, SDL_Event *originalEvent) = 0;
     };
 
 }; // namespace engine
