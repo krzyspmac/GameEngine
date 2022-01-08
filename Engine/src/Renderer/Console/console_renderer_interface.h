@@ -1,12 +1,12 @@
 //
-//  console_renderer.hpp
+//  console_renderer_interface_hpp
 //  Engine
 //
 //  Created by krzysp on 07/01/2022.
 //
 
-#ifndef console_renderer_hpp
-#define console_renderer_hpp
+#ifndef console_renderer_interface_hpp
+#define console_renderer_interface_hpp
 
 #include "common.h"
 
@@ -66,6 +66,10 @@ namespace engine
         std::vector<std::unique_ptr<ConsoleTerminalCmdI>> m_cmdParsers;
     };
 
+    /**
+     Defines the actual console renderer. Uses ConsoleAppRendererI for
+     platform specific rendering.
+     */
     class ConsoleRendererI
     {
     public:
@@ -83,14 +87,19 @@ namespace engine
     };
 
     /**
-     Defines the imgui renderer for a specific part
+     Defines the imgui renderer for a specific palrform.
      */
     class ConsoleAppRendererI
     {
     public:
-        ConsoleAppRendererI();
+        ConsoleAppRendererI() { };
         ~ConsoleAppRendererI() { };
+
+        virtual void Setup() = 0;
+        virtual bool IsSetup() = 0;
+        virtual void DoFrame(std::function<void(void)>) = 0;
+        virtual void SetConsoleHidden(bool) = 0;
     };
 };
 
-#endif /* console_renderer_hpp */
+#endif /* console_renderer_interface_hpp */

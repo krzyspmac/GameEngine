@@ -17,7 +17,6 @@
 #include "defs.h"
 #include "general.hpp"
 #include "common_sdl.h"
-#include "console_logger.hpp"
 
 #ifdef __cplusplus
 extern "C" {

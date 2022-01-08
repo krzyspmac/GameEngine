@@ -16,7 +16,7 @@ namespace engine
 {
     class ConsoleRenderer: public ConsoleRendererI
     {
-        engine::SDL_APP m_app;
+        std::unique_ptr<ConsoleAppRendererI> m_platformRenderer;
         bool m_hidden;
         bool m_isSetup;
         ConsoleLogI *m_logger;
@@ -33,10 +33,8 @@ namespace engine
         ConsoleTerminalI& GetTerminal();
 
     private:
-        void SetupWindow();
         void SetupEvents();
         void DoMenuBar();
-        void SetupImGui();
         void DoGui();
     };
 };

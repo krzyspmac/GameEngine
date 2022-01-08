@@ -11,6 +11,7 @@
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
 #include "common.h"
+#include "console_logger.hpp"
 
 #ifdef __cplusplus
 extern "C" {
