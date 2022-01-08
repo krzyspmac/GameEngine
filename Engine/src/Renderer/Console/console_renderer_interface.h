@@ -23,7 +23,7 @@ namespace engine
     };
 
     /**
-     Logger specifif.
+     Logger specific.
      */
     class ConsoleLogI: public ConsoleWindowI
     {
@@ -31,6 +31,30 @@ namespace engine
         virtual void Log(const char* fmt, ...) = 0;
         virtual void Render() = 0;
         virtual void ToggleVisibility() = 0;
+    };
+
+    /**
+     Declare a console command. Each command gets its own processor.
+     */
+    class ConsoleTerminalCmdI
+    {
+    public:
+        virtual bool Process(const char*) = 0;
+    };
+
+    /**
+     Terminal.
+     */
+    class ConsoleTerminalI: public ConsoleWindowI
+    {
+    public:
+        virtual void Render() = 0;
+        virtual void ToggleVisibility() = 0;
+        virtual void ClearLog() = 0;
+        virtual void AddLog(const char* fmt, ...) = 0;
+
+    protected:
+        std::vector<std::unique_ptr<ConsoleTerminalCmdI>> m_cmdParsers;
     };
 
     class ConsoleRendererI
@@ -43,6 +67,8 @@ namespace engine
         virtual void SetConsoleHidden(bool) = 0;
 
         virtual ConsoleLogI& GetLogger() = 0;
+
+        virtual ConsoleTerminalI& GetTerminal() = 0;
     };
 
     /**

@@ -20,6 +20,8 @@ namespace engine
         bool m_hidden;
         bool m_isSetup;
         ConsoleLogI *m_logger;
+        ConsoleTerminalI *m_terminal;
+
     public:
         ConsoleRenderer();
 
@@ -28,6 +30,7 @@ namespace engine
         void SetConsoleHidden(bool);
 
         ConsoleLogI& GetLogger();
+        ConsoleTerminalI& GetTerminal();
 
     private:
         void SetupWindow();

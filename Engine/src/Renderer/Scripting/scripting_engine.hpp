@@ -33,6 +33,7 @@ namespace engine
         void newState();
         void closeState();
         void loadFile(FileStreamI*);
+        void loadChunk(char*);
         void registerFunctions();
 
     public:

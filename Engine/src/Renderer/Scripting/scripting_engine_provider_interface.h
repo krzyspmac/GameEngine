@@ -53,6 +53,9 @@ namespace engine
         virtual void loadFile(FileStreamI*) = 0;
 
         ///
+        virtual void loadChunk(char*) = 0;
+
+        ///
         virtual void registerFunctions() = 0;
 
     /// Default, must-have main lua script functions

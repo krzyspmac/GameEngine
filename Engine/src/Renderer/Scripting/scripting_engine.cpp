@@ -73,6 +73,24 @@ void ScriptingEngine::loadFile(FileStreamI *bufferStream)
     }
 }
 
+void ScriptingEngine::loadChunk(char *buffer)
+{
+    size_t tt = strlen(buffer);
+    if (luaL_loadbufferx(this->L, (const char*)buffer, /*bufferStream->GetSize()*/tt, "insert", NULL) == 0)
+    {
+        // Call priming lua_pcall
+        int iErr = lua_pcall(L, 0, 0, 0);
+        if (iErr != 0)
+        {
+            std::cout << "Error:" << lua_tostring(L, -1) << "\n";
+        }
+    }
+    else
+    {
+        std::cout << "Final:" << lua_tostring(L, -1) << "\n";
+    }
+}
+
 void ScriptingEngine::registerFunctions()
 {
     lua_pushcclosure(L, &ScriptingEngine::L_textureLoad, 0);

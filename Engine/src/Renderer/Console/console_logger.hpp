@@ -15,7 +15,7 @@ namespace engine
 {
     class ConsoleLog: public ConsoleLogI
     {
-        bool                p_open;
+        bool p_open;
     public:
         ConsoleLog();
         static ConsoleLog *Shared();

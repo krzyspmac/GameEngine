@@ -12,13 +12,14 @@
 #include "engine_provider.hpp"
 #include "engine.hpp"
 #include "console_logger.hpp"
+#include "console_terminal.hpp"
 #include <Cocoa/Cocoa.h>
 
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_metal.h"
 
-#define SCREEN_WIDTH  800
+#define SCREEN_WIDTH  1020
 #define SCREEN_HEIGHT 1020
 
 /**
@@ -41,11 +42,17 @@ ConsoleRenderer::ConsoleRenderer()
     : m_hidden(true)
 {
     this->m_logger = new ConsoleLog();
+    this->m_terminal = new ConsoleTerminal();
 }
 
 ConsoleLogI& ConsoleRenderer::GetLogger()
 {
     return *m_logger;
+}
+
+ConsoleTerminalI& ConsoleRenderer::GetTerminal()
+{
+    return *m_terminal;
 }
 
 void ConsoleRenderer::Setup()
@@ -177,8 +184,10 @@ void ConsoleRenderer::SetConsoleHidden(bool hidden)
 void ConsoleRenderer::DoGui()
 {
     DoMenuBar();
+    ImGui::ShowDemoWindow();
 
     m_logger->Render();
+    m_terminal->Render();
 }
 
 void ConsoleRenderer::DoMenuBar()
@@ -188,6 +197,11 @@ void ConsoleRenderer::DoMenuBar()
         if (ImGui::BeginMenu("Log"))
         {
             m_logger->ToggleVisibility();
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Console"))
+        {
+            m_terminal->ToggleVisibility();
             ImGui::EndMenu();
         }
         ImGui::EndMainMenuBar();
