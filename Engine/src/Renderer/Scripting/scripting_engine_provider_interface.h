@@ -10,6 +10,7 @@
 
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
+#include "common.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -144,7 +145,7 @@ namespace engine
                                                                                     \
             if (luaL_newmetatable(L, tableName.c_str()))                            \
             {                                                                       \
-                printf("Creating LUA Table for className:%s\n", tableName.c_str()); \
+                LOGGER->Log("Creating LUA Table for className:%s", tableName.c_str()); \
                 lua_pushvalue(L, -1);                                               \
                 lua_setfield(L, -2, "__index");                                     \
                 std::vector<luaL_Reg> functions = ScriptingInterfaceFunctions();    \

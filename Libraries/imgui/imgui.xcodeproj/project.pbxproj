@@ -20,6 +20,7 @@
 		7FB8240F2788F8B5008F0F7A /* imgui_impl_osx.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824092788F8B5008F0F7A /* imgui_impl_osx.h */; };
 		7FB824102788F8B5008F0F7A /* imgui_impl_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8240A2788F8B5008F0F7A /* imgui_impl_osx.mm */; };
 		7FB824142788F98E008F0F7A /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB824132788F98E008F0F7A /* imgui_draw.cpp */; };
+		7FB8241627890150008F0F7A /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241527890150008F0F7A /* imgui_demo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		7FB824092788F8B5008F0F7A /* imgui_impl_osx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_osx.h; path = backends/imgui_impl_osx.h; sourceTree = "<group>"; };
 		7FB8240A2788F8B5008F0F7A /* imgui_impl_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imgui_impl_osx.mm; path = backends/imgui_impl_osx.mm; sourceTree = "<group>"; };
 		7FB824132788F98E008F0F7A /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
+		7FB8241527890150008F0F7A /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 		7FB823E92788F886008F0F7A = {
 			isa = PBXGroup;
 			children = (
+				7FB8241527890150008F0F7A /* imgui_demo.cpp */,
 				7FB824132788F98E008F0F7A /* imgui_draw.cpp */,
 				7FB824082788F8B5008F0F7A /* imgui_impl_metal.h */,
 				7FB824062788F8B5008F0F7A /* imgui_impl_metal.mm */,
@@ -157,6 +160,7 @@
 				7FB8240C2788F8B5008F0F7A /* imgui_impl_metal.mm in Sources */,
 				7FB824042788F8A3008F0F7A /* imgui_widgets.cpp in Sources */,
 				7FB824102788F8B5008F0F7A /* imgui_impl_osx.mm in Sources */,
+				7FB8241627890150008F0F7A /* imgui_demo.cpp in Sources */,
 				7FB824002788F8A3008F0F7A /* imgui.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

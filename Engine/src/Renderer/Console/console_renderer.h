@@ -19,6 +19,7 @@ namespace engine
         engine::SDL_APP m_app;
         bool m_hidden;
         bool m_isSetup;
+        ConsoleLogI *m_logger;
     public:
         ConsoleRenderer();
 
@@ -26,9 +27,12 @@ namespace engine
         void DoFrame();
         void SetConsoleHidden(bool);
 
+        ConsoleLogI& GetLogger();
+
     private:
         void SetupWindow();
         void SetupEvents();
+        void DoMenuBar();
         void SetupImGui();
         void DoGui();
     };

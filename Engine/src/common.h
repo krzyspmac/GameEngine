@@ -12,6 +12,7 @@
 #include "defs.h"
 #include "general.hpp"
 #include "common_sdl.h"
+#include "console_logger.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,5 +21,7 @@ extern "C" {
     #include "lauxlib.h"
 }
 #endif
+
+#define LOGGER ConsoleLog::Shared()
 
 #endif // COMMON_H_HEADER_GUARD

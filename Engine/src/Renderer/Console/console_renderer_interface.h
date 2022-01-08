@@ -9,10 +9,30 @@
 #define console_renderer_hpp
 
 #include "common.h"
-#include "engine_provider_interface.h"
 
 namespace engine
 {
+    /**
+     Console part specific.
+     */
+    class ConsoleWindowI
+    {
+    public:
+        virtual void ToggleVisibility() = 0;
+
+    };
+
+    /**
+     Logger specifif.
+     */
+    class ConsoleLogI: public ConsoleWindowI
+    {
+    public:
+        virtual void Log(const char* fmt, ...) = 0;
+        virtual void Render() = 0;
+        virtual void ToggleVisibility() = 0;
+    };
+
     class ConsoleRendererI
     {
     public:
@@ -21,6 +41,17 @@ namespace engine
         virtual void DoFrame() = 0;
 
         virtual void SetConsoleHidden(bool) = 0;
+
+        virtual ConsoleLogI& GetLogger() = 0;
+    };
+
+    /**
+     Defines the imgui renderer for a specific part
+     */
+    class ConsoleAppRendererI
+    {
+    public:
+        ConsoleAppRendererI();
     };
 };
 
