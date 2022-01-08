@@ -8,6 +8,7 @@
 #include "sprite_atlas.hpp"
 #include "engine.hpp"
 #include "cJSON.h"
+#include "easy.h"
 
 using namespace engine;
 
@@ -16,6 +17,7 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
 {
     std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonFilename));
 
+    LOGGER().Log("SpriteAtlas:Load <= json=%s, texture=%s", jsonFilename.c_str(), textureFilename.c_str());
     TextureI *texture = GetMainEngine()->LoadTexture(textureFilename);
     if (texture)
     {
@@ -53,7 +55,17 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
 
             m_filename = jsonFilename;
             cJSON_Delete(root);
+
+            LOGGER().Log("SpriteAtlas:Load >= loaded %d items.", m_items.size());
+        } // jsonSrouce
+        else
+        {
+            LOGGER().Log("SpriteAtlas:Load <= json load failed");
         }; // jsonSrouce
+    } // texture
+    else
+    {
+        LOGGER().Log("SpriteAtlas:Load <= texture load failed");
     }; // texture
 }
 
