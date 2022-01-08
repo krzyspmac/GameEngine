@@ -52,13 +52,10 @@ void ScriptingEngine::closeState()
 
 void ScriptingEngine::loadFile(FileStreamI *bufferStream)
 {
-//    const char* txt = (const char*)bufferStream->GetMemory();
-//    char p[55000];
-//    memcpy_s(p, 55000, txt, bufferStream->GetSize());
-    size_t tt = bufferStream->GetSize();
-//    size_t tt = strlen(txt);
+    auto buffer = bufferStream->ReadBufferString();
+    const char *str = buffer.c_str();
 
-    if (luaL_loadbufferx(this->L, (const char*)bufferStream->GetMemory(), /*bufferStream->GetSize()*/tt, "script", NULL) == 0)
+    if (luaL_loadbufferx(this->L, str, strlen(str), "script", NULL) == 0)
     {
         // Call priming lua_pcall
         int iErr = lua_pcall(L, 0, 0, 0);

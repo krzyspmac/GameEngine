@@ -80,17 +80,10 @@ void EngineProvider::RenderPresent()
 TextureI *EngineProvider::LoadTexture(std::string filename, FileStreamI *stream)
 {
     SDL_Texture *textureHandle;
-
-//    SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
-//    if (!ops)
-//    {
-//        return nullptr;
-//    }
-//
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename.c_str());
-//    textureHandle = IMG_LoadTexture_RW(m_engineHandle->renderer, ops, 1);
-    textureHandle = IMG_LoadTexture(m_engineHandle->renderer, filename.c_str());
 
+    auto ops = stream->CreateRWOps();
+    textureHandle = IMG_LoadTexture_RW(m_engineHandle->renderer, ops.get(), 0);
     if (textureHandle != NULL)
     {
         Texture *texture = new Texture(textureHandle, filename);

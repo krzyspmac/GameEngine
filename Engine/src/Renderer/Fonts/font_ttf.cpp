@@ -26,13 +26,13 @@ FontTTF::FontTTF(engine::SDL_APP *engineHandle, std::string filename, FileStream
 
     LOGGER().Log("Loading font %s", filename.c_str());
 
-    SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
-    if (!ops)
+    auto ops = stream->CreateRWOps();
+    if (ops == nullptr || ops.get() == nullptr)
     {
         return;
     }
     
-    m_font = TTF_OpenFontRW(ops, 1, FONT_SIZE*5); //TTF_OpenFont(filename.c_str(), FONT_SIZE);
+    m_font = TTF_OpenFontRW(ops.get(), 0, FONT_SIZE*5); //TTF_OpenFont(filename.c_str(), FONT_SIZE);
     if (m_font == NULL)
     {
         std::cout << "Could not open font " << filename << std::endl;

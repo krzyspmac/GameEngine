@@ -21,14 +21,15 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
     TextureI *texture = GetMainEngine()->LoadTexture(textureFilename);
     if (texture)
     {
-        char *jsonSrouce = (char*)stream.get()->GetMemory();
-        if (jsonSrouce)
+        auto buffer = stream->ReadBufferString();
+        const char *jsonSource = buffer.c_str();
+        if (jsonSource)
         {
             cJSON *root, *frames, *node, *singleFrame;
             char *filename, *rotated;
             int x, y, w, h;
 
-            root = cJSON_Parse(jsonSrouce);
+            root = cJSON_Parse(jsonSource);
             if (root)
             {
                 frames = cJSON_GetObjectItem(root, "frames");
