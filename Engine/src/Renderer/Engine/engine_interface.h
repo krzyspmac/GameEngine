@@ -26,6 +26,7 @@
 #include "release_pool.hpp"
 #include "animation_group_factory.hpp"
 #include "console_renderer.h"
+#include "texture_manager.hpp"
 
 namespace engine
 {
@@ -34,6 +35,7 @@ namespace engine
     public:
         ///
         EngineI(EngineProviderI &engineProvider,
+                TextureManager &textureManager,
                 FileAccessI &fileAccess,
                 ScriptingEngineI &scriptingEngine,
                 EventProviderI &eventProvider,
@@ -46,6 +48,7 @@ namespace engine
                 Size viewportSize
         )
         :       m_engineProvider(engineProvider),
+                m_textureManager(textureManager),
                 m_fileAccess(fileAccess),
                 m_scriptingEngine(scriptingEngine),
                 m_eventProvider(eventProvider),
@@ -89,35 +92,6 @@ namespace engine
     /// Also multiple methods should be called on-demant by the
     /// main renderer-entry that is platform specific.
 
-    /// Textures
-    public:
-        /// A concrete instance should load the texture.
-        /// If a texture exists for a given name the existing
-        /// texture will be returned.
-        /// The engine takes the ownership of the texture and add it to the
-        /// textures cache. You (the caller) must remove the
-        /// texture by using `UnloadTexture` or `DisposeAllTextures`.
-        virtual TextureI *LoadTexture(std::string name) = 0;
-
-        /// A concrete instance should create the texture. The texture
-        /// *is not* added to a cache and the ownershop is passed onto the
-        /// caller.
-        virtual TextureTargetI *CreateTargetTexture(int width, int height) = 0;
-
-        /// A concrete instance should get the existing texture
-        /// by comparing texture name. Otherwise returns NULL.
-        /// In such a case you must load the texture by using
-        /// `LoadTexture`.
-        virtual TextureI *GetTexture(std::string name) = 0;
-
-        /// A concrete instance should unlaod the texture and
-        /// remove it from the cache.
-        virtual void UnloadTexture(TextureI *texture) = 0;
-
-        /// A concrete instance should unlaod all the textures and
-        /// remove them from the cache.
-        virtual void DisposeAllTextures() = 0;
-
     /// Fonts
     public:
 
@@ -146,6 +120,9 @@ namespace engine
 
     /// Managers
     public:
+        ///
+        TextureManager &getTextureManager() { return m_textureManager; };
+
         ///
         CharacterManager& getCharacterManager() { return m_characterManager; };
 
@@ -197,6 +174,7 @@ namespace engine
         EventProviderI &m_eventProvider;
         EventsManager &m_eventsManager;
 
+        TextureManager &m_textureManager;
         SpriteAtlasManager &m_spriteAtlasManager;
         SpriteRendererManager &m_spriteRendererManager;
         SceneManager &m_sceneManager;

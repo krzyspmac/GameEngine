@@ -27,6 +27,7 @@ namespace engine
     public:
         ///
         Engine(EngineProviderI &engine,
+               TextureManager &textureManager,
                FileAccessI &fileAccess,
                ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
@@ -49,12 +50,6 @@ namespace engine
         void SetCapRate(int fps);
 
     public:
-        TextureI *LoadTexture(std::string name);
-        TextureTargetI *CreateTargetTexture(int width, int height);
-        TextureI *GetTexture(std::string name);
-        void UnloadTexture(TextureI *texture);
-        void DisposeAllTextures();
-
         FontI *LoadFont(std::string name);
         FontI *GetFont(std::string name);
         void DisposeAllFonts();
@@ -70,7 +65,6 @@ namespace engine
         void MouseClicked();
 
     private:
-        std::vector<std::unique_ptr<TextureI>> m_textures;
         std::vector<std::unique_ptr<FontI>> m_fonts;
         std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;
         std::vector<std::unique_ptr<SpriteDrawI>> m_spriteDraws;

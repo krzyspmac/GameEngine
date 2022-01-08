@@ -145,7 +145,7 @@ FontBitmapGlyph::FontBitmapGlyph(KeyValueProperties& properties)
 FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::string fontAtlas)
     : FontI(fntFile)
     , m_font(FontBitmapDescriptor(fntFile, fontAtlas))
-    , m_texture(GetMainEngine()->LoadTexture(fontAtlas))
+    , m_texture(GetMainEngine()->getTextureManager().LoadTexture(fontAtlas))
 {
 
 }

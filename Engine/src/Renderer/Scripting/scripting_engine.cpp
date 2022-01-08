@@ -208,7 +208,7 @@ int ScriptingEngine::L_textureLoad(lua_State *L)
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
 
-    TextureI *texture = GetMainEngine()->LoadTexture(msgX);
+    TextureI *texture = GetMainEngine()->getTextureManager().LoadTexture(msgX);
     lua_pushlightuserdata(L, texture);
 
     return 1;
@@ -222,7 +222,7 @@ int ScriptingEngine::L_unloadTexture(lua_State *L)
 
     if (texturePointer != NULL)
     {
-        GetMainEngine()->UnloadTexture(texturePointer);
+        GetMainEngine()->getTextureManager().UnloadTexture(texturePointer);
     }
 
     return 0;

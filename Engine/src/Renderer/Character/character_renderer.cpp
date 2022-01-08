@@ -18,7 +18,7 @@ CharacterRenderer::CharacterRenderer(SpriteAtlasI *characterAtlas, int scale)
 
 CharacterRenderer::~CharacterRenderer()
 {
-    GetMainEngine()->UnloadTexture(m_bufferTexture);
+    GetMainEngine()->getTextureManager().UnloadTexture(m_bufferTexture);
 }
 
 CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState direction)
@@ -101,7 +101,7 @@ void CharacterRenderer::PrepareCharacter()
     m_bodyWidth = std::max(maxBodyWidth, maxHeadWidth);
     m_bodyHeight = maxBodyHeight + maxHeadHeight;
     m_headHeadHeight = maxHeadHeight;
-    m_bufferTexture = GetMainEngine()->CreateTargetTexture(m_bodyWidth, m_bodyHeight);
+    m_bufferTexture = GetMainEngine()->getTextureManager().CreateTargetTexture(m_bodyWidth, m_bodyHeight);
 }
 
 void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimating)
