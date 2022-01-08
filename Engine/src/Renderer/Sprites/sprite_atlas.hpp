@@ -15,7 +15,6 @@
 namespace engine
 {
     /**
-     \ingroup API_EXPOSED
      */
     class SpriteAtlas: public SpriteAtlasI
     {
@@ -28,7 +27,6 @@ namespace engine
 
         /**
          Get the specific atlas item for the name.
-         \ingroup API_EXPOSED
          */
         SpriteAtlasItemI *GetItemForName(std::string name);
 

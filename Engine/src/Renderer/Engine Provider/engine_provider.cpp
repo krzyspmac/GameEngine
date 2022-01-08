@@ -7,7 +7,6 @@
 
 #include "engine_provider.hpp"
 #include "texture.hpp"
-#include "font_ttf.hpp"
 #include "texture_target.hpp"
 #include "SDL.h"
 
@@ -235,17 +234,6 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Ve
         SDL_RenderCopyExF(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPointF, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
         SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
-}
-
-FontI *EngineProvider::LoadFont(std::string name, FileStreamI *stream)
-{
-    return (FontI*)new FontTTF(m_engineHandle, name, stream);
-}
-
-void EngineProvider::DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align)
-{
-    FontTTF *fontImpl = (FontTTF*)font;
-    fontImpl->DrawText(m_engineHandle, text, x, y, r, g, b, align);
 }
 
 void EngineProvider::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)

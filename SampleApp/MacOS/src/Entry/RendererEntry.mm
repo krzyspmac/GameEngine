@@ -24,6 +24,7 @@ RendererEntry::RendererEntry()
     FileAccess *fa = new FileAccess();
     TextureManager *tm = new TextureManager();
     EngineProvider *ep = new EngineProvider(&m_app);
+    FontManager *fm  = new FontManager();
     ScriptingEngine *se = new ScriptingEngine();
     EventProvider *eventProvider = new EventProvider();
     EventsManager *eventsManager = new EventsManager(*eventProvider, *ep);
@@ -37,6 +38,7 @@ RendererEntry::RendererEntry()
     this->m_fileAccess = fa;
     this->m_textureManager = tm;
     this->m_engineProvider = ep;
+    this->m_fontManager = fm;
     this->m_scriptingEngine = se;
     this->m_eventProvider = eventProvider;
     this->m_eventsManager = eventsManager;
@@ -49,7 +51,7 @@ RendererEntry::RendererEntry()
     Size viewportSize;
     viewportSize.width = SCREEN_WIDTH;
     viewportSize.height = SCREEN_HEIGHT;
-    this->m_engine = new Engine(*this->m_engineProvider, *this->m_textureManager, *this->m_fileAccess, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, *this->m_consoleRenderer, viewportSize);
+    this->m_engine = new Engine(*this->m_engineProvider, *this->m_textureManager, *this->m_fileAccess, *this->m_fontManager, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, *this->m_consoleRenderer, viewportSize);
 }
 
 int RendererEntry::initSDL()

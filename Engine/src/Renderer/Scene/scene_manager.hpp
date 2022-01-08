@@ -29,15 +29,12 @@ namespace engine
 
     public:
         /// Creates a new scene. Removes the old one and removes it data.
-        /// \ingroup API_EXPOSED
         Scene* SceneCreateNew();
 
         /// Get the current scene.
-        /// \ingroup API_EXPOSED
         Scene* SceneGetCurrent() { return m_currentScene.get(); };
 
         /// Unload the current scene.
-        /// \ingroup API_EXPOSED
         void SceneUnloadCurrent();
         
     private:

@@ -110,16 +110,6 @@ namespace engine
         /// is a the bottom.
         virtual void DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal) = 0;
 
-    /// Fonts
-    public:
-
-        /// Load a font. The ownership
-        /// of the texture is passed to the caller.
-        virtual FontI *LoadFont(std::string name, FileStreamI *) = 0;
-
-        /// Draws a text using a specified font.
-        virtual void DrawText(FontI *font, std::string text, int x, int y, int r, int g, int b, TEXT_ALIGNMENT align) = 0;
-
     /// Effects
     public:
 

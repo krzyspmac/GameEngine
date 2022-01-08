@@ -14,6 +14,7 @@
 #include "common_engine_impl.h"
 #include "vector2.hpp"
 #include "texture_interface.h"
+#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -21,6 +22,7 @@ namespace engine
      Defines the bitmap font properties.
      Not all properties are supported atm.
      \see https://www.angelcode.com/products/bmfont/doc/file_format.html
+     @private
      */
     typedef struct
     {
@@ -29,6 +31,8 @@ namespace engine
         Vector2 spacing;
     } FontBitmapDescriptorInfo;
 
+    /** @private
+     */
     typedef struct
     {
         int lineHeight;
@@ -37,6 +41,8 @@ namespace engine
         int scaleH;
     } FontBitmapDescriptorCommon;
 
+    /** @private
+     */
     typedef struct
     {
         std::string m_textureFilename;
@@ -44,6 +50,8 @@ namespace engine
         FontBitmapDescriptorCommon common;
     } FontBitmapInfo;
 
+    /** @private
+     */
     class FontBitmapGlyph
     {
         int m_characterId;
@@ -62,6 +70,8 @@ namespace engine
         auto& GetXAdvance() { return m_xAdvance; };
     };
 
+    /** @private
+     */
     typedef struct
     {
         int first;
@@ -72,6 +82,7 @@ namespace engine
     /**
      Declares a concrete instance for rendering bitmpa fonts
      using a sprite atlas sheet and a .fnt file in text format.
+     @private
      */
     class FontBitmapDescriptor
     {
@@ -91,7 +102,8 @@ namespace engine
          @param fontAtlas   - path to the bitmap containing the font sprite sheet.
          */
         FontBitmapDescriptor(std::string fntFile, std::string fontAtlas);
-
+        ~FontBitmapDescriptor() { };
+        
         auto& GetDescriptor() { return m_sDescriptor; };
 
         FontBitmapGlyph *GetGlyph(char&);
@@ -102,7 +114,7 @@ namespace engine
     /**
      Declares the rendering engine for the font.
      */
-    class FontBitmapRepresentation: FontI
+    class FontBitmapRepresentation: public FontI
     {
         FontBitmapDescriptor m_font;
         TextureI *m_texture;
@@ -114,7 +126,28 @@ namespace engine
          */
         FontBitmapRepresentation(std::string fntFile, std::string fontAtlas);
 
-        void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align);
+        /** @private */
+        virtual ~FontBitmapRepresentation() { };
+
+        /**
+         Draw the font at a given position with a given color.
+
+         @param r       - red; 0-255
+         @param g       - green; 0-255
+         @param b       - blue; 0-255
+         @param a       - alpha; 0-255
+         @param align   - left|center|right (string)
+
+         \code{lua}
+         local font = FontManager:LoadFont("someFont.fnt", "someFont.png")
+         font:DrawAt("Sample Text", 0, 0, 255, 0, 0, 255, "left")
+         \endcode
+         */
+        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align);
+
+    private: /** scripting */
+        /** @private */
+        SCRIPTING_INTERFACE_HEADERS(FontBitmapRepresentation);
     };
 };
 

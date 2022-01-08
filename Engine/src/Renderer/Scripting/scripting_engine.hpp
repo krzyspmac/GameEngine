@@ -62,13 +62,6 @@ namespace engine
         /// drawTexture(texture_handle, x, y)
         static int L_drawTexture(lua_State *L);
 
-        /// L_loadFont(font_name)
-        /// returns: font_handle
-        static int L_loadFont(lua_State *L);
-
-        /// drawText(font_handle, text, x, y, r, g, b, align: "left"|"center"|"right")
-        static int L_drawText(lua_State *L);
-
         /// L_spriteAtlasLoad(json_path, texture_path)
         /// returns: atlas_handle
         static int L_spriteAtlasLoad(lua_State *L);

@@ -22,6 +22,7 @@
 #include "sprite_renderer_manager.hpp"
 #include "console_renderer.h"
 #include "texture_manager.hpp"
+#include "font_manager.hpp"
 
 namespace engine
 {
@@ -50,6 +51,7 @@ private:
     engine::FileAccessI *m_fileAccess;
     engine::TextureManager *m_textureManager;
     engine::EngineProviderI *m_engineProvider;
+    engine::FontManager *m_fontManager;
     engine::ScriptingEngineI *m_scriptingEngine;
     engine::EventProviderI *m_eventProvider;
     engine::EventsManager *m_eventsManager;

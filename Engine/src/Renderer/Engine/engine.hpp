@@ -30,6 +30,7 @@ namespace engine
         Engine(EngineProviderI &engine,
                TextureManager &textureManager,
                FileAccessI &fileAccess,
+               FontManager &fontManager,
                ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
                EventsManager &eventsManager,
@@ -49,11 +50,6 @@ namespace engine
 
     public:
         void SetCapRate(int fps);
-
-    public:
-        FontI *LoadFont(std::string name);
-        FontI *GetFont(std::string name);
-        void DisposeAllFonts();
 
     private:
         void RenderScene();

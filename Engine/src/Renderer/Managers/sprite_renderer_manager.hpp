@@ -27,19 +27,15 @@ namespace engine
     public:
         /// Creates or gets a drawing handle for a sprite.
         /// The result is cached.
-        /// \ingroup API_EXPOSED
         SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
 
         /// Creates or gets a drawing handle for a sprite
-        /// \ingroup API_EXPOSED
         SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
 
         /// Unloads the sprite draw.
-        /// \ingroup API_EXPOSED
         void SpriteDrawUnload(SpriteDrawI *spriteDraw);
 
         /// Unloads all.
-        /// \ingroup API_EXPOSED
         void SpriteDrawDisposeAll();
 
     private:

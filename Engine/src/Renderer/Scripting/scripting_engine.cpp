@@ -17,6 +17,7 @@
 #include "time.hpp"
 #include "engine_state.hpp"
 #include "animation_group_factory.hpp"
+#include "font_manager.hpp"
 
 using namespace engine;
 
@@ -96,12 +97,6 @@ void ScriptingEngine::registerFunctions()
     lua_pushcclosure(L, &ScriptingEngine::L_unloadTexture, 0);
     lua_setglobal (L, "unloadTexture");
 
-    lua_pushcclosure(L, &ScriptingEngine::L_loadFont, 0);
-    lua_setglobal (L, "L_loadFont");
-
-    lua_pushcclosure(L, &ScriptingEngine::L_drawText, 0);
-    lua_setglobal (L, "drawText");
-
     lua_pushcclosure(L, &ScriptingEngine::L_drawTexture, 0);
     lua_setglobal (L, "drawTexture");
 
@@ -162,6 +157,10 @@ void ScriptingEngine::registerFunctions()
     AnimationGroupFactory &animationGroupFactory = GetMainEngine()->getAnimationGroupFactory();
     animationGroupFactory.ScriptingInterfaceRegisterFunctions(L, &animationGroupFactory);
     lua_setglobal(L, "AnimationGroupFactory");
+
+    FontManager &fontManager = GetMainEngine()->getFontManager();
+    fontManager.ScriptingInterfaceRegisterFunctions(L, &fontManager);
+    lua_setglobal(L, "FontManager");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)
@@ -239,57 +238,6 @@ int ScriptingEngine::L_drawTexture(lua_State *L)
     if (texturePointer != NULL)
     {
         GetMainEngine()->getProvider().DrawTexture(texturePointer, x, y);
-    }
-
-    return 0;
-}
-
-/// L_loadFont(font_name)
-/// returns: font_handle
-int ScriptingEngine::L_loadFont(lua_State *L)
-{
-    int argc = lua_gettop(L);
-    const char *msgX = (char *) lua_tostring (L, argc);
-
-    FontI *font = GetMainEngine()->LoadFont(msgX);
-    lua_pushlightuserdata(L, font);
-
-    return 1;
-}
-
-/// drawText(font_handle, x, y, r, g, b, align: "left"|"center"|"right")
-int ScriptingEngine::L_drawText(lua_State *L)
-{
-    int argc = lua_gettop(L);
-
-    const char *alignment = (char *) lua_tostring (L, argc--);
-    int b = lua_tonumberx(L, argc--, NULL);
-    int g = lua_tonumberx(L, argc--, NULL);
-    int r = lua_tonumberx(L, argc--, NULL);
-
-    int y = lua_tonumberx(L, argc--, NULL);
-    int x = lua_tonumberx(L, argc--, NULL);
-
-    const char *text = (char *) lua_tostring (L, argc--);
-    FontI *fontPointer = (FontI*)lua_topointer(L, argc--);
-
-    if (fontPointer)
-    {
-        TEXT_ALIGNMENT align = TEXT_ALIGN_LEFT;
-        if (strcmp(alignment, "left") == 0)
-        {
-            align = TEXT_ALIGN_LEFT;
-        }
-        else if (strcmp(alignment, "center") == 0)
-        {
-            align = TEXT_ALIGN_CENTER;
-        }
-        else if (strcmp(alignment, "right") == 0)
-        {
-            align = TEXT_ALIGN_RIGHT;
-        }
-
-        GetMainEngine()->getProvider().DrawText(fontPointer, text, x, y, r, g, b, align);
     }
 
     return 0;

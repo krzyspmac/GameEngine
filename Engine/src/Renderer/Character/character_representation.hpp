@@ -20,7 +20,6 @@ namespace engine
      deal with rendering, path finder, placement and animation. This is the go-to
      class to render a character in a complete fashion.
      \see Scene
-     \ingroup API_EXPOSED
      */
     class CharacterRepresentation
     {
@@ -46,31 +45,26 @@ namespace engine
 
         /**
          Renders at position. Static. No anim.
-         \ingroup API_EXPOSED
          */
         void DrawAt(Vector2& position);
 
         /**
          Places at position. Static. No anim.
-         \ingroup API_EXPOSED
          */
         void PlaceAt(Vector2 target);
 
         /**
          Gets the current position.
-         \ingroup API_EXPOSED
          */
         Vector2& GetPosition();
 
         /**
          Sets the character scale.
-         \ingroup API_EXPOSED
          */
         void SetScale(float val);
 
         /**
          Walks to a specific place. Uses walkboxes if provided.
-         \ingroup API_EXPOSED
          */
         void WalkTo(Vector2& position);
 

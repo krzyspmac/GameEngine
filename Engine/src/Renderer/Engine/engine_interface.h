@@ -27,6 +27,7 @@
 #include "animation_group_factory.hpp"
 #include "console_renderer.h"
 #include "texture_manager.hpp"
+#include "font_manager.hpp"
 
 namespace engine
 {
@@ -37,6 +38,7 @@ namespace engine
         EngineI(EngineProviderI &engineProvider,
                 TextureManager &textureManager,
                 FileAccessI &fileAccess,
+                FontManager &fontManager,
                 ScriptingEngineI &scriptingEngine,
                 EventProviderI &eventProvider,
                 EventsManager &eventsManager,
@@ -50,6 +52,7 @@ namespace engine
         :       m_engineProvider(engineProvider),
                 m_textureManager(textureManager),
                 m_fileAccess(fileAccess),
+                m_fontManager(fontManager),
                 m_scriptingEngine(scriptingEngine),
                 m_eventProvider(eventProvider),
                 m_eventsManager(eventsManager),
@@ -92,18 +95,6 @@ namespace engine
     /// Also multiple methods should be called on-demant by the
     /// main renderer-entry that is platform specific.
 
-    /// Fonts
-    public:
-
-        /// Loads a font if not loaded previously.
-        virtual FontI *LoadFont(std::string name) = 0;
-
-        /// Gets the previously loaded font or returns nil;
-        virtual FontI *GetFont(std::string name) = 0;
-
-        /// Disposes of all fonts.
-        virtual void DisposeAllFonts() = 0;
-
     /// Animations & Periodic Updates
     public:
 
@@ -122,6 +113,9 @@ namespace engine
     public:
         ///
         TextureManager &getTextureManager() { return m_textureManager; };
+
+        ///
+        FontManager& getFontManager() { return m_fontManager; };
 
         ///
         CharacterManager& getCharacterManager() { return m_characterManager; };
@@ -175,6 +169,7 @@ namespace engine
         EventsManager &m_eventsManager;
 
         TextureManager &m_textureManager;
+        FontManager &m_fontManager;
         SpriteAtlasManager &m_spriteAtlasManager;
         SpriteRendererManager &m_spriteRendererManager;
         SceneManager &m_sceneManager;

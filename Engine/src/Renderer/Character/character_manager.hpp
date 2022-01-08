@@ -35,13 +35,11 @@ namespace engine
          in the game files as well as any other files referenced by the json.
          Loaded characters are kept in memory by the manager. No need to take
          ownership of the intances.
-         \ingroup API_EXPOSED
          */
         CharacterRepresentation* LoadCharacter(std::string jsonFilename);
 
         /**
          Unloads the character and its texture sheet.
-         \ingroup API_EXPOSED
          */
         void UnloadCharacter(CharacterRepresentation*);
 

@@ -8,6 +8,7 @@ sky = nil
 scene = nil
 truck = nil
 bg = nil
+font = nil
 
 ------------------------------------------------------------------------------------------
 -- loading functions
@@ -46,6 +47,7 @@ function loadSprites()
 	
 --	cupboardL = scene:LoadSpriteStatic(roomAtlas, "cupboard-l")
 	
+	font = FontManager:LoadFont("DialogFont_retro.fnt", "DialogFont_retro.png")
 end
 
 function animateIntro()
@@ -82,8 +84,10 @@ end
 
 function update ()
 	--L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
+--	font:DrawAt("This is a sample!", 200, 200, 255, 0, 0, 255, "left")
 end
 
 --function io.write (...)
 --	print ("mine")
+
 --end

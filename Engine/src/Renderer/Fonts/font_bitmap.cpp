@@ -197,3 +197,30 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
         }
     };
 }
+
+SCRIPTING_INTERFACE_IMPL_NAME(FontBitmapRepresentation);
+
+static int lua_FontBitmapRepresentation_DrawText(lua_State *L)
+{
+    FontBitmapRepresentation *font = ScriptingEngineI::GetScriptingObjectPtr<FontBitmapRepresentation>(L, 1);
+
+    const char *text = lua_tostring(L, 2);
+    int x = lua_tonumber(L, 3);
+    int y = lua_tonumber(L, 4);
+    int r = lua_tonumber(L, 5);
+    int g = lua_tonumber(L, 6);
+    int b = lua_tonumber(L, 7);
+    int a = lua_tonumber(L, 8);
+    //const char *align = lua_tostring(L, 9); // not yet supported
+
+    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT);
+    return 0;
+}
+
+std::vector<luaL_Reg> FontBitmapRepresentation::ScriptingInterfaceFunctions()
+{
+    std::vector<luaL_Reg> result({
+        { "DrawAt", &lua_FontBitmapRepresentation_DrawText}
+    });
+    return result;
+}

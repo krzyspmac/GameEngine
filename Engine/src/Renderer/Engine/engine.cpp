@@ -6,7 +6,6 @@
 //
 
 #include "engine.hpp"
-#include "font_ttf.hpp"
 #include "font_bitmap.hpp"
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas.hpp"
@@ -41,6 +40,7 @@ engine::EngineI *GetMainEngine()
 Engine::Engine(EngineProviderI &engineProvider,
                TextureManager &textureManager,
                FileAccessI &fileAccess,
+               FontManager &fontManager,
                ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
                EventsManager &eventsManager,
@@ -51,7 +51,7 @@ Engine::Engine(EngineProviderI &engineProvider,
                ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-: EngineI(engineProvider, textureManager, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
+: EngineI(engineProvider, textureManager, fileAccess, fontManager, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -60,8 +60,6 @@ Engine::Engine(EngineProviderI &engineProvider,
 
 Engine::~Engine()
 {
-    DisposeAllFonts();
-
     delete m_bufferTexture;
 }
 
@@ -233,39 +231,4 @@ void Engine::ApplyScaleTransformations()
 
 void Engine::MouseClicked()
 {
-}
-
-FontI *Engine::LoadFont(std::string name)
-{
-    FontI *result = GetFont(name);
-    if (!result)
-    {
-        std::unique_ptr<FileStreamI> stream(m_fileAccess.GetAccess(name));
-        result = m_engineProvider.LoadFont(name, stream.get());
-        if (result)
-        {
-            m_fonts.emplace_back(std::move(result));
-            return result;
-        }
-    }
-    return result;
-}
-
-FontI *Engine::GetFont(std::string name)
-{
-    for(auto it = std::begin(m_fonts); it != std::end(m_fonts); ++it)
-    {
-        FontI *item = it->get();
-        if (item->getFontName().compare(name) == 0)
-        {
-            return item;
-        }
-    }
-
-    return NULL;
-}
-
-void Engine::DisposeAllFonts()
-{
-    std::cout << "DisposeAllFonts not implemented" << std::endl;
 }

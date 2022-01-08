@@ -16,7 +16,6 @@ namespace engine
 
     /**
      Default game character.
-     \ingroup API_EXPOSED
      */
     class Character: public CharacterI, public ScriptingInterface
     {
@@ -32,13 +31,11 @@ namespace engine
     public:
         /**
          Set the scale.
-         \ingroup API_EXPOSED
          */
         void SetScale(float scale);
 
         /**
          Draw the character at position.
-         \ingroup API_EXPOSED
          */
         void Draw(Vector2& position);
 
