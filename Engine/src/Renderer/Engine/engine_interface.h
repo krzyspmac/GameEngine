@@ -25,6 +25,7 @@
 #include "engine_state.hpp"
 #include "release_pool.hpp"
 #include "animation_group_factory.hpp"
+#include "console_renderer.h"
 
 namespace engine
 {
@@ -41,6 +42,7 @@ namespace engine
                 SceneManager &sceneManager,
                 SpriteAtlasManager &spriteAtlasManager,
                 SpriteRendererManager &spriteRendererManager,
+                ConsoleRendererI &consoleRenderer,
                 Size viewportSize
         )
         :       m_engineProvider(engineProvider),
@@ -53,6 +55,7 @@ namespace engine
                 m_spriteAtlasManager(spriteAtlasManager),
                 m_spriteRendererManager(spriteRendererManager),
                 m_viewportSize(viewportSize),
+                m_consoleRenderer(consoleRenderer),
                 m_time(engineProvider)
         { }
 
@@ -73,6 +76,8 @@ namespace engine
     /// States
     public:
         Size &GetViewport() { return m_viewportSize; };
+
+        Size &GetRendererOutputSize() { return m_rendererOutputSize; };
 
     /// Behaviour
     public:
@@ -177,11 +182,15 @@ namespace engine
         ///
         AnimationGroupFactory& getAnimationGroupFactory() { return m_animationGroupFactory; };
 
+        ///
+        ConsoleRendererI& getConsoleRenderer() { return m_consoleRenderer; };
+
     /// Other states
     public:
 
     protected:
         Size m_viewportSize;
+        Size m_rendererOutputSize;
         EngineProviderI &m_engineProvider;
         FileAccessI &m_fileAccess;
         ScriptingEngineI &m_scriptingEngine;
@@ -201,6 +210,8 @@ namespace engine
         EngineState m_engineState;
         AnimationGroupFactory m_animationGroupFactory;
         MemoryReleasePool m_releasePool;
+
+        ConsoleRendererI &m_consoleRenderer;
     };
 
 };

@@ -23,6 +23,8 @@ FontTTF::FontTTF(engine::SDL_APP *engineHandle, std::string filename, FileStream
 {
     std::cout << "Loading font " << filename << std::endl;
 
+    LOGGER->Log("Loading font %s", filename.c_str());
+
     SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
     if (!ops)
     {

@@ -11,6 +11,7 @@
 #include "event_provider_interface.h"
 #include "engine_provider_interface.h"
 #include "common_engine_impl.h"
+#include "common.h"
 
 #include <iostream>
 
@@ -57,6 +58,12 @@ namespace engine
 
     ///
     ///
+    class EventHolderSDLEvent: public EventHolderLambda<SDL_Event> {
+        using EventHolderLambda::EventHolderLambda;
+    };
+
+    ///
+    ///
     class EventsManager
     {
     public:
@@ -71,12 +78,14 @@ namespace engine
     public:
         void RegisterMouseMovedEvents(EventHolderMouseMoved);
         void RegisterMouseClickedEvents(EventHolderMouseClicked);
+        void RegisterGeneralInputEvents(EventHolderSDLEvent);
 
     private:
         EventProviderI &m_eventProvider;
         EngineProviderI &m_engineProvider;
         std::vector<EventHolderMouseMoved> m_mouseMoves;
         std::vector<EventHolderMouseClicked> m_mouseClicks;
+        std::vector<EventHolderSDLEvent> m_generalInput;
     };
 
 };

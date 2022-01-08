@@ -57,6 +57,11 @@ void EngineProvider::GetWindowSize(int *w, int *h)
     SDL_GetWindowSize(m_engineHandle->window, w, h);
 }
 
+void EngineProvider::GetRendererOutputSize(int *w, int *h)
+{
+    SDL_GetRendererOutputSize(m_engineHandle->renderer, w, h);
+}
+
 void EngineProvider::SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     SDL_SetRenderDrawColor(m_engineHandle->renderer, r, g, b, a);

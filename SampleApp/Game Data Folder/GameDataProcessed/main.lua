@@ -49,19 +49,21 @@ function loadSprites()
 end
 
 function animateIntro()
---	local group = AnimationGroupFactory:GroupAnimations(
---	, 	function() -- on finish
---			character:SetHidden(false)
---		end
---	)
---	group:Start()
+	local group = AnimationGroupFactory:GroupAnimations(
+		'sequence',
+		PropertyAnimatorFactory:FadeIn(sky, 1, 3)
+	, 	function() -- on finish
+			character:SetHidden(false)
+		end
+	)
+	group:Start()
 end
 
 ------------------------------------------------------------------------------------------
 -- event handling functions
 
 function mouseDown(x, y)
-	MemoryReleasePool:Drain()
+--	MemoryReleasePool:Drain()
 
 --	if initialAnimationDone ~= true then
 --		return
@@ -81,3 +83,7 @@ end
 function update ()
 	--L_spriteDrawRender(backgroundSkyRenderer, 0, 0)
 end
+
+--function io.write (...)
+--	print ("mine")
+--end

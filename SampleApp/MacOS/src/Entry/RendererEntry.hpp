@@ -20,6 +20,7 @@
 #include "scene_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
+#include "console_renderer.h"
 
 namespace engine
 {
@@ -54,6 +55,7 @@ private:
     engine::SceneManager *m_sceneManager;
     engine::SpriteAtlasManager *m_spriteAtlasManager;
     engine::SpriteRendererManager *m_sprireRendererManager;
+    engine::ConsoleRenderer *m_consoleRenderer;
     engine::Engine *m_engine;
     engine::SDL_APP m_app;
 };

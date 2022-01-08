@@ -17,7 +17,6 @@
 #include "engine_provider.hpp"
 #include "character_mover.hpp"
 #include "polygon_loader.hpp"
-#include "console_view.hpp"
 #include "animation_curve_factory.hpp"
 
 #ifdef __cplusplus
@@ -48,9 +47,10 @@ Engine::Engine(EngineProviderI &engineProvider,
                SceneManager &sceneManager,
                SpriteAtlasManager &spriteAtlasManager,
                SpriteRendererManager &spriteRendererManager,
+               ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, viewportSize), m_viewportScale(1), m_consoleView(nullptr)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -65,7 +65,6 @@ Engine::~Engine()
 //    SpriteDrawDisposeAll();
 
     delete m_bufferTexture;
-    delete m_consoleView;
 }
 
 void Engine::setup()
@@ -91,10 +90,6 @@ void Engine::setup()
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
 
-#if USES_CONSOLE
-    m_consoleView = new ConsoleView(m_fpsFont, '~');
-#endif
-
     // Register events listeners. For simple events - use lambda.
     // Complex events get their own handler.
 
@@ -108,6 +103,10 @@ void Engine::setup()
         m_mousePosition.x -= m_viewportOffset.x;
         m_mousePosition.y -= m_viewportOffset.y;
     }));
+
+#if SHOW_CONSOLE
+    m_consoleRenderer.SetConsoleHidden(false);
+#endif
 }
 
 void Engine::SetCapRate(int fps)
@@ -118,52 +117,7 @@ void Engine::SetCapRate(int fps)
 
 int Engine::doInput()
 {
-//    m_eventListener.DoInput();
-//    m_eventProvider.DoEvent();
-
     int result = m_eventsManager.DoEvents();
-
-//    EVENT event;
-//    while (m_eventProvider.PollEvent(&event))
-//    {
-//        switch (event)
-//        {
-//            case EVENT_NONE:
-//            {
-//                break;
-//            }
-//
-//            case EVENT_KEYDOWN:
-//            {
-//                m_character->Change();
-//                break;
-//            }
-//
-//            case EVENT_MOUSEMOVE:
-//            {
-//                break;
-//            }
-//
-//            case EVENT_MOUSEUP:
-//            {
-//                MouseClicked();
-//                break;
-//            }
-//
-//            case EVENT_QUIT:
-//            {
-//                return 1;
-//            }
-//        };
-//    };
-
-//    m_engineProvider.GetMousePosition(&m_mousePosition.x, &m_mousePosition.y);
-//    m_mousePosition.x /= m_viewportScale;
-//    m_mousePosition.y /= m_viewportScale;
-//
-//    m_mousePosition.x -= m_viewportOffset.x;
-//    m_mousePosition.y -= m_viewportOffset.y;
-
     return result;
 }
 
@@ -171,6 +125,8 @@ void Engine::update()
 {
     // Update the time object
     m_time.PreUpdate();
+
+    m_engineProvider.GetRendererOutputSize(&m_rendererOutputSize.width, &m_rendererOutputSize.height);
 
     // Calculate performance
     MeasurePerformanceStart();
@@ -201,12 +157,6 @@ void Engine::update()
     m_engineProvider.RenderSetScale(1.0f, 1.0f);
     RenderSceneTexts();
 
-    // Render the console if possible
-    if (m_consoleView != nullptr && m_consoleView->ShouldPresentConsole())
-    {
-        //m_consoleView->RenderConsole();
-    }
-
     // Render the current stack
     m_engineProvider.RenderPresent();
 
@@ -215,6 +165,11 @@ void Engine::update()
 
     // Calculate performance
     MeasurePerformanceEnd();
+
+#if SHOW_CONSOLE
+    // Render the console if needed
+    m_consoleRenderer.DoFrame();
+#endif
 }
 
 void Engine::MeasurePerformanceStart()
@@ -230,7 +185,7 @@ void Engine::MeasurePerformanceEnd()
     m_milliseconds = m_seconds * 1000;
     m_previousFps = 1.0f / m_seconds;
 
-    m_engineProvider.Delay(MAX(0, floor(m_fpsCapInverse - m_milliseconds)));
+    //m_engineProvider.Delay(MAX(0, floor(m_fpsCapInverse - m_milliseconds)));
 }
 
 void Engine::RenderScene()

@@ -19,7 +19,6 @@
 #include "texture_target.hpp"
 #include "character_mover_interface.h"
 #include "path_finder.hpp"
-#include "console_view_interface.h"
 
 namespace engine
 {
@@ -36,6 +35,7 @@ namespace engine
                SceneManager &sceneManager,
                SpriteAtlasManager &spriteAtlasManager,
                SpriteRendererManager &spriteRendererManager,
+               ConsoleRendererI &consoleRenderer,
                Size viewportSize
         );
         ~Engine();
@@ -93,8 +93,6 @@ namespace engine
         char m_fpsBuffer[256];
         FontI *m_fpsFont;
     #endif
-        // Console
-        ConsoleViewI *m_consoleView;
     };
 }
 

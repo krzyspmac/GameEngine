@@ -40,9 +40,9 @@ namespace engine
          a value from min to max over certain seconds. Takes
          two functions as parameters (update and end).
          
-         @param min -   animate from this value
-         @param max -   animate to this value
-         @param seconds - animate over this many seconds
+         param min -   animate from this value
+         param max -   animate to this value
+         param seconds - animate over this many seconds
          @param delay - initial delay in seconds
          @param functionUpdateRef - script function that gets called
          each time an update is needed (linked to fps). Reveived

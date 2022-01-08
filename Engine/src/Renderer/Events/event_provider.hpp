@@ -20,7 +20,7 @@ namespace engine
 
     public:
         void DoEvent();
-        int PollEvent(EVENT *event);
+        int PollEvent(EVENT *event, SDL_Event *originalEvent);
     };
 
 }; // namespace engine

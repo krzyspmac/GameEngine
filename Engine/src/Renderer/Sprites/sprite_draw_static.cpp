@@ -93,6 +93,15 @@ static int lua_SpriteDrawStatic_SetPosition(lua_State *L)
     return 0;
 }
 
+static int lua_SpriteDrawStatic_GetPosition(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    Vector2 pos = spr->GetPosition();
+    lua_pushnumber(L, pos.x);
+    lua_pushnumber(L, pos.y);
+    return 2;
+}
+
 static int lua_SpriteDrawStatic_DrawAt(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
@@ -117,6 +126,7 @@ std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
         {"GetAlpha", &lua_SpriteDrawStatic_GetAlpha},
         {"GetSize", &lua_SpriteDrawStatic_GetSize},
         {"SetPosition", &lua_SpriteDrawStatic_SetPosition},
+        {"GetPosition", &lua_SpriteDrawStatic_GetPosition},
         {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
         {"Draw", &lua_SpriteDrawStatic_Draw}
     });
