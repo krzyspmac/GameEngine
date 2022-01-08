@@ -26,7 +26,9 @@ void FontBitmapDescriptor::Prepare(std::string fntFile)
     size_t len = 0;
     ssize_t read;
 
-    fp = fopen(fntFile.c_str(), "r");
+    std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(fntFile.c_str()));
+
+    fp = stream->GetFP(); //fopen(fntFile.c_str(), "r");
     if (fp == NULL)
     {
         return;
@@ -57,7 +59,6 @@ void FontBitmapDescriptor::Prepare(std::string fntFile)
         }
     }
 
-    fclose(fp);
     if (line)
     {
         free(line);

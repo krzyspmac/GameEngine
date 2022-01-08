@@ -19,6 +19,7 @@
 #include "texture_target.hpp"
 #include "character_mover_interface.h"
 #include "path_finder.hpp"
+#include "font_bitmap.hpp"
 
 namespace engine
 {
@@ -85,7 +86,7 @@ namespace engine
 
     #if SHOW_FPS
         char m_fpsBuffer[256];
-        FontI *m_fpsFont;
+        FontBitmapRepresentation *m_displayFont;
     #endif
     };
 }

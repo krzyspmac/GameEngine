@@ -45,6 +45,11 @@ namespace engine
          */
         virtual size_t Read(void *ptr, size_t size, size_t maxnum) = 0;
 
+        /**
+         Direct access to the file. Do not close by yourself.
+         */
+        virtual FILE *GetFP() = 0;
+
     public: // helpers
         /** Helper to read the whole file as string */
         virtual std::string ReadBufferString() = 0;
@@ -73,6 +78,7 @@ namespace engine
         size_t Read(void *ptr, size_t size, size_t maxnum);
         std::string ReadBufferString();
         std::unique_ptr<SDL_RWops> CreateRWOps();
+        FILE *GetFP() { return m_fp; };
     };
 
     /// Memory access for the file chunk in the packed system.

@@ -394,8 +394,8 @@
 				7F13823D277505B600ED6D67 /* font_interface.h */,
 				7F13823E277505B600ED6D67 /* font_ttf.hpp */,
 				7F13823C277505B600ED6D67 /* font_ttf.cpp */,
-				7F84990B27872F28004127CB /* font_bitmap.cpp */,
 				7F84990C27872F28004127CB /* font_bitmap.hpp */,
+				7F84990B27872F28004127CB /* font_bitmap.cpp */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
