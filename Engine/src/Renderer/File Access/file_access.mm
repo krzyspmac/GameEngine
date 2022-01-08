@@ -100,18 +100,3 @@ std::string FileAccess::getBundledFilepath(const char *value)
     return cString;
 #endif
 };
-
-std::string FileAccess::loadText(std::string filename)
-{
-    std::string fullPath = GetFullPath(filename); // getBundledFilepath(filename.c_str());
-
-    std::ifstream t(fullPath);
-    std::string str((std::istreambuf_iterator<char>(t)),
-                    std::istreambuf_iterator<char>());
-    return str;
-}
-
-FileStreamI *FileAccess::LoadBufferStream(const char *filename)
-{
-    return NULL;
-}

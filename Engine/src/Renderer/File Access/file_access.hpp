@@ -30,10 +30,6 @@ namespace engine
     public:
         std::string getBundledFilepath(const char *value);
 
-        std::string loadText(std::string filename);
-
-        FileStreamI *LoadBufferStream(const char *filename);
-
     public:
         std::string GetFullPath(std::string filename);
 

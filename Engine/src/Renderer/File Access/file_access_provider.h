@@ -9,35 +9,70 @@
 #define file_access_provider_h
 
 #include <iostream>
+#include "common.h"
 
 namespace engine
 {
-    /// Most of the file in the game system should be
-    /// packed so the FileMemoryBuffer encapsulates
-    /// data neede for the buffer stream.
+    /**
+     Provides an abstraction over file access.
+     */
     class FileStreamI
     {
     public:
-        FileStreamI(std::string filename): filename(filename) { };
+        FileStreamI(std::string filename): m_filename(filename) { };
         virtual ~FileStreamI() { };
+        std::string &GetFilename() { return m_filename; };
 
-        std::string &GetFilename() { return filename; };
-        void *GetMemory() { return memory; };
-        int64_t &GetSize() { return size; };
+    public: // file operations
+        /**
+         *  Return the size of the file, or -1 if unknown
+         */
+        int64_t &GetSize() { return m_size; };
+
+        /**
+         *  Seek to \c offset relative to \c whence, one of stdio's whence values:
+         *  RW_SEEK_SET, RW_SEEK_CUR, RW_SEEK_END
+         *
+         *  \return the final offset in the data stream, or -1 on error.
+         */
+        virtual int64_t Seek(int64_t offset, int whence) = 0;
+
+        /**
+         *  Read up to \c maxnum objects each of size \c size from the data
+         *  stream to the area pointed at by \c ptr.
+         *
+         *  \return the number of objects read, or 0 at error or end of file.
+         */
+        virtual size_t Read(void *ptr, size_t size, size_t maxnum) = 0;
+
+    public: // helpers
+        /** Helper to read the whole file as string */
+        virtual std::string ReadBufferString() = 0;
+
+        /**
+         Create a RW ops for SDL. Only one such operation can be performed
+         at a given time.
+         */
+        virtual std::unique_ptr<SDL_RWops> CreateRWOps() = 0;
 
     protected:
-        std::string filename;
-        void *memory;
-        int64_t size;
+        std::string m_filename;
+        int64_t m_size;
     };
 
     /// Mapped file system onto the FileMemoryBufferStreamI
     /// when no packed data exists.
     class FileMemoryBufferStreamFromFile: public FileStreamI
     {
+        FILE *m_fp;
     public:
         FileMemoryBufferStreamFromFile(std::string filename);
         virtual ~FileMemoryBufferStreamFromFile();
+
+        int64_t Seek(int64_t offset, int whence);
+        size_t Read(void *ptr, size_t size, size_t maxnum);
+        std::string ReadBufferString();
+        std::unique_ptr<SDL_RWops> CreateRWOps();
     };
 
     /// Memory access for the file chunk in the packed system.
@@ -52,11 +87,6 @@ namespace engine
     class FileAccessI
     {
     public:
-        /// Loads a packed file with all assets.
-        /// This is incompatible with LoadDirectory.
-        /// returns: 0 upon success, otherwise error
-        virtual int LoadPackedFile(std::string filename) = 0;
-
         /// Loads a directory for loading files directly off the file system.
         /// This is incompatible with LoadPackedFile.
         /// returns: 0 upon success, otherwise error
@@ -78,13 +108,6 @@ namespace engine
     public:
         /// Get a file path for a specific name. Main bundle will be used.
         virtual std::string getBundledFilepath(const char *value) = 0;
-
-        virtual std::string loadText(std::string filename) = 0;
-
-        /// Load a buffer stream for a specific chunk named `filename`.
-        /// If no packed data is presetend the system will try to load the data
-        /// from the file system. The ownership is passed onto the caller.
-        virtual FileStreamI *LoadBufferStream(const char *filename) = 0;
 
     public:
         // tmp

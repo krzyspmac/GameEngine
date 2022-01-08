@@ -19,7 +19,8 @@ Character::Character(std::string jsonDefinition)
 {
     std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonDefinition));
 
-    char *jsonSource = (char*)stream.get()->GetMemory();
+    auto buffer = stream->ReadBufferString();
+    const char *jsonSource = buffer.c_str();
     if (jsonSource && strlen(jsonSource) > 0)
     {
         cJSON *root;

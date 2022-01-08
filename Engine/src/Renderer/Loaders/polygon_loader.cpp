@@ -17,7 +17,9 @@ std::vector<Polygon> PolygonLoader::Load(FileStreamI *stream)
         std::vector<Polygon> outputPolygons;
 
         LOGGER().Log("Loading polygon %s", stream->GetFilename().c_str());
-        char *jsonSource = (char*)stream->GetMemory();
+
+        std::string buffer = stream->ReadBufferString();
+        const char *jsonSource = buffer.c_str();
         if (jsonSource == nullptr) {
             LOGGER().Log("Could not the polygon.");
             break;
