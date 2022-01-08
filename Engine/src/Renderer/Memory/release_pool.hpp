@@ -17,16 +17,13 @@ namespace engine
      MemoryReleasePool
      \addtogroup API_GLOBALS
      */
-    /**
-     Keeps references to object that otherwise are not being managed
-     by any other manager. Some animators are being created and returned
-     to the script. Those by definition are dangling in memory and are
-     sinked in the pool in order not to loose them.
+    /** Keeps references to object that otherwise are not being managed
+        by any other manager. Some animators are being created and returned
+        to the script. Those by definition are dangling in memory. In order not
+        to loose them thay are sinked in the pool.
      
-     A good practice would be to drain the pool once the scene changes
-     so that a new scene starts with a new set of objects.
-     
-     Generally only for objects available to the script functions.
+        Generally only for objects available to the script functions.
+        Scene change should automatically take care of its memory pool
      */
     class MemoryReleasePool: public MemoryReleasePoolI
     {

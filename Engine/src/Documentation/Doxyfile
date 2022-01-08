@@ -912,7 +912,18 @@ INPUT                  = ../Renderer/Scene/scene.hpp \
                          ../Renderer/Fonts/font_bitmap.cpp \
                          ../Renderer/Fonts/font_bitmap.hpp \
                          ../Renderer/Managers/font_manager.cpp \
-                         ../Renderer/Managers/font_manager.hpp
+                         ../Renderer/Managers/font_manager.hpp \
+                         ../doxygen_fonts.md \
+                         ../Renderer/Animations/animation_curve_factory.cpp \
+                         ../Renderer/Animations/animation_curve_factory.hpp \
+                         ../Renderer/Animations/animation_group_factory.cpp \
+                         ../Renderer/Animations/animation_group_factory.hpp \
+                         ../Renderer/Animations/animation_group_sequence.cpp \
+                         ../Renderer/Animations/animation_group_sequence.hpp \
+                         ../Renderer/Animations/animation_group_simulateneus.cpp \
+                         ../Renderer/Animations/animation_group_simulateneus.hpp \
+                         ../Renderer/Memory/release_pool.cpp \
+                         ../Renderer/Memory/release_pool.hpp
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
