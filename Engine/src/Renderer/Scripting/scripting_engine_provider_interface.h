@@ -149,7 +149,7 @@ namespace engine
                                                                                     \
             if (luaL_newmetatable(L, tableName.c_str()))                            \
             {                                                                       \
-                LOGGER->Log("Creating LUA Table for className:%s", tableName.c_str()); \
+                ConsoleLog::Shared()->Log("Creating LUA Table for className:%s", tableName.c_str()); \
                 lua_pushvalue(L, -1);                                               \
                 lua_setfield(L, -2, "__index");                                     \
                 std::vector<luaL_Reg> functions = ScriptingInterfaceFunctions();    \

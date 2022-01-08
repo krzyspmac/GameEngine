@@ -83,7 +83,7 @@ void ConsoleRenderer::SetConsoleHidden(bool hidden)
 void ConsoleRenderer::DoGui()
 {
     DoMenuBar();
-    ImGui::ShowDemoWindow();
+//    ImGui::ShowDemoWindow();
 
     m_logger->Render();
     m_terminal->Render();

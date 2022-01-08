@@ -8,6 +8,7 @@
 #include "font_ttf.hpp"
 #include "engine.hpp"
 #include "common_engine_impl.h"
+#include "easy.h"
 
 using namespace engine;
 
@@ -23,7 +24,7 @@ FontTTF::FontTTF(engine::SDL_APP *engineHandle, std::string filename, FileStream
 {
     std::cout << "Loading font " << filename << std::endl;
 
-    LOGGER->Log("Loading font %s", filename.c_str());
+    LOGGER().Log("Loading font %s", filename.c_str());
 
     SDL_RWops *ops = SDL_RWFromConstMem(stream->GetMemory(), (int)stream->GetSize());
     if (!ops)

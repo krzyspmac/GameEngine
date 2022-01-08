@@ -26,6 +26,4 @@ extern "C" {
 }
 #endif
 
-#define LOGGER ConsoleLog::Shared()
-
 #endif // COMMON_H_HEADER_GUARD

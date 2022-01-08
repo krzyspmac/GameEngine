@@ -7,6 +7,7 @@
 
 #include "polygon_loader.hpp"
 #include "cJSON.h"
+#include "easy.h"
 
 using namespace engine;
 
@@ -15,8 +16,12 @@ std::vector<Polygon> PolygonLoader::Load(FileStreamI *stream)
     do {
         std::vector<Polygon> outputPolygons;
 
+        LOGGER().Log("Loading polygon %s", stream->GetFilename().c_str());
         char *jsonSource = (char*)stream->GetMemory();
-        if (jsonSource == nullptr) { break; };
+        if (jsonSource == nullptr) {
+            LOGGER().Log("Could not the polygon.");
+            break;
+        };
 
         cJSON *root;
 
