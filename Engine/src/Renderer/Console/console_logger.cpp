@@ -8,6 +8,10 @@
 #include "console_logger.hpp"
 #include "imgui.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 using namespace engine;
 
 static ConsoleLog *shared = nullptr;
@@ -28,6 +32,12 @@ ConsoleLog::ConsoleLog()
     shared = this;
     AutoScroll = true;
     Clear();
+
+#if !WINDOWS
+    m_pipe = std::unique_ptr<PipeOutputI>(new PipeOutputUnix());
+#endif
+
+    m_pipe->ConnectStdOut();
 }
 
 void ConsoleLog::Clear()
@@ -54,6 +64,8 @@ void ConsoleLog::ToggleVisibility()
 
 void ConsoleLog::Render()
 {
+    ReadPipe();
+
     if (!p_open) { return; };
 
     ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
@@ -148,4 +160,14 @@ void ConsoleLog::Draw(const char* title, bool* p_open)
 
     ImGui::EndChild();
     ImGui::End();
+}
+
+
+void ConsoleLog::ReadPipe()
+{
+    auto lines = m_pipe->ReadPipeLines();
+    for (auto& l : lines)
+    {
+        Log(l.c_str());
+    }
 }

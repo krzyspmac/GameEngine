@@ -17,7 +17,6 @@ using namespace engine;
 
 char                  InputBuf[256];
 ImVector<char*>       Items;
-ImVector<const char*> Commands;
 ImVector<char*>       History;
 int                   HistoryPos;    // -1: new line, 0..History.Size-1 browsing history.
 ImGuiTextFilter       Filter;
@@ -45,16 +44,16 @@ ConsoleTerminal::ConsoleTerminal()
     memset(InputBuf, 0, sizeof(InputBuf));
     HistoryPos = -1;
 
-    // "CLASSIFY" is here to provide the test case where "C"+[tab] completes to "CL" and display multiple matches.
-    Commands.push_back("HELP");
-    Commands.push_back("HISTORY");
-    Commands.push_back("CLEAR");
-    Commands.push_back("CLASSIFY");
     AutoScroll = true;
     ScrollToBottom = false;
 
+    // Add parsers
     m_cmdParsers.push_back(std::unique_ptr<ConsoleTerminalCmdI>(std::move(new ConsoleTerminalCmdLuaExec())));
     m_cmdParsers.push_back(std::unique_ptr<ConsoleTerminalCmdI>(std::move(new ConcoleTemrinalCmdParserSimple())));
+
+    // Create the pipe. By default all output goes to the logger pipe but
+    // we're taking control when appropriate.
+    m_pipeOutput = std::unique_ptr<PipeOutputI>(new PipeOutputUnix());
 
     AddLog("Welcome to Dear ImGui!");
 }
@@ -117,21 +116,13 @@ void ConsoleTerminal::Draw(const char* title, bool* p_open)
         ImGui::EndPopup();
     }
 
-    ImGui::TextWrapped(
-        "This example implements a console with basic coloring, completion (TAB key) and history (Up/Down keys). A more elaborate "
-        "implementation may want to store entries along with extra data such as timestamp, emitter, etc.");
-    ImGui::TextWrapped("Enter 'HELP' for help.");
+    ImGui::TextWrapped("The Engine Virtual Terminal. Enter 'HELP' for help.");
 
     // TODO: display items starting from the bottom
 
-    if (ImGui::SmallButton("Add Debug Text"))  { AddLog("%d some text", Items.Size); AddLog("some more text"); AddLog("display very important message here!"); }
-    ImGui::SameLine();
-    if (ImGui::SmallButton("Add Debug Error")) { AddLog("[error] something went wrong"); }
-    ImGui::SameLine();
     if (ImGui::SmallButton("Clear"))           { ClearLog(); }
     ImGui::SameLine();
     bool copy_to_clipboard = ImGui::SmallButton("Copy");
-    //static float t = 0.0f; if (ImGui::GetTime() - t > 0.02f) { t = ImGui::GetTime(); AddLog("Spam %f", t); }
 
     ImGui::Separator();
 
@@ -264,9 +255,18 @@ int ConsoleTerminal::TextEditCallback(ImGuiInputTextCallbackData* data)
 
             // Build a list of candidates
             ImVector<const char*> candidates;
-            for (int i = 0; i < Commands.Size; i++)
-                if (Strnicmp(Commands[i], word_start, (int)(word_end - word_start)) == 0)
-                    candidates.push_back(Commands[i]);
+
+            for (int i = 0; i < m_cmdParsers.size(); i++)
+            {
+                auto &parser = m_cmdParsers.at(i);
+                auto cmd = std::string(parser->GetCommand());
+                auto cmdC = cmd.c_str();
+                if (Strnicmp(cmdC, word_start, (int)(word_end - word_start)) == 0)
+                {
+                    candidates.push_back(std::string(cmdC).c_str());
+                }
+
+            }
 
             if (candidates.Size == 0)
             {
@@ -359,6 +359,9 @@ void ConsoleTerminal::ExecCommand(const char* command_line)
         }
     History.push_back(Strdup(command_line));
 
+    // Temporarily take control of stdout
+    m_pipeOutput->ConnectStdOut();
+
     bool didParse = false;
     for (auto& prsr : m_cmdParsers)
     {
@@ -373,28 +376,16 @@ void ConsoleTerminal::ExecCommand(const char* command_line)
     {
         AddLog("Unknown command: '%s'\n", command_line);
     }
-//
-//    // Process command
-//    if (Stricmp(command_line, "CLEAR") == 0)
-//    {
-//        ClearLog();
-//    }
-//    else if (Stricmp(command_line, "HELP") == 0)
-//    {
-//        AddLog("Commands:");
-//        for (int i = 0; i < Commands.Size; i++)
-//            AddLog("- %s", Commands[i]);
-//    }
-//    else if (Stricmp(command_line, "HISTORY") == 0)
-//    {
-//        int first = History.Size - 10;
-//        for (int i = first > 0 ? first : 0; i < History.Size; i++)
-//            AddLog("%3d: %s\n", i, History[i]);
-//    }
-//    else
-//    {
-//        AddLog("Unknown command: '%s'\n", command_line);
-//    }
+
+    // Add stdout buffer lines to the virtual terminal
+    auto outputLines = m_pipeOutput->ReadPipeLines();
+    for (auto& l : outputLines)
+    {
+        AddLog(l.c_str());
+    }
+
+    // Release control of stdout
+    m_pipeOutput->ReleaseStdOut();
 
     // On command input, we scroll to bottom even if AutoScroll==false
     ScrollToBottom = true;

@@ -82,6 +82,8 @@
 		7FB8241E278993E0008F0F7A /* console_terminal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241C278993E0008F0F7A /* console_terminal.hpp */; };
 		7FB8242127899731008F0F7A /* console_terminal_commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */; };
 		7FB8242227899731008F0F7A /* console_terminal_commands.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242027899731008F0F7A /* console_terminal_commands.hpp */; };
+		7FB824252789AF95008F0F7A /* pipe_output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB824232789AF95008F0F7A /* pipe_output.cpp */; };
+		7FB824262789AF95008F0F7A /* pipe_output.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824242789AF95008F0F7A /* pipe_output.hpp */; };
 		7FCAE7BF277E36DD004A6107 /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7BD277E36DD004A6107 /* scene_manager.cpp */; };
 		7FCAE7C0277E36DD004A6107 /* scene_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7BE277E36DD004A6107 /* scene_manager.hpp */; };
 		7FCAE7C3277E3A68004A6107 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7C1277E3A68004A6107 /* scene.cpp */; };
@@ -209,6 +211,8 @@
 		7FB8241C278993E0008F0F7A /* console_terminal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = console_terminal.hpp; sourceTree = "<group>"; };
 		7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = console_terminal_commands.cpp; sourceTree = "<group>"; };
 		7FB8242027899731008F0F7A /* console_terminal_commands.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = console_terminal_commands.hpp; sourceTree = "<group>"; };
+		7FB824232789AF95008F0F7A /* pipe_output.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pipe_output.cpp; sourceTree = "<group>"; };
+		7FB824242789AF95008F0F7A /* pipe_output.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pipe_output.hpp; sourceTree = "<group>"; };
 		7FCAE7BD277E36DD004A6107 /* scene_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene_manager.cpp; sourceTree = "<group>"; };
 		7FCAE7BE277E36DD004A6107 /* scene_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scene_manager.hpp; sourceTree = "<group>"; };
 		7FCAE7C1277E3A68004A6107 /* scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -592,6 +596,8 @@
 				7FB8241B278993E0008F0F7A /* console_terminal.cpp */,
 				7FB8242027899731008F0F7A /* console_terminal_commands.hpp */,
 				7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */,
+				7FB824242789AF95008F0F7A /* pipe_output.hpp */,
+				7FB824232789AF95008F0F7A /* pipe_output.cpp */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -637,6 +643,7 @@
 				7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */,
 				7FCAE7D1277F5872004A6107 /* character_representation.hpp in Headers */,
 				7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */,
+				7FB824262789AF95008F0F7A /* pipe_output.hpp in Headers */,
 				7FF21D702784C6E0005C52C4 /* callable.hpp in Headers */,
 				7F13825A277505B600ED6D67 /* engine_provider.hpp in Headers */,
 				7FB8241A27890479008F0F7A /* console_logger.hpp in Headers */,
@@ -761,6 +768,7 @@
 				7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */,
 				4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
+				7FB824252789AF95008F0F7A /* pipe_output.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7FE2E5C0277A370D00538094 /* path_finder_line_graph_node.cpp in Sources */,
 				7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */,

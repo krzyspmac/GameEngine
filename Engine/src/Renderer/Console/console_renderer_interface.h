@@ -39,6 +39,7 @@ namespace engine
     class ConsoleTerminalCmdI
     {
     public:
+        virtual const char* GetCommand() = 0;
         virtual bool Process(const char*) = 0;
     };
 

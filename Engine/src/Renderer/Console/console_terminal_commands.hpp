@@ -16,6 +16,7 @@ namespace engine
     class ConcoleTemrinalCmdParserSimple: public ConsoleTerminalCmdI
     {
     public:
+        const char* GetCommand();
         bool Process(const char*);
     };
 
@@ -25,6 +26,7 @@ namespace engine
         ConsoleTerminalCmdLuaExec();
         virtual ~ConsoleTerminalCmdLuaExec();
 
+        const char* GetCommand();
         bool Process(const char*);
     };
 };

@@ -63,7 +63,7 @@ end
 -- event handling functions
 
 function mouseDown(x, y)
-	MemoryReleasePool:Drain()
+--	MemoryReleasePool:Drain()
 
 --	if initialAnimationDone ~= true then
 --		return

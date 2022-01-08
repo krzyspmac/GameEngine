@@ -11,12 +11,14 @@
 #include "common.h"
 #include "console_renderer_interface.h"
 #include "imgui.h"
+#include "pipe_output.hpp"
 
 namespace engine
 {
     class ConsoleTerminal: public ConsoleTerminalI
     {
         bool p_open;
+        std::unique_ptr<PipeOutputI> m_pipeOutput;
     public:
         ConsoleTerminal();
         ~ConsoleTerminal();
