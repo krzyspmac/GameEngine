@@ -19,7 +19,8 @@ namespace engine
     public:
         /// Scale applies to width and height. Does not modify x no y.
         SpriteDrawI(int scale): m_scale(scale), m_alpha(255), m_position(Vector2Zero) {};
-
+        virtual ~SpriteDrawI() { };
+        
     public:
         /**
          Draws the sprite at a given coordinates.

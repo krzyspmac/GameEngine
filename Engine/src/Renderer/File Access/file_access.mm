@@ -115,12 +115,3 @@ FileStreamI *FileAccess::LoadBufferStream(const char *filename)
 {
     return NULL;
 }
-
-int someFileFormat()
-{
-    std::vector<char> buffer;// = file_to_buffer(filename);
-    SDL_RWops* input = SDL_RWFromMem(buffer.data(), buffer.size());
-//    SDL_Surface* image = SDL_LoadBMP_RW(input, 0); // or IMG_Load_RW()
-
-    return 0;
-}

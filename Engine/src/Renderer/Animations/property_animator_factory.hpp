@@ -31,6 +31,25 @@ namespace engine
          @param duration    - duration in seconds
          @param fFinishRef  - finish function ref; function parameter is the created
                               PropertyAnimator. [optiona] LUA can ommit this parameter
+
+         \code{lua}
+         -- fade in the skySprite for 3 seconds with a 1 second delay
+         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3)
+         \endcode
+
+         \code{lua}
+         -- fade in the skySprite for 3 seconds with a 1 second delay and pass in a completion function
+         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function()
+            -- animation is finished
+         end)
+         \endcode
+
+         \code{lua}
+         -- fade in the skySprite for 3 seconds with a 1 second delay and pass in a completion function
+         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function(animator)
+            print("Animator " .. animator .. " is finished")
+         end)
+         \endcode
          */
         PropertyAnimator *FadeIn(SpriteDrawI *sprite,
                                  std::string curveType,
@@ -54,6 +73,25 @@ namespace engine
          @param duration    - duration in seconds
          @param fFinishRef  - finish function ref; function parameter is the created
                               PropertyAnimator. [optiona] LUA can ommit this parameter
+
+         \code{lua}
+         -- fade out the skySprite for 3 seconds with a 1 second delay
+         local propertyAnimator = PropertyAnimatorFactory:FadeOut(skySprite, 1, 3)
+         \endcode
+
+         \code{lua}
+         -- fade out the skySprite for 3 seconds with a 1 second delay and pass in a completion function
+         local propertyAnimator = PropertyAnimatorFactory:FadeIn(FadeOut, 1, 3, function()
+            -- animation is finished
+         end)
+         \endcode
+
+         \code{lua}
+         -- fade out the skySprite for 3 seconds with a 1 second delay and pass in a completion function
+         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function(animator)
+            print("Animator " .. animator .. " is finished")
+         end)
+         \endcode
          */
         PropertyAnimator *FadeOut(SpriteDrawI *sprite,
                                   std::string curveType,

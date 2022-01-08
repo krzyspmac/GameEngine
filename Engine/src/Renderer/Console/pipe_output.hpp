@@ -18,6 +18,8 @@ namespace engine
     class PipeOutputI
     {
     public:
+        virtual ~PipeOutputI() { };
+
         virtual void ConnectStdOut() = 0;
         virtual void ReleaseStdOut() = 0;
         virtual std::vector<std::string> ReadPipeLines() = 0;
@@ -31,6 +33,7 @@ namespace engine
         char buffer[MAX_STDOUT_LEN+1];
     public:
         PipeOutputUnix();
+        virtual ~PipeOutputUnix() { };
 
         void ConnectStdOut();
         void ReleaseStdOut();

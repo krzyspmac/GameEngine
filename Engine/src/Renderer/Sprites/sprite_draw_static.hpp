@@ -19,7 +19,8 @@ namespace engine
     public:
         /** @private */
         SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale);
-
+        virtual ~SpriteDrawStatic() { };
+        
     public:
     public:
         /**

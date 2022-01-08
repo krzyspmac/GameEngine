@@ -66,7 +66,8 @@ namespace engine {
     {
     public:
         SpriteAtlasI(std::string jsonFilename, std::string textureFilename) { }
-    
+        virtual ~SpriteAtlasI() { };
+
     public:
 
         virtual std::string &GetFilename() = 0;

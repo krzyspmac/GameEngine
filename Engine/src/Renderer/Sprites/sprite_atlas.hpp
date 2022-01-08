@@ -24,7 +24,7 @@ namespace engine
         SpriteAtlas(std::string jsonFilename, std::string textureFilename);
 
         /** @private */
-        ~SpriteAtlas();
+        virtual ~SpriteAtlas();
 
         /**
          Get the specific atlas item for the name.

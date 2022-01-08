@@ -6,8 +6,13 @@
 #include <functional>
 #include <algorithm>
 
-#define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
-#define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+#ifndef MIN
+    #define MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+#endif
+
+#ifndef MAX
+    #define MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+#endif
 
 #include "defs.h"
 #include "general.hpp"

@@ -18,6 +18,8 @@ namespace engine
     class ConsoleWindowI
     {
     public:
+        virtual ~ConsoleWindowI() { };
+
         virtual void ToggleVisibility() = 0;
 
     };
@@ -28,6 +30,8 @@ namespace engine
     class ConsoleLogI: public ConsoleWindowI
     {
     public:
+        virtual ~ConsoleLogI() { };
+
         virtual void Log(const char* fmt, ...) = 0;
         virtual void Render() = 0;
         virtual void ToggleVisibility() = 0;
@@ -39,6 +43,8 @@ namespace engine
     class ConsoleTerminalCmdI
     {
     public:
+        virtual ~ConsoleTerminalCmdI() { };
+
         virtual const char* GetCommand() = 0;
         virtual bool Process(const char*) = 0;
     };
@@ -49,6 +55,8 @@ namespace engine
     class ConsoleTerminalI: public ConsoleWindowI
     {
     public:
+        virtual ~ConsoleTerminalI() { };
+
         virtual void Render() = 0;
         virtual void ToggleVisibility() = 0;
         virtual void ClearLog() = 0;
@@ -61,6 +69,8 @@ namespace engine
     class ConsoleRendererI
     {
     public:
+        virtual ~ConsoleRendererI() { };
+
         virtual void Setup() = 0;
 
         virtual void DoFrame() = 0;
@@ -79,6 +89,7 @@ namespace engine
     {
     public:
         ConsoleAppRendererI();
+        ~ConsoleAppRendererI() { };
     };
 };
 
