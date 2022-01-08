@@ -87,11 +87,6 @@ namespace engine
     class FileAccessI
     {
     public:
-        /// Loads a packed file with all assets.
-        /// This is incompatible with LoadDirectory.
-        /// returns: 0 upon success, otherwise error
-        virtual int LoadPackedFile(std::string filename) = 0;
-
         /// Loads a directory for loading files directly off the file system.
         /// This is incompatible with LoadPackedFile.
         /// returns: 0 upon success, otherwise error
@@ -113,13 +108,6 @@ namespace engine
     public:
         /// Get a file path for a specific name. Main bundle will be used.
         virtual std::string getBundledFilepath(const char *value) = 0;
-
-        virtual std::string loadText(std::string filename) = 0;
-
-        /// Load a buffer stream for a specific chunk named `filename`.
-        /// If no packed data is presetend the system will try to load the data
-        /// from the file system. The ownership is passed onto the caller.
-        virtual FileStreamI *LoadBufferStream(const char *filename) = 0;
 
     public:
         // tmp
