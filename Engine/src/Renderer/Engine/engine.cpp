@@ -17,7 +17,6 @@
 #include "engine_provider.hpp"
 #include "character_mover.hpp"
 #include "polygon_loader.hpp"
-#include "console_view.hpp"
 #include "animation_curve_factory.hpp"
 
 #ifdef __cplusplus
@@ -51,7 +50,7 @@ Engine::Engine(EngineProviderI &engineProvider,
                ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1), m_consoleView(nullptr)
+: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -66,7 +65,6 @@ Engine::~Engine()
 //    SpriteDrawDisposeAll();
 
     delete m_bufferTexture;
-    delete m_consoleView;
 }
 
 void Engine::setup()
@@ -91,10 +89,6 @@ void Engine::setup()
 
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
-
-#if USES_CONSOLE
-    m_consoleView = new ConsoleView(m_fpsFont, '~');
-#endif
 
     // Register events listeners. For simple events - use lambda.
     // Complex events get their own handler.
@@ -162,12 +156,6 @@ void Engine::update()
     // Draw the texts
     m_engineProvider.RenderSetScale(1.0f, 1.0f);
     RenderSceneTexts();
-
-    // Render the console if possible
-    if (m_consoleView != nullptr && m_consoleView->ShouldPresentConsole())
-    {
-        //m_consoleView->RenderConsole();
-    }
 
     // Render the current stack
     m_engineProvider.RenderPresent();
