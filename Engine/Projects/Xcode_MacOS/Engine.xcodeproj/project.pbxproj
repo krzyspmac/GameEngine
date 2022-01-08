@@ -102,6 +102,8 @@
 		7FCC81BE2780A0C8003025CB /* value_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */; };
 		7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
 		7FCC81C32780A2A8003025CB /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
+		7FD5CBEA278A0C7100498B5F /* texture_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FD5CBE8278A0C7100498B5F /* texture_manager.cpp */; };
+		7FD5CBEB278A0C7100498B5F /* texture_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD5CBE9278A0C7100498B5F /* texture_manager.hpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
 		7FDDAF9F2776873900578F86 /* room.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FDDAF9D2776873900578F86 /* room.hpp */; };
 		7FE2E5C0277A370D00538094 /* path_finder_line_graph_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */; };
@@ -235,6 +237,8 @@
 		7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = value_animator_factory.hpp; sourceTree = "<group>"; };
 		7FCC81C02780A2A8003025CB /* value_animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = value_animator.cpp; sourceTree = "<group>"; };
 		7FCC81C12780A2A8003025CB /* value_animator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = value_animator.hpp; sourceTree = "<group>"; };
+		7FD5CBE8278A0C7100498B5F /* texture_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_manager.cpp; sourceTree = "<group>"; };
+		7FD5CBE9278A0C7100498B5F /* texture_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_manager.hpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
 		7FDDAF9D2776873900578F86 /* room.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = room.hpp; sourceTree = "<group>"; };
 		7FE2E5BD277A31F900538094 /* path_finder_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = path_finder_interface.h; sourceTree = "<group>"; };
@@ -498,6 +502,8 @@
 				7FCAE7C9277E543E004A6107 /* sprite_renderer_manager.cpp */,
 				7F869FB92780C41F00E8CB01 /* periodic_updates_manager.hpp */,
 				7F869FB82780C41F00E8CB01 /* periodic_updates_manager.cpp */,
+				7FD5CBE8278A0C7100498B5F /* texture_manager.cpp */,
+				7FD5CBE9278A0C7100498B5F /* texture_manager.hpp */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -675,6 +681,7 @@
 				7F13828B277505B600ED6D67 /* common.h in Headers */,
 				7F138265277505B600ED6D67 /* file_access_provider.h in Headers */,
 				7FF21D7B2784EA33005C52C4 /* property_animator_factory.hpp in Headers */,
+				7FD5CBEB278A0C7100498B5F /* texture_manager.hpp in Headers */,
 				7F13828A277505B600ED6D67 /* common_engine.h in Headers */,
 				7FB8242E2789D3AD008F0F7A /* console_app_renderer_mac.hpp in Headers */,
 				7F13827B277505B600ED6D67 /* engine_interface.h in Headers */,
@@ -785,6 +792,7 @@
 				7FB8241D278993E0008F0F7A /* console_terminal.cpp in Sources */,
 				7FB8242D2789D3AD008F0F7A /* console_app_renderer_mac.mm in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
+				7FD5CBEA278A0C7100498B5F /* texture_manager.cpp in Sources */,
 				7FCAE7CB277E543E004A6107 /* sprite_renderer_manager.cpp in Sources */,
 				7FCAE7BF277E36DD004A6107 /* scene_manager.cpp in Sources */,
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,

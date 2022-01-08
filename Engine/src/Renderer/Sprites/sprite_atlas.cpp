@@ -18,7 +18,7 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
     std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonFilename));
 
     LOGGER().Log("SpriteAtlas:Load <= json=%s, texture=%s", jsonFilename.c_str(), textureFilename.c_str());
-    TextureI *texture = GetMainEngine()->LoadTexture(textureFilename);
+    TextureI *texture = GetMainEngine()->getTextureManager().LoadTexture(textureFilename);
     if (texture)
     {
         auto buffer = stream->ReadBufferString();

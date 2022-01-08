@@ -21,6 +21,7 @@
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
 #include "console_renderer.h"
+#include "texture_manager.hpp"
 
 namespace engine
 {
@@ -47,6 +48,7 @@ public:
 
 private:
     engine::FileAccessI *m_fileAccess;
+    engine::TextureManager *m_textureManager;
     engine::EngineProviderI *m_engineProvider;
     engine::ScriptingEngineI *m_scriptingEngine;
     engine::EventProviderI *m_eventProvider;

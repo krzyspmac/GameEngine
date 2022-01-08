@@ -39,6 +39,7 @@ engine::EngineI *GetMainEngine()
 }
 
 Engine::Engine(EngineProviderI &engineProvider,
+               TextureManager &textureManager,
                FileAccessI &fileAccess,
                ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
@@ -50,7 +51,7 @@ Engine::Engine(EngineProviderI &engineProvider,
                ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-: EngineI(engineProvider, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
+: EngineI(engineProvider, textureManager, fileAccess, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -60,9 +61,6 @@ Engine::Engine(EngineProviderI &engineProvider,
 Engine::~Engine()
 {
     DisposeAllFonts();
-    DisposeAllTextures();
-//    SpriteAtlasDisposeAll();
-//    SpriteDrawDisposeAll();
 
     delete m_bufferTexture;
 }
@@ -235,60 +233,6 @@ void Engine::ApplyScaleTransformations()
 
 void Engine::MouseClicked()
 {
-}
-
-TextureI *Engine::LoadTexture(std::string filename)
-{
-    TextureI *result = GetTexture(filename);
-    if (!result)
-    {
-        std::unique_ptr<FileStreamI> stream(m_fileAccess.GetAccess(filename));
-        result = m_engineProvider.LoadTexture(filename, stream.get());
-        if (result)
-        {
-            m_textures.emplace_back(std::move(result));
-        }
-    }
-
-    return result;
-}
-
-TextureTargetI *Engine::CreateTargetTexture(int width, int height)
-{
-    return m_engineProvider.CreateTargetTexture(width, height);
-}
-
-TextureI *Engine::GetTexture(std::string name)
-{
-    for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
-    {
-        TextureI *item = it->get();
-        if (item->getTextureName().compare(name) == 0)
-        {
-            return item;
-        }
-    }
-
-    return NULL;
-}
-
-void Engine::UnloadTexture(TextureI *texture)
-{
-    for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
-    {
-        TextureI *item = it->get();
-        if (item == texture)
-        {
-            m_engineProvider.UnloadTexture(item);
-            m_textures.erase(it);
-            break;
-        }
-    }
-}
-
-void Engine::DisposeAllTextures()
-{
-    std::cout << "DisposeAlLTextures not implemented" << std::endl;
 }
 
 FontI *Engine::LoadFont(std::string name)
