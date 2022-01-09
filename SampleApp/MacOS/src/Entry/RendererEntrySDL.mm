@@ -1,11 +1,11 @@
 //
-//  RendererEntry.cpp
+//  RendererEntrySDL.cpp
 //  RendererAppSDL
 //
 //  Created by krzysp on 20/12/2021.
 //
 
-#include "RendererEntry.hpp"
+#include "RendererEntrySDL.hpp"
 #include "file_access.hpp"
 #include "scripting_engine.hpp"
 #include "event_provider.hpp"
@@ -18,7 +18,7 @@
 
 using namespace engine;
 
-RendererEntry::RendererEntry()
+RendererEntrySDL::RendererEntrySDL()
 {
     SDL_APP *sdl_app = new SDL_APP();
 
@@ -55,7 +55,7 @@ RendererEntry::RendererEntry()
     this->m_engine = new Engine(*this->m_engineProvider, *this->m_textureManager, *this->m_fileAccess, *this->m_fontManager, *this->m_scriptingEngine, *this->m_eventProvider, *this->m_eventsManager, *this->m_characterManager, *this->m_sceneManager, *this->m_spriteAtlasManager, *this->m_sprireRendererManager, *this->m_consoleRenderer, viewportSize);
 }
 
-int RendererEntry::initSDL()
+int RendererEntrySDL::initSDL()
 {
     int rendererFlags, windowFlags;
 
@@ -104,7 +104,7 @@ int RendererEntry::initSDL()
     return 0;
 }
 
-void RendererEntry::destroy()
+void RendererEntrySDL::destroy()
 {
     delete (m_engine);
     SDL_DestroyRenderer(m_engineProvider->GetRendererHandle()->renderer);
@@ -113,12 +113,12 @@ void RendererEntry::destroy()
     SDL_Quit();
 }
 
-void RendererEntry::prepare()
+void RendererEntrySDL::prepare()
 {
     m_engine->setup();
 }
 
-void RendererEntry::doInput()
+void RendererEntrySDL::doInput()
 {
     if (m_engine->doInput())
     {
@@ -127,12 +127,12 @@ void RendererEntry::doInput()
     }
 }
 
-void RendererEntry::doScene()
+void RendererEntrySDL::doScene()
 {
     m_engine->update();
 }
 
-void RendererEntry::main(int argc, const char *argv[])
+void RendererEntrySDL::main(int argc, const char *argv[])
 {
     if(initSDL())
     {

@@ -1,5 +1,5 @@
 //
-//  RendererEntry.hpp
+//  RendererEntrySDL.hpp
 //  RendererAppSDL
 //
 //  Created by krzysp on 20/12/2021.
@@ -28,11 +28,11 @@
 namespace engine
 {
 
-class RendererEntry
+class RendererEntrySDL
 {
 public:
     ///
-    RendererEntry();
+    RendererEntrySDL();
 
     ///
     int initSDL();
