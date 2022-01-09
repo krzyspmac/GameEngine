@@ -9,7 +9,6 @@
 #include <QuartzCore/QuartzCore.h>
 #include "common.h"
 #include "console_renderer.h"
-#include "engine_provider.hpp"
 #include "engine.hpp"
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
@@ -83,7 +82,7 @@ void ConsoleRenderer::SetConsoleHidden(bool hidden)
 void ConsoleRenderer::DoGui()
 {
     DoMenuBar();
-//    ImGui::ShowDemoWindow();
+    ImGui::ShowDemoWindow();
 
     m_logger->Render();
     m_terminal->Render();

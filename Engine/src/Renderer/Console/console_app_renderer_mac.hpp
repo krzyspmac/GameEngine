@@ -15,7 +15,6 @@ namespace engine
 {
     class ConsoleAppRendererMac: public ConsoleAppRendererI
     {
-        engine::SDL_APP m_app;
         bool m_hidden;
         bool m_isSetup;
 

@@ -16,12 +16,6 @@
 namespace engine
 {
 
-    typedef struct
-    {
-        SDL_Renderer *renderer;
-        SDL_Window *window;
-    } SDL_APP;
-
     typedef struct Size
     {
         int width;

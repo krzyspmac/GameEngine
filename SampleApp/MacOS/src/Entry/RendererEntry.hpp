@@ -23,6 +23,7 @@
 #include "console_renderer.h"
 #include "texture_manager.hpp"
 #include "font_manager.hpp"
+#include "engine_provider_sdl.hpp"
 
 namespace engine
 {
@@ -50,7 +51,7 @@ public:
 private:
     engine::FileAccessI *m_fileAccess;
     engine::TextureManager *m_textureManager;
-    engine::EngineProviderI *m_engineProvider;
+    engine::EngineProviderSDL *m_engineProvider;
     engine::FontManager *m_fontManager;
     engine::ScriptingEngineI *m_scriptingEngine;
     engine::EventProviderI *m_eventProvider;
@@ -61,7 +62,6 @@ private:
     engine::SpriteRendererManager *m_sprireRendererManager;
     engine::ConsoleRenderer *m_consoleRenderer;
     engine::Engine *m_engine;
-    engine::SDL_APP m_app;
 };
 
 }; // namespace

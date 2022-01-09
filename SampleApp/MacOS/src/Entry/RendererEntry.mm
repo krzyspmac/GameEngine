@@ -7,7 +7,6 @@
 
 #include "RendererEntry.hpp"
 #include "file_access.hpp"
-#include "engine_provider.hpp"
 #include "scripting_engine.hpp"
 #include "event_provider.hpp"
 #include "engine.hpp"
@@ -21,9 +20,11 @@ using namespace engine;
 
 RendererEntry::RendererEntry()
 {
+    SDL_APP *sdl_app = new SDL_APP();
+
     FileAccess *fa = new FileAccess();
     TextureManager *tm = new TextureManager();
-    EngineProvider *ep = new EngineProvider(&m_app);
+    EngineProviderSDL *ep = new EngineProviderSDL(sdl_app);
     FontManager *fm  = new FontManager();
     ScriptingEngine *se = new ScriptingEngine();
     EventProvider *eventProvider = new EventProvider();
@@ -75,22 +76,22 @@ int RendererEntry::initSDL()
         exit(1);
     }
 
-    m_app.window = SDL_CreateWindow("SomeEngine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+    m_engineProvider->GetRendererHandle()->window = SDL_CreateWindow("SomeEngine", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
 
-    if(!m_app.window)
+    if(!m_engineProvider->GetRendererHandle()->window)
     {
         printf("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
         exit(1);
     }
 
-    SDL_SetWindowResizable(m_app.window, SDL_TRUE);
+    SDL_SetWindowResizable(m_engineProvider->GetRendererHandle()->window, SDL_TRUE);
 //    SDL_SetWindowFullscreen(m_app.window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     SDL_SetHintWithPriority(SDL_HINT_RENDER_SCALE_QUALITY, "nearest", SDL_HINT_OVERRIDE);
     SDL_SetHint(SDL_HINT_RENDER_DRIVER, "metal");
-    m_app.renderer = SDL_CreateRenderer(m_app.window, -1, rendererFlags);
+    m_engineProvider->GetRendererHandle()->renderer = SDL_CreateRenderer(m_engineProvider->GetRendererHandle()->window, -1, rendererFlags);
 
-    if (!m_app.renderer)
+    if (!m_engineProvider->GetRendererHandle()->renderer)
     {
         printf("Failed to create renderer: %s\n", SDL_GetError());
         exit(1);
@@ -106,8 +107,8 @@ int RendererEntry::initSDL()
 void RendererEntry::destroy()
 {
     delete (m_engine);
-    SDL_DestroyRenderer(m_app.renderer);
-    SDL_DestroyWindow(m_app.window);
+    SDL_DestroyRenderer(m_engineProvider->GetRendererHandle()->renderer);
+    SDL_DestroyWindow(m_engineProvider->GetRendererHandle()->window);
     TTF_Quit();
     SDL_Quit();
 }
