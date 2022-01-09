@@ -10,12 +10,11 @@
 #include <Cocoa/Cocoa.h>
 #include "common.h"
 #include "console_renderer.h"
-#include "engine_provider.hpp"
 #include "engine.hpp"
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
 #include "console_app_renderer_mac.hpp"
-
+#include "engine_provider_sdl.hpp"
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
 #include "imgui_impl_metal.h"
@@ -40,6 +39,8 @@ API_AVAILABLE(macos(10.11))
 static MTLRenderPassDescriptor* renderPassDescriptor;
 
 static float clear_color[4] = {0.45f, 0.55f, 0.60f, 0.0f};
+
+static SDL_APP m_app;
 
 ConsoleAppRendererMac::ConsoleAppRendererMac()
     : ConsoleAppRendererI()

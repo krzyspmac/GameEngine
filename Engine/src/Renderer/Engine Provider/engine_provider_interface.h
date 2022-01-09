@@ -28,11 +28,9 @@ namespace engine
         ANCHOR_BOTTOM_CENTER    // for character drwaing
     } Anchor_Point;
 
-    /// EngineProviderI declares an abstraction for low-level
-    /// drawing functions. Those are bare-bones only.
-    /// EngineI provides further concrete instances where
-    /// additional caching might happen. Texturing should be
-    /// used via EngineI since the cache is there.
+    /** EngineProviderI declares an abstraction for low-level drawing functions. Those are bare-bones only.
+        The main entry point in the app initializes different concrete instances.
+     */
     class EngineProviderI
     {
     public:

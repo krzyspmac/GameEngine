@@ -19,10 +19,16 @@
 namespace engine
 {
 
-    class EngineProvider : public EngineProviderI
+    typedef struct
+    {
+        SDL_Renderer *renderer;
+        SDL_Window *window;
+    } SDL_APP;
+
+    class EngineProviderSDL : public EngineProviderI
     {
     public:
-        EngineProvider(engine::SDL_APP *engineHandle);
+        EngineProviderSDL(engine::SDL_APP *engineHandle);
 
     public:
 

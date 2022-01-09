@@ -5,7 +5,7 @@
 //  Created by krzysp on 19/12/2021.
 //
 
-#include "engine_provider.hpp"
+#include "engine_provider_sdl.hpp"
 #include "texture.hpp"
 #include "texture_target.hpp"
 #include "SDL.h"
@@ -17,7 +17,7 @@ static SDL_FPoint flipPointF;
 
 using namespace engine;
 
-EngineProvider::EngineProvider(engine::SDL_APP *engineHandle)
+EngineProviderSDL::EngineProviderSDL(engine::SDL_APP *engineHandle)
 : EngineProviderI(), m_engineHandle(engineHandle)
 {
     flipPoint.x = 0.5;
@@ -26,57 +26,57 @@ EngineProvider::EngineProvider(engine::SDL_APP *engineHandle)
     flipPointF.y = 0.5;
 }
 
-Uint64 EngineProvider::GetTicks()
+Uint64 EngineProviderSDL::GetTicks()
 {
     return SDL_GetTicks64();
 }
 
-Uint64 EngineProvider::GetPerformanceTicks()
+Uint64 EngineProviderSDL::GetPerformanceTicks()
 {
     return SDL_GetPerformanceCounter();
 }
 
-Uint64 EngineProvider::GetPerformanceCounter()
+Uint64 EngineProviderSDL::GetPerformanceCounter()
 {
     return SDL_GetPerformanceCounter();
 }
 
-void EngineProvider::GetMousePosition(int *x, int *y)
+void EngineProviderSDL::GetMousePosition(int *x, int *y)
 {
     SDL_GetMouseState(x, y);
 }
 
-void EngineProvider::Delay(Uint32 ms)
+void EngineProviderSDL::Delay(Uint32 ms)
 {
     SDL_Delay(ms);
 }
 
-void EngineProvider::GetWindowSize(int *w, int *h)
+void EngineProviderSDL::GetWindowSize(int *w, int *h)
 {
     SDL_GetWindowSize(m_engineHandle->window, w, h);
 }
 
-void EngineProvider::GetRendererOutputSize(int *w, int *h)
+void EngineProviderSDL::GetRendererOutputSize(int *w, int *h)
 {
     SDL_GetRendererOutputSize(m_engineHandle->renderer, w, h);
 }
 
-void EngineProvider::SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+void EngineProviderSDL::SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     SDL_SetRenderDrawColor(m_engineHandle->renderer, r, g, b, a);
 }
 
-void EngineProvider::ClearRender()
+void EngineProviderSDL::ClearRender()
 {
     SDL_RenderClear(m_engineHandle->renderer);
 }
 
-void EngineProvider::RenderPresent()
+void EngineProviderSDL::RenderPresent()
 {
     SDL_RenderPresent(m_engineHandle->renderer);
 }
 
-TextureI *EngineProvider::LoadTexture(std::string filename, FileStreamI *stream)
+TextureI *EngineProviderSDL::LoadTexture(std::string filename, FileStreamI *stream)
 {
     SDL_Texture *textureHandle;
     SDL_LogMessage(SDL_LOG_CATEGORY_APPLICATION, SDL_LOG_PRIORITY_INFO, "Loading %s", filename.c_str());
@@ -94,7 +94,7 @@ TextureI *EngineProvider::LoadTexture(std::string filename, FileStreamI *stream)
     }
 }
 
-TextureTargetI *EngineProvider::CreateTargetTexture(int width, int height)
+TextureTargetI *EngineProviderSDL::CreateTargetTexture(int width, int height)
 {
     SDL_Texture* textureHandle = SDL_CreateTexture(m_engineHandle->renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_TARGET, width, height);
     SDL_SetTextureBlendMode(textureHandle, SDL_BLENDMODE_BLEND);
@@ -102,7 +102,7 @@ TextureTargetI *EngineProvider::CreateTargetTexture(int width, int height)
     return (TextureTargetI*)texture;
 }
 
-void EngineProvider::UnloadTexture(TextureI *texture)
+void EngineProviderSDL::UnloadTexture(TextureI *texture)
 {
     if (texture != nullptr)
     {
@@ -122,7 +122,7 @@ void EngineProvider::UnloadTexture(TextureI *texture)
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
+void EngineProviderSDL::DrawTexture(TextureI *texture, int x, int y)
 {
     if (texture != nullptr)
     {
@@ -141,7 +141,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y)
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
+void EngineProviderSDL::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
 {
     if (texture != nullptr)
     {
@@ -173,7 +173,7 @@ void EngineProvider::DrawTexture(TextureI *texture, int x, int y, int srcX, int 
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
+void EngineProviderSDL::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
 {
     if (texture != NULL)
     {
@@ -203,7 +203,7 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, in
     }
 }
 
-void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
+void EngineProviderSDL::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
 {
     if (texture != NULL)
     {
@@ -236,7 +236,7 @@ void EngineProvider::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Ve
     }
 }
 
-void EngineProvider::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
+void EngineProviderSDL::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
 {
     if (SDL_SetTextureAlphaMod((SDL_Texture*)texture->getTextureHandle(), alpha) == -1)
     {
@@ -244,13 +244,13 @@ void EngineProvider::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
     }
 }
 
-void EngineProvider::RendererTargetPush(TextureTargetI *targetTexture)
+void EngineProviderSDL::RendererTargetPush(TextureTargetI *targetTexture)
 {
     m_rendererStack.push_back(targetTexture);
     SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
 }
 
-void EngineProvider::RendererTargetPop()
+void EngineProviderSDL::RendererTargetPop()
 {
     m_rendererStack.pop_back();
     if (m_rendererStack.size() > 0)
@@ -264,47 +264,47 @@ void EngineProvider::RendererTargetPop()
     }
 }
 
-void EngineProvider::RenderTargetSet(TextureI *targetTexture)
+void EngineProviderSDL::RenderTargetSet(TextureI *targetTexture)
 {
     SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
 }
 
-void EngineProvider::RenderTargetClear()
+void EngineProviderSDL::RenderTargetClear()
 {
     SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
 }
 
-void EngineProvider::RenderClear()
+void EngineProviderSDL::RenderClear()
 {
     SDL_RenderClear(m_engineHandle->renderer);
 }
 
-void EngineProvider::RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+void EngineProviderSDL::RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
 {
     SDL_SetRenderDrawColor(m_engineHandle->renderer, r, g, b, a);
 }
 
-void EngineProvider::RenderSetScale(float scaleX, float scaleY)
+void EngineProviderSDL::RenderSetScale(float scaleX, float scaleY)
 {
     SDL_RenderSetScale(m_engineHandle->renderer, scaleX, scaleY);
 }
 
-void EngineProvider::RenderDrawRect(Engine_Rect *rect)
+void EngineProviderSDL::RenderDrawRect(Engine_Rect *rect)
 {
     SDL_RenderDrawRect(m_engineHandle->renderer, (SDL_Rect*)rect);
 }
 
-void EngineProvider::RenderFillRect(Engine_Rect *rect)
+void EngineProviderSDL::RenderFillRect(Engine_Rect *rect)
 {
     SDL_RenderFillRect(m_engineHandle->renderer, (SDL_Rect*)rect);
 }
 
-void EngineProvider::RenderDrawLine(int x1, int y1, int x2, int y2)
+void EngineProviderSDL::RenderDrawLine(int x1, int y1, int x2, int y2)
 {
     SDL_RenderDrawLine(m_engineHandle->renderer, x1, y1, x2, y2);
 }
 
-void EngineProvider::RenderDrawPoint(int x1, int y1)
+void EngineProviderSDL::RenderDrawPoint(int x1, int y1)
 {
     SDL_RenderDrawPoint(m_engineHandle->renderer, x1, y1);
 }
