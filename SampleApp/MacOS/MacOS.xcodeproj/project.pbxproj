@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F138297277507C500ED6D67 /* RendererEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntry.mm */; };
+		7F138297277507C500ED6D67 /* RendererEntrySDL.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntrySDL.mm */; };
 		7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
@@ -19,6 +19,13 @@
 		7F1382C527750BBC00ED6D67 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; };
 		7F1382C627750BBC00ED6D67 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7F1382C827750C0800ED6D67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F1382C727750C0800ED6D67 /* main.mm */; };
+		7F20ACAD278B2A5A00B5772F /* RendererEntryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F20ACAC278B2A5A00B5772F /* RendererEntryViewController.mm */; };
+		7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F20ACB0278B2B1A00B5772F /* Main.storyboard */; };
+		7F20ACB4278B306100B5772F /* RendererEntryMetal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F20ACB2278B306100B5772F /* RendererEntryMetal.cpp */; };
+		7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB5278B31FA00B5772F /* Foundation.framework */; };
+		7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB7278B34D600B5772F /* Quartz.framework */; };
+		7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB9278B352400B5772F /* MetalKit.framework */; };
+		7F20ACBC278B3B1600B5772F /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F20ACBB278B3B1600B5772F /* AAPLShaders.metal */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7F849921278760FA004127CB /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
 		7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
@@ -60,8 +67,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7F138290277507C500ED6D67 /* RendererEntry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererEntry.hpp; sourceTree = "<group>"; };
-		7F138291277507C500ED6D67 /* RendererEntry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntry.mm; sourceTree = "<group>"; };
+		7F138290277507C500ED6D67 /* RendererEntrySDL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererEntrySDL.hpp; sourceTree = "<group>"; };
+		7F138291277507C500ED6D67 /* RendererEntrySDL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntrySDL.mm; sourceTree = "<group>"; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F13829E2775082800ED6D67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -74,6 +81,16 @@
 		7F1382B027750B5B00ED6D67 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382C727750C0800ED6D67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = SOURCE_ROOT; };
+		7F20ACAB278B2A5A00B5772F /* RendererEntryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RendererEntryViewController.h; sourceTree = "<group>"; };
+		7F20ACAC278B2A5A00B5772F /* RendererEntryViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntryViewController.mm; sourceTree = "<group>"; };
+		7F20ACB0278B2B1A00B5772F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7F20ACB2278B306100B5772F /* RendererEntryMetal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererEntryMetal.cpp; sourceTree = "<group>"; };
+		7F20ACB3278B306100B5772F /* RendererEntryMetal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererEntryMetal.hpp; sourceTree = "<group>"; };
+		7F20ACB5278B31FA00B5772F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7F20ACB7278B34D600B5772F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		7F20ACB9278B352400B5772F /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		7F20ACBB278B3B1600B5772F /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = src/Entry/AAPLShaders.metal; sourceTree = SOURCE_ROOT; };
+		7F20ACBD278B3B3200B5772F /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
 		7F3CAAE1277093D500E0D74C /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F84991F278760FA004127CB /* DialogFont_retro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DialogFont_retro.png; sourceTree = "<group>"; };
@@ -106,6 +123,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */,
+				7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */,
+				7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */,
 				7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */,
 				7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */,
 				7F1382AD27750B5B00ED6D67 /* libEngine.a in Frameworks */,
@@ -133,8 +153,13 @@
 		7F13828F277507C500ED6D67 /* Entry */ = {
 			isa = PBXGroup;
 			children = (
-				7F138290277507C500ED6D67 /* RendererEntry.hpp */,
-				7F138291277507C500ED6D67 /* RendererEntry.mm */,
+				7F20ACBD278B3B3200B5772F /* AAPLShaderTypes.h */,
+				7F138290277507C500ED6D67 /* RendererEntrySDL.hpp */,
+				7F138291277507C500ED6D67 /* RendererEntrySDL.mm */,
+				7F20ACAB278B2A5A00B5772F /* RendererEntryViewController.h */,
+				7F20ACAC278B2A5A00B5772F /* RendererEntryViewController.mm */,
+				7F20ACB3278B306100B5772F /* RendererEntryMetal.hpp */,
+				7F20ACB2278B306100B5772F /* RendererEntryMetal.cpp */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -152,9 +177,11 @@
 		7F1382A02775086200ED6D67 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F20ACBB278B3B1600B5772F /* AAPLShaders.metal */,
 				7F1382A12775086200ED6D67 /* App.entitlements */,
 				7F1382A22775086200ED6D67 /* Assets.xcassets */,
 				7F1382A32775086200ED6D67 /* MainMenu.xib */,
+				7F20ACB0278B2B1A00B5772F /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
@@ -180,6 +207,9 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F20ACB9278B352400B5772F /* MetalKit.framework */,
+				7F20ACB7278B34D600B5772F /* Quartz.framework */,
+				7F20ACB5278B31FA00B5772F /* Foundation.framework */,
 				7FB824112788F8FC008F0F7A /* libimgui.a */,
 				7F1382AA27750B5B00ED6D67 /* libcjson.a */,
 				7F1382AC27750B5B00ED6D67 /* libEngine.a */,
@@ -281,6 +311,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
+				7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */,
 				7FB8226D2788DB34008F0F7A /* parlor.png in Resources */,
 				7F869FE02783970400E8CB01 /* EnterCommand.ttf in Resources */,
 				7F849921278760FA004127CB /* DialogFont_retro.png in Resources */,
@@ -314,9 +345,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F20ACBC278B3B1600B5772F /* AAPLShaders.metal in Sources */,
 				7F1382C827750C0800ED6D67 /* main.mm in Sources */,
-				7F138297277507C500ED6D67 /* RendererEntry.mm in Sources */,
+				7F138297277507C500ED6D67 /* RendererEntrySDL.mm in Sources */,
 				7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */,
+				7F20ACB4278B306100B5772F /* RendererEntryMetal.cpp in Sources */,
+				7F20ACAD278B2A5A00B5772F /* RendererEntryViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,13 +422,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
 					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
 					"$(SRCROOT)/../../Libraries/SDL_image-main",
 					"$(SRCROOT)/../../Libraries/SDL_ttf-main",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -454,13 +489,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
 					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
 					"$(SRCROOT)/../../Libraries/SDL_image-main",
 					"$(SRCROOT)/../../Libraries/SDL_ttf-main",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = (
@@ -486,6 +522,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -514,6 +551,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -6,15 +6,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include "RendererEntry.hpp"
+#include "RendererEntrySDL.hpp"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // Setup code that might create autoreleased objects goes here.
     }
 
-    engine::RendererEntry entry;
-    entry.main(argc, argv);
+//    engine::RendererEntrySDL entry;
+//    entry.main(argc, argv);
 
     return NSApplicationMain(argc, argv);
 }
