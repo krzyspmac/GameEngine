@@ -36,12 +36,12 @@ namespace engine
         MTL::Device *m_device;
         vector_uint2 m_viewportSize;
 
-//        MTL::RenderPipelineState *m_pipelineState;
-//        MTL::Library *m_library;
-//        MTL::Function *m_vertexFuntion;
-//        MTL::Function *m_fragmentFunction;
-//        MTL::RenderPipelineDescriptor *m_renderePipelineDescriptor;
-//        MTL::CommandQueue *m_commandQueue;
+        MTL::RenderPipelineState *m_pipelineState;
+        MTL::Library *m_library;
+        MTL::Function *m_vertexFuntion;
+        MTL::Function *m_fragmentFunction;
+        MTL::RenderPipelineDescriptor *m_renderePipelineDescriptor;
+        MTL::CommandQueue *m_commandQueue;
 
         /*
          id<MTLDevice> _device;
@@ -63,7 +63,7 @@ namespace engine
 
         void DrawableSizeWillChange(float width, float height);
 
-        void Draw(MTL::CommandQueue*s, MTL::RenderPipelineState*, MTL::RenderPassDescriptor*, MTL::Drawable*, std::function<MTL::Drawable*(void)> lambda);
+        void Draw(MTL::RenderPassDescriptor*, MTL::Drawable*);
     };
 };
 

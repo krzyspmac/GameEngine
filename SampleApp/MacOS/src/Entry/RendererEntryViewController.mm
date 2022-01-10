@@ -140,10 +140,7 @@ using namespace engine;
     MTL::Drawable *drawable = (__bridge MTL::Drawable*)view.currentDrawable;
     MTL::CommandQueue *commandQueue = (__bridge MTL::CommandQueue*)_commandQueue;
     MTL::RenderPipelineState *pipelineState = (__bridge MTL::RenderPipelineState*)_pipelineState;
-    _entryMetal->Draw(commandQueue, pipelineState, ref, drawable, [&]{
-        MTL::Drawable *drawable = (__bridge MTL::Drawable*)view.currentDrawable;
-        return drawable;
-    });
+    _entryMetal->Draw(ref, drawable);
 
 
 //    static const AAPLVertex triangleVertices[] =
