@@ -61,7 +61,7 @@
         <scene sceneID="cYf-SN-1hr">
             <objects>
                 <viewController id="Ks1-I6-okK" customClass="RendererEntryViewController" sceneMemberID="viewController">
-                    <view key="view" id="OVM-le-4zR" customClass="MTKView">
+                    <view key="view" wantsLayer="YES" id="OVM-le-4zR" customClass="MTKView">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>

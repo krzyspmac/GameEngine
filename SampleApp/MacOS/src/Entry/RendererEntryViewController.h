@@ -22,7 +22,7 @@
     #define PlatformViewController NSViewController
 #endif
 
-@interface RendererEntryViewController : PlatformViewController
+@interface RendererEntryViewController : PlatformViewController <MTKViewDelegate>
 
 @end
 
