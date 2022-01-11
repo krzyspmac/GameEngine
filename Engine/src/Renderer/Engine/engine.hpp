@@ -44,9 +44,10 @@ namespace engine
         ~Engine();
 
     public:
-        void setup();
+        void Setup();
+        void FrameBegin();
         int doInput();
-        void update();
+        void FrameDraw();
 
     public:
         void SetCapRate(int fps);

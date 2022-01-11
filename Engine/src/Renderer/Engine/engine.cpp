@@ -25,8 +25,6 @@ extern "C" {
 }
 #endif //__cplusplus
 
-#define USES_CONSOLE 1
-
 using namespace engine;
 
 /// Main accessor for easy access.
@@ -62,7 +60,7 @@ Engine::~Engine()
     delete m_bufferTexture;
 }
 
-void Engine::setup()
+void Engine::Setup()
 {
     // Register time helper for future reference.
     // Needed to scripts at the start of execution.
@@ -116,7 +114,12 @@ int Engine::doInput()
     return result;
 }
 
-void Engine::update()
+void Engine::FrameBegin()
+{
+
+}
+
+void Engine::FrameDraw()
 {
     // Update the time object
     m_time.PreUpdate();

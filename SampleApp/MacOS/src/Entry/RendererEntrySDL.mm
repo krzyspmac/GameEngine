@@ -115,7 +115,7 @@ void RendererEntrySDL::destroy()
 
 void RendererEntrySDL::prepare()
 {
-    m_engine->setup();
+    m_engine->Setup();
 }
 
 void RendererEntrySDL::doInput()
@@ -129,7 +129,7 @@ void RendererEntrySDL::doInput()
 
 void RendererEntrySDL::doScene()
 {
-    m_engine->update();
+    m_engine->FrameDraw();
 }
 
 void RendererEntrySDL::main(int argc, const char *argv[])

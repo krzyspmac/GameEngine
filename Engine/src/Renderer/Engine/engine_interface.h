@@ -67,17 +67,27 @@ namespace engine
 
     /// Setup
     public:
-        /// The main setup. All engine components should be
-        /// loaded by the concrete class after this call.
-        virtual void setup() = 0;
+
+        /** The main setup. All engine components should be
+            loaded by the concrete class after this call.
+         */
+        virtual void Setup() = 0;
+
+        /** A concrete instance will prepare the engine for the frame drawing.
+            Just after this method a similar method will be called on the
+            engine provider. In case of metal a RenderCommandEncoder will be stored
+            in the provider so that the drawing functions have some rendering handle
+            to deal with.s
+         */
+        virtual void FrameBegin() = 0;
 
         /// Process the inputs from the game.
         /// Return != 0 do quit the application.
         virtual int doInput() = 0;
 
-        /// The main `update` method.
-        /// Engine magic happens there.
-        virtual void update() = 0;
+        /** The main `update` method. Engine magic happens there.
+         */
+        virtual void FrameDraw() = 0;
 
     /// States
     public:

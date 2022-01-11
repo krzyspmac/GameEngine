@@ -16,38 +16,38 @@ font = nil
 function loadSprites()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
-	
-	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
-
-	-- character
-	character = scene:LoadCharacter("brett_character.json")
-	character:SetScale(3)
-	character:PlaceAt(100,450)
-	character:SetInverseWalkbox("polygons.json")
-	character:SetWalkingSpeed(400)
-	character:SetHidden(true)
-	--scene:SetMainCharacter(character)
-	scene:SetMouseDownFunction(mouseDown)
-
+--	
+--	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
+--
+--	-- character
+--	character = scene:LoadCharacter("brett_character.json")
+--	character:SetScale(3)
+--	character:PlaceAt(100,450)
+--	character:SetInverseWalkbox("polygons.json")
+--	character:SetWalkingSpeed(400)
+--	character:SetHidden(true)
+--	--scene:SetMainCharacter(character)
+--	scene:SetMouseDownFunction(mouseDown)
+--
 	-- sky
 	sky = scene:LoadSpriteStatic(atlas, "sky.png")
 	sky:SetScale(3)
 	sky:SetAlpha(255)
-	
-	-- room
-	bg = scene:LoadSpriteStatic(roomAtlas, "roombg")
-	bg:SetScale(4)
-	
-	cupboardL = scene:LoadSpriteStatic(roomAtlas, "cupboard-l")
-	cupboardL:SetScale(4)
-	
-	cupboardR = scene:LoadSpriteStatic(roomAtlas, "cupboard-r")
-	cupboardR:SetScale(4)
-	cupboardR:SetPosition(235*4, 0)
-	
+--	
+--	-- room
+--	bg = scene:LoadSpriteStatic(roomAtlas, "roombg")
+--	bg:SetScale(4)
+--	
 --	cupboardL = scene:LoadSpriteStatic(roomAtlas, "cupboard-l")
-	
-	font = FontManager:LoadFont("DialogFont_retro.fnt", "DialogFont_retro.png")
+--	cupboardL:SetScale(4)
+--	
+--	cupboardR = scene:LoadSpriteStatic(roomAtlas, "cupboard-r")
+--	cupboardR:SetScale(4)
+--	cupboardR:SetPosition(235*4, 0)
+--	
+----	cupboardL = scene:LoadSpriteStatic(roomAtlas, "cupboard-l")
+--	
+--	font = FontManager:LoadFont("DialogFont_retro.fnt", "DialogFont_retro.png")
 end
 
 function animateIntro()
