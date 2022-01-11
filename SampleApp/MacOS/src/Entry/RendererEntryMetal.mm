@@ -13,7 +13,6 @@ using namespace engine;
 
 RendererEntryMetal::RendererEntryMetal()
 {
-
 }
 
 void RendererEntryMetal::Create(MTL::PixelFormat pixelFormat, MTL::Device *device)

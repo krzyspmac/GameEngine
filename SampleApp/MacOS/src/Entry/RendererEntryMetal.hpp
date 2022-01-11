@@ -43,19 +43,6 @@ namespace engine
         MTL::RenderPipelineDescriptor *m_renderePipelineDescriptor;
         MTL::CommandQueue *m_commandQueue;
 
-        /*
-         id<MTLDevice> _device;
-
-         // The render pipeline generated from the vertex and fragment shaders in the .metal shader file.
-         id<MTLRenderPipelineState> _pipelineState;
-
-         // The command queue used to pass commands to the device.
-         id<MTLCommandQueue> _commandQueue;
-
-         // The current size of the view, used as an input to the vertex shader.
-         vector_uint2 _viewportSize;
-
-         */
     public:
         RendererEntryMetal();
 

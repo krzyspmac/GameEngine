@@ -50,7 +50,6 @@
 		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
 		7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB824112788F8FC008F0F7A /* libimgui.a */; };
-		7FF62D65278CA6CF0047A950 /* MTKViewWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FF62D63278CA6CF0047A950 /* MTKViewWrapper.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -117,8 +116,6 @@
 		7FB8226B2788DB33008F0F7A /* parlor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parlor.png; sourceTree = "<group>"; };
 		7FB8226C2788DB34008F0F7A /* parlor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parlor.json; sourceTree = "<group>"; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FF62D63278CA6CF0047A950 /* MTKViewWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MTKViewWrapper.mm; sourceTree = "<group>"; };
-		7FF62D64278CA6CF0047A950 /* MTKViewWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MTKViewWrapper.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +160,6 @@
 				7F20ACAC278B2A5A00B5772F /* RendererEntryViewController.mm */,
 				7F20ACB3278B306100B5772F /* RendererEntryMetal.hpp */,
 				7F20ACB2278B306100B5772F /* RendererEntryMetal.mm */,
-				7FF62D64278CA6CF0047A950 /* MTKViewWrapper.hpp */,
-				7FF62D63278CA6CF0047A950 /* MTKViewWrapper.mm */,
 			);
 			path = Entry;
 			sourceTree = "<group>";
@@ -352,7 +347,6 @@
 			files = (
 				7F20ACBC278B3B1600B5772F /* AAPLShaders.metal in Sources */,
 				7F1382C827750C0800ED6D67 /* main.mm in Sources */,
-				7FF62D65278CA6CF0047A950 /* MTKViewWrapper.mm in Sources */,
 				7F138297277507C500ED6D67 /* RendererEntrySDL.mm in Sources */,
 				7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */,
 				7F20ACB4278B306100B5772F /* RendererEntryMetal.mm in Sources */,
