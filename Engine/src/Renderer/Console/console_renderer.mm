@@ -50,9 +50,11 @@ void ConsoleRenderer::Setup()
 
 void ConsoleRenderer::SetupEvents()
 {
+#if SHOW_CONSOLEz
     GetMainEngine()->getEventsManager().RegisterGeneralInputEvents(EventHolderSDLEvent([&](SDL_Event *event){
         ImGui_ImplSDL2_ProcessEvent((const SDL_Event*)event);
     }));
+#endif
 }
 
 void ConsoleRenderer::DoFrame()

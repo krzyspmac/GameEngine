@@ -54,7 +54,11 @@ void ConsoleLog::Log(const char* fmt, ...)
     Buf.appendfv(fmt, args);
     va_end(args);
     Buf.append("\n");
+
+#if SHOW_CONSOLE
     LineOffsets.push_back(Buf.size());
+#else
+#endif
 }
 
 void ConsoleLog::ToggleVisibility()

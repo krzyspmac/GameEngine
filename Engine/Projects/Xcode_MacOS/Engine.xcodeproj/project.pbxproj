@@ -46,6 +46,9 @@
 		7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13824C277505B600ED6D67 /* common_engine_impl.h */; };
 		7F13828A277505B600ED6D67 /* common_engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138250277505B600ED6D67 /* common_engine.h */; };
 		7F13828B277505B600ED6D67 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
+		7F26254D278DF96200529F29 /* engine_provider_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F26254B278DF96200529F29 /* engine_provider_metal.cpp */; };
+		7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254C278DF96200529F29 /* engine_provider_metal.hpp */; };
+		7F262550278E0B3400529F29 /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
 		7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character_renderer.hpp */; };
 		7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
@@ -174,6 +177,9 @@
 		7F138250277505B600ED6D67 /* common_engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common_engine.h; sourceTree = "<group>"; };
 		7F138251277505B600ED6D67 /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
 		7F1382A727750AC000ED6D67 /* common_sdl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_sdl.h; sourceTree = "<group>"; };
+		7F26254B278DF96200529F29 /* engine_provider_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_provider_metal.cpp; sourceTree = "<group>"; };
+		7F26254C278DF96200529F29 /* engine_provider_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_provider_metal.hpp; sourceTree = "<group>"; };
+		7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../../../../SampleApp/MacOS/src/Entry/AAPLShaderTypes.h; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F64288227779CD400EE9E2C /* character_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_renderer.cpp; sourceTree = "<group>"; };
 		7F64288327779CD400EE9E2C /* character_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_renderer.hpp; sourceTree = "<group>"; };
@@ -356,6 +362,7 @@
 			isa = PBXGroup;
 			children = (
 				7F138228277505B600ED6D67 /* engine_provider_interface.h */,
+				7F26254A278DF95200529F29 /* Metal */,
 				7FBD2E50278B1DB00055ADC9 /* SDL */,
 			);
 			path = "Engine Provider";
@@ -407,6 +414,16 @@
 				7F138242277505B600ED6D67 /* engine.cpp */,
 			);
 			path = Engine;
+			sourceTree = "<group>";
+		};
+		7F26254A278DF95200529F29 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */,
+				7F26254C278DF96200529F29 /* engine_provider_metal.hpp */,
+				7F26254B278DF96200529F29 /* engine_provider_metal.cpp */,
+			);
+			path = Metal;
 			sourceTree = "<group>";
 		};
 		7F3CAAD8277093D500E0D74C = {
@@ -646,6 +663,7 @@
 				7F64288E2777C59D00EE9E2C /* character.hpp in Headers */,
 				7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */,
 				7F6428A527791A9100EE9E2C /* path_finder.hpp in Headers */,
+				7F262550278E0B3400529F29 /* AAPLShaderTypes.h in Headers */,
 				7FCAE7D7278073B9004A6107 /* time.hpp in Headers */,
 				7FE2E5DE277B24AD00538094 /* line.hpp in Headers */,
 				7FF21D772784E99A005C52C4 /* property_animator.hpp in Headers */,
@@ -661,6 +679,7 @@
 				7F138270277505B600ED6D67 /* sprite_atlas_interface.h in Headers */,
 				7F138255277505B600ED6D67 /* texture.hpp in Headers */,
 				7FDDAF9F2776873900578F86 /* room.hpp in Headers */,
+				7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */,
 				7F869FBB2780C41F00E8CB01 /* periodic_updates_manager.hpp in Headers */,
 				7F8499162787464F004127CB /* key_value.hpp in Headers */,
 				7F138278277505B600ED6D67 /* font_interface.h in Headers */,
@@ -785,6 +804,7 @@
 				7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */,
 				7FCAE7C7277E4EAA004A6107 /* sprite_atlas_manager.cpp in Sources */,
 				4C255DE427859E3100D0B30A /* animation_curve_factory.cpp in Sources */,
+				7F26254D278DF96200529F29 /* engine_provider_metal.cpp in Sources */,
 				7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7FCAE7C3277E3A68004A6107 /* scene.cpp in Sources */,
@@ -915,6 +935,7 @@
 					"$(SRCROOT)/../../../Libraries/cJson/cJson",
 					"$(SRCROOT)/../../../Libraries/imgui",
 					"$(SRCROOT)/../../../Libraries/imgui/backends",
+					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -984,6 +1005,7 @@
 					"$(SRCROOT)/../../../Libraries/cJson/cJson",
 					"$(SRCROOT)/../../../Libraries/imgui",
 					"$(SRCROOT)/../../../Libraries/imgui/backends",
+					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
