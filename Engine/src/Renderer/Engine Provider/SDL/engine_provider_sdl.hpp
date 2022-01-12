@@ -27,10 +27,12 @@ namespace engine
 
     class EngineProviderSDL : public EngineProviderI
     {
+        Vector2 m_desiredViewport;
     public:
         EngineProviderSDL(engine::SDL_APP *engineHandle);
 
     public:
+        void SetDesiredViewport(int width, int height);
 
     public:
         Uint64 GetTicks();
@@ -48,6 +50,10 @@ namespace engine
         void SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
         void ClearRender();
         void RenderPresent();
+
+    public:
+        std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float scale);
+        void DrawableRender(DrawableI*, float, float);
 
     public:
         TextureI *LoadTexture(std::string name, FileStreamI *);

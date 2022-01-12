@@ -49,6 +49,8 @@
 		7F26254D278DF96200529F29 /* engine_provider_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F26254B278DF96200529F29 /* engine_provider_metal.cpp */; };
 		7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254C278DF96200529F29 /* engine_provider_metal.hpp */; };
 		7F262550278E0B3400529F29 /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */; };
+		7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
+		7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
 		7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character_renderer.hpp */; };
 		7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
@@ -180,6 +182,9 @@
 		7F26254B278DF96200529F29 /* engine_provider_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_provider_metal.cpp; sourceTree = "<group>"; };
 		7F26254C278DF96200529F29 /* engine_provider_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_provider_metal.hpp; sourceTree = "<group>"; };
 		7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../../../../SampleApp/MacOS/src/Entry/AAPLShaderTypes.h; sourceTree = "<group>"; };
+		7F262552278F55E700529F29 /* drawable_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drawable_interface.h; sourceTree = "<group>"; };
+		7F262554278F570E00529F29 /* drawable_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_metal.cpp; sourceTree = "<group>"; };
+		7F262555278F570E00529F29 /* drawable_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_metal.hpp; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F64288227779CD400EE9E2C /* character_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_renderer.cpp; sourceTree = "<group>"; };
 		7F64288327779CD400EE9E2C /* character_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_renderer.hpp; sourceTree = "<group>"; };
@@ -311,6 +316,7 @@
 		7F13821A277505B600ED6D67 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				7F262551278F55D500529F29 /* Drawables */,
 				7FF21D722784DDD5005C52C4 /* Memory */,
 				7FCAE7D3278073AE004A6107 /* States */,
 				7FCC81BA2780A091003025CB /* Animations */,
@@ -422,6 +428,24 @@
 				7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */,
 				7F26254C278DF96200529F29 /* engine_provider_metal.hpp */,
 				7F26254B278DF96200529F29 /* engine_provider_metal.cpp */,
+			);
+			path = Metal;
+			sourceTree = "<group>";
+		};
+		7F262551278F55D500529F29 /* Drawables */ = {
+			isa = PBXGroup;
+			children = (
+				7F262553278F56EE00529F29 /* Metal */,
+				7F262552278F55E700529F29 /* drawable_interface.h */,
+			);
+			path = Drawables;
+			sourceTree = "<group>";
+		};
+		7F262553278F56EE00529F29 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				7F262555278F570E00529F29 /* drawable_metal.hpp */,
+				7F262554278F570E00529F29 /* drawable_metal.cpp */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -682,6 +706,7 @@
 				7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */,
 				7F869FBB2780C41F00E8CB01 /* periodic_updates_manager.hpp in Headers */,
 				7F8499162787464F004127CB /* key_value.hpp in Headers */,
+				7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */,
 				7F138278277505B600ED6D67 /* font_interface.h in Headers */,
 				7FF641E1277D22E50017D86D /* events_manager.hpp in Headers */,
 				7F13825F277505B600ED6D67 /* engine_provider_interface.h in Headers */,
@@ -829,6 +854,7 @@
 				7F849909278713BB004127CB /* animation_group_sequence.cpp in Sources */,
 				7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */,
 				7FE2E5D0277B13B000538094 /* path.cpp in Sources */,
+				7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */,
 				7F869FBA2780C41F00E8CB01 /* periodic_updates_manager.cpp in Sources */,
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
 				7F708915278A13D800A501CB /* font_manager.cpp in Sources */,

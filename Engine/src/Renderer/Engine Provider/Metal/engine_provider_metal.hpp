@@ -28,13 +28,18 @@ namespace engine
     class EngineProviderMetal : public EngineProviderI
     {
         MTL::RenderCommandEncoder *m_renderEncoder;
-        vector_uint2 m_viewportSize;
+        vector_float2 m_viewportSize;
+        vector_float2 m_desiredViewport;
+        
     public:
         EngineProviderMetal();
 
     public:
         void SetRendererCommandEncoder(MTL::RenderCommandEncoder*);
-        void SetViewportSize(vector_uint2);
+        void SetViewportSize(vector_float2);
+
+    public:
+        void SetDesiredViewport(int width, int height);
 
     public:
         Uint64 GetTicks();
@@ -46,6 +51,8 @@ namespace engine
         void GetRendererOutputSize(int *w, int *h);
 
     public:
+        std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float scale);
+        void DrawableRender(DrawableI*, float, float);
 
     public:
         void SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);

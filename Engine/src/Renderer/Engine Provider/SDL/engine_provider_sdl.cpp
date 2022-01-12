@@ -26,6 +26,11 @@ EngineProviderSDL::EngineProviderSDL(engine::SDL_APP *engineHandle)
     flipPointF.y = 0.5;
 }
 
+void EngineProviderSDL::SetDesiredViewport(int width, int height)
+{
+    m_desiredViewport = Vector2Make(width, height);
+}
+
 Uint64 EngineProviderSDL::GetTicks()
 {
     return SDL_GetTicks64();
@@ -76,6 +81,11 @@ void EngineProviderSDL::RenderPresent()
     SDL_RenderPresent(m_engineHandle->renderer);
 }
 
+std::unique_ptr<DrawableI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI*, float scale)
+{
+    return nullptr;
+}
+
 TextureI *EngineProviderSDL::LoadTexture(std::string filename, FileStreamI *stream)
 {
     SDL_Texture *textureHandle;
@@ -92,6 +102,11 @@ TextureI *EngineProviderSDL::LoadTexture(std::string filename, FileStreamI *stre
     {
         return nullptr;
     }
+}
+
+void EngineProviderSDL::DrawableRender(DrawableI*, float, float)
+{
+
 }
 
 TextureTargetI *EngineProviderSDL::CreateTargetTexture(int width, int height)

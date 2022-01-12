@@ -12,33 +12,43 @@
 
 using namespace engine;
 
-SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale)
+SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scale)
     : SpriteDrawI(scale), m_sprite(spriteAtlasItem)
 {
+    auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, scale);
+    m_drawable = std::unique_ptr<DrawableI>(std::move(drawable));
 }
 
 void SpriteDrawStatic::DrawAt(int x, int y)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
     TextureI *texture = m_sprite->GetTexture();
+//
+//    provider.TextureAlphaSetMod(texture, m_alpha);
+//
+//    provider.DrawTexture(
+//       texture,
+//       x,
+//       y,
+//       m_sprite->GetX(),
+//       m_sprite->GetY(),
+//       m_sprite->GetWidth(),
+//       m_sprite->GetHeight(),
+//       m_scale
+//    );
 
-    provider.TextureAlphaSetMod(texture, m_alpha);
+    provider.DrawableRender(m_drawable.get(), x, y);
+}
 
-    provider.DrawTexture(
-       texture,
-       x,
-       y,
-       m_sprite->GetX(),
-       m_sprite->GetY(),
-       m_sprite->GetWidth(),
-       m_sprite->GetHeight(),
-       m_scale
-    );
+void SpriteDrawStatic::SetPosition(Vector2 &pos)
+{
+    m_drawable->SetPosition(pos.x, pos.y);
 }
 
 void SpriteDrawStatic::SetScale(float x)
 {
     SpriteDrawI::SetScale(x);
+    m_drawable->SetScale(x);
 }
 
 void SpriteDrawStatic::Draw()

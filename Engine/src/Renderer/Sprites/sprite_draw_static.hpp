@@ -10,15 +10,17 @@
 
 #include "scripting_engine_provider_interface.h"
 #include "sprite_draw_interface.h"
+#include "drawable_interface.h"
 
 namespace engine
 {
 
     class SpriteDrawStatic: public SpriteDrawI, public ScriptingInterface
     {
+        std::unique_ptr<DrawableI> m_drawable;
     public:
         /** @private */
-        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale);
+        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scale);
         virtual ~SpriteDrawStatic() { };
         
     public:
@@ -31,7 +33,7 @@ namespace engine
         /**
          Sets the position for the sprite.
          */
-        void SetPosition(Vector2 &pos) { m_position = pos; };
+        void SetPosition(Vector2 &pos);
 
         /**
          Gets the current position for the sprite.

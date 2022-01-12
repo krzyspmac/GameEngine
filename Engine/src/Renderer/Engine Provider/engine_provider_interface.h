@@ -9,8 +9,10 @@
 #define engine_provider_interface_h
 
 #include "texture_interface.h"
+#include "drawable_interface.h"
 #include "font_interface.h"
 #include "file_access_provider.h"
+#include "sprite_atlas_interface.h"
 #include "vector2.hpp"
 #include "common.h"
 
@@ -36,6 +38,13 @@ namespace engine
     public:
         ///
         EngineProviderI() { }
+
+    /// Engine setup
+    public:
+        /// Sets the desirec viewport. It will affect the aspect ration.
+        /// The engine them will attemp to compensate by scaling and
+        /// translating the remainder of the view.
+        virtual void SetDesiredViewport(int width, int height) = 0;
 
     /// Engine states
     public:
@@ -75,6 +84,15 @@ namespace engine
 
         /// Update the screen with any rendering performed since the previous call.
         virtual void RenderPresent() = 0;
+
+    /// Drawables
+    public:
+
+        /// Given a sprite atlas item construct a drawable for the chosen scale.
+        virtual std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float) = 0;
+
+        /// Render the drawable for the current frame at x, y.
+        virtual void DrawableRender(DrawableI*, float, float) = 0;
 
     /// Textures
     public:

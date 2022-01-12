@@ -68,42 +68,42 @@ void ConsoleRenderer::DoFrame()
 
 void ConsoleRenderer::SetConsoleHidden(bool hidden)
 {
-    if (!m_platformRenderer->IsSetup())
-    {
-        if (!hidden)
-        {
-            Setup();
-        }
-    }
-    else
-    {
-        m_platformRenderer->SetConsoleHidden(hidden);
-    }
+//    if (!m_platformRenderer->IsSetup())
+//    {
+//        if (!hidden)
+//        {
+//            Setup();
+//        }
+//    }
+//    else
+//    {
+//        m_platformRenderer->SetConsoleHidden(hidden);
+//    }
 }
 
 void ConsoleRenderer::DoGui()
 {
-    DoMenuBar();
-    ImGui::ShowDemoWindow();
-
-    m_logger->Render();
-    m_terminal->Render();
+//    DoMenuBar();
+//    ImGui::ShowDemoWindow();
+//
+//    m_logger->Render();
+//    m_terminal->Render();
 }
 
 void ConsoleRenderer::DoMenuBar()
 {
-    if (ImGui::BeginMainMenuBar())
-    {
-        if (ImGui::BeginMenu("Log"))
-        {
-            m_logger->ToggleVisibility();
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Console"))
-        {
-            m_terminal->ToggleVisibility();
-            ImGui::EndMenu();
-        }
-        ImGui::EndMainMenuBar();
-    }
+//    if (ImGui::BeginMainMenuBar())
+//    {
+//        if (ImGui::BeginMenu("Log"))
+//        {
+//            m_logger->ToggleVisibility();
+//            ImGui::EndMenu();
+//        }
+//        if (ImGui::BeginMenu("Console"))
+//        {
+//            m_terminal->ToggleVisibility();
+//            ImGui::EndMenu();
+//        }
+//        ImGui::EndMainMenuBar();
+//    }
 }

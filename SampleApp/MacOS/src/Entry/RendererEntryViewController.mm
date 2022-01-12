@@ -36,7 +36,7 @@ using namespace engine;
     MTLRenderPipelineDescriptor *renderePipelineDescriptor;
     id<MTLRenderPipelineState> pipelineState;
     id<MTLCommandQueue> commandQueue;
-    vector_uint2 viewportSize;
+    vector_float2 viewportSize;
     MTKView *mtkView;
 
     /** Engine Related */
@@ -146,7 +146,10 @@ using namespace engine;
         NSLog(@"Failed to create pipeline state: %@.", error);
         // TODO: error handling
     }
+
     commandQueue = [device newCommandQueue];
+
+    m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 #pragma mark - MTKViewDelegate
@@ -155,6 +158,7 @@ using namespace engine;
 {
     viewportSize.x = size.width;
     viewportSize.y = size.height;
+    NSLog(@"New size = %@\n", NSStringFromSize(size));
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view

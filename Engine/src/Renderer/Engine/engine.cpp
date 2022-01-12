@@ -166,7 +166,7 @@ void Engine::FrameDraw()
 
 #if SHOW_CONSOLE
     // Render the console if needed
-    m_consoleRenderer.DoFrame();
+//    m_consoleRenderer.DoFrame();
 #endif
 }
 
