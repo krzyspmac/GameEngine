@@ -9,19 +9,23 @@
 #define texture_interface_h
 
 #include "common.h"
+#include "common_engine_impl.h"
 
 namespace engine
 {
 
     class TextureI
     {
+        Vector2 m_textureSize;
     public:
-        TextureI(void *textureHandle, std::string textureName)
-        : m_textureHandle(textureHandle), m_textureName(textureName)
+        TextureI(void *textureHandle, std::string textureName, Vector2 size)
+        : m_textureHandle(textureHandle), m_textureName(textureName), m_textureSize(size)
         { }
 
         void *getTextureHandle() { return m_textureHandle; };
         std::string &getTextureName() { return m_textureName; };
+        void SetSize(Vector2 size) { m_textureSize = size; };
+        Vector2& GetSize() { return m_textureSize; };
 
     protected:
         void *m_textureHandle;
@@ -31,8 +35,8 @@ namespace engine
     class TextureTargetI: public TextureI
     {
     public:
-        TextureTargetI(void *textureHandle)
-        : TextureI(textureHandle, "")
+        TextureTargetI(void *textureHandle, Vector2 size)
+        : TextureI(textureHandle, "", size)
         { };
     };
 };

@@ -13,10 +13,10 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="zpD-J4-kZE">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="425" y="462" width="1280" height="720"/>
+                        <rect key="contentRect" x="425" y="462" width="300" height="300"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
                         <view key="contentView" id="doH-pW-izG">
-                            <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
                         <connections>
@@ -55,7 +55,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="-175" y="-164"/>
+            <point key="canvasLocation" x="-277" y="-156"/>
         </scene>
         <!--Renderer Entry View Controller-->
         <scene sceneID="cYf-SN-1hr">
@@ -447,7 +447,7 @@
                     </menu>
                 </application>
             </objects>
-            <point key="canvasLocation" x="-142" y="100"/>
+            <point key="canvasLocation" x="-288" y="267"/>
         </scene>
     </scenes>
 </document>

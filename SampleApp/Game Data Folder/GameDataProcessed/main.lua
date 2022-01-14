@@ -17,7 +17,7 @@ function loadSprites()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
 --	
-	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
+	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.tga" )
 --
 --	-- character
 --	character = scene:LoadCharacter("brett_character.json")
@@ -36,10 +36,10 @@ function loadSprites()
 	sky:SetPosition(0, 0)
 	
 --	-- sky
-sky2 = scene:LoadSpriteStatic(atlas, "sky.png")
-sky2:SetScale(2)
-sky2:SetAlpha(255)
-sky2:SetPosition(1280/2, 0)
+--sky2 = scene:LoadSpriteStatic(atlas, "sky.png")
+--sky2:SetScale(1)
+--sky2:SetAlpha(255)
+--sky2:SetPosition(1280/2, 0)
 
 --	
 --	-- room

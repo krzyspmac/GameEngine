@@ -112,6 +112,9 @@ using namespace engine;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+//    NSWindow * window = NSApplication.sharedApplication.windows[0];
+//    [window setFrame:CGRectMake(0, 0, 1280, 720) display:YES];
 
     [self setupEngine];
     [self setupRenderingPipeline];
@@ -149,6 +152,7 @@ using namespace engine;
 
     commandQueue = [device newCommandQueue];
 
+    m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
     m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 

@@ -20,11 +20,11 @@ struct RasterizerData
     // returned from the vertex function.
     float4 position [[position]];
 
-    // Since this member does not have a special attribute, the rasterizer
-    // interpolates its value with the values of the other triangle vertices
-    // and then passes the interpolated value to the fragment shader for each
-    // fragment in the triangle.
-    float4 color;
+    // Since this member does not have a special attribute qualifier, the rasterizer
+    // will interpolate its value with values of other vertices making up the triangle
+    // and pass that interpolated value to the fragment shader for each fragment in
+    // that triangle.
+    float2 textureCoordinate;
 };
 
 vertex RasterizerData
@@ -64,26 +64,63 @@ vertexShader(uint vertexID [[vertex_id]],
     scaleX = viewportSize.x / (desiredViewportSize.x / objectScale);
     scaleY = viewportSize.y / (desiredViewportSize.y / objectScale);
     scale = min(scaleX, scaleY);
+    
+    float trscaleX, trscaleY, trscale;
+    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
+    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
+    trscale = min(trscaleX, trscaleY);
 
     // Calculate offsets due to scaling
     // TBD
     vector_float2 targetViewportSize;
-    targetViewportSize.xy = desiredViewportSize * scale;
+    targetViewportSize.xy = desiredViewportSize * trscale;
 
     vector_float2 targetObjectSize;
     targetObjectSize.xy = objectSize * scale;
 
     pixelSpacePosition.xy *= scale;
+    
+    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
+    
+//    pixelSpacePosition.x -= (viewportSize.x - targetViewportSize.x)/2;
 
-    float offsetXToEdge = viewportSize.x/2 - ((targetObjectSize.x)/2);
+//    float offsetXToEdge = viewportSize.x/2 - ((targetObjectSize.x)/2);
+//
+//    float offsetXToViewport = (viewportSize.x - targetViewportSize.x) / 2;
+//
+//
+//    float pos = objectTranslation.x * scale;
+//
+//    pixelSpacePosition.x -= offsetXToEdge;// + (viewportSize.x/2 - targetObjectSize.x/2);
+//    pixelSpacePosition.x -= targetObjectSize.x/2;
+//
+//    pixelSpacePosition.x += pos;
+//
+//    pixelSpacePosition.x += targetObjectSize.x/2;
+//    pixelSpacePosition.x += offsetXToEdge;
 
-    pixelSpacePosition.x -= offsetXToEdge;
+    
+//    pixelSpacePosition.x += pos;
+    
+//    pixelSpacePosition.x -= offsetXToEdge;
+    
+//    pixelSpacePosition.x += targetObjectSize.x/2;
+//    pixelSpacePosition.x += 1280 / scale;
+//    pixelSpacePosition.x -= targetObjectSize.x / 2;
+//
+//    pixelSpacePosition.x += objectTranslation.x * scale;
+//
+//    pixelSpacePosition.x += targetObjectSize.x / 2;
+//    pixelSpacePosition.x += offsetXToEdge;
+    
 //    pixelSpacePosition.x += objectTranslation.x * scale;
 //    pixelSpacePosition.x -=
 //    pixelSpacePosition.x += (objectTranslation.x * scale / 1);
 //    pixelSpacePosition.x -= viewportSize.x / 2;
 //    pixelSpacePosition.x -= (objectSize.x * objectScale * scale);
-    pixelSpacePosition.x += offsetXToEdge;
+//    pixelSpacePosition.x -= objectSize.x / 2;
+//    pixelSpacePosition.x += objectTranslation.x * scale;
+//    pixelSpacePosition.x += offsetXToEdge;
 
 //    pixelSpacePosition.x = pixelSpacePosition.x + objectTranslation.x * scale / 2;
 
@@ -93,14 +130,30 @@ vertexShader(uint vertexID [[vertex_id]],
     out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
 
     // Pass the input color directly to the rasterizer.
-    out.color = vertices[vertexID].color;
+//    out.color = vertices[vertexID].color;
+    out.textureCoordinate = vertices[vertexID].textureCoordinate;
 
     return out;
 }
 
-fragment float4 fragmentShader(RasterizerData in [[stage_in]])
+//fragment float4 fragmentShader(RasterizerData in [[stage_in]])
+//{
+//    // Return the interpolated color.
+//    return in.color;
+//}
+
+// Fragment function
+fragment float4
+fragmentShader(RasterizerData in [[stage_in]],
+               texture2d<half> colorTexture [[ texture(AAPLTextureIndexBaseColor) ]])
 {
-    // Return the interpolated color.
-    return in.color;
+    constexpr sampler textureSampler (mag_filter::linear,
+                                      min_filter::linear);
+
+    // Sample the texture to obtain a color
+    const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
+
+    // return the color of the texture
+    return float4(colorSample);
 }
 

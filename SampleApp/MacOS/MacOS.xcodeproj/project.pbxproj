@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C9EA02D279217E70082EB6A /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
 		7F138297277507C500ED6D67 /* RendererEntrySDL.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntrySDL.mm */; };
 		7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
@@ -66,6 +67,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C9EA02C279217E70082EB6A /* parlor.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = parlor.tga; sourceTree = "<group>"; };
 		7F138290277507C500ED6D67 /* RendererEntrySDL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererEntrySDL.hpp; sourceTree = "<group>"; };
 		7F138291277507C500ED6D67 /* RendererEntrySDL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntrySDL.mm; sourceTree = "<group>"; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				4C9EA02C279217E70082EB6A /* parlor.tga */,
 				7FB8226C2788DB34008F0F7A /* parlor.json */,
 				7FB8226B2788DB33008F0F7A /* parlor.png */,
 				7F8499282787798B004127CB /* fireplace.json */,
@@ -321,6 +324,7 @@
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
 				7F84992A2787798B004127CB /* fireplace.json in Resources */,
 				7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */,
+				4C9EA02D279217E70082EB6A /* parlor.tga in Resources */,
 				7F869FDC2783970400E8CB01 /* characters.png in Resources */,
 				7F869FE32783970400E8CB01 /* polygons.json in Resources */,
 				7F869FD52783970400E8CB01 /* brett.png in Resources */,

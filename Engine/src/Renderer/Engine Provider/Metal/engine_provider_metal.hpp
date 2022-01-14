@@ -27,7 +27,10 @@ namespace engine
 
     class EngineProviderMetal : public EngineProviderI
     {
+        MTL::Device *m_device;
         MTL::RenderCommandEncoder *m_renderEncoder;
+        MTL::Library *m_library;
+        MTL::PixelFormat m_pixelFormat;
         vector_float2 m_viewportSize;
         vector_float2 m_desiredViewport;
         
@@ -35,6 +38,8 @@ namespace engine
         EngineProviderMetal();
 
     public:
+        void SetRendererDevice(MTL::Device*);
+        void SetPixelFormat(MTL::PixelFormat);
         void SetRendererCommandEncoder(MTL::RenderCommandEncoder*);
         void SetViewportSize(vector_float2);
 

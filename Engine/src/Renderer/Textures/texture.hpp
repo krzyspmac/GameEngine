@@ -18,7 +18,7 @@ namespace engine
     {
     public:
         Texture(void *textureHandle, std::string textureName)
-            : TextureI(textureHandle, textureName)
+            : TextureI(textureHandle, textureName, Vector2Zero)
         {
         }
 

@@ -10,7 +10,7 @@
 using namespace engine;
 
 TextureTarget::TextureTarget(void *textureHandle)
-: TextureTargetI(textureHandle)
+: TextureTargetI(textureHandle, Vector2Zero)
 {
     
 }

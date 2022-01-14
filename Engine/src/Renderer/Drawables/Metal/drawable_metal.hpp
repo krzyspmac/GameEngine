@@ -11,6 +11,8 @@
 #include "drawable_interface.h"
 #include "common.h"
 #include "common_engine_impl.h"
+#include "texture_metal.hpp"
+#include "sprite_atlas_interface.h"
 #include "AAPLShaderTypes.h"
 
 namespace engine
@@ -23,8 +25,10 @@ namespace engine
         simd_float2 m_position;
         vector_float2 m_size;
         float m_scale;
+        SpriteAtlasItemI *m_atlasItem;
+        TextureMetal *m_texture;
     public: // Drawable I
-        DrawableMetal(float, float);
+        DrawableMetal(SpriteAtlasItemI*, float, float);
         void SetPosition(float, float);
         void SetScale(float);
 
@@ -35,6 +39,7 @@ namespace engine
         simd_float2 *GetPosition();
         float *GetScale();
         vector_float2 *GetSize();
+        TextureMetal *GetTexture() { return m_texture; };
     };
 };
 

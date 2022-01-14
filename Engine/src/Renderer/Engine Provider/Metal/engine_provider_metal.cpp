@@ -15,6 +15,8 @@
 
 #include "drawable_metal.hpp"
 #include "texture.hpp"
+#include "texture_target_metal.hpp"
+#include "texture_metal.hpp"
 
 /// Defaults
 
@@ -23,6 +25,15 @@ static SDL_FPoint flipPointF;
 
 using namespace engine;
 
+class EngineProviderMetalTargetTextureDescriptor
+{
+public:
+    MTL::RenderPassDescriptor *m_renderToTexturePassDescriptor;
+    MTL::RenderPipelineDescriptor *m_renderToTexturePipeline;
+};
+
+std::vector<EngineProviderMetalTargetTextureDescriptor*> renderStack;
+
 EngineProviderMetal::EngineProviderMetal()
 : EngineProviderI()
 {
@@ -30,6 +41,17 @@ EngineProviderMetal::EngineProviderMetal()
 //    flipPoint.y = 0.5;
 //    flipPointF.x = 0.5;
 //    flipPointF.y = 0.5;
+}
+
+void EngineProviderMetal::SetRendererDevice(MTL::Device *device)
+{
+    m_device = device;
+    m_library = device->newDefaultLibrary();
+}
+
+void EngineProviderMetal::SetPixelFormat(MTL::PixelFormat val)
+{
+    m_pixelFormat = val;
 }
 
 void EngineProviderMetal::SetDesiredViewport(int width, int height)
@@ -100,12 +122,13 @@ void EngineProviderMetal::RenderPresent()
 
 TextureI *EngineProviderMetal::LoadTexture(std::string filename, FileStreamI *stream)
 {
-    return new Texture(nullptr, filename);
+    return new TextureMetal(m_device, filename);
 }
 
 TextureTargetI *EngineProviderMetal::CreateTargetTexture(int width, int height)
 {
-    return nullptr;
+    TextureTargetMetal *texture = new TextureTargetMetal(m_device, width, height);
+    return texture;
 }
 
 void EngineProviderMetal::UnloadTexture(TextureI *texture)
@@ -116,7 +139,7 @@ std::unique_ptr<DrawableI> EngineProviderMetal::DrawableCreate(SpriteAtlasItemI 
 {
     float width = atlasItem->GetWidth();
     float height = atlasItem->GetHeight();
-    DrawableMetal *drawable = new DrawableMetal(width, height);
+    DrawableMetal *drawable = new DrawableMetal(atlasItem, width, height);
     return std::unique_ptr<DrawableI>(std::move(drawable));
 }
 
@@ -133,7 +156,14 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     m_renderEncoder->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
     m_renderEncoder->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     m_renderEncoder->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
-
+    if (drawable->GetTexture() != nullptr)
+    {
+        if (drawable->GetTexture()->GetTexture() != nullptr)
+        {
+            m_renderEncoder->setFragmentTexture(drawable->GetTexture()->GetTexture(), AAPLTextureIndexBaseColor);
+        }
+    }
+    
     m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)trianglesNum);
 }
 
@@ -185,10 +215,36 @@ void EngineProviderMetal::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
 
 void EngineProviderMetal::RendererTargetPush(TextureTargetI *targetTexture)
 {
+//    TextureTargetMetal *metalTexture = (TextureTargetMetal*)targetTexture;
+//
+//    EngineProviderMetalTargetTextureDescriptor *targetRender = new EngineProviderMetalTargetTextureDescriptor();
+//
+//    targetRender->m_renderToTexturePassDescriptor = MTL::RenderPassDescriptor::alloc()->init();
+//
+//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setTexture(metalTexture->GetTexture());
+//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setLoadAction(MTL::LoadActionClear);
+//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setClearColor({1, 1, 1, 1 });
+//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setStoreAction(MTL::StoreActionStore);
+//
+//    targetRender->m_renderToTexturePipeline = MTL::RenderPipelineDescriptor::alloc()->init();
+//    targetRender->m_renderToTexturePipeline->setLabel(NS::MakeConstantString("Offscreen Render Pipe"));
+//    targetRender->m_renderToTexturePipeline->setSampleCount(1);
+//    targetRender->m_renderToTexturePipeline->setVertexFunction(m_library->newFunction(NS::MakeConstantString("simpleVertexShader")));
+//    targetRender->m_renderToTexturePipeline->setFragmentFunction(m_library->newFunction(NS::MakeConstantString("simpleFragmentShader")));
+//    targetRender->m_renderToTexturePipeline->colorAttachments()->object(0)->setPixelFormat(m_pixelFormat);
+//
+//
+//
+//    renderStack.emplace_back(targetRender);
 }
 
 void EngineProviderMetal::RendererTargetPop()
 {
+//    if (!renderStack.empty()) {
+//        auto item = renderStack.at(renderStack.size()-1);
+//        delete item;
+//        renderStack.pop_back();
+//    }
 }
 
 void EngineProviderMetal::RenderTargetSet(TextureI *targetTexture)

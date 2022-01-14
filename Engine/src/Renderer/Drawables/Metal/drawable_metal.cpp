@@ -9,60 +9,42 @@
 
 using namespace engine;
 
-DrawableMetal::DrawableMetal(float width, float height)
-    : DrawableI(width, height)
+DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float height)
+    : DrawableI(atlasItem->GetWidth(), atlasItem->GetHeight())
     , m_scale(1.0)
+    , m_atlasItem(atlasItem)
 {
     m_triangleVertices = (AAPLVertex*)malloc(6 * sizeof(AAPLVertex));
     m_position[0] = 0;
-    m_position[1] = 1;
-
-//    width = 1280;
-//    height = 720;
-
-    /*static const*/ /*AAPLVertex*//* triangleVertices[3] =*/
-//    const AAPLVertex data[] =
-//    {
-//        // 2D positions,    RGBA colors
-//        { {  -250,  -250 }, { 1, 0, 0, 1 } },       // bottom left
-//        { {  -250,   250 }, { 0, 1, 0, 1 } },       // upper left
-//        { {   250,   250 }, { 0, 0, 1, 1 } },       // upper right
-//
-//        { {   250,   250 }, { 0, 0, 1, 1 } },       // upper right
-//        { {   250,  -250 }, { 0, 0, 1, 1 } },       // bottom right
-//        { {  -250,  -250 }, { 0, 0, 1, 1 } },       // bottom left
-//    };
-
-    m_size[0] = width;
-    m_size[1] = height;
+    m_position[1] = 0;
+    
+    auto metalTextrue = (TextureMetal*)atlasItem->GetTexture();
+    
+    auto textureSize = metalTextrue->GetSize();
+    
+    float x = atlasItem->GetX() / textureSize.x;
+    float y = atlasItem->GetY() / textureSize.y;
+    float w = (atlasItem->GetX() +atlasItem->GetWidth()) / textureSize.x;
+    float h = (atlasItem->GetY() + atlasItem->GetHeight()) / textureSize.y;
+    
+    m_texture = metalTextrue;
 
     float width2 = width/2;
     float height2 = height/2;
-
-//    const AAPLVertex data[] =
-//    {
-//        // 2D positions,    RGBA colors
-//        { {  -width2,     -height2 } , { 1, 0, 0, 1 } },       // bottom left
-//        { {  -width2,      height2 } , { 0, 1, 0, 1 } },       // upper left
-//        { {   width2,      height2 } , { 0, 0, 1, 1 } },       // upper right
-//
-//        { {   width2,      height2 } , { 0, 0, 1, 1 } },       // upper right
-//        { {   width2,     -height2 } , { 0, 0, 1, 1 } },       // bottom right
-//        { {  -width2,     -height2 } , { 0, 0, 1, 1 } },       // bottom left
-//    };
-
-    const AAPLVertex data[] =
+    
+    // Set up a simple MTLBuffer with vertices which include texture coordinates
+    static const AAPLVertex data[] =
     {
-        // 2D positions,    RGBA colors
-        { {   -width2,          -height2 } , { 1, 0, 0, 1 } },       // bottom left
-        { {   -width2,           height2 } , { 0, 1, 0, 1 } },       // upper left
-        { {   width2,      height2 } , { 0, 0, 1, 1 } },       // upper right
+        // Pixel positions, Texture coordinates
+        { { -width2,  -height2 },   { x, h} },
+        { { -width2,   height2 },   { x, y } },
+        { {  width2,   height2 },   { w, y } },
 
-        { {   width2,      height2 } , { 0, 0, 1, 1 } },       // upper right
-        { {   width2,     -height2 } , { 0, 0, 1, 1 } },       // bottom right
-        { {  -width2,     -height2 } , { 0, 0, 1, 1 } },       // bottom left
+        { {  width2,    height2 },  { w, y } },
+        { {  width2,   -height2 },  { w, h } },
+        { { -width2,   -height2 },  { x, h } },
     };
-
+    
     m_triangleVerticiesDataSize = sizeof(data);
     memcpy(m_triangleVertices, data, m_triangleVerticiesDataSize);
 }
