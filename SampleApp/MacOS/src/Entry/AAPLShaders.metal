@@ -68,8 +68,13 @@ vertexShader(uint vertexID [[vertex_id]],
     // Calculate offsets due to scaling
     // TBD
 
-    pixelSpacePosition.x *= scale;
-    pixelSpacePosition.y *= scale;
+    pixelSpacePosition.xy *= scale;
+
+    float offsetXToEdge = viewportSize.x/2 - ((objectSize.x * scale)/2);
+
+    pixelSpacePosition.x -= offsetXToEdge;
+    pixelSpacePosition.x += objectTranslation.x * scale / 2;
+    pixelSpacePosition.x += offsetXToEdge;
 
     // To convert from positions in pixel space to positions in clip-space,
     //  divide the pixel coordinates by half the size of the viewport.

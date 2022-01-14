@@ -39,7 +39,7 @@ function loadSprites()
 sky2 = scene:LoadSpriteStatic(atlas, "sky.png")
 sky2:SetScale(2)
 sky2:SetAlpha(255)
-sky2:SetPosition(0, 0)
+sky2:SetPosition(1280/2, 0)
 
 --	
 --	-- room
