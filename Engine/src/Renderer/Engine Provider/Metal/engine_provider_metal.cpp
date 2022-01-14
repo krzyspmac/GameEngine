@@ -156,11 +156,14 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     m_renderEncoder->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
     m_renderEncoder->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     m_renderEncoder->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
-    if (drawable->GetTexture() != nullptr)
+    
+    auto texture = drawable->GetTexture();
+    if (texture != nullptr)
     {
-        if (drawable->GetTexture()->GetTexture() != nullptr)
+        auto mtlTextureHandle = texture->GetMTLTextureHandle();
+        if (mtlTextureHandle != nullptr)
         {
-            m_renderEncoder->setFragmentTexture(drawable->GetTexture()->GetTexture(), AAPLTextureIndexBaseColor);
+            m_renderEncoder->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
         }
     }
     

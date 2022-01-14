@@ -19,12 +19,12 @@ namespace engine
     {
         MTL::TextureDescriptor *m_textureDescriptor;
         MTL::Texture *m_texture;
-        void *m_textureBytes;
     public:
         TextureMetal(MTL::Device*, std::string filename);
+        virtual ~TextureMetal();
         
         MTL::TextureDescriptor *GetTextureDescriptor() { return m_textureDescriptor; };
-        MTL::Texture* GetTexture() { return m_texture; };
+        MTL::Texture* GetMTLTextureHandle() { return m_texture; };
     };
 };
 

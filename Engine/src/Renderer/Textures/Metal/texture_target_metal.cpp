@@ -9,21 +9,6 @@
 
 using namespace engine;
 
-/*
- // Set up a texture for rendering to and sampling from
- MTLTextureDescriptor *texDescriptor = [MTLTextureDescriptor new];
- texDescriptor.textureType = MTLTextureType2D;
- texDescriptor.width = 512;
- texDescriptor.height = 512;
- texDescriptor.pixelFormat = MTLPixelFormatRGBA8Unorm;
- texDescriptor.usage = MTLTextureUsageRenderTarget |
-                       MTLTextureUsageShaderRead;
-
- 
- _renderTargetTexture = [_device newTextureWithDescriptor:texDescriptor];
-
- */
-
 TextureTargetMetal::TextureTargetMetal(MTL::Device *device, float width, float height)
     : TextureTargetI(nullptr, Vector2Make(width, height))
 {

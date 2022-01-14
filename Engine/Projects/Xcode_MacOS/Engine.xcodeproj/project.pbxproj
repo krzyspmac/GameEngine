@@ -313,8 +313,8 @@
 				4C9EA02E27921D8D0082EB6A /* AAPLImage.mm */,
 				4C9EA021279205C80082EB6A /* texture_target_metal.hpp */,
 				4C9EA020279205C80082EB6A /* texture_target_metal.cpp */,
-				4C9EA0282792166F0082EB6A /* texture_metal.cpp */,
 				4C9EA0292792166F0082EB6A /* texture_metal.hpp */,
+				4C9EA0282792166F0082EB6A /* texture_metal.cpp */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
