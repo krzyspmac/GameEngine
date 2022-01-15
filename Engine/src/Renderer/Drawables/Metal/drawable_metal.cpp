@@ -11,7 +11,6 @@ using namespace engine;
 
 DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float height)
     : DrawableI(atlasItem->GetWidth(), atlasItem->GetHeight())
-    , m_scale(1.0)
     , m_atlasItem(atlasItem)
 {
     m_triangleVertices = (AAPLVertex*)malloc(6 * sizeof(AAPLVertex));
@@ -46,19 +45,9 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float hei
     memcpy(m_triangleVertices, data, m_triangleVerticiesDataSize);
 }
 
-void DrawableMetal::SetScale(float scale)
-{
-    m_scale = scale;
-}
-
 vector_float2 *DrawableMetal::GetSize()
 {
     return &m_size;
-}
-
-float *DrawableMetal::GetScale()
-{
-    return &m_scale;
 }
 
 AAPLVertex *DrawableMetal::GetVertexData()

@@ -134,7 +134,7 @@ void Engine::FrameDraw()
     m_engineProvider.ClearRender();
 
     // Push the buffer texture. All scene will be rendered to a buffer texture
-    m_engineProvider.RendererTargetPush(m_bufferTexture);
+//    m_engineProvider.RendererTargetPush(m_bufferTexture);
 
     // Clear the game background
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
@@ -144,7 +144,7 @@ void Engine::FrameDraw()
     RenderScene();
 
     // Pop the buffer texture. Blit the render to the screen.
-    m_engineProvider.RendererTargetPop();
+//    m_engineProvider.RendererTargetPop();
 
     ApplyScaleTransformations();
 

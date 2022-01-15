@@ -8,6 +8,7 @@
 #include "engine_provider_sdl.hpp"
 #include "texture.hpp"
 #include "texture_target.hpp"
+#include "drawable_sdl.hpp"
 #include "SDL.h"
 
 /// Defaults
@@ -81,9 +82,12 @@ void EngineProviderSDL::RenderPresent()
     SDL_RenderPresent(m_engineHandle->renderer);
 }
 
-std::unique_ptr<DrawableI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI*, float scale)
+std::unique_ptr<DrawableI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
 {
-    return nullptr;
+    float width = atlasItem->GetWidth();
+    float height = atlasItem->GetHeight();
+    DrawableSDL *drawable = new DrawableSDL(atlasItem, width, height);
+    return std::unique_ptr<DrawableI>(std::move(drawable));
 }
 
 TextureI *EngineProviderSDL::LoadTexture(std::string filename, FileStreamI *stream)
@@ -104,9 +108,23 @@ TextureI *EngineProviderSDL::LoadTexture(std::string filename, FileStreamI *stre
     }
 }
 
-void EngineProviderSDL::DrawableRender(DrawableI*, float, float)
+void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y)
 {
+    auto drawable = (DrawableSDL*)baseDrawable;
 
+    TextureI *texture = drawable->GetTexture();
+    TextureAlphaSetMod(texture, baseDrawable->GetAlpha());
+
+    DrawTexture(
+       texture,
+       (int)x,
+       (int)y,
+       (int)drawable->GetX(),
+       (int)drawable->GetY(),
+       (int)drawable->GetWidth(),
+       (int)drawable->GetHeight(),
+       *drawable->GetScale()
+    );
 }
 
 TextureTargetI *EngineProviderSDL::CreateTargetTexture(int width, int height)

@@ -63,7 +63,7 @@ function animateIntro()
 		'sequence',
 		PropertyAnimatorFactory:FadeIn(sky, 1, 3)
 	, 	function() -- on finish
-			character:SetHidden(false)
+--			character:SetHidden(false)
 		end
 	)
 	group:Start()
@@ -87,7 +87,7 @@ end
 
 function init()
 	loadSprites()
---	animateIntro()
+  	animateIntro()
 end
 
 function update ()

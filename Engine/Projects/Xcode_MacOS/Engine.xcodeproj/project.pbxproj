@@ -97,6 +97,8 @@
 		7FB824262789AF95008F0F7A /* pipe_output.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824242789AF95008F0F7A /* pipe_output.hpp */; };
 		7FB8242D2789D3AD008F0F7A /* console_app_renderer_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8242B2789D3AD008F0F7A /* console_app_renderer_mac.mm */; };
 		7FB8242E2789D3AD008F0F7A /* console_app_renderer_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */; };
+		7FC131052792CAD50094DF0C /* drawable_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FC131032792CAD50094DF0C /* drawable_sdl.cpp */; };
+		7FC131062792CAD50094DF0C /* drawable_sdl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131042792CAD50094DF0C /* drawable_sdl.hpp */; };
 		7FCAE7BF277E36DD004A6107 /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7BD277E36DD004A6107 /* scene_manager.cpp */; };
 		7FCAE7C0277E36DD004A6107 /* scene_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7BE277E36DD004A6107 /* scene_manager.hpp */; };
 		7FCAE7C3277E3A68004A6107 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7C1277E3A68004A6107 /* scene.cpp */; };
@@ -244,6 +246,8 @@
 		7FB8242B2789D3AD008F0F7A /* console_app_renderer_mac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = console_app_renderer_mac.mm; sourceTree = "<group>"; };
 		7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = console_app_renderer_mac.hpp; sourceTree = "<group>"; };
 		7FB8242F2789DCF6008F0F7A /* easy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = easy.h; sourceTree = "<group>"; };
+		7FC131032792CAD50094DF0C /* drawable_sdl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_sdl.cpp; sourceTree = "<group>"; };
+		7FC131042792CAD50094DF0C /* drawable_sdl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_sdl.hpp; sourceTree = "<group>"; };
 		7FCAE7BD277E36DD004A6107 /* scene_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene_manager.cpp; sourceTree = "<group>"; };
 		7FCAE7BE277E36DD004A6107 /* scene_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = scene_manager.hpp; sourceTree = "<group>"; };
 		7FCAE7C1277E3A68004A6107 /* scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = scene.cpp; sourceTree = "<group>"; };
@@ -367,6 +371,7 @@
 		7F13821B277505B600ED6D67 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				7FC131072792CDB70094DF0C /* SDL */,
 				4C9EA01F279205AD0082EB6A /* Metal */,
 				7F13821D277505B600ED6D67 /* texture_interface.h */,
 				7F13821E277505B600ED6D67 /* texture.hpp */,
@@ -461,6 +466,7 @@
 		7F262551278F55D500529F29 /* Drawables */ = {
 			isa = PBXGroup;
 			children = (
+				7FC131022792CA900094DF0C /* SDL */,
 				7F262553278F56EE00529F29 /* Metal */,
 				7F262552278F55E700529F29 /* drawable_interface.h */,
 			);
@@ -551,6 +557,22 @@
 			children = (
 				7F138224277505B600ED6D67 /* engine_provider_sdl.hpp */,
 				7F138229277505B600ED6D67 /* engine_provider_sdl.cpp */,
+			);
+			path = SDL;
+			sourceTree = "<group>";
+		};
+		7FC131022792CA900094DF0C /* SDL */ = {
+			isa = PBXGroup;
+			children = (
+				7FC131042792CAD50094DF0C /* drawable_sdl.hpp */,
+				7FC131032792CAD50094DF0C /* drawable_sdl.cpp */,
+			);
+			path = SDL;
+			sourceTree = "<group>";
+		};
+		7FC131072792CDB70094DF0C /* SDL */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = SDL;
 			sourceTree = "<group>";
@@ -726,6 +748,7 @@
 				7FA2AB39277DD1A600AED89D /* character_manager.hpp in Headers */,
 				4C255DE92785BABB00D0B30A /* animation_group_simulateneus.hpp in Headers */,
 				7F6428A12779183C00EE9E2C /* polygon.hpp in Headers */,
+				7FC131062792CAD50094DF0C /* drawable_sdl.hpp in Headers */,
 				4C9EA023279205C80082EB6A /* texture_target_metal.hpp in Headers */,
 				7FCAE7C4277E3A68004A6107 /* scene.hpp in Headers */,
 				7F138270277505B600ED6D67 /* sprite_atlas_interface.h in Headers */,
@@ -865,6 +888,7 @@
 				7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */,
 				7FCAE7D6278073B9004A6107 /* time.cpp in Sources */,
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
+				7FC131052792CAD50094DF0C /* drawable_sdl.cpp in Sources */,
 				7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */,
 				4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,

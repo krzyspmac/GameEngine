@@ -23,19 +23,16 @@ namespace engine
         AAPLVertex *m_triangleVertices;
         size_t m_triangleVerticiesDataSize;
         vector_float2 m_size;
-        float m_scale;
         SpriteAtlasItemI *m_atlasItem;
         TextureMetal *m_texture;
     public: // Drawable I
         DrawableMetal(SpriteAtlasItemI*, float, float);
         void SetPosition(float, float);
-        void SetScale(float);
 
     public:
         AAPLVertex *GetVertexData();
         size_t GetVertexDataSize();
         size_t GetVertexCount();
-        float *GetScale();
         vector_float2 *GetSize();
         TextureMetal *GetTexture() { return m_texture; };
     };

@@ -17,7 +17,6 @@ namespace engine
 
     class SpriteDrawStatic: public SpriteDrawI, public ScriptingInterface
     {
-        std::unique_ptr<DrawableI> m_drawable;
     public:
         /** @private */
         SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scale);

@@ -21,8 +21,23 @@ namespace engine
     class DrawableI
     {
     public:
-        DrawableI(float width, float height) { };
-        virtual void SetScale(float) = 0;
+        DrawableI(float width, float height)
+            : m_scale(1.0f)
+            , m_alpha(255)
+        { };
+
+        void SetScale(float val) { m_scale = val; }
+        float *GetScale() { return &m_scale; };
+
+        /** 0-255 */
+        void SetAlpha(uint8_t val) { m_alpha = val; };
+
+        /** 0-255 */
+        uint8_t GetAlpha() { return m_alpha; };
+
+    protected:
+        float m_scale;
+        uint8_t m_alpha;
     };
 };
 

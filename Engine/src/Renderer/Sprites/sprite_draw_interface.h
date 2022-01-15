@@ -9,6 +9,7 @@
 #define sprite_draw_interface_h
 
 #include "sprite_atlas_interface.h"
+#include "drawable_interface.h"
 #include "common_engine_impl.h"
 
 namespace engine
@@ -18,7 +19,7 @@ namespace engine
     {
     public:
         /// Scale applies to width and height. Does not modify x no y.
-        SpriteDrawI(int scale): m_scale(scale), m_alpha(255), m_position(Vector2Zero) {};
+        SpriteDrawI(int scale): m_scale(scale), m_position(Vector2Zero) {};
         virtual ~SpriteDrawI() { };
         
     public:
@@ -39,13 +40,13 @@ namespace engine
         void SetPosition(Vector2 pos) { m_position = pos; };
         Vector2& GetPosition() { return m_position; };
 
-        void SetAlpha(uint8_t val) { m_alpha = val; }
-        uint8_t GetAlpha() { return m_alpha; };
+        void SetAlpha(uint8_t val) { m_drawable->SetAlpha(val); }
+        uint8_t GetAlpha() { return m_drawable->GetAlpha(); };
 
     protected:
         int m_scale;
-        uint8_t m_alpha;
         Vector2 m_position;
+        std::unique_ptr<DrawableI> m_drawable;
     };
 };
 
