@@ -27,6 +27,7 @@ typedef enum AAPLVertexInputIndex
 typedef enum AAPLTextureIndex
 {
     AAPLTextureIndexBaseColor = 0,
+    AAPLTextureIndexBaseAlpha = 0,
 } AAPLTextureIndex;
 
 //  This structure defines the layout of vertices sent to the vertex

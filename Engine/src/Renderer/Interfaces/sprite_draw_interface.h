@@ -40,8 +40,9 @@ namespace engine
         void SetPosition(Vector2 pos) { m_position = pos; };
         Vector2& GetPosition() { return m_position; };
 
-        void SetAlpha(uint8_t val) { m_drawable->SetAlpha(val); }
-        uint8_t GetAlpha() { return m_drawable->GetAlpha(); };
+        /** Set Alpha as uint 0-255 */
+        void SetAlpha(uint8_t val) { m_drawable->SetAlpha((float)val/255.0f); }
+        uint8_t GetAlpha() { return *m_drawable->GetAlpha() * 255; };
 
     protected:
         int m_scale;

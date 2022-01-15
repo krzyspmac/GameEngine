@@ -18,12 +18,18 @@
 #include "texture_target_metal.hpp"
 #include "texture_metal.hpp"
 
-/// Defaults
+//static NSDate
 
-static SDL_Point flipPoint;
-static SDL_FPoint flipPointF;
+#include <chrono>
+#include <iostream>
+#include <chrono>
+#include <ratio>
+#include <thread>
 
 using namespace engine;
+using namespace std::chrono;
+
+static auto timeEngineStart = std::chrono::high_resolution_clock::now();
 
 class EngineProviderMetalTargetTextureDescriptor
 {
@@ -37,10 +43,6 @@ std::vector<EngineProviderMetalTargetTextureDescriptor*> renderStack;
 EngineProviderMetal::EngineProviderMetal()
 : EngineProviderI()
 {
-//    flipPoint.x = 0.5;
-//    flipPoint.y = 0.5;
-//    flipPointF.x = 0.5;
-//    flipPointF.y = 0.5;
 }
 
 void EngineProviderMetal::SetRendererDevice(MTL::Device *device)
@@ -72,17 +74,19 @@ void EngineProviderMetal::SetViewportSize(vector_float2 size)
 
 Uint64 EngineProviderMetal::GetTicks()
 {
-    return 0;
+    auto now = std::chrono::high_resolution_clock::now();
+    auto milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(now - timeEngineStart);
+    return milliseconds.count();
 }
 
 Uint64 EngineProviderMetal::GetPerformanceTicks()
 {
-    return 0;
+    return GetTicks();
 }
 
 Uint64 EngineProviderMetal::GetPerformanceCounter()
 {
-    return 0;
+    return GetTicks();
 }
 
 void EngineProviderMetal::GetMousePosition(int *x, int *y)
@@ -167,6 +171,8 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
             m_renderEncoder->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
         }
     }
+
+    m_renderEncoder->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
     
     m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)trianglesNum);
 }

@@ -139,7 +139,16 @@ using namespace engine;
     [renderePipelineDescriptor setLabel:@"Simple Pipeline"];
     [renderePipelineDescriptor setVertexFunction:vertexFunction];
     [renderePipelineDescriptor setFragmentFunction:fragmentFunction];
-    [renderePipelineDescriptor.colorAttachments[0] setPixelFormat:mtkView.colorPixelFormat];
+
+    MTLRenderPipelineColorAttachmentDescriptor *renderbufferAttachment = renderePipelineDescriptor.colorAttachments[0];
+    [renderbufferAttachment setPixelFormat:mtkView.colorPixelFormat];
+    [renderbufferAttachment setBlendingEnabled:YES];
+    [renderbufferAttachment setRgbBlendOperation:MTLBlendOperationAdd];
+    [renderbufferAttachment setAlphaBlendOperation:MTLBlendOperationAdd];
+    [renderbufferAttachment setSourceRGBBlendFactor:MTLBlendFactorSourceAlpha];
+    [renderbufferAttachment setSourceAlphaBlendFactor:MTLBlendFactorSourceAlpha];
+    [renderbufferAttachment setDestinationRGBBlendFactor:MTLBlendFactorOneMinusSourceAlpha];
+    [renderbufferAttachment setDestinationAlphaBlendFactor:MTLBlendFactorOneMinusSourceAlpha];
 
     NSError *error;
     pipelineState = [device newRenderPipelineStateWithDescriptor:renderePipelineDescriptor

@@ -113,7 +113,7 @@ void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y
     auto drawable = (DrawableSDL*)baseDrawable;
 
     TextureI *texture = drawable->GetTexture();
-    TextureAlphaSetMod(texture, baseDrawable->GetAlpha());
+    TextureAlphaSetMod(texture, *baseDrawable->GetAlpha() * 255);
 
     DrawTexture(
        texture,

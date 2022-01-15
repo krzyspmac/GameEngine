@@ -145,13 +145,24 @@ vertexShader(uint vertexID [[vertex_id]],
 // Fragment function
 fragment float4
 fragmentShader(RasterizerData in [[stage_in]],
-               texture2d<half> colorTexture [[ texture(AAPLTextureIndexBaseColor) ]])
+               texture2d<half> colorTexture [[ texture(AAPLTextureIndexBaseColor) ]],
+               constant float *alphaPointer [[buffer(AAPLTextureIndexBaseAlpha)]]
+               )
 {
     constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest);
 
     // Sample the texture to obtain a color
     const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
+
+    /*
+    // 3
+    if (transparencyEnabled && color.a < 0.1) {
+      discard_fragment();
+    }
+    */
+
+    colorSample.a = *alphaPointer;
 
     // return the color of the texture
     return float4(colorSample);
