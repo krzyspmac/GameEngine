@@ -15,11 +15,8 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float hei
     , m_atlasItem(atlasItem)
 {
     m_triangleVertices = (AAPLVertex*)malloc(6 * sizeof(AAPLVertex));
-    m_position[0] = 0;
-    m_position[1] = 0;
-    
+
     auto metalTextrue = (TextureMetal*)atlasItem->GetTexture();
-    
     auto textureSize = metalTextrue->GetSize();
     
     float x = atlasItem->GetX() / textureSize.x;
@@ -49,12 +46,6 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float hei
     memcpy(m_triangleVertices, data, m_triangleVerticiesDataSize);
 }
 
-void DrawableMetal::SetPosition(float x, float y)
-{
-    m_position[0] = x;
-    m_position[1] = y;
-}
-
 void DrawableMetal::SetScale(float scale)
 {
     m_scale = scale;
@@ -63,11 +54,6 @@ void DrawableMetal::SetScale(float scale)
 vector_float2 *DrawableMetal::GetSize()
 {
     return &m_size;
-}
-
-simd_float2 *DrawableMetal::GetPosition()
-{
-    return &m_position;
 }
 
 float *DrawableMetal::GetScale()

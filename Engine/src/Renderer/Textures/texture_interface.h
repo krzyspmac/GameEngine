@@ -14,12 +14,14 @@
 namespace engine
 {
 
+    /** Defines an abstract interface for the texture. Differnet back-end provide different concrete instances.
+        */
     class TextureI
     {
         Vector2 m_textureSize;
     public:
         TextureI(void *textureHandle, std::string textureName, Vector2 size)
-        : m_textureHandle(textureHandle), m_textureName(textureName), m_textureSize(size)
+            : m_textureHandle(textureHandle), m_textureName(textureName), m_textureSize(size)
         { }
 
         void *getTextureHandle() { return m_textureHandle; };
@@ -32,11 +34,13 @@ namespace engine
         std::string m_textureName;
     };
 
+    /** Defines an abstract interface for the target texture that gets the current rendering queue's rendering pass.
+     */
     class TextureTargetI: public TextureI
     {
     public:
         TextureTargetI(void *textureHandle, Vector2 size)
-        : TextureI(textureHandle, "", size)
+            : TextureI(textureHandle, "", size)
         { };
     };
 };

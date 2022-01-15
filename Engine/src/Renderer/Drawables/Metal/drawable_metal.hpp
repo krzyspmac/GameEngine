@@ -22,7 +22,6 @@ namespace engine
     {
         AAPLVertex *m_triangleVertices;
         size_t m_triangleVerticiesDataSize;
-        simd_float2 m_position;
         vector_float2 m_size;
         float m_scale;
         SpriteAtlasItemI *m_atlasItem;
@@ -36,7 +35,6 @@ namespace engine
         AAPLVertex *GetVertexData();
         size_t GetVertexDataSize();
         size_t GetVertexCount();
-        simd_float2 *GetPosition();
         float *GetScale();
         vector_float2 *GetSize();
         TextureMetal *GetTexture() { return m_texture; };

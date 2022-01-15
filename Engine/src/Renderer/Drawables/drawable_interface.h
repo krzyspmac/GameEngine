@@ -22,7 +22,6 @@ namespace engine
     {
     public:
         DrawableI(float width, float height) { };
-        virtual void SetPosition(float, float) = 0;
         virtual void SetScale(float) = 0;
     };
 };

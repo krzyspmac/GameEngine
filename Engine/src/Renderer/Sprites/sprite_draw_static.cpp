@@ -22,7 +22,8 @@ SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scal
 void SpriteDrawStatic::DrawAt(int x, int y)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
-    TextureI *texture = m_sprite->GetTexture();
+
+//    TextureI *texture = m_sprite->GetTexture();
 //
 //    provider.TextureAlphaSetMod(texture, m_alpha);
 //
@@ -42,7 +43,7 @@ void SpriteDrawStatic::DrawAt(int x, int y)
 
 void SpriteDrawStatic::SetPosition(Vector2 &pos)
 {
-    m_drawable->SetPosition(pos.x, pos.y);
+    m_position = pos;
 }
 
 void SpriteDrawStatic::SetScale(float x)

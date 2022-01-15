@@ -149,10 +149,11 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     auto triangles = drawable->GetVertexData();
     size_t trianglesSize = drawable->GetVertexDataSize();
     size_t trianglesNum = drawable->GetVertexCount();
+    simd_float2 pos = {x, y};
 
     m_renderEncoder->setVertexBytes(triangles, trianglesSize, AAPLVertexInputIndexVertices);
     m_renderEncoder->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
-    m_renderEncoder->setVertexBytes(drawable->GetPosition(), sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
+    m_renderEncoder->setVertexBytes(&pos, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
     m_renderEncoder->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
     m_renderEncoder->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     m_renderEncoder->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
