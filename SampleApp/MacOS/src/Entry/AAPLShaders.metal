@@ -147,8 +147,8 @@ fragment float4
 fragmentShader(RasterizerData in [[stage_in]],
                texture2d<half> colorTexture [[ texture(AAPLTextureIndexBaseColor) ]])
 {
-    constexpr sampler textureSampler (mag_filter::linear,
-                                      min_filter::linear);
+    constexpr sampler textureSampler (mag_filter::nearest,
+                                      min_filter::nearest);
 
     // Sample the texture to obtain a color
     const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
