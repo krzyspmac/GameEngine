@@ -9,7 +9,7 @@
 #define animation_group_sequence_hpp
 
 #include "common.h"
-#include "animation.h"
+#include "animation_interface.h"
 #include "scripting_engine_provider_interface.h"
 #include "callable.hpp"
 #include "memory.h"
