@@ -43,6 +43,9 @@ namespace engine
          */
         Size& GetSize() { return m_sprite->GetSize(); };
 
+        /** Get the current sprite atlas item for this sprite */
+        SpriteAtlasItemI *GetSpriteAtlasItem() { return m_sprite; };
+
         /**
          Draws the sprite.
          */
@@ -52,6 +55,7 @@ namespace engine
          Draws the sprite.
          */
         void Draw();
+
     public:
 
     private:

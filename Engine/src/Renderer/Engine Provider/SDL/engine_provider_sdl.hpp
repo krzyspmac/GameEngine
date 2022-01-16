@@ -52,7 +52,7 @@ namespace engine
         void RenderPresent();
 
     public:
-        std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float scale);
+        std::unique_ptr<DrawableSpriteI> DrawableCreate(SpriteAtlasItemI*, float scale);
         std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float);
         void DrawableRender(DrawableI*, float, float);
         void DrawableTargetRender(DrawableTargetI*, float, float);

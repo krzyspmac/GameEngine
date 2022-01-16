@@ -139,10 +139,10 @@ void EngineProviderMetal::UnloadTexture(TextureI *texture)
 {
 }
 
-std::unique_ptr<DrawableI> EngineProviderMetal::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
+std::unique_ptr<DrawableSpriteI> EngineProviderMetal::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
 {
     DrawableMetal *drawable = new DrawableMetal(atlasItem);
-    return std::unique_ptr<DrawableI>(std::move(drawable));
+    return std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
 std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float, float)

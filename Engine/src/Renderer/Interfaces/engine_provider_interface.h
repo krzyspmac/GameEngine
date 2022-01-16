@@ -90,7 +90,7 @@ namespace engine
     public:
 
         /// Given a sprite atlas item construct a drawable for the chosen scale.
-        virtual std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float) = 0;
+        virtual std::unique_ptr<DrawableSpriteI> DrawableCreate(SpriteAtlasItemI*, float) = 0;
 
         /// Given a size construct a drawable for the chosen scale.
         /// The drawable is to be used a target rending object. Its texture should be

@@ -12,6 +12,7 @@
 #include "texture_target.hpp"
 #include "vector2.hpp"
 #include "drawable_interface.h"
+#include "sprite_draw_static.hpp"
 
 namespace engine
 {
@@ -39,10 +40,17 @@ namespace engine
     {
     public:
         CharacterBodyPartRendererI(SpriteAtlasItemI *sprite, int offsetX, int offsetY)
-            : m_bodySprite(sprite), m_bodyOffsetX(offsetX), m_bodyOffsetY(offsetY)
-        { };
+            : m_bodySprite(sprite)
+            , m_bodyOffsetX(offsetX)
+            , m_bodyOffsetY(offsetY)
+        {
+            PrepareDrawable();
+        };
 
         SpriteAtlasItemI *GetSprite() { return m_bodySprite; };
+        DrawableSpriteI *GetDrawable() { return m_drawable.get(); };
+
+        void PrepareDrawable();
 
         void SetBodyOffsetX(int value) { m_bodyOffsetX = value; };
         void SetBodyOffsetY(int value) { m_bodyOffsetY = value; };
@@ -54,6 +62,7 @@ namespace engine
         SpriteAtlasItemI *m_bodySprite;
         int m_bodyOffsetX;
         int m_bodyOffsetY;
+        std::unique_ptr<DrawableSpriteI> m_drawable;
     };
 
     /// Describes a frame of the body renderer. Each body frame
@@ -181,7 +190,7 @@ namespace engine
         CharacterWalkRenderer m_standB;
 
         std::unique_ptr<DrawableTargetI> m_bufferDrawable;
-        std::unique_ptr<DrawableI> m_bodyDrawable;
+        std::unique_ptr<SpriteDrawStatic> m_bodySprite;
         std::unique_ptr<DrawableI> m_headDrawable;
     };
 

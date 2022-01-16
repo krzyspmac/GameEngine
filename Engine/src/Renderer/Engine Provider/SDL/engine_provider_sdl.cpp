@@ -82,10 +82,10 @@ void EngineProviderSDL::RenderPresent()
     SDL_RenderPresent(m_engineHandle->renderer);
 }
 
-std::unique_ptr<DrawableI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
+std::unique_ptr<DrawableSpriteI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
 {
     DrawableSDL *drawable = new DrawableSDL(atlasItem);
-    return std::unique_ptr<DrawableI>(std::move(drawable));
+    return std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
 std::unique_ptr<DrawableTargetI> EngineProviderSDL::DrawableTargetCreate(float width, float height)

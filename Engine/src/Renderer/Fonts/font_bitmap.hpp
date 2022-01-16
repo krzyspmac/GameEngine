@@ -60,7 +60,7 @@ namespace engine
         Size m_Offset;
         int m_xAdvance;
         std::string m_letterName;
-        std::unique_ptr<DrawableI> m_drawable;
+        std::unique_ptr<DrawableSpriteI> m_drawable;
     public:
         FontBitmapGlyph(int id, int x, int y, int w, int h, int xO, int yO, int xA, std::string letterName);
         FontBitmapGlyph(KeyValueProperties& properties);
@@ -70,9 +70,9 @@ namespace engine
         auto& GetOffset() { return m_Offset; };
         auto& GetXAdvance() { return m_xAdvance; };
 
-        void SetDrawable(std::unique_ptr<DrawableI> &drawable)
+        void SetDrawable(std::unique_ptr<DrawableSpriteI> &drawable)
         {
-            m_drawable = std::unique_ptr<DrawableI>(std::move(drawable));
+            m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(drawable));
         };
         auto *GetDrawable() { return m_drawable.get(); };
     };

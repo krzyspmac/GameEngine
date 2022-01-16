@@ -16,7 +16,7 @@ SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scal
     : SpriteDrawI(scale), m_sprite(spriteAtlasItem)
 {
     auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, scale);
-    m_drawable = std::unique_ptr<DrawableI>(std::move(drawable));
+    m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
 void SpriteDrawStatic::DrawAt(int x, int y)

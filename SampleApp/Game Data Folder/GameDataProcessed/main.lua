@@ -30,10 +30,12 @@ function loadSprites()
 	scene:SetMouseDownFunction(mouseDown)
 
 	-- sky
-	--sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
-	--sky:SetScale(4)
-	--sky:SetAlpha(255)
-	--sky:SetPosition(0, 0)
+	sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
+	sky:SetScale(4)
+	sky:SetAlpha(255)
+	sky:SetPosition(0, 0)
+	
+--	initialAnimationDone = true
 	
 --	-- sky
 --sky2 = scene:LoadSpriteStatic(atlas, "sky.png")
@@ -61,7 +63,7 @@ end
 function animateIntro()
 	local group = AnimationGroupFactory:GroupAnimations(
 		'sequence',
-		PropertyAnimatorFactory:FadeIn(sky, 1, 3)
+		PropertyAnimatorFactory:FadeIn(sky, 0, 0.5)
 	, 	function() -- on finish
 			character:SetHidden(false)
 			initialAnimationDone = true
@@ -76,9 +78,7 @@ end
 function mouseDown(x, y)
 --	MemoryReleasePool:Drain()
 
-	--if initialAnimationDone ~= true then
---		return
---	end
+	if initialAnimationDone ~= true then return end
 	print ("mouse down " .. x .. ", " .. y)
 	character:WalkTo(x, y)
 end
@@ -88,7 +88,7 @@ end
 
 function init()
 	loadSprites()
-  	--animateIntro()
+  	animateIntro()
 end
 
 function update ()

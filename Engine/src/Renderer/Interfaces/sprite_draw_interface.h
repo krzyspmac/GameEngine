@@ -57,15 +57,15 @@ namespace engine
     public: // Drawable related
 
         /** Set the main drawable for this sprite */
-        void SetDrawable(std::unique_ptr<DrawableI> val) { m_drawable = std::unique_ptr<DrawableI>(std::move(val)); };
+        void SetDrawable(std::unique_ptr<DrawableSpriteI> val) { m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(val)); };
 
         /** The main drawable for this sprite */
-        DrawableI* GetDrawable() { return m_drawable.get(); };
+        DrawableSpriteI* GetDrawable() { return m_drawable.get(); };
         
     protected:
         int m_scale;
         Vector2 m_position;
-        std::unique_ptr<DrawableI> m_drawable;
+        std::unique_ptr<DrawableSpriteI> m_drawable;
     };
 };
 
