@@ -187,8 +187,8 @@ void EngineProviderMetal::DrawableTargetRender(DrawableTargetI*, float, float)
 
 }
 
-void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y)
-{
+//void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y)
+//{
 ////    /*static const*/ AAPLVertex triangleVertices[] =
 ////    {
 ////        // 2D positions,    RGBA colors
@@ -214,24 +214,24 @@ void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y)
 //    m_renderEncoder->setVertexBytes(triangleVertices, sizeof(triangleVertices), AAPLVertexInputIndexVertices);
 //    m_renderEncoder->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
 //    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangle, (NS::UInteger)0, (NS::UInteger)3);
-    
-}
-
-void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
-{
-}
-
-void EngineProviderMetal::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
-{
-}
-
-void EngineProviderMetal::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
-{
-}
-
-void EngineProviderMetal::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
-{
-}
+//    
+//}
+//
+//void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
+//{
+//}
+//
+//void EngineProviderMetal::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
+//{
+//}
+//
+//void EngineProviderMetal::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
+//{
+//}
+//
+//void EngineProviderMetal::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
+//{
+//}
 
 //void EngineProviderMetal::RendererTargetPush(TextureTargetI *targetTexture)
 //{

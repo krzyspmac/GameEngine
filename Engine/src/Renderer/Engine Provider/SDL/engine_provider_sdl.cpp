@@ -117,10 +117,15 @@ void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y
     auto drawable = (DrawableSDL*)baseDrawable;
 
     TextureI *texture = drawable->GetTexture();
-    TextureAlphaSetMod(texture, *baseDrawable->GetAlpha() * 255);
 
     if (texture != NULL)
     {
+        int alpha = (*baseDrawable->GetAlpha()) * 255;
+        if (SDL_SetTextureAlphaMod((SDL_Texture*)texture->getTextureHandle(), alpha) == -1)
+        {
+            std::cout << "Error. SDL_SetTextureAlphaMod not supported by the renderer" << std::endl;
+        }
+
         auto spriteItem = drawable->GetSpriteAtlasItem();
         float scale = *drawable->GetScale();
 
@@ -152,10 +157,15 @@ void EngineProviderSDL::DrawableTargetRender(DrawableTargetI *baseDrawable, floa
 {
     auto drawable = (DrawableTargetSDL*)baseDrawable;
     TextureI *texture = drawable->GetTexture();
-    TextureAlphaSetMod(texture, *baseDrawable->GetAlpha() * 255);
 
     if (texture != NULL)
     {
+        int alpha = (*baseDrawable->GetAlpha()) * 255;
+        if (SDL_SetTextureAlphaMod((SDL_Texture*)texture->getTextureHandle(), alpha) == -1)
+        {
+            std::cout << "Error. SDL_SetTextureAlphaMod not supported by the renderer" << std::endl;
+        }
+
         SDL_Rect dest;
         float scale = *drawable->GetScale();
 
@@ -198,128 +208,6 @@ void EngineProviderSDL::UnloadTexture(TextureI *texture)
     else
     {
         std::cout << "No texture to destroy" << std::endl;
-    }
-}
-
-void EngineProviderSDL::DrawTexture(TextureI *texture, int x, int y)
-{
-    if (texture != nullptr)
-    {
-        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
-        SDL_Rect dest;
-
-        dest.x = x;
-        dest.y = y;
-
-        SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
-        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, NULL, &dest);
-    }
-    else
-    {
-        std::cout << "No texture to draw" << std::endl;
-    }
-}
-
-void EngineProviderSDL::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
-{
-    if (texture != nullptr)
-    {
-        SDL_Rect dest;
-        SDL_Rect src;
-
-        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
-        SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
-
-        dest.x = x / scale;
-        dest.y = y / scale;
-        dest.w = srcW;
-        dest.h = srcH;
-
-        src.x = srcX;
-        src.y = srcY;
-        src.w = srcW;
-        src.h = srcH;
-
-        float originalScaleX, originalScaleY;
-        SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
-        SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
-        SDL_RenderCopy(m_engineHandle->renderer, sdlTexture, &src, &dest);
-        SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
-    }
-    else
-    {
-        std::cout << "No texture to draw" << std::endl;
-    }
-}
-
-void EngineProviderSDL::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
-{
-    if (texture != NULL)
-    {
-        SDL_Rect dest;
-
-        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
-        SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
-
-        dest.x = x / scale;
-        dest.y = y / scale;
-
-        switch (anchorPoint)
-        {
-            case ANCHOR_TOP_LEFT:
-                break;
-            case ANCHOR_BOTTOM_CENTER:
-                dest.x -= dest.w / 2;
-                dest.y -= dest.h;
-                break;
-        }
-
-        float originalScaleX, originalScaleY;
-        SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
-        SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
-        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
-        SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
-    }
-}
-
-void EngineProviderSDL::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
-{
-    if (texture != NULL)
-    {
-        SDL_FRect dest;
-        int textureW, textureH;
-
-        SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
-        SDL_QueryTexture(sdlTexture, NULL, NULL, &textureW, &textureH);
-
-        dest.x = position.x / scale;
-        dest.y = position.y / scale;
-        dest.w = textureW;
-        dest.h = textureH;
-
-        switch (anchorPoint)
-        {
-            case ANCHOR_TOP_LEFT:
-                break;
-            case ANCHOR_BOTTOM_CENTER:
-                dest.x -= dest.w / 2;
-                dest.y -= dest.h;
-                break;
-        }
-
-        float originalScaleX, originalScaleY;
-        SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
-        SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
-        SDL_RenderCopyExF(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPointF, flipHorizontal ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
-        SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
-    }
-}
-
-void EngineProviderSDL::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
-{
-    if (SDL_SetTextureAlphaMod((SDL_Texture*)texture->getTextureHandle(), alpha) == -1)
-    {
-        std::cout << "Error. SDL_SetTextureAlphaMod not supported by the renderer" << std::endl;
     }
 }
 
