@@ -84,19 +84,12 @@ void EngineProviderSDL::RenderPresent()
 
 std::unique_ptr<DrawableI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
 {
-    float width = atlasItem->GetWidth();
-    float height = atlasItem->GetHeight();
-    DrawableSDL *drawable = new DrawableSDL(atlasItem, width, height);
+    DrawableSDL *drawable = new DrawableSDL(atlasItem);
     return std::unique_ptr<DrawableI>(std::move(drawable));
 }
 
 std::unique_ptr<DrawableTargetI> EngineProviderSDL::DrawableTargetCreate(float width, float height)
 {
-//    float width = atlasItem->GetWidth();
-//    float height = atlasItem->GetHeight();
-//    DrawableSDL *drawable = new DrawableSDL(atlasItem, width, height);
-//    return std::unique_ptr<DrawableI>(std::move(drawable));
-
     DrawableTargetI *targetDrawable = new DrawableTargetSDL(width, height);
     return std::unique_ptr<DrawableTargetI>(std::move(targetDrawable));
 }
@@ -128,7 +121,7 @@ void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y
 
     if (texture != NULL)
     {
-        auto spriteItem = drawable->GetSpriteItem();
+        auto spriteItem = drawable->GetSpriteAtlasItem();
         float scale = *drawable->GetScale();
 
         SDL_Rect dest;
@@ -150,7 +143,7 @@ void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y
         float originalScaleX, originalScaleY;
         SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
         SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
-        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &flipPoint, drawable->IsTextureCoordinatesFlippedHorizontally() ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &flipPoint, drawable->IsFlippedHorizontally() ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
         SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
 }
@@ -175,7 +168,7 @@ void EngineProviderSDL::DrawableTargetRender(DrawableTargetI *baseDrawable, floa
         float originalScaleX, originalScaleY;
         SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
         SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
-        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, drawable->IsTextureCoordinatesFlippedHorizontally() ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, drawable->IsFlippedHorizontally() ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
         SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
 }

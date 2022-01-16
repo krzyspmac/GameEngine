@@ -36,6 +36,9 @@ namespace engine {
         void DrawOriginCrosshair(EngineProviderI &provider);
 
     private:
+        void Prepare();
+
+    private:
         int m_headOffsetX;
         int m_headOffsetY;
 

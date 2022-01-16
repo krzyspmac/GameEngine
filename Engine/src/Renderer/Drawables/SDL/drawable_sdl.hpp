@@ -15,25 +15,10 @@
 namespace engine
 {
     /** Defines the SDL drawable that goes to the gpu. */
-    class DrawableSDL: public DrawableI
+    class DrawableSDL: public DrawableSpriteI
     {
-        SpriteAtlasItemI *m_atlasItem;
-        bool m_flippedHorizontally;
     public: // Drawable I
-        DrawableSDL(SpriteAtlasItemI *atlasItem, float width, float height);
-
-        bool IsTextureCoordinatesFlippedHorizontally();
-        void SetTextureCoordinatesFlippedHorizontally(bool);
-
-    public:
-        SpriteAtlasItemI *GetSpriteItem() { return m_atlasItem; };
-        
-        int GetX() { return m_atlasItem->GetX(); };
-        int GetY() { return m_atlasItem->GetY(); };
-        int GetWidth() { return m_atlasItem->GetWidth(); };
-        int GetHeight() { return m_atlasItem->GetHeight(); };
-        Size GetSize() { return m_atlasItem->GetSize(); };
-
+        DrawableSDL(SpriteAtlasItemI *atlasItem);
     };
 
     /** Defines a concrete metal class for the target drawable that is capable of
@@ -41,23 +26,8 @@ namespace engine
      */
     class DrawableTargetSDL: public DrawableTargetI
     {
-        int m_x;
-        int m_y;
-        int m_width;
-        int m_height;
-        bool m_flippedHorizontally;
     public: // Drawable I
         DrawableTargetSDL(float width, float height);
-
-        bool IsTextureCoordinatesFlippedHorizontally();
-        void SetTextureCoordinatesFlippedHorizontally(bool);
-
-    public: // Overrides
-        int GetX() { return m_x; };
-        int GetY() { return m_y; };
-        int GetWidth() { return m_width; };
-        int GetHeight() { return m_height; };
-        Size GetSize() { return { m_width, m_height}; };
     };
 };
 

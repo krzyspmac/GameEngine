@@ -224,7 +224,7 @@ void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTa
 
     // Draw the buffer texture.
     bufferDrawable->SetScale(m_scale);
-    bufferDrawable->SetTextureCoordinatesFlippedHorizontally(renderer.GetIsReversed());
+    bufferDrawable->SetFlippedHorizontally(renderer.GetIsReversed());
     provider.DrawableTargetRender(m_bufferDrawable.get(), position.x - (m_bodyWidth * m_scale /2), position.y - m_bodyHeight * m_scale);
 }
 

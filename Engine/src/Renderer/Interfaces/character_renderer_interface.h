@@ -181,6 +181,8 @@ namespace engine
         CharacterWalkRenderer m_standB;
 
         std::unique_ptr<DrawableTargetI> m_bufferDrawable;
+        std::unique_ptr<DrawableI> m_bodyDrawable;
+        std::unique_ptr<DrawableI> m_headDrawable;
     };
 
     inline CharacterWalkState CharacterWalkStateGetStanding(CharacterWalkState state)
