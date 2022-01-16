@@ -153,6 +153,8 @@ std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float
 void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
 {
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
+    if (!drawable->CanDraw()) { return; };
+
     auto triangles = drawable->GetVertexData();
     size_t trianglesSize = drawable->GetVertexDataSize();
     size_t trianglesNum = drawable->GetVertexCount();

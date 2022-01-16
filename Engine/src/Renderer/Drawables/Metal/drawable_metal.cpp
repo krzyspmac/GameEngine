@@ -10,12 +10,21 @@
 using namespace engine;
 
 DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
-    : DrawableI(atlasItem->GetWidth(), atlasItem->GetHeight())
-    , m_atlasItem(atlasItem)
+    : DrawableSpriteI(atlasItem)
 {
-    m_triangleVertices = (AAPLVertex*)malloc(6 * sizeof(AAPLVertex));
-
     auto metalTextrue = (TextureMetal*)atlasItem->GetTexture();
+    if (metalTextrue->GetMTLTextureHandle() == nullptr)
+    {
+        m_size = { 0, 0 };
+        m_triangleVertices = 0;
+        m_triangleVerticiesDataSize = 0;
+        m_vertexCount = 0;
+        return;
+    };
+
+    m_vertexCount = 6;
+    m_triangleVertices = (AAPLVertex*)malloc(m_vertexCount * sizeof(AAPLVertex));
+
     auto textureSize = metalTextrue->GetSize();
     
     float x = atlasItem->GetX() / textureSize.x;
@@ -47,11 +56,9 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
     memcpy(m_triangleVertices, data, m_triangleVerticiesDataSize);
 }
 
-DrawableMetal::DrawableMetal(float width, float height)
-    : DrawableI(width, height)
-    , m_atlasItem(nullptr)
+bool DrawableMetal::CanDraw()
 {
-
+    return m_vertexCount > 0;
 }
 
 vector_float2 *DrawableMetal::GetSize()
@@ -71,16 +78,5 @@ size_t DrawableMetal::GetVertexDataSize()
 
 size_t DrawableMetal::GetVertexCount()
 {
-    return 6;
-}
-
-void DrawableMetal::SetTextureCoordinatesFlippedHorizontally(bool)
-{
-    // TODO: not implemented
-}
-
-bool DrawableMetal::IsTextureCoordinatesFlippedHorizontally()
-{
-    // TODO: not implemented
-    return false;
+    return m_vertexCount;
 }

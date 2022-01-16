@@ -18,23 +18,18 @@
 namespace engine
 {
     /** Defines the metal drawable that goes to the gpu. */
-    class DrawableMetal: public DrawableI
+    class DrawableMetal: public DrawableSpriteI
     {
         AAPLVertex *m_triangleVertices;
         size_t m_triangleVerticiesDataSize;
         vector_float2 m_size;
-        SpriteAtlasItemI *m_atlasItem;
         TextureMetal *m_texture;
+        size_t m_vertexCount;
     public:
         /** Construct a drawable for metal given a sprite descriptor */
         DrawableMetal(SpriteAtlasItemI*);
 
-        /** Construct a drawable for metal given only the target size.
-            A target texture will be created. */
-        DrawableMetal(float width, float height);
-
-        void SetTextureCoordinatesFlippedHorizontally(bool);
-        bool IsTextureCoordinatesFlippedHorizontally();
+        bool CanDraw();
 
     public:
         void SetPosition(float, float);

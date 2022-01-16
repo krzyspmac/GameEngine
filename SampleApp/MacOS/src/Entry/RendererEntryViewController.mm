@@ -111,10 +111,7 @@ using namespace engine;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-
-    return;
-    
+    [super viewDidLoad];    
 //    NSWindow * window = NSApplication.sharedApplication.windows[0];
 //    [window setFrame:CGRectMake(0, 0, 1280, 720) display:YES];
 

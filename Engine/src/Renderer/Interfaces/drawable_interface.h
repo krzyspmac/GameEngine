@@ -41,6 +41,9 @@ namespace engine
 
         virtual ~DrawableI() { };
 
+        /** Can the sprite be drawn */
+        bool CanDraw() { return true; };
+
         /** Set the drawable scale */
         void SetScale(float val) { m_scale = val; }
 
