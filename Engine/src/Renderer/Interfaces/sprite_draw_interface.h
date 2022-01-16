@@ -19,30 +19,45 @@ namespace engine
     {
     public:
         /// Scale applies to width and height. Does not modify x no y.
-        SpriteDrawI(int scale): m_scale(scale), m_position(Vector2Zero) {};
+        SpriteDrawI(int scale)
+            : m_scale(scale), m_position(Vector2Zero)
+        { };
+        
         virtual ~SpriteDrawI() { };
         
     public:
-        /**
-         Draws the sprite at a given coordinates.
-         */
+        /** Draws the sprite at a given coordinates. */
         virtual void DrawAt(int x, int y) = 0;
 
-        /**
-         Draws the sprite at the stored coorindates that were
-         previously set.
+        /** Draws the sprite at the stored coorindates that were previously set.
          */
         virtual void Draw() = 0;
 
         void SetScale(float x) { m_scale = x; };
 
     public:
+        /** Position this sprite in game coordinates */
         void SetPosition(Vector2 pos) { m_position = pos; };
+
+        /** Get this sprite's position in game coordinates */
         Vector2& GetPosition() { return m_position; };
 
-        /** Set Alpha as uint 0-255 */
-        void SetAlpha(uint8_t val) { m_drawable->SetAlpha((float)val/255.0f); }
-        uint8_t GetAlpha() { return *m_drawable->GetAlpha() * 255; };
+        /**
+         Sets the alpha. Values range from 0-255.
+         Default value is 255.
+         */
+        void SetAlpha(uint8_t val) { m_drawable.get()->SetAlpha((float)val / 255.0f); };
+
+        /**
+         Gets the curernt alpha. Values range from 0-255.
+         Default value is 255.
+         */
+        uint8_t GetAlpha() { return (uint8_t)(*m_drawable.get()->GetAlpha() * 255.0f); };
+
+    public: // Drawable related
+
+        /** Set the main drawable for this sprite */
+        void SetDrawable(std::unique_ptr<DrawableI> val) { m_drawable = std::unique_ptr<DrawableI>(std::move(val)); };
 
         /** The main drawable for this sprite */
         DrawableI* GetDrawable() { return m_drawable.get(); };
