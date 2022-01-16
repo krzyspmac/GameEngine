@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "common_engine_impl.h"
+#include "texture_interface.h"
 
 namespace engine
 {
@@ -37,9 +38,27 @@ namespace engine
         /** 0-1 */
         float *GetAlpha() { return &m_alpha; };
 
+        void SetTexture(TextureI *texture) { m_texture = texture; };
+        TextureI *GetTexture() { return m_texture; };
+
     protected:
         float m_scale;
         float m_alpha;
+        TextureI *m_texture;
+    };
+
+    /** Declares an abstrzct interface for the target drawable that is capable of accepting
+        the current render pass and store it in its texture.
+     */
+    class DrawableTargetI: public DrawableI
+    {
+    public:
+        DrawableTargetI(float width, float height)
+            : DrawableI(width, height)
+        { };
+        
+        void SetTexture(TextureTargetI *texture) { m_texture = texture; };
+        TextureTargetI *GetTexture() { return (TextureTargetI*)m_texture; };
     };
 };
 

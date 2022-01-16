@@ -25,8 +25,15 @@ namespace engine
         vector_float2 m_size;
         SpriteAtlasItemI *m_atlasItem;
         TextureMetal *m_texture;
-    public: // Drawable I
-        DrawableMetal(SpriteAtlasItemI*, float, float);
+    public:
+        /** Construct a drawable for metal given a sprite descriptor */
+        DrawableMetal(SpriteAtlasItemI*);
+
+        /** Construct a drawable for metal given only the target size.
+            A target texture will be created. */
+        DrawableMetal(float width, float height);
+
+    public:
         void SetPosition(float, float);
 
     public:
@@ -35,6 +42,14 @@ namespace engine
         size_t GetVertexCount();
         vector_float2 *GetSize();
         TextureMetal *GetTexture() { return m_texture; };
+    };
+
+    /** Defines a concrete metal class for the target drawable that is capable of
+        accepting the render pass as its input.
+     */
+    class DrawableTargetMetal: public DrawableTargetI
+    {
+
     };
 };
 

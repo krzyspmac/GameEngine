@@ -17,23 +17,23 @@ function loadSprites()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
 --	
-	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.tga" )
---
---	-- character
---	character = scene:LoadCharacter("brett_character.json")
---	character:SetScale(3)
---	character:PlaceAt(100,450)
---	character:SetInverseWalkbox("polygons.json")
---	character:SetWalkingSpeed(400)
---	character:SetHidden(true)
---	--scene:SetMainCharacter(character)
---	scene:SetMouseDownFunction(mouseDown)
---
+	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
+
+	-- character
+	character = scene:LoadCharacter("brett_character.json")
+	character:SetScale(3)
+	character:PlaceAt(100,450)
+	character:SetInverseWalkbox("polygons.json")
+	character:SetWalkingSpeed(400)
+	character:SetHidden(false)
+	--scene:SetMainCharacter(character)
+	scene:SetMouseDownFunction(mouseDown)
+
 	-- sky
-	sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
-	sky:SetScale(4)
-	sky:SetAlpha(255)
-	sky:SetPosition(0, 0)
+	--sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
+	--sky:SetScale(4)
+	--sky:SetAlpha(255)
+	--sky:SetPosition(0, 0)
 	
 --	-- sky
 --sky2 = scene:LoadSpriteStatic(atlas, "sky.png")
@@ -63,7 +63,7 @@ function animateIntro()
 		'sequence',
 		PropertyAnimatorFactory:FadeIn(sky, 1, 3)
 	, 	function() -- on finish
---			character:SetHidden(false)
+		character:SetHidden(false)
 		end
 	)
 	group:Start()
@@ -87,7 +87,7 @@ end
 
 function init()
 	loadSprites()
-  	animateIntro()
+  	--animateIntro()
 end
 
 function update ()

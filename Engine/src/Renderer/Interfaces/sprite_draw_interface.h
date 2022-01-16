@@ -44,6 +44,9 @@ namespace engine
         void SetAlpha(uint8_t val) { m_drawable->SetAlpha((float)val/255.0f); }
         uint8_t GetAlpha() { return *m_drawable->GetAlpha() * 255; };
 
+        /** The main drawable for this sprite */
+        DrawableI* GetDrawable() { return m_drawable.get(); };
+        
     protected:
         int m_scale;
         Vector2 m_position;

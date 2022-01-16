@@ -23,7 +23,6 @@ namespace engine
         virtual ~SpriteDrawStatic() { };
         
     public:
-    public:
         /**
          Sets the scale.
          */

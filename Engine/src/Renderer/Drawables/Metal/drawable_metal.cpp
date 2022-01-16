@@ -9,7 +9,7 @@
 
 using namespace engine;
 
-DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float height)
+DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
     : DrawableI(atlasItem->GetWidth(), atlasItem->GetHeight())
     , m_atlasItem(atlasItem)
 {
@@ -25,6 +25,8 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float hei
     
     m_texture = metalTextrue;
 
+    float width = atlasItem->GetWidth();
+    float height = atlasItem->GetHeight();
     float width2 = width/2;
     float height2 = height/2;
     
@@ -43,6 +45,13 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem, float width, float hei
     
     m_triangleVerticiesDataSize = sizeof(data);
     memcpy(m_triangleVertices, data, m_triangleVerticiesDataSize);
+}
+
+DrawableMetal::DrawableMetal(float width, float height)
+    : DrawableI(width, height)
+    , m_atlasItem(nullptr)
+{
+
 }
 
 vector_float2 *DrawableMetal::GetSize()

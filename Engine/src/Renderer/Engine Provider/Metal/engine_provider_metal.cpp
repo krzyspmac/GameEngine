@@ -141,10 +141,13 @@ void EngineProviderMetal::UnloadTexture(TextureI *texture)
 
 std::unique_ptr<DrawableI> EngineProviderMetal::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
 {
-    float width = atlasItem->GetWidth();
-    float height = atlasItem->GetHeight();
-    DrawableMetal *drawable = new DrawableMetal(atlasItem, width, height);
+    DrawableMetal *drawable = new DrawableMetal(atlasItem);
     return std::unique_ptr<DrawableI>(std::move(drawable));
+}
+
+std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float, float)
+{
+    return nullptr;
 }
 
 void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
@@ -175,6 +178,11 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     m_renderEncoder->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
     
     m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)trianglesNum);
+}
+
+void EngineProviderMetal::DrawableTargetRender(DrawableTargetI*, float, float)
+{
+
 }
 
 void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y)
@@ -298,6 +306,21 @@ void EngineProviderMetal::RenderDrawLine(int x1, int y1, int x2, int y2)
 }
 
 void EngineProviderMetal::RenderDrawPoint(int x1, int y1)
+{
+
+}
+
+void EngineProviderMetal::RendererTargetDrawablePush(DrawableTargetI *drawable)
+{
+    m_rendererDrawableStack.emplace_back(drawable);
+}
+
+void EngineProviderMetal::RendererTargetDrawablePop()
+{
+    m_rendererDrawableStack.pop_back();
+}
+
+void EngineProviderMetal::RendererTargetDrawableSet(DrawableTargetI *)
 {
 
 }

@@ -90,6 +90,17 @@ std::unique_ptr<DrawableI> EngineProviderSDL::DrawableCreate(SpriteAtlasItemI *a
     return std::unique_ptr<DrawableI>(std::move(drawable));
 }
 
+std::unique_ptr<DrawableTargetI> EngineProviderSDL::DrawableTargetCreate(float width, float height)
+{
+//    float width = atlasItem->GetWidth();
+//    float height = atlasItem->GetHeight();
+//    DrawableSDL *drawable = new DrawableSDL(atlasItem, width, height);
+//    return std::unique_ptr<DrawableI>(std::move(drawable));
+
+    DrawableTargetI *targetDrawable = new DrawableTargetSDL(width, height);
+    return std::unique_ptr<DrawableTargetI>(std::move(targetDrawable));
+}
+
 TextureI *EngineProviderSDL::LoadTexture(std::string filename, FileStreamI *stream)
 {
     SDL_Texture *textureHandle;
@@ -114,6 +125,24 @@ void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y
 
     TextureI *texture = drawable->GetTexture();
     TextureAlphaSetMod(texture, *baseDrawable->GetAlpha() * 255);
+
+    DrawTexture(
+       texture,
+       (int)x,
+       (int)y,
+       (int)drawable->GetX(),
+       (int)drawable->GetY(),
+       (int)drawable->GetWidth(),
+       (int)drawable->GetHeight(),
+       *drawable->GetScale()
+    );
+}
+
+void EngineProviderSDL::DrawableTargetRender(DrawableTargetI *baseDrawable, float x, float y)
+{
+    auto drawable = (DrawableTargetSDL*)baseDrawable;
+
+    TextureI *texture = drawable->GetTexture();
 
     DrawTexture(
        texture,
@@ -279,27 +308,27 @@ void EngineProviderSDL::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
 
 void EngineProviderSDL::RendererTargetPush(TextureTargetI *targetTexture)
 {
-    m_rendererStack.push_back(targetTexture);
-    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+//    m_rendererStack.push_back(targetTexture);
+//    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
 }
 
 void EngineProviderSDL::RendererTargetPop()
 {
-    m_rendererStack.pop_back();
-    if (m_rendererStack.size() > 0)
-    {
-        TextureI *targetTexture = m_rendererStack.at(m_rendererStack.size()-1);
-        SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
-    }
-    else
-    {
-        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
-    }
+//    m_rendererStack.pop_back();
+//    if (m_rendererStack.size() > 0)
+//    {
+//        TextureI *targetTexture = m_rendererStack.at(m_rendererStack.size()-1);
+//        SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+//    }
+//    else
+//    {
+//        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
+//    }
 }
 
 void EngineProviderSDL::RenderTargetSet(TextureI *targetTexture)
 {
-    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+//    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
 }
 
 void EngineProviderSDL::RenderTargetClear()
@@ -340,4 +369,38 @@ void EngineProviderSDL::RenderDrawLine(int x1, int y1, int x2, int y2)
 void EngineProviderSDL::RenderDrawPoint(int x1, int y1)
 {
     SDL_RenderDrawPoint(m_engineHandle->renderer, x1, y1);
+}
+
+
+void EngineProviderSDL::RendererTargetDrawablePush(DrawableTargetI *drawable)
+{
+    m_rendererDrawableStack.emplace_back(drawable);
+    RendererTargetDrawableSet(drawable);
+}
+
+void EngineProviderSDL::RendererTargetDrawablePop()
+{
+    m_rendererDrawableStack.pop_back();
+    if (m_rendererDrawableStack.size() > 0)
+    {
+        DrawableTargetI *drawable = m_rendererDrawableStack.at(m_rendererDrawableStack.size()-1);
+        RendererTargetDrawableSet(drawable);
+    }
+    else
+    {
+        RendererTargetDrawableSet(nullptr);
+    }
+}
+
+void EngineProviderSDL::RendererTargetDrawableSet(DrawableTargetI *drawable)
+{
+    if (drawable != nullptr)
+    {
+        TextureTargetI *targetTexture = drawable->GetTexture();
+        SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
+    }
+    else
+    {
+        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
+    }
 }

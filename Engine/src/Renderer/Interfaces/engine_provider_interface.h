@@ -13,6 +13,7 @@
 #include "font_interface.h"
 #include "file_access_provider.h"
 #include "sprite_atlas_interface.h"
+#include "sprite_draw_backbuffer.hpp"
 #include "vector2.hpp"
 #include "common.h"
 
@@ -91,8 +92,16 @@ namespace engine
         /// Given a sprite atlas item construct a drawable for the chosen scale.
         virtual std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float) = 0;
 
+        /// Given a size construct a drawable for the chosen scale.
+        /// The drawable is to be used a target rending object. Its texture should be
+        /// able to accept the current rending pass.
+        virtual std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float) = 0;
+
         /// Render the drawable for the current frame at x, y.
         virtual void DrawableRender(DrawableI*, float, float) = 0;
+
+        /// Render the target drawable for the current frame at x, y.
+        virtual void DrawableTargetRender(DrawableTargetI*, float, float) = 0;
 
     /// Textures
     public:
@@ -145,6 +154,12 @@ namespace engine
         virtual void RendererTargetPop() = 0;
         
         virtual void RenderTargetSet(TextureI *targetTexture) = 0;
+
+
+        virtual void RendererTargetDrawablePush(DrawableTargetI *) = 0;
+        virtual void RendererTargetDrawablePop() = 0;
+        virtual void RendererTargetDrawableSet(DrawableTargetI *) = 0;
+
 
         /// Clears the render target so the final render can be applied.
         virtual void RenderTargetClear() = 0;

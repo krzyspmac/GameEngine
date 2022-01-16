@@ -57,7 +57,9 @@ namespace engine
 
     public:
         std::unique_ptr<DrawableI> DrawableCreate(SpriteAtlasItemI*, float scale);
+        std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float);
         void DrawableRender(DrawableI*, float, float);
+        void DrawableTargetRender(DrawableTargetI*, float, float);
 
     public:
         void SetRenderBackgroundColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
@@ -84,6 +86,10 @@ namespace engine
         void RenderTargetClear();
         void RenderClear();
 
+        void RendererTargetDrawablePush(DrawableTargetI *);
+        void RendererTargetDrawablePop();
+        void RendererTargetDrawableSet(DrawableTargetI *);
+
         void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
         void RenderSetScale(float scaleX, float scaleY);
         void RenderDrawRect(Engine_Rect*);
@@ -93,6 +99,7 @@ namespace engine
 
     private:
         std::vector<TextureI*> m_rendererStack;
+        std::vector<DrawableTargetI*> m_rendererDrawableStack;
     };
 };
 

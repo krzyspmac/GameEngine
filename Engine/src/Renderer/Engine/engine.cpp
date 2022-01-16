@@ -57,7 +57,7 @@ Engine::Engine(EngineProviderI &engineProvider,
 
 Engine::~Engine()
 {
-    delete m_bufferTexture;
+//    delete m_bufferTexture;
 }
 
 void Engine::Setup()
@@ -71,7 +71,9 @@ void Engine::Setup()
     m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png");
 #endif
 
-    m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
+    //m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
+    //m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
+    m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
 
     std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
 
@@ -135,6 +137,7 @@ void Engine::FrameDraw()
 
     // Push the buffer texture. All scene will be rendered to a buffer texture
 //    m_engineProvider.RendererTargetPush(m_bufferTexture);
+    m_engineProvider.RendererTargetDrawablePush(m_bufferDrawable.get());
 
     // Clear the game background
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
@@ -145,11 +148,13 @@ void Engine::FrameDraw()
 
     // Pop the buffer texture. Blit the render to the screen.
 //    m_engineProvider.RendererTargetPop();
+    m_engineProvider.RendererTargetDrawablePop();
 
     ApplyScaleTransformations();
 
     // Draw the back buffer texture
-    m_engineProvider.DrawTexture(m_bufferTexture, m_viewportOffset.x, m_viewportOffset.y);
+//    m_engineProvider.DrawTexture(m_bufferTexture, m_viewportOffset.x, m_viewportOffset.y);
+    m_engineProvider.DrawableTargetRender(m_bufferDrawable.get(), m_viewportOffset.x, m_viewportOffset.y);
 
     // Draw the texts
     m_engineProvider.RenderSetScale(1.0f, 1.0f);
