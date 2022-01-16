@@ -33,6 +33,9 @@ namespace engine
             A target texture will be created. */
         DrawableMetal(float width, float height);
 
+        void SetTextureCoordinatesFlippedHorizontally(bool);
+        bool IsTextureCoordinatesFlippedHorizontally();
+
     public:
         void SetPosition(float, float);
 

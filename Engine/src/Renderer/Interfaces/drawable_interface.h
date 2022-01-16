@@ -41,9 +41,16 @@ namespace engine
         void SetTexture(TextureI *texture) { m_texture = texture; };
         TextureI *GetTexture() { return m_texture; };
 
+        /** Flips the texture coordinates horizontally. */
+        virtual void SetTextureCoordinatesFlippedHorizontally(bool) = 0;
+
+        /** */
+        virtual bool IsTextureCoordinatesFlippedHorizontally() = 0;
+
     protected:
         float m_scale;
         float m_alpha;
+        float m_flipHorizontal;
         TextureI *m_texture;
     };
 

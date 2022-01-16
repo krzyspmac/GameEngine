@@ -13,10 +13,20 @@ using namespace engine;
 DrawableSDL::DrawableSDL(SpriteAtlasItemI *atlasItem, float width, float height)
     : DrawableI(width, height)
     , m_atlasItem(atlasItem)
+    , m_flippedHorizontally(false)
 {
     m_texture = m_atlasItem->GetTexture();
 }
 
+void DrawableSDL::SetTextureCoordinatesFlippedHorizontally(bool flipped)
+{
+    m_flippedHorizontally = flipped;
+}
+
+bool DrawableSDL::IsTextureCoordinatesFlippedHorizontally()
+{
+    return m_flippedHorizontally;
+}
 
 DrawableTargetSDL::DrawableTargetSDL(float width, float height)
     : DrawableTargetI(width, height)
@@ -28,5 +38,14 @@ DrawableTargetSDL::DrawableTargetSDL(float width, float height)
     EngineProviderI& provider = GetMainEngine()->getProvider();
     auto texture = provider.CreateTargetTexture(width, height);
     m_texture = texture;
-//?    m_texture = m_atlasItem->GetTexture();
+}
+
+void DrawableTargetSDL::SetTextureCoordinatesFlippedHorizontally(bool flipped)
+{
+    m_flippedHorizontally = flipped;
+}
+
+bool DrawableTargetSDL::IsTextureCoordinatesFlippedHorizontally()
+{
+    return m_flippedHorizontally;
 }

@@ -34,7 +34,7 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
     static const AAPLVertex data[] =
     {
         // Pixel positions, Texture coordinates
-        { { -width2,  -height2 },   { x, h} },
+        { { -width2,  -height2 },   { x, h } },
         { { -width2,   height2 },   { x, y } },
         { {  width2,   height2 },   { w, y } },
 
@@ -72,4 +72,15 @@ size_t DrawableMetal::GetVertexDataSize()
 size_t DrawableMetal::GetVertexCount()
 {
     return 6;
+}
+
+void DrawableMetal::SetTextureCoordinatesFlippedHorizontally(bool)
+{
+    // TODO: not implemented
+}
+
+bool DrawableMetal::IsTextureCoordinatesFlippedHorizontally()
+{
+    // TODO: not implemented
+    return false;
 }

@@ -18,8 +18,12 @@ namespace engine
     class DrawableSDL: public DrawableI
     {
         SpriteAtlasItemI *m_atlasItem;
+        bool m_flippedHorizontally;
     public: // Drawable I
         DrawableSDL(SpriteAtlasItemI *atlasItem, float width, float height);
+
+        bool IsTextureCoordinatesFlippedHorizontally();
+        void SetTextureCoordinatesFlippedHorizontally(bool);
 
     public:
         int GetX() { return m_atlasItem->GetX(); };
@@ -27,6 +31,7 @@ namespace engine
         int GetWidth() { return m_atlasItem->GetWidth(); };
         int GetHeight() { return m_atlasItem->GetHeight(); };
         Size GetSize() { return m_atlasItem->GetSize(); };
+
     };
 
     /** Defines a concrete metal class for the target drawable that is capable of
@@ -38,8 +43,12 @@ namespace engine
         int m_y;
         int m_width;
         int m_height;
+        bool m_flippedHorizontally;
     public: // Drawable I
         DrawableTargetSDL(float width, float height);
+
+        bool IsTextureCoordinatesFlippedHorizontally();
+        void SetTextureCoordinatesFlippedHorizontally(bool);
 
     public: // Overrides
         int GetX() { return m_x; };

@@ -11,6 +11,7 @@
 #include "sprite_atlas_interface.h"
 #include "texture_target.hpp"
 #include "vector2.hpp"
+#include "drawable_interface.h"
 
 namespace engine
 {
@@ -136,7 +137,7 @@ namespace engine
     {
     public:
         CharacterRendererI(SpriteAtlasI *characterAtlas, float scale)
-            : m_characterAtlas(characterAtlas), m_scale(scale), m_bufferTexture(NULL) {};
+            : m_characterAtlas(characterAtlas), m_scale(scale), m_bufferDrawable(nullptr) {};
 
         virtual ~CharacterRendererI() {
         };
@@ -179,7 +180,7 @@ namespace engine
         CharacterWalkRenderer m_walkB;
         CharacterWalkRenderer m_standB;
 
-        TextureTargetI *m_bufferTexture;
+        std::unique_ptr<DrawableTargetI> m_bufferDrawable;
     };
 
     inline CharacterWalkState CharacterWalkStateGetStanding(CharacterWalkState state)

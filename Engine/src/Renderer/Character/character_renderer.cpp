@@ -18,7 +18,8 @@ CharacterRenderer::CharacterRenderer(SpriteAtlasI *characterAtlas, int scale)
 
 CharacterRenderer::~CharacterRenderer()
 {
-    GetMainEngine()->getTextureManager().UnloadTexture(m_bufferTexture);
+    // TODO: memory management
+//    GetMainEngine()->getTextureManager().UnloadTexture(m_bufferTexture);
 }
 
 CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState direction)
@@ -101,7 +102,9 @@ void CharacterRenderer::PrepareCharacter()
     m_bodyWidth = std::max(maxBodyWidth, maxHeadWidth);
     m_bodyHeight = maxBodyHeight + maxHeadHeight;
     m_headHeadHeight = maxHeadHeight;
-    m_bufferTexture = GetMainEngine()->getTextureManager().CreateTargetTexture(m_bodyWidth, m_bodyHeight);
+//    m_bufferTexture = GetMainEngine()->getTextureManager().CreateTargetTexture(m_bodyWidth, m_bodyHeight);
+    // krzysp
+    m_bufferDrawable = GetMainEngine()->getProvider().DrawableTargetCreate(m_bodyWidth, m_bodyHeight);
 }
 
 void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimating)
@@ -199,7 +202,8 @@ void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTa
     CharacterWalkRenderer &renderer = GetRenderer(state);
 
     // Set the buffer texture as the current rendering target
-    provider.RendererTargetPush(m_bufferTexture);
+    auto bufferDrawable = m_bufferDrawable.get();
+    provider.RendererTargetDrawablePush(bufferDrawable);
 
     // Clear the buffer textures with a clear color
     provider.RenderSetColor(255, 255, 255, 0);
@@ -216,11 +220,12 @@ void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTa
 
     // Clear the render target so that the final pass can be pushed
     // to the graphics card.
-    provider.RendererTargetPop();
+    provider.RendererTargetDrawablePop();
 
     // Draw the buffer texture.
-//    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, position.x, position.y, m_scale, renderer.GetIsReversed());
-    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, position, m_scale, renderer.GetIsReversed());
+    bufferDrawable->SetScale(m_scale);
+    bufferDrawable->SetTextureCoordinatesFlippedHorizontally(renderer.GetIsReversed());
+    provider.DrawableTargetRender(m_bufferDrawable.get(), position.x - (m_bodyWidth * m_scale /2), position.y - m_bodyHeight * m_scale);
 }
 
 #pragma mark - CharacterWalkRenderer

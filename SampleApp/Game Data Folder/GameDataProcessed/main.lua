@@ -23,7 +23,7 @@ function loadSprites()
 	character = scene:LoadCharacter("brett_character.json")
 	character:SetScale(3)
 	character:PlaceAt(100,450)
-	character:SetInverseWalkbox("polygons.json")
+	--character:SetInverseWalkbox("polygons.json")
 	character:SetWalkingSpeed(400)
 	character:SetHidden(false)
 	--scene:SetMainCharacter(character)
@@ -63,7 +63,8 @@ function animateIntro()
 		'sequence',
 		PropertyAnimatorFactory:FadeIn(sky, 1, 3)
 	, 	function() -- on finish
-		character:SetHidden(false)
+			character:SetHidden(false)
+			initialAnimationDone = true
 		end
 	)
 	group:Start()
@@ -75,11 +76,11 @@ end
 function mouseDown(x, y)
 --	MemoryReleasePool:Drain()
 
---	if initialAnimationDone ~= true then
+	--if initialAnimationDone ~= true then
 --		return
 --	end
---	print ("mouse down " .. x .. ", " .. y)
---	character:WalkTo(x, y)
+	print ("mouse down " .. x .. ", " .. y)
+	character:WalkTo(x, y)
 end
 
 ------------------------------------------------------------------------------------------
