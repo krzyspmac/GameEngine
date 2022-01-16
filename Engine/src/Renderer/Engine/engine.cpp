@@ -68,7 +68,7 @@ void Engine::Setup()
 
     m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
 #if SHOW_FPS
-    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png");
+    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 0.75);
 #endif
 
     //m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
@@ -207,11 +207,11 @@ void Engine::RenderSceneTexts()
 {
 #if SHOW_FPS
     sprintf(m_fpsBuffer, "%.0f", m_previousFps);
-    m_displayFont->DrawAt(m_fpsBuffer, 0, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
+    m_displayFont->DrawAt(m_fpsBuffer, 0, 10, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
 #endif
     static char mousePos[256];
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
-    m_displayFont->DrawAt(mousePos, 200, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
+    m_displayFont->DrawAt(mousePos, 200, 10, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
 
 void Engine::ApplyScaleTransformations()

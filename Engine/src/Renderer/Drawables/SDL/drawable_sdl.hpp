@@ -26,6 +26,8 @@ namespace engine
         void SetTextureCoordinatesFlippedHorizontally(bool);
 
     public:
+        SpriteAtlasItemI *GetSpriteItem() { return m_atlasItem; };
+        
         int GetX() { return m_atlasItem->GetX(); };
         int GetY() { return m_atlasItem->GetY(); };
         int GetWidth() { return m_atlasItem->GetWidth(); };

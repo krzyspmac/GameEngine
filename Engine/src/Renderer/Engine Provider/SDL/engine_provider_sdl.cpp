@@ -128,19 +128,29 @@ void EngineProviderSDL::DrawableRender(DrawableI *baseDrawable, float x, float y
 
     if (texture != NULL)
     {
-        SDL_Rect dest;
+        auto spriteItem = drawable->GetSpriteItem();
         float scale = *drawable->GetScale();
+
+        SDL_Rect dest;
+        SDL_Rect src;
 
         SDL_Texture *sdlTexture = (SDL_Texture*)texture->getTextureHandle();
         SDL_QueryTexture(sdlTexture, NULL, NULL, &dest.w, &dest.h);
 
         dest.x = x / scale;
         dest.y = y / scale;
+        dest.w = spriteItem->GetWidth();
+        dest.h = spriteItem->GetHeight();
+
+        src.x = spriteItem->GetX();
+        src.y = spriteItem->GetY();
+        src.w = spriteItem->GetWidth();
+        src.h = spriteItem->GetHeight();
 
         float originalScaleX, originalScaleY;
         SDL_RenderGetScale(m_engineHandle->renderer, &originalScaleX, &originalScaleY);
         SDL_RenderSetScale(m_engineHandle->renderer, scale, scale);
-        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, NULL, &dest, 0, &flipPoint, drawable->IsTextureCoordinatesFlippedHorizontally() ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
+        SDL_RenderCopyEx(m_engineHandle->renderer, sdlTexture, &src, &dest, 0, &flipPoint, drawable->IsTextureCoordinatesFlippedHorizontally() ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE);
         SDL_RenderSetScale(m_engineHandle->renderer, originalScaleX, originalScaleY);
     }
 }

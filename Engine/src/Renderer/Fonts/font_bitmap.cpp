@@ -118,10 +118,11 @@ int FontBitmapDescriptor::GetKerningAmount(int first, int second)
 
 FontBitmapGlyph::FontBitmapGlyph(int id, int x, int y, int w, int h, int xO, int yO, int xA, std::string letterName)
     : m_characterId(id)
-    , m_textureRect({ {x, }, {w, h} })
+    , m_textureRect({ {x, y}, {w, h} })
     , m_Offset({ xO, yO })
     , m_xAdvance(xA)
     , m_letterName(letterName)
+    , m_drawable(nullptr)
 {
 }
 
@@ -129,6 +130,7 @@ FontBitmapGlyph::FontBitmapGlyph(KeyValueProperties& properties)
     : m_characterId(properties.GetNumberValueFor("id"))
     , m_xAdvance(properties.GetNumberValueFor("xadvance"))
     , m_letterName(properties.GetStringValueFor("letter"))
+    , m_drawable(nullptr)
 {
     int x = properties.GetNumberValueFor("x");
     int y = properties.GetNumberValueFor("y");
@@ -143,12 +145,31 @@ FontBitmapGlyph::FontBitmapGlyph(KeyValueProperties& properties)
 
 #pragma mark - FontBitmapRepresentation
 
-FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::string fontAtlas)
+std::vector<std::unique_ptr<SpriteAtlasItemI>> spriteDescriptors;
+
+
+FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::string fontAtlas, float scale)
     : FontI(fntFile)
     , m_font(FontBitmapDescriptor(fntFile, fontAtlas))
     , m_texture(GetMainEngine()->getTextureManager().LoadTexture(fontAtlas))
+    , m_scale(scale)
 {
+    EngineProviderI& provider = GetMainEngine()->getProvider();
 
+
+    for (auto &glyph : m_font.GetGlyphs())
+    {
+        auto rect = glyph.GetRect();
+        //auto offset = glyph.GetOffset();
+
+        auto atlasItem = new SpriteAtlasItemI(m_texture, rect.origin.x/* + offset.width*/, rect.origin.y/* + offset.height*/, rect.size.width, rect.size.height, false, "");
+        spriteDescriptors.emplace_back(std::unique_ptr<SpriteAtlasItemI>(atlasItem));
+
+        auto drawable = provider.DrawableCreate(atlasItem, 1);
+        drawable->SetTexture(m_texture);
+        drawable->SetScale(m_scale);
+        glyph.SetDrawable(drawable);
+    }
 }
 
 void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta)
@@ -158,7 +179,6 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
         EngineProviderI& provider = GetMainEngine()->getProvider();
         auto& fontDescriptor = m_font.GetDescriptor();
         auto& charSpacing = fontDescriptor.info.spacing;
-        float scale = 0.75;
 
 //        SDL_SetTextureColorMod((SDL_Texture*)m_texture->getTextureHandle(), (Uint8)200, (Uint8)0, (Uint8)0);
 
@@ -178,19 +198,13 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
 
             if (auto glyph = m_font.GetGlyph(c))
             {
-                Rect& r = glyph->GetRect();
                 Size& offset = glyph->GetOffset();
+                auto drawable = glyph->GetDrawable();
+                float tx = x + (offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale);
+                float ty = y + (offset.height * m_scale);
 
-                provider.DrawTexture(m_texture,
-                                     x + (offset.width * scale) - (m_font.GetKerningAmount(previousC, c) * scale),
-                                     y + (offset.height * scale),
-                                     r.origin.x,
-                                     r.origin.y,
-                                     r.size.width,
-                                     r.size.height,
-                                     scale);
-
-                x += (glyph->GetXAdvance() + charSpacing.x) * scale;
+                provider.DrawableRender(drawable, tx, ty);
+                x += (glyph->GetXAdvance() + charSpacing.x) * m_scale;
             }
 
             previousC = c;

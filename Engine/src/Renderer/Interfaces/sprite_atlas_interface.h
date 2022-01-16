@@ -13,8 +13,12 @@
 #include "scripting_engine_provider_interface.h"
 #include "common_engine_impl.h"
 
-namespace engine {
+namespace engine
+{
 
+    /** Declares an interface that holds information on a particular sprite atlas item
+        loaded using SpriteAtlasI.
+     */
     class SpriteAtlasItemI
     {
     public:
@@ -61,6 +65,8 @@ namespace engine {
         TextureI *m_texture;
     };
 
+    /** Declares an abstraction that defines a sprite atlas loaded from a file.
+     */
     class SpriteAtlasI
     {
     public:

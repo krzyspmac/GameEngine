@@ -15,6 +15,7 @@
 #include "vector2.hpp"
 #include "texture_interface.h"
 #include "scripting_engine_provider_interface.h"
+#include "drawable_interface.h"
 
 namespace engine
 {
@@ -59,7 +60,7 @@ namespace engine
         Size m_Offset;
         int m_xAdvance;
         std::string m_letterName;
-
+        std::unique_ptr<DrawableI> m_drawable;
     public:
         FontBitmapGlyph(int id, int x, int y, int w, int h, int xO, int yO, int xA, std::string letterName);
         FontBitmapGlyph(KeyValueProperties& properties);
@@ -68,6 +69,12 @@ namespace engine
         auto& GetRect() { return m_textureRect; };
         auto& GetOffset() { return m_Offset; };
         auto& GetXAdvance() { return m_xAdvance; };
+
+        void SetDrawable(std::unique_ptr<DrawableI> &drawable)
+        {
+            m_drawable = std::unique_ptr<DrawableI>(std::move(drawable));
+        };
+        auto *GetDrawable() { return m_drawable.get(); };
     };
 
     /** @private
@@ -108,6 +115,8 @@ namespace engine
 
         FontBitmapGlyph *GetGlyph(char&);
 
+        std::vector<FontBitmapGlyph> &GetGlyphs() { return m_glyphs; };
+
         int GetKerningAmount(int first, int second);
     };
 
@@ -118,13 +127,14 @@ namespace engine
     {
         FontBitmapDescriptor m_font;
         TextureI *m_texture;
+        float m_scale;
     public:
         /**
          Create a bitmap bit.
          @param fntFile     - path to a FNT file (in text format)
          @param fontAtlas   - path to the bitmap containing the font sprite sheet.
          */
-        FontBitmapRepresentation(std::string fntFile, std::string fontAtlas);
+        FontBitmapRepresentation(std::string fntFile, std::string fontAtlas, float scale);
 
         /** @private */
         virtual ~FontBitmapRepresentation() { };
