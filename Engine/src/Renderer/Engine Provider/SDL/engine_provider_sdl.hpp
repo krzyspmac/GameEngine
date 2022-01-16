@@ -70,9 +70,6 @@ namespace engine
         void TextureAlphaSetMod(TextureI *texture, uint8_t alpha);
 
     public:
-        void RendererTargetPush(TextureTargetI *targetTexture);
-        void RendererTargetPop();
-
         void RenderTargetSet(TextureI *targetTexture);
         void RenderTargetClear();
         void RenderClear();
@@ -91,7 +88,6 @@ namespace engine
 
     private:
         engine::SDL_APP *m_engineHandle;
-        std::vector<TextureI*> m_rendererStack;
         std::vector<DrawableTargetI*> m_rendererDrawableStack;
     };
 

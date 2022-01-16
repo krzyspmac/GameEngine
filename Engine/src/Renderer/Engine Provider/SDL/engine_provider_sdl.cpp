@@ -320,26 +320,6 @@ void EngineProviderSDL::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
     }
 }
 
-void EngineProviderSDL::RendererTargetPush(TextureTargetI *targetTexture)
-{
-//    m_rendererStack.push_back(targetTexture);
-//    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
-}
-
-void EngineProviderSDL::RendererTargetPop()
-{
-//    m_rendererStack.pop_back();
-//    if (m_rendererStack.size() > 0)
-//    {
-//        TextureI *targetTexture = m_rendererStack.at(m_rendererStack.size()-1);
-//        SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());
-//    }
-//    else
-//    {
-//        SDL_SetRenderTarget(m_engineHandle->renderer, NULL);
-//    }
-}
-
 void EngineProviderSDL::RenderTargetSet(TextureI *targetTexture)
 {
 //    SDL_SetRenderTarget(m_engineHandle->renderer, (SDL_Texture*)targetTexture->getTextureHandle());

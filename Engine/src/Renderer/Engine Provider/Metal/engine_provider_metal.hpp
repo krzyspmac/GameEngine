@@ -79,10 +79,6 @@ namespace engine
         void TextureAlphaSetMod(TextureI *texture, uint8_t alpha);
 
     public:
-        void RendererTargetPush(TextureTargetI *targetTexture);
-        void RendererTargetPop();
-
-        void RenderTargetSet(TextureI *targetTexture);
         void RenderTargetClear();
         void RenderClear();
 
@@ -98,7 +94,6 @@ namespace engine
         void RenderDrawPoint(int x1, int y1);
 
     private:
-        std::vector<TextureI*> m_rendererStack;
         std::vector<DrawableTargetI*> m_rendererDrawableStack;
     };
 };

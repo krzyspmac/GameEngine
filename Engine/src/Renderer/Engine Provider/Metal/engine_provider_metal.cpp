@@ -231,8 +231,8 @@ void EngineProviderMetal::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
 {
 }
 
-void EngineProviderMetal::RendererTargetPush(TextureTargetI *targetTexture)
-{
+//void EngineProviderMetal::RendererTargetPush(TextureTargetI *targetTexture)
+//{
 //    TextureTargetMetal *metalTexture = (TextureTargetMetal*)targetTexture;
 //
 //    EngineProviderMetalTargetTextureDescriptor *targetRender = new EngineProviderMetalTargetTextureDescriptor();
@@ -254,21 +254,21 @@ void EngineProviderMetal::RendererTargetPush(TextureTargetI *targetTexture)
 //
 //
 //    renderStack.emplace_back(targetRender);
-}
+//}
 
-void EngineProviderMetal::RendererTargetPop()
-{
+//void EngineProviderMetal::RendererTargetPop()
+//{
 //    if (!renderStack.empty()) {
 //        auto item = renderStack.at(renderStack.size()-1);
 //        delete item;
 //        renderStack.pop_back();
 //    }
-}
+//}
 
-void EngineProviderMetal::RenderTargetSet(TextureI *targetTexture)
-{
-
-}
+//void EngineProviderMetal::RenderTargetSet(TextureI *targetTexture)
+//{
+//
+//}
 
 void EngineProviderMetal::RenderTargetClear()
 {

@@ -144,28 +144,25 @@ namespace engine
     /// Renderer specific
     public:
 
-        /// Sets the render target to a target texture. All rendering goes
-        /// there until a `RenderTargetClear` is called. The texture
-        /// must be created as a target texture.
-        virtual void RendererTargetPush(TextureTargetI *targetTexture) = 0;
+        /// Sets the render target to a target drawable. All rendering goes
+        /// there until a the target is popped.
+        virtual void RendererTargetDrawablePush(DrawableTargetI *) = 0;
 
         /// Pops the renderer target texture from the stack and returned
         /// to the previous one or the main renderer if the stack is empty.
-        virtual void RendererTargetPop() = 0;
-        
-        virtual void RenderTargetSet(TextureI *targetTexture) = 0;
-
-
-        virtual void RendererTargetDrawablePush(DrawableTargetI *) = 0;
         virtual void RendererTargetDrawablePop() = 0;
-        virtual void RendererTargetDrawableSet(DrawableTargetI *) = 0;
 
+        /// Sets the drawable as the current render target.
+        virtual void RendererTargetDrawableSet(DrawableTargetI *) = 0;
 
         /// Clears the render target so the final render can be applied.
         virtual void RenderTargetClear() = 0;
 
         /// Clears the buffer before drawing a new frame.
         virtual void RenderClear() = 0;
+
+
+
 
         /// Sets the draw color.
         virtual void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) = 0;
