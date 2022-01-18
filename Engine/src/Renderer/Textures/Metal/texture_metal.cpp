@@ -19,7 +19,7 @@ TextureMetal::TextureMetal(MTL::Device *device, std::string filename)
     {
         std::string path = GetMainEngine()->getFileAccess().GetFullPath(filename);
 
-        TextureMetalTGA *texture = new TextureMetalTGA(path, &m_horizontallyFlipped, &m_verticallyFlipped);
+        TextureMetalTGA *texture = new TextureMetalTGA(path, &m_options.flippedHorizontally, &m_options.flippedVertically);
         if (texture != nullptr)
         {
             m_textureDescriptor = MTL::TextureDescriptor::alloc()->init();

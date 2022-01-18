@@ -48,6 +48,7 @@
 		7F869FE32783970400E8CB01 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
 		7F869FE42783970400E8CB01 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
 		7F927F462796B8B90052DB60 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
+		7F927F482796FB430052DB60 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
 		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
 		7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB824112788F8FC008F0F7A /* libimgui.a */; };
@@ -114,6 +115,7 @@
 		7F869FD32783970400E8CB01 /* polygons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polygons.json; sourceTree = "<group>"; };
 		7F869FD42783970400E8CB01 /* room1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room1.png; sourceTree = "<group>"; };
 		7F927F452796B8B90052DB60 /* background.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.tga; sourceTree = "<group>"; };
+		7F927F472796FB430052DB60 /* background1.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background1.tga; sourceTree = "<group>"; };
 		7FB8226B2788DB33008F0F7A /* parlor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parlor.png; sourceTree = "<group>"; };
 		7FB8226C2788DB34008F0F7A /* parlor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parlor.json; sourceTree = "<group>"; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +226,7 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7F927F472796FB430052DB60 /* background1.tga */,
 				7F927F452796B8B90052DB60 /* background.tga */,
 				4C9EA02C279217E70082EB6A /* parlor.tga */,
 				7FB8226C2788DB34008F0F7A /* parlor.json */,
@@ -329,6 +332,7 @@
 				7F84992A2787798B004127CB /* fireplace.json in Resources */,
 				7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */,
 				4C9EA02D279217E70082EB6A /* parlor.tga in Resources */,
+				7F927F482796FB430052DB60 /* background1.tga in Resources */,
 				7F869FDC2783970400E8CB01 /* characters.png in Resources */,
 				7F869FE32783970400E8CB01 /* polygons.json in Resources */,
 				7F869FD52783970400E8CB01 /* brett.png in Resources */,

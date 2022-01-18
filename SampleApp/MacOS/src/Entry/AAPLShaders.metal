@@ -52,23 +52,23 @@ vertexShader(uint vertexID [[vertex_id]],
 
     // Get the target object scale
     float objectScale = float(*objectScalePointer);
-//
-//    // Get the object size
-//    vector_float2 objectSize = vector_float2(*objectSizePointer);
-//
-//    // Get the target object translation
-//    vector_float2 objectTranslation = vector_float2(*viewportOffset);
-//
+
+    // Get the object size
+    vector_float2 objectSize = vector_float2(*objectSizePointer);
+
+    // Get the target object translation
+    vector_float2 objectTranslation = vector_float2(*viewportOffset);
+
     // Calculate aspect ratio & scale
     float scaleX, scaleY, scale;
     scaleX = viewportSize.x / (desiredViewportSize.x / objectScale);
     scaleY = viewportSize.y / (desiredViewportSize.y / objectScale);
     scale = min(scaleX, scaleY);
-//
-//    float trscaleX, trscaleY, trscale;
-//    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
-//    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
-//    trscale = min(trscaleX, trscaleY);
+
+    float trscaleX, trscaleY, trscale;
+    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
+    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
+    trscale = min(trscaleX, trscaleY);
 //
 //    // Calculate offsets due to scaling
 //    // TBD
@@ -80,8 +80,8 @@ vertexShader(uint vertexID [[vertex_id]],
 
     pixelSpacePosition.xy *= scale;
 //
-//    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
-//    pixelSpacePosition.y += objectTranslation.y * trscale;// - targetViewportSize.x/2;
+    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
+    pixelSpacePosition.y += objectTranslation.y * trscale;// - targetViewportSize.x/2;
 
 
 

@@ -42,6 +42,24 @@ namespace engine
         Size size;
     } Rect;
 
+    typedef struct
+    {
+        float x;
+        float y;
+    } OriginF;
+
+    typedef struct
+    {
+        float width;
+        float height;
+    } SizeF;
+
+    typedef struct
+    {
+        OriginF origin;
+        SizeF size;
+    } RectF;
+
     inline Origin OriginMake(int x, int y)
     {
         Origin result;

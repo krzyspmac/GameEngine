@@ -23,10 +23,13 @@ namespace engine
     {
     public:
         SpriteAtlasItemI(TextureI *texture, int x, int y, int w, int h, bool rotated, std::string filename)
-            :   m_texture(texture),
-                x(x), y(y), w(w), h(h),
-                m_size({w, h}),
-                rotated(rotated), m_filename(filename) { };
+            : m_texture(texture)
+            , x(x), y(y), w(w), h(h)
+            , m_size({w, h})
+            , rotated(rotated)
+            , m_filename(filename)
+            , m_flippedVertically(false)
+        { };
 
     public:
 
@@ -44,15 +47,15 @@ namespace engine
         Size &GetSize() { return m_size; };
 
         ///
-        SpriteDescriptor GetSpriteDescriptor()
-        {
-            SpriteDescriptor sp;
-            sp.spriteSrcX = x;
-            sp.spriteSrcY = y;
-            sp.spriteWidth = w;
-            sp.spriteHeight = h;
-            return sp;
-        };
+        RectF GetTextureCoordinates() { return {(float)x, (float)y, (float)w, (float)h}; };
+
+        /** Mark this sprite atlas as using a flipped texture. For compatibility issues.
+            @private
+         */
+        void SetFlippedVertically(bool val) { m_flippedVertically = val; };
+
+        /** */
+        bool GetFlippedVertically() { return m_flippedVertically; };
 
     private:
         int x;
@@ -63,6 +66,7 @@ namespace engine
         bool rotated;
         std::string m_filename;
         TextureI *m_texture;
+        bool m_flippedVertically;
     };
 
     /** Declares an abstraction that defines a sprite atlas loaded from a file.
@@ -77,10 +81,17 @@ namespace engine
 
         virtual std::string &GetFilename() = 0;
 
-        /**
-         Get the SpriteAtlasItemI if that item exists in the atlas json.
+        /** Get the SpriteAtlasItemI if that item exists in the atlas json.
          */
         virtual SpriteAtlasItemI *GetItemForName(std::string name) = 0;
+
+        /** Mark this sprite atlas as using a flipped texture. For compatibility issues.
+            @private
+         */
+        virtual void SetFlippedVertically(bool val) = 0;
+
+        /** */
+        virtual bool GetFlippedVertically() = 0;
     };
 };
 

@@ -14,7 +14,9 @@ font = nil
 -- loading functions
 
 function loadSprites()
-	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.tga" )
+	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background1.tga" )
+	atlas:SetFlippedVertically(1)
+	
 	local scene = SceneManager:SceneCreateNew()
 --	
 	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.tga" )
@@ -33,15 +35,18 @@ function loadSprites()
 sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
 sky:SetScale(3)
 --sky:SetAlpha(255)
---sky:SetPosition(0, 0)
+sky:SetPosition(0, 0)
 	
 --	initialAnimationDone = true
 	
 --	-- sky
 sky2 = scene:LoadSpriteStatic(atlas, "background.png")
 sky2:SetScale(0.5)
---sky2:SetAlpha(255)
---sky2:SetPosition(1280/2, 0)
+sky2:SetAlpha(255)
+sky2:SetPosition(1280/4, 100)
+
+--another = scene:LoadSpriteStatic(roomAtlas, "cupboard-r")
+--another = scene:LoadSpriteStatic(roomAtlas, "cupboard-l")
 
 --sky3 = scene:LoadSpriteStatic(atlas, "background.png")
 --sky3:SetScale(1)

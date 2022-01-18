@@ -15,22 +15,25 @@
 
 namespace engine
 {
+    typedef struct
+    {
+        bool flippedHorizontally;
+        bool flippedVertically;
+    } TextureMetalOptions;
+
     class TextureMetal: public TextureI
     {
         MTL::TextureDescriptor *m_textureDescriptor;
         MTL::Texture *m_texture;
         MTL::SharedTextureHandle *m_sharedTexture;
-        bool m_verticallyFlipped;
-        bool m_horizontallyFlipped;
+        TextureMetalOptions m_options;
     public:
         TextureMetal(MTL::Device*, std::string filename);
         virtual ~TextureMetal();
         
         MTL::TextureDescriptor *GetTextureDescriptor() { return m_textureDescriptor; };
         MTL::Texture* GetMTLTextureHandle() { return m_texture; };
-        MTL::SharedTextureHandle* GetMTLSharedTextureHandle() { return m_sharedTexture; };
-        bool IsHorizontallyFlipped() { return m_horizontallyFlipped; };
-        bool IsVerticallyFlipped() { return m_verticallyFlipped; };
+        TextureMetalOptions *GetOptions() { return &m_options; };
     };
 };
 
