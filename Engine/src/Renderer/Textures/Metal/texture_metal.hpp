@@ -19,12 +19,18 @@ namespace engine
     {
         MTL::TextureDescriptor *m_textureDescriptor;
         MTL::Texture *m_texture;
+        MTL::SharedTextureHandle *m_sharedTexture;
+        bool m_verticallyFlipped;
+        bool m_horizontallyFlipped;
     public:
         TextureMetal(MTL::Device*, std::string filename);
         virtual ~TextureMetal();
         
         MTL::TextureDescriptor *GetTextureDescriptor() { return m_textureDescriptor; };
         MTL::Texture* GetMTLTextureHandle() { return m_texture; };
+        MTL::SharedTextureHandle* GetMTLSharedTextureHandle() { return m_sharedTexture; };
+        bool IsHorizontallyFlipped() { return m_horizontallyFlipped; };
+        bool IsVerticallyFlipped() { return m_verticallyFlipped; };
     };
 };
 

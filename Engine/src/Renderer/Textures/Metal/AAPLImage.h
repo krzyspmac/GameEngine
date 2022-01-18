@@ -15,7 +15,7 @@ namespace engine
         int m_height;
         void *m_data;
     public:
-        TextureMetalTGA(std::string filename);
+        TextureMetalTGA(std::string filename, bool *horizontallyFlipped, bool *verticallyFlipped);
         
         int GetWidth() { return m_width; };
         int GetHeight() { return m_height; };

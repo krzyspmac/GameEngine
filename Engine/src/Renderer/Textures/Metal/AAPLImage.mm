@@ -198,7 +198,7 @@ using namespace engine;
 
 @end
 
-TextureMetalTGA::TextureMetalTGA(std::string filename)
+TextureMetalTGA::TextureMetalTGA(std::string filename, bool *horizontallyFlipped, bool *verticallyFlipped)
 {
     // Structure fitting the layout of a TGA header containing image metadata.
     typedef struct __attribute__ ((packed)) TGAHeader
@@ -313,6 +313,9 @@ TextureMetalTGA::TextureMetalTGA(std::string filename)
     // Initialize a destination pointer to which you'll store the converted BGRA
     // image data
     uint8_t *dstImageData = (uint8_t*)mutableData.mutableBytes;
+
+    *horizontallyFlipped = tgaInfo->rightOrigin;
+    *verticallyFlipped = tgaInfo->topOrigin;
 
     // For every row of the image
     for(NSUInteger y = 0; y < m_height; y++)

@@ -18,12 +18,13 @@ TextureMetal::TextureMetal(MTL::Device *device, std::string filename)
     if (filename.ends_with(".tga"))
     {
         std::string path = GetMainEngine()->getFileAccess().GetFullPath(filename);
-        
-        TextureMetalTGA *texture = new TextureMetalTGA(path);
+
+        TextureMetalTGA *texture = new TextureMetalTGA(path, &m_horizontallyFlipped, &m_verticallyFlipped);
         if (texture != nullptr)
         {
             m_textureDescriptor = MTL::TextureDescriptor::alloc()->init();
             m_textureDescriptor->setPixelFormat(MTL::PixelFormatBGRA8Unorm);
+            m_textureDescriptor->setResourceOptions(MTL::ResourceStorageModeShared);
             m_textureDescriptor->setWidth(texture->GetWidth());
             m_textureDescriptor->setHeight(texture->GetHeight());
             

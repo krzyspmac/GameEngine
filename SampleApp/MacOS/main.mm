@@ -13,8 +13,8 @@ int main(int argc, const char * argv[]) {
         // Setup code that might create autoreleased objects goes here.
     }
 
-    engine::RendererEntrySDL entry;
-    entry.main(argc, argv);
+//    engine::RendererEntrySDL entry;
+//    entry.main(argc, argv);
 
     return NSApplicationMain(argc, argv);
 }

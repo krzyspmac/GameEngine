@@ -19,6 +19,7 @@ namespace engine
     {
     public: // Drawable I
         DrawableSDL(SpriteAtlasItemI *atlasItem);
+        bool CanDraw();
     };
 
     /** Defines a concrete metal class for the target drawable that is capable of
@@ -28,6 +29,7 @@ namespace engine
     {
     public: // Drawable I
         DrawableTargetSDL(float width, float height);
+        bool CanDraw();
     };
 };
 

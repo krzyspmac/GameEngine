@@ -20,23 +20,17 @@ namespace engine
     /** Defines the metal drawable that goes to the gpu. */
     class DrawableMetal: public DrawableSpriteI
     {
-        AAPLVertex *m_triangleVertices;
-        size_t m_triangleVerticiesDataSize;
+        MTL::Buffer *m_vertexBuffer;
         vector_float2 m_size;
         TextureMetal *m_texture;
         size_t m_vertexCount;
-    public:
+    public: // DrawableSpriteI
         /** Construct a drawable for metal given a sprite descriptor */
-        DrawableMetal(SpriteAtlasItemI*);
-
+        DrawableMetal(MTL::Device*, SpriteAtlasItemI*);
+        virtual ~DrawableMetal();
         bool CanDraw();
-
     public:
-        void SetPosition(float, float);
-
-    public:
-        AAPLVertex *GetVertexData();
-        size_t GetVertexDataSize();
+        MTL::Buffer *GetVertexBuffer();
         size_t GetVertexCount();
         vector_float2 *GetSize();
         TextureMetal *GetTexture() { return m_texture; };

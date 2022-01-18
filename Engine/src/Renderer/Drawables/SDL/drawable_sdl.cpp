@@ -16,10 +16,20 @@ DrawableSDL::DrawableSDL(SpriteAtlasItemI *atlasItem)
     m_texture = m_atlasItem->GetTexture();
 }
 
+bool DrawableSDL::CanDraw()
+{
+    return true;
+}
+
 DrawableTargetSDL::DrawableTargetSDL(float width, float height)
     : DrawableTargetI(width, height)
 {
     EngineProviderI& provider = GetMainEngine()->getProvider();
     auto texture = provider.CreateTargetTexture(width, height);
     m_texture = texture;
+}
+
+bool DrawableTargetSDL::CanDraw()
+{
+    return true;
 }

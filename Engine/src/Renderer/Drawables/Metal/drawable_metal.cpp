@@ -9,21 +9,18 @@
 
 using namespace engine;
 
-DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
+DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     : DrawableSpriteI(atlasItem)
+    , m_vertexBuffer(nullptr)
 {
     auto metalTextrue = (TextureMetal*)atlasItem->GetTexture();
     if (metalTextrue->GetMTLTextureHandle() == nullptr)
     {
-        m_size = { 0, 0 };
-        m_triangleVertices = 0;
-        m_triangleVerticiesDataSize = 0;
         m_vertexCount = 0;
         return;
     };
 
     m_vertexCount = 6;
-    m_triangleVertices = (AAPLVertex*)malloc(m_vertexCount * sizeof(AAPLVertex));
 
     auto textureSize = metalTextrue->GetSize();
     
@@ -38,9 +35,8 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
     float height = atlasItem->GetHeight();
     float width2 = width/2;
     float height2 = height/2;
-    
-    // Set up a simple MTLBuffer with vertices which include texture coordinates
-    static const AAPLVertex data[] =
+
+    AAPLVertex data[] =
     {
         // Pixel positions, Texture coordinates
         { { -width2,  -height2 },   { x, h } },
@@ -51,9 +47,14 @@ DrawableMetal::DrawableMetal(SpriteAtlasItemI *atlasItem)
         { {  width2,   -height2 },  { w, h } },
         { { -width2,   -height2 },  { x, h } },
     };
-    
-    m_triangleVerticiesDataSize = sizeof(data);
-    memcpy(m_triangleVertices, data, m_triangleVerticiesDataSize);
+
+    m_vertexBuffer = device->newBuffer(sizeof(data), MTL::ResourceStorageModeShared);
+    memcpy(m_vertexBuffer->contents(), data, sizeof(data));
+}
+
+DrawableMetal::~DrawableMetal()
+{
+    m_vertexBuffer->release();
 }
 
 bool DrawableMetal::CanDraw()
@@ -66,14 +67,9 @@ vector_float2 *DrawableMetal::GetSize()
     return &m_size;
 }
 
-AAPLVertex *DrawableMetal::GetVertexData()
+MTL::Buffer *DrawableMetal::GetVertexBuffer()
 {
-    return m_triangleVertices;
-}
-
-size_t DrawableMetal::GetVertexDataSize()
-{
-    return m_triangleVerticiesDataSize;
+    return m_vertexBuffer;
 }
 
 size_t DrawableMetal::GetVertexCount()

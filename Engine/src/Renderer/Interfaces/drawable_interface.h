@@ -90,6 +90,9 @@ namespace engine
 
         virtual ~DrawableSpriteI() { };
 
+        /** Can the drawable be presented. Override */
+        virtual bool CanDraw() = 0;
+
     public: // Sprite atlas related
 
         /** Set the sprite atlas item. Cannot be nil */

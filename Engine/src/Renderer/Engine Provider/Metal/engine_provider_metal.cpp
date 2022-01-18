@@ -51,6 +51,16 @@ void EngineProviderMetal::SetRendererDevice(MTL::Device *device)
     m_library = device->newDefaultLibrary();
 }
 
+void EngineProviderMetal::SetCommandBuffer(MTL::CommandBuffer *val)
+{
+    m_commandBuffer = val;
+}
+
+void EngineProviderMetal::SetRenderPassDescriptor(MTL::RenderPassDescriptor* val)
+{
+    m_rederPassDescriptor = val;
+}
+
 void EngineProviderMetal::SetPixelFormat(MTL::PixelFormat val)
 {
     m_pixelFormat = val;
@@ -60,6 +70,11 @@ void EngineProviderMetal::SetDesiredViewport(int width, int height)
 {
     m_desiredViewport[0] = width;
     m_desiredViewport[1] = height;
+}
+
+void EngineProviderMetal::SetRenderingPipelineState(MTL::RenderPipelineState *val)
+{
+    m_renderPipelineState = val;
 }
 
 void EngineProviderMetal::SetRendererCommandEncoder(MTL::RenderCommandEncoder *renderEncoder)
@@ -141,7 +156,7 @@ void EngineProviderMetal::UnloadTexture(TextureI *texture)
 
 std::unique_ptr<DrawableSpriteI> EngineProviderMetal::DrawableCreate(SpriteAtlasItemI *atlasItem, float scale)
 {
-    DrawableMetal *drawable = new DrawableMetal(atlasItem);
+    DrawableMetal *drawable = new DrawableMetal(m_device, atlasItem);
     return std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
@@ -152,21 +167,23 @@ std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float
 
 void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
 {
+    // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
     if (!drawable->CanDraw()) { return; };
 
-    auto triangles = drawable->GetVertexData();
-    size_t trianglesSize = drawable->GetVertexDataSize();
-    size_t trianglesNum = drawable->GetVertexCount();
-    simd_float2 pos = {x, y};
+    // Some values to pass to the GPU
+    static simd_float2 position = { 0, 0 };
+    position.x = x; position.y = y;
 
-    m_renderEncoder->setVertexBytes(triangles, trianglesSize, AAPLVertexInputIndexVertices);
+    // Pass data to the GPU
+    m_renderEncoder->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
     m_renderEncoder->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
-    m_renderEncoder->setVertexBytes(&pos, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
+    m_renderEncoder->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
     m_renderEncoder->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
     m_renderEncoder->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     m_renderEncoder->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
-    
+    m_renderEncoder->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
+
     auto texture = drawable->GetTexture();
     if (texture != nullptr)
     {
@@ -177,9 +194,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
         }
     }
 
-    m_renderEncoder->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
-    
-    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)trianglesNum);
+    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)drawable->GetVertexCount());
 }
 
 void EngineProviderMetal::DrawableTargetRender(DrawableTargetI*, float, float)

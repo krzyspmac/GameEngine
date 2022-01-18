@@ -52,36 +52,43 @@ vertexShader(uint vertexID [[vertex_id]],
 
     // Get the target object scale
     float objectScale = float(*objectScalePointer);
-
-    // Get the object size
-    vector_float2 objectSize = vector_float2(*objectSizePointer);
-
-    // Get the target object translation
-    vector_float2 objectTranslation = vector_float2(*viewportOffset);
-
+//
+//    // Get the object size
+//    vector_float2 objectSize = vector_float2(*objectSizePointer);
+//
+//    // Get the target object translation
+//    vector_float2 objectTranslation = vector_float2(*viewportOffset);
+//
     // Calculate aspect ratio & scale
     float scaleX, scaleY, scale;
     scaleX = viewportSize.x / (desiredViewportSize.x / objectScale);
     scaleY = viewportSize.y / (desiredViewportSize.y / objectScale);
     scale = min(scaleX, scaleY);
-    
-    float trscaleX, trscaleY, trscale;
-    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
-    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
-    trscale = min(trscaleX, trscaleY);
-
-    // Calculate offsets due to scaling
-    // TBD
-    vector_float2 targetViewportSize;
-    targetViewportSize.xy = desiredViewportSize * trscale;
-
-    vector_float2 targetObjectSize;
-    targetObjectSize.xy = objectSize * scale;
+//
+//    float trscaleX, trscaleY, trscale;
+//    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
+//    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
+//    trscale = min(trscaleX, trscaleY);
+//
+//    // Calculate offsets due to scaling
+//    // TBD
+//    vector_float2 targetViewportSize;
+//    targetViewportSize.xy = desiredViewportSize * trscale;
+//
+//    vector_float2 targetObjectSize;
+//    targetObjectSize.xy = objectSize * scale;
 
     pixelSpacePosition.xy *= scale;
-    
-    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
-    
+//
+//    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
+//    pixelSpacePosition.y += objectTranslation.y * trscale;// - targetViewportSize.x/2;
+
+
+
+
+
+
+
 //    pixelSpacePosition.x -= (viewportSize.x - targetViewportSize.x)/2;
 
 //    float offsetXToEdge = viewportSize.x/2 - ((targetObjectSize.x)/2);
@@ -149,20 +156,20 @@ fragmentShader(RasterizerData in [[stage_in]],
                constant float *alphaPointer [[buffer(AAPLTextureIndexBaseAlpha)]]
                )
 {
+//    return in.color;
+
     constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest);
 
     // Sample the texture to obtain a color
     const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
 
-    /*
+//    colorSample.a = *alphaPointer;
+
     // 3
-    if (transparencyEnabled && color.a < 0.1) {
+    if (/*transparencyEnabled && */colorSample.a < 0.1) {
       discard_fragment();
     }
-    */
-
-    colorSample.a = *alphaPointer;
 
     // return the color of the texture
     return float4(colorSample);

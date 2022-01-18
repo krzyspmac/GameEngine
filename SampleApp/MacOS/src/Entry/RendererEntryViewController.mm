@@ -162,6 +162,7 @@ using namespace engine;
 
     m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
     m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
+    m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
 }
 
 #pragma mark - MTKViewDelegate
@@ -177,6 +178,7 @@ using namespace engine;
 {
     /** Create a command buffer*/
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
+    m_engineProvider->SetCommandBuffer((__bridge MTL::CommandBuffer*)commandBuffer);
 
     /** Encoder goes directly to the C++ engine*/
     id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:mtkView.currentRenderPassDescriptor];
@@ -184,6 +186,7 @@ using namespace engine;
 
     /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
     m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
+    m_engineProvider->SetRenderPassDescriptor((__bridge MTL::RenderPassDescriptor*)mtkView.currentRenderPassDescriptor);
     m_engineProvider->SetViewportSize(viewportSize);
 
     m_engine->FrameBegin();

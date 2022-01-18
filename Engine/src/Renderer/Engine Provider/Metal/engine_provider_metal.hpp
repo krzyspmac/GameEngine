@@ -28,7 +28,10 @@ namespace engine
     class EngineProviderMetal : public EngineProviderI
     {
         MTL::Device *m_device;
+        MTL::CommandBuffer *m_commandBuffer;
         MTL::RenderCommandEncoder *m_renderEncoder;
+        MTL::RenderPipelineState *m_renderPipelineState;
+        MTL::RenderPassDescriptor *m_rederPassDescriptor;
         MTL::Library *m_library;
         MTL::PixelFormat m_pixelFormat;
         vector_float2 m_viewportSize;
@@ -39,7 +42,10 @@ namespace engine
 
     public:
         void SetRendererDevice(MTL::Device*);
+        void SetCommandBuffer(MTL::CommandBuffer*);
+        void SetRenderPassDescriptor(MTL::RenderPassDescriptor*);
         void SetPixelFormat(MTL::PixelFormat);
+        void SetRenderingPipelineState(MTL::RenderPipelineState*);
         void SetRendererCommandEncoder(MTL::RenderCommandEncoder*);
         void SetViewportSize(vector_float2);
 
