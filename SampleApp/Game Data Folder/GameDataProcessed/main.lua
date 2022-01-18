@@ -14,7 +14,7 @@ font = nil
 -- loading functions
 
 function loadSprites()
-	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background1.tga" )
+	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.tga" )
 	atlas:SetFlippedVertically(1)
 	
 	local scene = SceneManager:SceneCreateNew()

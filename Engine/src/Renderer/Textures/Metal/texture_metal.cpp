@@ -24,7 +24,7 @@ TextureMetal::TextureMetal(MTL::Device *device, std::string filename)
         {
             m_textureDescriptor = MTL::TextureDescriptor::alloc()->init();
             m_textureDescriptor->setPixelFormat(MTL::PixelFormatBGRA8Unorm);
-            m_textureDescriptor->setResourceOptions(MTL::ResourceStorageModeShared);
+//            m_textureDescriptor->setResourceOptions(MTL::ResourceStorageModeShared);
             m_textureDescriptor->setWidth(texture->GetWidth());
             m_textureDescriptor->setHeight(texture->GetHeight());
             

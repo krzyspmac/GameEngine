@@ -19,6 +19,9 @@
 #include "event_provider.hpp"
 #include "engine.hpp"
 #include "common_engine_impl.h"
+#include "texture_target_metal.hpp"
+
+#include "AAPLShaderTypes.h"
 
 #define SCREEN_WIDTH  1280
 #define SCREEN_HEIGHT 720
@@ -30,11 +33,24 @@ using namespace engine;
 {
     /** Metal related */
     id<MTLDevice> device;
+
+    /** Onscreen rendering */
     id<MTLLibrary> library;
     id<MTLFunction> vertexFunction;
     id<MTLFunction> fragmentFunction;
     MTLRenderPipelineDescriptor *renderePipelineDescriptor;
     id<MTLRenderPipelineState> pipelineState;
+
+    /** Offscreen rendering */
+    id<MTLLibrary> oscLibrary;
+//    TextureTargetMetal *oscTargetTexture;
+    id<MTLTexture> oscTargetTexture;
+    id<MTLFunction> oscVertexFunction;
+    id<MTLFunction> oscFragmentFunction;
+    MTLRenderPassDescriptor *oscRenderPassDescriptor;
+    MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor;
+    id<MTLRenderPipelineState> oscPipelineState;
+
     id<MTLCommandQueue> commandQueue;
     vector_float2 viewportSize;
     MTKView *mtkView;
@@ -116,13 +132,14 @@ using namespace engine;
 //    [window setFrame:CGRectMake(0, 0, 1280, 720) display:YES];
 
     [self setupEngine];
-    [self setupRenderingPipeline];
+    [self setupScreenRendingPipeline];
+    [self setupOffscreenRenderingPipeline];
     [self prepareEngine];
 
     [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
 }
 
-- (void)setupRenderingPipeline
+- (void)setupScreenRendingPipeline
 {
     device = MTLCreateSystemDefaultDevice();
 
@@ -131,8 +148,8 @@ using namespace engine;
     mtkView.delegate = self;
 
     library = [device newDefaultLibrary];
-    vertexFunction = [library newFunctionWithName:@"vertexShader"];
-    fragmentFunction = [library newFunctionWithName:@"fragmentShader"];
+    vertexFunction = [library newFunctionWithName:@"presenterVertexShader"];
+    fragmentFunction = [library newFunctionWithName:@"presenterFragmentShader"];
 
     renderePipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
     [renderePipelineDescriptor setLabel:@"Simple Pipeline"];
@@ -165,6 +182,44 @@ using namespace engine;
     m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
 }
 
+- (void)setupOffscreenRenderingPipeline
+{
+//    oscLibrary = [device newDefaultLibrary];
+    oscVertexFunction = [library newFunctionWithName:@"vertexShader"];
+    oscFragmentFunction = [library newFunctionWithName:@"fragmentShader"];
+
+    MTLTextureDescriptor *texDescriptor = [MTLTextureDescriptor new];
+    texDescriptor.textureType = MTLTextureType2D;
+    texDescriptor.width = SCREEN_WIDTH;
+    texDescriptor.height = SCREEN_HEIGHT;
+    texDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;//MTLPixelFormatRGBA8Unorm;
+    texDescriptor.usage = MTLTextureUsageRenderTarget |
+                          MTLTextureUsageShaderRead;
+
+    oscTargetTexture = [device newTextureWithDescriptor:texDescriptor];
+
+//    oscTargetTexture = (TextureTargetMetal*)m_engineProvider->CreateTargetTexture(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    oscRenderPassDescriptor = [MTLRenderPassDescriptor new];
+//    oscRenderPassDescriptor.colorAttachments[0].texture = (__bridge id<MTLTexture>)(oscTargetTexture->GetMTLTextureHandle());
+    oscRenderPassDescriptor.colorAttachments[0].texture = oscTargetTexture;
+    oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+    oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 1, 1, 1);
+    oscRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+
+    MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
+    oscRenderePipelineDescriptor.label = @"Offline Render Pipeline";
+    oscRenderePipelineDescriptor.sampleCount = 1;
+    oscRenderePipelineDescriptor.vertexFunction = oscVertexFunction;
+    oscRenderePipelineDescriptor.fragmentFunction = oscFragmentFunction;
+    oscRenderePipelineDescriptor.colorAttachments[0].pixelFormat = oscTargetTexture.pixelFormat;
+//    oscRenderePipelineDescriptor.vertexBuffers[AAPLVertexInputIndexVertices].mutability = MTLMutabilityImmutable;
+
+    NSError *error;
+    oscPipelineState = [device newRenderPipelineStateWithDescriptor:oscRenderePipelineDescriptor error:&error];
+    NSAssert(oscPipelineState, @"Failed to create pipeline state to render to screen: %@", error);
+}
+
 #pragma mark - MTKViewDelegate
 
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
@@ -178,22 +233,73 @@ using namespace engine;
 {
     /** Create a command buffer*/
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
-    m_engineProvider->SetCommandBuffer((__bridge MTL::CommandBuffer*)commandBuffer);
+    commandBuffer.label = @"Command Buffer";
+//    m_engineProvider->SetCommandBuffer((__bridge MTL::CommandBuffer*)commandBuffer);
 
-    /** Encoder goes directly to the C++ engine*/
-    id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:mtkView.currentRenderPassDescriptor];
-    [encoder setRenderPipelineState:pipelineState];
+    /** Render the scene offscreen to a target texture */
+    {
+        /** Create the encoder for the pass */
+        id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:oscRenderPassDescriptor];
+        [encoder setRenderPipelineState:oscPipelineState];
 
-    /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
-    m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
-    m_engineProvider->SetRenderPassDescriptor((__bridge MTL::RenderPassDescriptor*)mtkView.currentRenderPassDescriptor);
-    m_engineProvider->SetViewportSize(viewportSize);
+        /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
+        m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
+        m_engineProvider->SetViewportSize(viewportSize);
 
-    m_engine->FrameBegin();
-    m_engine->FrameDraw();
+        /** Render the scene */
+        m_engine->FrameBegin();
+        m_engine->FrameDraw();
 
-    /** End encoding */
-    [encoder endEncoding];
+        /** End encoding */
+        [encoder endEncoding];
+    }
+
+    /** Render the offscreen texture to screen */
+    MTLRenderPassDescriptor *drawableRenderPassDescriptor = view.currentRenderPassDescriptor;
+    if(drawableRenderPassDescriptor != nil)
+    {
+        /** Create the encoder for the pass */
+        id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:drawableRenderPassDescriptor];
+        encoder.label = @"Drawable Render Pass";
+        [encoder setRenderPipelineState:pipelineState];
+
+        static const AAPLVertex quadVertices[] =
+        {
+            // Positions     , Texture coordinates
+            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
+            { { -0.5,  -0.5 },  { 0.0, 1.0 } },
+            { { -0.5,   0.5 },  { 0.0, 0.0 } },
+
+            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
+            { { -0.5,   0.5 },  { 0.0, 0.0 } },
+            { {  0.5,   0.5 },  { 1.0, 0.0 } },
+        };
+
+        [encoder setVertexBytes:&quadVertices
+                         length:sizeof(quadVertices)
+                        atIndex:AAPLVertexInputIndexVertices];
+
+//        float _aspectRatio = 1;
+//
+//        [encoder setVertexBytes:&_aspectRatio
+//                         length:sizeof(_aspectRatio)
+//                        atIndex:AAPLVertexInputIndexAspectRatio];
+
+//        [encoder setVertexBytes:&viewportSize
+//                         length:sizeof(viewportSize)
+//                        atIndex:AAPLVertexInputIndexViewportSize];
+
+            // Set the offscreen texture as the source texture.
+        [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
+
+            // Draw quad with rendered texture.
+        [encoder drawPrimitives:MTLPrimitiveTypeTriangle
+                    vertexStart:0
+                    vertexCount:6];
+
+        /** End encoding */
+        [encoder endEncoding];
+    }
 
     /** Present the drawable */
     [commandBuffer presentDrawable:view.currentDrawable];

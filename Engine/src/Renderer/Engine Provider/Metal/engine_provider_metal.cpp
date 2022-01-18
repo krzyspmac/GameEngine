@@ -54,6 +54,12 @@ void EngineProviderMetal::SetRendererDevice(MTL::Device *device)
 void EngineProviderMetal::SetCommandBuffer(MTL::CommandBuffer *val)
 {
     m_commandBuffer = val;
+
+    for (DrawableTargetI *baseDrawable : m_rendererDrawableStack)
+    {
+        DrawableTargetMetal *drawable = static_cast<DrawableTargetMetal*>(baseDrawable);
+        drawable->UpdateCommandEncoder(val);
+    }
 }
 
 void EngineProviderMetal::SetRenderPassDescriptor(MTL::RenderPassDescriptor* val)
@@ -160,9 +166,11 @@ std::unique_ptr<DrawableSpriteI> EngineProviderMetal::DrawableCreate(SpriteAtlas
     return std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
-std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float, float)
+std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float width, float height)
 {
-    return nullptr;
+    TextureTargetMetal *texture = (TextureTargetMetal*)CreateTargetTexture(width, height);
+    DrawableTargetMetal *drawable = new DrawableTargetMetal(m_device, m_commandBuffer, texture);
+    return std::unique_ptr<DrawableTargetI>(std::move(drawable));
 }
 
 void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
@@ -175,14 +183,17 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     static simd_float2 position = { 0, 0 };
     position.x = x; position.y = y;
 
-    // Pass data to the GPU
-    m_renderEncoder->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
-    m_renderEncoder->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
-    m_renderEncoder->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
-    m_renderEncoder->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
-    m_renderEncoder->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
-    m_renderEncoder->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
-    m_renderEncoder->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
+    // Pass data to the GPU. Render on screen or on offline-buffer specified
+    // when using RendererTargetDrawablePush.
+    MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
+
+    renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
+    renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
+    renderToPipline->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
+    renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
+    renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
+    renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
+    renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
 
     auto texture = drawable->GetTexture();
     if (texture != nullptr)
@@ -190,16 +201,64 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
         auto mtlTextureHandle = texture->GetMTLTextureHandle();
         if (mtlTextureHandle != nullptr)
         {
-            m_renderEncoder->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
+            renderToPipline->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
         }
     }
 
-    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)drawable->GetVertexCount());
+    renderToPipline->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)drawable->GetVertexCount());
 }
 
-void EngineProviderMetal::DrawableTargetRender(DrawableTargetI*, float, float)
+void EngineProviderMetal::DrawableTargetRender(DrawableTargetI *baseDrawable, float x, float y)
 {
+    return;
+//    // Cast interface to concrete instance and check if we can draw
+//    auto drawable = static_cast<DrawableTargetMetal*>(baseDrawable);
+//    if (!drawable->CanDraw()) { return; };
+//
+//    // Some values to pass to the GPU
+//    static simd_float2 position = { 0, 0 };
+//    position.x = x; position.y = y;
+//
+//    // Pass data to the GPU. Render on screen or on offline-buffer specified
+//    // when using RendererTargetDrawablePush.
+//    MTL::RenderPipelineState *renderToPipline = m_renderPipelineState;
+//
+//    m_renderEncoder->setRenderPipelineState(renderToPipline);
+//    m_renderEncoder->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
+//    m_renderEncoder->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
+//    m_renderEncoder->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
+//    m_renderEncoder->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
+//    m_renderEncoder->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
+//    m_renderEncoder->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
+//    m_renderEncoder->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
+//
+//    auto texture = drawable->GetTexture();
+//    if (texture != nullptr)
+//    {
+//        auto mtlTextureHandle = texture->GetMTLTextureHandle();
+//        if (mtlTextureHandle != nullptr)
+//        {
+//            m_renderEncoder->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
+//        }
+//    }
+//
+//    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)drawable->GetVertexCount());
+}
 
+// TODO: move where appropriate
+
+MTL::RenderCommandEncoder *EngineProviderMetal::GetTopEncoder()
+{
+    return m_renderEncoder;
+//    if (m_rendererDrawableTop != nullptr)
+//    {
+//        auto topDrawable = static_cast<DrawableTargetMetal*>(m_rendererDrawableTop);
+//        return topDrawable->GetEncoder();
+//    }
+//    else
+//    {
+//        return nullptr;
+//    }
 }
 
 //void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y)
@@ -330,11 +389,21 @@ void EngineProviderMetal::RenderDrawPoint(int x1, int y1)
 void EngineProviderMetal::RendererTargetDrawablePush(DrawableTargetI *drawable)
 {
     m_rendererDrawableStack.emplace_back(drawable);
+    m_rendererDrawableTop = drawable;
+    SetCommandBuffer(m_commandBuffer);
 }
 
 void EngineProviderMetal::RendererTargetDrawablePop()
 {
     m_rendererDrawableStack.pop_back();
+    if (m_rendererDrawableStack.empty())
+    {
+        m_rendererDrawableTop = nullptr;
+    }
+    else
+    {
+        m_rendererDrawableStack.at(m_rendererDrawableStack.size()-1);
+    }
 }
 
 void EngineProviderMetal::RendererTargetDrawableSet(DrawableTargetI *)

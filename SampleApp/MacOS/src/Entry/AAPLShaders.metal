@@ -39,6 +39,13 @@ vertexShader(uint vertexID [[vertex_id]],
 {
     RasterizerData out;
 
+//    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+//    out.position.xy = vertices[vertexID].position.xy;
+//
+//    out.textureCoordinate = vertices[vertexID].textureCoordinate;
+//
+//    return out;
+
     // Index into the array of positions to get the current vertex.
     // The positions are specified in pixel dimensions (i.e. a value of 100
     // is 100 pixels from the origin).
@@ -47,28 +54,27 @@ vertexShader(uint vertexID [[vertex_id]],
     // Get the viewport size and cast to float.
     vector_float2 viewportSize = vector_float2(*viewportSizePointer);
 
-    // Get the desired viewport size; used to calaculate aspect ratio
-    vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
-
-    // Get the target object scale
-    float objectScale = float(*objectScalePointer);
-
-    // Get the object size
-    vector_float2 objectSize = vector_float2(*objectSizePointer);
-
-    // Get the target object translation
-    vector_float2 objectTranslation = vector_float2(*viewportOffset);
-
-    // Calculate aspect ratio & scale
-    float scaleX, scaleY, scale;
-    scaleX = viewportSize.x / (desiredViewportSize.x / objectScale);
-    scaleY = viewportSize.y / (desiredViewportSize.y / objectScale);
-    scale = min(scaleX, scaleY);
-
-    float trscaleX, trscaleY, trscale;
-    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
-    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
-    trscale = min(trscaleX, trscaleY);
+//    // Get the desired viewport size; used to calaculate aspect ratio
+//    vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
+//
+//    // Get the target object scale
+//    float objectScale = float(*objectScalePointer);
+//    // Get the object size
+//    vector_float2 objectSize = vector_float2(*objectSizePointer);
+//
+//    // Get the target object translation
+//    vector_float2 objectTranslation = vector_float2(*viewportOffset);
+//
+//    // Calculate aspect ratio & scale
+//    float scaleX, scaleY, scale;
+//    scaleX = viewportSize.x / (desiredViewportSize.x / objectScale);
+//    scaleY = viewportSize.y / (desiredViewportSize.y / objectScale);
+//    scale = min(scaleX, scaleY);
+//
+//    float trscaleX, trscaleY, trscale;
+//    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
+//    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
+//    trscale = min(trscaleX, trscaleY);
 //
 //    // Calculate offsets due to scaling
 //    // TBD
@@ -78,10 +84,10 @@ vertexShader(uint vertexID [[vertex_id]],
 //    vector_float2 targetObjectSize;
 //    targetObjectSize.xy = objectSize * scale;
 
-    pixelSpacePosition.xy *= scale;
-//
-    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
-    pixelSpacePosition.y += objectTranslation.y * trscale;// - targetViewportSize.x/2;
+//    pixelSpacePosition.xy *= scale;
+////
+//    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
+//    pixelSpacePosition.y += objectTranslation.y * trscale;// - targetViewportSize.x/2;
 
 
 
@@ -143,12 +149,6 @@ vertexShader(uint vertexID [[vertex_id]],
     return out;
 }
 
-//fragment float4 fragmentShader(RasterizerData in [[stage_in]])
-//{
-//    // Return the interpolated color.
-//    return in.color;
-//}
-
 // Fragment function
 fragment float4
 fragmentShader(RasterizerData in [[stage_in]],
@@ -156,15 +156,13 @@ fragmentShader(RasterizerData in [[stage_in]],
                constant float *alphaPointer [[buffer(AAPLTextureIndexBaseAlpha)]]
                )
 {
-//    return in.color;
-
     constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest);
 
     // Sample the texture to obtain a color
     const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
 
-//    colorSample.a = *alphaPointer;
+    colorSample.a = *alphaPointer;
 
     // 3
     if (/*transparencyEnabled && */colorSample.a < 0.1) {
@@ -175,3 +173,37 @@ fragmentShader(RasterizerData in [[stage_in]],
     return float4(colorSample);
 }
 
+
+#pragma mark -
+#pragma mark Final presenter shaders
+
+// Vertex shader which adjusts positions by an aspect ratio and passes texture
+// coordinates through to the rasterizer.
+vertex RasterizerData
+presenterVertexShader(const uint vertexID [[ vertex_id ]],
+                      const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]]
+                      )
+{
+    RasterizerData out;
+
+    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+
+    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;
+    out.position.y = vertices[vertexID].position.y;
+
+    out.textureCoordinate = vertices[vertexID].textureCoordinate;
+
+    return out;
+}
+// Fragment shader that samples a texture and outputs the sampled color.
+fragment float4 presenterFragmentShader(RasterizerData in  [[stage_in]],
+                                        texture2d<float> texture [[texture(AAPLTextureIndexBaseColor)]])
+{
+    constexpr sampler simpleSampler;
+
+    // Sample data from the texture.
+    float4 colorSample = texture.sample(simpleSampler, in.textureCoordinate);
+
+    // Return the color sample as the final color.
+    return colorSample;
+}

@@ -73,7 +73,7 @@ void Engine::Setup()
 
     //m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
     //m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
-    m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
+//    m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
 
     std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
 
@@ -137,7 +137,7 @@ void Engine::FrameDraw()
 
     // Push the buffer texture. All scene will be rendered to a buffer texture
 //    m_engineProvider.RendererTargetPush(m_bufferTexture);
-    m_engineProvider.RendererTargetDrawablePush(m_bufferDrawable.get());
+//    m_engineProvider.RendererTargetDrawablePush(m_bufferDrawable.get());
 
     // Clear the game background
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
@@ -148,13 +148,13 @@ void Engine::FrameDraw()
 
     // Pop the buffer texture. Blit the render to the screen.
 //    m_engineProvider.RendererTargetPop();
-    m_engineProvider.RendererTargetDrawablePop();
+//    m_engineProvider.RendererTargetDrawablePop();
 
-    ApplyScaleTransformations();
+//    ApplyScaleTransformations();
 
     // Draw the back buffer texture
 //    m_engineProvider.DrawTexture(m_bufferTexture, m_viewportOffset.x, m_viewportOffset.y);
-    m_engineProvider.DrawableTargetRender(m_bufferDrawable.get(), m_viewportOffset.x, m_viewportOffset.y);
+//    m_engineProvider.DrawableTargetRender(m_bufferDrawable.get(), m_viewportOffset.x, m_viewportOffset.y);
 
     // Draw the texts
     m_engineProvider.RenderSetScale(1.0f, 1.0f);
@@ -216,24 +216,24 @@ void Engine::RenderSceneTexts()
 
 void Engine::ApplyScaleTransformations()
 {
-    // Apply scaling transformation due to possible window resize
-    int windowW, windowH;
-    m_engineProvider.GetWindowSize(&windowW, &windowH);
-
-    float scaleX, scaleY;
-    scaleX = (float)windowW / (float)m_viewportSize.width;
-    scaleY = (float)windowH / (float)m_viewportSize.height;
-
-    m_viewportScale = std::min(scaleX, scaleY);
-    m_engineProvider.RenderSetScale(m_viewportScale, m_viewportScale);
-
-    int targetWidth = m_viewportSize.width * m_viewportScale;
-    int targetHeight = m_viewportSize.height * m_viewportScale;
-
-    m_viewportOffset = OriginMake(
-        ((windowW - targetWidth) / 2)/m_viewportScale,
-        ((windowH - targetHeight) / 2)/m_viewportScale
-    );
+//    // Apply scaling transformation due to possible window resize
+//    int windowW, windowH;
+//    m_engineProvider.GetWindowSize(&windowW, &windowH);
+//
+//    float scaleX, scaleY;
+//    scaleX = (float)windowW / (float)m_viewportSize.width;
+//    scaleY = (float)windowH / (float)m_viewportSize.height;
+//
+//    m_viewportScale = std::min(scaleX, scaleY);
+//    m_engineProvider.RenderSetScale(m_viewportScale, m_viewportScale);
+//
+//    int targetWidth = m_viewportSize.width * m_viewportScale;
+//    int targetHeight = m_viewportSize.height * m_viewportScale;
+//
+//    m_viewportOffset = OriginMake(
+//        ((windowW - targetWidth) / 2)/m_viewportScale,
+//        ((windowH - targetHeight) / 2)/m_viewportScale
+//    );
 }
 
 void Engine::MouseClicked()

@@ -16,7 +16,8 @@ TextureTargetMetal::TextureTargetMetal(MTL::Device *device, float width, float h
     m_textureDescriptor->setTextureType(MTL::TextureType2D);
     m_textureDescriptor->setWidth(width);
     m_textureDescriptor->setHeight(width);
-    m_textureDescriptor->setPixelFormat(MTL::PixelFormatBC7_RGBAUnorm);
+    m_textureDescriptor->setPixelFormat(MTL::PixelFormatBGRA8Unorm);
+
     m_textureDescriptor->setUsage(MTL::TextureUsageRenderTarget | MTL::TextureUsageShaderRead);
     
     m_texture = device->newTexture(m_textureDescriptor);

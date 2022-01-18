@@ -25,7 +25,6 @@ namespace engine
     {
         MTL::TextureDescriptor *m_textureDescriptor;
         MTL::Texture *m_texture;
-        MTL::SharedTextureHandle *m_sharedTexture;
         TextureMetalOptions m_options;
     public:
         TextureMetal(MTL::Device*, std::string filename);

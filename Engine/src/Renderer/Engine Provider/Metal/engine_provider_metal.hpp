@@ -25,6 +25,11 @@
 namespace engine
 {
 
+    struct EngineProviderMetalTargetDrawableDescriptor
+    {
+
+    };
+
     class EngineProviderMetal : public EngineProviderI
     {
         MTL::Device *m_device;
@@ -92,7 +97,10 @@ namespace engine
         void RenderDrawPoint(int x1, int y1);
 
     private:
+        DrawableTargetI *m_rendererDrawableTop;
         std::vector<DrawableTargetI*> m_rendererDrawableStack;
+
+        MTL::RenderCommandEncoder *GetTopEncoder();
     };
 };
 

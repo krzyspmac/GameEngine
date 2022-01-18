@@ -23,7 +23,7 @@ namespace engine
     public:
         TextureTargetMetal(MTL::Device*, float, float);
         
-        MTL::Texture* GetTexture() { return m_texture; };
+        MTL::Texture* GetMTLTextureHandle() { return m_texture; };
     };
 };
 

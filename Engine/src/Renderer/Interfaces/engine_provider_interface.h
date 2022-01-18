@@ -93,8 +93,9 @@ namespace engine
         virtual std::unique_ptr<DrawableSpriteI> DrawableCreate(SpriteAtlasItemI*, float) = 0;
 
         /// Given a size construct a drawable for the chosen scale.
-        /// The drawable is to be used a target rending object. Its texture should be
-        /// able to accept the current rending pass.
+        /// The drawable is to be used as a target rending object. The curren rendering pass
+        /// should be rendered onto the texture. The drawable object should then be able to be
+        /// rendered using ::DrawableTargetRender.
         virtual std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float) = 0;
 
         /// Render the drawable for the current frame at x, y.
