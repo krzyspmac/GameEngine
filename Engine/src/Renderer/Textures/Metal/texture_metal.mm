@@ -8,23 +8,37 @@
 #include "texture_metal.hpp"
 #include "AAPLImage.h"
 #include "engine.hpp"
+#include <MetalKit/MetalKit.h>
 
 using namespace engine;
+
+#define USES_METAL_TEXTURE_LOADING 1
 
 TextureMetal::TextureMetal(MTL::Device *device, std::string filename)
     : TextureI(nullptr, filename, Vector2Zero)
     , m_texture(nullptr)
 {
+    std::string path = GetMainEngine()->getFileAccess().GetFullPath(filename);
+
+#if USES_METAL_TEXTURE_LOADING
+    m_texture = TextureMetalTGA::CreateFrom(path, device, &m_options.flippedHorizontally, &m_options.flippedVertically);
+    if (m_texture != nullptr)
+    {
+        SetSize(Vector2Make(m_texture->width(), m_texture->height()));
+    }
+    else
+    {
+        SetSize(Vector2Zero);
+    }
+#else
     if (filename.ends_with(".tga"))
     {
-        std::string path = GetMainEngine()->getFileAccess().GetFullPath(filename);
-
         TextureMetalTGA *texture = new TextureMetalTGA(path, &m_options.flippedHorizontally, &m_options.flippedVertically);
         if (texture != nullptr)
         {
             m_textureDescriptor = MTL::TextureDescriptor::alloc()->init();
-            m_textureDescriptor->setPixelFormat(MTL::PixelFormatBGRA8Unorm);
-//            m_textureDescriptor->setResourceOptions(MTL::ResourceStorageModeShared);
+            m_textureDescriptor->setPixelFormat(MTL::PixelFormatBGRA8Unorm_sRGB);
+            m_textureDescriptor->setResourceOptions(MTL::ResourceStorageModeShared);
             m_textureDescriptor->setWidth(texture->GetWidth());
             m_textureDescriptor->setHeight(texture->GetHeight());
             
@@ -53,9 +67,10 @@ TextureMetal::TextureMetal(MTL::Device *device, std::string filename)
     {
         printf("Not a tga file\n");
     }
+#endif
 }
 
 TextureMetal::~TextureMetal()
 {
-    // TODO: memory cleanup
+    m_texture->release();
 }

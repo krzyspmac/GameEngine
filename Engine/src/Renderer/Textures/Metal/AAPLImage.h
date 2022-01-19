@@ -6,6 +6,7 @@ Header for a very simple container for image data
 */
 
 #include "common.h"
+#include <Metal/Metal.hpp>
 
 namespace engine
 {
@@ -16,6 +17,8 @@ namespace engine
         void *m_data;
     public:
         TextureMetalTGA(std::string filename, bool *horizontallyFlipped, bool *verticallyFlipped);
+
+        static MTL::Texture* CreateFrom(std::string filename, MTL::Device *device, bool *horizontallyFlipped, bool *verticallyFlipped);
         
         int GetWidth() { return m_width; };
         int GetHeight() { return m_height; };

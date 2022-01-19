@@ -16,7 +16,7 @@
 		4C255DED2785CA9100D0B30A /* animation_group_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */; };
 		4C9EA022279205C80082EB6A /* texture_target_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA020279205C80082EB6A /* texture_target_metal.cpp */; };
 		4C9EA023279205C80082EB6A /* texture_target_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA021279205C80082EB6A /* texture_target_metal.hpp */; };
-		4C9EA02A2792166F0082EB6A /* texture_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA0282792166F0082EB6A /* texture_metal.cpp */; };
+		4C9EA02A2792166F0082EB6A /* texture_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA0282792166F0082EB6A /* texture_metal.mm */; };
 		4C9EA02B2792166F0082EB6A /* texture_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA0292792166F0082EB6A /* texture_metal.hpp */; };
 		4C9EA03027921D8D0082EB6A /* AAPLImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA02E27921D8D0082EB6A /* AAPLImage.mm */; };
 		4C9EA03127921D8D0082EB6A /* AAPLImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA02F27921D8D0082EB6A /* AAPLImage.h */; };
@@ -165,7 +165,7 @@
 		4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_factory.hpp; sourceTree = "<group>"; };
 		4C9EA020279205C80082EB6A /* texture_target_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_target_metal.cpp; sourceTree = "<group>"; };
 		4C9EA021279205C80082EB6A /* texture_target_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_target_metal.hpp; sourceTree = "<group>"; };
-		4C9EA0282792166F0082EB6A /* texture_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_metal.cpp; sourceTree = "<group>"; };
+		4C9EA0282792166F0082EB6A /* texture_metal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = texture_metal.mm; sourceTree = "<group>"; };
 		4C9EA0292792166F0082EB6A /* texture_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_metal.hpp; sourceTree = "<group>"; };
 		4C9EA02E27921D8D0082EB6A /* AAPLImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLImage.mm; sourceTree = "<group>"; };
 		4C9EA02F27921D8D0082EB6A /* AAPLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLImage.h; sourceTree = "<group>"; };
@@ -332,7 +332,7 @@
 				4C9EA021279205C80082EB6A /* texture_target_metal.hpp */,
 				4C9EA020279205C80082EB6A /* texture_target_metal.cpp */,
 				4C9EA0292792166F0082EB6A /* texture_metal.hpp */,
-				4C9EA0282792166F0082EB6A /* texture_metal.cpp */,
+				4C9EA0282792166F0082EB6A /* texture_metal.mm */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -957,7 +957,7 @@
 				7FB8242127899731008F0F7A /* console_terminal_commands.cpp in Sources */,
 				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
 				7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */,
-				4C9EA02A2792166F0082EB6A /* texture_metal.cpp in Sources */,
+				4C9EA02A2792166F0082EB6A /* texture_metal.mm in Sources */,
 				4C9EA03027921D8D0082EB6A /* AAPLImage.mm in Sources */,
 				4C255DEC2785CA9100D0B30A /* animation_group_factory.cpp in Sources */,
 				7F869FC22780F6F800E8CB01 /* engine_state.cpp in Sources */,

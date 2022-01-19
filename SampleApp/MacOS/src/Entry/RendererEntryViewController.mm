@@ -155,6 +155,9 @@ using namespace engine;
 //    NSWindow * window = NSApplication.sharedApplication.windows[0];
 //    [window setFrame:CGRectMake(0, 0, 1280, 720) display:YES];
 
+    mtkView = (MTKView*)self.view;
+    mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
+
     [self setupEngine];
     [self setupScreenRendingPipeline];
     [self setupOffscreenRenderingPipeline];
@@ -167,7 +170,6 @@ using namespace engine;
 {
     device = MTLCreateSystemDefaultDevice();
 
-    mtkView = (MTKView*)self.view;
     mtkView.device = device;
     mtkView.delegate = self;
 
@@ -216,7 +218,7 @@ using namespace engine;
     texDescriptor.textureType = MTLTextureType2D;
     texDescriptor.width = SCREEN_WIDTH;
     texDescriptor.height = SCREEN_HEIGHT;
-    texDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;//MTLPixelFormatRGBA8Unorm;
+    texDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//MTLPixelFormatRGBA8Unorm;
     texDescriptor.usage = MTLTextureUsageRenderTarget |
                           MTLTextureUsageShaderRead;
 
