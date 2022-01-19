@@ -23,6 +23,17 @@
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
 
+
+@implementation NSWindow (TitleBarHeight)
+
+- (CGFloat) titlebarHeight
+{
+    return self.frame.size.height - [self contentRectForFrameRect: self.frame].size.height;
+}
+
+@end
+
+
 using namespace engine;
 
 @implementation RendererEntryViewController
@@ -64,6 +75,9 @@ using namespace engine;
     engine::SpriteRendererManager *m_sprireRendererManager;
     engine::ConsoleRenderer *m_consoleRenderer;
     engine::Engine *m_engine;
+
+    /** Setup related*/
+    BOOL didSetupEvents;
 }
 
 - (void)setupEngine
@@ -131,6 +145,11 @@ using namespace engine;
     [self prepareEngine];
 
     [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
+}
+
+- (void)viewDidAppear
+{
+    [self setupEvents];
 }
 
 - (void)setupView
@@ -313,6 +332,28 @@ using namespace engine;
     /** Flush the queue */
     [commandBuffer commit];
 };
+
+- (void)setupEvents
+{
+    if (didSetupEvents) { return; };
+
+    [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
+        NSView *view = self.view;
+        NSWindow *window = view.window;
+        CGRect windowFrame = window.frame;
+        windowFrame = [window convertRectToBacking:windowFrame];
+
+        CGPoint locationInWindow = [event locationInWindow];
+        locationInWindow = [view convertPointToBacking:locationInWindow];
+        locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
+
+        return event;
+    }];
+
+//    keyDownMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskKeyDown handler:^(NSEvent *event) {
+
+    didSetupEvents = YES;
+}
 
 @end
 

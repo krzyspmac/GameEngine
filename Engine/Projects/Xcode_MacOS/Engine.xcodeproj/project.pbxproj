@@ -278,6 +278,7 @@
 		7FCAE7D2277F85BF004A6107 /* doxygen_main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = doxygen_main.h; sourceTree = "<group>"; };
 		7FCAE7D4278073B9004A6107 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
 		7FCAE7D5278073B9004A6107 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
+		7FCC129327984DD5002ECABD /* engine_events_provider_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_events_provider_interface.h; sourceTree = "<group>"; };
 		7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = value_animator_factory.cpp; sourceTree = "<group>"; };
 		7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = value_animator_factory.hpp; sourceTree = "<group>"; };
 		7FCC81C02780A2A8003025CB /* value_animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = value_animator.cpp; sourceTree = "<group>"; };
@@ -588,6 +589,7 @@
 			children = (
 				7FC1310B2792FAF20094DF0C /* engine_interface.h */,
 				7FC131182792FAF20094DF0C /* engine_provider_interface.h */,
+				7FCC129327984DD5002ECABD /* engine_events_provider_interface.h */,
 				7FC1310A2792FAF20094DF0C /* console_renderer_interface.h */,
 				7FC131282792FCA30094DF0C /* sprite_draw_interface.h */,
 				7FC131172792FAF20094DF0C /* drawable_interface.h */,

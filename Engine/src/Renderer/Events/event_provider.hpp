@@ -20,6 +20,7 @@ namespace engine
 
     public:
         void DoEvent();
+        void SetMouseLocation(Origin);
         int PollEvent(EVENT *event, SDL_Event *originalEvent);
     };
 

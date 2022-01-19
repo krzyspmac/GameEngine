@@ -48,3 +48,8 @@ static EVENT SDLEvent2EVENT(SDL_Event *event)
 
     return EVENT_NONE;
 }
+
+void EventProvider::SetMouseLocation(Origin)
+{
+
+}

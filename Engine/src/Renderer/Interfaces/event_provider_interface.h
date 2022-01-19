@@ -9,6 +9,7 @@
 #define event_provider_interface_h
 
 #include "common.h"
+#include "common_engine_impl.h"
 
 namespace engine
 {
@@ -23,6 +24,12 @@ namespace engine
         EVENT_QUIT,
     } EVENT;
 
+    /** Declares an abstract interface to provide real events directly into the
+        engine. The platform code should setup its own processing and pass those
+        events to the event provider.
+
+        During one frame multiple events can be passed.
+     */
     class EventProviderI
     {
     public:
@@ -30,6 +37,10 @@ namespace engine
 
     public:
         virtual void DoEvent() = 0;
+
+        /** Updates the current mouse location if applicable. Also sends out
+            a mouse moved event. */
+        virtual void SetMouseLocation(Origin) = 0;
 
         /// Polls the next event and puts in into
         /// &event. Returns 1 if more events need
