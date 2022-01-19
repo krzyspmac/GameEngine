@@ -381,7 +381,15 @@ using namespace engine;
     locationInWindow = [view convertPointToBacking:locationInWindow];
     locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
 
-    m_engine->getEventProvider().PushMouseLocation({(int)locationInWindow.x, (int)locationInWindow.y});
+    auto& viewport = m_engine->GetViewport();
+    float xPer = locationInWindow.x / windowFrame.size.width;
+    float yPer = locationInWindow.y / windowFrame.size.height;
+
+    Origin locationInViewport;
+    locationInViewport.x = (int)(xPer * (float)viewport.width);
+    locationInViewport.y = (int)(yPer * (float)viewport.height);
+
+    m_engine->getEventProvider().PushMouseLocation(locationInViewport);
 }
 
 @end
