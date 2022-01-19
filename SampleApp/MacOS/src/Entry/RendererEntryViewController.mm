@@ -23,18 +23,11 @@
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
 
-
-@implementation NSWindow (TitleBarHeight)
-
-- (CGFloat) titlebarHeight
-{
-    return self.frame.size.height - [self contentRectForFrameRect: self.frame].size.height;
-}
-
-@end
-
-
 using namespace engine;
+
+@interface NSWindow (TitleBarHeight)
+- (CGFloat) titlebarHeight;
+@end
 
 @implementation RendererEntryViewController
 {
@@ -81,6 +74,30 @@ using namespace engine;
 
     /** Events */
     NSTrackingArea *mouseTrackingArea;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    [self setupView];
+    [self setupScreenRendingPipeline];
+    [self setupOffscreenRenderingPipeline];
+    [self setupEngine];
+    [self prepareEngine];
+
+    [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
+}
+
+- (void)viewDidAppear
+{
+    [self setupEvents];
+}
+
+- (void)setupView
+{
+    mtkView = (MTKView*)self.view;
+    mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
 }
 
 - (void)setupEngine
@@ -130,35 +147,14 @@ using namespace engine;
                           , viewportSize
                           );
 
+    m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
+    m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
+    m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
 }
 
 - (void)prepareEngine
 {
     m_engine->Setup();
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-
-    [self setupView];
-    [self setupEngine];
-    [self setupScreenRendingPipeline];
-    [self setupOffscreenRenderingPipeline];
-    [self prepareEngine];
-
-    [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
-}
-
-- (void)viewDidAppear
-{
-    [self setupEvents];
-}
-
-- (void)setupView
-{
-    mtkView = (MTKView*)self.view;
-    mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
 }
 
 - (void)setupScreenRendingPipeline
@@ -197,10 +193,6 @@ using namespace engine;
     }
 
     commandQueue = [device newCommandQueue];
-
-    m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
-    m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
-    m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
 }
 
 - (void)setupOffscreenRenderingPipeline
@@ -347,30 +339,16 @@ using namespace engine;
 {
     if (didSetupEvents) { return; };
 
-//    [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
-//        NSView *view = self.view;
-//        NSWindow *window = view.window;
-//        CGRect windowFrame = window.frame;
-//        windowFrame = [window convertRectToBacking:windowFrame];
-//
-//        CGPoint locationInWindow = [event locationInWindow];
-//        locationInWindow = [view convertPointToBacking:locationInWindow];
-//        locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
-//
-//        m_engine->getEventProvider().PushMouseLocation({(int)locationInWindow.x, (int)locationInWindow.y});
-//
-//        return event;
-//    }];
-
     [self setupMouseClickEvents];
     [self setupMouseMovedEvents];
+
     didSetupEvents = YES;
 }
 
 - (void)setupMouseClickEvents
 {
     [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseUp handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
-        m_engine->getEventProvider().PushMouseLeftUp();
+        self->m_engine->getEventProvider().PushMouseLeftUp();
         return event;
     }];
 }
@@ -378,11 +356,9 @@ using namespace engine;
 - (void)setupMouseMovedEvents
 {
     NSView *view = self.view;
-
     if (mouseTrackingArea)
     {
         [view removeTrackingArea: mouseTrackingArea];
-        mouseTrackingArea = nil;
     }
 
     NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:view.bounds
@@ -431,3 +407,12 @@ using namespace engine;
 @end
 
 #endif
+
+#pragma mark - NSWindowAdditions
+
+@implementation NSWindow (TitleBarHeight)
+- (CGFloat) titlebarHeight
+{
+    return self.frame.size.height - [self contentRectForFrameRect: self.frame].size.height;
+}
+@end
