@@ -8,9 +8,6 @@
 #import "RendererEntryViewController.h"
 #include "AAPLShaderTypes.h"
 
-//#define NS_PRIVATE_IMPLEMENTATION
-//#define CA_PRIVATE_IMPLEMENTATION
-//#define MTL_PRIVATE_IMPLEMENTATION
 #include <Metal/Metal.hpp>
 #include <MetalKit/MetalKit.h>
 
@@ -41,8 +38,6 @@ using namespace engine;
     id<MTLRenderPipelineState> pipelineState;
 
     /** Offscreen rendering */
-    id<MTLLibrary> oscLibrary;
-//    TextureTargetMetal *oscTargetTexture;
     id<MTLTexture> oscTargetTexture;
     id<MTLFunction> oscVertexFunction;
     id<MTLFunction> oscFragmentFunction;
@@ -129,41 +124,19 @@ using namespace engine;
 {
     [super viewDidLoad];
 
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-//    NSWindow * window = self.windowController.window;
-//    [window setContentSize:NSMakeSize(SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    NSRect windowFrame = window.frame;
-//    windowFrame.size.width = SCREEN_WIDTH;
-//    windowFrame.size.width = SCREEN_HEIGHT;
-//    [window setFrame:windowFrame display:YES];
-//
-//    NSRect viewFrame = self.view.frame;
-//    viewFrame.size.width = SCREEN_WIDTH;
-//    viewFrame.size.width = SCREEN_HEIGHT;
-//    [self.view setFrame:viewFrame];
-
-//    self.windowController.window.minSize = NSMakeSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-//    NSWindow *window = self.windowController.window;
-//    CGFloat scale = [NSScreen mainScreen].backingScaleFactor;
-//    CGSize gameSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
-//    gameSize.width *= scale;
-//    gameSize.height *= scale;
-//    window.minSize = gameSize;
-#endif
-
-//    NSWindow * window = NSApplication.sharedApplication.windows[0];
-//    [window setFrame:CGRectMake(0, 0, 1280, 720) display:YES];
-
-    mtkView = (MTKView*)self.view;
-    mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
-
+    [self setupView];
     [self setupEngine];
     [self setupScreenRendingPipeline];
     [self setupOffscreenRenderingPipeline];
     [self prepareEngine];
 
     [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
+}
+
+- (void)setupView
+{
+    mtkView = (MTKView*)self.view;
+    mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
 }
 
 - (void)setupScreenRendingPipeline
@@ -210,7 +183,6 @@ using namespace engine;
 
 - (void)setupOffscreenRenderingPipeline
 {
-//    oscLibrary = [device newDefaultLibrary];
     oscVertexFunction = [library newFunctionWithName:@"vertexShader"];
     oscFragmentFunction = [library newFunctionWithName:@"fragmentShader"];
 
@@ -224,10 +196,7 @@ using namespace engine;
 
     oscTargetTexture = [device newTextureWithDescriptor:texDescriptor];
 
-//    oscTargetTexture = (TextureTargetMetal*)m_engineProvider->CreateTargetTexture(SCREEN_WIDTH, SCREEN_HEIGHT);
-
     oscRenderPassDescriptor = [MTLRenderPassDescriptor new];
-//    oscRenderPassDescriptor.colorAttachments[0].texture = (__bridge id<MTLTexture>)(oscTargetTexture->GetMTLTextureHandle());
     oscRenderPassDescriptor.colorAttachments[0].texture = oscTargetTexture;
     oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;//MTLLoadActionLoad;//MTLLoadActionClear;
     oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 1, 1);
@@ -304,14 +273,6 @@ using namespace engine;
 
         static const AAPLVertex quadVertices[] =
         {
-//            // Positions     , Texture coordinates
-//            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
-//            { { -0.5,  -0.5 },  { 0.0, 1.0 } },
-//            { { -0.5,   0.5 },  { 0.0, 0.0 } },
-//
-//            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
-//            { { -0.5,   0.5 },  { 0.0, 0.0 } },
-//            { {  0.5,   0.5 },  { 1.0, 0.0 } },
             // Positions     , Texture coordinates
             { {  1,  -1 },  { 1.0, 1.0 } },
             { { -1,  -1 },  { 0.0, 1.0 } },
@@ -366,25 +327,11 @@ using namespace engine;
 - (void)windowWillLoad
 {
     [super windowWillLoad];
-
-
-
 }
 
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-
-//    NSWindow *window = self.window;
-//    CGFloat scale = [NSScreen mainScreen].backingScaleFactor;
-//    CGSize gameSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
-////    gameSize.width *= scale;
-////    gameSize.height *= scale;
-//    window.minSize = gameSize;
-//
-//    NSRect windowRect = window.frame;
-//    windowRect.size = gameSize;
-//    [window setFrame:window display:YES];
 }
 
 @end

@@ -48,7 +48,8 @@ Engine::Engine(EngineProviderI &engineProvider,
                ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-: EngineI(engineProvider, textureManager, fileAccess, fontManager, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize), m_viewportScale(1)
+    : EngineI(engineProvider, textureManager, fileAccess, fontManager, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize)
+    , m_viewportScale(1)
 {
     sharedEngine = this;
     SetCapRate(60);
@@ -57,7 +58,6 @@ Engine::Engine(EngineProviderI &engineProvider,
 
 Engine::~Engine()
 {
-//    delete m_bufferTexture;
 }
 
 void Engine::Setup()
@@ -70,10 +70,6 @@ void Engine::Setup()
 #if SHOW_FPS
     m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 1);
 #endif
-
-    //m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
-    //m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
-//    m_bufferDrawable = m_engineProvider.DrawableTargetCreate(m_viewportSize.width, m_viewportSize.height);
 
     std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
 
@@ -137,10 +133,6 @@ void Engine::FrameDraw()
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
 
-    // Push the buffer texture. All scene will be rendered to a buffer texture
-//    m_engineProvider.RendererTargetPush(m_bufferTexture);
-//    m_engineProvider.RendererTargetDrawablePush(m_bufferDrawable.get());
-
     // Clear the game background
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
@@ -148,18 +140,7 @@ void Engine::FrameDraw()
     // Render scene
     RenderScene();
 
-    // Pop the buffer texture. Blit the render to the screen.
-//    m_engineProvider.RendererTargetPop();
-//    m_engineProvider.RendererTargetDrawablePop();
-
-//    ApplyScaleTransformations();
-
-    // Draw the back buffer texture
-//    m_engineProvider.DrawTexture(m_bufferTexture, m_viewportOffset.x, m_viewportOffset.y);
-//    m_engineProvider.DrawableTargetRender(m_bufferDrawable.get(), m_viewportOffset.x, m_viewportOffset.y);
-
     // Draw the texts
-//    m_engineProvider.RenderSetScale(1.0f, 1.0f);
     RenderSceneTexts();
 
     // Render the current stack
@@ -189,8 +170,6 @@ void Engine::MeasurePerformanceEnd()
     m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
     m_milliseconds = m_seconds * 1000;
     m_previousFps = 1.0f / m_seconds;
-
-    //m_engineProvider.Delay(MAX(0, floor(m_fpsCapInverse - m_milliseconds)));
 }
 
 void Engine::RenderScene()

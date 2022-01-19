@@ -77,8 +77,6 @@ namespace engine
         int m_fpsCap;
         double m_fpsCapInverse;
 
-        //TextureTargetI *m_bufferTexture;
-        std::unique_ptr<DrawableTargetI> m_bufferDrawable;
         float m_viewportScale; // scaled to fit the window
         Origin m_viewportOffset;
 

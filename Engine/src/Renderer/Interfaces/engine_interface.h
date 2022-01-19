@@ -91,10 +91,11 @@ namespace engine
 
     /// States
     public:
+
+        /** Get the current viewport size */
         Size &GetViewport() { return m_viewportSize; };
 
-        Size &GetRendererOutputSize() { return m_rendererOutputSize; };
-
+        /** Set the viewport scale to match the current screen the engine in on */
         void SetViewportScale(float val) { m_engineProvider.SetViewportScale(val); m_viewportScale = val; };
 
     /// Behaviour
