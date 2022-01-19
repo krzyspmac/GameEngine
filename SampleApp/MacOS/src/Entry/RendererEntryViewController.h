@@ -40,6 +40,10 @@
 #include "engine_provider_metal.hpp"
 
 @interface RendererEntryViewController : PlatformViewController <MTKViewDelegate>
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
+@property (weak) IBOutlet NSWindowController *windowController;
+#endif
 @end
 
 #endif

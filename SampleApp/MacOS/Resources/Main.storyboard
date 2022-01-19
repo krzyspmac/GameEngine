@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="hfS-4j-oLb">
             <objects>
-                <windowController showSeguePresentationStyle="single" id="d30-I0-q9q" sceneMemberID="viewController">
+                <windowController showSeguePresentationStyle="single" id="d30-I0-q9q" customClass="GameWindowController" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="zpD-J4-kZE">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -40,6 +40,9 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
+                    <connections>
+                        <outlet property="windowController" destination="d30-I0-q9q" id="wTG-b1-JDp"/>
+                    </connections>
                 </menu>
                 <menu id="z8G-Da-GnY">
                     <items>
@@ -62,13 +65,13 @@
             <objects>
                 <viewController id="Ks1-I6-okK" customClass="RendererEntryViewController" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="OVM-le-4zR" customClass="MTKView">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </view>
                 </viewController>
                 <customObject id="KUP-wt-vKn" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="500" y="-164"/>
+            <point key="canvasLocation" x="740" y="-165"/>
         </scene>
         <!--Application-->
         <scene sceneID="rFW-eR-3Td">

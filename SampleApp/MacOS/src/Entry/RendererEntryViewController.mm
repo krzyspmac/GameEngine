@@ -23,9 +23,8 @@
 
 #include "AAPLShaderTypes.h"
 
-#define SCREEN_WIDTH  1280
-#define SCREEN_HEIGHT 720
-#define ASPECT_RATIO (640/480)
+#define SCREEN_WIDTH  (1280)
+#define SCREEN_HEIGHT (720)
 
 using namespace engine;
 
@@ -53,6 +52,7 @@ using namespace engine;
 
     id<MTLCommandQueue> commandQueue;
     vector_float2 viewportSize;
+    vector_float2 desiredViewport;
     MTKView *mtkView;
 
     /** Engine Related */
@@ -127,7 +127,31 @@ using namespace engine;
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
+//    NSWindow * window = self.windowController.window;
+//    [window setContentSize:NSMakeSize(SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    NSRect windowFrame = window.frame;
+//    windowFrame.size.width = SCREEN_WIDTH;
+//    windowFrame.size.width = SCREEN_HEIGHT;
+//    [window setFrame:windowFrame display:YES];
+//
+//    NSRect viewFrame = self.view.frame;
+//    viewFrame.size.width = SCREEN_WIDTH;
+//    viewFrame.size.width = SCREEN_HEIGHT;
+//    [self.view setFrame:viewFrame];
+
+//    self.windowController.window.minSize = NSMakeSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+//    NSWindow *window = self.windowController.window;
+//    CGFloat scale = [NSScreen mainScreen].backingScaleFactor;
+//    CGSize gameSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+//    gameSize.width *= scale;
+//    gameSize.height *= scale;
+//    window.minSize = gameSize;
+#endif
+
 //    NSWindow * window = NSApplication.sharedApplication.windows[0];
 //    [window setFrame:CGRectMake(0, 0, 1280, 720) display:YES];
 
@@ -204,7 +228,7 @@ using namespace engine;
 //    oscRenderPassDescriptor.colorAttachments[0].texture = (__bridge id<MTLTexture>)(oscTargetTexture->GetMTLTextureHandle());
     oscRenderPassDescriptor.colorAttachments[0].texture = oscTargetTexture;
     oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-    oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 1, 1, 1);
+    oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 1, 1);
     oscRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
 
     MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
@@ -226,7 +250,10 @@ using namespace engine;
 {
     viewportSize.x = size.width;
     viewportSize.y = size.height;
-    NSLog(@"New size = %@\n", NSStringFromSize(size));
+
+    desiredViewport.x = SCREEN_WIDTH;
+    desiredViewport.y = SCREEN_HEIGHT;
+    printf("size = %f, %f\n", size.width, size.height);
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view
@@ -265,34 +292,40 @@ using namespace engine;
 
         static const AAPLVertex quadVertices[] =
         {
+//            // Positions     , Texture coordinates
+//            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
+//            { { -0.5,  -0.5 },  { 0.0, 1.0 } },
+//            { { -0.5,   0.5 },  { 0.0, 0.0 } },
+//
+//            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
+//            { { -0.5,   0.5 },  { 0.0, 0.0 } },
+//            { {  0.5,   0.5 },  { 1.0, 0.0 } },
             // Positions     , Texture coordinates
-            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
-            { { -0.5,  -0.5 },  { 0.0, 1.0 } },
-            { { -0.5,   0.5 },  { 0.0, 0.0 } },
+            { {  1,  -1 },  { 1.0, 1.0 } },
+            { { -1,  -1 },  { 0.0, 1.0 } },
+            { { -1,   1 },  { 0.0, 0.0 } },
 
-            { {  0.5,  -0.5 },  { 1.0, 1.0 } },
-            { { -0.5,   0.5 },  { 0.0, 0.0 } },
-            { {  0.5,   0.5 },  { 1.0, 0.0 } },
+            { {  1,  -1 },  { 1.0, 1.0 } },
+            { { -1,   1 },  { 0.0, 0.0 } },
+            { {  1,   1 },  { 1.0, 0.0 } },
         };
 
         [encoder setVertexBytes:&quadVertices
                          length:sizeof(quadVertices)
                         atIndex:AAPLVertexInputIndexVertices];
 
-//        float _aspectRatio = 1;
-//
-//        [encoder setVertexBytes:&_aspectRatio
-//                         length:sizeof(_aspectRatio)
-//                        atIndex:AAPLVertexInputIndexAspectRatio];
+        [encoder setVertexBytes:&viewportSize
+                         length:sizeof(viewportSize)
+                        atIndex:AAPLVertexInputIndexViewportSize];
 
-//        [encoder setVertexBytes:&viewportSize
-//                         length:sizeof(viewportSize)
-//                        atIndex:AAPLVertexInputIndexViewportSize];
+        [encoder setVertexBytes:&desiredViewport
+                         length:sizeof(desiredViewport)
+                        atIndex:AAPLVertexInputIndexViewportTarget];
 
-            // Set the offscreen texture as the source texture.
+        // Set the offscreen texture as the source texture.
         [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
 
-            // Draw quad with rendered texture.
+        // Draw quad with rendered texture.
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle
                     vertexStart:0
                     vertexCount:6];
@@ -309,3 +342,39 @@ using namespace engine;
 };
 
 @end
+
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
+
+@interface GameWindowController: NSWindowController
+@end
+
+@implementation GameWindowController
+
+- (void)windowWillLoad
+{
+    [super windowWillLoad];
+
+
+
+}
+
+- (void)windowDidLoad
+{
+    [super windowDidLoad];
+
+//    NSWindow *window = self.window;
+//    CGFloat scale = [NSScreen mainScreen].backingScaleFactor;
+//    CGSize gameSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT);
+////    gameSize.width *= scale;
+////    gameSize.height *= scale;
+//    window.minSize = gameSize;
+//
+//    NSRect windowRect = window.frame;
+//    windowRect.size = gameSize;
+//    [window setFrame:window display:YES];
+}
+
+@end
+
+#endif

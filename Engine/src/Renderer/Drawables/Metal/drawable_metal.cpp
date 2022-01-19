@@ -74,6 +74,10 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
 
     // Store the texture.
     m_texture = metalTextrue;
+
+    // Store the size of the object
+    m_size.x = (float)atlasItem->GetWidth();
+    m_size.y = (float)atlasItem->GetHeight();
 }
 
 DrawableMetal::~DrawableMetal()

@@ -54,16 +54,19 @@ vertexShader(uint vertexID [[vertex_id]],
     // Get the viewport size and cast to float.
     vector_float2 viewportSize = vector_float2(*viewportSizePointer);
 
-//    // Get the desired viewport size; used to calaculate aspect ratio
-//    vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
-//
-//    // Get the target object scale
-//    float objectScale = float(*objectScalePointer);
-//    // Get the object size
-//    vector_float2 objectSize = vector_float2(*objectSizePointer);
-//
-//    // Get the target object translation
-//    vector_float2 objectTranslation = vector_float2(*viewportOffset);
+    // Get the target object scale
+    float objectScale = float(*objectScalePointer);
+
+    // Get the object size
+    vector_float2 objectSize = vector_float2(*objectSizePointer);
+
+    // Calculate object size scaled
+    vector_float2 objectSizeScaled = objectSize.xy * objectScale;
+
+    // Get the target object translation
+    vector_float2 objectTranslation = vector_float2(*viewportOffset);
+    objectTranslation.xy *= 2;
+
 //
 //    // Calculate aspect ratio & scale
 //    float scaleX, scaleY, scale;
@@ -84,63 +87,32 @@ vertexShader(uint vertexID [[vertex_id]],
 //    vector_float2 targetObjectSize;
 //    targetObjectSize.xy = objectSize * scale;
 
-//    pixelSpacePosition.xy *= scale;
-////
-//    pixelSpacePosition.x += objectTranslation.x * trscale;// - targetViewportSize.x/2;
-//    pixelSpacePosition.y += objectTranslation.y * trscale;// - targetViewportSize.x/2;
+//    pixelSpacePosition.x += (objectSize.x * objectScale) / 2;
 
+//    pixelSpacePosition.x -= (viewportSize.x - (objectSize.x * objectScale)) / 2;
 
+    vector_float2 objectSizeHalf = objectSize.xy / 2.0f;
 
+    float leading = objectSize.x/2;
+    float top = objectSize.y/2;
 
+    // Sacle the object
+    pixelSpacePosition.xy *= objectScale;
 
+    // Translate to top-left corner
+    pixelSpacePosition.x -= (viewportSize.x - objectSizeScaled.x)/2;
+    pixelSpacePosition.y += (viewportSize.y - objectSizeScaled.y)/2;
 
-
-//    pixelSpacePosition.x -= (viewportSize.x - targetViewportSize.x)/2;
-
-//    float offsetXToEdge = viewportSize.x/2 - ((targetObjectSize.x)/2);
-//
-//    float offsetXToViewport = (viewportSize.x - targetViewportSize.x) / 2;
-//
-//
-//    float pos = objectTranslation.x * scale;
-//
-//    pixelSpacePosition.x -= offsetXToEdge;// + (viewportSize.x/2 - targetObjectSize.x/2);
-//    pixelSpacePosition.x -= targetObjectSize.x/2;
-//
-//    pixelSpacePosition.x += pos;
-//
-//    pixelSpacePosition.x += targetObjectSize.x/2;
-//    pixelSpacePosition.x += offsetXToEdge;
-
-    
-//    pixelSpacePosition.x += pos;
-    
-//    pixelSpacePosition.x -= offsetXToEdge;
-    
-//    pixelSpacePosition.x += targetObjectSize.x/2;
-//    pixelSpacePosition.x += 1280 / scale;
-//    pixelSpacePosition.x -= targetObjectSize.x / 2;
-//
-//    pixelSpacePosition.x += objectTranslation.x * scale;
-//
-//    pixelSpacePosition.x += targetObjectSize.x / 2;
-//    pixelSpacePosition.x += offsetXToEdge;
-    
-//    pixelSpacePosition.x += objectTranslation.x * scale;
-//    pixelSpacePosition.x -=
-//    pixelSpacePosition.x += (objectTranslation.x * scale / 1);
-//    pixelSpacePosition.x -= viewportSize.x / 2;
-//    pixelSpacePosition.x -= (objectSize.x * objectScale * scale);
-//    pixelSpacePosition.x -= objectSize.x / 2;
-//    pixelSpacePosition.x += objectTranslation.x * scale;
-//    pixelSpacePosition.x += offsetXToEdge;
-
-//    pixelSpacePosition.x = pixelSpacePosition.x + objectTranslation.x * scale / 2;
+    // Apply translation
+    pixelSpacePosition.x += objectTranslation.x;
+    pixelSpacePosition.y -= objectTranslation.y;
 
     // To convert from positions in pixel space to positions in clip-space,
     //  divide the pixel coordinates by half the size of the viewport.
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+//    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
     out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
+
 
     // Pass the input color directly to the rasterizer.
 //    out.color = vertices[vertexID].color;
@@ -162,7 +134,7 @@ fragmentShader(RasterizerData in [[stage_in]],
     // Sample the texture to obtain a color
     const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
 
-    colorSample.a = *alphaPointer;
+//    colorSample.a = *alphaPointer;
 
     // 3
     if (/*transparencyEnabled && */colorSample.a < 0.1) {
@@ -181,15 +153,37 @@ fragmentShader(RasterizerData in [[stage_in]],
 // coordinates through to the rasterizer.
 vertex RasterizerData
 presenterVertexShader(const uint vertexID [[ vertex_id ]],
-                      const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]]
+                      const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
+                      constant vector_float2 *viewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]],
+                      constant vector_float2 *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportTarget)]]
                       )
 {
     RasterizerData out;
 
-    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+    // Index into the array of positions to get the current vertex.
+    // The positions are specified in pixel dimensions (i.e. a value of 100
+    // is 100 pixels from the origin).
+    float2 pixelSpacePosition = vertices[vertexID].position.xy;
 
-    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;
-    out.position.y = vertices[vertexID].position.y;
+    // Get the viewport size and cast to float.
+    vector_float2 viewportSize = vector_float2(*viewportSizePointer);
+
+    // Get the desired viewport size; used to calaculate aspect ratio
+    vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
+
+    // Calculate aspect ratio & scale
+    float scaleX, scaleY, scale;
+    scaleX = viewportSize.x / desiredViewportSize.x;
+    scaleY = viewportSize.y / desiredViewportSize.y;
+    scale = min(scaleX, scaleY);
+
+    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+//    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
+    out.position.xy = pixelSpacePosition.xy;// * (scale / 2);
+
+//    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
+//    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;
+//    out.position.y = vertices[vertexID].position.y;
 
     out.textureCoordinate = vertices[vertexID].textureCoordinate;
 
