@@ -120,7 +120,7 @@ void RendererEntrySDL::prepare()
 
 void RendererEntrySDL::doInput()
 {
-    if (m_engine->doInput())
+    if (m_engine->ProcessEvents())
     {
         destroy();
         exit(0);

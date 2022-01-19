@@ -22,7 +22,39 @@ namespace engine
         EVENT_MOUSEUP,
 
         EVENT_QUIT,
-    } EVENT;
+    } EventType;
+
+    /** Declares an abstract interface for different type of events received from
+        the platform handlers. */
+    class EventI
+    {
+        EventType m_eventType;
+        bool m_inUse;
+    public:
+        EventI(EventType type)
+            : m_eventType(type)
+            , m_inUse(false)
+        { };
+        const EventType& GetType() { return m_eventType; };
+        bool& GetInUse() { return m_inUse; };
+    };
+
+    class EventMouseMove: public EventI
+    {
+        Origin m_location;
+    public:
+        EventMouseMove(Origin location)
+            : EventI(EVENT_MOUSEMOVE)
+            , m_location(location)
+        { };
+        Origin& GetLocation() { return m_location; };
+    };
+
+    class EventMouseLeftUp: public EventI
+    {
+    public:
+        EventMouseLeftUp() : EventI(EVENT_MOUSEUP) { };
+    };
 
     /** Declares an abstract interface to provide real events directly into the
         engine. The platform code should setup its own processing and pass those
@@ -36,16 +68,15 @@ namespace engine
         EventProviderI() { };
 
     public:
-        virtual void DoEvent() = 0;
-
         /** Updates the current mouse location if applicable. Also sends out
             a mouse moved event. */
-        virtual void SetMouseLocation(Origin) = 0;
+        virtual void PushMouseLocation(Origin) = 0;
 
-        /// Polls the next event and puts in into
-        /// &event. Returns 1 if more events need
-        /// be processed or 0 if it's done.
-        virtual int PollEvent(EVENT *event, SDL_Event *originalEvent) = 0;
+        /** Left mouse button up */
+        virtual void PushMouseLeftUp() = 0;
+
+        /** Poll an event from the queue. */
+        virtual bool PollEvent(EventI **outEvent) = 0;
     };
 
 }; // namespace engine

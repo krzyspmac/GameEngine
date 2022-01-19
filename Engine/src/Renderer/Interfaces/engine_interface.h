@@ -83,7 +83,7 @@ namespace engine
 
         /// Process the inputs from the game.
         /// Return != 0 do quit the application.
-        virtual int doInput() = 0;
+        virtual int ProcessEvents() = 0;
 
         /** The main `update` method. Engine magic happens there.
          */
@@ -97,6 +97,9 @@ namespace engine
 
         /** Set the viewport scale to match the current screen the engine in on */
         void SetViewportScale(float val) { m_engineProvider.SetViewportScale(val); m_viewportScale = val; };
+
+        /** Get Mouse position */
+        engine::Origin& GetMousPosition() { return m_mousePosition; };
 
     /// Behaviour
     public:
@@ -144,6 +147,9 @@ namespace engine
 
         ///
         EventsManager& getEventsManager() { return m_eventsManager; };
+
+        ///
+        EventProviderI& getEventProvider() { return m_eventProvider; };
 
         ///
         Time& getTime() { return m_time; };

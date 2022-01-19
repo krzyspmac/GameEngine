@@ -88,13 +88,8 @@ void Engine::Setup()
     m_mousePosition.x = 0;
     m_mousePosition.y = 0;
     m_eventsManager.RegisterMouseMovedEvents(EventHolderMouseMoved([&](Origin *origin){
-        m_mousePosition = *origin;
-
-        m_mousePosition.x /= m_viewportScale;
-        m_mousePosition.y /= m_viewportScale;
-
-        m_mousePosition.x -= m_viewportOffset.x;
-        m_mousePosition.y -= m_viewportOffset.y;
+        m_mousePosition.x = origin->x;
+        m_mousePosition.y = origin->y;
     }));
 
 #if SHOW_CONSOLE
@@ -108,7 +103,7 @@ void Engine::SetCapRate(int fps)
     m_fpsCapInverse = (1.0f / (float)fps) * 1000.f;
 }
 
-int Engine::doInput()
+int Engine::ProcessEvents()
 {
     int result = m_eventsManager.DoEvents();
     return result;

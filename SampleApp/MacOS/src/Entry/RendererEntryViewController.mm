@@ -78,6 +78,9 @@ using namespace engine;
 
     /** Setup related*/
     BOOL didSetupEvents;
+
+    /** Events */
+    NSTrackingArea *mouseTrackingArea;
 }
 
 - (void)setupEngine
@@ -252,12 +255,17 @@ using namespace engine;
     desiredViewport.x = SCREEN_WIDTH;
     desiredViewport.y = SCREEN_HEIGHT;
     printf("size = %f, %f\n", size.width, size.height);
+
+    [self setupMouseMovedEvents];
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
     /** Update the engine if needed*/
     m_engine->SetViewportScale(self.view.window.backingScaleFactor);
+
+    /** Process events */
+    m_engine->ProcessEvents();
 
     /** Create a command buffer*/
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
@@ -333,26 +341,71 @@ using namespace engine;
     [commandBuffer commit];
 };
 
+#pragma mark - Events Handlers setup
+
 - (void)setupEvents
 {
     if (didSetupEvents) { return; };
 
-    [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
-        NSView *view = self.view;
-        NSWindow *window = view.window;
-        CGRect windowFrame = window.frame;
-        windowFrame = [window convertRectToBacking:windowFrame];
+//    [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskMouseMoved handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
+//        NSView *view = self.view;
+//        NSWindow *window = view.window;
+//        CGRect windowFrame = window.frame;
+//        windowFrame = [window convertRectToBacking:windowFrame];
+//
+//        CGPoint locationInWindow = [event locationInWindow];
+//        locationInWindow = [view convertPointToBacking:locationInWindow];
+//        locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
+//
+//        m_engine->getEventProvider().PushMouseLocation({(int)locationInWindow.x, (int)locationInWindow.y});
+//
+//        return event;
+//    }];
 
-        CGPoint locationInWindow = [event locationInWindow];
-        locationInWindow = [view convertPointToBacking:locationInWindow];
-        locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
+    [self setupMouseClickEvents];
+    [self setupMouseMovedEvents];
+    didSetupEvents = YES;
+}
 
+- (void)setupMouseClickEvents
+{
+    [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseUp handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
+        m_engine->getEventProvider().PushMouseLeftUp();
         return event;
     }];
+}
 
-//    keyDownMonitor = [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskKeyDown handler:^(NSEvent *event) {
+- (void)setupMouseMovedEvents
+{
+    NSView *view = self.view;
 
-    didSetupEvents = YES;
+    if (mouseTrackingArea)
+    {
+        [view removeTrackingArea: mouseTrackingArea];
+        mouseTrackingArea = nil;
+    }
+
+    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:view.bounds
+                                                        options:NSTrackingActiveInKeyWindow|NSTrackingMouseMoved
+                                                          owner:self
+                                                       userInfo:nil];
+    [view addTrackingArea:area];
+}
+
+#pragma mark - Events Handlers
+
+- (void)mouseMoved:(NSEvent *)event
+{
+    CGPoint   locationInWindow = [event locationInWindow];
+    NSView    *view = self.view;
+    NSWindow  *window = view.window;
+    CGRect    windowFrame = window.frame;
+
+    windowFrame = [window convertRectToBacking:windowFrame];
+    locationInWindow = [view convertPointToBacking:locationInWindow];
+    locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
+
+    m_engine->getEventProvider().PushMouseLocation({(int)locationInWindow.x, (int)locationInWindow.y});
 }
 
 @end

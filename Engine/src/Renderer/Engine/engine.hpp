@@ -45,8 +45,8 @@ namespace engine
 
     public:
         void Setup();
+        int ProcessEvents();
         void FrameBegin();
-        int doInput();
         void FrameDraw();
 
     public:
