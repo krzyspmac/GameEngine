@@ -229,7 +229,7 @@ using namespace engine;
     oscRenderPassDescriptor = [MTLRenderPassDescriptor new];
 //    oscRenderPassDescriptor.colorAttachments[0].texture = (__bridge id<MTLTexture>)(oscTargetTexture->GetMTLTextureHandle());
     oscRenderPassDescriptor.colorAttachments[0].texture = oscTargetTexture;
-    oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
+    oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;//MTLLoadActionLoad;//MTLLoadActionClear;
     oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 1, 1);
     oscRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
 
@@ -238,8 +238,16 @@ using namespace engine;
     oscRenderePipelineDescriptor.sampleCount = 1;
     oscRenderePipelineDescriptor.vertexFunction = oscVertexFunction;
     oscRenderePipelineDescriptor.fragmentFunction = oscFragmentFunction;
-    oscRenderePipelineDescriptor.colorAttachments[0].pixelFormat = oscTargetTexture.pixelFormat;
-//    oscRenderePipelineDescriptor.vertexBuffers[AAPLVertexInputIndexVertices].mutability = MTLMutabilityImmutable;
+
+    MTLRenderPipelineColorAttachmentDescriptor *colorAttch = oscRenderePipelineDescriptor.colorAttachments[0];
+    colorAttch.pixelFormat = oscTargetTexture.pixelFormat;
+    colorAttch.blendingEnabled             = YES;
+    colorAttch.rgbBlendOperation           = MTLBlendOperationAdd;
+    colorAttch.alphaBlendOperation         = MTLBlendOperationAdd;
+    colorAttch.sourceRGBBlendFactor        = MTLBlendFactorSourceAlpha;
+    colorAttch.sourceAlphaBlendFactor      = MTLBlendFactorSourceAlpha;
+    colorAttch.destinationRGBBlendFactor   = MTLBlendFactorOneMinusSourceAlpha;
+    colorAttch.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
 
     NSError *error;
     oscPipelineState = [device newRenderPipelineStateWithDescriptor:oscRenderePipelineDescriptor error:&error];
@@ -260,10 +268,12 @@ using namespace engine;
 
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
+    /** Update the engine if needed*/
+    m_engine->SetViewportScale(self.view.window.backingScaleFactor);
+
     /** Create a command buffer*/
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
     commandBuffer.label = @"Command Buffer";
-//    m_engineProvider->SetCommandBuffer((__bridge MTL::CommandBuffer*)commandBuffer);
 
     /** Render the scene offscreen to a target texture */
     {
@@ -273,7 +283,7 @@ using namespace engine;
 
         /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
         m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
-        m_engineProvider->SetViewportSize(viewportSize);
+        m_engineProvider->SetViewportSize(desiredViewport);
 
         /** Render the scene */
         m_engine->FrameBegin();
@@ -318,11 +328,11 @@ using namespace engine;
 
         [encoder setVertexBytes:&viewportSize
                          length:sizeof(viewportSize)
-                        atIndex:AAPLVertexInputIndexViewportSize];
+                        atIndex:AAPLVertexInputIndexWindowSize];
 
         [encoder setVertexBytes:&desiredViewport
                          length:sizeof(desiredViewport)
-                        atIndex:AAPLVertexInputIndexViewportTarget];
+                        atIndex:AAPLVertexInputIndexViewportSize];
 
         // Set the offscreen texture as the source texture.
         [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];

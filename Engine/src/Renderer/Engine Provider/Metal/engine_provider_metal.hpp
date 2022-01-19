@@ -41,7 +41,7 @@ namespace engine
         MTL::PixelFormat m_pixelFormat;
         vector_float2 m_viewportSize;
         vector_float2 m_desiredViewport;
-        
+        float m_viewportScale;
     public:
         EngineProviderMetal();
 
@@ -56,6 +56,7 @@ namespace engine
 
     public:
         void SetDesiredViewport(int width, int height);
+        void SetViewportScale(float);
 
     public:
         Uint64 GetTicks();

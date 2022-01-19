@@ -44,7 +44,7 @@ void AnimationCurveFactory::Prepare()
         float m_diff = fabsf(max - min);
         if (min > max)
         {
-            float result = min - progress * m_diff;
+            float result = MAX(0, min - progress * m_diff);
             return result;
         }
         else

@@ -72,7 +72,7 @@ static int lua_SpriteDrawStatic_SetScale(lua_State *L)
 static int lua_SpriteDrawStatic_SetAlpha(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
-    float x = MAX(0, MIN(255, lua_tonumberx(L, 2, NULL)));
+    float x = MAX(0, MIN(1, lua_tonumberx(L, 2, NULL)));
     spr->SetAlpha(x);
     return 0;
 }

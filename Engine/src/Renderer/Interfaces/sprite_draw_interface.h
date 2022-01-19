@@ -43,16 +43,16 @@ namespace engine
         Vector2& GetPosition() { return m_position; };
 
         /**
-         Sets the alpha. Values range from 0-255.
-         Default value is 255.
+         Sets the alpha. Values range from 0-1.
+         Default value is 1.
          */
-        void SetAlpha(uint8_t val) { m_drawable.get()->SetAlpha((float)val / 255.0f); };
+        void SetAlpha(float val) { m_drawable.get()->SetAlpha(val); };
 
         /**
-         Gets the curernt alpha. Values range from 0-255.
-         Default value is 255.
+         Gets the curernt alpha. Values range from 0-1.
+         Default value is 1.
          */
-        uint8_t GetAlpha() { return (uint8_t)(*m_drawable.get()->GetAlpha() * 255.0f); };
+        float GetAlpha() { return *m_drawable.get()->GetAlpha(); };
 
     public: // Drawable related
 

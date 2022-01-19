@@ -14,8 +14,8 @@ font = nil
 -- loading functions
 
 function loadSprites()
-	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.tga" )
-	atlas:SetFlippedVertically(1)
+	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
+--atlas:SetFlippedVertically(1)
 	
 	local scene = SceneManager:SceneCreateNew()
 --	
@@ -32,18 +32,20 @@ function loadSprites()
 --	scene:SetMouseDownFunction(mouseDown)
 
 	-- sky
-sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
-sky:SetScale(3)
---sky:SetAlpha(255)
-sky:SetPosition(0, 0)
 	
 --	initialAnimationDone = true
 	
 --	-- sky
 sky2 = scene:LoadSpriteStatic(atlas, "background.png")
 sky2:SetScale(0.5)
-sky2:SetAlpha(255)
-sky2:SetPosition(1280/4, 100)
+sky2:SetAlpha(1)
+sky2:SetPosition(1280/2, 720/2)
+
+sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
+sky:SetScale(1)
+sky:SetAlpha(0)
+sky:SetPosition(1280/2, 200)
+
 
 --another = scene:LoadSpriteStatic(roomAtlas, "cupboard-r")
 --another = scene:LoadSpriteStatic(roomAtlas, "cupboard-l")
@@ -75,7 +77,8 @@ end
 function animateIntro()
 	local group = AnimationGroupFactory:GroupAnimations(
 		'sequence',
-		PropertyAnimatorFactory:FadeIn(sky, 0, 0.5)
+		PropertyAnimatorFactory:FadeIn(sky, 1, 5)
+	,	PropertyAnimatorFactory:FadeOut(sky, 1, 3)
 	, 	function() -- on finish
 			--character:SetHidden(false)
 			initialAnimationDone = true
@@ -100,7 +103,7 @@ end
 
 function init()
 	loadSprites()
-  	--animateIntro()
+  	animateIntro()
 end
 
 function update ()

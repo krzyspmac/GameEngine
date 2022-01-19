@@ -32,6 +32,11 @@ void EngineProviderSDL::SetDesiredViewport(int width, int height)
     m_desiredViewport = Vector2Make(width, height);
 }
 
+void EngineProviderSDL::SetViewportScale(float)
+{
+
+}
+
 Uint64 EngineProviderSDL::GetTicks()
 {
     return SDL_GetTicks64();

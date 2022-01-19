@@ -47,6 +47,9 @@ namespace engine
         /// translating the remainder of the view.
         virtual void SetDesiredViewport(int width, int height) = 0;
 
+        /// Sets the viewport scale.
+        virtual void SetViewportScale(float) = 0;
+
     /// Engine states
     public:
 

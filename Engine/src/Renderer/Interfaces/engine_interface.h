@@ -95,6 +95,8 @@ namespace engine
 
         Size &GetRendererOutputSize() { return m_rendererOutputSize; };
 
+        void SetViewportScale(float val) { m_engineProvider.SetViewportScale(val); m_viewportScale = val; };
+
     /// Behaviour
     public:
         /// Sets the cap rate. Default is 60.
@@ -171,7 +173,9 @@ namespace engine
 
     protected:
         Size m_viewportSize;
+        float m_viewportScale;
         Size m_rendererOutputSize;
+
         EngineProviderI &m_engineProvider;
         FileAccessI &m_fileAccess;
         ScriptingEngineI &m_scriptingEngine;

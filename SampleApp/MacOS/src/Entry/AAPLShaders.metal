@@ -29,22 +29,15 @@ struct RasterizerData
 
 vertex RasterizerData
 vertexShader(uint vertexID [[vertex_id]],
-             constant AAPLVertex *vertices [[buffer(AAPLVertexInputIndexVertices)]],
-             constant vector_float2 *viewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]],
-             constant vector_float2 *viewportOffset [[buffer(AAPLVertexInputIndexViewportOffset)]],
-             constant float *objectScalePointer [[buffer(AAPLVertexInputIndexViewportScale)]],
-             constant vector_float2 *objectSizePointer [[buffer(AAPLVertexInputIndexObjectSize)]],
-             constant vector_float2 *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportTarget)]]
+             constant AAPLVertex    *vertices               [[buffer(AAPLVertexInputIndexVertices)]],
+             constant float         *viewportScalePointer   [[buffer(AAPLVertexInputIndexWindowScale)]],
+             constant vector_float2 *viewportOffset         [[buffer(AAPLVertexInputIndexObjectOffset)]],
+             constant float         *objectScalePointer     [[buffer(AAPLVertexInputIndexObjectScale)]],
+             constant vector_float2 *objectSizePointer      [[buffer(AAPLVertexInputIndexObjectSize)]],
+             constant vector_float2 *viewportSizePointer    [[buffer(AAPLVertexInputIndexViewportSize)]]
              )
 {
     RasterizerData out;
-
-//    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-//    out.position.xy = vertices[vertexID].position.xy;
-//
-//    out.textureCoordinate = vertices[vertexID].textureCoordinate;
-//
-//    return out;
 
     // Index into the array of positions to get the current vertex.
     // The positions are specified in pixel dimensions (i.e. a value of 100
@@ -54,6 +47,9 @@ vertexShader(uint vertexID [[vertex_id]],
     // Get the viewport size and cast to float.
     vector_float2 viewportSize = vector_float2(*viewportSizePointer);
 
+    // Get the viewport scale
+    float viewportScale = float(*viewportScalePointer);
+
     // Get the target object scale
     float objectScale = float(*objectScalePointer);
 
@@ -61,42 +57,16 @@ vertexShader(uint vertexID [[vertex_id]],
     vector_float2 objectSize = vector_float2(*objectSizePointer);
 
     // Calculate object size scaled
-    vector_float2 objectSizeScaled = objectSize.xy * objectScale;
+    vector_float2 objectSizeScaled = objectSize.xy * objectScale * viewportScale;
 
     // Get the target object translation
     vector_float2 objectTranslation = vector_float2(*viewportOffset);
     objectTranslation.xy *= 2;
 
-//
-//    // Calculate aspect ratio & scale
-//    float scaleX, scaleY, scale;
-//    scaleX = viewportSize.x / (desiredViewportSize.x / objectScale);
-//    scaleY = viewportSize.y / (desiredViewportSize.y / objectScale);
-//    scale = min(scaleX, scaleY);
-//
-//    float trscaleX, trscaleY, trscale;
-//    trscaleX = viewportSize.x / (desiredViewportSize.x / 1);
-//    trscaleY = viewportSize.y / (desiredViewportSize.y / 1);
-//    trscale = min(trscaleX, trscaleY);
-//
-//    // Calculate offsets due to scaling
-//    // TBD
-//    vector_float2 targetViewportSize;
-//    targetViewportSize.xy = desiredViewportSize * trscale;
-//
-//    vector_float2 targetObjectSize;
-//    targetObjectSize.xy = objectSize * scale;
+    // Scale the object based on the viewport scale
+    pixelSpacePosition.xy *= viewportScale;
 
-//    pixelSpacePosition.x += (objectSize.x * objectScale) / 2;
-
-//    pixelSpacePosition.x -= (viewportSize.x - (objectSize.x * objectScale)) / 2;
-
-    vector_float2 objectSizeHalf = objectSize.xy / 2.0f;
-
-    float leading = objectSize.x/2;
-    float top = objectSize.y/2;
-
-    // Sacle the object
+    // Sacle the object based on internal scale
     pixelSpacePosition.xy *= objectScale;
 
     // Translate to top-left corner
@@ -104,18 +74,15 @@ vertexShader(uint vertexID [[vertex_id]],
     pixelSpacePosition.y += (viewportSize.y - objectSizeScaled.y)/2;
 
     // Apply translation
-    pixelSpacePosition.x += objectTranslation.x;
-    pixelSpacePosition.y -= objectTranslation.y;
+    pixelSpacePosition.x += objectTranslation.x / viewportScale;
+    pixelSpacePosition.y -= objectTranslation.y / viewportScale;
 
     // To convert from positions in pixel space to positions in clip-space,
     //  divide the pixel coordinates by half the size of the viewport.
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-//    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
     out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
 
-
     // Pass the input color directly to the rasterizer.
-//    out.color = vertices[vertexID].color;
     out.textureCoordinate = vertices[vertexID].textureCoordinate;
 
     return out;
@@ -134,11 +101,22 @@ fragmentShader(RasterizerData in [[stage_in]],
     // Sample the texture to obtain a color
     const half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
 
-//    colorSample.a = *alphaPointer;
+    // Get the chosen alpha transparency for the object
+    float alpha = float(*alphaPointer);
 
-    // 3
-    if (/*transparencyEnabled && */colorSample.a < 0.1) {
-      discard_fragment();
+    // If not visible hide the fragment anyway
+    if (alpha <= 0)
+    {
+        discard_fragment();
+    }
+
+    // If still visible combine with the fragment's alpha
+
+    colorSample.a *= *alphaPointer;
+
+    if (colorSample.a <= 0.0001)
+    {
+        discard_fragment();
     }
 
     // return the color of the texture
@@ -154,8 +132,9 @@ fragmentShader(RasterizerData in [[stage_in]],
 vertex RasterizerData
 presenterVertexShader(const uint vertexID [[ vertex_id ]],
                       const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
-                      constant vector_float2 *viewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]],
-                      constant vector_float2 *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportTarget)]]
+                      constant vector_float2 *viewportSizePointer [[buffer(AAPLVertexInputIndexWindowSize)]],
+                      constant float *viewportScalePointer [[buffer(AAPLVertexInputIndexWindowScale)]],
+                      constant vector_float2 *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]]
                       )
 {
     RasterizerData out;
@@ -179,7 +158,7 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
 //    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-    out.position.xy = pixelSpacePosition.xy;// * (scale / 2);
+    out.position.xy = pixelSpacePosition.xy;//* scale/2;
 
 //    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
 //    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;

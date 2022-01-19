@@ -68,7 +68,7 @@ void Engine::Setup()
 
     m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
 #if SHOW_FPS
-//    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 0.75);
+    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 1);
 #endif
 
     //m_bufferTexture = m_engineProvider.CreateTargetTexture(m_viewportSize.width, m_viewportSize.height);
@@ -89,6 +89,8 @@ void Engine::Setup()
     // Complex events get their own handler.
 
     // Register & process mouse events
+    m_mousePosition.x = 0;
+    m_mousePosition.y = 0;
     m_eventsManager.RegisterMouseMovedEvents(EventHolderMouseMoved([&](Origin *origin){
         m_mousePosition = *origin;
 
@@ -157,7 +159,7 @@ void Engine::FrameDraw()
 //    m_engineProvider.DrawableTargetRender(m_bufferDrawable.get(), m_viewportOffset.x, m_viewportOffset.y);
 
     // Draw the texts
-    m_engineProvider.RenderSetScale(1.0f, 1.0f);
+//    m_engineProvider.RenderSetScale(1.0f, 1.0f);
     RenderSceneTexts();
 
     // Render the current stack
@@ -205,13 +207,13 @@ void Engine::RenderScene()
 
 void Engine::RenderSceneTexts()
 {
-//#if SHOW_FPS
+#if SHOW_FPS
 //    sprintf(m_fpsBuffer, "%.0f", m_previousFps);
 //    m_displayFont->DrawAt(m_fpsBuffer, 0, 10, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
-//#endif
-//    static char mousePos[256];
-//    sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
-//    m_displayFont->DrawAt(mousePos, 200, 10, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
+#endif
+    static char mousePos[256];
+    sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
+    m_displayFont->DrawAt(mousePos, 200, 10, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
 
 void Engine::ApplyScaleTransformations()

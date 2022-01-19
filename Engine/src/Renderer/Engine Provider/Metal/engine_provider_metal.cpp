@@ -78,6 +78,11 @@ void EngineProviderMetal::SetDesiredViewport(int width, int height)
     m_desiredViewport[1] = height;
 }
 
+void EngineProviderMetal::SetViewportScale(float val)
+{
+    m_viewportScale = val;
+}
+
 void EngineProviderMetal::SetRenderingPipelineState(MTL::RenderPipelineState *val)
 {
     m_renderPipelineState = val;
@@ -188,11 +193,12 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
 
     renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
-    renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
-    renderToPipline->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexViewportOffset);
-    renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexViewportScale);
+    renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexWindowSize);
+    renderToPipline->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexObjectOffset);
+    renderToPipline->setVertexBytes(&m_viewportScale, sizeof(float), AAPLVertexInputIndexWindowScale);
+    renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexObjectScale);
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
-    renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportTarget);
+    renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
 
     auto texture = drawable->GetTexture();

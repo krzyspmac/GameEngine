@@ -160,12 +160,18 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
     for (auto &glyph : m_font.GetGlyphs())
     {
         auto rect = glyph.GetRect();
-        //auto offset = glyph.GetOffset();
+        auto offset = glyph.GetOffset();
 
-        auto atlasItem = new SpriteAtlasItemI(m_texture, rect.origin.x/* + offset.width*/, rect.origin.y/* + offset.height*/, rect.size.width, rect.size.height, false, "");
+//        float xxx = 40;
+//        rect.origin.x -= xxx;
+//        rect.origin.y -= xxx;
+//        rect.size.width += 2*xxx;
+//        rect.size.height += 2*xxx;
+
+        auto atlasItem = new SpriteAtlasItemI(m_texture, rect.origin.x - offset.width, rect.origin.y /*- offset.height*/, rect.size.width, rect.size.height, false, "");
         spriteDescriptors.emplace_back(std::unique_ptr<SpriteAtlasItemI>(atlasItem));
 
-        auto drawable = provider.DrawableCreate(atlasItem, 1);
+        auto drawable = provider.DrawableCreate(atlasItem, m_scale);
         drawable->SetTexture(m_texture);
         drawable->SetScale(m_scale);
         glyph.SetDrawable(drawable);
@@ -200,11 +206,11 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
             {
                 Size& offset = glyph->GetOffset();
                 auto drawable = glyph->GetDrawable();
-                float tx = x + (offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale);
-                float ty = y + (offset.height * m_scale);
+                float tx = x + ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale));
+                float ty = y + ceil((offset.height * m_scale));
 
                 provider.DrawableRender(drawable, tx, ty);
-                x += (glyph->GetXAdvance() + charSpacing.x) * m_scale;
+                x += ceil((glyph->GetXAdvance() + charSpacing.x) * m_scale);
             }
 
             previousC = c;

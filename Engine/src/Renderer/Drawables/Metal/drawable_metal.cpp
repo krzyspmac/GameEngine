@@ -46,10 +46,10 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     }
 
     // Prepare the verticies for this item
-    float width = textureCoodinagtes.size.width;
-    float height = textureCoodinagtes.size.height;
-    float width2 = width/2;
-    float height2 = height/2;
+    float width = ceil(textureCoodinagtes.size.width);
+    float height = ceil(textureCoodinagtes.size.height);
+    float width2 = ceil(width/2);
+    float height2 = ceil(height/2);
 
     AAPLVertex data[] =
     {
@@ -87,7 +87,7 @@ DrawableMetal::~DrawableMetal()
 
 bool DrawableMetal::CanDraw()
 {
-    return m_vertexBuffer != nullptr;
+    return m_vertexBuffer != nullptr && m_alpha > 0;
 }
 
 vector_float2 *DrawableMetal::GetSize()

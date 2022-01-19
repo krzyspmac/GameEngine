@@ -20,7 +20,7 @@ PropertyAnimator *PropertyAnimatorFactory
             , CallableScriptFunctionSciptableInstance fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
-    CallableCurveLamba *curve = new CallableCurveLamba(0, 255, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
                   curve
@@ -42,7 +42,7 @@ PropertyAnimator *PropertyAnimatorFactory
              , std::function<void(void)> fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
-    CallableCurveLamba *curve = new CallableCurveLamba(0, 255, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
                   curve
@@ -63,7 +63,7 @@ PropertyAnimator *PropertyAnimatorFactory
               , CallableScriptFunctionSciptableInstance fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
-    CallableCurveLamba *curve = new CallableCurveLamba(255, 0, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
                   curve
@@ -85,7 +85,7 @@ PropertyAnimator *PropertyAnimatorFactory
               , std::function<void(void)> fFinishRef)
 {
     SpriteDrawI &spr = *sprite;
-    CallableCurveLamba *curve = new CallableCurveLamba(255, 0, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
                   curve

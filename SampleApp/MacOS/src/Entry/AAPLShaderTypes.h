@@ -15,11 +15,14 @@ Header containing types and enum constants shared between Metal shaders and C/Ob
 typedef enum AAPLVertexInputIndex
 {
     AAPLVertexInputIndexVertices        = 0,        // the vertices
-    AAPLVertexInputIndexViewportSize    = 1,        // the current viewport size (window size)
-    AAPLVertexInputIndexViewportOffset  = 3,        // the object translation from the top, left corner
-    AAPLVertexInputIndexViewportScale   = 4,        // the object scale
+    AAPLVertexInputIndexWindowSize      = 1,        // the current window size
+    AAPLVertexInputIndexWindowScale     = 2,        // the current window scale
+    AAPLVertexInputIndexObjectOffset    = 3,        // the object translation from the top, left corner in viewport coordinates
+    AAPLVertexInputIndexObjectScale     = 4,        // the object scale
     AAPLVertexInputIndexObjectSize      = 5,        // the size of the object
-    AAPLVertexInputIndexViewportTarget  = 6,        // the desired viewport size
+    AAPLVertexInputIndexViewportSize    = 6,        // the current viewport size; usually
+                                                    // set at the beginning; this is also the
+                                                    // size of the framebuffer texture
 } AAPLVertexInputIndex;
 
 // Texture index values shared between shader and C code to ensure Metal shader buffer inputs match

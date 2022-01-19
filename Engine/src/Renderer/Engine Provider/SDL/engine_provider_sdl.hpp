@@ -33,7 +33,8 @@ namespace engine
 
     public:
         void SetDesiredViewport(int width, int height);
-
+        void SetViewportScale(float);
+        
     public:
         Uint64 GetTicks();
         Uint64 GetPerformanceTicks();
