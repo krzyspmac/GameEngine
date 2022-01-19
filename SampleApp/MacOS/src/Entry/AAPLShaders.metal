@@ -111,7 +111,6 @@ fragmentShader(RasterizerData in [[stage_in]],
     }
 
     // If still visible combine with the fragment's alpha
-
     colorSample.a *= *alphaPointer;
 
     if (colorSample.a <= 0.0001)
