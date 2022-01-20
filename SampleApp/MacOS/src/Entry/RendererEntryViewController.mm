@@ -24,7 +24,7 @@
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
 
-#define USES_CONSOLE 1
+#define USES_CONSOLE 0
 
 using namespace engine;
 
@@ -391,7 +391,9 @@ using namespace engine;
     NSEventMask eventMask = NSEventMaskKeyDown | NSEventMaskKeyUp | NSEventMaskFlagsChanged;
     [NSEvent addLocalMonitorForEventsMatchingMask:eventMask handler:^NSEvent * _Nullable(NSEvent *event)
     {
+#if USES_CONSOLE
         self->m_consoleRendererProvider->HandleEvent(event);
+#endif
         return event;
     }];
 }
@@ -402,31 +404,30 @@ using namespace engine;
 
 - (void)handle:(NSEvent*)event
 {
+#if USES_CONSOLE
     m_consoleRendererProvider->HandleEvent(event);
+#endif
 }
 
 - (void)mouseMoved:(NSEvent *)event
 {
-    CGPoint   locationInWindow = [event locationInWindow];
     NSView    *view = self.view;
-    NSWindow  *window = view.window;
-    CGRect    windowFrame = window.frame;
+    CGRect    viewFrame = view.frame;
+    CGPoint   locationInView = [view convertPoint:[event locationInWindow] fromView:nil];
 
-    windowFrame = [window convertRectToBacking:windowFrame];
-    locationInWindow = [view convertPointToBacking:locationInWindow];
-    locationInWindow.y = windowFrame.size.height - locationInWindow.y - window.titlebarHeight * 2;
+    locationInView.y = viewFrame.size.height - locationInView.y;
+
+    float xPer = locationInView.x / viewFrame.size.width;
+    float yPer = locationInView.y / viewFrame.size.height;
 
     auto& viewport = m_engine->GetViewport();
-    float xPer = locationInWindow.x / windowFrame.size.width;
-    float yPer = locationInWindow.y / windowFrame.size.height;
-
     Origin locationInViewport;
     locationInViewport.x = (int)(xPer * (float)viewport.width);
     locationInViewport.y = (int)(yPer * (float)viewport.height);
 
     m_engine->getEventProvider().PushMouseLocation(locationInViewport);
 
-    m_consoleRendererProvider->HandleEvent(event);
+    [self handle:event];
 }
 
 - (void)mouseDown:(NSEvent *)event           { [self handle:event]; }
