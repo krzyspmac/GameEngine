@@ -68,6 +68,7 @@ void ConsoleRenderer::DoFrame()
 
 void ConsoleRenderer::SetConsoleHidden(bool hidden)
 {
+#if SHOW_CONSOLE
     if (!m_platformRenderer->IsSetup())
     {
         if (!hidden)
@@ -79,19 +80,23 @@ void ConsoleRenderer::SetConsoleHidden(bool hidden)
     {
         m_platformRenderer->SetConsoleHidden(hidden);
     }
+#endif
 }
 
 void ConsoleRenderer::DoGui()
 {
+#if SHOW_CONSOLE
     DoMenuBar();
-    ImGui::ShowDemoWindow();
+    //ImGui::ShowDemoWindow();
 
     m_logger->Render();
     m_terminal->Render();
+#endif
 }
 
 void ConsoleRenderer::DoMenuBar()
 {
+#if SHOW_CONSOLE
     if (ImGui::BeginMainMenuBar())
     {
         if (ImGui::BeginMenu("Log"))
@@ -106,4 +111,5 @@ void ConsoleRenderer::DoMenuBar()
         }
         ImGui::EndMainMenuBar();
     }
+#endif
 }

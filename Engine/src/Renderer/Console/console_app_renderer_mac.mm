@@ -60,7 +60,6 @@ void ConsoleAppRendererMac::PrepareForFrame(NSView *view,
     CGFloat framebufferScale = view.window.screen.scale ?: UIScreen.mainScreen.scale;
 #endif
     io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
-//    io.DeltaTime = 1 / float(((MTKView*)view).preferredFramesPerSecond ?: 60);
 }
 
 void ConsoleAppRendererMac::HandleEvent(NSEvent *event)

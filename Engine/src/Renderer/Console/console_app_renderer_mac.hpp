@@ -13,7 +13,7 @@
 #include <Metal/Metal.hpp>
 
 #if TARGET_OS_OSX
-//#import <Cocoa/Cocoa.h>
+#import <Cocoa/Cocoa.h>
 #else
 #import <UIKit/UIKit.h>
 #endif

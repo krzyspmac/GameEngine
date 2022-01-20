@@ -14,6 +14,7 @@
 
 namespace engine
 {
+    /** The main console renderer. Release version does not include a console. */
     class ConsoleRenderer: public ConsoleRendererI
     {
         std::unique_ptr<ConsoleAppRendererI> m_platformRenderer;

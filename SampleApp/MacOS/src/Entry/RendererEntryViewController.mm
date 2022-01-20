@@ -24,7 +24,7 @@
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
 
-#define USES_CONSOLE 0
+#define USES_CONSOLE 1
 
 using namespace engine;
 
@@ -155,13 +155,13 @@ using namespace engine;
     m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
     m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
     m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
-
 }
 
 - (void)setupConsole
 {
     m_consoleRendererProvider = (ConsoleAppRendererMac*)m_consoleRenderer->GetPlarformRenderer();
     m_consoleRendererProvider->SetDevice((__bridge MTL::Device*)device);
+    m_consoleRendererProvider->SetView(self.view);
 }
 
 - (void)prepareEngine
@@ -321,6 +321,8 @@ using namespace engine;
 
         // Optionally draw the console
 #if USES_CONSOLE
+        [encoder pushDebugGroup:@"Dear ImGui rendering"];
+
         m_consoleRendererProvider->PrepareForFrame(
            self.view
          , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
@@ -329,6 +331,8 @@ using namespace engine;
         );
         m_consoleRenderer->DoFrame();
         m_consoleRendererProvider->Render();
+
+        [encoder popDebugGroup];
 #endif
         /** End encoding */
         [encoder endEncoding];
@@ -422,6 +426,7 @@ using namespace engine;
 
     m_engine->getEventProvider().PushMouseLocation(locationInViewport);
 
+    m_consoleRendererProvider->HandleEvent(event);
 }
 
 - (void)mouseDown:(NSEvent *)event           { [self handle:event]; }

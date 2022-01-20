@@ -72,7 +72,7 @@ void ConsoleLog::Render()
 
     if (!p_open) { return; };
 
-    ImGui::SetNextWindowSize(ImVec2(500, 400), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(200, 200), ImGuiCond_Once);
     ImGui::Begin("Example: Log", &p_open);
     ImGui::End();
 
