@@ -19,17 +19,17 @@ function loadSprites()
 	
 	local scene = SceneManager:SceneCreateNew()
 --	
-	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.tga" )
+	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
 
 	-- character
---	character = scene:LoadCharacter("brett_character.json")
---	character:SetScale(3)
---	character:PlaceAt(100,450)
+	character = scene:LoadCharacter("brett_character.json")
+	character:SetScale(1)
+	character:PlaceAt(0,0)
 --	character:SetInverseWalkbox("polygons.json")
---	character:SetWalkingSpeed(400)
---	character:SetHidden(false)
---	scene:SetMainCharacter(character)
---	scene:SetMouseDownFunction(mouseDown)
+	character:SetWalkingSpeed(600)
+	character:SetHidden(false)
+	--scene:SetMainCharacter(character)
+	scene:SetMouseDownFunction(mouseDown)
 
 	-- sky
 	
@@ -93,7 +93,7 @@ end
 function mouseDown(x, y)
 --	MemoryReleasePool:Drain()
 
-	if initialAnimationDone ~= true then return end
+--	if initialAnimationDone ~= true then return end
 	print ("mouse down " .. x .. ", " .. y)
 	character:WalkTo(x, y)
 end

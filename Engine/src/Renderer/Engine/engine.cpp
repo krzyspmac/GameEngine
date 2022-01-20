@@ -111,27 +111,20 @@ int Engine::ProcessEvents()
 
 void Engine::FrameBegin()
 {
+    // Update the time object
+    m_time.PreUpdate();
 
+    // Calculate performance
+    MeasurePerformanceStart();
+}
+
+void Engine::ProcessScript()
+{
+    m_scriptingEngine.callUpdate();
 }
 
 void Engine::FrameDraw()
 {
-    // Update the time object
-    m_time.PreUpdate();
-
-    m_engineProvider.GetRendererOutputSize(&m_rendererOutputSize.width, &m_rendererOutputSize.height);
-
-    // Calculate performance
-    MeasurePerformanceStart();
-
-    // Clear the window background
-    m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
-    m_engineProvider.ClearRender();
-
-    // Clear the game background
-    m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
-    m_engineProvider.ClearRender();
-
     // Render scene
     RenderScene();
 
@@ -141,16 +134,19 @@ void Engine::FrameDraw()
     // Render the current stack
     m_engineProvider.RenderPresent();
 
+#if SHOW_CONSOLE
+    // Render the console if needed
+//    m_consoleRenderer.DoFrame();
+#endif
+}
+
+void Engine::FrameEnd()
+{
     // Update the time object
     m_time.PostUpdate();
 
     // Calculate performance
     MeasurePerformanceEnd();
-
-#if SHOW_CONSOLE
-    // Render the console if needed
-//    m_consoleRenderer.DoFrame();
-#endif
 }
 
 void Engine::MeasurePerformanceStart()
@@ -176,7 +172,6 @@ void Engine::RenderScene()
     }
 
     m_periodicUpdatesManager.Update();
-    m_scriptingEngine.callUpdate();
 }
 
 void Engine::RenderSceneTexts()

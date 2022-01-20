@@ -6,11 +6,12 @@
 //
 
 #import "RendererEntryViewController.h"
-#include "AAPLShaderTypes.h"
 
 #include <Metal/Metal.hpp>
 #include <MetalKit/MetalKit.h>
 
+#include <stdio.h>
+#include "common.h"
 #include "file_access.hpp"
 #include "scripting_engine.hpp"
 #include "event_provider.hpp"
@@ -19,12 +20,27 @@
 #include "texture_target_metal.hpp"
 #include "console_renderer.h"
 #include "console_app_renderer_mac.hpp"
+#include "file_access_provider.h"
+#include "engine_provider_interface.h"
+#include "scripting_engine_provider_interface.h"
+#include "engine_interface.h"
+#include "engine.hpp"
+#include "events_manager.hpp"
+#include "character_manager.hpp"
+#include "scene_manager.hpp"
+#include "sprite_atlas_manager.hpp"
+#include "sprite_renderer_manager.hpp"
+#include "console_renderer.h"
+#include "texture_manager.hpp"
+#include "font_manager.hpp"
+#include "engine_provider_metal.hpp"
+
 #include "AAPLShaderTypes.h"
 
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
 
-#define USES_CONSOLE 1
+#define USES_CONSOLE 0
 
 using namespace engine;
 
@@ -32,6 +48,10 @@ using namespace engine;
 - (CGFloat) titlebarHeight;
 @end
 
+@interface RendererEntryViewController () <NSWindowDelegate>
+@end
+
+#pragma mark - Renderer Entry
 @implementation RendererEntryViewController
 {
     /** Metal related */
@@ -80,6 +100,19 @@ using namespace engine;
     NSTrackingArea *mouseTrackingArea;
 }
 
+#pragma mark - Lifecycle & Setup
+
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    return self;
+}
+
+- (void)loadView
+{
+    self.view = [[MTKView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -97,6 +130,7 @@ using namespace engine;
 - (void)viewDidAppear
 {
     [self setupEvents];
+    mtkView.window.delegate = self;
 }
 
 - (void)setupView
@@ -271,6 +305,9 @@ using namespace engine;
     /** Process events */
     m_engine->ProcessEvents();
 
+    /** Process script. Script can alter the current rendering queue */
+    m_engine->ProcessScript();
+
     /** Create a command buffer*/
     id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
     commandBuffer.label = @"Command Buffer";
@@ -396,6 +433,37 @@ using namespace engine;
 #endif
         return event;
     }];
+}
+
+- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
+{
+//    float desiredViewportWidth = (float)SCREEN_WIDTH;
+//    float desiredViewportHeight = (float)SCREEN_HEIGHT;
+//    float aspectRatio = desiredViewportWidth/desiredViewportHeight;
+//
+//    CGRect mtkFrame = mtkView.frame;
+//
+//    float scaleX, scaleY, scale;
+//    scaleX = frameSize.width / (float)SCREEN_WIDTH;
+//    scaleY = frameSize.height / (float)SCREEN_HEIGHT;
+//    scale = std::min(scaleX, scaleY);
+//
+//    if (desiredViewportWidth > desiredViewportHeight)
+//    {
+//        mtkFrame.size.width = frameSize.width;
+//        mtkFrame.size.height = frameSize.width / aspectRatio;
+//    }
+//    else
+//    {
+//        exit(0); // not implemented
+//    }
+//
+//    mtkFrame.size = CGSizeMake(100, 100);
+//    mtkFrame.origin = CGPointMake(floor((frameSize.width - mtkFrame.size.width)/2), floor((frameSize.height - mtkFrame.size.height)/2));
+////    mtkFrame.size = frameSize;
+//    mtkView.frame = mtkFrame;
+////    [mtkView setNeedsDisplay:YES];
+    return frameSize;
 }
 
 #pragma mark - Other input processing

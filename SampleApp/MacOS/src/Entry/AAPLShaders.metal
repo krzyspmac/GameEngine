@@ -154,6 +154,7 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     scaleX = viewportSize.x / desiredViewportSize.x;
     scaleY = viewportSize.y / desiredViewportSize.y;
     scale = min(scaleX, scaleY);
+    
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
 //    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);

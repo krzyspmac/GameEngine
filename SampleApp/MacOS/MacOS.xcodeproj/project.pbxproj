@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4C9EA02D279217E70082EB6A /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
 		7F138297277507C500ED6D67 /* RendererEntrySDL.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntrySDL.mm */; };
-		7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
+		7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
 		7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AA27750B5B00ED6D67 /* libcjson.a */; };
@@ -27,6 +27,7 @@
 		7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB9278B352400B5772F /* MetalKit.framework */; };
 		7F20ACBC278B3B1600B5772F /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F20ACBB278B3B1600B5772F /* AAPLShaders.metal */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D819279A067800139E14 /* Cocoa.framework */; };
 		7F849921278760FA004127CB /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
 		7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
 		7F8499292787798B004127CB /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
@@ -75,7 +76,7 @@
 		7F138290277507C500ED6D67 /* RendererEntrySDL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererEntrySDL.hpp; sourceTree = "<group>"; };
 		7F138291277507C500ED6D67 /* RendererEntrySDL.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntrySDL.mm; sourceTree = "<group>"; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7F13829E2775082800ED6D67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7F13829E2775082800ED6D67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7F1382A22775086200ED6D67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F1382A42775086200ED6D67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -94,8 +95,10 @@
 		7F20ACB9278B352400B5772F /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		7F20ACBB278B3B1600B5772F /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = src/Entry/AAPLShaders.metal; sourceTree = SOURCE_ROOT; };
 		7F20ACBD278B3B3200B5772F /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
-		7F3CAAE1277093D500E0D74C /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3CAAE1277093D500E0D74C /* MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F63D818279A043300139E14 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-macOS.plist"; sourceTree = SOURCE_ROOT; };
+		7F63D819279A067800139E14 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7F84991F278760FA004127CB /* DialogFont_retro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DialogFont_retro.png; sourceTree = "<group>"; };
 		7F849920278760FA004127CB /* DialogFont_retro.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DialogFont_retro.fnt; sourceTree = "<group>"; };
 		7F8499272787798B004127CB /* fireplace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireplace.png; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */,
 				7FCC12962798D792002ECABD /* GameController.framework in Frameworks */,
 				7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */,
 				7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */,
@@ -174,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				7F13829D2775082800ED6D67 /* AppDelegate.h */,
-				7F13829E2775082800ED6D67 /* AppDelegate.m */,
+				7F13829E2775082800ED6D67 /* AppDelegate.mm */,
 				7F1382C727750C0800ED6D67 /* main.mm */,
 			);
 			path = AppDelegate;
@@ -183,6 +187,7 @@
 		7F1382A02775086200ED6D67 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F63D818279A043300139E14 /* Info-macOS.plist */,
 				7F20ACBB278B3B1600B5772F /* AAPLShaders.metal */,
 				7F1382A12775086200ED6D67 /* App.entitlements */,
 				7F1382A22775086200ED6D67 /* Assets.xcassets */,
@@ -205,7 +210,7 @@
 		7F3CAAE2277093D500E0D74C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F3CAAE1277093D500E0D74C /* SampleApp.app */,
+				7F3CAAE1277093D500E0D74C /* MacOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F63D819279A067800139E14 /* Cocoa.framework */,
 				7FCC12952798D792002ECABD /* GameController.framework */,
 				7F20ACB9278B352400B5772F /* MetalKit.framework */,
 				7F20ACB7278B34D600B5772F /* Quartz.framework */,
@@ -266,9 +272,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F3CAAE0277093D500E0D74C /* SampleApp */ = {
+		7F3CAAE0277093D500E0D74C /* MacOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "SampleApp" */;
+			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "MacOS" */;
 			buildPhases = (
 				7F3CAADD277093D500E0D74C /* Sources */,
 				7F3CAADE277093D500E0D74C /* Frameworks */,
@@ -279,9 +285,9 @@
 			);
 			dependencies = (
 			);
-			name = SampleApp;
+			name = MacOS;
 			productName = RendererAppSDL;
-			productReference = 7F3CAAE1277093D500E0D74C /* SampleApp.app */;
+			productReference = 7F3CAAE1277093D500E0D74C /* MacOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -311,7 +317,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F3CAAE0277093D500E0D74C /* SampleApp */,
+				7F3CAAE0277093D500E0D74C /* MacOS */,
 			);
 		};
 /* End PBXProject section */
@@ -363,7 +369,7 @@
 				7F20ACBC278B3B1600B5772F /* AAPLShaders.metal in Sources */,
 				7F1382C827750C0800ED6D67 /* main.mm in Sources */,
 				7F138297277507C500ED6D67 /* RendererEntrySDL.mm in Sources */,
-				7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */,
+				7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */,
 				7F20ACAD278B2A5A00B5772F /* RendererEntryViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -534,9 +540,9 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Info-macOS.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -563,9 +569,9 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Info-macOS.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -591,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "SampleApp" */ = {
+		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "MacOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F3CAAF2277093D600E0D74C /* Debug */,

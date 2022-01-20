@@ -47,8 +47,9 @@ namespace engine
         void Setup();
         int ProcessEvents();
         void FrameBegin();
+        void ProcessScript();
         void FrameDraw();
-
+        void FrameEnd();
     public:
         void SetCapRate(int fps);
 

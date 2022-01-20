@@ -81,13 +81,22 @@ namespace engine
          */
         virtual void FrameBegin() = 0;
 
-        /// Process the inputs from the game.
-        /// Return != 0 do quit the application.
+
+        /** Process the inputs from the game.
+            Return != 0 do quit the application.
+        */
         virtual int ProcessEvents() = 0;
+
+        /** Entry point for a concrete instance to process the script functions
+         */
+        virtual void ProcessScript() = 0;
 
         /** The main `update` method. Engine magic happens there.
          */
         virtual void FrameDraw() = 0;
+
+        /** Executed at the end of the frame pass */
+        virtual void FrameEnd() = 0;
 
     /// States
     public:

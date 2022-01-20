@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
                BuildableName = "SampleApp.app"
-               BlueprintName = "SampleApp"
+               BlueprintName = "MacOS"
                ReferencedContainer = "container:MacOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -131,7 +131,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
             BuildableName = "SampleApp.app"
-            BlueprintName = "SampleApp"
+            BlueprintName = "MacOS"
             ReferencedContainer = "container:MacOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -148,7 +148,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
             BuildableName = "SampleApp.app"
-            BlueprintName = "SampleApp"
+            BlueprintName = "MacOS"
             ReferencedContainer = "container:MacOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

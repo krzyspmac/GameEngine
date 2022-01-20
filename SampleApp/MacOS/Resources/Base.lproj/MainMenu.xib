@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -677,23 +676,5 @@
             </items>
             <point key="canvasLocation" x="-36" y="50"/>
         </menu>
-        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="hjr-4G-PY6">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="283" y="305" width="414" height="298"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="875"/>
-            <view key="contentView" id="fEJ-We-DcF">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="298"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gRF-32-ZqG">
-                        <rect key="frame" x="126" y="94" width="163" height="96"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    </customView>
-                </subviews>
-            </view>
-            <point key="canvasLocation" x="-329" y="306"/>
-        </window>
-        <viewController id="wg1-wB-utj" customClass="RendererEntryViewController"/>
     </objects>
 </document>

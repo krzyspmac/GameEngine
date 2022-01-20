@@ -48,6 +48,9 @@
 		7F262550278E0B3400529F29 /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */; };
 		7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
 		7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
+		7F63D81C279A086300139E14 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D81B279A086300139E14 /* libcjson.a */; };
+		7F63D81E279A086300139E14 /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D81D279A086300139E14 /* libimgui.a */; };
+		7F63D820279A086300139E14 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D81F279A086300139E14 /* liblua.a */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
 		7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character_renderer.hpp */; };
 		7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
@@ -200,6 +203,9 @@
 		7F262554278F570E00529F29 /* drawable_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_metal.cpp; sourceTree = "<group>"; };
 		7F262555278F570E00529F29 /* drawable_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_metal.hpp; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F63D81B279A086300139E14 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F63D81D279A086300139E14 /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F63D81F279A086300139E14 /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F64288227779CD400EE9E2C /* character_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_renderer.cpp; sourceTree = "<group>"; };
 		7F64288327779CD400EE9E2C /* character_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_renderer.hpp; sourceTree = "<group>"; };
 		7F6428882777C51D00EE9E2C /* character_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_interface.h; sourceTree = "<group>"; };
@@ -319,6 +325,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F63D81C279A086300139E14 /* libcjson.a in Frameworks */,
+				7F63D81E279A086300139E14 /* libimgui.a in Frameworks */,
+				7F63D820279A086300139E14 /* liblua.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,6 +519,9 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F63D81B279A086300139E14 /* libcjson.a */,
+				7F63D81D279A086300139E14 /* libimgui.a */,
+				7F63D81F279A086300139E14 /* liblua.a */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 			);
 			path = Frameworks;

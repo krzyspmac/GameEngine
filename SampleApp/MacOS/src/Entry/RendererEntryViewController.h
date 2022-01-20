@@ -22,22 +22,6 @@
     #define PlatformViewController NSViewController
 #endif
 
-#include <stdio.h>
-#include "common.h"
-#include "file_access_provider.h"
-#include "engine_provider_interface.h"
-#include "scripting_engine_provider_interface.h"
-#include "engine_interface.h"
-#include "engine.hpp"
-#include "events_manager.hpp"
-#include "character_manager.hpp"
-#include "scene_manager.hpp"
-#include "sprite_atlas_manager.hpp"
-#include "sprite_renderer_manager.hpp"
-#include "console_renderer.h"
-#include "texture_manager.hpp"
-#include "font_manager.hpp"
-#include "engine_provider_metal.hpp"
 
 @interface RendererEntryViewController : PlatformViewController <MTKViewDelegate>
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)

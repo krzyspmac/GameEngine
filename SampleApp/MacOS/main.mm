@@ -8,13 +8,23 @@
 #import <Cocoa/Cocoa.h>
 #include "RendererEntrySDL.hpp"
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
-        // Setup code that might create autoreleased objects goes here.
-    }
+#pragma mark - Application Main Function
 
-//    engine::RendererEntrySDL entry;
-//    entry.main(argc, argv);
+#if TARGET_OS_OSX
 
+int main(int argc, const char * argv[])
+{
     return NSApplicationMain(argc, argv);
 }
+
+#else
+
+int main(int argc, char * argv[])
+{
+    @autoreleasepool
+    {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+
+#endif
