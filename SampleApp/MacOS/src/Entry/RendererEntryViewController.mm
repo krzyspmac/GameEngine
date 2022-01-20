@@ -17,11 +17,14 @@
 #include "engine.hpp"
 #include "common_engine_impl.h"
 #include "texture_target_metal.hpp"
-
+#include "console_renderer.h"
+#include "console_app_renderer_mac.hpp"
 #include "AAPLShaderTypes.h"
 
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
+
+#define USES_CONSOLE 0
 
 using namespace engine;
 
@@ -67,6 +70,7 @@ using namespace engine;
     engine::SpriteAtlasManager *m_spriteAtlasManager;
     engine::SpriteRendererManager *m_sprireRendererManager;
     engine::ConsoleRenderer *m_consoleRenderer;
+    engine::ConsoleAppRendererMac *m_consoleRendererProvider;
     engine::Engine *m_engine;
 
     /** Setup related*/
@@ -84,6 +88,7 @@ using namespace engine;
     [self setupScreenRendingPipeline];
     [self setupOffscreenRenderingPipeline];
     [self setupEngine];
+    [self setupConsole];
     [self prepareEngine];
 
     [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
@@ -150,6 +155,13 @@ using namespace engine;
     m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
     m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
     m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
+
+}
+
+- (void)setupConsole
+{
+    m_consoleRendererProvider = (ConsoleAppRendererMac*)m_consoleRenderer->GetPlarformRenderer();
+    m_consoleRendererProvider->SetDevice((__bridge MTL::Device*)device);
 }
 
 - (void)prepareEngine
@@ -265,7 +277,6 @@ using namespace engine;
 
     /** Render the scene offscreen to a target texture */
     {
-        /** Create the encoder for the pass */
         id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:oscRenderPassDescriptor];
         [encoder setRenderPipelineState:oscPipelineState];
 
@@ -277,7 +288,6 @@ using namespace engine;
         m_engine->FrameBegin();
         m_engine->FrameDraw();
 
-        /** End encoding */
         [encoder endEncoding];
     }
 
@@ -302,26 +312,24 @@ using namespace engine;
             { {  1,   1 },  { 1.0, 0.0 } },
         };
 
-        [encoder setVertexBytes:&quadVertices
-                         length:sizeof(quadVertices)
-                        atIndex:AAPLVertexInputIndexVertices];
-
-        [encoder setVertexBytes:&viewportSize
-                         length:sizeof(viewportSize)
-                        atIndex:AAPLVertexInputIndexWindowSize];
-
-        [encoder setVertexBytes:&desiredViewport
-                         length:sizeof(desiredViewport)
-                        atIndex:AAPLVertexInputIndexViewportSize];
-
-        // Set the offscreen texture as the source texture.
+        // Draw the offscreen texture
+        [encoder setVertexBytes:&quadVertices length:sizeof(quadVertices) atIndex:AAPLVertexInputIndexVertices];
+        [encoder setVertexBytes:&viewportSize length:sizeof(viewportSize) atIndex:AAPLVertexInputIndexWindowSize];
+        [encoder setVertexBytes:&desiredViewport length:sizeof(desiredViewport) atIndex:AAPLVertexInputIndexViewportSize];
         [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
+        [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 
-        // Draw quad with rendered texture.
-        [encoder drawPrimitives:MTLPrimitiveTypeTriangle
-                    vertexStart:0
-                    vertexCount:6];
-
+        // Optionally draw the console
+#if USES_CONSOLE
+        m_consoleRendererProvider->PrepareForFrame(
+           self.view
+         , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
+         , (__bridge MTL::CommandBuffer*)commandBuffer
+         , (__bridge MTL::RenderCommandEncoder*)encoder
+        );
+        m_consoleRenderer->DoFrame();
+        m_consoleRendererProvider->Render();
+#endif
         /** End encoding */
         [encoder endEncoding];
     }
@@ -341,6 +349,7 @@ using namespace engine;
 
     [self setupMouseClickEvents];
     [self setupMouseMovedEvents];
+    [self setupKeyEvents];
 
     didSetupEvents = YES;
 }
@@ -368,7 +377,29 @@ using namespace engine;
     [view addTrackingArea:area];
 }
 
-#pragma mark - Events Handlers
+- (void)setupKeyEvents
+{
+    // If we want to receive key events, we either need to be in the responder chain of the key view,
+    // or else we can install a local monitor. The consequence of this heavy-handed approach is that
+    // we receive events for all controls, not just Dear ImGui widgets. If we had native controls in our
+    // window, we'd want to be much more careful than just ingesting the complete event stream.
+    // To match the behavior of other backends, we pass every event down to the OS.
+    NSEventMask eventMask = NSEventMaskKeyDown | NSEventMaskKeyUp | NSEventMaskFlagsChanged;
+    [NSEvent addLocalMonitorForEventsMatchingMask:eventMask handler:^NSEvent * _Nullable(NSEvent *event)
+    {
+        self->m_consoleRendererProvider->HandleEvent(event);
+        return event;
+    }];
+}
+
+#pragma mark - Other input processing
+
+#if TARGET_OS_OSX
+
+- (void)handle:(NSEvent*)event
+{
+    m_consoleRendererProvider->HandleEvent(event);
+}
 
 - (void)mouseMoved:(NSEvent *)event
 {
@@ -390,7 +421,24 @@ using namespace engine;
     locationInViewport.y = (int)(yPer * (float)viewport.height);
 
     m_engine->getEventProvider().PushMouseLocation(locationInViewport);
+
 }
+
+- (void)mouseDown:(NSEvent *)event           { [self handle:event]; }
+- (void)rightMouseDown:(NSEvent *)event      { [self handle:event]; }
+- (void)otherMouseDown:(NSEvent *)event      { [self handle:event]; }
+- (void)mouseUp:(NSEvent *)event             { [self handle:event]; }
+- (void)rightMouseUp:(NSEvent *)event        { [self handle:event]; }
+- (void)otherMouseUp:(NSEvent *)event        { [self handle:event]; }
+- (void)mouseDragged:(NSEvent *)event        { [self handle:event]; }
+- (void)rightMouseMoved:(NSEvent *)event     { [self handle:event]; }
+- (void)rightMouseDragged:(NSEvent *)event   { [self handle:event]; }
+- (void)otherMouseMoved:(NSEvent *)event     { [self handle:event]; }
+- (void)otherMouseDragged:(NSEvent *)event   { [self handle:event]; }
+- (void)scrollWheel:(NSEvent *)event         { [self handle:event]; }
+
+#endif
+
 
 @end
 

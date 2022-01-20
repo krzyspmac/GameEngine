@@ -7,11 +7,14 @@
 
 #include "engine_provider_metal.hpp"
 
+////
+////#define NS_PRIVATE_IMPLEMENTATION
+////#define CA_PRIVATE_IMPLEMENTATION
+////#define MTL_PRIVATE_IMPLEMENTATION
+//#include <Metal/Metal.hpp>
 //
-//#define NS_PRIVATE_IMPLEMENTATION
-//#define CA_PRIVATE_IMPLEMENTATION
-//#define MTL_PRIVATE_IMPLEMENTATION
-#include <Metal/Metal.hpp>
+#include "AAPLShaderTypes.h"
+
 
 #include "drawable_metal.hpp"
 #include "texture.hpp"
@@ -49,6 +52,11 @@ void EngineProviderMetal::SetRendererDevice(MTL::Device *device)
 {
     m_device = device;
     m_library = device->newDefaultLibrary();
+}
+
+MTL::Device* EngineProviderMetal::GetRendererDevice()
+{
+    return m_device;
 }
 
 void EngineProviderMetal::SetCommandBuffer(MTL::CommandBuffer *val)

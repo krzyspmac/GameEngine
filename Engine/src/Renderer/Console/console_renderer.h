@@ -32,6 +32,8 @@ namespace engine
         ConsoleLogI& GetLogger();
         ConsoleTerminalI& GetTerminal();
 
+        auto GetPlarformRenderer() { return m_platformRenderer.get(); };
+
     private:
         void SetupEvents();
         void DoMenuBar();

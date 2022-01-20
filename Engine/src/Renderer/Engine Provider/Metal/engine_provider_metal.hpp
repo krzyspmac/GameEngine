@@ -47,6 +47,7 @@ namespace engine
 
     public:
         void SetRendererDevice(MTL::Device*);
+        MTL::Device* GetRendererDevice();
         void SetCommandBuffer(MTL::CommandBuffer*);
         void SetRenderPassDescriptor(MTL::RenderPassDescriptor*);
         void SetPixelFormat(MTL::PixelFormat);
