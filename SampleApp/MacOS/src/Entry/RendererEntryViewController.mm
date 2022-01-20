@@ -24,7 +24,7 @@
 #define SCREEN_WIDTH  (1280)
 #define SCREEN_HEIGHT (720)
 
-#define USES_CONSOLE 0
+#define USES_CONSOLE 1
 
 using namespace engine;
 

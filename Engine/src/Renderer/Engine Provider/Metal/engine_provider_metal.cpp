@@ -9,14 +9,10 @@
 
 #include "AAPLShaderTypes.h"
 
-
 #include "drawable_metal.hpp"
 #include "texture.hpp"
 #include "texture_target_metal.hpp"
 #include "texture_metal.hpp"
-
-//static NSDate
-
 #include <chrono>
 #include <iostream>
 #include <chrono>
@@ -115,11 +111,6 @@ Uint64 EngineProviderMetal::GetPerformanceTicks()
 Uint64 EngineProviderMetal::GetPerformanceCounter()
 {
     return GetTicks();
-}
-
-void EngineProviderMetal::GetMousePosition(int *x, int *y)
-{
-    return;
 }
 
 void EngineProviderMetal::Delay(Uint32 ms)

@@ -45,6 +45,7 @@ void ConsoleAppRendererMac::PrepareForFrame(NSView *view,
                                             MTL::CommandBuffer *buffer,
                                             MTL::RenderCommandEncoder *encoder)
 {
+#if SHOW_CONSOLE
     m_view = view;
     m_renderPassDescriptor = pass;
     m_commandBuffer = buffer;
@@ -60,15 +61,19 @@ void ConsoleAppRendererMac::PrepareForFrame(NSView *view,
     CGFloat framebufferScale = view.window.screen.scale ?: UIScreen.mainScreen.scale;
 #endif
     io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
+#endif
 }
 
 void ConsoleAppRendererMac::HandleEvent(NSEvent *event)
 {
+#if SHOW_CONSOLE
     ImGui_ImplOSX_HandleEvent(event, m_view);
+#endif
 }
 
 void ConsoleAppRendererMac::SetupWindow()
 {
+#if SHOW_CONSOLE
     if (m_isSetup) { return; };
 
     IMGUI_CHECKVERSION();
@@ -79,6 +84,7 @@ void ConsoleAppRendererMac::SetupWindow()
     ImGui_ImplMetal_Init((__bridge id<MTLDevice>)m_device);
     ImGui_ImplOSX_Init(m_view);
     m_isSetup = true;
+#endif
 }
 
 void ConsoleAppRendererMac::DoFrame(std::function<void(void)> lambda)
@@ -128,5 +134,7 @@ void ConsoleAppRendererMac::SetConsoleHidden(bool hidden)
 
 void ConsoleAppRendererMac::Setup()
 {
+#if SHOW_CONSOLE
     SetupWindow();
+#endif
 }

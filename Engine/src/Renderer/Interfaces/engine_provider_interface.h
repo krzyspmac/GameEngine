@@ -25,12 +25,6 @@ namespace engine
         int w, h;
     } Engine_Rect;
 
-    typedef enum Anchor_Point
-    {
-        ANCHOR_TOP_LEFT,        // default
-        ANCHOR_BOTTOM_CENTER    // for character drwaing
-    } Anchor_Point;
-
     /** EngineProviderI declares an abstraction for low-level drawing functions. Those are bare-bones only.
         The main entry point in the app initializes different concrete instances.
      */
@@ -63,10 +57,6 @@ namespace engine
 
         /// More robuts results than GetTicks.
         virtual Uint64 GetPerformanceCounter() = 0;
-
-        /// Concrete instance would get the mouse position
-        /// and store them under the given pointers.
-        virtual void GetMousePosition(int *x, int *y) = 0;
 
         /// Wait ms
         virtual void Delay(Uint32 ms) = 0;
@@ -128,28 +118,30 @@ namespace engine
 
         /// Sets the render target to a target drawable. All rendering goes
         /// there until a the target is popped.
+        /// Currently not used
         virtual void RendererTargetDrawablePush(DrawableTargetI *) = 0;
 
         /// Pops the renderer target texture from the stack and returned
         /// to the previous one or the main renderer if the stack is empty.
+        /// Currently not used
         virtual void RendererTargetDrawablePop() = 0;
 
         /// Sets the drawable as the current render target.
+        /// Currently not used
         virtual void RendererTargetDrawableSet(DrawableTargetI *) = 0;
 
         /// Clears the render target so the final render can be applied.
+        /// Currently not used
         virtual void RenderTargetClear() = 0;
 
         /// Clears the buffer before drawing a new frame.
         virtual void RenderClear() = 0;
 
-
-
-
         /// Sets the draw color.
         virtual void RenderSetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) = 0;
 
         /// Sets the render scale.
+        /// Has no effect on non-sdl providers
         virtual void RenderSetScale(float scaleX, float scaleY) = 0;
 
         /// Draw a rectangle.

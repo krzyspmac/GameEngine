@@ -25,11 +25,6 @@
 namespace engine
 {
 
-    struct EngineProviderMetalTargetDrawableDescriptor
-    {
-
-    };
-
     class EngineProviderMetal : public EngineProviderI
     {
         MTL::Device *m_device;
@@ -63,7 +58,6 @@ namespace engine
         Uint64 GetTicks();
         Uint64 GetPerformanceTicks();
         Uint64 GetPerformanceCounter();
-        void GetMousePosition(int *x, int *y);
         void Delay(Uint32 ms);
         void GetWindowSize(int *w, int *h);
         void GetRendererOutputSize(int *w, int *h);

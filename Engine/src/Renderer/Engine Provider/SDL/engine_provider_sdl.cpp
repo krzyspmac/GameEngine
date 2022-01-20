@@ -52,11 +52,6 @@ Uint64 EngineProviderSDL::GetPerformanceCounter()
     return SDL_GetPerformanceCounter();
 }
 
-void EngineProviderSDL::GetMousePosition(int *x, int *y)
-{
-    SDL_GetMouseState(x, y);
-}
-
 void EngineProviderSDL::Delay(Uint32 ms)
 {
     SDL_Delay(ms);
