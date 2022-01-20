@@ -7,12 +7,6 @@
 
 #include "engine_provider_metal.hpp"
 
-////
-////#define NS_PRIVATE_IMPLEMENTATION
-////#define CA_PRIVATE_IMPLEMENTATION
-////#define MTL_PRIVATE_IMPLEMENTATION
-//#include <Metal/Metal.hpp>
-//
 #include "AAPLShaderTypes.h"
 
 
@@ -224,6 +218,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
 
 void EngineProviderMetal::DrawableTargetRender(DrawableTargetI *baseDrawable, float x, float y)
 {
+    // TODO: not implemented
     return;
 //    // Cast interface to concrete instance and check if we can draw
 //    auto drawable = static_cast<DrawableTargetMetal*>(baseDrawable);
@@ -259,106 +254,10 @@ void EngineProviderMetal::DrawableTargetRender(DrawableTargetI *baseDrawable, fl
 //    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)drawable->GetVertexCount());
 }
 
-// TODO: move where appropriate
-
 MTL::RenderCommandEncoder *EngineProviderMetal::GetTopEncoder()
 {
     return m_renderEncoder;
-//    if (m_rendererDrawableTop != nullptr)
-//    {
-//        auto topDrawable = static_cast<DrawableTargetMetal*>(m_rendererDrawableTop);
-//        return topDrawable->GetEncoder();
-//    }
-//    else
-//    {
-//        return nullptr;
-//    }
 }
-
-//void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y)
-//{
-////    /*static const*/ AAPLVertex triangleVertices[] =
-////    {
-////        // 2D positions,    RGBA colors
-////        { {  250,  -250 }, { 1, 0, 0, 1 } },
-////        { { -250,  -250 }, { 0, 1, 0, 1 } },
-////        { {    0,   250 }, { 0, 0, 1, 1 } },
-////    };
-//
-////    const vector_float2 p1[] = { 250, -250 };
-//    float textureWidth = 200;
-//    float viewportWidth = m_viewportSize.x;
-//
-//    /*static const*/ AAPLVertex triangleVertices[3] =
-//    {
-//        // 2D positions,    RGBA colors
-//        { {  250,  -250 }, { 1, 0, 0, 1 } },
-//        { { -250,  -250 }, { 0, 1, 0, 1 } },
-//        { {    0,   250 }, { 0, 0, 1, 1 } },
-//    };
-//
-////    AAPLVertexShift(triangleVertices, 3, -(float)m_viewportSize.x/2 + 250, -(float)m_viewportSize.y/2 + 250);
-//
-//    m_renderEncoder->setVertexBytes(triangleVertices, sizeof(triangleVertices), AAPLVertexInputIndexVertices);
-//    m_renderEncoder->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexViewportSize);
-//    m_renderEncoder->drawPrimitives(MTL::PrimitiveTypeTriangle, (NS::UInteger)0, (NS::UInteger)3);
-//    
-//}
-//
-//void EngineProviderMetal::DrawTexture(TextureI *texture, int x, int y, int srcX, int srcY, int srcW, int srcH, float scale)
-//{
-//}
-//
-//void EngineProviderMetal::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, int x, int y, float scale, bool flipHorizontal)
-//{
-//}
-//
-//void EngineProviderMetal::DrawTexture(TextureI *texture, Anchor_Point anchorPoint, Vector2& position, float scale, bool flipHorizontal)
-//{
-//}
-//
-//void EngineProviderMetal::TextureAlphaSetMod(TextureI *texture, uint8_t alpha)
-//{
-//}
-
-//void EngineProviderMetal::RendererTargetPush(TextureTargetI *targetTexture)
-//{
-//    TextureTargetMetal *metalTexture = (TextureTargetMetal*)targetTexture;
-//
-//    EngineProviderMetalTargetTextureDescriptor *targetRender = new EngineProviderMetalTargetTextureDescriptor();
-//
-//    targetRender->m_renderToTexturePassDescriptor = MTL::RenderPassDescriptor::alloc()->init();
-//
-//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setTexture(metalTexture->GetTexture());
-//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setLoadAction(MTL::LoadActionClear);
-//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setClearColor({1, 1, 1, 1 });
-//    targetRender->m_renderToTexturePassDescriptor->colorAttachments()->object(0)->setStoreAction(MTL::StoreActionStore);
-//
-//    targetRender->m_renderToTexturePipeline = MTL::RenderPipelineDescriptor::alloc()->init();
-//    targetRender->m_renderToTexturePipeline->setLabel(NS::MakeConstantString("Offscreen Render Pipe"));
-//    targetRender->m_renderToTexturePipeline->setSampleCount(1);
-//    targetRender->m_renderToTexturePipeline->setVertexFunction(m_library->newFunction(NS::MakeConstantString("simpleVertexShader")));
-//    targetRender->m_renderToTexturePipeline->setFragmentFunction(m_library->newFunction(NS::MakeConstantString("simpleFragmentShader")));
-//    targetRender->m_renderToTexturePipeline->colorAttachments()->object(0)->setPixelFormat(m_pixelFormat);
-//
-//
-//
-//    renderStack.emplace_back(targetRender);
-//}
-
-//void EngineProviderMetal::RendererTargetPop()
-//{
-//    if (!renderStack.empty()) {
-//        auto item = renderStack.at(renderStack.size()-1);
-//        delete item;
-//        renderStack.pop_back();
-//    }
-//}
-
-//void EngineProviderMetal::RenderTargetSet(TextureI *targetTexture)
-//{
-//
-//}
 
 void EngineProviderMetal::RenderTargetClear()
 {
