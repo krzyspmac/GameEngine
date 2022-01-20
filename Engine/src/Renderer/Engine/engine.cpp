@@ -68,7 +68,7 @@ void Engine::Setup()
 
     m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
 #if SHOW_FPS
-    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 1);
+    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 0.5);
 #endif
 
     std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
@@ -187,7 +187,9 @@ void Engine::RenderSceneTexts()
 #endif
     static char mousePos[256];
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
-    m_displayFont->DrawAt(mousePos, 200, 10, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
+    sprintf(mousePos, "Mouse testing: %d x %d", m_mousePosition.x, m_mousePosition.y);
+
+    m_displayFont->DrawAt(mousePos, 0, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
 
 void Engine::ApplyScaleTransformations()
