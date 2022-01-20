@@ -203,7 +203,7 @@
 		4C9EA0292792166F0082EB6A /* texture_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_metal.hpp; sourceTree = "<group>"; };
 		4C9EA02E27921D8D0082EB6A /* AAPLImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLImage.mm; sourceTree = "<group>"; };
 		4C9EA02F27921D8D0082EB6A /* AAPLImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLImage.h; sourceTree = "<group>"; };
-		7F1382152775059B00ED6D67 /* libEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F1382152775059B00ED6D67 /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F13821C277505B600ED6D67 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
 		7F13821E277505B600ED6D67 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
 		7F138220277505B600ED6D67 /* scripting_engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripting_engine.cpp; sourceTree = "<group>"; };
@@ -561,7 +561,7 @@
 		7F3CAAE2277093D500E0D74C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F1382152775059B00ED6D67 /* libEngine.a */,
+				7F1382152775059B00ED6D67 /* libEngine-Mac.a */,
 				7F63D862279A12F900139E14 /* Engine-Mac-Bundle.bundle */,
 			);
 			name = Products;
@@ -943,9 +943,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7F1382142775059B00ED6D67 /* Engine */ = {
+		7F1382142775059B00ED6D67 /* Engine-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F1382162775059B00ED6D67 /* Build configuration list for PBXNativeTarget "Engine" */;
+			buildConfigurationList = 7F1382162775059B00ED6D67 /* Build configuration list for PBXNativeTarget "Engine-Mac" */;
 			buildPhases = (
 				7F1382112775059B00ED6D67 /* Headers */,
 				7F1382122775059B00ED6D67 /* Sources */,
@@ -958,9 +958,9 @@
 				7F63D846279A0F2F00139E14 /* PBXTargetDependency */,
 				7F63D848279A0F2F00139E14 /* PBXTargetDependency */,
 			);
-			name = Engine;
+			name = "Engine-Mac";
 			productName = Engine;
-			productReference = 7F1382152775059B00ED6D67 /* libEngine.a */;
+			productReference = 7F1382152775059B00ED6D67 /* libEngine-Mac.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */ = {
@@ -1044,7 +1044,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F1382142775059B00ED6D67 /* Engine */,
+				7F1382142775059B00ED6D67 /* Engine-Mac */,
 				7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */,
 				7F63D83C279A0E8B00139E14 /* Engine-Mac-MetalLib */,
 				7F63D861279A12F900139E14 /* Engine-Mac-Bundle */,
@@ -1432,7 +1432,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7F1382162775059B00ED6D67 /* Build configuration list for PBXNativeTarget "Engine" */ = {
+		7F1382162775059B00ED6D67 /* Build configuration list for PBXNativeTarget "Engine-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F1382172775059B00ED6D67 /* Debug */,

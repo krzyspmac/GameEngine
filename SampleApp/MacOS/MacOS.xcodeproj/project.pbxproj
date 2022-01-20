@@ -12,7 +12,6 @@
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
 		7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AA27750B5B00ED6D67 /* libcjson.a */; };
-		7F1382AD27750B5B00ED6D67 /* libEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AC27750B5B00ED6D67 /* libEngine.a */; };
 		7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AE27750B5B00ED6D67 /* liblua.a */; };
 		7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B027750B5B00ED6D67 /* libSDL2_image.a */; };
 		7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */; };
@@ -49,6 +48,7 @@
 		7F927F462796B8B90052DB60 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
 		7F927F482796FB430052DB60 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
 		7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
+		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
 		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
 		7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB824112788F8FC008F0F7A /* libimgui.a */; };
@@ -116,6 +116,7 @@
 		7F927F452796B8B90052DB60 /* background.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.tga; sourceTree = "<group>"; };
 		7F927F472796FB430052DB60 /* background1.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background1.tga; sourceTree = "<group>"; };
 		7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = DialogFont_retro.tga; sourceTree = "<group>"; };
+		7F9EB6CF279A163700384C0B /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB8226B2788DB33008F0F7A /* parlor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parlor.png; sourceTree = "<group>"; };
 		7FB8226C2788DB34008F0F7A /* parlor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parlor.json; sourceTree = "<group>"; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */,
 				7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */,
 				7FCC12962798D792002ECABD /* GameController.framework in Frameworks */,
 				7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */,
@@ -134,7 +136,6 @@
 				7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */,
 				7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */,
 				7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */,
-				7F1382AD27750B5B00ED6D67 /* libEngine.a in Frameworks */,
 				7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */,
 				7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */,
 				7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */,
@@ -200,6 +201,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F9EB6CF279A163700384C0B /* libEngine-Mac.a */,
 				7F63D819279A067800139E14 /* Cocoa.framework */,
 				7FCC12952798D792002ECABD /* GameController.framework */,
 				7F20ACB9278B352400B5772F /* MetalKit.framework */,

@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F1382142775059B00ED6D67"
                BuildableName = "libEngine.a"
-               BlueprintName = "Engine"
+               BlueprintName = "Engine-Mac"
                ReferencedContainer = "container:Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -136,7 +136,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F1382142775059B00ED6D67"
             BuildableName = "libEngine.a"
-            BlueprintName = "Engine"
+            BlueprintName = "Engine-Mac"
             ReferencedContainer = "container:Engine.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
