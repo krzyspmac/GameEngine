@@ -76,6 +76,34 @@
                ReferencedContainer = "container:../../../Libraries/cJson/cJson.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F63D83C279A0E8B00139E14"
+               BuildableName = "Engine-Mac-MetalLib"
+               BlueprintName = "Engine-Mac-MetalLib"
+               ReferencedContainer = "container:Engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F63D832279A0D4000139E14"
+               BuildableName = "Engine-iOS-MetalLib"
+               BlueprintName = "Engine-iOS-MetalLib"
+               ReferencedContainer = "container:Engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

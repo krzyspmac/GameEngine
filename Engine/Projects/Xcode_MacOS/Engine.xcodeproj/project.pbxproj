@@ -51,6 +51,13 @@
 		7F63D81C279A086300139E14 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D81B279A086300139E14 /* libcjson.a */; };
 		7F63D81E279A086300139E14 /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D81D279A086300139E14 /* libimgui.a */; };
 		7F63D820279A086300139E14 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D81F279A086300139E14 /* liblua.a */; };
+		7F63D828279A0C5C00139E14 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; };
+		7F63D82A279A0C6100139E14 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D829279A0C6100139E14 /* MetalKit.framework */; };
+		7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */; };
+		7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */; };
+		7F63D84E279A103C00139E14 /* AAPLShaderTypes.h in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D84B279A102B00139E14 /* AAPLShaderTypes.h */; };
+		7F63D84F279A103E00139E14 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D84C279A102B00139E14 /* AAPLShaders.metal */; };
+		7F63D86A279A132E00139E14 /* Engine-Mac-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F63D859279A11E600139E14 /* Engine-Mac-MetalLib.metallib */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
 		7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character_renderer.hpp */; };
 		7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
@@ -157,6 +164,30 @@
 		7FF641E1277D22E50017D86D /* events_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641DF277D22E50017D86D /* events_manager.hpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7F63D845279A0F2F00139E14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F3CAAD9277093D500E0D74C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F63D83C279A0E8B00139E14;
+			remoteInfo = "Engine-Mac-MetalLib";
+		};
+		7F63D847279A0F2F00139E14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F3CAAD9277093D500E0D74C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F63D832279A0D4000139E14;
+			remoteInfo = "Engine-iOS-MetalLib";
+		};
+		7F63D866279A130200139E14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F3CAAD9277093D500E0D74C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F63D861279A12F900139E14;
+			remoteInfo = "Engine-Bundle";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4C255DDB27858CBA00D0B30A /* release_pool.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = release_pool.cpp; sourceTree = "<group>"; };
 		4C255DDC27858CBA00D0B30A /* release_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = release_pool.hpp; sourceTree = "<group>"; };
@@ -206,6 +237,14 @@
 		7F63D81B279A086300139E14 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F63D81D279A086300139E14 /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F63D81F279A086300139E14 /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F63D829279A0C6100139E14 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntryViewController.mm; sourceTree = "<group>"; };
+		7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RendererEntryViewController.h; sourceTree = "<group>"; };
+		7F63D84B279A102B00139E14 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
+		7F63D84C279A102B00139E14 /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = AAPLShaders.metal; sourceTree = "<group>"; };
+		7F63D859279A11E600139E14 /* Engine-Mac-MetalLib.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; path = "Engine-Mac-MetalLib.metallib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F63D862279A12F900139E14 /* Engine-Mac-Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Engine-Mac-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F63D86E279A138500139E14 /* Engine-Mac-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Engine-Mac-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F64288227779CD400EE9E2C /* character_renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_renderer.cpp; sourceTree = "<group>"; };
 		7F64288327779CD400EE9E2C /* character_renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_renderer.hpp; sourceTree = "<group>"; };
 		7F6428882777C51D00EE9E2C /* character_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = character_interface.h; sourceTree = "<group>"; };
@@ -325,9 +364,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F63D82A279A0C6100139E14 /* MetalKit.framework in Frameworks */,
+				7F63D828279A0C5C00139E14 /* Metal.framework in Frameworks */,
 				7F63D81C279A086300139E14 /* libcjson.a in Frameworks */,
 				7F63D81E279A086300139E14 /* libimgui.a in Frameworks */,
 				7F63D820279A086300139E14 /* liblua.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F63D85F279A12F900139E14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -359,6 +407,7 @@
 				7F1382A727750AC000ED6D67 /* common_sdl.h */,
 				7FB8242F2789DCF6008F0F7A /* easy.h */,
 				7FE2E5D2277B233900538094 /* Common */,
+				7F63D82B279A0C9500139E14 /* EntryPoints */,
 				7FDDAF9A2776872100578F86 /* Game */,
 				7F13821A277505B600ED6D67 /* Renderer */,
 			);
@@ -503,6 +552,7 @@
 			isa = PBXGroup;
 			children = (
 				7F138219277505B600ED6D67 /* src */,
+				7F63D84A279A102B00139E14 /* Metal-Mac-Shaders */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
 				7F3CAAE2277093D500E0D74C /* Products */,
 			);
@@ -512,6 +562,7 @@
 			isa = PBXGroup;
 			children = (
 				7F1382152775059B00ED6D67 /* libEngine.a */,
+				7F63D862279A12F900139E14 /* Engine-Mac-Bundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -519,12 +570,42 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F63D829279A0C6100139E14 /* MetalKit.framework */,
 				7F63D81B279A086300139E14 /* libcjson.a */,
 				7F63D81D279A086300139E14 /* libimgui.a */,
 				7F63D81F279A086300139E14 /* liblua.a */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 			);
 			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		7F63D82B279A0C9500139E14 /* EntryPoints */ = {
+			isa = PBXGroup;
+			children = (
+				7F63D82C279A0C9500139E14 /* Mac */,
+			);
+			path = EntryPoints;
+			sourceTree = "<group>";
+		};
+		7F63D82C279A0C9500139E14 /* Mac */ = {
+			isa = PBXGroup;
+			children = (
+				7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */,
+				7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */,
+			);
+			path = Mac;
+			sourceTree = "<group>";
+		};
+		7F63D84A279A102B00139E14 /* Metal-Mac-Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				7F63D86E279A138500139E14 /* Engine-Mac-Bundle.bundle */,
+				7F63D859279A11E600139E14 /* Engine-Mac-MetalLib.metallib */,
+				7F63D84B279A102B00139E14 /* AAPLShaderTypes.h */,
+				7F63D84C279A102B00139E14 /* AAPLShaders.metal */,
+			);
+			name = "Metal-Mac-Shaders";
+			path = "../../src/Shaders/Metal-Mac-Shaders";
 			sourceTree = "<group>";
 		};
 		7F64288127779CCA00EE9E2C /* Character */ = {
@@ -819,6 +900,7 @@
 				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
 				4C255DED2785CA9100D0B30A /* animation_group_factory.hpp in Headers */,
 				7FE2E5DA277B23BC00538094 /* vector2.hpp in Headers */,
+				7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */,
 				7FC1311F2792FAF20094DF0C /* scripting_engine_provider_interface.h in Headers */,
 				7F6E2C272794AFD100348C81 /* character_interface_impl.hpp in Headers */,
 				7FC131242792FAF20094DF0C /* animation_interface.h in Headers */,
@@ -872,11 +954,59 @@
 			buildRules = (
 			);
 			dependencies = (
+				7F63D867279A130200139E14 /* PBXTargetDependency */,
+				7F63D846279A0F2F00139E14 /* PBXTargetDependency */,
+				7F63D848279A0F2F00139E14 /* PBXTargetDependency */,
 			);
 			name = Engine;
 			productName = Engine;
 			productReference = 7F1382152775059B00ED6D67 /* libEngine.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F63D836279A0D4000139E14 /* Build configuration list for PBXNativeTarget "Engine-iOS-MetalLib" */;
+			buildPhases = (
+				7F63D831279A0D4000139E14 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Engine-iOS-MetalLib";
+			productName = "Engine-MacOS-MetalLib";
+			productType = "com.apple.product-type.metal-library";
+		};
+		7F63D83C279A0E8B00139E14 /* Engine-Mac-MetalLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F63D840279A0E8B00139E14 /* Build configuration list for PBXNativeTarget "Engine-Mac-MetalLib" */;
+			buildPhases = (
+				7F63D83B279A0E8B00139E14 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Engine-Mac-MetalLib";
+			productName = "Engine-Mac-MetalLib";
+			productType = "com.apple.product-type.metal-library";
+		};
+		7F63D861279A12F900139E14 /* Engine-Mac-Bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F63D863279A12F900139E14 /* Build configuration list for PBXNativeTarget "Engine-Mac-Bundle" */;
+			buildPhases = (
+				7F63D85E279A12F900139E14 /* Sources */,
+				7F63D85F279A12F900139E14 /* Frameworks */,
+				7F63D860279A12F900139E14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Engine-Mac-Bundle";
+			productName = "Engine-Bundle";
+			productReference = 7F63D862279A12F900139E14 /* Engine-Mac-Bundle.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -888,6 +1018,15 @@
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					7F1382142775059B00ED6D67 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					7F63D832279A0D4000139E14 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					7F63D83C279A0E8B00139E14 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					7F63D861279A12F900139E14 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
@@ -906,9 +1045,23 @@
 			projectRoot = "";
 			targets = (
 				7F1382142775059B00ED6D67 /* Engine */,
+				7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */,
+				7F63D83C279A0E8B00139E14 /* Engine-Mac-MetalLib */,
+				7F63D861279A12F900139E14 /* Engine-Mac-Bundle */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7F63D860279A12F900139E14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F63D86A279A132E00139E14 /* Engine-Mac-MetalLib.metallib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7F1382122775059B00ED6D67 /* Sources */ = {
@@ -960,6 +1113,7 @@
 				7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */,
 				7F869FBA2780C41F00E8CB01 /* periodic_updates_manager.cpp in Sources */,
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
+				7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */,
 				7F708915278A13D800A501CB /* font_manager.cpp in Sources */,
 				7F8499152787464F004127CB /* key_value.cpp in Sources */,
 				7F6E2C262794AFD100348C81 /* character_interface_impl.cpp in Sources */,
@@ -980,7 +1134,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F63D831279A0D4000139E14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F63D83B279A0E8B00139E14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F63D84E279A103C00139E14 /* AAPLShaderTypes.h in Sources */,
+				7F63D84F279A103E00139E14 /* AAPLShaders.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F63D85E279A12F900139E14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7F63D846279A0F2F00139E14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F63D83C279A0E8B00139E14 /* Engine-Mac-MetalLib */;
+			targetProxy = 7F63D845279A0F2F00139E14 /* PBXContainerItemProxy */;
+		};
+		7F63D848279A0F2F00139E14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */;
+			targetProxy = 7F63D847279A0F2F00139E14 /* PBXContainerItemProxy */;
+		};
+		7F63D867279A130200139E14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F63D861279A12F900139E14 /* Engine-Mac-Bundle */;
+			targetProxy = 7F63D866279A130200139E14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		7F1382172775059B00ED6D67 /* Debug */ = {
@@ -1037,6 +1232,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1113,6 +1309,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1150,6 +1347,88 @@
 			};
 			name = Release;
 		};
+		7F63D837279A0D4000139E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		7F63D838279A0D4000139E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		7F63D841279A0E8B00139E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		7F63D842279A0E8B00139E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		7F63D864279A12F900139E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.krzysp.gameengine.Engine-Bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		7F63D865279A12F900139E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.krzysp.gameengine.Engine-Bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1167,6 +1446,33 @@
 			buildConfigurations = (
 				7F3CAAEF277093D600E0D74C /* Debug */,
 				7F3CAAF0277093D600E0D74C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F63D836279A0D4000139E14 /* Build configuration list for PBXNativeTarget "Engine-iOS-MetalLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F63D837279A0D4000139E14 /* Debug */,
+				7F63D838279A0D4000139E14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F63D840279A0E8B00139E14 /* Build configuration list for PBXNativeTarget "Engine-Mac-MetalLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F63D841279A0E8B00139E14 /* Debug */,
+				7F63D842279A0E8B00139E14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F63D863279A12F900139E14 /* Build configuration list for PBXNativeTarget "Engine-Mac-Bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F63D864279A12F900139E14 /* Debug */,
+				7F63D865279A12F900139E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

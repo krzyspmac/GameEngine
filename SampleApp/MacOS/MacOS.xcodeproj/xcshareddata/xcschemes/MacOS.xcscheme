@@ -104,6 +104,20 @@
                ReferencedContainer = "container:../../Libraries/imgui/imgui.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F63D83C279A0E8B00139E14"
+               BuildableName = "Engine-Mac-MetalLib"
+               BlueprintName = "Engine-Mac-MetalLib"
+               ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

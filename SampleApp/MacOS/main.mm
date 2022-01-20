@@ -6,7 +6,6 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#include "RendererEntrySDL.hpp"
 
 #pragma mark - Application Main Function
 
