@@ -146,7 +146,7 @@ namespace engine
     {
     public:
         CharacterRendererI(SpriteAtlasI *characterAtlas, float scale)
-            : m_characterAtlas(characterAtlas), m_scale(scale), m_bufferDrawable(nullptr) {};
+            : m_characterAtlas(characterAtlas), m_scale(scale) {};
 
         virtual ~CharacterRendererI() {
         };
@@ -189,9 +189,7 @@ namespace engine
         CharacterWalkRenderer m_walkB;
         CharacterWalkRenderer m_standB;
 
-        std::unique_ptr<DrawableTargetI> m_bufferDrawable;
         std::unique_ptr<SpriteDrawStatic> m_bodySprite;
-        std::unique_ptr<DrawableI> m_headDrawable;
     };
 
     inline CharacterWalkState CharacterWalkStateGetStanding(CharacterWalkState state)
