@@ -68,7 +68,7 @@ void Engine::Setup()
 
     m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
 #if SHOW_FPS
-    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 0.5);
+    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 1);
 #endif
 
     std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));

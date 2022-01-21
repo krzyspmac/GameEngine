@@ -61,7 +61,7 @@ vertexShader(uint vertexID [[vertex_id]],
 
     // Get the target object translation
     vector_float2 objectTranslation = vector_float2(*viewportOffset);
-    objectTranslation.xy *= 2;
+    objectTranslation.xy *= viewportScale;
 
     // Scale the object based on the viewport scale
     pixelSpacePosition.xy *= viewportScale;

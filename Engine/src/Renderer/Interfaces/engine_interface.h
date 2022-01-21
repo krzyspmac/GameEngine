@@ -107,6 +107,9 @@ namespace engine
         /** Set the viewport scale to match the current screen the engine in on */
         void SetViewportScale(float val) { m_engineProvider.SetViewportScale(val); m_viewportScale = val; };
 
+        /** Get the viewport scale to match the current screen the engine in on */
+        float GetViewportScale() { return m_viewportScale; };
+
         /** Get Mouse position */
         engine::Origin& GetMousPosition() { return m_mousePosition; };
 

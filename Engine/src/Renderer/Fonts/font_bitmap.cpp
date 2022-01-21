@@ -183,6 +183,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
     if (m_texture != nullptr)
     {
         EngineProviderI& provider = GetMainEngine()->getProvider();
+        float viewportScale = GetMainEngine()->GetViewportScale();
         auto& fontDescriptor = m_font.GetDescriptor();
         auto& charSpacing = fontDescriptor.info.spacing;
 
@@ -204,11 +205,11 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
             {
                 Size& offset = glyph->GetOffset();
                 auto drawable = glyph->GetDrawable();
-                float tx = x + ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale));
-                float ty = y + ceil((offset.height * m_scale * 2));
+                float tx = x + (viewportScale * ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale)));
+                float ty = y + ceil((offset.height * m_scale * viewportScale));
 
                 provider.DrawableRender(drawable, tx, ty);
-                x += ceil((glyph->GetXAdvance()*2 + charSpacing.x) * m_scale);
+                x += ceil((glyph->GetXAdvance() + charSpacing.x)) * m_scale * viewportScale;
             }
 
             previousC = c;

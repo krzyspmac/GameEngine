@@ -9,6 +9,6 @@
 #define defs_h
 
 #define SHOW_FPS        1   /* shows the FPS on the screen */
-#define SHOW_CONSOLE    1
+#define SHOW_CONSOLE    0
 
 #endif /* defs_h */

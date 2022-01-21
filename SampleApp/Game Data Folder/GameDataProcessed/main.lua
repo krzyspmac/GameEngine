@@ -10,10 +10,14 @@ truck = nil
 bg = nil
 font = nil
 
+viewportWidth = nil, viewportHeight
+
 ------------------------------------------------------------------------------------------
 -- loading functions
 
 function loadSprites()
+	viewportWidth, viewportHeight = EngineState:GetViewportSize()
+	
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 --atlas:SetFlippedVertically(1)
 	
@@ -37,9 +41,9 @@ function loadSprites()
 	
 --	-- sky
 sky2 = scene:LoadSpriteStatic(atlas, "background.png")
-sky2:SetScale(0.5)
+sky2:SetScale(2)
 sky2:SetAlpha(1)
-sky2:SetPosition(1280/2, 720/2)
+sky2:SetPosition(0, 0)
 
 sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
 sky:SetScale(1)
@@ -103,7 +107,7 @@ end
 
 function init()
 	loadSprites()
-  	animateIntro()
+  	--animateIntro()
 end
 
 function update ()

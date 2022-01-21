@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F3E915E279B0459003BB7B6"
-               BuildableName = "Engine-iOS-Bundle copy.bundle"
+               BuildableName = "Engine-TV-Bundle.bundle"
                BlueprintName = "Engine-TV-Bundle"
                ReferencedContainer = "container:Engine.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F3E915E279B0459003BB7B6"
-            BuildableName = "Engine-iOS-Bundle copy.bundle"
+            BuildableName = "Engine-TV-Bundle.bundle"
             BlueprintName = "Engine-TV-Bundle"
             ReferencedContainer = "container:Engine.xcodeproj">
          </BuildableReference>
