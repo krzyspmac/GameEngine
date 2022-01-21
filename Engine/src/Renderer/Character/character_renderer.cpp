@@ -7,7 +7,6 @@
 
 #include "character_renderer.hpp"
 #include "engine.hpp"
-#include <SDL.h>
 
 using namespace engine;
 

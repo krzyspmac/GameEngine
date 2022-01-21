@@ -14,12 +14,6 @@
       location = "group:../../Libraries/Lua/Lua.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../Libraries/SDL_image-main/Xcode/SDL_image.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../Libraries/SDL_ttf-main/Xcode/SDL_ttf.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:../../Libraries/imgui/imgui.xcodeproj">
    </FileRef>
 </Workspace>

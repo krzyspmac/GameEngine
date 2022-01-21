@@ -13,10 +13,6 @@
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
 		7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AA27750B5B00ED6D67 /* libcjson.a */; };
 		7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AE27750B5B00ED6D67 /* liblua.a */; };
-		7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B027750B5B00ED6D67 /* libSDL2_image.a */; };
-		7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */; };
-		7F1382C527750BBC00ED6D67 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; };
-		7F1382C627750BBC00ED6D67 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7F1382C827750C0800ED6D67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F1382C727750C0800ED6D67 /* main.mm */; };
 		7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F20ACB0278B2B1A00B5772F /* Main.storyboard */; };
 		7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB5278B31FA00B5772F /* Foundation.framework */; };
@@ -62,7 +58,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7F1382C627750BBC00ED6D67 /* SDL2.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,10 +132,7 @@
 				7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */,
 				7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */,
 				7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */,
-				7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */,
-				7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */,
 				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
-				7F1382C527750BBC00ED6D67 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,10 +406,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
-					"$(SRCROOT)/../../Frameworks/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../Frameworks/**";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -435,18 +424,11 @@
 					"$(SRCROOT)/../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
-					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
-					"$(SRCROOT)/../../Libraries/SDL_image-main",
-					"$(SRCROOT)/../../Libraries/SDL_ttf-main",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-weak_framework",
-					webp,
-				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -487,10 +469,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
-					"$(SRCROOT)/../../Frameworks/**",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../Frameworks/**";
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -502,17 +481,10 @@
 					"$(SRCROOT)/../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
-					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
-					"$(SRCROOT)/../../Libraries/SDL_image-main",
-					"$(SRCROOT)/../../Libraries/SDL_ttf-main",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"-weak_framework",
-					webp,
-				);
 				SDKROOT = macosx;
 			};
 			name = Release;

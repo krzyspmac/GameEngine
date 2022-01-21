@@ -51,8 +51,3 @@ void EventsManager::RegisterMouseClickedEvents(EventHolderMouseClicked val)
 {
     m_mouseClicks.push_back(val);
 }
-
-void EventsManager::RegisterGeneralInputEvents(EventHolderSDLEvent val)
-{
-    m_generalInput.push_back(val);
-}

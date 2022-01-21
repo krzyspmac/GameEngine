@@ -156,11 +156,11 @@ void Engine::MeasurePerformanceStart()
 
 void Engine::MeasurePerformanceEnd()
 {
-    m_performanceEnd = m_engineProvider.GetPerformanceCounter();
-    m_performanceDelta = m_performanceEnd - m_performanceStart;
-    m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
-    m_milliseconds = m_seconds * 1000;
-    m_previousFps = 1.0f / m_seconds;
+//    m_performanceEnd = m_engineProvider.GetPerformanceCounter();
+//    m_performanceDelta = m_performanceEnd - m_performanceStart;
+//    m_seconds = m_performanceDelta / (float)SDL_GetPerformanceFrequency();
+//    m_milliseconds = m_seconds * 1000;
+//    m_previousFps = 1.0f / m_seconds;
 }
 
 void Engine::RenderScene()

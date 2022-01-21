@@ -103,16 +103,3 @@ static int closeF(struct SDL_RWops * context)
 {
     return 0;
 }
-
-std::unique_ptr<SDL_RWops> FileMemoryBufferStreamFromFile::CreateRWOps()
-{
-    currentStream = this;
-
-    SDL_RWops *ops = (SDL_RWops*)malloc(sizeof(SDL_RWops));
-    ops->size = &sizeF;
-    ops->seek = &seekF;
-    ops->read = &readF;
-    ops->close = &closeF;
-
-    return std::unique_ptr<SDL_RWops>(std::move(ops));
-}

@@ -54,12 +54,6 @@ namespace engine
         /** Helper to read the whole file as string */
         virtual std::string ReadBufferString() = 0;
 
-        /**
-         Create a RW ops for SDL. Only one such operation can be performed
-         at a given time.
-         */
-        virtual std::unique_ptr<SDL_RWops> CreateRWOps() = 0;
-
     protected:
         std::string m_filename;
         int64_t m_size;
@@ -77,7 +71,6 @@ namespace engine
         int64_t Seek(int64_t offset, int whence);
         size_t Read(void *ptr, size_t size, size_t maxnum);
         std::string ReadBufferString();
-        std::unique_ptr<SDL_RWops> CreateRWOps();
         FILE *GetFP() { return m_fp; };
     };
 

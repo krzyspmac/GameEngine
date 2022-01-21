@@ -14,7 +14,6 @@
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
 #include "console_app_renderer_mac.hpp"
-#include "engine_provider_sdl.hpp"
 #include "imgui.h"
 #include "imgui_impl_metal.h"
 #include "imgui_impl_osx.h"

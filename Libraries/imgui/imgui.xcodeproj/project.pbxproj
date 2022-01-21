@@ -13,9 +13,7 @@
 		7FB824022788F8A3008F0F7A /* imstb_textedit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823FC2788F8A3008F0F7A /* imstb_textedit.h */; };
 		7FB824032788F8A3008F0F7A /* imgui_internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823FD2788F8A3008F0F7A /* imgui_internal.h */; };
 		7FB824042788F8A3008F0F7A /* imgui_widgets.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB823FE2788F8A3008F0F7A /* imgui_widgets.cpp */; };
-		7FB8240B2788F8B5008F0F7A /* imgui_impl_sdl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824052788F8B5008F0F7A /* imgui_impl_sdl.h */; };
 		7FB8240C2788F8B5008F0F7A /* imgui_impl_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB824062788F8B5008F0F7A /* imgui_impl_metal.mm */; };
-		7FB8240D2788F8B5008F0F7A /* imgui_impl_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB824072788F8B5008F0F7A /* imgui_impl_sdl.cpp */; };
 		7FB8240E2788F8B5008F0F7A /* imgui_impl_metal.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824082788F8B5008F0F7A /* imgui_impl_metal.h */; };
 		7FB8240F2788F8B5008F0F7A /* imgui_impl_osx.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824092788F8B5008F0F7A /* imgui_impl_osx.h */; };
 		7FB824102788F8B5008F0F7A /* imgui_impl_osx.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8240A2788F8B5008F0F7A /* imgui_impl_osx.mm */; };
@@ -31,9 +29,7 @@
 		7FB823FC2788F8A3008F0F7A /* imstb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imstb_textedit.h; sourceTree = "<group>"; };
 		7FB823FD2788F8A3008F0F7A /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
 		7FB823FE2788F8A3008F0F7A /* imgui_widgets.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_widgets.cpp; sourceTree = "<group>"; };
-		7FB824052788F8B5008F0F7A /* imgui_impl_sdl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_sdl.h; path = backends/imgui_impl_sdl.h; sourceTree = "<group>"; };
 		7FB824062788F8B5008F0F7A /* imgui_impl_metal.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imgui_impl_metal.mm; path = backends/imgui_impl_metal.mm; sourceTree = "<group>"; };
-		7FB824072788F8B5008F0F7A /* imgui_impl_sdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = imgui_impl_sdl.cpp; path = backends/imgui_impl_sdl.cpp; sourceTree = "<group>"; };
 		7FB824082788F8B5008F0F7A /* imgui_impl_metal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_metal.h; path = backends/imgui_impl_metal.h; sourceTree = "<group>"; };
 		7FB824092788F8B5008F0F7A /* imgui_impl_osx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgui_impl_osx.h; path = backends/imgui_impl_osx.h; sourceTree = "<group>"; };
 		7FB8240A2788F8B5008F0F7A /* imgui_impl_osx.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = imgui_impl_osx.mm; path = backends/imgui_impl_osx.mm; sourceTree = "<group>"; };
@@ -61,8 +57,6 @@
 				7FB824062788F8B5008F0F7A /* imgui_impl_metal.mm */,
 				7FB824092788F8B5008F0F7A /* imgui_impl_osx.h */,
 				7FB8240A2788F8B5008F0F7A /* imgui_impl_osx.mm */,
-				7FB824072788F8B5008F0F7A /* imgui_impl_sdl.cpp */,
-				7FB824052788F8B5008F0F7A /* imgui_impl_sdl.h */,
 				7FB823FD2788F8A3008F0F7A /* imgui_internal.h */,
 				7FB823F92788F8A3008F0F7A /* imgui_tables.cpp */,
 				7FB823FE2788F8A3008F0F7A /* imgui_widgets.cpp */,
@@ -88,7 +82,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FB8240B2788F8B5008F0F7A /* imgui_impl_sdl.h in Headers */,
 				7FB8240E2788F8B5008F0F7A /* imgui_impl_metal.h in Headers */,
 				7FB824012788F8A3008F0F7A /* imgui.h in Headers */,
 				7FB824022788F8A3008F0F7A /* imstb_textedit.h in Headers */,
@@ -156,7 +149,6 @@
 			files = (
 				7FB823FF2788F8A3008F0F7A /* imgui_tables.cpp in Sources */,
 				7FB824142788F98E008F0F7A /* imgui_draw.cpp in Sources */,
-				7FB8240D2788F8B5008F0F7A /* imgui_impl_sdl.cpp in Sources */,
 				7FB8240C2788F8B5008F0F7A /* imgui_impl_metal.mm in Sources */,
 				7FB824042788F8A3008F0F7A /* imgui_widgets.cpp in Sources */,
 				7FB824102788F8B5008F0F7A /* imgui_impl_osx.mm in Sources */,

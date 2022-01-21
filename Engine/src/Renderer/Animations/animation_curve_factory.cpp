@@ -6,6 +6,7 @@
 //
 
 #include "animation_curve_factory.hpp"
+#include <math.h>
 
 using namespace engine;
 
