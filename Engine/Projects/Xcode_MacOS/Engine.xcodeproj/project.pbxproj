@@ -204,8 +204,12 @@
 		7F3E8F52279AE344003BB7B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* AAPLShaders.metal */; };
 		7F3E8F53279AE3CF003BB7B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* AAPLShaders.metal */; };
 		7F3E8FF7279AF7F7003BB7B6 /* Engine-iOS-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8FF5279AF7BC003BB7B6 /* Engine-iOS-MetalLib.metallib */; };
-		7F63D828279A0C5C00139E14 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; };
-		7F63D82A279A0C6100139E14 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D829279A0C6100139E14 /* MetalKit.framework */; };
+		7F3E901A279AFFFC003BB7B6 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F4C279AE2E6003BB7B6 /* libcjson.a */; };
+		7F3E901B279AFFFC003BB7B6 /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F4E279AE2E6003BB7B6 /* libimgui.a */; };
+		7F3E901C279AFFFC003BB7B6 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F4D279AE2E6003BB7B6 /* liblua.a */; };
+		7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E901D279B0056003BB7B6 /* libcjson-ios.a */; };
+		7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E901F279B0056003BB7B6 /* libimgui-ios.a */; };
+		7F3E9022279B0056003BB7B6 /* liblua-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9021279B0056003BB7B6 /* liblua-ios.a */; };
 		7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */; };
 		7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
@@ -397,6 +401,9 @@
 		7F3E8F80279AECF0003BB7B6 /* prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = prefix.pch; sourceTree = "<group>"; };
 		7F3E8FF4279AF7B6003BB7B6 /* Engine-iOS-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-iOS-Bundle.bundle"; path = "../Debug-iphonesimulator/Engine-iOS-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8FF5279AF7BC003BB7B6 /* Engine-iOS-MetalLib.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = "Engine-iOS-MetalLib.metallib"; path = "../Debug-iphonesimulator/Engine-iOS-MetalLib.metallib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E901D279B0056003BB7B6 /* libcjson-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libcjson-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E901F279B0056003BB7B6 /* libimgui-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libimgui-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9021279B0056003BB7B6 /* liblua-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblua-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F63D829279A0C6100139E14 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntryViewController.mm; sourceTree = "<group>"; };
@@ -521,8 +528,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F63D82A279A0C6100139E14 /* MetalKit.framework in Frameworks */,
-				7F63D828279A0C5C00139E14 /* Metal.framework in Frameworks */,
+				7F3E901A279AFFFC003BB7B6 /* libcjson.a in Frameworks */,
+				7F3E901B279AFFFC003BB7B6 /* libimgui.a in Frameworks */,
+				7F3E901C279AFFFC003BB7B6 /* liblua.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +538,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */,
+				7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */,
+				7F3E9022279B0056003BB7B6 /* liblua-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +751,9 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F3E901D279B0056003BB7B6 /* libcjson-ios.a */,
+				7F3E901F279B0056003BB7B6 /* libimgui-ios.a */,
+				7F3E9021279B0056003BB7B6 /* liblua-ios.a */,
 				7F63D829279A0C6100139E14 /* MetalKit.framework */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 			);

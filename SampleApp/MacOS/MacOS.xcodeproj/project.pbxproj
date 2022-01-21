@@ -11,8 +11,6 @@
 		7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
-		7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AA27750B5B00ED6D67 /* libcjson.a */; };
-		7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AE27750B5B00ED6D67 /* liblua.a */; };
 		7F1382C827750C0800ED6D67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F1382C727750C0800ED6D67 /* main.mm */; };
 		7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F20ACB0278B2B1A00B5772F /* Main.storyboard */; };
 		7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB5278B31FA00B5772F /* Foundation.framework */; };
@@ -27,9 +25,6 @@
 		7F3E8F86279AF176003BB7B6 /* libEngine-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F85279AF176003BB7B6 /* libEngine-iOS.a */; };
 		7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F8A279AF17C003BB7B6 /* Metal.framework */; };
 		7F3E8F8D279AF17C003BB7B6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F8B279AF17C003BB7B6 /* MetalKit.framework */; };
-		7F3E8FF9279AF81B003BB7B6 /* libcjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8FF8279AF81B003BB7B6 /* libcjson-ios.a */; };
-		7F3E8FFB279AF81B003BB7B6 /* libimgui-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8FFA279AF81B003BB7B6 /* libimgui-ios.a */; };
-		7F3E8FFD279AF81B003BB7B6 /* liblua-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8FFC279AF81B003BB7B6 /* liblua-ios.a */; };
 		7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */; };
 		7F3E9000279AFA6C003BB7B6 /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
 		7F3E9001279AFA6C003BB7B6 /* fireplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499282787798B004127CB /* fireplace.json */; };
@@ -86,7 +81,6 @@
 		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
 		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
-		7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB824112788F8FC008F0F7A /* libimgui.a */; };
 		7FCC12962798D792002ECABD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCC12952798D792002ECABD /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -182,9 +176,6 @@
 				7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */,
 				7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */,
 				7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */,
-				7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */,
-				7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */,
-				7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */,
 				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -193,9 +184,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3E8FF9279AF81B003BB7B6 /* libcjson-ios.a in Frameworks */,
-				7F3E8FFB279AF81B003BB7B6 /* libimgui-ios.a in Frameworks */,
-				7F3E8FFD279AF81B003BB7B6 /* liblua-ios.a in Frameworks */,
 				7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */,
 				7F3E8F8D279AF17C003BB7B6 /* MetalKit.framework in Frameworks */,
 				7F3E8F86279AF176003BB7B6 /* libEngine-iOS.a in Frameworks */,
