@@ -1,0 +1,13 @@
+//
+//  PrefixHeader.pch
+//  MacOS
+//
+//  Created by krzysp on 21/01/2022.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#include "Defs.h"
+
+#endif /* PrefixHeader_pch */

@@ -12,7 +12,12 @@
 #include "engine.hpp"
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
+
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#include <UIKit/UIKit.h>
+#else
 #include <Cocoa/Cocoa.h>
+#endif
 
 #include "imgui.h"
 #include "imgui_impl_sdl.h"

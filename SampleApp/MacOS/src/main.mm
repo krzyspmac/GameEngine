@@ -9,7 +9,7 @@
 
 #pragma mark - Application Main Function
 
-#if TARGET_OS_OSX
+#if TARGET_MACOS
 
 int main(int argc, const char * argv[])
 {

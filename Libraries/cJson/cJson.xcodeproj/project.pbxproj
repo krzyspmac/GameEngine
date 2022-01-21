@@ -7,18 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F3E8FEC279AF5F0003BB7B6 /* cJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F42606127733F6500E0DC09 /* cJSON.h */; };
+		7F3E8FEE279AF5F0003BB7B6 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F42606227733F6500E0DC09 /* cJSON.c */; };
 		7F42606327733F6500E0DC09 /* cJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F42606127733F6500E0DC09 /* cJSON.h */; };
 		7F42606427733F6500E0DC09 /* cJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = 7F42606227733F6500E0DC09 /* cJSON.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7F2E2314276F8C51003E6B4E /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8FF3279AF5F0003BB7B6 /* libcjson-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcjson-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F42606127733F6500E0DC09 /* cJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cJSON.h; path = cJson/cJSON.h; sourceTree = "<group>"; };
 		7F42606227733F6500E0DC09 /* cJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cJSON.c; path = cJson/cJSON.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7F2E2312276F8C51003E6B4E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E8FEF279AF5F0003BB7B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				7F2E2314276F8C51003E6B4E /* libcjson.a */,
+				7F3E8FF3279AF5F0003BB7B6 /* libcjson-ios.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +64,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F42606327733F6500E0DC09 /* cJSON.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E8FEB279AF5F0003BB7B6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E8FEC279AF5F0003BB7B6 /* cJSON.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +93,23 @@
 			name = cjson;
 			productName = lua;
 			productReference = 7F2E2314276F8C51003E6B4E /* libcjson.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		7F3E8FEA279AF5F0003BB7B6 /* cjson-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E8FF0279AF5F0003BB7B6 /* Build configuration list for PBXNativeTarget "cjson-ios" */;
+			buildPhases = (
+				7F3E8FEB279AF5F0003BB7B6 /* Headers */,
+				7F3E8FED279AF5F0003BB7B6 /* Sources */,
+				7F3E8FEF279AF5F0003BB7B6 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "cjson-ios";
+			productName = lua;
+			productReference = 7F3E8FF3279AF5F0003BB7B6 /* libcjson-ios.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -104,6 +140,7 @@
 			projectRoot = "";
 			targets = (
 				7F2E2313276F8C51003E6B4E /* cjson */,
+				7F3E8FEA279AF5F0003BB7B6 /* cjson-ios */,
 			);
 		};
 /* End PBXProject section */
@@ -114,6 +151,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F42606427733F6500E0DC09 /* cJSON.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E8FED279AF5F0003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E8FEE279AF5F0003BB7B6 /* cJSON.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +302,30 @@
 			};
 			name = Release;
 		};
+		7F3E8FF1279AF5F0003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		7F3E8FF2279AF5F0003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -274,6 +343,15 @@
 			buildConfigurations = (
 				7F2E2319276F8C51003E6B4E /* Debug */,
 				7F2E231A276F8C51003E6B4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E8FF0279AF5F0003BB7B6 /* Build configuration list for PBXNativeTarget "cjson-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E8FF1279AF5F0003BB7B6 /* Debug */,
+				7F3E8FF2279AF5F0003BB7B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

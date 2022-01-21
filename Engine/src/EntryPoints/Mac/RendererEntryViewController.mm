@@ -44,7 +44,8 @@
 
 using namespace engine;
 
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
 @interface NSWindow (TitleBarHeight)
 - (CGFloat) titlebarHeight;
 @end
@@ -52,7 +53,8 @@ using namespace engine;
 
 @interface RendererEntryViewController ()
 
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
 <NSWindowDelegate>
 #endif
 
@@ -104,7 +106,8 @@ using namespace engine;
     BOOL didSetupEvents;
 
     /** Events */
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
     NSTrackingArea *mouseTrackingArea;
 #endif
 }
@@ -223,11 +226,18 @@ using namespace engine;
     mtkView.device = device;
     mtkView.delegate = self;
 
-
+#if TARGET_MACOS
     NSURL *engineBundlePath = [[NSBundle mainBundle] URLForResource:@"Engine-Mac-Bundle" withExtension:@"bundle"];
+#else
+    NSURL *engineBundlePath = [[NSBundle mainBundle] URLForResource:@"Engine-iOS-Bundle" withExtension:@"bundle"];
+#endif
     NSBundle *engineBundle = [NSBundle bundleWithURL:engineBundlePath];
     NSError *libraryError = NULL;
+#if TARGET_MACOS
     NSString *libraryFile = [engineBundle pathForResource:@"Engine-Mac-MetalLib" ofType:@"metallib"];
+#else
+    NSString *libraryFile = [engineBundle pathForResource:@"Engine-iOS-MetalLib" ofType:@"metallib"];
+#endif
     library = [device newLibraryWithFile:libraryFile error:&libraryError];
     if (!library) {
         NSLog(@"Library error: %@", libraryError.localizedDescription);
@@ -322,10 +332,10 @@ using namespace engine;
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
     /** Update the engine if needed*/
-#if defined(TARGET_OS_OSX)
-    m_engine->SetViewportScale(self.view.window.backingScaleFactor);
-#else
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
     m_engine->SetViewportScale([UIScreen mainScreen].scale);
+#else
+    m_engine->SetViewportScale(self.view.window.backingScaleFactor);
 #endif
 
     /** Process events */
@@ -423,7 +433,8 @@ using namespace engine;
 
 - (void)setupMouseClickEvents
 {
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
     [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseUp handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
         self->m_engine->getEventProvider().PushMouseLeftUp();
         return event;
@@ -433,7 +444,8 @@ using namespace engine;
 
 - (void)setupMouseMovedEvents
 {
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
     NSView *view = self.view;
     if (mouseTrackingArea)
     {
@@ -450,7 +462,8 @@ using namespace engine;
 
 - (void)setupKeyEvents
 {
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
     // If we want to receive key events, we either need to be in the responder chain of the key view,
     // or else we can install a local monitor. The consequence of this heavy-handed approach is that
     // we receive events for all controls, not just Dear ImGui widgets. If we had native controls in our
@@ -467,6 +480,8 @@ using namespace engine;
 #endif
 }
 
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
 {
 //    float desiredViewportWidth = (float)SCREEN_WIDTH;
@@ -497,10 +512,12 @@ using namespace engine;
 ////    [mtkView setNeedsDisplay:YES];
     return frameSize;
 }
+#endif
 
 #pragma mark - Other input processing
 
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
 
 - (void)handle:(NSEvent*)event
 {
@@ -572,7 +589,8 @@ using namespace engine;
 
 #pragma mark - NSWindowAdditions
 
-#if defined(TARGET_OS_OSX)
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#else
 @implementation NSWindow (TitleBarHeight)
 - (CGFloat) titlebarHeight
 {

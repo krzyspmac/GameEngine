@@ -7,7 +7,6 @@
 
 #include <Metal/Metal.h>
 #include <QuartzCore/QuartzCore.h>
-#include <Cocoa/Cocoa.h>
 #include "common.h"
 #include "console_renderer.h"
 #include "engine.hpp"
@@ -17,6 +16,12 @@
 #include "imgui.h"
 #include "imgui_impl_metal.h"
 #include "imgui_impl_osx.h"
+
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#include <UIKit/UIKit.h>
+#else
+#include <Cocoa/Cocoa.h>
+#endif
 
 using namespace engine;
 

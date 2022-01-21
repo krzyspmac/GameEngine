@@ -1,0 +1,13 @@
+//
+//  prefix.pch
+//  Engine
+//
+//  Created by krzysp on 21/01/2022.
+//
+
+#ifndef prefix_pch
+#define prefix_pch
+
+#include "defs.h"
+
+#endif /* prefix_pch */
