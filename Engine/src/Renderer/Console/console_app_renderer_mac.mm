@@ -25,7 +25,9 @@ ConsoleAppRendererMac::ConsoleAppRendererMac()
     , m_isSetup(false)
     , m_device(NULL)
     , m_renderPassDescriptor(NULL)
+#if TARGET_OS_OSX
     , m_view(NULL)
+#endif
 {
 }
 
@@ -33,6 +35,8 @@ void ConsoleAppRendererMac::SetDevice(MTL::Device *device)
 {
     m_device = device;
 }
+
+#if TARGET_OS_OSX
 
 void ConsoleAppRendererMac::SetView(NSView *view)
 {
@@ -70,6 +74,8 @@ void ConsoleAppRendererMac::HandleEvent(NSEvent *event)
 #endif
 }
 
+#endif
+
 void ConsoleAppRendererMac::SetupWindow()
 {
 #if SHOW_CONSOLE
@@ -81,7 +87,11 @@ void ConsoleAppRendererMac::SetupWindow()
     (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplMetal_Init((__bridge id<MTLDevice>)m_device);
+
+#if TARGET_OS_OSX
     ImGui_ImplOSX_Init(m_view);
+#endif
+    
     m_isSetup = true;
 #endif
 }

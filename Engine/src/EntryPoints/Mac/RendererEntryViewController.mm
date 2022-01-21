@@ -44,11 +44,18 @@
 
 using namespace engine;
 
+#if defined(TARGET_OS_OSX)
 @interface NSWindow (TitleBarHeight)
 - (CGFloat) titlebarHeight;
 @end
+#endif
 
-@interface RendererEntryViewController () <NSWindowDelegate>
+@interface RendererEntryViewController ()
+
+#if defined(TARGET_OS_OSX)
+<NSWindowDelegate>
+#endif
+
 @end
 
 #pragma mark - Renderer Entry
@@ -97,7 +104,9 @@ using namespace engine;
     BOOL didSetupEvents;
 
     /** Events */
+#if defined(TARGET_OS_OSX)
     NSTrackingArea *mouseTrackingArea;
+#endif
 }
 
 #pragma mark - Lifecycle & Setup
@@ -130,7 +139,9 @@ using namespace engine;
 - (void)viewDidAppear
 {
     [self setupEvents];
+#if TARGET_OSX
     mtkView.window.delegate = self;
+#endif
 }
 
 - (void)setupView
@@ -195,7 +206,9 @@ using namespace engine;
 {
     m_consoleRendererProvider = (ConsoleAppRendererMac*)m_consoleRenderer->GetPlarformRenderer();
     m_consoleRendererProvider->SetDevice((__bridge MTL::Device*)device);
+#if TARGET_OSX
     m_consoleRendererProvider->SetView(self.view);
+#endif
 }
 
 - (void)prepareEngine
@@ -309,7 +322,11 @@ using namespace engine;
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
     /** Update the engine if needed*/
+#if defined(TARGET_OS_OSX)
     m_engine->SetViewportScale(self.view.window.backingScaleFactor);
+#else
+    m_engine->SetViewportScale([UIScreen mainScreen].scale);
+#endif
 
     /** Process events */
     m_engine->ProcessEvents();
@@ -406,14 +423,17 @@ using namespace engine;
 
 - (void)setupMouseClickEvents
 {
+#if defined(TARGET_OS_OSX)
     [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseUp handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
         self->m_engine->getEventProvider().PushMouseLeftUp();
         return event;
     }];
+#endif
 }
 
 - (void)setupMouseMovedEvents
 {
+#if defined(TARGET_OS_OSX)
     NSView *view = self.view;
     if (mouseTrackingArea)
     {
@@ -425,10 +445,12 @@ using namespace engine;
                                                           owner:self
                                                        userInfo:nil];
     [view addTrackingArea:area];
+#endif
 }
 
 - (void)setupKeyEvents
 {
+#if defined(TARGET_OS_OSX)
     // If we want to receive key events, we either need to be in the responder chain of the key view,
     // or else we can install a local monitor. The consequence of this heavy-handed approach is that
     // we receive events for all controls, not just Dear ImGui widgets. If we had native controls in our
@@ -442,6 +464,7 @@ using namespace engine;
 #endif
         return event;
     }];
+#endif
 }
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
@@ -477,7 +500,7 @@ using namespace engine;
 
 #pragma mark - Other input processing
 
-#if TARGET_OS_OSX
+#if defined(TARGET_OS_OSX)
 
 - (void)handle:(NSEvent*)event
 {
@@ -549,9 +572,11 @@ using namespace engine;
 
 #pragma mark - NSWindowAdditions
 
+#if defined(TARGET_OS_OSX)
 @implementation NSWindow (TitleBarHeight)
 - (CGFloat) titlebarHeight
 {
     return self.frame.size.height - [self contentRectForFrameRect: self.frame].size.height;
 }
 @end
+#endif

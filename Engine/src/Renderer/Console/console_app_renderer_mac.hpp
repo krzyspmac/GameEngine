@@ -37,9 +37,11 @@ namespace engine
 
         void Setup();
         void SetDevice(MTL::Device*);
+#if TARGET_OS_OSX
         void SetView(NSView*);
         void PrepareForFrame(NSView*, MTL::RenderPassDescriptor*, MTL::CommandBuffer*, MTL::RenderCommandEncoder*);
         void HandleEvent(NSEvent*);
+#endif
         bool IsSetup();
         void DoFrame(std::function<void(void)>);
         void Render();

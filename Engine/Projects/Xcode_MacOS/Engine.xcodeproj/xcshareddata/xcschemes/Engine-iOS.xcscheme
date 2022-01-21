@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
-               BuildableName = "MacOS.app"
-               BlueprintName = "MacOS"
-               ReferencedContainer = "container:MacOS.xcodeproj">
+               BlueprintIdentifier = "7F3E8E26279AC8BA003BB7B6"
+               BuildableName = "libEngine-iOS.a"
+               BlueprintName = "Engine-iOS"
+               ReferencedContainer = "container:Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -31,7 +31,21 @@
                BlueprintIdentifier = "7F2E2313276F8C51003E6B4E"
                BuildableName = "liblua.a"
                BlueprintName = "lua"
-               ReferencedContainer = "container:../../Libraries/Lua/Lua.xcodeproj">
+               ReferencedContainer = "container:../../../Libraries/Lua/Lua.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F63D832279A0D4000139E14"
+               BuildableName = "Engine-iOS-MetalLib"
+               BlueprintName = "Engine-iOS-MetalLib"
+               ReferencedContainer = "container:Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,21 +59,7 @@
                BlueprintIdentifier = "7F2E2313276F8C51003E6B4E"
                BuildableName = "libcjson.a"
                BlueprintName = "cjson"
-               ReferencedContainer = "container:../../Libraries/cJson/cJson.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F1382142775059B00ED6D67"
-               BuildableName = "libEngine-Mac.a"
-               BlueprintName = "Engine-Mac"
-               ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
+               ReferencedContainer = "container:../../../Libraries/cJson/cJson.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -73,21 +73,7 @@
                BlueprintIdentifier = "7FB823F12788F886008F0F7A"
                BuildableName = "libimgui.a"
                BlueprintName = "imgui"
-               ReferencedContainer = "container:../../Libraries/imgui/imgui.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F63D861279A12F900139E14"
-               BuildableName = "Engine-Mac-Bundle.bundle"
-               BlueprintName = "Engine-Mac-Bundle"
-               ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
+               ReferencedContainer = "container:../../../Libraries/imgui/imgui.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -101,26 +87,15 @@
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
-      useCustomWorkingDirectory = "YES"
-      customWorkingDirectory = "/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/working_dir"
+      useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
-            BuildableName = "MacOS.app"
-            BlueprintName = "MacOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -128,16 +103,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
-            BuildableName = "MacOS.app"
-            BlueprintName = "MacOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3E8E26279AC8BA003BB7B6"
+            BuildableName = "libEngine-iOS.a"
+            BlueprintName = "Engine-iOS"
+            ReferencedContainer = "container:Engine.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

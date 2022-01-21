@@ -12,6 +12,10 @@
 
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
     #import <UIKit/UIKit.h>
+    #include <MetalKit/MetalKit.h>
+    #include <Foundation/Foundation.hpp>
+    #include <Metal/Metal.hpp>
+    #include <QuartzCore/QuartzCore.hpp>
     #define PlatformViewController UIViewController
 #else
     #import <Cocoa/Cocoa.h>
