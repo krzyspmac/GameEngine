@@ -226,19 +226,8 @@ using namespace engine;
     mtkView.device = device;
     mtkView.delegate = self;
 
-#if TARGET_MACOS
-    NSURL *engineBundlePath = [[NSBundle mainBundle] URLForResource:@"Engine-Mac-Bundle" withExtension:@"bundle"];
-#else
-    NSURL *engineBundlePath = [[NSBundle mainBundle] URLForResource:@"Engine-iOS-Bundle" withExtension:@"bundle"];
-#endif
-    NSBundle *engineBundle = [NSBundle bundleWithURL:engineBundlePath];
     NSError *libraryError = NULL;
-#if TARGET_MACOS
-    NSString *libraryFile = [engineBundle pathForResource:@"Engine-Mac-MetalLib" ofType:@"metallib"];
-#else
-    NSString *libraryFile = [engineBundle pathForResource:@"Engine-iOS-MetalLib" ofType:@"metallib"];
-#endif
-    library = [device newLibraryWithFile:libraryFile error:&libraryError];
+    library = [device newLibraryWithFile:[self libraryPath] error:&libraryError];
     if (!library) {
         NSLog(@"Library error: %@", libraryError.localizedDescription);
     }
@@ -332,7 +321,7 @@ using namespace engine;
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
     /** Update the engine if needed*/
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#if TARGET_IOS
     m_engine->SetViewportScale([UIScreen mainScreen].scale);
 #else
     m_engine->SetViewportScale(self.view.window.backingScaleFactor);
@@ -562,6 +551,39 @@ using namespace engine;
 
 #endif
 
+#pragma mark - Helpers
+
+- (NSString*)libraryPath
+{
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSURL *engineBundlePath = nil;
+
+    engineBundlePath = [mainBundle URLForResource:@"Engine-Mac-Bundle" withExtension:@"bundle"];
+
+    if (!engineBundlePath)
+    {
+        engineBundlePath = [mainBundle URLForResource:@"Engine-iOS-Bundle" withExtension:@"bundle"];
+    }
+
+    if (!engineBundlePath)
+    {
+        engineBundlePath = [mainBundle URLForResource:@"Engine-TV-Bundle" withExtension:@"bundle"];
+    }
+
+    NSBundle *engineBundle = [NSBundle bundleWithURL:engineBundlePath];
+
+    NSString *metalLibPath = [engineBundle pathForResource:@"Engine-Mac-MetalLib" ofType:@"metallib"];
+    if (!metalLibPath)
+    {
+        metalLibPath = [engineBundle pathForResource:@"Engine-iOS-MetalLib" ofType:@"metallib"];
+    }
+    if (!metalLibPath)
+    {
+        metalLibPath = [engineBundle pathForResource:@"Engine-TV-MetalLib" ofType:@"metallib"];
+    }
+
+    return metalLibPath;
+}
 
 @end
 

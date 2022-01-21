@@ -199,7 +199,6 @@
 		7F3E8F23279AC914003BB7B6 /* AAPLImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA02E27921D8D0082EB6A /* AAPLImage.mm */; };
 		7F3E8F24279AC914003BB7B6 /* texture_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA0282792166F0082EB6A /* texture_metal.mm */; };
 		7F3E8F25279AC914003BB7B6 /* file_access.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13822B277505B600ED6D67 /* file_access.mm */; };
-		7F3E8F4A279AE1A4003BB7B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* AAPLShaders.metal */; };
 		7F3E8F51279AE32A003BB7B6 /* Engine-Mac-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F4F279AE313003BB7B6 /* Engine-Mac-MetalLib.metallib */; };
 		7F3E8F52279AE344003BB7B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* AAPLShaders.metal */; };
 		7F3E8F53279AE3CF003BB7B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* AAPLShaders.metal */; };
@@ -210,6 +209,164 @@
 		7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E901D279B0056003BB7B6 /* libcjson-ios.a */; };
 		7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E901F279B0056003BB7B6 /* libimgui-ios.a */; };
 		7F3E9022279B0056003BB7B6 /* liblua-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9021279B0056003BB7B6 /* liblua-ios.a */; };
+		7F3E90AF279B03F6003BB7B6 /* doxygen_main.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D2277F85BF004A6107 /* doxygen_main.h */; };
+		7F3E90B0279B03F6003BB7B6 /* defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138243277505B600ED6D67 /* defs.h */; };
+		7F3E90B1279B03F6003BB7B6 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
+		7F3E90B2279B03F6003BB7B6 /* common_engine.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138250277505B600ED6D67 /* common_engine.h */; };
+		7F3E90B3279B03F6003BB7B6 /* common_engine_impl.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F13824C277505B600ED6D67 /* common_engine_impl.h */; };
+		7F3E90B4279B03F6003BB7B6 /* easy.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242F2789DCF6008F0F7A /* easy.h */; };
+		7F3E90B5279B03F6003BB7B6 /* general.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641C6277CC72D0017D86D /* general.hpp */; };
+		7F3E90B6279B03F6003BB7B6 /* function.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5D4277B234E00538094 /* function.hpp */; };
+		7F3E90B7279B03F6003BB7B6 /* vector2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5D8277B23BC00538094 /* vector2.hpp */; };
+		7F3E90B8279B03F6003BB7B6 /* line.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5DC277B24AD00538094 /* line.hpp */; };
+		7F3E90B9279B03F6003BB7B6 /* polygon.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289F2779183C00EE9E2C /* polygon.hpp */; };
+		7F3E90BA279B03F6003BB7B6 /* performance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5E0277B3E6E00538094 /* performance.hpp */; };
+		7F3E90BB279B03F6003BB7B6 /* key_value.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F8499142787464F004127CB /* key_value.hpp */; };
+		7F3E90BC279B03F6003BB7B6 /* RendererEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */; };
+		7F3E90BD279B03F6003BB7B6 /* room.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FDDAF9D2776873900578F86 /* room.hpp */; };
+		7F3E90BE279B03F6003BB7B6 /* engine_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310B2792FAF20094DF0C /* engine_interface.h */; };
+		7F3E90BF279B03F6003BB7B6 /* engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131182792FAF20094DF0C /* engine_provider_interface.h */; };
+		7F3E90C0279B03F6003BB7B6 /* engine_events_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC129327984DD5002ECABD /* engine_events_provider_interface.h */; };
+		7F3E90C1279B03F6003BB7B6 /* console_renderer_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310A2792FAF20094DF0C /* console_renderer_interface.h */; };
+		7F3E90C2279B03F6003BB7B6 /* sprite_draw_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131282792FCA30094DF0C /* sprite_draw_interface.h */; };
+		7F3E90C3279B03F6003BB7B6 /* drawable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131172792FAF20094DF0C /* drawable_interface.h */; };
+		7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131112792FAF20094DF0C /* font_interface.h */; };
+		7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310C2792FAF20094DF0C /* character_mover_interface.h */; };
+		7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310D2792FAF20094DF0C /* callable_interface.h */; };
+		7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */; };
+		7F3E90C8279B03F6003BB7B6 /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310F2792FAF20094DF0C /* texture_interface.h */; };
+		7F3E90C9279B03F6003BB7B6 /* scripting_engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */; };
+		7F3E90CA279B03F6003BB7B6 /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
+		7F3E90CB279B03F6003BB7B6 /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
+		7F3E90CC279B03F6003BB7B6 /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */; };
+		7F3E90CD279B03F6003BB7B6 /* animation_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.h */; };
+		7F3E90CE279B03F6003BB7B6 /* file_access_provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131162792FAF20094DF0C /* file_access_provider.h */; };
+		7F3E90CF279B03F6003BB7B6 /* drawable_sdl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131042792CAD50094DF0C /* drawable_sdl.hpp */; };
+		7F3E90D0279B03F6003BB7B6 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
+		7F3E90D1279B03F6003BB7B6 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D732784DDE0005C52C4 /* memory.h */; };
+		7F3E90D2279B03F6003BB7B6 /* release_pool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DDC27858CBA00D0B30A /* release_pool.hpp */; };
+		7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
+		7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FC12780F6F800E8CB01 /* engine_state.hpp */; };
+		7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
+		7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
+		7F3E90D7279B03F6003BB7B6 /* value_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */; };
+		7F3E90D8279B03F6003BB7B6 /* property_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D752784E99A005C52C4 /* property_animator.hpp */; };
+		7F3E90D9279B03F6003BB7B6 /* property_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */; };
+		7F3E90DA279B03F6003BB7B6 /* animation_group_simulateneus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */; };
+		7F3E90DB279B03F6003BB7B6 /* animation_group_sequence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F849908278713BB004127CB /* animation_group_sequence.hpp */; };
+		7F3E90DC279B03F6003BB7B6 /* animation_group_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */; };
+		7F3E90DD279B03F6003BB7B6 /* character_mover.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289A2778CCCB00EE9E2C /* character_mover.hpp */; };
+		7F3E90DE279B03F6003BB7B6 /* path_finder_helper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */; };
+		7F3E90DF279B03F6003BB7B6 /* path_finder_line_graph_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */; };
+		7F3E90E0279B03F6003BB7B6 /* path_finder_graph.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5CB277A3FA900538094 /* path_finder_graph.hpp */; };
+		7F3E90E1279B03F6003BB7B6 /* path_finder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428A327791A9100EE9E2C /* path_finder.hpp */; };
+		7F3E90E2279B03F6003BB7B6 /* path.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5CF277B13B000538094 /* path.hpp */; };
+		7F3E90E3279B03F6003BB7B6 /* events_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641DF277D22E50017D86D /* events_manager.hpp */; };
+		7F3E90E4279B03F6003BB7B6 /* sprite_atlas_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7C6277E4EAA004A6107 /* sprite_atlas_manager.hpp */; };
+		7F3E90E5279B03F6003BB7B6 /* sprite_renderer_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CA277E543E004A6107 /* sprite_renderer_manager.hpp */; };
+		7F3E90E6279B03F6003BB7B6 /* periodic_updates_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FB92780C41F00E8CB01 /* periodic_updates_manager.hpp */; };
+		7F3E90E7279B03F6003BB7B6 /* texture_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD5CBE9278A0C7100498B5F /* texture_manager.hpp */; };
+		7F3E90E8279B03F6003BB7B6 /* font_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F708914278A13D800A501CB /* font_manager.hpp */; };
+		7F3E90E9279B03F6003BB7B6 /* scene_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7BE277E36DD004A6107 /* scene_manager.hpp */; };
+		7F3E90EA279B03F6003BB7B6 /* scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7C2277E3A68004A6107 /* scene.hpp */; };
+		7F3E90EB279B03F6003BB7B6 /* character_renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288327779CD400EE9E2C /* character_renderer.hpp */; };
+		7F3E90EC279B03F6003BB7B6 /* character_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428882777C51D00EE9E2C /* character_interface.h */; };
+		7F3E90ED279B03F6003BB7B6 /* character.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64288C2777C59D00EE9E2C /* character.hpp */; };
+		7F3E90EE279B03F6003BB7B6 /* character_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FA2AB37277DD1A600AED89D /* character_manager.hpp */; };
+		7F3E90EF279B03F6003BB7B6 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
+		7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */; };
+		7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
+		7F3E90F2279B03F6003BB7B6 /* callable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D6E2784C6E0005C52C4 /* callable.hpp */; };
+		7F3E90F3279B03F6003BB7B6 /* console_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823E82788F64D008F0F7A /* console_renderer.h */; };
+		7F3E90F4279B03F6003BB7B6 /* console_app_renderer_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */; };
+		7F3E90F5279B03F6003BB7B6 /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
+		7F3E90F6279B03F6003BB7B6 /* console_terminal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241C278993E0008F0F7A /* console_terminal.hpp */; };
+		7F3E90F7279B03F6003BB7B6 /* console_terminal_commands.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242027899731008F0F7A /* console_terminal_commands.hpp */; };
+		7F3E90F8279B03F6003BB7B6 /* pipe_output.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB824242789AF95008F0F7A /* pipe_output.hpp */; };
+		7F3E90F9279B03F6003BB7B6 /* polygon_loader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */; };
+		7F3E90FA279B03F6003BB7B6 /* AAPLImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA02F27921D8D0082EB6A /* AAPLImage.h */; };
+		7F3E90FB279B03F6003BB7B6 /* texture_target_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA021279205C80082EB6A /* texture_target_metal.hpp */; };
+		7F3E90FC279B03F6003BB7B6 /* texture_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA0292792166F0082EB6A /* texture_metal.hpp */; };
+		7F3E90FD279B03F6003BB7B6 /* texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821E277505B600ED6D67 /* texture.hpp */; };
+		7F3E90FE279B03F6003BB7B6 /* texture_target.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289227787C2E00EE9E2C /* texture_target.hpp */; };
+		7F3E90FF279B03F6003BB7B6 /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254F278E0B3400529F29 /* AAPLShaderTypes.h */; };
+		7F3E9100279B03F6003BB7B6 /* engine_provider_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254C278DF96200529F29 /* engine_provider_metal.hpp */; };
+		7F3E9101279B03F6003BB7B6 /* file_access.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822C277505B600ED6D67 /* file_access.hpp */; };
+		7F3E9102279B03F6003BB7B6 /* sprite_interface_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138239277505B600ED6D67 /* sprite_interface_defs.h */; };
+		7F3E9103279B03F6003BB7B6 /* sprite_atlas.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138232277505B600ED6D67 /* sprite_atlas.hpp */; };
+		7F3E9104279B03F6003BB7B6 /* sprite_draw_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_draw_static.hpp */; };
+		7F3E9105279B03F6003BB7B6 /* sprite_draw_animated.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */; };
+		7F3E9106279B03F6003BB7B6 /* sprite_draw_backbuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */; };
+		7F3E9107279B03F6003BB7B6 /* event_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138226277505B600ED6D67 /* event_provider.hpp */; };
+		7F3E9108279B03F6003BB7B6 /* font_bitmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F84990C27872F28004127CB /* font_bitmap.hpp */; };
+		7F3E9109279B03F6003BB7B6 /* engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138240277505B600ED6D67 /* engine.hpp */; };
+		7F3E910B279B03F6003BB7B6 /* RendererEntryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */; };
+		7F3E910C279B03F6003BB7B6 /* console_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB823E12788E199008F0F7A /* console_renderer.mm */; };
+		7F3E910D279B03F6003BB7B6 /* console_app_renderer_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8242B2789D3AD008F0F7A /* console_app_renderer_mac.mm */; };
+		7F3E910E279B03F6003BB7B6 /* AAPLImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA02E27921D8D0082EB6A /* AAPLImage.mm */; };
+		7F3E910F279B03F6003BB7B6 /* texture_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA0282792166F0082EB6A /* texture_metal.mm */; };
+		7F3E9110279B03F6003BB7B6 /* file_access.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13822B277505B600ED6D67 /* file_access.mm */; };
+		7F3E9111279B03F6003BB7B6 /* polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64289E2779183C00EE9E2C /* polygon.cpp */; };
+		7F3E9112279B03F6003BB7B6 /* performance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5DF277B3E6E00538094 /* performance.cpp */; };
+		7F3E9113279B03F6003BB7B6 /* key_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F8499132787464F004127CB /* key_value.cpp */; };
+		7F3E9114279B03F6003BB7B6 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
+		7F3E9115279B03F6003BB7B6 /* drawable_sdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FC131032792CAD50094DF0C /* drawable_sdl.cpp */; };
+		7F3E9116279B03F6003BB7B6 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
+		7F3E9117279B03F6003BB7B6 /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
+		7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
+		7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FC02780F6F800E8CB01 /* engine_state.cpp */; };
+		7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
+		7F3E911B279B03F6003BB7B6 /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
+		7F3E911C279B03F6003BB7B6 /* value_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */; };
+		7F3E911D279B03F6003BB7B6 /* property_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D742784E99A005C52C4 /* property_animator.cpp */; };
+		7F3E911E279B03F6003BB7B6 /* property_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */; };
+		7F3E911F279B03F6003BB7B6 /* animation_group_simulateneus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */; };
+		7F3E9120279B03F6003BB7B6 /* animation_group_sequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F849907278713BB004127CB /* animation_group_sequence.cpp */; };
+		7F3E9121279B03F6003BB7B6 /* animation_group_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */; };
+		7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428992778CCCB00EE9E2C /* character_mover.cpp */; };
+		7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */; };
+		7F3E9124279B03F6003BB7B6 /* path_finder_line_graph_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */; };
+		7F3E9125279B03F6003BB7B6 /* path_finder_graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5CA277A3FA900538094 /* path_finder_graph.cpp */; };
+		7F3E9126279B03F6003BB7B6 /* path_finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428A227791A9100EE9E2C /* path_finder.cpp */; };
+		7F3E9127279B03F6003BB7B6 /* path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5CE277B13B000538094 /* path.cpp */; };
+		7F3E9128279B03F6003BB7B6 /* events_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641DE277D22E50017D86D /* events_manager.cpp */; };
+		7F3E9129279B03F6003BB7B6 /* sprite_atlas_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7C5277E4EAA004A6107 /* sprite_atlas_manager.cpp */; };
+		7F3E912A279B03F6003BB7B6 /* sprite_renderer_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7C9277E543E004A6107 /* sprite_renderer_manager.cpp */; };
+		7F3E912B279B03F6003BB7B6 /* periodic_updates_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FB82780C41F00E8CB01 /* periodic_updates_manager.cpp */; };
+		7F3E912C279B03F6003BB7B6 /* texture_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FD5CBE8278A0C7100498B5F /* texture_manager.cpp */; };
+		7F3E912D279B03F6003BB7B6 /* font_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F708913278A13D800A501CB /* font_manager.cpp */; };
+		7F3E912E279B03F6003BB7B6 /* scene_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7BD277E36DD004A6107 /* scene_manager.cpp */; };
+		7F3E912F279B03F6003BB7B6 /* scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7C1277E3A68004A6107 /* scene.cpp */; };
+		7F3E9130279B03F6003BB7B6 /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
+		7F3E9131279B03F6003BB7B6 /* character.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288B2777C59D00EE9E2C /* character.cpp */; };
+		7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2AB36277DD1A600AED89D /* character_manager.cpp */; };
+		7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7CE277F5872004A6107 /* character_representation.cpp */; };
+		7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */; };
+		7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
+		7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D6D2784C6E0005C52C4 /* callable.cpp */; };
+		7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
+		7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241B278993E0008F0F7A /* console_terminal.cpp */; };
+		7F3E9139279B03F6003BB7B6 /* console_terminal_commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */; };
+		7F3E913A279B03F6003BB7B6 /* pipe_output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB824232789AF95008F0F7A /* pipe_output.cpp */; };
+		7F3E913B279B03F6003BB7B6 /* polygon_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */; };
+		7F3E913C279B03F6003BB7B6 /* texture_target_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA020279205C80082EB6A /* texture_target_metal.cpp */; };
+		7F3E913D279B03F6003BB7B6 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
+		7F3E913E279B03F6003BB7B6 /* texture_target.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64289127787C2E00EE9E2C /* texture_target.cpp */; };
+		7F3E913F279B03F6003BB7B6 /* engine_provider_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F26254B278DF96200529F29 /* engine_provider_metal.cpp */; };
+		7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
+		7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
+		7F3E9142279B03F6003BB7B6 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823A277505B600ED6D67 /* sprite_atlas.cpp */; };
+		7F3E9143279B03F6003BB7B6 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_draw_static.cpp */; };
+		7F3E9144279B03F6003BB7B6 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */; };
+		7F3E9145279B03F6003BB7B6 /* sprite_draw_backbuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */; };
+		7F3E9146279B03F6003BB7B6 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138225277505B600ED6D67 /* event_provider.cpp */; };
+		7F3E9147279B03F6003BB7B6 /* font_bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F84990B27872F28004127CB /* font_bitmap.cpp */; };
+		7F3E9148279B03F6003BB7B6 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138242277505B600ED6D67 /* engine.cpp */; };
+		7F3E9153279B0424003BB7B6 /* libcjson-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9152279B0424003BB7B6 /* libcjson-tv.a */; };
+		7F3E9155279B0424003BB7B6 /* libimgui-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9154279B0424003BB7B6 /* libimgui-tv.a */; };
+		7F3E9157279B0424003BB7B6 /* liblua-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9156279B0424003BB7B6 /* liblua-tv.a */; };
+		7F3E915A279B0448003BB7B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* AAPLShaders.metal */; };
+		7F3E918E279B06DC003BB7B6 /* Engine-TV-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E918C279B06C2003BB7B6 /* Engine-TV-MetalLib.metallib */; };
 		7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */; };
 		7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
@@ -333,10 +490,26 @@
 			remoteGlobalIDString = 7F63D832279A0D4000139E14;
 			remoteInfo = "Engine-iOS-MetalLib";
 		};
+		7F3E918A279B06B3003BB7B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F3CAAD9277093D500E0D74C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F3E9158279B0448003BB7B6;
+			remoteInfo = "Engine-TV-MetalLib";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		7F3E8E25279AC8BA003BB7B6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E914D279B03F6003BB7B6 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
@@ -404,6 +577,13 @@
 		7F3E901D279B0056003BB7B6 /* libcjson-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libcjson-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E901F279B0056003BB7B6 /* libimgui-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libimgui-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E9021279B0056003BB7B6 /* liblua-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblua-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9151279B03F6003BB7B6 /* libEngine-TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEngine-TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9152279B0424003BB7B6 /* libcjson-tv.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libcjson-tv.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9154279B0424003BB7B6 /* libimgui-tv.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libimgui-tv.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9156279B0424003BB7B6 /* liblua-tv.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblua-tv.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9169279B0459003BB7B6 /* Engine-TV-Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Engine-TV-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E918C279B06C2003BB7B6 /* Engine-TV-MetalLib.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = "Engine-TV-MetalLib.metallib"; path = "../Debug-appletvsimulator/Engine-TV-MetalLib.metallib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E918D279B06CA003BB7B6 /* Engine-TV-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-TV-Bundle.bundle"; path = "../Debug-appletvsimulator/Engine-TV-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F63D829279A0C6100139E14 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntryViewController.mm; sourceTree = "<group>"; };
@@ -545,6 +725,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		7F3E8F28279ADCDB003BB7B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9149279B03F6003BB7B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E9153279B0424003BB7B6 /* libcjson-tv.a in Frameworks */,
+				7F3E9155279B0424003BB7B6 /* libimgui-tv.a in Frameworks */,
+				7F3E9157279B0424003BB7B6 /* liblua-tv.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9162279B0459003BB7B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -744,6 +941,8 @@
 				7F63D862279A12F900139E14 /* Engine-Mac-Bundle.bundle */,
 				7F3E8E27279AC8BA003BB7B6 /* libEngine-iOS.a */,
 				7F3E8F2B279ADCDB003BB7B6 /* Engine-iOS-Bundle.bundle */,
+				7F3E9151279B03F6003BB7B6 /* libEngine-TV.a */,
+				7F3E9169279B0459003BB7B6 /* Engine-TV-Bundle.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -751,6 +950,9 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F3E9152279B0424003BB7B6 /* libcjson-tv.a */,
+				7F3E9154279B0424003BB7B6 /* libimgui-tv.a */,
+				7F3E9156279B0424003BB7B6 /* liblua-tv.a */,
 				7F3E901D279B0056003BB7B6 /* libcjson-ios.a */,
 				7F3E901F279B0056003BB7B6 /* libimgui-ios.a */,
 				7F3E9021279B0056003BB7B6 /* liblua-ios.a */,
@@ -780,6 +982,8 @@
 		7F3E8F4B279AE2DD003BB7B6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				7F3E918D279B06CA003BB7B6 /* Engine-TV-Bundle.bundle */,
+				7F3E918C279B06C2003BB7B6 /* Engine-TV-MetalLib.metallib */,
 				7F3E8FF4279AF7B6003BB7B6 /* Engine-iOS-Bundle.bundle */,
 				7F3E8FF5279AF7BC003BB7B6 /* Engine-iOS-MetalLib.metallib */,
 				7F3E8F50279AE318003BB7B6 /* Engine-Mac-Bundle.bundle */,
@@ -1228,6 +1432,104 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F3E90AE279B03F6003BB7B6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E90AF279B03F6003BB7B6 /* doxygen_main.h in Headers */,
+				7F3E90B0279B03F6003BB7B6 /* defs.h in Headers */,
+				7F3E90B1279B03F6003BB7B6 /* common.h in Headers */,
+				7F3E90B2279B03F6003BB7B6 /* common_engine.h in Headers */,
+				7F3E90B3279B03F6003BB7B6 /* common_engine_impl.h in Headers */,
+				7F3E90B4279B03F6003BB7B6 /* easy.h in Headers */,
+				7F3E90B5279B03F6003BB7B6 /* general.hpp in Headers */,
+				7F3E90B6279B03F6003BB7B6 /* function.hpp in Headers */,
+				7F3E90B7279B03F6003BB7B6 /* vector2.hpp in Headers */,
+				7F3E90B8279B03F6003BB7B6 /* line.hpp in Headers */,
+				7F3E90B9279B03F6003BB7B6 /* polygon.hpp in Headers */,
+				7F3E90BA279B03F6003BB7B6 /* performance.hpp in Headers */,
+				7F3E90BB279B03F6003BB7B6 /* key_value.hpp in Headers */,
+				7F3E90BC279B03F6003BB7B6 /* RendererEntryViewController.h in Headers */,
+				7F3E90BD279B03F6003BB7B6 /* room.hpp in Headers */,
+				7F3E90BE279B03F6003BB7B6 /* engine_interface.h in Headers */,
+				7F3E90BF279B03F6003BB7B6 /* engine_provider_interface.h in Headers */,
+				7F3E90C0279B03F6003BB7B6 /* engine_events_provider_interface.h in Headers */,
+				7F3E90C1279B03F6003BB7B6 /* console_renderer_interface.h in Headers */,
+				7F3E90C2279B03F6003BB7B6 /* sprite_draw_interface.h in Headers */,
+				7F3E90C3279B03F6003BB7B6 /* drawable_interface.h in Headers */,
+				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
+				7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */,
+				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
+				7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */,
+				7F3E90C8279B03F6003BB7B6 /* texture_interface.h in Headers */,
+				7F3E90C9279B03F6003BB7B6 /* scripting_engine_provider_interface.h in Headers */,
+				7F3E90CA279B03F6003BB7B6 /* path_finder_interface.h in Headers */,
+				7F3E90CB279B03F6003BB7B6 /* event_provider_interface.h in Headers */,
+				7F3E90CC279B03F6003BB7B6 /* sprite_atlas_interface.h in Headers */,
+				7F3E90CD279B03F6003BB7B6 /* animation_interface.h in Headers */,
+				7F3E90CE279B03F6003BB7B6 /* file_access_provider.h in Headers */,
+				7F3E90CF279B03F6003BB7B6 /* drawable_sdl.hpp in Headers */,
+				7F3E90D0279B03F6003BB7B6 /* drawable_metal.hpp in Headers */,
+				7F3E90D1279B03F6003BB7B6 /* memory.h in Headers */,
+				7F3E90D2279B03F6003BB7B6 /* release_pool.hpp in Headers */,
+				7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */,
+				7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */,
+				7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */,
+				7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */,
+				7F3E90D7279B03F6003BB7B6 /* value_animator_factory.hpp in Headers */,
+				7F3E90D8279B03F6003BB7B6 /* property_animator.hpp in Headers */,
+				7F3E90D9279B03F6003BB7B6 /* property_animator_factory.hpp in Headers */,
+				7F3E90DA279B03F6003BB7B6 /* animation_group_simulateneus.hpp in Headers */,
+				7F3E90DB279B03F6003BB7B6 /* animation_group_sequence.hpp in Headers */,
+				7F3E90DC279B03F6003BB7B6 /* animation_group_factory.hpp in Headers */,
+				7F3E90DD279B03F6003BB7B6 /* character_mover.hpp in Headers */,
+				7F3E90DE279B03F6003BB7B6 /* path_finder_helper.hpp in Headers */,
+				7F3E90DF279B03F6003BB7B6 /* path_finder_line_graph_node.hpp in Headers */,
+				7F3E90E0279B03F6003BB7B6 /* path_finder_graph.hpp in Headers */,
+				7F3E90E1279B03F6003BB7B6 /* path_finder.hpp in Headers */,
+				7F3E90E2279B03F6003BB7B6 /* path.hpp in Headers */,
+				7F3E90E3279B03F6003BB7B6 /* events_manager.hpp in Headers */,
+				7F3E90E4279B03F6003BB7B6 /* sprite_atlas_manager.hpp in Headers */,
+				7F3E90E5279B03F6003BB7B6 /* sprite_renderer_manager.hpp in Headers */,
+				7F3E90E6279B03F6003BB7B6 /* periodic_updates_manager.hpp in Headers */,
+				7F3E90E7279B03F6003BB7B6 /* texture_manager.hpp in Headers */,
+				7F3E90E8279B03F6003BB7B6 /* font_manager.hpp in Headers */,
+				7F3E90E9279B03F6003BB7B6 /* scene_manager.hpp in Headers */,
+				7F3E90EA279B03F6003BB7B6 /* scene.hpp in Headers */,
+				7F3E90EB279B03F6003BB7B6 /* character_renderer.hpp in Headers */,
+				7F3E90EC279B03F6003BB7B6 /* character_interface.h in Headers */,
+				7F3E90ED279B03F6003BB7B6 /* character.hpp in Headers */,
+				7F3E90EE279B03F6003BB7B6 /* character_manager.hpp in Headers */,
+				7F3E90EF279B03F6003BB7B6 /* character_representation.hpp in Headers */,
+				7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */,
+				7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */,
+				7F3E90F2279B03F6003BB7B6 /* callable.hpp in Headers */,
+				7F3E90F3279B03F6003BB7B6 /* console_renderer.h in Headers */,
+				7F3E90F4279B03F6003BB7B6 /* console_app_renderer_mac.hpp in Headers */,
+				7F3E90F5279B03F6003BB7B6 /* console_logger.hpp in Headers */,
+				7F3E90F6279B03F6003BB7B6 /* console_terminal.hpp in Headers */,
+				7F3E90F7279B03F6003BB7B6 /* console_terminal_commands.hpp in Headers */,
+				7F3E90F8279B03F6003BB7B6 /* pipe_output.hpp in Headers */,
+				7F3E90F9279B03F6003BB7B6 /* polygon_loader.hpp in Headers */,
+				7F3E90FA279B03F6003BB7B6 /* AAPLImage.h in Headers */,
+				7F3E90FB279B03F6003BB7B6 /* texture_target_metal.hpp in Headers */,
+				7F3E90FC279B03F6003BB7B6 /* texture_metal.hpp in Headers */,
+				7F3E90FD279B03F6003BB7B6 /* texture.hpp in Headers */,
+				7F3E90FE279B03F6003BB7B6 /* texture_target.hpp in Headers */,
+				7F3E90FF279B03F6003BB7B6 /* AAPLShaderTypes.h in Headers */,
+				7F3E9100279B03F6003BB7B6 /* engine_provider_metal.hpp in Headers */,
+				7F3E9101279B03F6003BB7B6 /* file_access.hpp in Headers */,
+				7F3E9102279B03F6003BB7B6 /* sprite_interface_defs.h in Headers */,
+				7F3E9103279B03F6003BB7B6 /* sprite_atlas.hpp in Headers */,
+				7F3E9104279B03F6003BB7B6 /* sprite_draw_static.hpp in Headers */,
+				7F3E9105279B03F6003BB7B6 /* sprite_draw_animated.hpp in Headers */,
+				7F3E9106279B03F6003BB7B6 /* sprite_draw_backbuffer.hpp in Headers */,
+				7F3E9107279B03F6003BB7B6 /* event_provider.hpp in Headers */,
+				7F3E9108279B03F6003BB7B6 /* font_bitmap.hpp in Headers */,
+				7F3E9109279B03F6003BB7B6 /* engine.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1283,6 +1585,57 @@
 			name = "Engine-iOS-Bundle";
 			productName = "Engine-iOS-Bundle";
 			productReference = 7F3E8F2B279ADCDB003BB7B6 /* Engine-iOS-Bundle.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		7F3E90AD279B03F6003BB7B6 /* Engine-TV */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E914E279B03F6003BB7B6 /* Build configuration list for PBXNativeTarget "Engine-TV" */;
+			buildPhases = (
+				7F3E90AE279B03F6003BB7B6 /* Headers */,
+				7F3E910A279B03F6003BB7B6 /* Sources */,
+				7F3E9149279B03F6003BB7B6 /* Frameworks */,
+				7F3E914D279B03F6003BB7B6 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Engine-TV";
+			productName = "Engine-iOS";
+			productReference = 7F3E9151279B03F6003BB7B6 /* libEngine-TV.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		7F3E9158279B0448003BB7B6 /* Engine-TV-MetalLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E915B279B0448003BB7B6 /* Build configuration list for PBXNativeTarget "Engine-TV-MetalLib" */;
+			buildPhases = (
+				7F3E9159279B0448003BB7B6 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Engine-TV-MetalLib";
+			productName = "Engine-Mac-MetalLib";
+			productType = "com.apple.product-type.metal-library";
+		};
+		7F3E915E279B0459003BB7B6 /* Engine-TV-Bundle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E9166279B0459003BB7B6 /* Build configuration list for PBXNativeTarget "Engine-TV-Bundle" */;
+			buildPhases = (
+				7F3E9161279B0459003BB7B6 /* Sources */,
+				7F3E9162279B0459003BB7B6 /* Frameworks */,
+				7F3E9163279B0459003BB7B6 /* Resources */,
+				7F3E9165279B0459003BB7B6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7F3E918B279B06B3003BB7B6 /* PBXTargetDependency */,
+			);
+			name = "Engine-TV-Bundle";
+			productName = "Engine-iOS-Bundle";
+			productReference = 7F3E9169279B0459003BB7B6 /* Engine-TV-Bundle.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
 		7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */ = {
@@ -1375,10 +1728,13 @@
 			targets = (
 				7F1382142775059B00ED6D67 /* Engine-Mac */,
 				7F3E8E26279AC8BA003BB7B6 /* Engine-iOS */,
+				7F3E90AD279B03F6003BB7B6 /* Engine-TV */,
 				7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */,
 				7F63D83C279A0E8B00139E14 /* Engine-Mac-MetalLib */,
+				7F3E9158279B0448003BB7B6 /* Engine-TV-MetalLib */,
 				7F63D861279A12F900139E14 /* Engine-Mac-Bundle */,
 				7F3E8F2A279ADCDB003BB7B6 /* Engine-iOS-Bundle */,
+				7F3E915E279B0459003BB7B6 /* Engine-TV-Bundle */,
 			);
 		};
 /* End PBXProject section */
@@ -1389,6 +1745,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F3E8FF7279AF7F7003BB7B6 /* Engine-iOS-MetalLib.metallib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9163279B0459003BB7B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E918E279B06DC003BB7B6 /* Engine-TV-MetalLib.metallib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1404,6 +1768,23 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		7F3E8F8F279AF30A003BB7B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nls\n";
+		};
+		7F3E9165279B0459003BB7B6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1568,6 +1949,90 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F3E910A279B03F6003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E910B279B03F6003BB7B6 /* RendererEntryViewController.mm in Sources */,
+				7F3E910C279B03F6003BB7B6 /* console_renderer.mm in Sources */,
+				7F3E910D279B03F6003BB7B6 /* console_app_renderer_mac.mm in Sources */,
+				7F3E910E279B03F6003BB7B6 /* AAPLImage.mm in Sources */,
+				7F3E910F279B03F6003BB7B6 /* texture_metal.mm in Sources */,
+				7F3E9110279B03F6003BB7B6 /* file_access.mm in Sources */,
+				7F3E9111279B03F6003BB7B6 /* polygon.cpp in Sources */,
+				7F3E9112279B03F6003BB7B6 /* performance.cpp in Sources */,
+				7F3E9113279B03F6003BB7B6 /* key_value.cpp in Sources */,
+				7F3E9114279B03F6003BB7B6 /* room.cpp in Sources */,
+				7F3E9115279B03F6003BB7B6 /* drawable_sdl.cpp in Sources */,
+				7F3E9116279B03F6003BB7B6 /* drawable_metal.cpp in Sources */,
+				7F3E9117279B03F6003BB7B6 /* release_pool.cpp in Sources */,
+				7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */,
+				7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */,
+				7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */,
+				7F3E911B279B03F6003BB7B6 /* value_animator.cpp in Sources */,
+				7F3E911C279B03F6003BB7B6 /* value_animator_factory.cpp in Sources */,
+				7F3E911D279B03F6003BB7B6 /* property_animator.cpp in Sources */,
+				7F3E911E279B03F6003BB7B6 /* property_animator_factory.cpp in Sources */,
+				7F3E911F279B03F6003BB7B6 /* animation_group_simulateneus.cpp in Sources */,
+				7F3E9120279B03F6003BB7B6 /* animation_group_sequence.cpp in Sources */,
+				7F3E9121279B03F6003BB7B6 /* animation_group_factory.cpp in Sources */,
+				7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */,
+				7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */,
+				7F3E9124279B03F6003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
+				7F3E9125279B03F6003BB7B6 /* path_finder_graph.cpp in Sources */,
+				7F3E9126279B03F6003BB7B6 /* path_finder.cpp in Sources */,
+				7F3E9127279B03F6003BB7B6 /* path.cpp in Sources */,
+				7F3E9128279B03F6003BB7B6 /* events_manager.cpp in Sources */,
+				7F3E9129279B03F6003BB7B6 /* sprite_atlas_manager.cpp in Sources */,
+				7F3E912A279B03F6003BB7B6 /* sprite_renderer_manager.cpp in Sources */,
+				7F3E912B279B03F6003BB7B6 /* periodic_updates_manager.cpp in Sources */,
+				7F3E912C279B03F6003BB7B6 /* texture_manager.cpp in Sources */,
+				7F3E912D279B03F6003BB7B6 /* font_manager.cpp in Sources */,
+				7F3E912E279B03F6003BB7B6 /* scene_manager.cpp in Sources */,
+				7F3E912F279B03F6003BB7B6 /* scene.cpp in Sources */,
+				7F3E9130279B03F6003BB7B6 /* character_renderer.cpp in Sources */,
+				7F3E9131279B03F6003BB7B6 /* character.cpp in Sources */,
+				7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */,
+				7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */,
+				7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */,
+				7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */,
+				7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */,
+				7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */,
+				7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */,
+				7F3E9139279B03F6003BB7B6 /* console_terminal_commands.cpp in Sources */,
+				7F3E913A279B03F6003BB7B6 /* pipe_output.cpp in Sources */,
+				7F3E913B279B03F6003BB7B6 /* polygon_loader.cpp in Sources */,
+				7F3E913C279B03F6003BB7B6 /* texture_target_metal.cpp in Sources */,
+				7F3E913D279B03F6003BB7B6 /* texture.cpp in Sources */,
+				7F3E913E279B03F6003BB7B6 /* texture_target.cpp in Sources */,
+				7F3E913F279B03F6003BB7B6 /* engine_provider_metal.cpp in Sources */,
+				7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
+				7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
+				7F3E9142279B03F6003BB7B6 /* sprite_atlas.cpp in Sources */,
+				7F3E9143279B03F6003BB7B6 /* sprite_draw_static.cpp in Sources */,
+				7F3E9144279B03F6003BB7B6 /* sprite_draw_animated.cpp in Sources */,
+				7F3E9145279B03F6003BB7B6 /* sprite_draw_backbuffer.cpp in Sources */,
+				7F3E9146279B03F6003BB7B6 /* event_provider.cpp in Sources */,
+				7F3E9147279B03F6003BB7B6 /* font_bitmap.cpp in Sources */,
+				7F3E9148279B03F6003BB7B6 /* engine.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9159279B0448003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E915A279B0448003BB7B6 /* AAPLShaders.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9161279B0459003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7F63D831279A0D4000139E14 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1588,7 +2053,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3E8F4A279AE1A4003BB7B6 /* AAPLShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1604,6 +2068,11 @@
 			isa = PBXTargetDependency;
 			target = 7F63D832279A0D4000139E14 /* Engine-iOS-MetalLib */;
 			targetProxy = 7F3E8F79279AE865003BB7B6 /* PBXContainerItemProxy */;
+		};
+		7F3E918B279B06B3003BB7B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F3E9158279B0448003BB7B6 /* Engine-TV-MetalLib */;
+			targetProxy = 7F3E918A279B06B3003BB7B6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1876,6 +2345,125 @@
 			};
 			name = Release;
 		};
+		7F3E914F279B03F6003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GCC_PREFIX_HEADER = ../../../Engine/src/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TARGET_IOS=1",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				OTHER_CFLAGS = "-DTARGET_IOS=1";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7F3E9150279B03F6003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GCC_PREFIX_HEADER = ../../../Engine/src/prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IOS;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				OTHER_CFLAGS = "-DTARGET_IOS=1";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7F3E915C279B0448003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+			};
+			name = Debug;
+		};
+		7F3E915D279B0448003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+			};
+			name = Release;
+		};
+		7F3E9167279B0459003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.krzysp.gameengine.Engine-iOS-Bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		7F3E9168279B0459003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSPrincipalClass = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 11.6;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.krzysp.gameengine.Engine-iOS-Bundle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		7F63D837279A0D4000139E14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1997,6 +2585,33 @@
 			buildConfigurations = (
 				7F3E8F2D279ADCDB003BB7B6 /* Debug */,
 				7F3E8F2E279ADCDB003BB7B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E914E279B03F6003BB7B6 /* Build configuration list for PBXNativeTarget "Engine-TV" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E914F279B03F6003BB7B6 /* Debug */,
+				7F3E9150279B03F6003BB7B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E915B279B0448003BB7B6 /* Build configuration list for PBXNativeTarget "Engine-TV-MetalLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E915C279B0448003BB7B6 /* Debug */,
+				7F3E915D279B0448003BB7B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E9166279B0459003BB7B6 /* Build configuration list for PBXNativeTarget "Engine-TV-Bundle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E9167279B0459003BB7B6 /* Debug */,
+				7F3E9168279B0459003BB7B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

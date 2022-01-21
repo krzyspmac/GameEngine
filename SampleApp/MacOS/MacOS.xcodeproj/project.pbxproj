@@ -52,6 +52,41 @@
 		7F3E9017279AFA6C003BB7B6 /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7F3E9018279AFA6C003BB7B6 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
 		7F3E9019279AFA6C003BB7B6 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
+		7F3E9037279B015A003BB7B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E9035279B015A003BB7B6 /* Main.storyboard */; };
+		7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E9038279B015C003BB7B6 /* Assets.xcassets */; };
+		7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */; };
+		7F3E903E279B015C003BB7B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E903D279B015C003BB7B6 /* main.m */; };
+		7F3E9042279B0311003BB7B6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
+		7F3E9048279B039E003BB7B6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9046279B039E003BB7B6 /* MetalKit.framework */; };
+		7F3E9049279B039E003BB7B6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9047279B039E003BB7B6 /* Metal.framework */; };
+		7F3E916D279B060A003BB7B6 /* libEngine-TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E916C279B060A003BB7B6 /* libEngine-TV.a */; };
+		7F3E9170279B0650003BB7B6 /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
+		7F3E9171279B0650003BB7B6 /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
+		7F3E9172279B0650003BB7B6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC92783970400E8CB01 /* main.lua */; };
+		7F3E9173279B0650003BB7B6 /* textx.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD22783970400E8CB01 /* textx.json */; };
+		7F3E9174279B0650003BB7B6 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
+		7F3E9175279B0650003BB7B6 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCE2783970400E8CB01 /* background.png */; };
+		7F3E9176279B0650003BB7B6 /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
+		7F3E9177279B0650003BB7B6 /* brett.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCF2783970400E8CB01 /* brett.json */; };
+		7F3E9178279B0650003BB7B6 /* fireplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499282787798B004127CB /* fireplace.json */; };
+		7F3E9179279B0650003BB7B6 /* brett.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC52783970400E8CB01 /* brett.png */; };
+		7F3E917A279B0650003BB7B6 /* room1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCB2783970400E8CB01 /* room1.json */; };
+		7F3E917B279B0650003BB7B6 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
+		7F3E917C279B0650003BB7B6 /* brett_character.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC62783970400E8CB01 /* brett_character.json */; };
+		7F3E917D279B0650003BB7B6 /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
+		7F3E917E279B0650003BB7B6 /* background.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC82783970400E8CB01 /* background.json */; };
+		7F3E917F279B0650003BB7B6 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCA2783970400E8CB01 /* characters.json */; };
+		7F3E9180279B0650003BB7B6 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD02783970400E8CB01 /* EnterCommand.ttf */; };
+		7F3E9181279B0650003BB7B6 /* main copy.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD12783970400E8CB01 /* main copy.lua */; };
+		7F3E9182279B0650003BB7B6 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCD2783970400E8CB01 /* background.jpg */; };
+		7F3E9183279B0650003BB7B6 /* textx.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC72783970400E8CB01 /* textx.png */; };
+		7F3E9184279B0650003BB7B6 /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
+		7F3E9185279B0650003BB7B6 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
+		7F3E9186279B0650003BB7B6 /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
+		7F3E9187279B0650003BB7B6 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
+		7F3E9188279B0650003BB7B6 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCC2783970400E8CB01 /* characters.png */; };
+		7F3E9189279B0650003BB7B6 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
+		7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D819279A067800139E14 /* Cocoa.framework */; };
 		7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */; };
@@ -131,6 +166,16 @@
 		7F3E8FFA279AF81B003BB7B6 /* libimgui-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libimgui-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8FFC279AF81B003BB7B6 /* liblua-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblua-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-iOS-Bundle.bundle"; path = "../Debug-iphonesimulator/Engine-iOS-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9027279B015A003BB7B6 /* TVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9036279B015A003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7F3E9038279B015C003BB7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F3E903B279B015C003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7F3E903D279B015C003BB7B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7F3E9044279B0397003BB7B6 /* libEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9046279B039E003BB7B6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		7F3E9047279B039E003BB7B6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		7F3E916C279B060A003BB7B6 /* libEngine-TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-TV-Bundle.bundle"; path = "../Debug-appletvsimulator/Engine-TV-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F63D818279A043300139E14 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-macOS.plist"; sourceTree = SOURCE_ROOT; };
 		7F63D819279A067800139E14 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -190,6 +235,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F3E9024279B015A003BB7B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E916D279B060A003BB7B6 /* libEngine-TV.a in Frameworks */,
+				7F3E9048279B039E003BB7B6 /* MetalKit.framework in Frameworks */,
+				7F3E9049279B039E003BB7B6 /* Metal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -226,6 +281,7 @@
 				7F13828C277507C500ED6D67 /* src */,
 				7F869FC42783970400E8CB01 /* GameDataProcessed */,
 				7F3E8F5C279AE6A2003BB7B6 /* iOS */,
+				7F3E9028279B015A003BB7B6 /* TVOS */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
 				7F3CAAE2277093D500E0D74C /* Products */,
 			);
@@ -236,6 +292,7 @@
 			children = (
 				7F3CAAE1277093D500E0D74C /* MacOS.app */,
 				7F3E8F5B279AE6A2003BB7B6 /* iOS.app */,
+				7F3E9027279B015A003BB7B6 /* TVOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -243,6 +300,10 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F3E916C279B060A003BB7B6 /* libEngine-TV.a */,
+				7F3E9047279B039E003BB7B6 /* Metal.framework */,
+				7F3E9046279B039E003BB7B6 /* MetalKit.framework */,
+				7F3E9044279B0397003BB7B6 /* libEngine-iOS.a */,
 				7F3E8FF8279AF81B003BB7B6 /* libcjson-ios.a */,
 				7F3E8FFA279AF81B003BB7B6 /* libimgui-ios.a */,
 				7F3E8FFC279AF81B003BB7B6 /* liblua-ios.a */,
@@ -278,9 +339,21 @@
 			path = iOS;
 			sourceTree = "<group>";
 		};
+		7F3E9028279B015A003BB7B6 /* TVOS */ = {
+			isa = PBXGroup;
+			children = (
+				7F3E9035279B015A003BB7B6 /* Main.storyboard */,
+				7F3E9038279B015C003BB7B6 /* Assets.xcassets */,
+				7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */,
+				7F3E903D279B015C003BB7B6 /* main.m */,
+			);
+			path = TVOS;
+			sourceTree = "<group>";
+		};
 		7F63D871279A140C00139E14 /* Build Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */,
 				7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */,
 				7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */,
 			);
@@ -360,6 +433,23 @@
 			productReference = 7F3E8F5B279AE6A2003BB7B6 /* iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		7F3E9026279B015A003BB7B6 /* TVOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E903F279B015C003BB7B6 /* Build configuration list for PBXNativeTarget "TVOS" */;
+			buildPhases = (
+				7F3E9023279B015A003BB7B6 /* Sources */,
+				7F3E9024279B015A003BB7B6 /* Frameworks */,
+				7F3E9025279B015A003BB7B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TVOS;
+			productName = TVOS;
+			productReference = 7F3E9027279B015A003BB7B6 /* TVOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -373,6 +463,9 @@
 						CreatedOnToolsVersion = 13.1;
 					};
 					7F3E8F5A279AE6A2003BB7B6 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					7F3E9026279B015A003BB7B6 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
@@ -392,6 +485,7 @@
 			targets = (
 				7F3CAAE0277093D500E0D74C /* MacOS */,
 				7F3E8F5A279AE6A2003BB7B6 /* iOS */,
+				7F3E9026279B015A003BB7B6 /* TVOS */,
 			);
 		};
 /* End PBXProject section */
@@ -472,6 +566,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F3E9025279B015A003BB7B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */,
+				7F3E9185279B0650003BB7B6 /* room1.png in Resources */,
+				7F3E917B279B0650003BB7B6 /* polygons.json in Resources */,
+				7F3E9186279B0650003BB7B6 /* parlor.json in Resources */,
+				7F3E9180279B0650003BB7B6 /* EnterCommand.ttf in Resources */,
+				7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */,
+				7F3E9175279B0650003BB7B6 /* background.png in Resources */,
+				7F3E917F279B0650003BB7B6 /* characters.json in Resources */,
+				7F3E9174279B0650003BB7B6 /* DialogFont_retro.tga in Resources */,
+				7F3E9177279B0650003BB7B6 /* brett.json in Resources */,
+				7F3E917E279B0650003BB7B6 /* background.json in Resources */,
+				7F3E9188279B0650003BB7B6 /* characters.png in Resources */,
+				7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */,
+				7F3E917A279B0650003BB7B6 /* room1.json in Resources */,
+				7F3E9184279B0650003BB7B6 /* parlor.tga in Resources */,
+				7F3E9037279B015A003BB7B6 /* Main.storyboard in Resources */,
+				7F3E9176279B0650003BB7B6 /* DialogFont_retro.fnt in Resources */,
+				7F3E9182279B0650003BB7B6 /* background.jpg in Resources */,
+				7F3E9179279B0650003BB7B6 /* brett.png in Resources */,
+				7F3E917C279B0650003BB7B6 /* brett_character.json in Resources */,
+				7F3E917D279B0650003BB7B6 /* fireplace.png in Resources */,
+				7F3E9172279B0650003BB7B6 /* main.lua in Resources */,
+				7F3E9183279B0650003BB7B6 /* textx.png in Resources */,
+				7F3E9189279B0650003BB7B6 /* background1.tga in Resources */,
+				7F3E9170279B0650003BB7B6 /* DialogFont_retro.png in Resources */,
+				7F3E9178279B0650003BB7B6 /* fireplace.json in Resources */,
+				7F3E9187279B0650003BB7B6 /* background.tga in Resources */,
+				7F3E9181279B0650003BB7B6 /* main copy.lua in Resources */,
+				7F3E9171279B0650003BB7B6 /* parlor.png in Resources */,
+				7F3E9173279B0650003BB7B6 /* textx.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -513,6 +644,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F3E9023279B015A003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E9042279B0311003BB7B6 /* AppDelegate.mm in Sources */,
+				7F3E903E279B015C003BB7B6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -536,6 +676,22 @@
 			isa = PBXVariantGroup;
 			children = (
 				7F3E8F6C279AE6A4003BB7B6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7F3E9035279B015A003BB7B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F3E9036279B015A003BB7B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F3E903B279B015C003BB7B6 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -801,6 +957,71 @@
 			};
 			name = Release;
 		};
+		7F3E9040279B015C003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TARGET_IOS=1",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = metal;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.TVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
+			};
+			name = Debug;
+		};
+		7F3E9041279B015C003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = "TARGET_IOS=1";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = metal;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.TVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -827,6 +1048,15 @@
 			buildConfigurations = (
 				7F3E8F72279AE6A4003BB7B6 /* Debug */,
 				7F3E8F73279AE6A4003BB7B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E903F279B015C003BB7B6 /* Build configuration list for PBXNativeTarget "TVOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E9040279B015C003BB7B6 /* Debug */,
+				7F3E9041279B015C003BB7B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
