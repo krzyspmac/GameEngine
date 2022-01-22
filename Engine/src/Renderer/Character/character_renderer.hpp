@@ -28,8 +28,8 @@ namespace engine {
 
         void SetScale(float scale) { m_scale = scale; };
 
-        void DrawBody(CharacterWalkRenderer&, bool isAnimating);
-        void DrawHead(CharacterWalkRenderer&, bool isAnimating);
+        void DrawBody(CharacterWalkRenderer&, bool isAnimating, Vector2 position);
+        void DrawHead(CharacterWalkRenderer&, bool isAnimating, Vector2 position);
         void Draw(CharacterWalkState, bool isWalking, bool isTalking, Vector2& position);
 
         void DrawBoundingBox(EngineProviderI &provider);

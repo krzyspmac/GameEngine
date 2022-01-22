@@ -12,7 +12,12 @@
 #include "engine.hpp"
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
+
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#include <UIKit/UIKit.h>
+#else
 #include <Cocoa/Cocoa.h>
+#endif
 
 #include "imgui.h"
 #include "imgui_impl_sdl.h"
@@ -50,9 +55,6 @@ void ConsoleRenderer::Setup()
 
 void ConsoleRenderer::SetupEvents()
 {
-    GetMainEngine()->getEventsManager().RegisterGeneralInputEvents(EventHolderSDLEvent([&](SDL_Event *event){
-        ImGui_ImplSDL2_ProcessEvent((const SDL_Event*)event);
-    }));
 }
 
 void ConsoleRenderer::DoFrame()
@@ -66,6 +68,7 @@ void ConsoleRenderer::DoFrame()
 
 void ConsoleRenderer::SetConsoleHidden(bool hidden)
 {
+#if SHOW_CONSOLE
     if (!m_platformRenderer->IsSetup())
     {
         if (!hidden)
@@ -77,19 +80,23 @@ void ConsoleRenderer::SetConsoleHidden(bool hidden)
     {
         m_platformRenderer->SetConsoleHidden(hidden);
     }
+#endif
 }
 
 void ConsoleRenderer::DoGui()
 {
+#if SHOW_CONSOLE
     DoMenuBar();
-    ImGui::ShowDemoWindow();
+    //ImGui::ShowDemoWindow();
 
     m_logger->Render();
     m_terminal->Render();
+#endif
 }
 
 void ConsoleRenderer::DoMenuBar()
 {
+#if SHOW_CONSOLE
     if (ImGui::BeginMainMenuBar())
     {
         if (ImGui::BeginMenu("Log"))
@@ -104,4 +111,5 @@ void ConsoleRenderer::DoMenuBar()
         }
         ImGui::EndMainMenuBar();
     }
+#endif
 }

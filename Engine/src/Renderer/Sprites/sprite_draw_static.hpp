@@ -10,6 +10,7 @@
 
 #include "scripting_engine_provider_interface.h"
 #include "sprite_draw_interface.h"
+#include "drawable_interface.h"
 
 namespace engine
 {
@@ -18,10 +19,9 @@ namespace engine
     {
     public:
         /** @private */
-        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale);
+        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scale);
         virtual ~SpriteDrawStatic() { };
         
-    public:
     public:
         /**
          Sets the scale.
@@ -31,7 +31,7 @@ namespace engine
         /**
          Sets the position for the sprite.
          */
-        void SetPosition(Vector2 &pos) { m_position = pos; };
+        void SetPosition(Vector2 &pos);
 
         /**
          Gets the current position for the sprite.
@@ -39,21 +39,12 @@ namespace engine
         Vector2& GetPosition() { return m_position; };
 
         /**
-         Sets the alpha. Values range from 0-255.
-         Default value is 255.
-         */
-        void SetAlpha(uint8_t val) { SpriteDrawI::SetAlpha(val); };
-
-        /**
-         Gets the curernt alpha. Values range from 0-255.
-         Default value is 255.
-         */
-        uint8_t GetAlpha() { return SpriteDrawI::GetAlpha(); };
-
-        /**
          Get width & size of the sprite.
          */
         Size& GetSize() { return m_sprite->GetSize(); };
+
+        /** Get the current sprite atlas item for this sprite */
+        SpriteAtlasItemI *GetSpriteAtlasItem() { return m_sprite; };
 
         /**
          Draws the sprite.
@@ -64,6 +55,7 @@ namespace engine
          Draws the sprite.
          */
         void Draw();
+
     public:
 
     private:

@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>SampleApp.xcscheme_^#shared#^_</key>
+		<key>MacOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>TVOS.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>iOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>1</integer>
@@ -18,6 +28,16 @@
 			<true/>
 		</dict>
 		<key>7F3CAAE0277093D500E0D74C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F3E8F5A279AE6A2003BB7B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F3E9026279B015A003BB7B6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

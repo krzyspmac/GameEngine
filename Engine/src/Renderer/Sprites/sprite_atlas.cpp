@@ -13,7 +13,8 @@
 using namespace engine;
 
 SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
-: SpriteAtlasI(jsonFilename, textureFilename)
+    : SpriteAtlasI(jsonFilename, textureFilename)
+    , m_flippedVertically(false)
 {
     std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonFilename));
 
@@ -87,6 +88,20 @@ SpriteAtlasItemI *SpriteAtlas::GetItemForName(std::string name)
     return NULL;
 }
 
+void SpriteAtlas::SetFlippedVertically(bool val)
+{
+    m_flippedVertically = val;
+    for (auto& item : m_items)
+    {
+        item.SetFlippedVertically(val);
+    }
+}
+
+bool SpriteAtlas::GetFlippedVertically()
+{
+    return m_flippedVertically;
+}
+
 #pragma mark - Scripting Interface
 
 SCRIPTING_INTERFACE_IMPL_NAME(SpriteAtlas);
@@ -106,10 +121,23 @@ static int lua_SpriteAtlas_GetItemForName(lua_State *L)
     return 1;
 }
 
+static int lua_SpriteAtlas_SetFlippedVertically(lua_State *L)
+{
+    SpriteAtlas **ptr = (SpriteAtlas**)luaL_checkudata(
+        L, 1, SpriteAtlas::ScriptingInterfaceName().c_str()
+    );
+    if (ptr != nullptr && dynamic_cast<SpriteAtlas*>(*ptr) == nullptr) { return 0; }
+
+    bool value = lua_toboolean(L, 2);
+    (*ptr)->SetFlippedVertically(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteAtlas::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "GetItemForName", &lua_SpriteAtlas_GetItemForName}
+        { "GetItemForName", &lua_SpriteAtlas_GetItemForName }
+    ,   { "SetFlippedVertically", &lua_SpriteAtlas_SetFlippedVertically }
     });
     return result;
 }

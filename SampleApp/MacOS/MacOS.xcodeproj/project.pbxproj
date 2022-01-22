@@ -7,19 +7,89 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F138297277507C500ED6D67 /* RendererEntry.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F138291277507C500ED6D67 /* RendererEntry.mm */; };
-		7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
+		4C9EA02D279217E70082EB6A /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
+		7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
-		7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AA27750B5B00ED6D67 /* libcjson.a */; };
-		7F1382AD27750B5B00ED6D67 /* libEngine.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AC27750B5B00ED6D67 /* libEngine.a */; };
-		7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382AE27750B5B00ED6D67 /* liblua.a */; };
-		7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B027750B5B00ED6D67 /* libSDL2_image.a */; };
-		7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */; };
-		7F1382C527750BBC00ED6D67 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; };
-		7F1382C627750BBC00ED6D67 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7F1382A827750B4400ED6D67 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7F1382C827750C0800ED6D67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F1382C727750C0800ED6D67 /* main.mm */; };
+		7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F20ACB0278B2B1A00B5772F /* Main.storyboard */; };
+		7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB5278B31FA00B5772F /* Foundation.framework */; };
+		7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB7278B34D600B5772F /* Quartz.framework */; };
+		7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB9278B352400B5772F /* MetalKit.framework */; };
+		7F3E8F68279AE6A2003BB7B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F66279AE6A2003BB7B6 /* Main.storyboard */; };
+		7F3E8F6A279AE6A4003BB7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F69279AE6A4003BB7B6 /* Assets.xcassets */; };
+		7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F6B279AE6A4003BB7B6 /* LaunchScreen.storyboard */; };
+		7F3E8F70279AE6A4003BB7B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F6F279AE6A4003BB7B6 /* main.m */; };
+		7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F74279AE6F8003BB7B6 /* Info-iOS.plist */; };
+		7F3E8F83279AEE17003BB7B6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
+		7F3E8F86279AF176003BB7B6 /* libEngine-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F85279AF176003BB7B6 /* libEngine-iOS.a */; };
+		7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F8A279AF17C003BB7B6 /* Metal.framework */; };
+		7F3E8F8D279AF17C003BB7B6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F8B279AF17C003BB7B6 /* MetalKit.framework */; };
+		7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */; };
+		7F3E9000279AFA6C003BB7B6 /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
+		7F3E9001279AFA6C003BB7B6 /* fireplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499282787798B004127CB /* fireplace.json */; };
+		7F3E9002279AFA6C003BB7B6 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD02783970400E8CB01 /* EnterCommand.ttf */; };
+		7F3E9003279AFA6C003BB7B6 /* brett.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCF2783970400E8CB01 /* brett.json */; };
+		7F3E9004279AFA6C003BB7B6 /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
+		7F3E9005279AFA6C003BB7B6 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
+		7F3E9006279AFA6C003BB7B6 /* main copy.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD12783970400E8CB01 /* main copy.lua */; };
+		7F3E9007279AFA6C003BB7B6 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
+		7F3E9008279AFA6C003BB7B6 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCA2783970400E8CB01 /* characters.json */; };
+		7F3E9009279AFA6C003BB7B6 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCE2783970400E8CB01 /* background.png */; };
+		7F3E900A279AFA6C003BB7B6 /* brett_character.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC62783970400E8CB01 /* brett_character.json */; };
+		7F3E900B279AFA6C003BB7B6 /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
+		7F3E900C279AFA6C003BB7B6 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
+		7F3E900D279AFA6C003BB7B6 /* background.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC82783970400E8CB01 /* background.json */; };
+		7F3E900E279AFA6C003BB7B6 /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
+		7F3E900F279AFA6C003BB7B6 /* textx.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC72783970400E8CB01 /* textx.png */; };
+		7F3E9010279AFA6C003BB7B6 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCC2783970400E8CB01 /* characters.png */; };
+		7F3E9011279AFA6C003BB7B6 /* brett.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC52783970400E8CB01 /* brett.png */; };
+		7F3E9012279AFA6C003BB7B6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC92783970400E8CB01 /* main.lua */; };
+		7F3E9013279AFA6C003BB7B6 /* room1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCB2783970400E8CB01 /* room1.json */; };
+		7F3E9014279AFA6C003BB7B6 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCD2783970400E8CB01 /* background.jpg */; };
+		7F3E9015279AFA6C003BB7B6 /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
+		7F3E9016279AFA6C003BB7B6 /* textx.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD22783970400E8CB01 /* textx.json */; };
+		7F3E9017279AFA6C003BB7B6 /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
+		7F3E9018279AFA6C003BB7B6 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
+		7F3E9019279AFA6C003BB7B6 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
+		7F3E9037279B015A003BB7B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E9035279B015A003BB7B6 /* Main.storyboard */; };
+		7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E9038279B015C003BB7B6 /* Assets.xcassets */; };
+		7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */; };
+		7F3E903E279B015C003BB7B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E903D279B015C003BB7B6 /* main.m */; };
+		7F3E9042279B0311003BB7B6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
+		7F3E9048279B039E003BB7B6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9046279B039E003BB7B6 /* MetalKit.framework */; };
+		7F3E9049279B039E003BB7B6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9047279B039E003BB7B6 /* Metal.framework */; };
+		7F3E916D279B060A003BB7B6 /* libEngine-TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E916C279B060A003BB7B6 /* libEngine-TV.a */; };
+		7F3E9170279B0650003BB7B6 /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
+		7F3E9171279B0650003BB7B6 /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
+		7F3E9172279B0650003BB7B6 /* main.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC92783970400E8CB01 /* main.lua */; };
+		7F3E9173279B0650003BB7B6 /* textx.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD22783970400E8CB01 /* textx.json */; };
+		7F3E9174279B0650003BB7B6 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
+		7F3E9175279B0650003BB7B6 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCE2783970400E8CB01 /* background.png */; };
+		7F3E9176279B0650003BB7B6 /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
+		7F3E9177279B0650003BB7B6 /* brett.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCF2783970400E8CB01 /* brett.json */; };
+		7F3E9178279B0650003BB7B6 /* fireplace.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499282787798B004127CB /* fireplace.json */; };
+		7F3E9179279B0650003BB7B6 /* brett.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC52783970400E8CB01 /* brett.png */; };
+		7F3E917A279B0650003BB7B6 /* room1.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCB2783970400E8CB01 /* room1.json */; };
+		7F3E917B279B0650003BB7B6 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
+		7F3E917C279B0650003BB7B6 /* brett_character.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC62783970400E8CB01 /* brett_character.json */; };
+		7F3E917D279B0650003BB7B6 /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
+		7F3E917E279B0650003BB7B6 /* background.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC82783970400E8CB01 /* background.json */; };
+		7F3E917F279B0650003BB7B6 /* characters.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCA2783970400E8CB01 /* characters.json */; };
+		7F3E9180279B0650003BB7B6 /* EnterCommand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD02783970400E8CB01 /* EnterCommand.ttf */; };
+		7F3E9181279B0650003BB7B6 /* main copy.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD12783970400E8CB01 /* main copy.lua */; };
+		7F3E9182279B0650003BB7B6 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCD2783970400E8CB01 /* background.jpg */; };
+		7F3E9183279B0650003BB7B6 /* textx.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FC72783970400E8CB01 /* textx.png */; };
+		7F3E9184279B0650003BB7B6 /* parlor.tga in Resources */ = {isa = PBXBuildFile; fileRef = 4C9EA02C279217E70082EB6A /* parlor.tga */; };
+		7F3E9185279B0650003BB7B6 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
+		7F3E9186279B0650003BB7B6 /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
+		7F3E9187279B0650003BB7B6 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
+		7F3E9188279B0650003BB7B6 /* characters.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FCC2783970400E8CB01 /* characters.png */; };
+		7F3E9189279B0650003BB7B6 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
+		7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */; };
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D819279A067800139E14 /* Cocoa.framework */; };
+		7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */; };
 		7F849921278760FA004127CB /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
 		7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
 		7F8499292787798B004127CB /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
@@ -40,9 +110,13 @@
 		7F869FE22783970400E8CB01 /* textx.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD22783970400E8CB01 /* textx.json */; };
 		7F869FE32783970400E8CB01 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
 		7F869FE42783970400E8CB01 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
+		7F927F462796B8B90052DB60 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
+		7F927F482796FB430052DB60 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
+		7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
+		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
 		7FB8226D2788DB34008F0F7A /* parlor.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226B2788DB33008F0F7A /* parlor.png */; };
 		7FB8226E2788DB34008F0F7A /* parlor.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FB8226C2788DB34008F0F7A /* parlor.json */; };
-		7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB824112788F8FC008F0F7A /* libimgui.a */; };
+		7FCC12962798D792002ECABD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCC12952798D792002ECABD /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,7 +126,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				7F1382C627750BBC00ED6D67 /* SDL2.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -60,10 +133,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		7F138290277507C500ED6D67 /* RendererEntry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererEntry.hpp; sourceTree = "<group>"; };
-		7F138291277507C500ED6D67 /* RendererEntry.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntry.mm; sourceTree = "<group>"; };
+		4C9EA02C279217E70082EB6A /* parlor.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = parlor.tga; sourceTree = "<group>"; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7F13829E2775082800ED6D67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7F13829E2775082800ED6D67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7F1382A22775086200ED6D67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F1382A42775086200ED6D67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -73,9 +145,41 @@
 		7F1382AE27750B5B00ED6D67 /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382B027750B5B00ED6D67 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1382C727750C0800ED6D67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = SOURCE_ROOT; };
-		7F3CAAE1277093D500E0D74C /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F1382C727750C0800ED6D67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = src/main.mm; sourceTree = SOURCE_ROOT; };
+		7F20ACB0278B2B1A00B5772F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		7F20ACB5278B31FA00B5772F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7F20ACB7278B34D600B5772F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
+		7F20ACB9278B352400B5772F /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		7F3CAAE1277093D500E0D74C /* MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8F5B279AE6A2003BB7B6 /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8F67279AE6A2003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7F3E8F69279AE6A4003BB7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F3E8F6C279AE6A4003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7F3E8F6F279AE6A4003BB7B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7F3E8F74279AE6F8003BB7B6 /* Info-iOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-iOS.plist"; sourceTree = SOURCE_ROOT; };
+		7F3E8F7E279AEB1B003BB7B6 /* Defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defs.h; sourceTree = "<group>"; };
+		7F3E8F7F279AEB78003BB7B6 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		7F3E8F85279AF176003BB7B6 /* libEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8F8A279AF17C003BB7B6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		7F3E8F8B279AF17C003BB7B6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		7F3E8FF8279AF81B003BB7B6 /* libcjson-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libcjson-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8FFA279AF81B003BB7B6 /* libimgui-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libimgui-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8FFC279AF81B003BB7B6 /* liblua-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "liblua-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-iOS-Bundle.bundle"; path = "../Debug-iphonesimulator/Engine-iOS-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9027279B015A003BB7B6 /* TVOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TVOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9036279B015A003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7F3E9038279B015C003BB7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7F3E903B279B015C003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7F3E903D279B015C003BB7B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7F3E9044279B0397003BB7B6 /* libEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E9046279B039E003BB7B6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		7F3E9047279B039E003BB7B6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		7F3E916C279B060A003BB7B6 /* libEngine-TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-TV-Bundle.bundle"; path = "../Debug-appletvsimulator/Engine-TV-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		7F63D818279A043300139E14 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-macOS.plist"; sourceTree = SOURCE_ROOT; };
+		7F63D819279A067800139E14 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Engine-Mac-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F84991F278760FA004127CB /* DialogFont_retro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DialogFont_retro.png; sourceTree = "<group>"; };
 		7F849920278760FA004127CB /* DialogFont_retro.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DialogFont_retro.fnt; sourceTree = "<group>"; };
 		7F8499272787798B004127CB /* fireplace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireplace.png; sourceTree = "<group>"; };
@@ -96,9 +200,14 @@
 		7F869FD22783970400E8CB01 /* textx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = textx.json; sourceTree = "<group>"; };
 		7F869FD32783970400E8CB01 /* polygons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polygons.json; sourceTree = "<group>"; };
 		7F869FD42783970400E8CB01 /* room1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room1.png; sourceTree = "<group>"; };
+		7F927F452796B8B90052DB60 /* background.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.tga; sourceTree = "<group>"; };
+		7F927F472796FB430052DB60 /* background1.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background1.tga; sourceTree = "<group>"; };
+		7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = DialogFont_retro.tga; sourceTree = "<group>"; };
+		7F9EB6CF279A163700384C0B /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB8226B2788DB33008F0F7A /* parlor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = parlor.png; sourceTree = "<group>"; };
 		7FB8226C2788DB34008F0F7A /* parlor.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = parlor.json; sourceTree = "<group>"; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FCC12952798D792002ECABD /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,14 +215,33 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FB824122788F8FC008F0F7A /* libimgui.a in Frameworks */,
-				7F1382AB27750B5B00ED6D67 /* libcjson.a in Frameworks */,
-				7F1382AD27750B5B00ED6D67 /* libEngine.a in Frameworks */,
-				7F1382AF27750B5B00ED6D67 /* liblua.a in Frameworks */,
-				7F1382B127750B5B00ED6D67 /* libSDL2_image.a in Frameworks */,
-				7F1382B327750B5B00ED6D67 /* libSDL2_ttf.a in Frameworks */,
+				7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */,
+				7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */,
+				7FCC12962798D792002ECABD /* GameController.framework in Frameworks */,
+				7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */,
+				7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */,
+				7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */,
 				7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */,
-				7F1382C527750BBC00ED6D67 /* SDL2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E8F58279AE6A2003BB7B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */,
+				7F3E8F8D279AF17C003BB7B6 /* MetalKit.framework in Frameworks */,
+				7F3E8F86279AF176003BB7B6 /* libEngine-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9024279B015A003BB7B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E916D279B060A003BB7B6 /* libEngine-TV.a in Frameworks */,
+				7F3E9048279B039E003BB7B6 /* MetalKit.framework in Frameworks */,
+				7F3E9049279B039E003BB7B6 /* Metal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,38 +251,25 @@
 		7F13828C277507C500ED6D67 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				7F13829C2775082800ED6D67 /* AppDelegate */,
-				7F13828F277507C500ED6D67 /* Entry */,
+				7F3E8F7E279AEB1B003BB7B6 /* Defs.h */,
+				7F3E8F7F279AEB78003BB7B6 /* PrefixHeader.pch */,
+				7F13829D2775082800ED6D67 /* AppDelegate.h */,
+				7F13829E2775082800ED6D67 /* AppDelegate.mm */,
+				7F1382C727750C0800ED6D67 /* main.mm */,
 				7F1382A02775086200ED6D67 /* Resources */,
 			);
 			path = src;
 			sourceTree = "<group>";
 		};
-		7F13828F277507C500ED6D67 /* Entry */ = {
-			isa = PBXGroup;
-			children = (
-				7F138290277507C500ED6D67 /* RendererEntry.hpp */,
-				7F138291277507C500ED6D67 /* RendererEntry.mm */,
-			);
-			path = Entry;
-			sourceTree = "<group>";
-		};
-		7F13829C2775082800ED6D67 /* AppDelegate */ = {
-			isa = PBXGroup;
-			children = (
-				7F13829D2775082800ED6D67 /* AppDelegate.h */,
-				7F13829E2775082800ED6D67 /* AppDelegate.m */,
-				7F1382C727750C0800ED6D67 /* main.mm */,
-			);
-			path = AppDelegate;
-			sourceTree = "<group>";
-		};
 		7F1382A02775086200ED6D67 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7F63D818279A043300139E14 /* Info-macOS.plist */,
+				7F3E8F74279AE6F8003BB7B6 /* Info-iOS.plist */,
 				7F1382A12775086200ED6D67 /* App.entitlements */,
 				7F1382A22775086200ED6D67 /* Assets.xcassets */,
 				7F1382A32775086200ED6D67 /* MainMenu.xib */,
+				7F20ACB0278B2B1A00B5772F /* Main.storyboard */,
 			);
 			path = Resources;
 			sourceTree = SOURCE_ROOT;
@@ -162,8 +277,11 @@
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
+				7F63D871279A140C00139E14 /* Build Resources */,
 				7F13828C277507C500ED6D67 /* src */,
 				7F869FC42783970400E8CB01 /* GameDataProcessed */,
+				7F3E8F5C279AE6A2003BB7B6 /* iOS */,
+				7F3E9028279B015A003BB7B6 /* TVOS */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
 				7F3CAAE2277093D500E0D74C /* Products */,
 			);
@@ -172,7 +290,9 @@
 		7F3CAAE2277093D500E0D74C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F3CAAE1277093D500E0D74C /* SampleApp.app */,
+				7F3CAAE1277093D500E0D74C /* MacOS.app */,
+				7F3E8F5B279AE6A2003BB7B6 /* iOS.app */,
+				7F3E9027279B015A003BB7B6 /* TVOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -180,6 +300,22 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F3E916C279B060A003BB7B6 /* libEngine-TV.a */,
+				7F3E9047279B039E003BB7B6 /* Metal.framework */,
+				7F3E9046279B039E003BB7B6 /* MetalKit.framework */,
+				7F3E9044279B0397003BB7B6 /* libEngine-iOS.a */,
+				7F3E8FF8279AF81B003BB7B6 /* libcjson-ios.a */,
+				7F3E8FFA279AF81B003BB7B6 /* libimgui-ios.a */,
+				7F3E8FFC279AF81B003BB7B6 /* liblua-ios.a */,
+				7F3E8F8A279AF17C003BB7B6 /* Metal.framework */,
+				7F3E8F8B279AF17C003BB7B6 /* MetalKit.framework */,
+				7F3E8F85279AF176003BB7B6 /* libEngine-iOS.a */,
+				7F9EB6CF279A163700384C0B /* libEngine-Mac.a */,
+				7F63D819279A067800139E14 /* Cocoa.framework */,
+				7FCC12952798D792002ECABD /* GameController.framework */,
+				7F20ACB9278B352400B5772F /* MetalKit.framework */,
+				7F20ACB7278B34D600B5772F /* Quartz.framework */,
+				7F20ACB5278B31FA00B5772F /* Foundation.framework */,
 				7FB824112788F8FC008F0F7A /* libimgui.a */,
 				7F1382AA27750B5B00ED6D67 /* libcjson.a */,
 				7F1382AC27750B5B00ED6D67 /* libEngine.a */,
@@ -192,9 +328,45 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		7F3E8F5C279AE6A2003BB7B6 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7F3E8F66279AE6A2003BB7B6 /* Main.storyboard */,
+				7F3E8F69279AE6A4003BB7B6 /* Assets.xcassets */,
+				7F3E8F6B279AE6A4003BB7B6 /* LaunchScreen.storyboard */,
+				7F3E8F6F279AE6A4003BB7B6 /* main.m */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		7F3E9028279B015A003BB7B6 /* TVOS */ = {
+			isa = PBXGroup;
+			children = (
+				7F3E9035279B015A003BB7B6 /* Main.storyboard */,
+				7F3E9038279B015C003BB7B6 /* Assets.xcassets */,
+				7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */,
+				7F3E903D279B015C003BB7B6 /* main.m */,
+			);
+			path = TVOS;
+			sourceTree = "<group>";
+		};
+		7F63D871279A140C00139E14 /* Build Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */,
+				7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */,
+				7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */,
+			);
+			name = "Build Resources";
+			sourceTree = "<group>";
+		};
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */,
+				7F927F472796FB430052DB60 /* background1.tga */,
+				7F927F452796B8B90052DB60 /* background.tga */,
+				4C9EA02C279217E70082EB6A /* parlor.tga */,
 				7FB8226C2788DB34008F0F7A /* parlor.json */,
 				7FB8226B2788DB33008F0F7A /* parlor.png */,
 				7F8499282787798B004127CB /* fireplace.json */,
@@ -225,9 +397,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F3CAAE0277093D500E0D74C /* SampleApp */ = {
+		7F3CAAE0277093D500E0D74C /* MacOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "SampleApp" */;
+			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "MacOS" */;
 			buildPhases = (
 				7F3CAADD277093D500E0D74C /* Sources */,
 				7F3CAADE277093D500E0D74C /* Frameworks */,
@@ -238,9 +410,44 @@
 			);
 			dependencies = (
 			);
-			name = SampleApp;
+			name = MacOS;
 			productName = RendererAppSDL;
-			productReference = 7F3CAAE1277093D500E0D74C /* SampleApp.app */;
+			productReference = 7F3CAAE1277093D500E0D74C /* MacOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7F3E8F5A279AE6A2003BB7B6 /* iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E8F71279AE6A4003BB7B6 /* Build configuration list for PBXNativeTarget "iOS" */;
+			buildPhases = (
+				7F3E8F57279AE6A2003BB7B6 /* Sources */,
+				7F3E8F58279AE6A2003BB7B6 /* Frameworks */,
+				7F3E8F59279AE6A2003BB7B6 /* Resources */,
+				7F3E8F8E279AF29B003BB7B6 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iOS;
+			productName = iOS;
+			productReference = 7F3E8F5B279AE6A2003BB7B6 /* iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7F3E9026279B015A003BB7B6 /* TVOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7F3E903F279B015C003BB7B6 /* Build configuration list for PBXNativeTarget "TVOS" */;
+			buildPhases = (
+				7F3E9023279B015A003BB7B6 /* Sources */,
+				7F3E9024279B015A003BB7B6 /* Frameworks */,
+				7F3E9025279B015A003BB7B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TVOS;
+			productName = TVOS;
+			productReference = 7F3E9027279B015A003BB7B6 /* TVOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -253,6 +460,12 @@
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					7F3CAAE0277093D500E0D74C = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					7F3E8F5A279AE6A2003BB7B6 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					7F3E9026279B015A003BB7B6 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
@@ -270,7 +483,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F3CAAE0277093D500E0D74C /* SampleApp */,
+				7F3CAAE0277093D500E0D74C /* MacOS */,
+				7F3E8F5A279AE6A2003BB7B6 /* iOS */,
+				7F3E9026279B015A003BB7B6 /* TVOS */,
 			);
 		};
 /* End PBXProject section */
@@ -280,14 +495,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */,
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
+				7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */,
 				7FB8226D2788DB34008F0F7A /* parlor.png in Resources */,
 				7F869FE02783970400E8CB01 /* EnterCommand.ttf in Resources */,
 				7F849921278760FA004127CB /* DialogFont_retro.png in Resources */,
+				7F927F462796B8B90052DB60 /* background.tga in Resources */,
 				7F869FDE2783970400E8CB01 /* background.png in Resources */,
 				7F869FD82783970400E8CB01 /* background.json in Resources */,
 				7F8499292787798B004127CB /* fireplace.png in Resources */,
 				7F869FDB2783970400E8CB01 /* room1.json in Resources */,
+				7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */,
+				7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */,
 				7F869FD72783970400E8CB01 /* textx.png in Resources */,
 				7F869FD92783970400E8CB01 /* main.lua in Resources */,
 				7F869FD62783970400E8CB01 /* brett_character.json in Resources */,
@@ -295,6 +515,8 @@
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
 				7F84992A2787798B004127CB /* fireplace.json in Resources */,
 				7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */,
+				4C9EA02D279217E70082EB6A /* parlor.tga in Resources */,
+				7F927F482796FB430052DB60 /* background1.tga in Resources */,
 				7F869FDC2783970400E8CB01 /* characters.png in Resources */,
 				7F869FE32783970400E8CB01 /* polygons.json in Resources */,
 				7F869FD52783970400E8CB01 /* brett.png in Resources */,
@@ -307,7 +529,101 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7F3E8F59279AE6A2003BB7B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E9007279AFA6C003BB7B6 /* polygons.json in Resources */,
+				7F3E9016279AFA6C003BB7B6 /* textx.json in Resources */,
+				7F3E900F279AFA6C003BB7B6 /* textx.png in Resources */,
+				7F3E9018279AFA6C003BB7B6 /* background1.tga in Resources */,
+				7F3E9010279AFA6C003BB7B6 /* characters.png in Resources */,
+				7F3E900E279AFA6C003BB7B6 /* parlor.json in Resources */,
+				7F3E900D279AFA6C003BB7B6 /* background.json in Resources */,
+				7F3E9012279AFA6C003BB7B6 /* main.lua in Resources */,
+				7F3E9014279AFA6C003BB7B6 /* background.jpg in Resources */,
+				7F3E9000279AFA6C003BB7B6 /* parlor.tga in Resources */,
+				7F3E9008279AFA6C003BB7B6 /* characters.json in Resources */,
+				7F3E9015279AFA6C003BB7B6 /* DialogFont_retro.png in Resources */,
+				7F3E9013279AFA6C003BB7B6 /* room1.json in Resources */,
+				7F3E9002279AFA6C003BB7B6 /* EnterCommand.ttf in Resources */,
+				7F3E9004279AFA6C003BB7B6 /* fireplace.png in Resources */,
+				7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */,
+				7F3E9019279AFA6C003BB7B6 /* DialogFont_retro.tga in Resources */,
+				7F3E9003279AFA6C003BB7B6 /* brett.json in Resources */,
+				7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */,
+				7F3E9005279AFA6C003BB7B6 /* background.tga in Resources */,
+				7F3E9009279AFA6C003BB7B6 /* background.png in Resources */,
+				7F3E9001279AFA6C003BB7B6 /* fireplace.json in Resources */,
+				7F3E9006279AFA6C003BB7B6 /* main copy.lua in Resources */,
+				7F3E9017279AFA6C003BB7B6 /* parlor.png in Resources */,
+				7F3E900B279AFA6C003BB7B6 /* DialogFont_retro.fnt in Resources */,
+				7F3E9011279AFA6C003BB7B6 /* brett.png in Resources */,
+				7F3E8F6A279AE6A4003BB7B6 /* Assets.xcassets in Resources */,
+				7F3E8F68279AE6A2003BB7B6 /* Main.storyboard in Resources */,
+				7F3E900C279AFA6C003BB7B6 /* room1.png in Resources */,
+				7F3E900A279AFA6C003BB7B6 /* brett_character.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9025279B015A003BB7B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */,
+				7F3E9185279B0650003BB7B6 /* room1.png in Resources */,
+				7F3E917B279B0650003BB7B6 /* polygons.json in Resources */,
+				7F3E9186279B0650003BB7B6 /* parlor.json in Resources */,
+				7F3E9180279B0650003BB7B6 /* EnterCommand.ttf in Resources */,
+				7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */,
+				7F3E9175279B0650003BB7B6 /* background.png in Resources */,
+				7F3E917F279B0650003BB7B6 /* characters.json in Resources */,
+				7F3E9174279B0650003BB7B6 /* DialogFont_retro.tga in Resources */,
+				7F3E9177279B0650003BB7B6 /* brett.json in Resources */,
+				7F3E917E279B0650003BB7B6 /* background.json in Resources */,
+				7F3E9188279B0650003BB7B6 /* characters.png in Resources */,
+				7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */,
+				7F3E917A279B0650003BB7B6 /* room1.json in Resources */,
+				7F3E9184279B0650003BB7B6 /* parlor.tga in Resources */,
+				7F3E9037279B015A003BB7B6 /* Main.storyboard in Resources */,
+				7F3E9176279B0650003BB7B6 /* DialogFont_retro.fnt in Resources */,
+				7F3E9182279B0650003BB7B6 /* background.jpg in Resources */,
+				7F3E9179279B0650003BB7B6 /* brett.png in Resources */,
+				7F3E917C279B0650003BB7B6 /* brett_character.json in Resources */,
+				7F3E917D279B0650003BB7B6 /* fireplace.png in Resources */,
+				7F3E9172279B0650003BB7B6 /* main.lua in Resources */,
+				7F3E9183279B0650003BB7B6 /* textx.png in Resources */,
+				7F3E9189279B0650003BB7B6 /* background1.tga in Resources */,
+				7F3E9170279B0650003BB7B6 /* DialogFont_retro.png in Resources */,
+				7F3E9178279B0650003BB7B6 /* fireplace.json in Resources */,
+				7F3E9187279B0650003BB7B6 /* background.tga in Resources */,
+				7F3E9181279B0650003BB7B6 /* main copy.lua in Resources */,
+				7F3E9171279B0650003BB7B6 /* parlor.png in Resources */,
+				7F3E9173279B0650003BB7B6 /* textx.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7F3E8F8E279AF29B003BB7B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nls\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		7F3CAADD277093D500E0D74C /* Sources */ = {
@@ -315,8 +631,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1382C827750C0800ED6D67 /* main.mm in Sources */,
-				7F138297277507C500ED6D67 /* RendererEntry.mm in Sources */,
-				7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */,
+				7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E8F57279AE6A2003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E8F83279AEE17003BB7B6 /* AppDelegate.mm in Sources */,
+				7F3E8F70279AE6A4003BB7B6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7F3E9023279B015A003BB7B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7F3E9042279B0311003BB7B6 /* AppDelegate.mm in Sources */,
+				7F3E903E279B015C003BB7B6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +662,38 @@
 				7F1382A42775086200ED6D67 /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		7F3E8F66279AE6A2003BB7B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F3E8F67279AE6A2003BB7B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7F3E8F6B279AE6A4003BB7B6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F3E8F6C279AE6A4003BB7B6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7F3E9035279B015A003BB7B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F3E9036279B015A003BB7B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7F3E903B279B015C003BB7B6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -371,12 +736,13 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
+					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/../../Frameworks/**",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = src/PrefixHeader.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -388,20 +754,14 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
-					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
-					"$(SRCROOT)/../../Libraries/SDL_image-main",
-					"$(SRCROOT)/../../Libraries/SDL_ttf-main",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_LDFLAGS = (
-					"-weak_framework",
-					webp,
-				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -443,10 +803,11 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/../../Libraries/SDL_image-main/Xcode/Frameworks",
+					"$(BUILT_PRODUCTS_DIR)",
 					"$(SRCROOT)/../../Frameworks/**",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = src/PrefixHeader.pch;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -454,19 +815,13 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
-					"$(SRCROOT)/../../Frameworks/SDL2.framework/Headers",
-					"$(SRCROOT)/../../Libraries/SDL_image-main",
-					"$(SRCROOT)/../../Libraries/SDL_ttf-main",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_LDFLAGS = (
-					"-weak_framework",
-					webp,
-				);
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -483,7 +838,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TARGET_MACOS=1",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Info-macOS.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -511,7 +872,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_HARDENED_RUNTIME = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "TARGET_MACOS=1";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Info-macOS.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainNibFile = MainMenu;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -527,6 +890,146 @@
 			};
 			name = Release;
 		};
+		7F3E8F72279AE6A4003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TARGET_IOS=1",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Info-iOS.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.iOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7F3E8F73279AE6A4003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = TARGET_IOS;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Info-iOS.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.iOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7F3E9040279B015C003BB7B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"TARGET_IOS=1",
+				);
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = metal;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.TVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
+			};
+			name = Debug;
+		};
+		7F3E9041279B015C003BB7B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 75FQAVWUP3;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_PREPROCESSOR_DEFINITIONS = "TARGET_IOS=1";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = metal;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.TVOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -539,11 +1042,29 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "SampleApp" */ = {
+		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "MacOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F3CAAF2277093D600E0D74C /* Debug */,
 				7F3CAAF3277093D600E0D74C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E8F71279AE6A4003BB7B6 /* Build configuration list for PBXNativeTarget "iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E8F72279AE6A4003BB7B6 /* Debug */,
+				7F3E8F73279AE6A4003BB7B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7F3E903F279B015C003BB7B6 /* Build configuration list for PBXNativeTarget "TVOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7F3E9040279B015C003BB7B6 /* Debug */,
+				7F3E9041279B015C003BB7B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

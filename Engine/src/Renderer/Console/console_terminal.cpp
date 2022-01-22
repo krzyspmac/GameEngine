@@ -99,7 +99,7 @@ void ConsoleTerminal::AddLog(const char* fmt, ...)
 
 void ConsoleTerminal::Draw(const char* title, bool* p_open)
 {
-    ImGui::SetNextWindowSize(ImVec2(520, 600), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(320, 200), ImGuiCond_Once);
     if (!ImGui::Begin(title, p_open))
     {
         ImGui::End();

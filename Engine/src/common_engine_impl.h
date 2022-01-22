@@ -8,7 +8,6 @@
 #ifndef common_engine_impl_h
 #define common_engine_impl_h
 
-#include "SDL.h"
 #include "general.hpp"
 #include "vector2.hpp"
 #include "line.hpp"
@@ -41,6 +40,24 @@ namespace engine
         Origin origin;
         Size size;
     } Rect;
+
+    typedef struct
+    {
+        float x;
+        float y;
+    } OriginF;
+
+    typedef struct
+    {
+        float width;
+        float height;
+    } SizeF;
+
+    typedef struct
+    {
+        OriginF origin;
+        SizeF size;
+    } RectF;
 
     inline Origin OriginMake(int x, int y)
     {

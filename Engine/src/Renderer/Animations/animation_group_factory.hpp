@@ -12,7 +12,7 @@
 #include "scripting_engine_provider_interface.h"
 #include "animation_group_simulateneus.hpp"
 #include "animation_group_sequence.hpp"
-#include "animation.h"
+#include "animation_interface.h"
 #include "property_animator.hpp"
 
 namespace engine

@@ -7,7 +7,6 @@
 
 #include "character_renderer.hpp"
 #include "engine.hpp"
-#include <SDL.h>
 
 using namespace engine;
 
@@ -18,7 +17,8 @@ CharacterRenderer::CharacterRenderer(SpriteAtlasI *characterAtlas, int scale)
 
 CharacterRenderer::~CharacterRenderer()
 {
-    GetMainEngine()->getTextureManager().UnloadTexture(m_bufferTexture);
+    // TODO: memory management
+//    GetMainEngine()->getTextureManager().UnloadTexture(m_bufferTexture);
 }
 
 CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState direction)
@@ -99,21 +99,26 @@ void CharacterRenderer::PrepareCharacter()
     }
 
     m_bodyWidth = std::max(maxBodyWidth, maxHeadWidth);
-    m_bodyHeight = maxBodyHeight + maxHeadHeight;
+    m_bodyHeight = maxBodyHeight;
     m_headHeadHeight = maxHeadHeight;
-    m_bufferTexture = GetMainEngine()->getTextureManager().CreateTargetTexture(m_bodyWidth, m_bodyHeight);
+
+    auto& anyRenderer = m_standB;
+    auto body = anyRenderer.GetBodyRendererAtIndex(0);
+    auto sprite = new SpriteDrawStatic(body->GetSprite(), m_scale);
+    m_bodySprite = std::unique_ptr<SpriteDrawStatic>(std::move(sprite));
 }
 
-void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimating)
+void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimating, Vector2 position)
 {
     if (!renderer.GetBodyAnimationCount())
     {
         return;
     }
 
+    auto& provider = GetMainEngine()->getProvider();
     int m_maxWidth = renderer.GetBodyMaxWidth();
 
-    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 ticks = provider.GetTicks();
     Uint64 seconds = ticks / renderer.GetBodyAnimationDelay();
     Uint32 frameCount = (Uint32)renderer.GetBodyAnimationCount();
     Uint32 frameNo = //renderer.GetIsReversed()
@@ -121,51 +126,58 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
         /*: */(seconds % frameCount)
     ;
     Uint32 spriteNo = isAnimating ? (frameNo) : 0;
+
+    // Get the current body renderer
     CharacterBodyRenderer *bodyRenderer = renderer.GetBodyRendererAtIndex(spriteNo);
+
+    // The current sprite item decides where the body should go
     SpriteAtlasItemI *spriteItem = bodyRenderer->GetSprite();
     m_headOffsetX = bodyRenderer->GetHeadOffsetX();
     m_headOffsetY = bodyRenderer->GetHeadOffsetY();
 
-    GetMainEngine()->getProvider().DrawTexture(
-       spriteItem->GetTexture(),
-        /*x + */ceil(1 *((m_maxWidth - spriteItem->GetWidth())/2)) + + (1 * bodyRenderer->GetBodyOffsetX()),
-        /*y + */m_headHeadHeight,
-        spriteItem->GetX(),
-        spriteItem->GetY(),
-        spriteItem->GetWidth(),
-        spriteItem->GetHeight(),
-        1
+    float x = ceil(
+        ((m_maxWidth - spriteItem->GetWidth())/2) + bodyRenderer->GetBodyOffsetX()
+    );
+
+    float spriteWidth = spriteItem->GetWidth();
+    float spriteWidth2 = spriteWidth / 2;
+    float widthDifference = (m_maxWidth - spriteWidth)/2;
+
+    auto drawable = bodyRenderer->GetDrawable();
+    drawable->SetScale(m_scale);
+    provider.DrawableRender(
+        drawable
+      , position.x - (widthDifference * m_scale) - ceil(bodyRenderer->GetBodyOffsetX() * m_scale)  // - (m_bodyWidth * m_scale / 2)
+      , position.y
     );
 }
 
-void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimating)
+void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimating, Vector2 position)
 {
-    if (!renderer.GetHeadAnimationCount())
-    {
-        return;
-    }
+    if (!renderer.GetHeadAnimationCount()) { return; }
 
+    auto& provider = GetMainEngine()->getProvider();
     int m_maxWidth = renderer.GetHeadMaxWidth();
 
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
     Uint64 seconds = ticks / renderer.GetHeadAnimationDelay();
     Uint32 frameCount = (Uint32)renderer.GetHeadAnimationCount();
-    Uint32 frameNo = //renderer.GetIsReversed()
-        //? (frameCount-1) - (seconds % frameCount)
-        /*: */(seconds % frameCount)
-    ;
+    Uint32 frameNo = (seconds % frameCount);
     Uint32 spriteNo = isAnimating ? (frameNo) : 0;
-    SpriteAtlasItemI *spriteItem = renderer.GetHeadRendererAtIndex(spriteNo)->GetSprite();
 
-    GetMainEngine()->getProvider().DrawTexture(
-       spriteItem->GetTexture(),
-        /*0 + */ceil((m_maxWidth - spriteItem->GetWidth())/2) + m_headOffsetX,
-        /*0 + */m_headOffsetY,
-        spriteItem->GetX(),
-        spriteItem->GetY(),
-        spriteItem->GetWidth(),
-        spriteItem->GetHeight(),
-        1
+    // Get the current body renderer
+    auto headPartRenderer = renderer.GetHeadRendererAtIndex(spriteNo);
+    SpriteAtlasItemI *spriteItem = headPartRenderer->GetSprite();
+
+    auto drawable = headPartRenderer->GetDrawable();
+    drawable->SetScale(m_scale);
+    float x = ceil((m_maxWidth - (float)spriteItem->GetWidth())/2) + m_headOffsetX + spriteItem->GetWidth();
+    float y = m_headOffsetY * m_scale;
+
+    provider.DrawableRender(
+        drawable
+      , position.x - ceil(x * m_scale)
+      , position.y - (m_headHeadHeight * m_scale * 2)  // + y + (m_headHeadHeight * m_scale)
     );
 }
 
@@ -198,29 +210,20 @@ void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTa
     // Get the current walk renderer.
     CharacterWalkRenderer &renderer = GetRenderer(state);
 
-    // Set the buffer texture as the current rendering target
-    provider.RendererTargetPush(m_bufferTexture);
-
-    // Clear the buffer textures with a clear color
-    provider.RenderSetColor(255, 255, 255, 0);
-    GetMainEngine()->getProvider().RenderClear();
+    Vector2 bodyPosition =
+    {
+        position.x - (m_bodyWidth * m_scale / 2),
+        position.y - (m_bodyHeight * m_scale * 2)
+    };
 
     // Render the body, then the head
-    DrawBody(renderer, isWalking);
-    DrawHead(renderer, isTalking);
+    DrawBody(renderer, isWalking, bodyPosition);
+    DrawHead(renderer, isTalking, bodyPosition);
 
     // Render display artifacts
     provider.RenderSetColor(255, 255, 255, 120);
     DrawBoundingBox(provider);
     DrawOriginCrosshair(provider);
-
-    // Clear the render target so that the final pass can be pushed
-    // to the graphics card.
-    provider.RendererTargetPop();
-
-    // Draw the buffer texture.
-//    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, position.x, position.y, m_scale, renderer.GetIsReversed());
-    provider.DrawTexture(m_bufferTexture, ANCHOR_BOTTOM_CENTER, position, m_scale, renderer.GetIsReversed());
 }
 
 #pragma mark - CharacterWalkRenderer

@@ -16,7 +16,15 @@
 
 #include "defs.h"
 #include "general.hpp"
-#include "common_sdl.h"
+
+#define Uint64  uint64_t
+#define Uint32  uint32_t
+#define Uint8   uint8_t
+
+#define Sint64  int64_t
+#define Sint32  int32_t
+#define Sint8   int8_t
+
 
 #ifdef __cplusplus
 extern "C" {

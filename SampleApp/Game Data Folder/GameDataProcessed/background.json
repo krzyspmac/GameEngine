@@ -1,6 +1,14 @@
 {"frames": [
 
 {
+	"filename": "all",
+	"frame": {"x":0,"y":0,"w":640,"h":423},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":423},
+	"sourceSize": {"w":640,"h":423}
+},
+{
 	"filename": "background.png",
 	"frame": {"x":0,"y":0,"w":640,"h":268},
 	"rotated": false,

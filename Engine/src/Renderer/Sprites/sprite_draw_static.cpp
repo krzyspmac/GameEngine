@@ -12,33 +12,44 @@
 
 using namespace engine;
 
-SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, int scale)
+SpriteDrawStatic::SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scale)
     : SpriteDrawI(scale), m_sprite(spriteAtlasItem)
 {
+    auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, scale);
+    m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
 void SpriteDrawStatic::DrawAt(int x, int y)
 {
     EngineProviderI &provider = GetMainEngine()->getProvider();
-    TextureI *texture = m_sprite->GetTexture();
 
-    provider.TextureAlphaSetMod(texture, m_alpha);
+//    TextureI *texture = m_sprite->GetTexture();
+//
+//    provider.TextureAlphaSetMod(texture, m_alpha);
+//
+//    provider.DrawTexture(
+//       texture,
+//       x,
+//       y,
+//       m_sprite->GetX(),
+//       m_sprite->GetY(),
+//       m_sprite->GetWidth(),
+//       m_sprite->GetHeight(),
+//       m_scale
+//    );
 
-    provider.DrawTexture(
-       texture,
-       x,
-       y,
-       m_sprite->GetX(),
-       m_sprite->GetY(),
-       m_sprite->GetWidth(),
-       m_sprite->GetHeight(),
-       m_scale
-    );
+    provider.DrawableRender(m_drawable.get(), x, y);
+}
+
+void SpriteDrawStatic::SetPosition(Vector2 &pos)
+{
+    m_position = pos;
 }
 
 void SpriteDrawStatic::SetScale(float x)
 {
     SpriteDrawI::SetScale(x);
+    m_drawable->SetScale(x);
 }
 
 void SpriteDrawStatic::Draw()
@@ -61,7 +72,7 @@ static int lua_SpriteDrawStatic_SetScale(lua_State *L)
 static int lua_SpriteDrawStatic_SetAlpha(lua_State *L)
 {
     SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
-    float x = MAX(0, MIN(255, lua_tonumberx(L, 2, NULL)));
+    float x = MAX(0, MIN(1, lua_tonumberx(L, 2, NULL)));
     spr->SetAlpha(x);
     return 0;
 }

@@ -12,7 +12,7 @@
 #include "engine_provider_interface.h"
 #include "time.hpp"
 #include "callable.hpp"
-#include "animation.h"
+#include "animation_interface.h"
 #include "memory.h"
 
 namespace engine

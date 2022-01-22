@@ -115,7 +115,7 @@
     NSEventMask eventMask = NSEventMaskKeyDown | NSEventMaskKeyUp | NSEventMaskFlagsChanged;
     [NSEvent addLocalMonitorForEventsMatchingMask:eventMask handler:^NSEvent * _Nullable(NSEvent *event)
     {
-        ImGui_ImplOSX_HandleEvent(event, self.view);
+        //ImGui_ImplOSX_HandleEvent(event, self.view);
         return event;
     }];
 

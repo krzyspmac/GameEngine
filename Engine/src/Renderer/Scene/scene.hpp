@@ -9,6 +9,7 @@
 #define scene_hpp
 
 #include "scripting_engine_provider_interface.h"
+#include "engine_provider_interface.h"
 #include "sprite_draw_static.hpp"
 #include "sprite_draw_animated.hpp"
 #include "sprite_atlas.hpp"

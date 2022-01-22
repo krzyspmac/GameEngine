@@ -15,7 +15,7 @@ FontI *FontManager::LoadFont(std::string fntFilename, std::string fontTexture)
     FontI *result = GetFont(fntFilename);
     if (!result)
     {
-        FontI *result = new FontBitmapRepresentation(fntFilename, fontTexture);
+        FontI *result = new FontBitmapRepresentation(fntFilename, fontTexture, 1);
         if (result)
         {
             m_fonts.emplace_back(std::unique_ptr<FontI>(std::move(result)));

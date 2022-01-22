@@ -15,12 +15,25 @@ namespace engine
 {
     class EventProvider: public EventProviderI
     {
+        std::vector<std::unique_ptr<EventI>> m_poolMouseMove;
+        std::vector<std::unique_ptr<EventI>> m_poolMouseLeftUp;
+        std::vector<EventI*> m_eventQueue;
     public:
-        EventProvider(): EventProviderI() { };
+        EventProvider();
 
     public:
-        void DoEvent();
-        int PollEvent(EVENT *event, SDL_Event *originalEvent);
+        void    PushMouseLocation(Origin);
+        void    PushMouseLeftUp();
+        bool    PollEvent(EventI **outEvent);
+
+    private:
+        void    EventsPoolPopulate();
+        EventI* EventsPoolDequeue(EventType type);
+
+        void    EventPush(EventI*);
+
+    private: // helpers
+        std::vector<std::unique_ptr<EventI>> *EventsPoolForType(EventType type);
     };
 
 }; // namespace engine

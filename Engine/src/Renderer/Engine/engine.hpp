@@ -44,10 +44,12 @@ namespace engine
         ~Engine();
 
     public:
-        void setup();
-        int doInput();
-        void update();
-
+        void Setup();
+        int ProcessEvents();
+        void FrameBegin();
+        void ProcessScript();
+        void FrameDraw();
+        void FrameEnd();
     public:
         void SetCapRate(int fps);
 
@@ -76,7 +78,6 @@ namespace engine
         int m_fpsCap;
         double m_fpsCapInverse;
 
-        TextureTargetI *m_bufferTexture;
         float m_viewportScale; // scaled to fit the window
         Origin m_viewportOffset;
 

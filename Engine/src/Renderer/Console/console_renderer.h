@@ -14,6 +14,7 @@
 
 namespace engine
 {
+    /** The main console renderer. Release version does not include a console. */
     class ConsoleRenderer: public ConsoleRendererI
     {
         std::unique_ptr<ConsoleAppRendererI> m_platformRenderer;
@@ -31,6 +32,8 @@ namespace engine
 
         ConsoleLogI& GetLogger();
         ConsoleTerminalI& GetTerminal();
+
+        auto GetPlarformRenderer() { return m_platformRenderer.get(); };
 
     private:
         void SetupEvents();

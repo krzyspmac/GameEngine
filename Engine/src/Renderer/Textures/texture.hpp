@@ -14,16 +14,15 @@
 namespace engine
 {
 
-class Texture: TextureI
-{
-public:
-    Texture(void *textureHandle, std::string textureName)
-        : TextureI(textureHandle, textureName)
+    class Texture: public TextureI
     {
-    }
+    public:
+        Texture(void *textureHandle, std::string textureName)
+            : TextureI(textureHandle, textureName, Vector2Zero)
+        {
+        }
 
-};
-
+    };
 };
 
 #endif /* texture_hpp */

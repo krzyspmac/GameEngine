@@ -7,8 +7,10 @@
 
 #include "file_access.hpp"
 
-#ifdef __APPLE__
+#if !TARGET_IOS
 #include <Cocoa/Cocoa.h>
+#else
+#include <UIKit/UIKit.h>
 #endif
 
 #include <string>

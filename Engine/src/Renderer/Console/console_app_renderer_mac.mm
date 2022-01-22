@@ -7,136 +7,133 @@
 
 #include <Metal/Metal.h>
 #include <QuartzCore/QuartzCore.h>
-#include <Cocoa/Cocoa.h>
 #include "common.h"
 #include "console_renderer.h"
 #include "engine.hpp"
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
 #include "console_app_renderer_mac.hpp"
-#include "engine_provider_sdl.hpp"
 #include "imgui.h"
-#include "imgui_impl_sdl.h"
 #include "imgui_impl_metal.h"
+#include "imgui_impl_osx.h"
 
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+#include <UIKit/UIKit.h>
+#else
+#include <Cocoa/Cocoa.h>
+#endif
 
-/* Shared namespace */
 using namespace engine;
-
-/**
- Static definitions for the console. In case of a debug guild only one console can exist.
- */
-#define SCREEN_WIDTH  1020
-#define SCREEN_HEIGHT 1020
-
-API_AVAILABLE(macos(10.11))
-static CAMetalLayer* layer = nullptr;
-
-API_AVAILABLE(macos(10.11))
-static id<MTLCommandQueue> commandQueue;
-
-API_AVAILABLE(macos(10.11))
-static MTLRenderPassDescriptor* renderPassDescriptor;
-
-static float clear_color[4] = {0.45f, 0.55f, 0.60f, 0.0f};
-
-static SDL_APP m_app;
 
 ConsoleAppRendererMac::ConsoleAppRendererMac()
     : ConsoleAppRendererI()
+    , m_isSetup(false)
+    , m_device(NULL)
+    , m_renderPassDescriptor(NULL)
+#if TARGET_OS_OSX
+    , m_view(NULL)
+#endif
 {
 }
 
+void ConsoleAppRendererMac::SetDevice(MTL::Device *device)
+{
+    m_device = device;
+}
+
+#if TARGET_OS_OSX
+
+void ConsoleAppRendererMac::SetView(NSView *view)
+{
+    m_view = view;
+}
+
+void ConsoleAppRendererMac::PrepareForFrame(NSView *view,
+                                            MTL::RenderPassDescriptor *pass,
+                                            MTL::CommandBuffer *buffer,
+                                            MTL::RenderCommandEncoder *encoder)
+{
+#if SHOW_CONSOLE
+    m_view = view;
+    m_renderPassDescriptor = pass;
+    m_commandBuffer = buffer;
+    m_encoder = encoder;
+
+    ImGuiIO& io = ImGui::GetIO();
+    io.DisplaySize.x = view.bounds.size.width;
+    io.DisplaySize.y = view.bounds.size.height;
+
+#if TARGET_OS_OSX
+    CGFloat framebufferScale = view.window.screen.backingScaleFactor ?: NSScreen.mainScreen.backingScaleFactor;
+#else
+    CGFloat framebufferScale = view.window.screen.scale ?: UIScreen.mainScreen.scale;
+#endif
+    io.DisplayFramebufferScale = ImVec2(framebufferScale, framebufferScale);
+#endif
+}
+
+void ConsoleAppRendererMac::HandleEvent(NSEvent *event)
+{
+#if SHOW_CONSOLE
+    ImGui_ImplOSX_HandleEvent(event, m_view);
+#endif
+}
+
+#endif
+
 void ConsoleAppRendererMac::SetupWindow()
 {
-    int rendererFlags, windowFlags;
-    windowFlags = 0;
-    rendererFlags = SDL_RENDERER_ACCELERATED;
+#if SHOW_CONSOLE
+    if (m_isSetup) { return; };
 
-    m_app.window = SDL_CreateWindow("Console", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, windowFlags);
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplMetal_Init((__bridge id<MTLDevice>)m_device);
 
-    if(!m_app.window)
-    {
-        printf("Failed to open %d x %d window: %s\n", SCREEN_WIDTH, SCREEN_HEIGHT, SDL_GetError());
-        return;
-    }
-
-    m_app.renderer = SDL_CreateRenderer(m_app.window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-    if (m_app.renderer == NULL)
-    {
-        printf("Error creating renderer: %s\n", SDL_GetError());
-        return;
-    }
-
-    SDL_SetWindowResizable(m_app.window, SDL_TRUE);
-
+#if TARGET_OS_OSX
+    ImGui_ImplOSX_Init(m_view);
+#endif
+    
     m_isSetup = true;
+#endif
 }
 
 void ConsoleAppRendererMac::DoFrame(std::function<void(void)> lambda)
 {
 #if SHOW_CONSOLE
     if (!m_isSetup) { return; };
+    if (m_renderPassDescriptor == nullptr) { return; };
 
-    if (@available(macOS 10.11, *)) {
-        int width;
-        int height;
-        SDL_GetRendererOutputSize(m_app.renderer, &width, &height);
+    ImGui_ImplMetal_NewFrame((__bridge MTLRenderPassDescriptor*)m_renderPassDescriptor);
 
-        layer.drawableSize = CGSizeMake(width, height);
-        id<CAMetalDrawable> drawable = [layer nextDrawable];
-        id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
-        renderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(clear_color[0] * clear_color[3], clear_color[1] * clear_color[3], clear_color[2] * clear_color[3], clear_color[3]);
-        renderPassDescriptor.colorAttachments[0].texture = drawable.texture;
-        renderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;
-        renderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
-        id <MTLRenderCommandEncoder> renderEncoder = [commandBuffer renderCommandEncoderWithDescriptor:renderPassDescriptor];
-        [renderEncoder pushDebugGroup:@"ImGui demo"];
+    #if TARGET_OS_OSX
+    ImGui_ImplOSX_NewFrame(m_view);
+    #endif
 
-        ImGui_ImplMetal_NewFrame(renderPassDescriptor);
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
-
-        // Gui
-        lambda();
-
-        // Rendering
-        ImGui::Render();
-        ImGui_ImplMetal_RenderDrawData(ImGui::GetDrawData(), commandBuffer, renderEncoder);
-
-        [renderEncoder popDebugGroup];
-        [renderEncoder endEncoding];
-
-        [commandBuffer presentDrawable:drawable];
-        [commandBuffer commit];
-    } else {
-        // Fallback on earlier versions
-    }
+    ImGui::NewFrame();
+    lambda();
 #endif
 }
 
-void ConsoleAppRendererMac::SetupImGui()
+void ConsoleAppRendererMac::Render()
 {
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+#if SHOW_CONSOLE
+    ImGui::Render();
+    ImDrawData* draw_data = ImGui::GetDrawData();
 
-    ImGui::StyleColorsDark();
+    ImGui_ImplMetal_RenderDrawData(
+       draw_data,
+       (__bridge id<MTLCommandBuffer>)m_commandBuffer,
+       (__bridge id<MTLRenderCommandEncoder>)m_encoder
+    );
 
-    // Setup Platform/Renderer backends
-    if (@available(macOS 10.11, *)) {
-        layer = (__bridge CAMetalLayer*)SDL_RenderGetMetalLayer(m_app.renderer);
-        layer.pixelFormat = MTLPixelFormatBGRA8Unorm;
-        layer.backgroundColor = [NSColor clearColor].CGColor;
-
-        ImGui_ImplMetal_Init(layer.device);
-        ImGui_ImplSDL2_InitForMetal(m_app.window);
-
-        commandQueue = [layer.device newCommandQueue];
-        renderPassDescriptor = [MTLRenderPassDescriptor new];
-    } else {
-        // Fallback on earlier versions
-    }
+    m_renderPassDescriptor = nullptr;
+    m_commandBuffer = nullptr;
+    m_encoder = nullptr;
+#endif
 }
 
 bool ConsoleAppRendererMac::IsSetup()
@@ -146,18 +143,12 @@ bool ConsoleAppRendererMac::IsSetup()
 
 void ConsoleAppRendererMac::SetConsoleHidden(bool hidden)
 {
-    if (!hidden)
-    {
-        SDL_ShowWindow(m_app.window);
-    }
-    else
-    {
-        SDL_HideWindow(m_app.window);
-    }
+    // TODO: not implemented
 }
 
 void ConsoleAppRendererMac::Setup()
 {
+#if SHOW_CONSOLE
     SetupWindow();
-    SetupImGui();
+#endif
 }

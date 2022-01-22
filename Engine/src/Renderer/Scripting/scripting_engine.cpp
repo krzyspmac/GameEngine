@@ -229,16 +229,17 @@ int ScriptingEngine::L_unloadTexture(lua_State *L)
 /// drawTexture(texture_handle, x, y)
 int ScriptingEngine::L_drawTexture(lua_State *L)
 {
-    int argc = lua_gettop(L);
-    int y = lua_tonumberx(L, argc--, NULL);
-    int x = lua_tonumberx(L, argc--, NULL);
-    TextureI *texturePointer = (TextureI*)lua_topointer(L, argc--);
-
-    if (texturePointer != NULL)
-    {
-        GetMainEngine()->getProvider().DrawTexture(texturePointer, x, y);
-    }
-
+    // TODO: not used; to be removed
+//    int argc = lua_gettop(L);
+//    int y = lua_tonumberx(L, argc--, NULL);
+//    int x = lua_tonumberx(L, argc--, NULL);
+//    TextureI *texturePointer = (TextureI*)lua_topointer(L, argc--);
+//
+//    if (texturePointer != NULL)
+//    {
+//        GetMainEngine()->getProvider().DrawTexture(texturePointer, x, y);
+//    }
+//
     return 0;
 }
 
