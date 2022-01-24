@@ -28,6 +28,7 @@
 #include "console_renderer.h"
 #include "texture_manager.hpp"
 #include "font_manager.hpp"
+#include "engine_setup_interface.h"
 
 namespace engine
 {
@@ -191,6 +192,8 @@ namespace engine
     public:
 
     protected:
+        EngineSetup m_engineSetup;
+
         Size m_viewportSize;
         float m_viewportScale;
         Size m_rendererOutputSize;

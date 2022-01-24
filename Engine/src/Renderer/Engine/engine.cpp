@@ -16,6 +16,7 @@
 #include "character_mover.hpp"
 #include "polygon_loader.hpp"
 #include "animation_curve_factory.hpp"
+#include "ini_reader.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -62,15 +63,32 @@ Engine::~Engine()
 
 void Engine::Setup()
 {
+    // Preare the file access functions
+    m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
+
+    // Read the ini file. If not existing - exit with a proper message.
+    try
+    {
+        std::string path = m_fileAccess.GetFullPath("main.ini");
+        IniReader reader(path);
+        m_engineSetup = reader.GetSetup();
+    }
+    catch (const char* exception)
+    {
+        printf("Exception found while loading main.ini: %s.\n", exception);
+        exit(1);
+    }
+
     // Register time helper for future reference.
     // Needed to scripts at the start of execution.
     m_time.Prepare();
 
-    m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
+    // Load some debug fonts
 #if SHOW_FPS
     m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 1);
 #endif
 
+    // Load the main script file
     std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
 
     m_scriptingEngine.newState();

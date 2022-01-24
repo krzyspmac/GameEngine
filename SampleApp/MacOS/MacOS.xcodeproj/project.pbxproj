@@ -90,6 +90,9 @@
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D819279A067800139E14 /* Cocoa.framework */; };
 		7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */; };
+		7F6D1C8A279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
+		7F6D1C8B279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
+		7F6D1C8C279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
 		7F849921278760FA004127CB /* DialogFont_retro.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F84991F278760FA004127CB /* DialogFont_retro.png */; };
 		7F849922278760FA004127CB /* DialogFont_retro.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F849920278760FA004127CB /* DialogFont_retro.fnt */; };
 		7F8499292787798B004127CB /* fireplace.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8499272787798B004127CB /* fireplace.png */; };
@@ -180,6 +183,7 @@
 		7F63D818279A043300139E14 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-macOS.plist"; sourceTree = SOURCE_ROOT; };
 		7F63D819279A067800139E14 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Engine-Mac-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F6D1C89279F186A0078D76A /* main.ini */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.ini; sourceTree = "<group>"; };
 		7F84991F278760FA004127CB /* DialogFont_retro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DialogFont_retro.png; sourceTree = "<group>"; };
 		7F849920278760FA004127CB /* DialogFont_retro.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DialogFont_retro.fnt; sourceTree = "<group>"; };
 		7F8499272787798B004127CB /* fireplace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fireplace.png; sourceTree = "<group>"; };
@@ -389,6 +393,7 @@
 				7F869FD22783970400E8CB01 /* textx.json */,
 				7F869FD32783970400E8CB01 /* polygons.json */,
 				7F869FD42783970400E8CB01 /* room1.png */,
+				7F6D1C89279F186A0078D76A /* main.ini */,
 			);
 			name = GameDataProcessed;
 			path = "../Game Data Folder/GameDataProcessed";
@@ -522,6 +527,7 @@
 				7F869FD52783970400E8CB01 /* brett.png in Resources */,
 				7F869FE42783970400E8CB01 /* room1.png in Resources */,
 				7F869FE12783970400E8CB01 /* main copy.lua in Resources */,
+				7F6D1C8A279F186A0078D76A /* main.ini in Resources */,
 				7F869FDD2783970400E8CB01 /* background.jpg in Resources */,
 				7F869FDF2783970400E8CB01 /* brett.json in Resources */,
 				7F869FDA2783970400E8CB01 /* characters.json in Resources */,
@@ -538,6 +544,7 @@
 				7F3E900F279AFA6C003BB7B6 /* textx.png in Resources */,
 				7F3E9018279AFA6C003BB7B6 /* background1.tga in Resources */,
 				7F3E9010279AFA6C003BB7B6 /* characters.png in Resources */,
+				7F6D1C8B279F186A0078D76A /* main.ini in Resources */,
 				7F3E900E279AFA6C003BB7B6 /* parlor.json in Resources */,
 				7F3E900D279AFA6C003BB7B6 /* background.json in Resources */,
 				7F3E9012279AFA6C003BB7B6 /* main.lua in Resources */,
@@ -575,6 +582,7 @@
 				7F3E917B279B0650003BB7B6 /* polygons.json in Resources */,
 				7F3E9186279B0650003BB7B6 /* parlor.json in Resources */,
 				7F3E9180279B0650003BB7B6 /* EnterCommand.ttf in Resources */,
+				7F6D1C8C279F186A0078D76A /* main.ini in Resources */,
 				7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */,
 				7F3E9175279B0650003BB7B6 /* background.png in Resources */,
 				7F3E917F279B0650003BB7B6 /* characters.json in Resources */,
