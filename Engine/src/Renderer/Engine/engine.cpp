@@ -54,6 +54,11 @@ Engine::Engine(EngineProviderI &engineProvider,
 {
     sharedEngine = this;
     SetCapRate(60);
+
+    EngineSetup setup;
+    setup.resolution.width = 320;
+    setup.resolution.height = 200;
+
     AnimationCurveFactory::Prepare();
 }
 

@@ -1,0 +1,110 @@
+//
+//  RendererEntryViewController+RendererEntryViewController_Helpers.m
+//  Engine
+//
+//  Created by krzysp on 24/01/2022.
+//
+
+#import "RendererEntryViewController.h"
+
+@implementation RendererEntryViewController (Rendering)
+
+- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
+{
+    viewportSize.x = size.width;
+    viewportSize.y = size.height;
+    printf("size = %f, %f\n", size.width, size.height);
+
+    [self setupMouseMovedEvents];
+}
+
+- (void)drawInMTKView:(nonnull MTKView *)view
+{
+    /** Update the engine if needed*/
+#if TARGET_IOS
+    m_engine->SetViewportScale([UIScreen mainScreen].scale);
+#else
+    m_engine->SetViewportScale(self.view.window.backingScaleFactor);
+#endif
+
+    /** Process events */
+    m_engine->ProcessEvents();
+
+    /** Process script. Script can alter the current rendering queue */
+    m_engine->ProcessScript();
+
+    /** Create a command buffer*/
+    id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
+    commandBuffer.label = @"Command Buffer";
+
+    /** Render the scene offscreen to a target texture */
+    {
+        id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:oscRenderPassDescriptor];
+        [encoder setRenderPipelineState:oscPipelineState];
+
+        /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
+        m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
+        m_engineProvider->SetViewportSize(desiredViewport);
+
+        /** Render the scene */
+        m_engine->FrameBegin();
+        m_engine->FrameDraw();
+
+        [encoder endEncoding];
+    }
+
+    /** Render the offscreen texture to screen */
+    MTLRenderPassDescriptor *drawableRenderPassDescriptor = view.currentRenderPassDescriptor;
+    if(drawableRenderPassDescriptor != nil)
+    {
+        /** Create the encoder for the pass */
+        id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:drawableRenderPassDescriptor];
+        encoder.label = @"Drawable Render Pass";
+        [encoder setRenderPipelineState:pipelineState];
+
+        static const AAPLVertex quadVertices[] =
+        {
+            // Positions     , Texture coordinates
+            { {  1,  -1 },  { 1.0, 1.0 } },
+            { { -1,  -1 },  { 0.0, 1.0 } },
+            { { -1,   1 },  { 0.0, 0.0 } },
+
+            { {  1,  -1 },  { 1.0, 1.0 } },
+            { { -1,   1 },  { 0.0, 0.0 } },
+            { {  1,   1 },  { 1.0, 0.0 } },
+        };
+
+        // Draw the offscreen texture
+        [encoder setVertexBytes:&quadVertices length:sizeof(quadVertices) atIndex:AAPLVertexInputIndexVertices];
+        [encoder setVertexBytes:&viewportSize length:sizeof(viewportSize) atIndex:AAPLVertexInputIndexWindowSize];
+        [encoder setVertexBytes:&desiredViewport length:sizeof(desiredViewport) atIndex:AAPLVertexInputIndexViewportSize];
+        [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
+        [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
+
+        // Optionally draw the console
+#if USES_CONSOLE
+        [encoder pushDebugGroup:@"Dear ImGui rendering"];
+
+        m_consoleRendererProvider->PrepareForFrame(
+           self.view
+         , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
+         , (__bridge MTL::CommandBuffer*)commandBuffer
+         , (__bridge MTL::RenderCommandEncoder*)encoder
+        );
+        m_consoleRenderer->DoFrame();
+        m_consoleRendererProvider->Render();
+
+        [encoder popDebugGroup];
+#endif
+        /** End encoding */
+        [encoder endEncoding];
+    }
+
+    /** Present the drawable */
+    [commandBuffer presentDrawable:view.currentDrawable];
+
+    /** Flush the queue */
+    [commandBuffer commit];
+};
+
+@end

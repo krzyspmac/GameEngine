@@ -383,6 +383,15 @@
 		7F6D1C85279F14690078D76A /* ini_reader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6D1C81279F14690078D76A /* ini_reader.hpp */; };
 		7F6D1C86279F14690078D76A /* ini_reader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6D1C81279F14690078D76A /* ini_reader.hpp */; };
 		7F6D1C87279F14690078D76A /* ini_reader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6D1C81279F14690078D76A /* ini_reader.hpp */; };
+		7F6D1CA1279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C92279F4ACA0078D76A /* RendererEntryViewController+Helpers.mm */; };
+		7F6D1CA2279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C92279F4ACA0078D76A /* RendererEntryViewController+Helpers.mm */; };
+		7F6D1CA3279F4F810078D76A /* RendererEntryViewController+Helpers.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C92279F4ACA0078D76A /* RendererEntryViewController+Helpers.mm */; };
+		7F6D1CA4279F503A0078D76A /* RendererEntryViewController+Events.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C9D279F4CAD0078D76A /* RendererEntryViewController+Events.mm */; };
+		7F6D1CA5279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C9D279F4CAD0078D76A /* RendererEntryViewController+Events.mm */; };
+		7F6D1CA6279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C9D279F4CAD0078D76A /* RendererEntryViewController+Events.mm */; };
+		7F6D1CA7279F50590078D76A /* RendererEntryViewController+Rendering.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C99279F4BDB0078D76A /* RendererEntryViewController+Rendering.mm */; };
+		7F6D1CA8279F50590078D76A /* RendererEntryViewController+Rendering.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C99279F4BDB0078D76A /* RendererEntryViewController+Rendering.mm */; };
+		7F6D1CA9279F505A0078D76A /* RendererEntryViewController+Rendering.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C99279F4BDB0078D76A /* RendererEntryViewController+Rendering.mm */; };
 		7F6E2C262794AFD100348C81 /* character_interface_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */; };
 		7F6E2C272794AFD100348C81 /* character_interface_impl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */; };
 		7F708915278A13D800A501CB /* font_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F708913278A13D800A501CB /* font_manager.cpp */; };
@@ -605,6 +614,9 @@
 		7F6D1C80279F14690078D76A /* ini_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ini_reader.cpp; sourceTree = "<group>"; };
 		7F6D1C81279F14690078D76A /* ini_reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ini_reader.hpp; sourceTree = "<group>"; };
 		7F6D1C88279F14CA0078D76A /* engine_setup_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_setup_interface.h; sourceTree = "<group>"; };
+		7F6D1C92279F4ACA0078D76A /* RendererEntryViewController+Helpers.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "RendererEntryViewController+Helpers.mm"; sourceTree = "<group>"; };
+		7F6D1C99279F4BDB0078D76A /* RendererEntryViewController+Rendering.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "RendererEntryViewController+Rendering.mm"; sourceTree = "<group>"; };
+		7F6D1C9D279F4CAD0078D76A /* RendererEntryViewController+Events.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "RendererEntryViewController+Events.mm"; sourceTree = "<group>"; };
 		7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_interface_impl.cpp; sourceTree = "<group>"; };
 		7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_interface_impl.hpp; sourceTree = "<group>"; };
 		7F708913278A13D800A501CB /* font_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font_manager.cpp; sourceTree = "<group>"; };
@@ -1008,6 +1020,9 @@
 			children = (
 				7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */,
 				7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */,
+				7F6D1C99279F4BDB0078D76A /* RendererEntryViewController+Rendering.mm */,
+				7F6D1C9D279F4CAD0078D76A /* RendererEntryViewController+Events.mm */,
+				7F6D1C92279F4ACA0078D76A /* RendererEntryViewController+Helpers.mm */,
 			);
 			path = Mac;
 			sourceTree = "<group>";
@@ -1812,6 +1827,7 @@
 				7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */,
 				4C255DE82785BABB00D0B30A /* animation_group_simulateneus.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
+				7F6D1CA7279F50590078D76A /* RendererEntryViewController+Rendering.mm in Sources */,
 				7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */,
 				7FCAE7C7277E4EAA004A6107 /* sprite_atlas_manager.cpp in Sources */,
 				4C255DE427859E3100D0B30A /* animation_curve_factory.cpp in Sources */,
@@ -1827,6 +1843,7 @@
 				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
 				7FB824252789AF95008F0F7A /* pipe_output.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
+				7F6D1CA1279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				4C9EA022279205C80082EB6A /* texture_target_metal.cpp in Sources */,
 				7FE2E5C0277A370D00538094 /* path_finder_line_graph_node.cpp in Sources */,
 				7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */,
@@ -1854,6 +1871,7 @@
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
 				7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */,
 				7FCC81BD2780A0C8003025CB /* value_animator_factory.cpp in Sources */,
+				7F6D1CA6279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
 				7FB8242127899731008F0F7A /* console_terminal_commands.cpp in Sources */,
 				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
@@ -1881,6 +1899,7 @@
 				7F3E8EE9279AC909003BB7B6 /* performance.cpp in Sources */,
 				7F3E8EEA279AC909003BB7B6 /* key_value.cpp in Sources */,
 				7F3E8EEB279AC909003BB7B6 /* room.cpp in Sources */,
+				7F6D1CA8279F50590078D76A /* RendererEntryViewController+Rendering.mm in Sources */,
 				7F3E8EED279AC909003BB7B6 /* drawable_metal.cpp in Sources */,
 				7F3E8EEE279AC909003BB7B6 /* release_pool.cpp in Sources */,
 				7F3E8EEF279AC909003BB7B6 /* time.cpp in Sources */,
@@ -1896,6 +1915,7 @@
 				7F3E8EF9279AC909003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E8EFA279AC909003BB7B6 /* path_finder_helper.cpp in Sources */,
 				7F3E8EFB279AC909003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
+				7F6D1CA2279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				7F3E8EFC279AC909003BB7B6 /* path_finder_graph.cpp in Sources */,
 				7F3E8EFD279AC909003BB7B6 /* path_finder.cpp in Sources */,
 				7F3E8EFE279AC909003BB7B6 /* path.cpp in Sources */,
@@ -1923,6 +1943,7 @@
 				7F3E8F13279AC909003BB7B6 /* texture_target_metal.cpp in Sources */,
 				7F3E8F14279AC909003BB7B6 /* texture.cpp in Sources */,
 				7F3E8F15279AC909003BB7B6 /* texture_target.cpp in Sources */,
+				7F6D1CA5279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F3E8F16279AC909003BB7B6 /* engine_provider_metal.cpp in Sources */,
 				7F3E8F17279AC909003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E8F18279AC909003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
@@ -1957,6 +1978,7 @@
 				7F3E9112279B03F6003BB7B6 /* performance.cpp in Sources */,
 				7F3E9113279B03F6003BB7B6 /* key_value.cpp in Sources */,
 				7F3E9114279B03F6003BB7B6 /* room.cpp in Sources */,
+				7F6D1CA9279F505A0078D76A /* RendererEntryViewController+Rendering.mm in Sources */,
 				7F3E9116279B03F6003BB7B6 /* drawable_metal.cpp in Sources */,
 				7F3E9117279B03F6003BB7B6 /* release_pool.cpp in Sources */,
 				7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */,
@@ -1972,6 +1994,7 @@
 				7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */,
 				7F3E9124279B03F6003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
+				7F6D1CA3279F4F810078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				7F3E9125279B03F6003BB7B6 /* path_finder_graph.cpp in Sources */,
 				7F3E9126279B03F6003BB7B6 /* path_finder.cpp in Sources */,
 				7F3E9127279B03F6003BB7B6 /* path.cpp in Sources */,
@@ -1999,6 +2022,7 @@
 				7F3E913C279B03F6003BB7B6 /* texture_target_metal.cpp in Sources */,
 				7F3E913D279B03F6003BB7B6 /* texture.cpp in Sources */,
 				7F3E913E279B03F6003BB7B6 /* texture_target.cpp in Sources */,
+				7F6D1CA4279F503A0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F3E913F279B03F6003BB7B6 /* engine_provider_metal.cpp in Sources */,
 				7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
