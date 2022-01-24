@@ -102,6 +102,9 @@ namespace engine
     /// States
     public:
 
+        /** Get the resolution set in the main ini file */
+        auto& GetEngineSetup() { return m_engineSetup; };
+
         /** Get the current viewport size */
         Size &GetViewport() { return m_viewportSize; };
 

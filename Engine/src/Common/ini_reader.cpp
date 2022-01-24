@@ -6,12 +6,15 @@
 //
 
 #include "ini_reader.hpp"
+#include "key_value.hpp"
 #include <stdio.h>
 
 using namespace engine;
 
+std::string GetSectionName(char *srcLine);
+
 IniReader::IniReader(std::string path)
-    : m_currentSectionName("")
+    : m_currentSectionType(UNKNOWN)
 {
     const char *cPath = path.c_str();
     FILE *fp = fopen(cPath, "r");
@@ -23,6 +26,18 @@ IniReader::IniReader(std::string path)
 
         while ((read = getline(&line, &len, fp)) != -1)
         {
+            if (strlen(line) < 1) { continue; };
+            if (line[0] == ';') { continue; };
+
+            if (UpdateSection(line))
+            {
+                continue;
+            }
+            else
+            {
+                ParseKeyValue(line);
+            }
+
             printf("%s\n", line);
         }
         fclose(fp);
@@ -38,7 +53,72 @@ EngineSetup IniReader::GetSetup()
     return m_engineSetup;
 }
 
-void IniReader::ParseResolutionSection()
+bool IniReader::UpdateSection(char *srcLine)
 {
+    // Get the section name if possible
+    std::string sectionName = GetSectionName(srcLine);
 
+    if (sectionName.empty())
+    {
+        return false;
+    }
+
+    // Compare to a rudimental list of sections
+    static std::string types[] = { "RESOLUTION" };
+
+    for (int i = 0; i < sizeof(types); i++)
+    {
+        if (sectionName == types[i])
+        {
+            m_currentSectionType = (IniSectionType)(i + 1);
+            return true;
+        }
+    }
+
+    return false;
+}
+
+void IniReader::ParseKeyValue(char *line)
+{
+    KeyValueProperties keyValue(line);
+    if (!keyValue.GetValues().size()) { return; };
+
+    auto& values = keyValue.GetValues().at(0);
+    auto& key = values.key;
+    auto& val = values.value;
+
+    switch (m_currentSectionType)
+    {
+        case UNKNOWN:
+        {
+            break;
+        }
+        case RESOLUTION:
+        {
+            if (key == "width")
+            {
+                m_engineSetup.resolution.width = std::stoi(val);
+            }
+            else if (key == "height")
+            {
+                m_engineSetup.resolution.height = std::stoi(val);
+            }
+
+            break;
+        }
+    }
+}
+
+std::string GetSectionName(char *srcLine)
+{
+    static std::string types[] = { "RESOLUTION" };
+    std::string line(srcLine);
+    trim(line);
+
+    if (line[0] == '[' && line.at(line.size()-1) == ']')
+    {
+        return line.substr(1, line.size()-2);
+    }
+
+    return "";
 }

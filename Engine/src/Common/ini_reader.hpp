@@ -22,14 +22,21 @@ namespace engine
      */
     class IniReader
     {
+        typedef enum
+        {
+            UNKNOWN         = 0,
+            RESOLUTION      = 1
+        } IniSectionType;
+
         EngineSetup m_engineSetup;
-        std::string m_currentSectionName;
+        IniSectionType m_currentSectionType;
     public:
         IniReader(std::string path);
         EngineSetup GetSetup();
 
     private:
-        void ParseResolutionSection();
+        bool UpdateSection(char *);
+        void ParseKeyValue(char *);
     };
 };
 
