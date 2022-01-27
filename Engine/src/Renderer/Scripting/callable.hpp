@@ -128,7 +128,8 @@ namespace engine
     {
         CallableScriptFunctionRef m_ref = -1;
     public:
-        static CallableScriptFunctionSciptableInstance none;
+        static CallableScriptFunctionSciptableInstance none()
+        { return CallableScriptFunctionSciptableInstance(-1); };
     public:
         /**
          Construct a callable function by providing a reference for it.

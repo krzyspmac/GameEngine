@@ -95,6 +95,7 @@
 
     /** Setup related*/
     BOOL didSetupEvents;
+    float density;
 
     /** Events */
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
@@ -107,6 +108,7 @@
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
+@property (weak) NSWindow *parentWindow;
 #endif
 @end
 

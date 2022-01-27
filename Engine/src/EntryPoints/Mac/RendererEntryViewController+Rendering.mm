@@ -6,26 +6,33 @@
 //
 
 #import "RendererEntryViewController.h"
+#import "engine.hpp"
 
 @implementation RendererEntryViewController (Rendering)
 
 - (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
 {
+    density = [self density];
+
     viewportSize.x = size.width;
     viewportSize.y = size.height;
     printf("size = %f, %f\n", size.width, size.height);
 
     [self setupMouseMovedEvents];
+
+    if (density > 0)
+    {
+        GetMainEngine()->getEngineState().SendScreenSizeChangeEvent(
+            { static_cast<int>(size.width), static_cast<int>(size.height) }
+          , density
+        );
+    }
 }
 
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
     /** Update the engine if needed*/
-#if TARGET_IOS
-    m_engine->SetViewportScale([UIScreen mainScreen].scale);
-#else
-    m_engine->SetViewportScale(self.view.window.backingScaleFactor);
-#endif
+    m_engine->SetViewportScale(density);
 
     /** Process events */
     m_engine->ProcessEvents();
@@ -106,5 +113,15 @@
     /** Flush the queue */
     [commandBuffer commit];
 };
+
+- (float)density
+{
+#if TARGET_IOS
+    return [UIScreen mainScreen].scale;
+#else
+    return self.parentWindow.backingScaleFactor;
+#endif
+
+}
 
 @end

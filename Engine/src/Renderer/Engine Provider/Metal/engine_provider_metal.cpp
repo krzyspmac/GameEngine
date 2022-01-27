@@ -76,6 +76,11 @@ void EngineProviderMetal::SetDesiredViewport(int width, int height)
     m_desiredViewport[1] = height;
 }
 
+engine::Size EngineProviderMetal::GetDesiredViewport()
+{
+    return { static_cast<int>(m_desiredViewport.x), static_cast<int>(m_desiredViewport.y) };
+}
+
 void EngineProviderMetal::SetViewportScale(float val)
 {
     m_viewportScale = val;
