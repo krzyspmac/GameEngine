@@ -49,6 +49,8 @@ function registerResolutionChange()
 		
 		viewportWidth, viewportHeight = EngineState:GetViewportSize()
  		print("Current viewport is " .. viewportWidth .. " x " .. viewportHeight)
+		
+		EngineState:SetViewportSize(1280*density, 720*density)
 	end)
 end
 

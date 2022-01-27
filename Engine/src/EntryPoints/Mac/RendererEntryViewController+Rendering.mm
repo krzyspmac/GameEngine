@@ -34,6 +34,15 @@
     /** Update the engine if needed*/
     m_engine->SetViewportScale(density);
 
+    /** Recreate the offscreen texture if needed */
+    desiredFramebufferTextureSize.width = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;;
+    desiredFramebufferTextureSize.height = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+
+    if ( desiredFramebufferTextureSize.width != framebufferTextureSize.width || desiredFramebufferTextureSize.height != framebufferTextureSize.height)
+    {
+        [self recreateOffscreenRenderingPipeline];
+    }
+
     /** Process events */
     m_engine->ProcessEvents();
 

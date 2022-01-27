@@ -51,17 +51,33 @@ void EngineState::SendScreenSizeChangeEvent(Size size, float density)
     }
 }
 
+void EngineState::SetViewportSize(Size size)
+{
+    auto& engineSetup = GetMainEngine()->GetEngineSetup();
+    engineSetup.resolution.width = size.width;
+    engineSetup.resolution.height = size.height;
+}
+
 #pragma mark - Scripting Interface
 
 SCRIPTING_INTERFACE_IMPL_NAME(EngineState);
 
-static int lua_EngineState_GetViewport(lua_State *L)
+static int lua_EngineState_GetViewportSize(lua_State *L)
 {
     EngineState *spr = ScriptingEngineI::GetScriptingObjectPtr<EngineState>(L, 1);
     Size size = spr->GetViewportSize();
     lua_pushnumber(L, size.width);
     lua_pushnumber(L, size.height);
     return 2;
+}
+
+static int lua_EngineState_SetViewportSize(lua_State *L)
+{
+    EngineState *spr = ScriptingEngineI::GetScriptingObjectPtr<EngineState>(L, 1);
+    float width = lua_tonumber(L, 2);
+    float height = lua_tonumber(L, 3);
+    spr->SetViewportSize({static_cast<int>(width), static_cast<int>(height)});
+    return 0;
 }
 
 static int lua_EngineState_SetOnScreenSizeChange(lua_State *L)
@@ -75,7 +91,8 @@ static int lua_EngineState_SetOnScreenSizeChange(lua_State *L)
 std::vector<luaL_Reg> EngineState::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "GetViewportSize", &lua_EngineState_GetViewport}
+        { "GetViewportSize", &lua_EngineState_GetViewportSize}
+      , { "SetViewportSize", &lua_EngineState_SetViewportSize}
       , { "SetOnScreenSizeChange", &lua_EngineState_SetOnScreenSizeChange}
     });
     return result;

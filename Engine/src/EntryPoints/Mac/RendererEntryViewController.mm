@@ -9,8 +9,6 @@
 #include <Metal/Metal.hpp>
 #include <MetalKit/MetalKit.h>
 
-#define INITIAL_SCREEN_WIDTH  320
-#define INITIAL_SCREEN_HEIGHT 200
 #define USES_CONSOLE 0
 
 using namespace engine;
@@ -184,10 +182,13 @@ using namespace engine;
     if (!oscFragmentFunction)
         oscFragmentFunction = [library newFunctionWithName:@"fragmentShader"];
 
+    framebufferTextureSize.width = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;
+    framebufferTextureSize.height = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+
     MTLTextureDescriptor *texDescriptor = [MTLTextureDescriptor new];
     texDescriptor.textureType = MTLTextureType2D;
-    texDescriptor.width = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;
-    texDescriptor.height = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+    texDescriptor.width = framebufferTextureSize.width;
+    texDescriptor.height = framebufferTextureSize.height;
     texDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//MTLPixelFormatRGBA8Unorm;
     texDescriptor.usage = MTLTextureUsageRenderTarget |
                           MTLTextureUsageShaderRead;

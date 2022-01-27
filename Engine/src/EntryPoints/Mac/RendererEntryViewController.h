@@ -52,6 +52,9 @@
 #include "engine_provider_metal.hpp"
 #include "AAPLShaderTypes.h"
 
+#define INITIAL_SCREEN_WIDTH  320
+#define INITIAL_SCREEN_HEIGHT 200
+
 @interface RendererEntryViewController : PlatformViewController
 {
     /** Metal related */
@@ -96,7 +99,9 @@
     /** Setup related*/
     BOOL didSetupEvents;
     float density;
-
+    engine::Size desiredFramebufferTextureSize;
+    engine::Size framebufferTextureSize;
+    
     /** Events */
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
@@ -110,6 +115,8 @@
 @property (weak) IBOutlet NSWindowController *windowController;
 @property (weak) NSWindow *parentWindow;
 #endif
+
+- (void)recreateOffscreenRenderingPipeline;
 @end
 
 #endif
