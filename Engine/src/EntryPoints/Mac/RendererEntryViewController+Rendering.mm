@@ -31,16 +31,27 @@
 
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
+    /** The main engine */
+    auto engine = GetMainEngine();
+
+    /** The main engine provider */
+    auto& provider = engine->getProvider();
+
     /** Update the engine if needed*/
     m_engine->SetViewportScale(density);
 
     /** Recreate the offscreen texture if needed */
-    desiredFramebufferTextureSize.width = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;;
-    desiredFramebufferTextureSize.height = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+    desiredFramebufferTextureSize.x = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;;
+    desiredFramebufferTextureSize.y = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
 
-    if ( desiredFramebufferTextureSize.width != framebufferTextureSize.width || desiredFramebufferTextureSize.height != framebufferTextureSize.height)
+    if (    desiredFramebufferTextureSize.x != framebufferTextureSize.x
+         || desiredFramebufferTextureSize.y != framebufferTextureSize.y
+         || engine->GetEngineSetup().affineScale != affineScale
+       )
     {
         [self recreateOffscreenRenderingPipeline];
+        provider.SetDesiredViewport(desiredFramebufferTextureSize.x, desiredFramebufferTextureSize.y);
+        affineScale = engine->GetEngineSetup().affineScale;
     }
 
     /** Process events */
@@ -60,7 +71,7 @@
 
         /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
         m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
-        m_engineProvider->SetViewportSize(desiredViewport);
+        m_engineProvider->SetViewportSize(desiredFramebufferTextureSize);
 
         /** Render the scene */
         m_engine->FrameBegin();
@@ -93,7 +104,8 @@
         // Draw the offscreen texture
         [encoder setVertexBytes:&quadVertices length:sizeof(quadVertices) atIndex:AAPLVertexInputIndexVertices];
         [encoder setVertexBytes:&viewportSize length:sizeof(viewportSize) atIndex:AAPLVertexInputIndexWindowSize];
-        [encoder setVertexBytes:&desiredViewport length:sizeof(desiredViewport) atIndex:AAPLVertexInputIndexViewportSize];
+        [encoder setVertexBytes:&desiredFramebufferTextureSize length:sizeof(desiredFramebufferTextureSize) atIndex:AAPLVertexInputIndexViewportSize];
+        [encoder setVertexBytes:&affineScale length:sizeof(affineScale) atIndex:AAPLVertexInputIndexObjectScale];
         [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 

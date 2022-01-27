@@ -34,9 +34,9 @@ namespace engine
          */
         Size GetViewportSize();
 
-        /** Set the viewport. This changes the target framebuffer texture size on the
+        /** Set the viewport & scale. This changes the target framebuffer texture size on the
             frame. */
-        void SetViewportSize(Size);
+        void SetViewportSize(Size, float);
 
     public: /** Handlers */
 

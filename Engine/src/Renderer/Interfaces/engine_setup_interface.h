@@ -17,6 +17,12 @@ namespace engine
     {
         /** The initial resolution */
         Size resolution;
+
+        /** The scale to apply to the whole framebuffer. Allows for keeping
+            the framebuffer resolution while scaling the whole screen.
+            Default is 1.
+         */
+        float affineScale;
     } EngineSetup;
 };
 

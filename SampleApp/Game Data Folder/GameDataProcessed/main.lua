@@ -1,4 +1,38 @@
-initialAnimationDone = false
+
+------------------------------------------------------------------------------------------
+-- game state
+-- created at the start of the script and holds some dear information used later;
+-- the initial resolution is kept in the .ini file but the script has the final say
+-- in what the resolution will be and what will be the final scale of the frame-buffer
+
+GameState = {}
+GameState.__index = GameState
+
+function GameState:new()
+	local o = {}; setmetatable(o, GameState)
+	self.wantedWidth = 1280
+	self.wantedHeight = 720
+	return o
+end
+
+function GameState:OnResolutionChange(width, height, density)
+	-- Calculate the wanted scale. We want to change the scale instead of changing
+	-- the resolution itself. Changing the resolution would mean we have to update
+	-- the UI as well.
+	local scale = math.min(width / gameState.wantedWidth, height / gameState.wantedHeight)
+	
+	-- Apply the scale to our original frame-buffer size. We don't want to change
+	-- the resolution itself. Scale will suffice.
+	EngineState:SetViewportSize(gameState.wantedWidth, gameState.wantedHeight, scale)
+end
+
+function GameState:Register()
+	EngineState:SetOnScreenSizeChange(function(w, h, d)
+		self:OnResolutionChange(w, h, d)
+	end)
+end
+
+gameState = GameState:new()
 
 ------------------------------------------------------------------------------------------
 -- globals for the script
@@ -9,15 +43,12 @@ scene = nil
 truck = nil
 bg = nil
 font = nil
-
-viewportWidth = nil, viewportHeight
+initialAnimationDone = false
 
 ------------------------------------------------------------------------------------------
 -- loading functions
 
-function loadSprites()
-	viewportWidth, viewportHeight = EngineState:GetViewportSize()
-	
+function loadSprites()	
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
 	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
@@ -44,14 +75,7 @@ function loadSprites()
 end
 
 function registerResolutionChange()
-	EngineState:SetOnScreenSizeChange(function(width, height, density)
-		print("Size received: width = " .. width .. ", height = " .. height .. " at density = " .. density)
-		
-		viewportWidth, viewportHeight = EngineState:GetViewportSize()
- 		print("Current viewport is " .. viewportWidth .. " x " .. viewportHeight)
-		
-		EngineState:SetViewportSize(1280*density, 720*density)
-	end)
+--	EngineState:SetOnScreenSizeChange(gameState:onResolutionChange)
 end
 
 function animateIntro()
@@ -71,18 +95,13 @@ end
 -- event handling functions
 
 function mouseDown(x, y)
---	MemoryReleasePool:Drain()
-
---	if initialAnimationDone ~= true then return end
-	print ("mouse down " .. x .. ", " .. y)
-	character:WalkTo(x, y)
 end
 
 ------------------------------------------------------------------------------------------
 -- script entry point functions
 
 function init()
-	registerResolutionChange()
+	gameState:Register()
 	loadSprites()
   	--animateIntro()
 end

@@ -103,6 +103,7 @@ using namespace engine;
     m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
     m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
     m_engineProvider->SetDesiredViewport(INITIAL_SCREEN_WIDTH, INITIAL_SCREEN_HEIGHT);
+    affineScale = 1.0f;
 }
 
 - (void)setupConsole
@@ -182,13 +183,13 @@ using namespace engine;
     if (!oscFragmentFunction)
         oscFragmentFunction = [library newFunctionWithName:@"fragmentShader"];
 
-    framebufferTextureSize.width = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;
-    framebufferTextureSize.height = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+    framebufferTextureSize.x = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;
+    framebufferTextureSize.y = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
 
     MTLTextureDescriptor *texDescriptor = [MTLTextureDescriptor new];
     texDescriptor.textureType = MTLTextureType2D;
-    texDescriptor.width = framebufferTextureSize.width;
-    texDescriptor.height = framebufferTextureSize.height;
+    texDescriptor.width = framebufferTextureSize.x;
+    texDescriptor.height = framebufferTextureSize.y;
     texDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//MTLPixelFormatRGBA8Unorm;
     texDescriptor.usage = MTLTextureUsageRenderTarget |
                           MTLTextureUsageShaderRead;

@@ -51,11 +51,12 @@ void EngineState::SendScreenSizeChangeEvent(Size size, float density)
     }
 }
 
-void EngineState::SetViewportSize(Size size)
+void EngineState::SetViewportSize(Size size, float scale)
 {
     auto& engineSetup = GetMainEngine()->GetEngineSetup();
     engineSetup.resolution.width = size.width;
     engineSetup.resolution.height = size.height;
+    engineSetup.affineScale = scale;
 }
 
 #pragma mark - Scripting Interface
@@ -76,7 +77,8 @@ static int lua_EngineState_SetViewportSize(lua_State *L)
     EngineState *spr = ScriptingEngineI::GetScriptingObjectPtr<EngineState>(L, 1);
     float width = lua_tonumber(L, 2);
     float height = lua_tonumber(L, 3);
-    spr->SetViewportSize({static_cast<int>(width), static_cast<int>(height)});
+    float scale = lua_tonumber(L, 4);
+    spr->SetViewportSize({static_cast<int>(width), static_cast<int>(height)}, scale);
     return 0;
 }
 

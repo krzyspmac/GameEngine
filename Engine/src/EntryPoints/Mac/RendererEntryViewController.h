@@ -77,7 +77,6 @@
 
     id<MTLCommandQueue> commandQueue;
     vector_float2 viewportSize;
-    vector_float2 desiredViewport;
     MTKView *mtkView;
 
     /** Engine Related */
@@ -99,8 +98,9 @@
     /** Setup related*/
     BOOL didSetupEvents;
     float density;
-    engine::Size desiredFramebufferTextureSize;
-    engine::Size framebufferTextureSize;
+    simd_float2 desiredFramebufferTextureSize;
+    simd_float2 framebufferTextureSize;
+    float affineScale;
     
     /** Events */
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)

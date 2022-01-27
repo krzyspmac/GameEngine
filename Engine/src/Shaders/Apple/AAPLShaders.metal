@@ -131,9 +131,10 @@ fragmentShader(RasterizerData in [[stage_in]],
 vertex RasterizerData
 presenterVertexShader(const uint vertexID [[ vertex_id ]],
                       const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
-                      constant vector_float2 *viewportSizePointer [[buffer(AAPLVertexInputIndexWindowSize)]],
-                      constant float *viewportScalePointer [[buffer(AAPLVertexInputIndexWindowScale)]],
-                      constant vector_float2 *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]]
+                      constant vector_float2  *viewportSizePointer [[buffer(AAPLVertexInputIndexWindowSize)]],
+                      constant float          *viewportScalePointer [[buffer(AAPLVertexInputIndexWindowScale)]],
+                      constant vector_float2  *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]],
+                      constant float          *affineScalePointer     [[buffer(AAPLVertexInputIndexObjectScale)]]
                       )
 {
     RasterizerData out;
@@ -149,16 +150,22 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     // Get the desired viewport size; used to calaculate aspect ratio
     vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
 
+    // Get the target final scale for the texture
+    float targetAffineScale = float(*affineScalePointer);
+
     // Calculate aspect ratio & scale
-    float scaleX, scaleY, scale;
-    scaleX = viewportSize.x / desiredViewportSize.x;
-    scaleY = viewportSize.y / desiredViewportSize.y;
-    scale = min(scaleX, scaleY);
+//    float scaleX, scaleY, scale;
+//    scaleX = viewportSize.x / desiredViewportSize.x;
+//    scaleY = viewportSize.y / desiredViewportSize.y;
+
+    float2 scale = viewportSize / desiredViewportSize;
+//    scale = min(scaleX, scaleY);
     
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
 //    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-    out.position.xy = pixelSpacePosition.xy;//* scale/2;
+//    out.position.xy = pixelSpacePosition.xy;//* scale/2;
+    out.position.xy = pixelSpacePosition / scale * targetAffineScale;
 
 //    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
 //    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;

@@ -58,6 +58,7 @@ Engine::Engine(EngineProviderI &engineProvider,
     EngineSetup setup;
     setup.resolution.width = 320;
     setup.resolution.height = 200;
+    setup.affineScale = 1.0f;
 
     AnimationCurveFactory::Prepare();
 }
