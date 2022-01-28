@@ -22,7 +22,7 @@ namespace engine
      */
     class EngineState
     {
-        std::function<void(Size)> m_screenSizeChangeHandler;
+        std::function<void(Size, float)> m_screenSizeChangeHandler;
         CallableScriptFunctionSciptableInstance m_screenSizeChangeScriptHandler;
     public:
         EngineState();
@@ -43,9 +43,14 @@ namespace engine
         /** Register a screen resolution change. Once the resolution is changed
             this script function will be callsed and the script will have an option
             to modify the desired resoltion. That in turn might recreate the
-            framebuffer texture size. */
+            framebuffer texture size.
+
+            The lambda will receive the parameters:
+            - size
+            - screen density
+         */
         /** @private */
-        void SetOnScreenSizeChange(std::function<void(Size)>);
+        void SetOnScreenSizeChange(std::function<void(Size, float)>);
 
         /** Register a screen resolution change handler. Once the resolution is changed
             this script function will be called and the script will have an option

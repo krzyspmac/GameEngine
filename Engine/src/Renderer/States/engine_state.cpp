@@ -23,7 +23,7 @@ Size EngineState::GetViewportSize()
     return GetMainEngine()->getProvider().GetDesiredViewport();
 }
 
-void EngineState::SetOnScreenSizeChange(std::function<void (Size)> lambda)
+void EngineState::SetOnScreenSizeChange(std::function<void (Size, float)> lambda)
 {
     m_screenSizeChangeHandler = lambda;
 }
@@ -37,7 +37,7 @@ void EngineState::SendScreenSizeChangeEvent(Size size, float density)
 {
     if (m_screenSizeChangeHandler != nullptr)
     {
-        m_screenSizeChangeHandler(size);
+        m_screenSizeChangeHandler(size, density);
     }
 
     if (m_screenSizeChangeScriptHandler.CanCall())
