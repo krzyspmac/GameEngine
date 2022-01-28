@@ -34,6 +34,9 @@
     /** The main engine */
     auto engine = GetMainEngine();
 
+    /** Engine state */
+    auto& engineSetup = engine->GetEngineSetup();
+
     /** The main engine provider */
     auto& provider = engine->getProvider();
 
@@ -41,17 +44,15 @@
     m_engine->SetViewportScale(density);
 
     /** Recreate the offscreen texture if needed */
-    desiredFramebufferTextureSize.x = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;;
-    desiredFramebufferTextureSize.y = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+    desiredFramebufferTextureSize.x = engineSetup.resolution.width;
+    desiredFramebufferTextureSize.y = engineSetup.resolution.height;
 
-    if (    desiredFramebufferTextureSize.x != framebufferTextureSize.x
-         || desiredFramebufferTextureSize.y != framebufferTextureSize.y
-         || engine->GetEngineSetup().affineScale != affineScale
-       )
+    if ( engineSetup.isDirty )
     {
         [self recreateOffscreenRenderingPipeline];
         provider.SetDesiredViewport(desiredFramebufferTextureSize.x, desiredFramebufferTextureSize.y);
-        affineScale = engine->GetEngineSetup().affineScale;
+        affineScale = engineSetup.affineScale;
+        engineSetup.isDirty = false;
     }
 
     /** Process events */

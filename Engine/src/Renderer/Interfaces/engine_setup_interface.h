@@ -23,6 +23,10 @@ namespace engine
             Default is 1.
          */
         float affineScale;
+
+        /** Can mark the setup as dirty to inform the main renderer pass that
+            changes have to pulled and reintegrated. */
+        bool isDirty;
     } EngineSetup;
 };
 

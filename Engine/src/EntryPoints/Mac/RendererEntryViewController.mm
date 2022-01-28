@@ -103,6 +103,9 @@ using namespace engine;
     m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
     m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
     m_engineProvider->SetDesiredViewport(INITIAL_SCREEN_WIDTH, INITIAL_SCREEN_HEIGHT);
+
+    desiredFramebufferTextureSize.x = INITIAL_SCREEN_WIDTH;
+    desiredFramebufferTextureSize.y = INITIAL_SCREEN_HEIGHT;
     affineScale = 1.0f;
 }
 
