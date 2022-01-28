@@ -52,6 +52,7 @@ namespace engine
 
     public:
         void SetDesiredViewport(int width, int height);
+        engine::Size GetDesiredViewport();
         void SetViewportScale(float);
 
     public:

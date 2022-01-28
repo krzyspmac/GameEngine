@@ -28,6 +28,7 @@
 #include "console_renderer.h"
 #include "texture_manager.hpp"
 #include "font_manager.hpp"
+#include "engine_setup_interface.h"
 
 namespace engine
 {
@@ -100,6 +101,9 @@ namespace engine
 
     /// States
     public:
+
+        /** Get the resolution set in the main ini file */
+        auto& GetEngineSetup() { return m_engineSetup; };
 
         /** Get the current viewport size */
         Size &GetViewport() { return m_viewportSize; };
@@ -191,6 +195,8 @@ namespace engine
     public:
 
     protected:
+        EngineSetup m_engineSetup;
+
         Size m_viewportSize;
         float m_viewportScale;
         Size m_rendererOutputSize;

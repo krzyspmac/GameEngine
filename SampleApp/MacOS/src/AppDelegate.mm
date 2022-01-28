@@ -25,11 +25,12 @@
 {
     if (self = [super init])
     {
-        NSViewController *rootViewController = [[RendererEntryViewController alloc] initWithNibName:nil bundle:nil];
+        RendererEntryViewController *rootViewController = [[RendererEntryViewController alloc] initWithNibName:nil bundle:nil];
         self.window = [[NSWindow alloc] initWithContentRect:NSZeroRect
                                                   styleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable | NSWindowStyleMaskMiniaturizable
                                                     backing:NSBackingStoreBuffered
                                                       defer:NO];
+        rootViewController.parentWindow = self.window;
         self.window.contentViewController = rootViewController;
         [self.window orderFront:self];
         [self.window center];

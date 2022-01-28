@@ -36,10 +36,12 @@ namespace engine
 
     /// Engine setup
     public:
-        /// Sets the desirec viewport. It will affect the aspect ration.
+        /// Sets the desired viewport. It will affect the aspect ratio.
         /// The engine them will attemp to compensate by scaling and
         /// translating the remainder of the view.
         virtual void SetDesiredViewport(int width, int height) = 0;
+
+        virtual engine::Size GetDesiredViewport() = 0;
 
         /// Sets the viewport scale.
         virtual void SetViewportScale(float) = 0;

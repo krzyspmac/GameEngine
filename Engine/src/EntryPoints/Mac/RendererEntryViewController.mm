@@ -6,111 +6,14 @@
 //
 
 #import "RendererEntryViewController.h"
-
 #include <Metal/Metal.hpp>
 #include <MetalKit/MetalKit.h>
-
-#include <stdio.h>
-#include "common.h"
-#include "file_access.hpp"
-#include "scripting_engine.hpp"
-#include "event_provider.hpp"
-#include "engine.hpp"
-#include "common_engine_impl.h"
-#include "texture_target_metal.hpp"
-#include "console_renderer.h"
-#include "console_app_renderer_mac.hpp"
-#include "file_access_provider.h"
-#include "engine_provider_interface.h"
-#include "scripting_engine_provider_interface.h"
-#include "engine_interface.h"
-#include "engine.hpp"
-#include "events_manager.hpp"
-#include "character_manager.hpp"
-#include "scene_manager.hpp"
-#include "sprite_atlas_manager.hpp"
-#include "sprite_renderer_manager.hpp"
-#include "console_renderer.h"
-#include "texture_manager.hpp"
-#include "font_manager.hpp"
-#include "engine_provider_metal.hpp"
-
-#include "AAPLShaderTypes.h"
-
-#define SCREEN_WIDTH  (1280)
-#define SCREEN_HEIGHT (720)
 
 #define USES_CONSOLE 0
 
 using namespace engine;
 
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-@interface NSWindow (TitleBarHeight)
-- (CGFloat) titlebarHeight;
-@end
-#endif
-
-@interface RendererEntryViewController ()
-
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-<NSWindowDelegate>
-#endif
-
-@end
-
-#pragma mark - Renderer Entry
 @implementation RendererEntryViewController
-{
-    /** Metal related */
-    id<MTLDevice> device;
-
-    /** Onscreen rendering */
-    id<MTLLibrary> library;
-    id<MTLFunction> vertexFunction;
-    id<MTLFunction> fragmentFunction;
-    MTLRenderPipelineDescriptor *renderePipelineDescriptor;
-    id<MTLRenderPipelineState> pipelineState;
-
-    /** Offscreen rendering */
-    id<MTLTexture> oscTargetTexture;
-    id<MTLFunction> oscVertexFunction;
-    id<MTLFunction> oscFragmentFunction;
-    MTLRenderPassDescriptor *oscRenderPassDescriptor;
-    MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor;
-    id<MTLRenderPipelineState> oscPipelineState;
-
-    id<MTLCommandQueue> commandQueue;
-    vector_float2 viewportSize;
-    vector_float2 desiredViewport;
-    MTKView *mtkView;
-
-    /** Engine Related */
-    engine::FileAccessI *m_fileAccess;
-    engine::TextureManager *m_textureManager;
-    engine::EngineProviderMetal *m_engineProvider;
-    engine::FontManager *m_fontManager;
-    engine::ScriptingEngineI *m_scriptingEngine;
-    engine::EventProviderI *m_eventProvider;
-    engine::EventsManager *m_eventsManager;
-    engine::CharacterManager *m_characterManager;
-    engine::SceneManager *m_sceneManager;
-    engine::SpriteAtlasManager *m_spriteAtlasManager;
-    engine::SpriteRendererManager *m_sprireRendererManager;
-    engine::ConsoleRenderer *m_consoleRenderer;
-    engine::ConsoleAppRendererMac *m_consoleRendererProvider;
-    engine::Engine *m_engine;
-
-    /** Setup related*/
-    BOOL didSetupEvents;
-
-    /** Events */
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-    NSTrackingArea *mouseTrackingArea;
-#endif
-}
 
 #pragma mark - Lifecycle & Setup
 
@@ -122,7 +25,7 @@ using namespace engine;
 
 - (void)loadView
 {
-    self.view = [[MTKView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    self.view = [[MTKView alloc] initWithFrame:CGRectMake(0, 0, INITIAL_SCREEN_WIDTH, INITIAL_SCREEN_HEIGHT)];
 }
 
 - (void)viewDidLoad
@@ -142,9 +45,6 @@ using namespace engine;
 - (void)viewDidAppear
 {
     [self setupEvents];
-#if TARGET_OSX
-    mtkView.window.delegate = self;
-#endif
 }
 
 - (void)setupView
@@ -182,8 +82,8 @@ using namespace engine;
     m_consoleRenderer = consoleRenderer;
 
     engine::Size viewportSize;
-    viewportSize.width = SCREEN_WIDTH;
-    viewportSize.height = SCREEN_HEIGHT;
+    viewportSize.width = INITIAL_SCREEN_WIDTH;
+    viewportSize.height = INITIAL_SCREEN_HEIGHT;
     m_engine = new Engine(
                             *m_engineProvider
                           , *m_textureManager
@@ -201,8 +101,9 @@ using namespace engine;
                           );
 
     m_engineProvider->SetRendererDevice((__bridge MTL::Device*)device);
-    m_engineProvider->SetDesiredViewport(SCREEN_WIDTH, SCREEN_HEIGHT);
     m_engineProvider->SetRenderingPipelineState((__bridge MTL::RenderPipelineState*)pipelineState);
+    m_engineProvider->SetDesiredViewport(INITIAL_SCREEN_WIDTH, INITIAL_SCREEN_HEIGHT);
+    affineScale = 1.0f;
 }
 
 - (void)setupConsole
@@ -216,7 +117,20 @@ using namespace engine;
 
 - (void)prepareEngine
 {
+    // Setup the engine
     m_engine->Setup();
+
+    // Reapply initial resolution read from ini file
+    auto resolution = m_engine->GetEngineSetup().resolution;
+    m_engineProvider->SetDesiredViewport(resolution.width, resolution.height);
+
+    // Recreate the offscreen rendering pipeline
+    [self recreateOffscreenRenderingPipeline];
+
+    // Reapply the view size from ini file
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size = CGSizeMake(resolution.width, resolution.height);
+    self.view.frame = viewFrame;
 }
 
 - (void)setupScreenRendingPipeline
@@ -264,16 +178,26 @@ using namespace engine;
 
 - (void)setupOffscreenRenderingPipeline
 {
-    oscVertexFunction = [library newFunctionWithName:@"vertexShader"];
-    oscFragmentFunction = [library newFunctionWithName:@"fragmentShader"];
+    if (!oscVertexFunction)
+        oscVertexFunction = [library newFunctionWithName:@"vertexShader"];
+    if (!oscFragmentFunction)
+        oscFragmentFunction = [library newFunctionWithName:@"fragmentShader"];
+
+    framebufferTextureSize.x = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;
+    framebufferTextureSize.y = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
 
     MTLTextureDescriptor *texDescriptor = [MTLTextureDescriptor new];
     texDescriptor.textureType = MTLTextureType2D;
-    texDescriptor.width = SCREEN_WIDTH;
-    texDescriptor.height = SCREEN_HEIGHT;
+    texDescriptor.width = framebufferTextureSize.x;
+    texDescriptor.height = framebufferTextureSize.y;
     texDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//MTLPixelFormatRGBA8Unorm;
     texDescriptor.usage = MTLTextureUsageRenderTarget |
                           MTLTextureUsageShaderRead;
+
+    if (oscTargetTexture)
+    {
+        oscTargetTexture = nil;
+    }
 
     oscTargetTexture = [device newTextureWithDescriptor:texDescriptor];
 
@@ -304,285 +228,9 @@ using namespace engine;
     NSAssert(oscPipelineState, @"Failed to create pipeline state to render to screen: %@", error);
 }
 
-#pragma mark - MTKViewDelegate
-
-- (void)mtkView:(nonnull MTKView *)view drawableSizeWillChange:(CGSize)size
+- (void)recreateOffscreenRenderingPipeline
 {
-    viewportSize.x = size.width;
-    viewportSize.y = size.height;
-
-    desiredViewport.x = SCREEN_WIDTH;
-    desiredViewport.y = SCREEN_HEIGHT;
-    printf("size = %f, %f\n", size.width, size.height);
-
-    [self setupMouseMovedEvents];
-}
-
-- (void)drawInMTKView:(nonnull MTKView *)view
-{
-    /** Update the engine if needed*/
-#if TARGET_IOS
-    m_engine->SetViewportScale([UIScreen mainScreen].scale);
-#else
-    m_engine->SetViewportScale(self.view.window.backingScaleFactor);
-#endif
-
-    /** Process events */
-    m_engine->ProcessEvents();
-
-    /** Process script. Script can alter the current rendering queue */
-    m_engine->ProcessScript();
-
-    /** Create a command buffer*/
-    id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
-    commandBuffer.label = @"Command Buffer";
-
-    /** Render the scene offscreen to a target texture */
-    {
-        id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:oscRenderPassDescriptor];
-        [encoder setRenderPipelineState:oscPipelineState];
-
-        /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
-        m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);
-        m_engineProvider->SetViewportSize(desiredViewport);
-
-        /** Render the scene */
-        m_engine->FrameBegin();
-        m_engine->FrameDraw();
-
-        [encoder endEncoding];
-    }
-
-    /** Render the offscreen texture to screen */
-    MTLRenderPassDescriptor *drawableRenderPassDescriptor = view.currentRenderPassDescriptor;
-    if(drawableRenderPassDescriptor != nil)
-    {
-        /** Create the encoder for the pass */
-        id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:drawableRenderPassDescriptor];
-        encoder.label = @"Drawable Render Pass";
-        [encoder setRenderPipelineState:pipelineState];
-
-        static const AAPLVertex quadVertices[] =
-        {
-            // Positions     , Texture coordinates
-            { {  1,  -1 },  { 1.0, 1.0 } },
-            { { -1,  -1 },  { 0.0, 1.0 } },
-            { { -1,   1 },  { 0.0, 0.0 } },
-
-            { {  1,  -1 },  { 1.0, 1.0 } },
-            { { -1,   1 },  { 0.0, 0.0 } },
-            { {  1,   1 },  { 1.0, 0.0 } },
-        };
-
-        // Draw the offscreen texture
-        [encoder setVertexBytes:&quadVertices length:sizeof(quadVertices) atIndex:AAPLVertexInputIndexVertices];
-        [encoder setVertexBytes:&viewportSize length:sizeof(viewportSize) atIndex:AAPLVertexInputIndexWindowSize];
-        [encoder setVertexBytes:&desiredViewport length:sizeof(desiredViewport) atIndex:AAPLVertexInputIndexViewportSize];
-        [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
-        [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
-
-        // Optionally draw the console
-#if USES_CONSOLE
-        [encoder pushDebugGroup:@"Dear ImGui rendering"];
-
-        m_consoleRendererProvider->PrepareForFrame(
-           self.view
-         , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
-         , (__bridge MTL::CommandBuffer*)commandBuffer
-         , (__bridge MTL::RenderCommandEncoder*)encoder
-        );
-        m_consoleRenderer->DoFrame();
-        m_consoleRendererProvider->Render();
-
-        [encoder popDebugGroup];
-#endif
-        /** End encoding */
-        [encoder endEncoding];
-    }
-
-    /** Present the drawable */
-    [commandBuffer presentDrawable:view.currentDrawable];
-
-    /** Flush the queue */
-    [commandBuffer commit];
-};
-
-#pragma mark - Events Handlers setup
-
-- (void)setupEvents
-{
-    if (didSetupEvents) { return; };
-
-    [self setupMouseClickEvents];
-    [self setupMouseMovedEvents];
-    [self setupKeyEvents];
-
-    didSetupEvents = YES;
-}
-
-- (void)setupMouseClickEvents
-{
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-    [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseUp handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
-        self->m_engine->getEventProvider().PushMouseLeftUp();
-        return event;
-    }];
-#endif
-}
-
-- (void)setupMouseMovedEvents
-{
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-    NSView *view = self.view;
-    if (mouseTrackingArea)
-    {
-        [view removeTrackingArea: mouseTrackingArea];
-    }
-
-    NSTrackingArea *area = [[NSTrackingArea alloc] initWithRect:view.bounds
-                                                        options:NSTrackingActiveInKeyWindow|NSTrackingMouseMoved
-                                                          owner:self
-                                                       userInfo:nil];
-    [view addTrackingArea:area];
-#endif
-}
-
-- (void)setupKeyEvents
-{
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-    // If we want to receive key events, we either need to be in the responder chain of the key view,
-    // or else we can install a local monitor. The consequence of this heavy-handed approach is that
-    // we receive events for all controls, not just Dear ImGui widgets. If we had native controls in our
-    // window, we'd want to be much more careful than just ingesting the complete event stream.
-    // To match the behavior of other backends, we pass every event down to the OS.
-    NSEventMask eventMask = NSEventMaskKeyDown | NSEventMaskKeyUp | NSEventMaskFlagsChanged;
-    [NSEvent addLocalMonitorForEventsMatchingMask:eventMask handler:^NSEvent * _Nullable(NSEvent *event)
-    {
-#if USES_CONSOLE
-        self->m_consoleRendererProvider->HandleEvent(event);
-#endif
-        return event;
-    }];
-#endif
-}
-
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-- (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize
-{
-//    float desiredViewportWidth = (float)SCREEN_WIDTH;
-//    float desiredViewportHeight = (float)SCREEN_HEIGHT;
-//    float aspectRatio = desiredViewportWidth/desiredViewportHeight;
-//
-//    CGRect mtkFrame = mtkView.frame;
-//
-//    float scaleX, scaleY, scale;
-//    scaleX = frameSize.width / (float)SCREEN_WIDTH;
-//    scaleY = frameSize.height / (float)SCREEN_HEIGHT;
-//    scale = std::min(scaleX, scaleY);
-//
-//    if (desiredViewportWidth > desiredViewportHeight)
-//    {
-//        mtkFrame.size.width = frameSize.width;
-//        mtkFrame.size.height = frameSize.width / aspectRatio;
-//    }
-//    else
-//    {
-//        exit(0); // not implemented
-//    }
-//
-//    mtkFrame.size = CGSizeMake(100, 100);
-//    mtkFrame.origin = CGPointMake(floor((frameSize.width - mtkFrame.size.width)/2), floor((frameSize.height - mtkFrame.size.height)/2));
-////    mtkFrame.size = frameSize;
-//    mtkView.frame = mtkFrame;
-////    [mtkView setNeedsDisplay:YES];
-    return frameSize;
-}
-#endif
-
-#pragma mark - Other input processing
-
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-
-- (void)handle:(NSEvent*)event
-{
-#if USES_CONSOLE
-    m_consoleRendererProvider->HandleEvent(event);
-#endif
-}
-
-- (void)mouseMoved:(NSEvent *)event
-{
-    NSView    *view = self.view;
-    CGRect    viewFrame = view.frame;
-    CGPoint   locationInView = [view convertPoint:[event locationInWindow] fromView:nil];
-
-    locationInView.y = viewFrame.size.height - locationInView.y;
-
-    float xPer = locationInView.x / viewFrame.size.width;
-    float yPer = locationInView.y / viewFrame.size.height;
-
-    auto& viewport = m_engine->GetViewport();
-    Origin locationInViewport;
-    locationInViewport.x = (int)(xPer * (float)viewport.width);
-    locationInViewport.y = (int)(yPer * (float)viewport.height);
-
-    m_engine->getEventProvider().PushMouseLocation(locationInViewport);
-
-    [self handle:event];
-}
-
-- (void)mouseDown:(NSEvent *)event           { [self handle:event]; }
-- (void)rightMouseDown:(NSEvent *)event      { [self handle:event]; }
-- (void)otherMouseDown:(NSEvent *)event      { [self handle:event]; }
-- (void)mouseUp:(NSEvent *)event             { [self handle:event]; }
-- (void)rightMouseUp:(NSEvent *)event        { [self handle:event]; }
-- (void)otherMouseUp:(NSEvent *)event        { [self handle:event]; }
-- (void)mouseDragged:(NSEvent *)event        { [self handle:event]; }
-- (void)rightMouseMoved:(NSEvent *)event     { [self handle:event]; }
-- (void)rightMouseDragged:(NSEvent *)event   { [self handle:event]; }
-- (void)otherMouseMoved:(NSEvent *)event     { [self handle:event]; }
-- (void)otherMouseDragged:(NSEvent *)event   { [self handle:event]; }
-- (void)scrollWheel:(NSEvent *)event         { [self handle:event]; }
-
-#endif
-
-#pragma mark - Helpers
-
-- (NSString*)libraryPath
-{
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSURL *engineBundlePath = nil;
-
-    engineBundlePath = [mainBundle URLForResource:@"Engine-Mac-Bundle" withExtension:@"bundle"];
-
-    if (!engineBundlePath)
-    {
-        engineBundlePath = [mainBundle URLForResource:@"Engine-iOS-Bundle" withExtension:@"bundle"];
-    }
-
-    if (!engineBundlePath)
-    {
-        engineBundlePath = [mainBundle URLForResource:@"Engine-TV-Bundle" withExtension:@"bundle"];
-    }
-
-    NSBundle *engineBundle = [NSBundle bundleWithURL:engineBundlePath];
-
-    NSString *metalLibPath = [engineBundle pathForResource:@"Engine-Mac-MetalLib" ofType:@"metallib"];
-    if (!metalLibPath)
-    {
-        metalLibPath = [engineBundle pathForResource:@"Engine-iOS-MetalLib" ofType:@"metallib"];
-    }
-    if (!metalLibPath)
-    {
-        metalLibPath = [engineBundle pathForResource:@"Engine-TV-MetalLib" ofType:@"metallib"];
-    }
-
-    return metalLibPath;
+    [self setupOffscreenRenderingPipeline];
 }
 
 @end
@@ -607,16 +255,4 @@ using namespace engine;
 
 @end
 
-#endif
-
-#pragma mark - NSWindowAdditions
-
-#if defined(TARGET_IOS) || defined(TARGET_TVOS)
-#else
-@implementation NSWindow (TitleBarHeight)
-- (CGFloat) titlebarHeight
-{
-    return self.frame.size.height - [self contentRectForFrameRect: self.frame].size.height;
-}
-@end
 #endif

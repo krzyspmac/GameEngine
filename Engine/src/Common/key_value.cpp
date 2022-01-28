@@ -34,7 +34,7 @@ KeyValueProperties::KeyValueProperties(std::string s)
     // The first word is the type
     size_t lineStartPos = 0;
     m_type = KeyValueLine::GetFirstWord(s, &lineStartPos);
-    if (m_type == "" || lineStartPos < 1) { return; };
+//    if (m_type == "" || lineStartPos < 1) { return; };
 
     // The rest is the key value type line.
     std::string delim = "=";
