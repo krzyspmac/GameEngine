@@ -70,6 +70,40 @@ using namespace engine;
 #if USES_CONSOLE
         self->m_consoleRendererProvider->HandleEvent(event);
 #endif
+        auto& eventsProvider = GetMainEngine()->getEventProvider();
+
+        switch (event.type)
+        {
+            case NSEventTypeKeyDown:
+            {
+                unsigned short key = event.keyCode;
+                eventsProvider.PushKeyStateChange(key, true);
+                break;
+            }
+            case NSEventTypeKeyUp:
+            {
+                unsigned short key = event.keyCode;
+                eventsProvider.PushKeyStateChange(key, false);
+                break;
+            }
+            case NSFlagsChanged:
+            {
+                NSEventModifierFlags flags = event.modifierFlags;
+
+                bool isShift = flags & NSEventModifierFlagShift;
+                eventsProvider.PushFlagsChange(FLAG_SHIFT, isShift);
+
+                bool isControl = flags & NSEventModifierFlagControl;
+                eventsProvider.PushFlagsChange(FLAG_CONTROL, isControl);
+
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+
         return event;
     }];
 #endif

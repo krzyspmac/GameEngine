@@ -29,6 +29,16 @@ void EventProvider::EventsPoolPopulate()
         EventMouseLeftUp *event = new EventMouseLeftUp();
         m_poolMouseLeftUp.emplace_back(std::unique_ptr<EventMouseLeftUp>(std::move(event)));
     }
+    for (int i = 0; i < POOL_COUNT_PER_TYPE; ++i)
+    {
+        EventKeyFlagStateChanged *event = new EventKeyFlagStateChanged();
+        m_poolKeyFlagStateChanged.emplace_back(std::unique_ptr<EventKeyFlagStateChanged>(std::move(event)));
+    }
+    for (int i = 0; i < POOL_COUNT_PER_TYPE; ++i)
+    {
+        EventKeyStateChanged *event = new EventKeyStateChanged();
+        m_poolKeyStateChanged.emplace_back(std::unique_ptr<EventKeyStateChanged>(std::move(event)));
+    }
 }
 
 std::vector<std::unique_ptr<EventI>> *EventProvider::EventsPoolForType(EventType type)
@@ -37,8 +47,10 @@ std::vector<std::unique_ptr<EventI>> *EventProvider::EventsPoolForType(EventType
     {
         case EVENT_NONE:
             return nullptr;
-        case EVENT_KEYDOWN:
-            return nullptr;
+        case EVENT_KEY_FLAG_STATE_CHANGE:
+            return &m_poolKeyFlagStateChanged;
+        case EVENT_KEY_STATE_CHANGE:
+            return &m_poolKeyStateChanged;
         case EVENT_MOUSEMOVE:
             return &m_poolMouseMove;
         case EVENT_MOUSEUP:
@@ -90,6 +102,30 @@ void EventProvider::PushMouseLeftUp()
     if (event != nullptr)
     {
         EventPush(event);
+    }
+}
+
+void EventProvider::PushFlagsChange(EventFlagType flagType, bool value)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_KEY_FLAG_STATE_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventKeyFlagStateChanged*>(baseEvent);
+        event->GetState() = value;
+        event->GetFlagType() = flagType;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushKeyStateChange(unsigned short key, bool pressed)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_KEY_STATE_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventKeyStateChanged*>(baseEvent);
+        event->GetKey() = key;
+        event->GetIsDown() = pressed;
+        EventPush(baseEvent);
     }
 }
 

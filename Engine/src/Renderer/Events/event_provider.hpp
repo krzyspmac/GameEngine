@@ -17,6 +17,9 @@ namespace engine
     {
         std::vector<std::unique_ptr<EventI>> m_poolMouseMove;
         std::vector<std::unique_ptr<EventI>> m_poolMouseLeftUp;
+        std::vector<std::unique_ptr<EventI>> m_poolKeyFlagStateChanged;
+        std::vector<std::unique_ptr<EventI>> m_poolKeyStateChanged;
+
         std::vector<EventI*> m_eventQueue;
     public:
         EventProvider();
@@ -24,6 +27,8 @@ namespace engine
     public:
         void    PushMouseLocation(Origin);
         void    PushMouseLeftUp();
+        void    PushFlagsChange(EventFlagType, bool);
+        void    PushKeyStateChange(unsigned short, bool);
         bool    PollEvent(EventI **outEvent);
 
     private:

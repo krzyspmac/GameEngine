@@ -61,7 +61,7 @@ namespace engine
     class EventsManager
     {
     public:
-        EventsManager(EventProviderI &provider, EngineProviderI &engineProvider): m_eventProvider(provider), m_engineProvider(engineProvider) { };
+        EventsManager(EventProviderI &provider, EngineProviderI &engineProvider);
 
     /// General events handling
     public:
@@ -73,11 +73,22 @@ namespace engine
         void RegisterMouseMovedEvents(EventHolderMouseMoved);
         void RegisterMouseClickedEvents(EventHolderMouseClicked);
 
+    /// Public getters
+    public:
+        bool IsShiftDown() { return m_shiftKeyDown; };
+        bool IsControlDown() { return m_controlKeyDown; };
+        auto& GetKeys() { return m_keys; };
+        bool GetKeyDown(unsigned short key) { return m_keys[key]; };
+
     private:
         EventProviderI &m_eventProvider;
         EngineProviderI &m_engineProvider;
         std::vector<EventHolderMouseMoved> m_mouseMoves;
         std::vector<EventHolderMouseClicked> m_mouseClicks;
+
+        bool m_shiftKeyDown;
+        bool m_controlKeyDown;
+        bool m_keys[256];
     };
 
 };

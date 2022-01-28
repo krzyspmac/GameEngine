@@ -10,32 +10,82 @@
 
 using namespace engine;
 
+EventsManager::EventsManager(EventProviderI &provider, EngineProviderI &engineProvider)
+    : m_eventProvider(provider)
+    , m_engineProvider(engineProvider)
+    , m_shiftKeyDown(false)
+    , m_controlKeyDown(false)
+{ }
+
 int EventsManager::DoEvents()
 {
-    EventI *event = nullptr;
+    EventI *baseEvent = nullptr;
 
-    while (m_eventProvider.PollEvent(&event))
+    while (m_eventProvider.PollEvent(&baseEvent))
     {
-        switch (event->GetType())
+        switch (baseEvent->GetType())
         {
             case EVENT_NONE:
+            {
                 break;
-            case EVENT_KEYDOWN:
+            }
+            case EVENT_KEY_FLAG_STATE_CHANGE:
+            {
+                auto* event = static_cast<EventKeyFlagStateChanged*>(baseEvent);
+                switch (event->GetFlagType())
+                {
+                    case FLAG_SHIFT:
+                    {
+                        m_shiftKeyDown = event->GetState();
+                        printf("key=SHIFT, isDown=%d\n", event->GetState());
+                        break;
+                    }
+                    case FLAG_CONTROL:
+                    {
+                        m_controlKeyDown = event->GetState();
+                        printf("key=CONTROL, isDown=%d\n", event->GetState());
+                        break;
+                    }
+                    default:
+                    {
+                        break;
+                    }
+                }
                 break;
+            }
+            case EVENT_KEY_STATE_CHANGE:
+            {
+                auto* event = static_cast<EventKeyStateChanged*>(baseEvent);
+                auto& key = event->GetKey();
+                auto& state = m_keys[key];
+                auto& isDown = event->GetIsDown();
+                if (state != isDown)
+                {
+                    m_keys[key] = isDown;
+                    printf("key=%d, isDown=%d\n", key, isDown);
+                }
+                break;
+            }
             case EVENT_MOUSEMOVE:
+            {
                 std::for_each(m_mouseMoves.begin(), m_mouseMoves.end(), [&](EventHolderMouseMoved &l) {
-                    auto mouseEvent = static_cast<EventMouseMove*>(event);
+                    auto mouseEvent = static_cast<EventMouseMove*>(baseEvent);
                     l.Process(&mouseEvent->GetLocation());
                 });
                 break;
+            }
             case EVENT_MOUSEUP:
+            {
                 std::for_each(m_mouseClicks.begin(), m_mouseClicks.end(), [&](EventHolderMouseClicked &l) {
                     Origin& mousePosition = GetMainEngine()->GetMousPosition();
                     l.Process(&mousePosition);
                 });
                 break;
+            }
             case EVENT_QUIT:
+            {
                 return 1;
+            }
         }
     }
 

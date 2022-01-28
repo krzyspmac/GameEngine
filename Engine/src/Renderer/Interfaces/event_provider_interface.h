@@ -13,16 +13,22 @@
 
 namespace engine
 {
-
-    typedef enum {
-        EVENT_NONE = 0,
-        EVENT_KEYDOWN,
-
-        EVENT_MOUSEMOVE,
-        EVENT_MOUSEUP,
-
-        EVENT_QUIT,
+    typedef enum
+    {
+        EVENT_NONE = 0
+      , EVENT_KEY_FLAG_STATE_CHANGE
+      , EVENT_KEY_STATE_CHANGE
+      , EVENT_MOUSEMOVE
+      , EVENT_MOUSEUP
+      , EVENT_QUIT
     } EventType;
+
+    typedef enum
+    {
+        FLAG_NONE   = 0
+      , FLAG_SHIFT
+      , FLAG_CONTROL
+    } EventFlagType;
 
     /** Declares an abstract interface for different type of events received from
         the platform handlers. */
@@ -56,6 +62,26 @@ namespace engine
         EventMouseLeftUp() : EventI(EVENT_MOUSEUP) { };
     };
 
+    class EventKeyFlagStateChanged: public EventI
+    {
+        bool m_state;
+        EventFlagType m_flagType;
+    public:
+        EventKeyFlagStateChanged() : EventI(EVENT_KEY_FLAG_STATE_CHANGE), m_state(false) { };
+        EventFlagType& GetFlagType() { return m_flagType; };
+        bool& GetState() { return m_state; };
+    };
+
+    class EventKeyStateChanged: public EventI
+    {
+        unsigned short m_key;
+        bool m_keyDown;
+    public:
+        EventKeyStateChanged() : EventI(EVENT_KEY_STATE_CHANGE), m_key(0), m_keyDown(false) { };
+        auto& GetKey() { return m_key; };
+        bool& GetIsDown() { return m_keyDown; };
+    };
+
     /** Declares an abstract interface to provide real events directly into the
         engine. The platform code should setup its own processing and pass those
         events to the event provider.
@@ -74,6 +100,12 @@ namespace engine
 
         /** Left mouse button up */
         virtual void PushMouseLeftUp() = 0;
+
+        /** Shift state changed */
+        virtual void PushFlagsChange(EventFlagType, bool) = 0;
+
+        /** Key state changed */
+        virtual void PushKeyStateChange(unsigned short, bool) = 0;
 
         /** Poll an event from the queue. */
         virtual bool PollEvent(EventI **outEvent) = 0;
