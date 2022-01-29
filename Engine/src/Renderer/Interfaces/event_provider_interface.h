@@ -28,6 +28,8 @@ namespace engine
         FLAG_NONE   = 0
       , FLAG_SHIFT
       , FLAG_CONTROL
+      , FLAG_ALT
+      , FLAG_COMMAND
     } EventFlagType;
 
     /** Declares an abstract interface for different type of events received from

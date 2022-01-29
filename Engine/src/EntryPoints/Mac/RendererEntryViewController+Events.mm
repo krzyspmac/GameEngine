@@ -106,6 +106,12 @@ using namespace engine;
                 bool isControl = flags & NSEventModifierFlagControl;
                 eventsProvider.PushFlagsChange(FLAG_CONTROL, isControl);
 
+                bool isAlt = flags & NSEventModifierFlagOption;
+                eventsProvider.PushFlagsChange(FLAG_ALT, isAlt);
+
+                bool isCommand = flags & NSEventModifierFlagCommand;
+                eventsProvider.PushFlagsChange(FLAG_COMMAND, isCommand);
+
                 break;
             }
             default:
