@@ -74,7 +74,6 @@ using namespace engine;
         }
 #endif
         auto& eventsProvider = GetMainEngine()->getEventProvider();
-
         switch (event.type)
         {
             case NSEventTypeKeyDown:

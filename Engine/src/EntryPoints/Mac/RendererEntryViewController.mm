@@ -8,6 +8,7 @@
 #import "RendererEntryViewController.h"
 #include <Metal/Metal.hpp>
 #include <MetalKit/MetalKit.h>
+#include "defs.h"
 
 using namespace engine;
 
