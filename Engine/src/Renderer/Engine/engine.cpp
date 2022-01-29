@@ -118,7 +118,8 @@ void Engine::Setup()
     }));
 
 #if SHOW_CONSOLE
-    m_consoleRenderer.SetConsoleHidden(false);
+    m_consoleRenderer.Setup();
+    m_consoleRenderer.SetConsoleHidden(true);
 #endif
 }
 

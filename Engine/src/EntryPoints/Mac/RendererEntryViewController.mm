@@ -9,8 +9,6 @@
 #include <Metal/Metal.hpp>
 #include <MetalKit/MetalKit.h>
 
-#define USES_CONSOLE 0
-
 using namespace engine;
 
 @implementation RendererEntryViewController

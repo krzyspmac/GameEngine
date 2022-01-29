@@ -7,6 +7,7 @@
 
 #import "RendererEntryViewController.h"
 #import "engine.hpp"
+#include "defs.h"
 
 @implementation RendererEntryViewController (Rendering)
 
@@ -111,19 +112,22 @@
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 
         // Optionally draw the console
-#if USES_CONSOLE
-        [encoder pushDebugGroup:@"Dear ImGui rendering"];
+#if SHOW_CONSOLE
+        if (!m_consoleRenderer->GetConsoleHidden())
+        {
+            [encoder pushDebugGroup:@"Dear ImGui rendering"];
 
-        m_consoleRendererProvider->PrepareForFrame(
-           self.view
-         , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
-         , (__bridge MTL::CommandBuffer*)commandBuffer
-         , (__bridge MTL::RenderCommandEncoder*)encoder
-        );
-        m_consoleRenderer->DoFrame();
-        m_consoleRendererProvider->Render();
+            m_consoleRendererProvider->PrepareForFrame(
+               self.view
+             , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
+             , (__bridge MTL::CommandBuffer*)commandBuffer
+             , (__bridge MTL::RenderCommandEncoder*)encoder
+            );
+            m_consoleRenderer->DoFrame();
+            m_consoleRendererProvider->Render();
 
-        [encoder popDebugGroup];
+            [encoder popDebugGroup];
+        }
 #endif
         /** End encoding */
         [encoder endEncoding];

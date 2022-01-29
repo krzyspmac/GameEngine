@@ -29,6 +29,7 @@ namespace engine
         void Setup();
         void DoFrame();
         void SetConsoleHidden(bool);
+        bool GetConsoleHidden();
 
         ConsoleLogI& GetLogger();
         ConsoleTerminalI& GetTerminal();

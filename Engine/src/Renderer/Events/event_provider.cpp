@@ -70,6 +70,7 @@ EventI* EventProvider::EventsPoolDequeue(EventType type)
         {
             if (!event.get()->GetInUse())
             {
+                event.get()->GetInUse() = true;
                 return event.get();
             }
         }
@@ -119,6 +120,7 @@ void EventProvider::PushFlagsChange(EventFlagType flagType, bool value)
 
 void EventProvider::PushKeyStateChange(unsigned short key, bool pressed)
 {
+    printf("key = %d\n", key);
     EventI *baseEvent = EventsPoolDequeue(EVENT_KEY_STATE_CHANGE);
     if (baseEvent != nullptr)
     {
@@ -135,7 +137,9 @@ bool EventProvider::PollEvent(EventI **outEvent)
     {
         if (outEvent != nullptr)
         {
-            *outEvent = m_eventQueue.back();
+            auto *last = m_eventQueue.back();
+            *outEvent = last;
+            last->GetInUse() = false;
             m_eventQueue.pop_back();
             return true;
         }

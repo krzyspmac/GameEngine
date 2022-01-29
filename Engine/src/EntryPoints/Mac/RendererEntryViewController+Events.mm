@@ -67,8 +67,11 @@ using namespace engine;
     NSEventMask eventMask = NSEventMaskKeyDown | NSEventMaskKeyUp | NSEventMaskFlagsChanged;
     [NSEvent addLocalMonitorForEventsMatchingMask:eventMask handler:^NSEvent * _Nullable(NSEvent *event)
     {
-#if USES_CONSOLE
-        self->m_consoleRendererProvider->HandleEvent(event);
+#if SHOW_CONSOLE
+        if (!self->m_consoleRenderer->GetConsoleHidden())
+        {
+            self->m_consoleRendererProvider->HandleEvent(event);
+        }
 #endif
         auto& eventsProvider = GetMainEngine()->getEventProvider();
 
@@ -76,14 +79,22 @@ using namespace engine;
         {
             case NSEventTypeKeyDown:
             {
-                unsigned short key = event.keyCode;
-                eventsProvider.PushKeyStateChange(key, true);
+                NSString *characters = event.charactersIgnoringModifiers;
+                for (NSInteger i = 0; i < characters.length; i++)
+                {
+                    unichar c = [characters characterAtIndex:i];
+                    eventsProvider.PushKeyStateChange((unsigned short)c, true);
+                }
                 break;
             }
             case NSEventTypeKeyUp:
             {
-                unsigned short key = event.keyCode;
-                eventsProvider.PushKeyStateChange(key, false);
+                NSString *characters = event.charactersIgnoringModifiers;
+                for (NSInteger i = 0; i < characters.length; i++)
+                {
+                    unichar c = [characters characterAtIndex:i];
+                    eventsProvider.PushKeyStateChange((unsigned short)c, false);
+                }
                 break;
             }
             case NSFlagsChanged:
@@ -113,8 +124,11 @@ using namespace engine;
 
 - (void)handle:(NSEvent*)event
 {
-#if USES_CONSOLE
-    m_consoleRendererProvider->HandleEvent(event);
+#if SHOW_CONSOLE
+    if (!self->m_consoleRenderer->GetConsoleHidden())
+    {
+        m_consoleRendererProvider->HandleEvent(event);
+    }
 #endif
 }
 

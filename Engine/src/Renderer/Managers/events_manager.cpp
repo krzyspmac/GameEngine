@@ -15,7 +15,9 @@ EventsManager::EventsManager(EventProviderI &provider, EngineProviderI &enginePr
     , m_engineProvider(engineProvider)
     , m_shiftKeyDown(false)
     , m_controlKeyDown(false)
-{ }
+{
+    bzero(m_keys, KEY_TABLE_SIZE);
+}
 
 int EventsManager::DoEvents()
 {
@@ -62,8 +64,17 @@ int EventsManager::DoEvents()
                 if (state != isDown)
                 {
                     m_keys[key] = isDown;
-                    printf("key=%d, isDown=%d\n", key, isDown);
                 }
+
+                for (auto& keyHandler : m_keyshortcuts)
+                {
+                    if (keyHandler.Matches(m_shiftKeyDown, m_controlKeyDown, m_keys))
+                    {
+                        keyHandler.Process(nullptr);
+                    }
+                }
+
+                printf("keys = \n");
                 break;
             }
             case EVENT_MOUSEMOVE:
@@ -100,4 +111,43 @@ void EventsManager::RegisterMouseMovedEvents(EventHolderMouseMoved val)
 void EventsManager::RegisterMouseClickedEvents(EventHolderMouseClicked val)
 {
     m_mouseClicks.push_back(val);
+}
+
+void EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)
+{
+    m_keyshortcuts.push_back(EventHolderKeyShortcutPressed(lambda, modifiers, keys));
+}
+
+
+/** Event holder implementations */
+
+bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bool keys[KEY_TABLE_SIZE])
+{
+    for (auto& modifier : m_modifiers)
+    {
+        if (modifier == FLAG_SHIFT)
+        {
+            if (!shiftDown)
+            {
+                return false;
+            }
+        }
+        else if (modifier == FLAG_CONTROL)
+        {
+            if (!controlDown)
+            {
+                return false;
+            }
+        }
+    }
+
+    for (auto& key : m_keys)
+    {
+        if (keys[key] != true)
+        {
+            return false;
+        }
+    }
+
+    return true;
 }
