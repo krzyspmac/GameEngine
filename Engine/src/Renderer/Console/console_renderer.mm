@@ -54,7 +54,7 @@ void ConsoleRenderer::Setup()
 
 void ConsoleRenderer::SetupEvents()
 {
-    GetMainEngine()->getEventsManager().RegisterKeyShortcut( {FLAG_CONTROL, FLAG_SHIFT}, { 'C' }, [&](void*) {
+    GetMainEngine()->getEventsManager().RegisterKeyShortcut( {FLAG_CONTROL}, { CODE_TIDLE }, [&](void*) {
         this->SetConsoleHidden(!m_hidden);
     });
 }

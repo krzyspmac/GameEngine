@@ -17,14 +17,14 @@ Scene::Scene()
     m_mouseDownFunctionRef(-1),
     m_engineProvider(GetMainEngine()->getProvider())
 {
-    GetMainEngine()->getEventsManager().RegisterMouseClickedEvents(EventHolderMouseClicked([&](void *mouse){
+    GetMainEngine()->getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
         Vector2 pos;
         pos.x = (*clicked).x;
         pos.y = (*clicked).y;
 
         MouseClicked(pos);
-    }));
+    });
 }
 
 Scene::~Scene()

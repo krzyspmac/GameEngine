@@ -120,7 +120,6 @@ void EventProvider::PushFlagsChange(EventFlagType flagType, bool value)
 
 void EventProvider::PushKeyStateChange(unsigned short key, bool pressed)
 {
-    printf("key = %d\n", key);
     EventI *baseEvent = EventsPoolDequeue(EVENT_KEY_STATE_CHANGE);
     if (baseEvent != nullptr)
     {

@@ -12,6 +12,7 @@ using namespace engine;
 
 EventsManager::EventsManager(EventProviderI &provider, EngineProviderI &engineProvider)
     : m_eventProvider(provider)
+    , m_identifierCounter(0)
     , m_engineProvider(engineProvider)
     , m_shiftKeyDown(false)
     , m_controlKeyDown(false)
@@ -39,13 +40,11 @@ int EventsManager::DoEvents()
                     case FLAG_SHIFT:
                     {
                         m_shiftKeyDown = event->GetState();
-                        printf("key=SHIFT, isDown=%d\n", event->GetState());
                         break;
                     }
                     case FLAG_CONTROL:
                     {
                         m_controlKeyDown = event->GetState();
-                        printf("key=CONTROL, isDown=%d\n", event->GetState());
                         break;
                     }
                     default:
@@ -74,7 +73,6 @@ int EventsManager::DoEvents()
                     }
                 }
 
-                printf("keys = \n");
                 break;
             }
             case EVENT_MOUSEMOVE:
@@ -103,21 +101,61 @@ int EventsManager::DoEvents()
     return 0;
 }
 
-void EventsManager::RegisterMouseMovedEvents(EventHolderMouseMoved val)
+EventIdentifier EventsManager::RegisterMouseMovedEvents(std::function<void(Origin*)> lambda)
 {
-    m_mouseMoves.push_back(val);
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_mouseMoves.push_back(EventHolderMouseMoved(identifier, lambda));
+    return identifier;
 }
 
-void EventsManager::RegisterMouseClickedEvents(EventHolderMouseClicked val)
+EventIdentifier EventsManager::RegisterMouseClickedEvents(std::function<void(void*)> lambda)
 {
-    m_mouseClicks.push_back(val);
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_mouseClicks.push_back(EventHolderMouseClicked(identifier, lambda));
+    return identifier;;
 }
 
-void EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)
+EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)
 {
-    m_keyshortcuts.push_back(EventHolderKeyShortcutPressed(lambda, modifiers, keys));
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_keyshortcuts.push_back(EventHolderKeyShortcutPressed(identifier, lambda, modifiers, keys));
+    return identifier;
 }
 
+void EventsManager::UnregisterEvent(EventIdentifier identifier)
+{
+    for (auto it = m_mouseMoves.begin(); it != m_mouseMoves.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_mouseMoves.erase(it);
+            return;
+        }
+    }
+    for (auto it = m_mouseClicks.begin(); it != m_mouseClicks.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_mouseClicks.erase(it);
+            return;
+        }
+    }
+    for (auto it = m_keyshortcuts.begin(); it != m_keyshortcuts.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_keyshortcuts.erase(it);
+            return;
+        }
+    }
+}
+
+void EventsManager::UnregisterAllEvents()
+{
+    m_mouseMoves.clear();
+    m_mouseClicks.clear();
+    m_keyshortcuts.clear();
+}
 
 /** Event holder implementations */
 

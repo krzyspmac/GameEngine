@@ -111,6 +111,13 @@ namespace engine
         virtual bool PollEvent(EventI **outEvent) = 0;
     };
 
+
+    /** Public ASCII codes */
+    typedef enum
+    {
+        CODE_TIDLE = '`'
+    } ASCIIKeyCode;
+
 }; // namespace engine
 
 #endif /* event_provider_interface_h */

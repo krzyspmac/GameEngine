@@ -19,12 +19,20 @@
 
 namespace engine
 {
+    /** Holder identifier */
+    typedef unsigned int EventIdentifier;
+
     /***/
     template <class T>
     class EventHolderI
     {
+        EventIdentifier m_identifier;
     public:
-        EventHolderI() { };
+        EventHolderI(EventIdentifier identifier)
+            : m_identifier(identifier)
+        { };
+        
+        auto GetIdentifier() { return m_identifier; };
 
     public:
         virtual void Process(T*) = 0;
@@ -32,14 +40,16 @@ namespace engine
 
     /***/
     template <class T>
-    class EventHolderLambda
+    class EventHolderLambda: public EventHolderI<T>
     {
-    public:
-        EventHolderLambda(std::function<void(T*)> lambda): m_lambda(lambda) { };
-        void Process(T *val) { m_lambda(val); };
-
-    private:
         std::function<void(T*)> m_lambda;
+    public:
+        EventHolderLambda(EventIdentifier identifier, std::function<void(T*)> lambda)
+            : EventHolderI<T>(identifier)
+            , m_lambda(lambda)
+        { };
+
+        void Process(T *val) { m_lambda(val); };
     };
 
 #pragma mark - Designated event holders
@@ -60,8 +70,8 @@ namespace engine
         std::vector<EventFlagType> m_modifiers;
         std::vector<unsigned short> m_keys;
     public:
-        EventHolderKeyShortcutPressed(std::function<void(void*)> lambda, std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys)
-            : EventHolderLambda<void>(lambda)
+        EventHolderKeyShortcutPressed(EventIdentifier identifier, std::function<void(void*)> lambda, std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys)
+            : EventHolderLambda<void>(identifier, lambda)
             , m_modifiers(modifiers)
             , m_keys(keys)
         { };
@@ -82,9 +92,11 @@ namespace engine
         int DoEvents();
 
     public: /** Register for various events */
-        void RegisterMouseMovedEvents(EventHolderMouseMoved);
-        void RegisterMouseClickedEvents(EventHolderMouseClicked);
-        void RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda);
+        EventIdentifier RegisterMouseMovedEvents(std::function<void(Origin*)> lambda);
+        EventIdentifier RegisterMouseClickedEvents(std::function<void(void*)> lambda);
+        EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda);
+        void UnregisterEvent(EventIdentifier);
+        void UnregisterAllEvents();
 
     public: /** Public getters */
         bool IsShiftDown() { return m_shiftKeyDown; };
@@ -93,6 +105,7 @@ namespace engine
         bool GetKeyDown(unsigned short key) { return m_keys[key]; };
 
     private: /** Variables */
+        EventIdentifier m_identifierCounter;
         EventProviderI &m_eventProvider;
         EngineProviderI &m_engineProvider;
         std::vector<EventHolderMouseMoved> m_mouseMoves;
