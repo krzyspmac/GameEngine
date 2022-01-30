@@ -155,8 +155,9 @@ using namespace engine;
 
     /** Get the scale that was applied to the viewport in order to render it on-screen*/
     float aspect = desiredFramebufferTextureSize.x / desiredFramebufferTextureSize.y;
+    float viewFrameAspect = CGRectGetWidth(viewFrame) / CGRectGetHeight(viewFrame);
     simd_float2 displayFramebufferSize;
-    if (viewFrame.size.width > viewFrame.size.height)
+    if (viewFrameAspect >= aspect)
     {
         displayFramebufferSize.y = viewFrame.size.height;
         displayFramebufferSize.x = displayFramebufferSize.y * aspect;
