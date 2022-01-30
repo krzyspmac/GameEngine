@@ -161,11 +161,27 @@ void EventsManager::UnregisterEvent(EventIdentifier identifier)
             return;
         }
     }
+    for (auto it = m_mouseMovesScript.begin(); it != m_mouseMovesScript.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_mouseMovesScript.erase(it);
+            return;
+        }
+    }
     for (auto it = m_mouseClicks.begin(); it != m_mouseClicks.end(); it++)
     {
         if ((*it).GetIdentifier() == identifier)
         {
             m_mouseClicks.erase(it);
+            return;
+        }
+    }
+    for (auto it = m_mouseClickedScript.begin(); it != m_mouseClickedScript.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_mouseClickedScript.erase(it);
             return;
         }
     }
@@ -213,11 +229,20 @@ static int lua_EventsManager_RegisterMouseClickedEvents(lua_State *L)
     return 1;
 }
 
+static int lua_EventsManager_UnregisterEvent(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    int eventIdentifier = lua_tonumber(L, 2);
+    mgr->UnregisterEvent(eventIdentifier);
+    return 0;
+}
+
 std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         { "RegisterMouseMovedEvents", &lua_EventsManager_RegisterMouseMoveEvents }
       , { "RegisterMouseClickedEvents", &lua_EventsManager_RegisterMouseClickedEvents }
+      , { "UnregisterEvent", &lua_EventsManager_UnregisterEvent }
     });
     return result;
 }
