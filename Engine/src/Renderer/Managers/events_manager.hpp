@@ -15,61 +15,10 @@
 #include "common_engine_impl.h"
 #include "scripting_engine_provider_interface.h"
 #include "callable.hpp"
-
-#define KEY_TABLE_SIZE 256
+#include "events_manager_types.hpp"
 
 namespace engine
 {
-    /** Holder identifier
-     @private
-     */
-    typedef unsigned int EventIdentifier;
-
-    /** @private */
-    template <class T>
-    class EventHolderI
-    {
-        EventIdentifier m_identifier;
-    public:
-        EventHolderI(EventIdentifier identifier)
-            : m_identifier(identifier)
-        { };
-        
-        auto GetIdentifier() { return m_identifier; };
-
-    public:
-        virtual void Process(T*) = 0;
-    };
-
-    /** @private */
-    template <class T>
-    class EventHolderLambda: public EventHolderI<T>
-    {
-        std::function<void(T*)> m_lambda;
-    public:
-        EventHolderLambda(EventIdentifier identifier, std::function<void(T*)> lambda)
-            : EventHolderI<T>(identifier)
-            , m_lambda(lambda)
-        { };
-
-        void Process(T *val) { m_lambda(val); };
-    };
-
-    /** @private */
-    class EventHolderScriptCallableMousePosition: public EventHolderI<Origin>
-    {
-        CallableScriptFunctionSciptableInstance m_function;
-    public:
-        EventHolderScriptCallableMousePosition(EventIdentifier identifier, CallableScriptFunctionSciptableInstance fnc)
-            : EventHolderI<Origin>(identifier)
-            , m_function(fnc)
-        { };
-
-        void Process(Origin *val);
-    };
-
-#pragma mark - Designated event holders
-
     /** Holder for mouse moved event. Provides the position. */
     /** @private */
     class EventHolderMouseMoved: public EventHolderLambda<Origin>
@@ -98,23 +47,11 @@ namespace engine
         using EventHolderLambda::EventHolderLambda;
     };
 
-    /** Holder for key combination pressed */
+    /** Holder for key shortcut for C++ */
     /** @private */
-    class EventHolderKeyShortcutPressed: public EventHolderLambda<void>
+    class EventHolderKeyShortcutLambda: public EventHolderKeyShortcutPressedLambda
     {
-        using EventHolderLambda::EventHolderLambda;
-        std::vector<EventFlagType> m_modifiers;
-        std::vector<unsigned short> m_keys;
-    public:
-        EventHolderKeyShortcutPressed(EventIdentifier identifier, std::function<void(void*)> lambda, std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys)
-            : EventHolderLambda<void>(identifier, lambda)
-            , m_modifiers(modifiers)
-            , m_keys(keys)
-        { };
-
-        auto& GetModifiers() { return m_modifiers; };
-        auto& GetKeys() { return m_keys; };
-        bool Matches(bool shiftDown, bool controlDown, bool keys[KEY_TABLE_SIZE]);
+        using EventHolderKeyShortcutPressedLambda::EventHolderKeyShortcutPressedLambda;
     };
 
     /**
@@ -169,16 +106,34 @@ namespace engine
             @private */
         EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda);
 
-        /** @private */
+        /** Register a key combination for scripting.
+
+            \code{lua}
+            EventsManager:RegisterKeyShortcutsEvents("shift|control", "w|t", function()
+                print("shift & control & w & t pressed simulataneously")
+            end)
+            \endcode
+         */
+        EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionSciptableInstance);
+
+        /** Unregisters an event for a given identifier. */
         void UnregisterEvent(EventIdentifier);
 
         /** @private */
         void UnregisterAllEvents();
 
     public: /** Public getters */
+
+        /** Checkf for the shift modifier */
         bool IsShiftDown() { return m_shiftKeyDown; };
+
+        /** Checks for the control modifier */
         bool IsControlDown() { return m_controlKeyDown; };
+
+        /** @private */
         auto& GetKeys() { return m_keys; };
+
+        /** @private */
         bool GetKeyDown(unsigned short key) { return m_keys[key]; };
 
     private: /** scripting */
@@ -193,7 +148,8 @@ namespace engine
         std::vector<EventHolderMouseMovedScript> m_mouseMovesScript;
         std::vector<EventHolderMouseClicked> m_mouseClicks;
         std::vector<EventHolderMouseClickedScript> m_mouseClickedScript;
-        std::vector<EventHolderKeyShortcutPressed> m_keyshortcuts;
+        std::vector<EventHolderKeyShortcutLambda> m_keyshortcuts;
+        std::vector<EventHolderKeyShortcutPressedScript> m_keyshortcutsScript;
 
         bool m_shiftKeyDown;
         bool m_controlKeyDown;

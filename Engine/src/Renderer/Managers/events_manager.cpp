@@ -73,6 +73,14 @@ int EventsManager::DoEvents()
                     }
                 }
 
+                for (auto& keyHandler : m_keyshortcutsScript)
+                {
+                    if (keyHandler.Matches(m_shiftKeyDown, m_controlKeyDown, m_keys))
+                    {
+                        keyHandler.Process(nullptr);
+                    }
+                }
+
                 break;
             }
             case EVENT_MOUSEMOVE:
@@ -147,7 +155,14 @@ EventIdentifier EventsManager::RegisterMouseClickedEvents(CallableScriptFunction
 EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-    m_keyshortcuts.push_back(EventHolderKeyShortcutPressed(identifier, lambda, modifiers, keys));
+    m_keyshortcuts.push_back(EventHolderKeyShortcutLambda(identifier, lambda, modifiers, keys));
+    return identifier;
+}
+
+EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionSciptableInstance fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_keyshortcutsScript.push_back(EventHolderKeyShortcutPressedScript(identifier, fnc, modifiers, keys));
     return identifier;
 }
 
@@ -193,6 +208,14 @@ void EventsManager::UnregisterEvent(EventIdentifier identifier)
             return;
         }
     }
+    for (auto it = m_keyshortcutsScript.begin(); it != m_keyshortcutsScript.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_keyshortcutsScript.erase(it);
+            return;
+        }
+    }
 }
 
 void EventsManager::UnregisterAllEvents()
@@ -229,6 +252,27 @@ static int lua_EventsManager_RegisterMouseClickedEvents(lua_State *L)
     return 1;
 }
 
+static int lua_EventsManager_RegisterKeyShortcutsEvents(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+
+    std::string modifiersString = lua_tostring(L, 2);
+    std::string charactersString = lua_tostring(L, 3);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+
+    auto modifiers = map<std::string, EventFlagType>(explode(modifiersString, "|"), [](std::string type) {
+        return engine::String2EventFlagType(type);
+    });
+
+    auto keys = map<std::string, unsigned short>(explode(charactersString, "|"), [](std::string cs){
+        return cs.at(0);
+    });
+
+    auto identifier = mgr->RegisterKeyShortcut(modifiers, keys, CallableScriptFunctionSciptableInstance(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
 static int lua_EventsManager_UnregisterEvent(lua_State *L)
 {
     EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
@@ -237,55 +281,46 @@ static int lua_EventsManager_UnregisterEvent(lua_State *L)
     return 0;
 }
 
+static int lua_EventsManager_IsShiftDown(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    lua_pushnumber(L, mgr->IsShiftDown());
+    return 1;
+}
+
+static int lua_EventsManager_IsControlDown(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    lua_pushnumber(L, mgr->IsControlDown());
+    return 1;
+}
+
 std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         { "RegisterMouseMovedEvents", &lua_EventsManager_RegisterMouseMoveEvents }
       , { "RegisterMouseClickedEvents", &lua_EventsManager_RegisterMouseClickedEvents }
+      , { "RegisterKeyShortcutsEvents", &lua_EventsManager_RegisterKeyShortcutsEvents }
       , { "UnregisterEvent", &lua_EventsManager_UnregisterEvent }
+      , { "IsShiftDown", &lua_EventsManager_IsShiftDown }
+      , { "IsControlDown", &lua_EventsManager_IsControlDown }
     });
     return result;
 }
 
+/** Helper functions */
 
-/** Event holder implementations */
-
-void EventHolderScriptCallableMousePosition::Process(Origin *val)
+EventFlagType engine::String2EventFlagType(std::string string)
 {
-    m_function.PerformCall([&](lua_State *L){
-        lua_pushnumber(L, val->x);
-        lua_pushnumber(L, val->y);
-        return 2;
-    });
-}
+    static std::vector<std::string> values = { "none", "shift", "control", "alt", "command" };
 
-bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bool keys[KEY_TABLE_SIZE])
-{
-    for (auto& modifier : m_modifiers)
+    for (int i = 0; i < values.size(); i++)
     {
-        if (modifier == FLAG_SHIFT)
+        if (string == values.at(i))
         {
-            if (!shiftDown)
-            {
-                return false;
-            }
-        }
-        else if (modifier == FLAG_CONTROL)
-        {
-            if (!controlDown)
-            {
-                return false;
-            }
+            return (EventFlagType)i;
         }
     }
 
-    for (auto& key : m_keys)
-    {
-        if (keys[key] != true)
-        {
-            return false;
-        }
-    }
-
-    return true;
+    return FLAG_NONE;
 }

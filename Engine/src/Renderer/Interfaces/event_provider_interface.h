@@ -32,6 +32,8 @@ namespace engine
       , FLAG_COMMAND
     } EventFlagType;
 
+    EventFlagType String2EventFlagType(std::string);
+
     /** Declares an abstract interface for different type of events received from
         the platform handlers. */
     class EventI

@@ -38,6 +38,10 @@ function GameState:Register()
 	EventsManager:RegisterMouseClickedEvents(function(x, y)
 		print("Mouse clicked position = " .. x .. ", " .. y)
 	end)
+	
+	EventsManager:RegisterKeyShortcutsEvents("control", "w|t", function()
+		print("control & w & t pressed simulataneously")
+	end)
 end
 
 gameState = GameState:new()
