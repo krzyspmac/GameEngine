@@ -7,6 +7,7 @@
 
 #import "RendererEntryViewController.h"
 #import "engine.hpp"
+#include "defs.h"
 
 @implementation RendererEntryViewController (Rendering)
 
@@ -34,6 +35,9 @@
     /** The main engine */
     auto engine = GetMainEngine();
 
+    /** Engine state */
+    auto& engineSetup = engine->GetEngineSetup();
+
     /** The main engine provider */
     auto& provider = engine->getProvider();
 
@@ -41,17 +45,15 @@
     m_engine->SetViewportScale(density);
 
     /** Recreate the offscreen texture if needed */
-    desiredFramebufferTextureSize.x = m_engine ? m_engine->GetEngineSetup().resolution.width : INITIAL_SCREEN_WIDTH;;
-    desiredFramebufferTextureSize.y = m_engine ? m_engine->GetEngineSetup().resolution.height : INITIAL_SCREEN_HEIGHT;
+    desiredFramebufferTextureSize.x = engineSetup.resolution.width;
+    desiredFramebufferTextureSize.y = engineSetup.resolution.height;
 
-    if (    desiredFramebufferTextureSize.x != framebufferTextureSize.x
-         || desiredFramebufferTextureSize.y != framebufferTextureSize.y
-         || engine->GetEngineSetup().affineScale != affineScale
-       )
+    if ( engineSetup.isDirty )
     {
         [self recreateOffscreenRenderingPipeline];
         provider.SetDesiredViewport(desiredFramebufferTextureSize.x, desiredFramebufferTextureSize.y);
-        affineScale = engine->GetEngineSetup().affineScale;
+        affineScale = engineSetup.affineScale;
+        engineSetup.isDirty = false;
     }
 
     /** Process events */
@@ -110,19 +112,22 @@
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 
         // Optionally draw the console
-#if USES_CONSOLE
-        [encoder pushDebugGroup:@"Dear ImGui rendering"];
+#if SHOW_CONSOLE
+        if (!m_consoleRenderer->GetConsoleHidden())
+        {
+            [encoder pushDebugGroup:@"Dear ImGui rendering"];
 
-        m_consoleRendererProvider->PrepareForFrame(
-           self.view
-         , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
-         , (__bridge MTL::CommandBuffer*)commandBuffer
-         , (__bridge MTL::RenderCommandEncoder*)encoder
-        );
-        m_consoleRenderer->DoFrame();
-        m_consoleRendererProvider->Render();
+            m_consoleRendererProvider->PrepareForFrame(
+               self.view
+             , (__bridge MTL::RenderPassDescriptor*)drawableRenderPassDescriptor
+             , (__bridge MTL::CommandBuffer*)commandBuffer
+             , (__bridge MTL::RenderCommandEncoder*)encoder
+            );
+            m_consoleRenderer->DoFrame();
+            m_consoleRendererProvider->Render();
 
-        [encoder popDebugGroup];
+            [encoder popDebugGroup];
+        }
 #endif
         /** End encoding */
         [encoder endEncoding];

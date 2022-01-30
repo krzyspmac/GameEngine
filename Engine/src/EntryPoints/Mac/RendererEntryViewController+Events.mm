@@ -67,9 +67,60 @@ using namespace engine;
     NSEventMask eventMask = NSEventMaskKeyDown | NSEventMaskKeyUp | NSEventMaskFlagsChanged;
     [NSEvent addLocalMonitorForEventsMatchingMask:eventMask handler:^NSEvent * _Nullable(NSEvent *event)
     {
-#if USES_CONSOLE
-        self->m_consoleRendererProvider->HandleEvent(event);
+#if SHOW_CONSOLE
+        if (!self->m_consoleRenderer->GetConsoleHidden())
+        {
+            self->m_consoleRendererProvider->HandleEvent(event);
+        }
 #endif
+        auto& eventsProvider = GetMainEngine()->getEventProvider();
+        switch (event.type)
+        {
+            case NSEventTypeKeyDown:
+            {
+                NSString *characters = event.charactersIgnoringModifiers;
+                for (NSInteger i = 0; i < characters.length; i++)
+                {
+                    unichar c = [characters characterAtIndex:i];
+                    eventsProvider.PushKeyStateChange((unsigned short)c, true);
+                }
+                break;
+            }
+            case NSEventTypeKeyUp:
+            {
+                NSString *characters = event.charactersIgnoringModifiers;
+                for (NSInteger i = 0; i < characters.length; i++)
+                {
+                    unichar c = [characters characterAtIndex:i];
+                    eventsProvider.PushKeyStateChange((unsigned short)c, false);
+                }
+                break;
+            }
+            case NSFlagsChanged:
+            {
+                NSEventModifierFlags flags = event.modifierFlags;
+
+                bool isShift = flags & NSEventModifierFlagShift;
+                eventsProvider.PushFlagsChange(FLAG_SHIFT, isShift);
+
+                bool isControl = flags & NSEventModifierFlagControl;
+                eventsProvider.PushFlagsChange(FLAG_CONTROL, isControl);
+
+                bool isAlt = flags & NSEventModifierFlagOption;
+                eventsProvider.PushFlagsChange(FLAG_ALT, isAlt);
+
+                bool isCommand = flags & NSEventModifierFlagCommand;
+                eventsProvider.PushFlagsChange(FLAG_COMMAND, isCommand);
+
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
+
+        // TODO: do not send all events to the system!
         return event;
     }];
 #endif
@@ -79,8 +130,11 @@ using namespace engine;
 
 - (void)handle:(NSEvent*)event
 {
-#if USES_CONSOLE
-    m_consoleRendererProvider->HandleEvent(event);
+#if SHOW_CONSOLE
+    if (!self->m_consoleRenderer->GetConsoleHidden())
+    {
+        m_consoleRendererProvider->HandleEvent(event);
+    }
 #endif
 }
 
@@ -93,18 +147,47 @@ using namespace engine;
     CGRect    viewFrame = view.frame;
     CGPoint   locationInView = [view convertPoint:[event locationInWindow] fromView:nil];
 
+    /** Make the origin top, left */
     locationInView.y = viewFrame.size.height - locationInView.y;
 
-    float xPer = locationInView.x / viewFrame.size.width;
-    float yPer = locationInView.y / viewFrame.size.height;
-
+    /** Get the desired viewport set by the engine */
     auto& viewport = m_engine->GetEngineSetup().resolution;
+
+    /** Get the scale that was applied to the viewport in order to render it on-screen*/
+    float aspect = desiredFramebufferTextureSize.x / desiredFramebufferTextureSize.y;
+    float viewFrameAspect = CGRectGetWidth(viewFrame) / CGRectGetHeight(viewFrame);
+    simd_float2 displayFramebufferSize;
+    if (viewFrameAspect >= aspect)
+    {
+        displayFramebufferSize.y = viewFrame.size.height;
+        displayFramebufferSize.x = displayFramebufferSize.y * aspect;
+    }
+    else
+    {
+        displayFramebufferSize.x = viewFrame.size.width;
+        displayFramebufferSize.y = displayFramebufferSize.x / aspect;
+    }
+
+    /** Scale & offset the position to take into account that the viewport may be
+        scaled and translated/centered in the backing window/surface. */
+    locationInView.x -= ceil((CGRectGetWidth(viewFrame) - displayFramebufferSize.x)/2);
+    locationInView.x = MAX(0, MIN(locationInView.x, displayFramebufferSize.x));
+
+    locationInView.y -= ceil((CGRectGetHeight(viewFrame) - displayFramebufferSize.y)/2);
+    locationInView.y = MAX(0, MIN(locationInView.y, displayFramebufferSize.y));
+
+    float xPer = locationInView.x / displayFramebufferSize.x;
+    float yPer = locationInView.y / displayFramebufferSize.y;
+
+    /** Calcualte position in the viewport */
     Origin locationInViewport;
     locationInViewport.x = (int)(xPer * (float)viewport.width);
     locationInViewport.y = (int)(yPer * (float)viewport.height);
 
+    /** Send the calcualted position ot the engine provider */
     m_engine->getEventProvider().PushMouseLocation(locationInViewport);
 
+    /** Also handle other events if necessary */
     [self handle:event];
 }
 

@@ -9,6 +9,7 @@
 #define general_h
 
 #include <iostream>
+#include <vector>
 
 namespace engine
 {
@@ -35,6 +36,37 @@ namespace engine
     static inline void trim(std::string &s) {
         ltrim(s);
         rtrim(s);
+    }
+
+    // break the string into parts
+    static inline std::vector<std::string> explode(std::string &s, std::string delimiter) {
+        std::vector<std::string> broken;
+
+        size_t pos = 0;
+        std::string token;
+        while ((pos = s.find(delimiter)) != std::string::npos) {
+            token = s.substr(0, pos);
+            broken.push_back(token);
+            s.erase(0, pos + delimiter.length());
+        }
+
+        broken.push_back(s);
+
+        return broken;
+    }
+
+    /** map a vector of source elements S to destination elements D */
+    template<typename S, typename D>
+    std::vector<D> map(std::vector<S> source, std::function<D(S)> lambda)
+    {
+        std::vector<D> result;
+
+        for (auto& srcItem : source)
+        {
+            result.push_back(lambda(srcItem));
+        }
+
+        return result;
     }
 };
 

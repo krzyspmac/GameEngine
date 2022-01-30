@@ -48,13 +48,15 @@ ConsoleTerminalI& ConsoleRenderer::GetTerminal()
 void ConsoleRenderer::Setup()
 {
 #if SHOW_CONSOLE
-    m_platformRenderer->Setup();
     SetupEvents();
 #endif
 }
 
 void ConsoleRenderer::SetupEvents()
 {
+    GetMainEngine()->getEventsManager().RegisterKeyShortcut( {FLAG_CONTROL}, { CODE_TIDLE }, [&](void*) {
+        this->SetConsoleHidden(!m_hidden);
+    });
 }
 
 void ConsoleRenderer::DoFrame()
@@ -73,14 +75,21 @@ void ConsoleRenderer::SetConsoleHidden(bool hidden)
     {
         if (!hidden)
         {
-            Setup();
+            m_platformRenderer->Setup();
         }
     }
     else
     {
         m_platformRenderer->SetConsoleHidden(hidden);
     }
+
+    m_hidden = hidden;
 #endif
+}
+
+bool ConsoleRenderer::GetConsoleHidden()
+{
+    return m_hidden;
 }
 
 void ConsoleRenderer::DoGui()

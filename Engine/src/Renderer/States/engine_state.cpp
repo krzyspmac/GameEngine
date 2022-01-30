@@ -57,6 +57,7 @@ void EngineState::SetViewportSize(Size size, float scale)
     engineSetup.resolution.width = size.width;
     engineSetup.resolution.height = size.height;
     engineSetup.affineScale = scale;
+    engineSetup.isDirty = true;
 }
 
 #pragma mark - Scripting Interface

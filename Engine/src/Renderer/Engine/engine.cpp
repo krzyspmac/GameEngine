@@ -59,6 +59,7 @@ Engine::Engine(EngineProviderI &engineProvider,
     setup.resolution.width = 320;
     setup.resolution.height = 200;
     setup.affineScale = 1.0f;
+    setup.isDirty = false;
 
     AnimationCurveFactory::Prepare();
 }
@@ -111,13 +112,14 @@ void Engine::Setup()
     // Register & process mouse events
     m_mousePosition.x = 0;
     m_mousePosition.y = 0;
-    m_eventsManager.RegisterMouseMovedEvents(EventHolderMouseMoved([&](Origin *origin){
+    m_eventsManager.RegisterMouseMovedEvents([&](Origin *origin){
         m_mousePosition.x = origin->x;
         m_mousePosition.y = origin->y;
-    }));
+    });
 
 #if SHOW_CONSOLE
-    m_consoleRenderer.SetConsoleHidden(false);
+    m_consoleRenderer.Setup();
+    m_consoleRenderer.SetConsoleHidden(true);
 #endif
 }
 
