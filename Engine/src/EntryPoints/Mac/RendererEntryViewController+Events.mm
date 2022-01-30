@@ -146,18 +146,46 @@ using namespace engine;
     CGRect    viewFrame = view.frame;
     CGPoint   locationInView = [view convertPoint:[event locationInWindow] fromView:nil];
 
+    /** Make the origin top, left */
     locationInView.y = viewFrame.size.height - locationInView.y;
 
-    float xPer = locationInView.x / viewFrame.size.width;
-    float yPer = locationInView.y / viewFrame.size.height;
-
+    /** Get the desired viewport set by the engine */
     auto& viewport = m_engine->GetEngineSetup().resolution;
+
+    /** Get the scale that was applied to the viewport in order to render it on-screen*/
+    float aspect = desiredFramebufferTextureSize.x / desiredFramebufferTextureSize.y;
+    simd_float2 displayFramebufferSize;
+    if (viewFrame.size.width > viewFrame.size.height)
+    {
+        displayFramebufferSize.y = viewFrame.size.height;
+        displayFramebufferSize.x = displayFramebufferSize.y * aspect;
+    }
+    else
+    {
+        displayFramebufferSize.x = viewFrame.size.width;
+        displayFramebufferSize.y = displayFramebufferSize.x / aspect;
+    }
+
+    /** Scale & offset the position to take into account that the viewport may be
+        scaled and translated/centered in the backing window/surface. */
+    locationInView.x -= ceil((CGRectGetWidth(viewFrame) - displayFramebufferSize.x)/2);
+    locationInView.x = MAX(0, MIN(locationInView.x, displayFramebufferSize.x));
+
+    locationInView.y -= ceil((CGRectGetHeight(viewFrame) - displayFramebufferSize.y)/2);
+    locationInView.y = MAX(0, MIN(locationInView.y, displayFramebufferSize.y));
+
+    float xPer = locationInView.x / displayFramebufferSize.x;
+    float yPer = locationInView.y / displayFramebufferSize.y;
+
+    /** Calcualte position in the viewport */
     Origin locationInViewport;
     locationInViewport.x = (int)(xPer * (float)viewport.width);
     locationInViewport.y = (int)(yPer * (float)viewport.height);
 
+    /** Send the calcualted position ot the engine provider */
     m_engine->getEventProvider().PushMouseLocation(locationInViewport);
 
+    /** Also handle other events if necessary */
     [self handle:event];
 }
 
