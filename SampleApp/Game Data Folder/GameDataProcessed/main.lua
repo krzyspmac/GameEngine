@@ -30,6 +30,14 @@ function GameState:Register()
 	EngineState:SetOnScreenSizeChange(function(w, h, d)
 		self:OnResolutionChange(w, h, d)
 	end)
+	
+	EventsManager:RegisterMouseMovedEvents(function(x, y)
+		print("Mouse position = " .. x .. ", " .. y)
+	end)
+	
+	EventsManager:RegisterMouseClickedEvents(function(x, y)
+		print("Mouse clicked position = " .. x .. ", " .. y)
+	end)
 end
 
 gameState = GameState:new()

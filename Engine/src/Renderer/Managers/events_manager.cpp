@@ -77,18 +77,33 @@ int EventsManager::DoEvents()
             }
             case EVENT_MOUSEMOVE:
             {
-                std::for_each(m_mouseMoves.begin(), m_mouseMoves.end(), [&](EventHolderMouseMoved &l) {
-                    auto mouseEvent = static_cast<EventMouseMove*>(baseEvent);
-                    l.Process(&mouseEvent->GetLocation());
-                });
+                auto mouseEvent = static_cast<EventMouseMove*>(baseEvent);
+                auto mouseLocation = &mouseEvent->GetLocation();
+
+                for (auto& codeHandler : m_mouseMoves)
+                {
+                    codeHandler.Process(mouseLocation);
+                }
+
+                for (auto& handler : m_mouseMovesScript)
+                {
+                    handler.Process(mouseLocation);
+                }
                 break;
             }
             case EVENT_MOUSEUP:
             {
-                std::for_each(m_mouseClicks.begin(), m_mouseClicks.end(), [&](EventHolderMouseClicked &l) {
-                    Origin& mousePosition = GetMainEngine()->GetMousPosition();
-                    l.Process(&mousePosition);
-                });
+                auto mouseLocation = &(GetMainEngine()->GetMousPosition());
+
+                for (auto& codeHandler : m_mouseClicks)
+                {
+                    codeHandler.Process(mouseLocation);
+                }
+
+                for (auto& handler : m_mouseClickedScript)
+                {
+                    handler.Process(mouseLocation);
+                }
                 break;
             }
             case EVENT_QUIT:
@@ -108,11 +123,25 @@ EventIdentifier EventsManager::RegisterMouseMovedEvents(std::function<void(Origi
     return identifier;
 }
 
+EventIdentifier EventsManager::RegisterMouseMovedEvents(CallableScriptFunctionSciptableInstance caller)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_mouseMovesScript.push_back(EventHolderMouseMovedScript(identifier, caller));
+    return identifier;
+}
+
 EventIdentifier EventsManager::RegisterMouseClickedEvents(std::function<void(void*)> lambda)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_mouseClicks.push_back(EventHolderMouseClicked(identifier, lambda));
     return identifier;;
+}
+
+EventIdentifier EventsManager::RegisterMouseClickedEvents(CallableScriptFunctionSciptableInstance caller)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_mouseClickedScript.push_back(EventHolderMouseClickedScript(identifier, caller));
+    return identifier;
 }
 
 EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)
@@ -157,7 +186,53 @@ void EventsManager::UnregisterAllEvents()
     m_keyshortcuts.clear();
 }
 
+#pragma mark - Scripting Interface
+/** Scripting interface */
+
+SCRIPTING_INTERFACE_IMPL_NAME(EventsManager);
+
+static int lua_EventsManager_RegisterMouseMoveEvents(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+
+    int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto lambda = CallableScriptFunctionSciptableInstance(functionEndRef);
+    auto identifier = mgr->RegisterMouseMovedEvents(lambda);
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
+static int lua_EventsManager_RegisterMouseClickedEvents(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+
+    int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto lambda = CallableScriptFunctionSciptableInstance(functionEndRef);
+    auto identifier = mgr->RegisterMouseClickedEvents(lambda);
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
+std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
+{
+    std::vector<luaL_Reg> result({
+        { "RegisterMouseMovedEvents", &lua_EventsManager_RegisterMouseMoveEvents }
+      , { "RegisterMouseClickedEvents", &lua_EventsManager_RegisterMouseClickedEvents }
+    });
+    return result;
+}
+
+
 /** Event holder implementations */
+
+void EventHolderScriptCallableMousePosition::Process(Origin *val)
+{
+    m_function.PerformCall([&](lua_State *L){
+        lua_pushnumber(L, val->x);
+        lua_pushnumber(L, val->y);
+        return 2;
+    });
+}
 
 bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bool keys[KEY_TABLE_SIZE])
 {
