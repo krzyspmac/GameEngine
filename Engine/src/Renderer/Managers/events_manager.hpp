@@ -16,6 +16,7 @@
 #include "scripting_engine_provider_interface.h"
 #include "callable.hpp"
 #include "events_manager_types.hpp"
+#include "object_pool.hpp"
 
 namespace engine
 {

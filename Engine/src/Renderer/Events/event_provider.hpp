@@ -10,15 +10,16 @@
 
 #include "common.h"
 #include "event_provider_interface.h"
+#include "object_pool.hpp"
 
 namespace engine
 {
     class EventProvider: public EventProviderI
     {
-        std::vector<std::unique_ptr<EventI>> m_poolMouseMove;
-        std::vector<std::unique_ptr<EventI>> m_poolMouseLeftUp;
-        std::vector<std::unique_ptr<EventI>> m_poolKeyFlagStateChanged;
-        std::vector<std::unique_ptr<EventI>> m_poolKeyStateChanged;
+        std::unique_ptr<ObjectPool<EventI>> m_poolMouseMove;
+        std::unique_ptr<ObjectPool<EventI>> m_poolMouseLeftUp;
+        std::unique_ptr<ObjectPool<EventI>> m_poolKeyFlagStateChanged;
+        std::unique_ptr<ObjectPool<EventI>> m_poolKeyStateChanged;
 
         std::vector<EventI*> m_eventQueue;
     public:
@@ -32,13 +33,13 @@ namespace engine
         bool    PollEvent(EventI **outEvent);
 
     private:
-        void    EventsPoolPopulate();
         EventI* EventsPoolDequeue(EventType type);
+        void    EventsPoolPutBack(EventI*);
 
         void    EventPush(EventI*);
 
     private: // helpers
-        std::vector<std::unique_ptr<EventI>> *EventsPoolForType(EventType type);
+        ObjectPool<EventI> *EventsPoolForType(EventType type);
     };
 
 }; // namespace engine

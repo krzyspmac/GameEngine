@@ -7,54 +7,57 @@
 
 #include "event_provider.hpp"
 
-#define POOL_COUNT_PER_TYPE 20
+#define POOL_COUNT_PER_TYPE 50
 
 using namespace engine;
 
 EventProvider::EventProvider()
-    :EventProviderI()
+    : EventProviderI()
 {
-    EventsPoolPopulate();
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventMouseMove({0, 0});
+        });
+        m_poolMouseMove = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventMouseLeftUp();
+        });
+        m_poolMouseLeftUp = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventKeyFlagStateChanged();
+        });
+        m_poolKeyFlagStateChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventKeyStateChanged();
+        });
+        m_poolKeyStateChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
 }
 
-void EventProvider::EventsPoolPopulate()
-{
-    for (int i = 0; i < POOL_COUNT_PER_TYPE; ++i)
-    {
-        EventMouseMove *event = new EventMouseMove({0, 0});
-        m_poolMouseMove.emplace_back(std::unique_ptr<EventMouseMove>(std::move(event)));
-    }
-    for (int i = 0; i < POOL_COUNT_PER_TYPE; ++i)
-    {
-        EventMouseLeftUp *event = new EventMouseLeftUp();
-        m_poolMouseLeftUp.emplace_back(std::unique_ptr<EventMouseLeftUp>(std::move(event)));
-    }
-    for (int i = 0; i < POOL_COUNT_PER_TYPE; ++i)
-    {
-        EventKeyFlagStateChanged *event = new EventKeyFlagStateChanged();
-        m_poolKeyFlagStateChanged.emplace_back(std::unique_ptr<EventKeyFlagStateChanged>(std::move(event)));
-    }
-    for (int i = 0; i < POOL_COUNT_PER_TYPE; ++i)
-    {
-        EventKeyStateChanged *event = new EventKeyStateChanged();
-        m_poolKeyStateChanged.emplace_back(std::unique_ptr<EventKeyStateChanged>(std::move(event)));
-    }
-}
-
-std::vector<std::unique_ptr<EventI>> *EventProvider::EventsPoolForType(EventType type)
+ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
 {
     switch (type)
     {
         case EVENT_NONE:
             return nullptr;
         case EVENT_KEY_FLAG_STATE_CHANGE:
-            return &m_poolKeyFlagStateChanged;
+            return m_poolKeyFlagStateChanged.get();
         case EVENT_KEY_STATE_CHANGE:
-            return &m_poolKeyStateChanged;
+            return m_poolKeyStateChanged.get();
         case EVENT_MOUSEMOVE:
-            return &m_poolMouseMove;
+            return m_poolMouseMove.get();
         case EVENT_MOUSEUP:
-            return &m_poolMouseLeftUp;
+            return m_poolMouseLeftUp.get();
         case EVENT_QUIT:
             return nullptr;
     }
@@ -62,23 +65,23 @@ std::vector<std::unique_ptr<EventI>> *EventProvider::EventsPoolForType(EventType
 
 EventI* EventProvider::EventsPoolDequeue(EventType type)
 {
-    std::vector<std::unique_ptr<EventI>> *pool = EventsPoolForType(type);
-
+    auto* pool = EventsPoolForType(type);
     if (pool != nullptr)
     {
-        for (auto& event : *pool)
-        {
-            if (!event.get()->GetInUse())
-            {
-                event.get()->GetInUse() = true;
-                return event.get();
-            }
-        }
-        return nullptr;
+        return pool->Dequeue();
     }
     else
     {
         return nullptr;
+    }
+}
+
+void EventProvider::EventsPoolPutBack(EventI *event)
+{
+    auto* pool = EventsPoolForType(event->GetType());
+    if (pool != nullptr)
+    {
+        return pool->PutBack(event);
     }
 }
 
@@ -138,7 +141,7 @@ bool EventProvider::PollEvent(EventI **outEvent)
         {
             auto *last = m_eventQueue.back();
             *outEvent = last;
-            last->GetInUse() = false;
+            EventsPoolPutBack(last);
             m_eventQueue.pop_back();
             return true;
         }
