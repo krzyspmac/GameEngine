@@ -153,24 +153,10 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     // Get the target final scale for the texture
     float targetAffineScale = float(*affineScalePointer);
 
-    // Calculate aspect ratio & scale
-//    float scaleX, scaleY, scale;
-//    scaleX = viewportSize.x / desiredViewportSize.x;
-//    scaleY = viewportSize.y / desiredViewportSize.y;
-
     float2 scale = viewportSize / desiredViewportSize;
-//    scale = min(scaleX, scaleY);
-    
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-//    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-//    out.position.xy = pixelSpacePosition.xy;//* scale/2;
     out.position.xy = pixelSpacePosition / scale * targetAffineScale;
-
-//    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-//    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;
-//    out.position.y = vertices[vertexID].position.y;
-
     out.textureCoordinate = vertices[vertexID].textureCoordinate;
 
     return out;
