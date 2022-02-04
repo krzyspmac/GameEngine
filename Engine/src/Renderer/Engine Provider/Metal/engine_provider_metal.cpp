@@ -190,6 +190,10 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     // when using RendererTargetDrawablePush.
     MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
 
+    AAPAmbientLLight light;
+    light.color = { 1, 1, 1 };
+    light.ambientIntensity = 0.1;
+
     renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
     renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexWindowSize);
     renderToPipline->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexObjectOffset);
@@ -198,7 +202,8 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
-
+    renderToPipline->setFragmentBytes(&light, sizeof(light), AAPLAmbientLightIndex);
+    
     auto texture = drawable->GetTexture();
     if (texture != nullptr)
     {

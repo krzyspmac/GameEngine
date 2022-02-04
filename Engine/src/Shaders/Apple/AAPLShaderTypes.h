@@ -31,6 +31,7 @@ typedef enum AAPLTextureIndex
 {
     AAPLTextureIndexBaseColor = 0,
     AAPLTextureIndexBaseAlpha = 1,
+    AAPLAmbientLightIndex     = 2
 } AAPLTextureIndex;
 
 //  This structure defines the layout of vertices sent to the vertex
@@ -41,9 +42,15 @@ typedef struct
 {
     // Positions in pixel space. A value of 100 indicates 100 pixels from the origin/center.
     vector_float2 position;
-    
+
     // 2D texture coordinate
     vector_float2 textureCoordinate;
 } AAPLVertex;
+
+typedef struct
+{
+    vector_float3 color;
+    float ambientIntensity;
+} AAPAmbientLLight;
 
 #endif /* AAPLShaderTypes_h */

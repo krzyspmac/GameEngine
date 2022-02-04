@@ -1,3 +1,13 @@
+------------------------------------------------------------------------------------------
+-- globals for the script
+
+character = nil
+sky = nil
+scene = nil
+truck = nil
+bg = nil
+font = nil
+initialAnimationDone = false
 
 ------------------------------------------------------------------------------------------
 -- game state
@@ -37,6 +47,8 @@ function GameState:Register()
 	
 	EventsManager:RegisterMouseClickedEvents(function(x, y)
 		print("Mouse clicked position = " .. x .. ", " .. y)
+		character:SetHidden(false)
+		character:WalkTo(x, y)
 	end)
 	
 	EventsManager:RegisterKeyShortcutsEvents("control", "w|t", function()
@@ -46,16 +58,6 @@ end
 
 gameState = GameState:new()
 
-------------------------------------------------------------------------------------------
--- globals for the script
-
-character = nil
-sky = nil
-scene = nil
-truck = nil
-bg = nil
-font = nil
-initialAnimationDone = false
 
 ------------------------------------------------------------------------------------------
 -- loading functions
