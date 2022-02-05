@@ -52,7 +52,6 @@ typedef struct
     float lightAmount;
 } AAPLVertex;
 
-// float size == 4
 typedef struct
 {
     vector_float3 color;            // 0-2
@@ -63,16 +62,12 @@ typedef struct
 
     float diffuse_intensity;        // 7
 
-//    float reserved1;                // 8
-//    float reserved2;                // 9
-//    float reserved3;                // 10
-//    float reserved4;                // 11
-    /*
-    _______________________
-   |0 1 2 3|4 5 6 7|8 9 10   |
-    -----------------------
-   |       |       |       |
-   | chunk0| chunk1| chunk2|
+    /* Keep the structure aligned to 16 bytes!
+        _______________________
+       |0 1 2 3|4 5 6 7|8 9 10 |
+        -----------------------
+       |       |       |       |
+       | chunk0| chunk1| chunk2|
     */
 } AAPAmbientLLight;
 

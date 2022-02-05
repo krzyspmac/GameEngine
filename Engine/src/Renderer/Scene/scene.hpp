@@ -14,6 +14,7 @@
 #include "sprite_draw_animated.hpp"
 #include "sprite_atlas.hpp"
 #include "character_representation.hpp"
+#include "light_interface.hpp"
 #include "common.h"
 #include <iostream>
 
@@ -24,6 +25,7 @@ namespace engine
         EngineProviderI& m_engineProvider;
         std::vector<SpriteDrawStatic*> m_staticSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
+        std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
     ///
@@ -43,11 +45,6 @@ namespace engine
             @private
         */
         void RenderSceneForeground();
-
-        /** Render the scene including only objects marked as `light`.
-            @private
-        */
-        void RenderSceneLights();
 
         /**
          Called by the engine. Reacts to mouse clicks.
@@ -102,6 +99,12 @@ namespace engine
          \include Scene_MouseDown.lua
          */
         void SetMouseDownFunction(int mouseFunctionRef);
+
+        /**
+         \brief Creates a light and adds it to the scene. This is a helper function
+         to the the LightManager.
+         */
+        LightI* CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
 
     public: /** Getters */
 

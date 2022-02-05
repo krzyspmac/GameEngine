@@ -31,12 +31,14 @@ namespace engine
         float m_scale;
         float m_alpha;
         bool m_flippedHorizontally;
+        bool m_acceptsLight;
     public:
         DrawableI(float width, float height)
             : m_scale(1.0f)
             , m_alpha(1.0f)
             , m_flippedHorizontally(false)
             , m_textureRect( { {0, 0}, {(int)width, (int)height} } )
+            , m_acceptsLight(true)
         { };
 
         virtual ~DrawableI() { };
@@ -72,6 +74,9 @@ namespace engine
 
         /** Get the texture rect that this sprite is in */
         Rect& GetTextureRect() { return m_textureRect; };
+
+        /** */
+        bool& GetAcceptsLight() { return m_acceptsLight; };
     };
 
     /** Declares an abstract interface dealing with a drawable for a sprite

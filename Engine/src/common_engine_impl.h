@@ -21,13 +21,20 @@ namespace engine
         int height;
     } Size;
 
-    typedef struct Color
+    typedef struct
     {
-        int r;
-        int g;
-        int b;
-        int a;
-    } Color;
+        float r;
+        float g;
+        float b;
+    } Color3;
+
+    typedef struct
+    {
+        float r;
+        float g;
+        float b;
+        float a;
+    } Color4;
 
     typedef struct
     {

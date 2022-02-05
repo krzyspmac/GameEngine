@@ -81,12 +81,20 @@ function loadSprites()
 	sky2:SetScale(1)
 	sky2:SetAlpha(1)
 	sky2:SetPosition(0, 0)
+	sky2:SetAcceptsLight(false)
 
 	sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
 	sky:SetScale(1)
 	sky:SetAlpha(0)
 	sky:SetPosition(1280/2, 200)
 	
+	-- lights
+--	light = scene:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
+	light1 = scene:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
+
+	light = LightManager:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
+--	light1 = LightManager:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
+
 --	light = scene:LoadSpriteStatic(atlas, "background_light.tga")
 --	light:SetType("light")
 end

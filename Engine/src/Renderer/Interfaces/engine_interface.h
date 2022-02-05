@@ -29,6 +29,7 @@
 #include "texture_manager.hpp"
 #include "font_manager.hpp"
 #include "engine_setup_interface.h"
+#include "light_manager.hpp"
 
 namespace engine
 {
@@ -63,7 +64,8 @@ namespace engine
                 m_spriteRendererManager(spriteRendererManager),
                 m_viewportSize(viewportSize),
                 m_consoleRenderer(consoleRenderer),
-                m_time(engineProvider)
+                m_time(engineProvider),
+                m_lightManager(*(new LightManager()))
         { }
 
     /// Setup
@@ -168,6 +170,9 @@ namespace engine
         SceneManager& getSceneManager() { return m_sceneManager; };
 
         ///
+        LightManager& getLightMnaager() { return m_lightManager; };
+
+        ///
         SpriteAtlasManager& getAtlasManager() { return m_spriteAtlasManager; };
 
         ///
@@ -225,6 +230,7 @@ namespace engine
         SpriteRendererManager &m_spriteRendererManager;
         SceneManager &m_sceneManager;
         CharacterManager &m_characterManager;
+        LightManager &m_lightManager;
 
         engine::Origin m_mousePosition;
         Time m_time;

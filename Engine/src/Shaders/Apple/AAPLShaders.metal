@@ -132,29 +132,24 @@ fragmentShader(
         return float4(colorSample);
     }
 
-    // Combined
+    // Light calculation
     int lightCount = int(*lightCountPtr);
-
-    half3 appliedColor = half3(0.f, 0.f, 0.f);
-
-    for (int i = 0; i < lightCount; i++)
+    if (lightCount)
     {
+        half3 appliedColor = half3(0.f, 0.f, 0.f);
+        for (int i = 0; i < lightCount; i++)
+        {
+            auto light = &lights[i];
 
-        auto light = &lights[i];
+            float distance = metal::distance(in.position.xy, light->position);
+            float str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
+            half3 ambientColor = half3(light->color);
+            half3 ambientIntensity = half3(light->ambientIntensity);
+            appliedColor = min(1.f, appliedColor + min(1.f, ambientColor.rgb * min(1.f, (ambientIntensity + str))));
+        }
 
-        float distance = metal::distance(in.position.xy, light->position);
-        float str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
-        half3 ambientColor = half3(light->color);
-        half3 ambientIntensity = half3(light->ambientIntensity);
-
-        appliedColor = min(1.f, appliedColor + min(1.f, ambientColor.rgb * min(1.f, (ambientIntensity + str))));
-
-//        appliedColor += ambientColor.rgb * min(1.f, (ambientIntensity + str));
-
-//        colorSample.rgb *= ambientColor.rgb * min(1.f, (ambientIntensity + str));
+        colorSample.rgb *= appliedColor;
     }
-
-    colorSample.rgb *= appliedColor;
 
     // return the color of the texture
     return float4(colorSample);

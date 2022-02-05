@@ -9,6 +9,7 @@
 #include "scripting_engine.hpp"
 #include "character.hpp"
 #include "scripting_engine.hpp"
+#include "light.hpp"
 
 using namespace engine;
 
@@ -121,19 +122,18 @@ void Scene::RenderSceneForeground()
     };
 }
 
-void Scene::RenderSceneLights()
+LightI* Scene::CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
-    for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
+    auto* light = GetMainEngine()->getLightMnaager().CreateLight(color, ambientIntensity, position, diffuseSize, diffuseIntensity);
+    if (light != nullptr)
     {
-        SpriteDrawI *sprite = (*it);
-        if (sprite->GetType() != SPRITE_DRAW_TYPE_LIGHT)
-        {
-            continue;
-        }
-
-        Vector2& pos = sprite->GetPosition();
-        (*it)->DrawAt(pos.x, pos.y);
-    };
+        m_lights.emplace_back(light);
+        return light;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 #pragma mark - Scripting Interface
@@ -193,6 +193,23 @@ static int lua_Scene_SetMouseDownFunction(lua_State *L)
     return 0;
 }
 
+static int lua_Scene_CreateLight(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    float ambientIntensity = lua_tonumber(L, 5);
+    int posX = lua_tonumber(L, 6);
+    int posY = lua_tonumber(L, 7);
+    float diffuseSize = lua_tonumber(L, 8);
+    float diffuseIntensity = lua_tonumber(L, 9);
+
+    auto *light = (Light*)scene->CreateLight({r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
+    light->ScriptingInterfaceRegisterFunctions(L, light);
+    return 0;
+}
+
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -200,8 +217,8 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
         {"LoadSpriteStatic", &lua_Scene_LoadSpriteDrawStatic},
         {"LoadCharacter", &lua_Scene_LoadCharacter},
         {"SetMainCharacter", &lua_Scene_SetMainCharacter},
-        {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
-
+        {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction},
+        {"CreateLight", &lua_Scene_CreateLight}
     });
     return result;
 }

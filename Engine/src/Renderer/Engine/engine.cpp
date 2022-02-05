@@ -172,11 +172,6 @@ void Engine::FrameDrawForegroundObjects()
 
 void Engine::FrameDrawLightObjects()
 {
-    Scene *scene = m_sceneManager.SceneGetCurrent();
-    if (scene != nullptr)
-    {
-        scene->RenderSceneLights();
-    }
 }
 
 void Engine::FrameDrawTopObjects()
