@@ -81,7 +81,7 @@ function loadSprites()
 	sky2:SetScale(1)
 	sky2:SetAlpha(1)
 	sky2:SetPosition(0, 0)
-	sky2:SetAcceptsLight(false)
+	sky2:SetAcceptsLight(true)
 
 	sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
 	sky:SetScale(1)
@@ -91,7 +91,6 @@ function loadSprites()
 	-- lights
 --	light = scene:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
 	light1 = scene:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
-
 	light = LightManager:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
 --	light1 = LightManager:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
 
