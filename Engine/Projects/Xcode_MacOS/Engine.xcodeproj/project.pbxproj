@@ -448,6 +448,18 @@
 		7FC131262792FAF20094DF0C /* drawable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131172792FAF20094DF0C /* drawable_interface.h */; };
 		7FC131272792FAF20094DF0C /* engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131182792FAF20094DF0C /* engine_provider_interface.h */; };
 		7FC131292792FCA30094DF0C /* sprite_draw_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131282792FCA30094DF0C /* sprite_draw_interface.h */; };
+		7FC971E727AF3B9600049146 /* light_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F08C44C27AF21E2002FEB8F /* light_metal.cpp */; };
+		7FC971E827AF3B9600049146 /* light_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F08C44D27AF21E2002FEB8F /* light_metal.hpp */; };
+		7FC971E927AF3B9600049146 /* light_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F08C44C27AF21E2002FEB8F /* light_metal.cpp */; };
+		7FC971EA27AF3B9600049146 /* light_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F08C44D27AF21E2002FEB8F /* light_metal.hpp */; };
+		7FC971EB27AF3B9A00049146 /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F08C45027AF22F2002FEB8F /* light.cpp */; };
+		7FC971EC27AF3B9A00049146 /* light.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F08C45127AF22F2002FEB8F /* light.hpp */; };
+		7FC971ED27AF3B9A00049146 /* light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F08C45027AF22F2002FEB8F /* light.cpp */; };
+		7FC971EE27AF3B9A00049146 /* light.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F08C45127AF22F2002FEB8F /* light.hpp */; };
+		7FC971EF27AF3BA100049146 /* light_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F08C45427AF2441002FEB8F /* light_manager.cpp */; };
+		7FC971F027AF3BA100049146 /* light_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F08C45527AF2441002FEB8F /* light_manager.hpp */; };
+		7FC971F127AF3BA100049146 /* light_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F08C45427AF2441002FEB8F /* light_manager.cpp */; };
+		7FC971F227AF3BA100049146 /* light_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F08C45527AF2441002FEB8F /* light_manager.hpp */; };
 		7FCAE6D427AD345D00589EDE /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F3E8F47279AE1A4003BB7B6 /* AAPLShaderTypes.h */; };
 		7FCAE6D527AD345D00589EDE /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F3E8F47279AE1A4003BB7B6 /* AAPLShaderTypes.h */; };
 		7FCAE6D627AD345E00589EDE /* AAPLShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F3E8F47279AE1A4003BB7B6 /* AAPLShaderTypes.h */; };
@@ -1428,6 +1440,7 @@
 				7F3E8EA0279AC8F9003BB7B6 /* sprite_draw_interface.h in Headers */,
 				7F3E8EA1279AC8F9003BB7B6 /* drawable_interface.h in Headers */,
 				7F3E8EA2279AC8F9003BB7B6 /* font_interface.h in Headers */,
+				7FC971EC27AF3B9A00049146 /* light.hpp in Headers */,
 				7F3E8EA3279AC8F9003BB7B6 /* character_mover_interface.h in Headers */,
 				7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */,
 				7F3E8EA5279AC8F9003BB7B6 /* character_renderer_interface.h in Headers */,
@@ -1454,6 +1467,7 @@
 				7F6D1C86279F14690078D76A /* ini_reader.hpp in Headers */,
 				7F3E8EBB279AC8F9003BB7B6 /* character_mover.hpp in Headers */,
 				7F3E8EBC279AC8F9003BB7B6 /* path_finder_helper.hpp in Headers */,
+				7FC971F027AF3BA100049146 /* light_manager.hpp in Headers */,
 				7F3E8EBD279AC8F9003BB7B6 /* path_finder_line_graph_node.hpp in Headers */,
 				7F3E8EBE279AC8F9003BB7B6 /* path_finder_graph.hpp in Headers */,
 				7F3E8EBF279AC8F9003BB7B6 /* path_finder.hpp in Headers */,
@@ -1491,6 +1505,7 @@
 				7F3E8EDE279AC8F9003BB7B6 /* engine_provider_metal.hpp in Headers */,
 				7F3E8EDF279AC8F9003BB7B6 /* file_access.hpp in Headers */,
 				7F08C44427AF20A6002FEB8F /* light_interface.hpp in Headers */,
+				7FC971E827AF3B9600049146 /* light_metal.hpp in Headers */,
 				7F3E8EE0279AC8F9003BB7B6 /* sprite_interface_defs.h in Headers */,
 				7F3E8EE1279AC8F9003BB7B6 /* sprite_atlas.hpp in Headers */,
 				7F3E8EE2279AC8F9003BB7B6 /* sprite_draw_static.hpp in Headers */,
@@ -1529,6 +1544,7 @@
 				7F3E90C2279B03F6003BB7B6 /* sprite_draw_interface.h in Headers */,
 				7F3E90C3279B03F6003BB7B6 /* drawable_interface.h in Headers */,
 				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
+				7FC971EE27AF3B9A00049146 /* light.hpp in Headers */,
 				7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */,
 				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
 				7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */,
@@ -1555,6 +1571,7 @@
 				7F6D1C87279F14690078D76A /* ini_reader.hpp in Headers */,
 				7F3E90DD279B03F6003BB7B6 /* character_mover.hpp in Headers */,
 				7F3E90DE279B03F6003BB7B6 /* path_finder_helper.hpp in Headers */,
+				7FC971F227AF3BA100049146 /* light_manager.hpp in Headers */,
 				7F3E90DF279B03F6003BB7B6 /* path_finder_line_graph_node.hpp in Headers */,
 				7F3E90E0279B03F6003BB7B6 /* path_finder_graph.hpp in Headers */,
 				7F3E90E1279B03F6003BB7B6 /* path_finder.hpp in Headers */,
@@ -1592,6 +1609,7 @@
 				7F3E9100279B03F6003BB7B6 /* engine_provider_metal.hpp in Headers */,
 				7F3E9101279B03F6003BB7B6 /* file_access.hpp in Headers */,
 				7F08C44527AF20A6002FEB8F /* light_interface.hpp in Headers */,
+				7FC971EA27AF3B9600049146 /* light_metal.hpp in Headers */,
 				7F3E9102279B03F6003BB7B6 /* sprite_interface_defs.h in Headers */,
 				7F3E9103279B03F6003BB7B6 /* sprite_atlas.hpp in Headers */,
 				7F3E9104279B03F6003BB7B6 /* sprite_draw_static.hpp in Headers */,
@@ -1987,6 +2005,7 @@
 				7F3E8EFC279AC909003BB7B6 /* path_finder_graph.cpp in Sources */,
 				7F3E8EFD279AC909003BB7B6 /* path_finder.cpp in Sources */,
 				7F3E8EFE279AC909003BB7B6 /* path.cpp in Sources */,
+				7FC971EB27AF3B9A00049146 /* light.cpp in Sources */,
 				7F3E8EFF279AC909003BB7B6 /* events_manager.cpp in Sources */,
 				7F3E8F00279AC909003BB7B6 /* sprite_atlas_manager.cpp in Sources */,
 				7F3E8F01279AC909003BB7B6 /* sprite_renderer_manager.cpp in Sources */,
@@ -1994,6 +2013,7 @@
 				7F3E8F03279AC909003BB7B6 /* texture_manager.cpp in Sources */,
 				7F3E8F04279AC909003BB7B6 /* font_manager.cpp in Sources */,
 				7F3E8F05279AC909003BB7B6 /* scene_manager.cpp in Sources */,
+				7FC971EF27AF3BA100049146 /* light_manager.cpp in Sources */,
 				7F3E8F06279AC909003BB7B6 /* scene.cpp in Sources */,
 				7F3E8F07279AC909003BB7B6 /* character_renderer.cpp in Sources */,
 				7F3E8F08279AC909003BB7B6 /* character.cpp in Sources */,
@@ -2014,6 +2034,7 @@
 				7F3E8F15279AC909003BB7B6 /* texture_target.cpp in Sources */,
 				7F6D1CA5279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F3E8F16279AC909003BB7B6 /* engine_provider_metal.cpp in Sources */,
+				7FC971E727AF3B9600049146 /* light_metal.cpp in Sources */,
 				7F3E8F17279AC909003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E8F18279AC909003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F3E8F19279AC909003BB7B6 /* sprite_atlas.cpp in Sources */,
@@ -2067,6 +2088,7 @@
 				7F3E9125279B03F6003BB7B6 /* path_finder_graph.cpp in Sources */,
 				7F3E9126279B03F6003BB7B6 /* path_finder.cpp in Sources */,
 				7F3E9127279B03F6003BB7B6 /* path.cpp in Sources */,
+				7FC971ED27AF3B9A00049146 /* light.cpp in Sources */,
 				7F3E9128279B03F6003BB7B6 /* events_manager.cpp in Sources */,
 				7F3E9129279B03F6003BB7B6 /* sprite_atlas_manager.cpp in Sources */,
 				7F3E912A279B03F6003BB7B6 /* sprite_renderer_manager.cpp in Sources */,
@@ -2074,6 +2096,7 @@
 				7F3E912C279B03F6003BB7B6 /* texture_manager.cpp in Sources */,
 				7F3E912D279B03F6003BB7B6 /* font_manager.cpp in Sources */,
 				7F3E912E279B03F6003BB7B6 /* scene_manager.cpp in Sources */,
+				7FC971F127AF3BA100049146 /* light_manager.cpp in Sources */,
 				7F3E912F279B03F6003BB7B6 /* scene.cpp in Sources */,
 				7F3E9130279B03F6003BB7B6 /* character_renderer.cpp in Sources */,
 				7F3E9131279B03F6003BB7B6 /* character.cpp in Sources */,
@@ -2094,6 +2117,7 @@
 				7F3E913E279B03F6003BB7B6 /* texture_target.cpp in Sources */,
 				7F6D1CA4279F503A0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F3E913F279B03F6003BB7B6 /* engine_provider_metal.cpp in Sources */,
+				7FC971E927AF3B9600049146 /* light_metal.cpp in Sources */,
 				7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F3E9142279B03F6003BB7B6 /* sprite_atlas.cpp in Sources */,

@@ -22,7 +22,7 @@ LightManager::LightManager()
 
 LightI *LightManager::CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
-#if TARGET_OSX
+#if TARGET_OSX || TARGET_IOS
     LightMetal *light = new LightMetal(color, ambientIntensity, position, diffuseSize, diffuseIntensity);
     m_lights.emplace_back(std::unique_ptr<LightI>(std::move(light)));
     UpdateCache();
@@ -34,7 +34,14 @@ LightI *LightManager::CreateLight(Color3 color, float ambientIntensity, Origin p
 
 void LightManager::DeleteLight(LightI *light)
 {
-    erase_if(m_lights, [&](auto& it) { return it.get() == light; });
+    for (auto it = m_lights.begin(); it != m_lights.end(); ++it)
+    {
+        if (it->get() == light)
+        {
+            m_lights.erase(it);
+            break;
+        }
+    }
     UpdateCache();
 }
 

@@ -28,6 +28,7 @@
 
 #include <stdio.h>
 #include "common.h"
+#include "defs.h"
 #include "file_access.hpp"
 #include "scripting_engine.hpp"
 #include "event_provider.hpp"
@@ -129,7 +130,9 @@
 - (void)setupMouseClickEvents;
 - (void)setupMouseMovedEvents;
 - (void)setupKeyEvents;
+#if TARGET_OSX
 - (void)handle:(NSEvent*)event;
+#endif
 @end
 
 @interface RendererEntryViewController (Helpers)

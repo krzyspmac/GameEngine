@@ -128,6 +128,7 @@ using namespace engine;
 
 #pragma mark - Handling
 
+#if TARGET_OSX
 - (void)handle:(NSEvent*)event
 {
 #if SHOW_CONSOLE
@@ -137,6 +138,7 @@ using namespace engine;
     }
 #endif
 }
+#endif
 
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
