@@ -15,12 +15,24 @@
 namespace engine
 {
 
+    typedef enum
+    {
+        SPRITE_DRAW_TYPE_BACKGROUND     = 0     // background sprites do not receive lights
+      , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
+      , SPRITE_DRAW_TYPE_LIGHT          = 2     // light sprites are drawn on the screen
+                                                // in one pass and applied on top of
+                                                // forground objects
+    } SpriteDrawType;
+
     class SpriteDrawI
     {
     public:
         /// Scale applies to width and height. Does not modify x no y.
         SpriteDrawI(int scale)
-            : m_scale(scale), m_position(Vector2Zero)
+            : m_scale(scale)
+            , m_position(Vector2Zero)
+            , m_isDrawable(true)
+            , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
         { };
         
         virtual ~SpriteDrawI() { };
@@ -56,6 +68,12 @@ namespace engine
 
     public: // Drawable related
 
+        /** Controls wheather this sprite is drawable at all. Default is yes. */
+        auto& GetIsDrawable() { return m_isDrawable; };
+
+        /** Controls the sprite type. Default is SPRITE_DRAW_TYPE_FOREGROUND */
+        auto& GetType() { return m_type; };
+
         /** Set the main drawable for this sprite */
         void SetDrawable(std::unique_ptr<DrawableSpriteI> val) { m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(val)); };
 
@@ -65,6 +83,8 @@ namespace engine
     protected:
         int m_scale;
         Vector2 m_position;
+        SpriteDrawType m_type;
+        bool m_isDrawable;
         std::unique_ptr<DrawableSpriteI> m_drawable;
     };
 };

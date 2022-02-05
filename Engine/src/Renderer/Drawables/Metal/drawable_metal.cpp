@@ -53,14 +53,14 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
 
     AAPLVertex data[] =
     {
-        // Pixel positions, Texture coordinates
-        { { -width2,  -height2 },   { x0, y1 } },
-        { { -width2,   height2 },   { x0, y0 } },
-        { {  width2,   height2 },   { x1, y0 } },
+        // Pixel positions, Texture coordinates, normals
+        { { -width2,  -height2 },   { x0, y1 }, { 1 } },
+        { { -width2,   height2 },   { x0, y0 }, { 1 } },
+        { {  width2,   height2 },   { x1, y0 }, { 1 } },
 
-        { {  width2,    height2 },  { x1, y0 } },
-        { {  width2,   -height2 },  { x1, y1 } },
-        { { -width2,   -height2 },  { x0, y1 } },
+        { {  width2,    height2 },  { x1, y0 }, { 1 } },
+        { {  width2,   -height2 },  { x1, y1 }, { 1 } },
+        { { -width2,   -height2 },  { x0, y1 }, { 1 } },
     };
 
     // Allocate a buffer for metal with sufficient size. Set mode to shared.

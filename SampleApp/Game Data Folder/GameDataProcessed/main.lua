@@ -86,6 +86,9 @@ function loadSprites()
 	sky:SetScale(1)
 	sky:SetAlpha(0)
 	sky:SetPosition(1280/2, 200)
+	
+--	light = scene:LoadSpriteStatic(atlas, "background_light.tga")
+--	light:SetType("light")
 end
 
 function registerResolutionChange()

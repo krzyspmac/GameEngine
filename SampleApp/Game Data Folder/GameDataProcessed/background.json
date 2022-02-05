@@ -1,14 +1,6 @@
 {"frames": [
 
 {
-	"filename": "all",
-	"frame": {"x":0,"y":0,"w":640,"h":423},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":423},
-	"sourceSize": {"w":640,"h":423}
-},
-{
 	"filename": "background.png",
 	"frame": {"x":0,"y":0,"w":640,"h":268},
 	"rotated": false,
@@ -17,8 +9,16 @@
 	"sourceSize": {"w":640,"h":268}
 },
 {
+	"filename": "background_light.tga",
+	"frame": {"x":0,"y":268,"w":640,"h":268},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":640,"h":268},
+	"sourceSize": {"w":640,"h":268}
+},
+{
 	"filename": "sky.png",
-	"frame": {"x":0,"y":268,"w":481,"h":155},
+	"frame": {"x":0,"y":536,"w":481,"h":155},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":481,"h":155},
@@ -29,8 +29,8 @@
 	"version": "1.0",
 	"image": "background.png",
 	"format": "RGBA8888",
-	"size": {"w":640,"h":423},
+	"size": {"w":640,"h":691},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:e0c0d048e8af5d102775b3638aadf291:63bbfe83b3c8cfa2801f4f8a118ec31c:2ba65c328dea799e4d80739630892abf$"
+	"smartupdate": "$TexturePacker:SmartUpdate:10ea6efb0dd1093b8c4523930abc67ea:fe861ba23133a40b4ba4a8627ce99534:2ba65c328dea799e4d80739630892abf$"
 }
 }

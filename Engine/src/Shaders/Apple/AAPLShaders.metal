@@ -27,15 +27,24 @@ struct RasterizerData
     float2 textureCoordinate;
 };
 
+/// Non-change'able data
+struct Uniforms
+{
+  float4x4 modelMatrix;
+  float4x4 projectionMatrix;
+};
+
 vertex RasterizerData
-vertexShader(uint vertexID [[vertex_id]],
-             constant AAPLVertex    *vertices               [[buffer(AAPLVertexInputIndexVertices)]],
-             constant float         *viewportScalePointer   [[buffer(AAPLVertexInputIndexWindowScale)]],
-             constant vector_float2 *viewportOffset         [[buffer(AAPLVertexInputIndexObjectOffset)]],
-             constant float         *objectScalePointer     [[buffer(AAPLVertexInputIndexObjectScale)]],
-             constant vector_float2 *objectSizePointer      [[buffer(AAPLVertexInputIndexObjectSize)]],
-             constant vector_float2 *viewportSizePointer    [[buffer(AAPLVertexInputIndexViewportSize)]]
-             )
+vertexShader(
+    uint     vertexID                                 [[ vertex_id ]]
+  , constant AAPLVertex       *vertices               [[ buffer(AAPLVertexInputIndexVertices) ]]
+  , constant Uniforms         *uniforms               [[ buffer(AAPLVertexInputIndexUniforms) ]]
+  , constant float            *viewportScalePointer   [[ buffer(AAPLVertexInputIndexWindowScale) ]]
+  , constant vector_float2    *viewportOffset         [[ buffer(AAPLVertexInputIndexObjectOffset) ]]
+  , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
+  , constant vector_float2    *objectSizePointer      [[ buffer(AAPLVertexInputIndexObjectSize) ]]
+  , constant vector_float2    *viewportSizePointer    [[ buffer(AAPLVertexInputIndexViewportSize) ]]
+)
 {
     RasterizerData out;
 
@@ -78,7 +87,7 @@ vertexShader(uint vertexID [[vertex_id]],
     pixelSpacePosition.y -= objectTranslation.y / viewportScale;
 
     // To convert from positions in pixel space to positions in clip-space,
-    //  divide the pixel coordinates by half the size of the viewport.
+    // divide the pixel coordinates by half the size of the viewport.
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
     out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
 
@@ -90,14 +99,15 @@ vertexShader(uint vertexID [[vertex_id]],
 
 // Fragment function
 fragment float4
-fragmentShader(RasterizerData in [[stage_in]],
-               texture2d<half> colorTexture     [[ texture(AAPLTextureIndexBaseColor) ]],
-               constant float *alphaPointer     [[buffer(AAPLTextureIndexBaseAlpha)]],
-               constant AAPAmbientLLight *light [[buffer(AAPLAmbientLightIndex)]]
-               )
+fragmentShader(
+     RasterizerData             in [[stage_in]]
+   , texture2d<half>            colorTexture     [[ texture(AAPLTextureIndexBaseColor) ]]
+   , constant float             *alphaPointer    [[ buffer(AAPLTextureIndexBaseAlpha) ]]
+   , constant AAPAmbientLLight  *lights          [[ buffer(AAPLVertexInputIndexLight) ]]
+   , constant int               *lightCountPtr   [[ buffer(AAPLVertexInpueIndexLightCount) ]]
+)
 {
-    float4 ambientColor = float4(light->color * light->ambientIntensity, 1);
-
+    // Texture sampler
     constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest);
 
@@ -119,11 +129,32 @@ fragmentShader(RasterizerData in [[stage_in]],
     if (colorSample.a <= 0.0001)
     {
         discard_fragment();
+        return float4(colorSample);
     }
 
-    colorSample.r *= ambientColor.r;
-    colorSample.g *= ambientColor.g;
-    colorSample.b *= ambientColor.b;
+    // Combined
+    int lightCount = int(*lightCountPtr);
+
+    half3 appliedColor = half3(0.f, 0.f, 0.f);
+
+    for (int i = 0; i < lightCount; i++)
+    {
+
+        auto light = &lights[i];
+
+        float distance = metal::distance(in.position.xy, light->position);
+        float str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
+        half3 ambientColor = half3(light->color);
+        half3 ambientIntensity = half3(light->ambientIntensity);
+
+        appliedColor = min(1.f, appliedColor + min(1.f, ambientColor.rgb * min(1.f, (ambientIntensity + str))));
+
+//        appliedColor += ambientColor.rgb * min(1.f, (ambientIntensity + str));
+
+//        colorSample.rgb *= ambientColor.rgb * min(1.f, (ambientIntensity + str));
+    }
+
+    colorSample.rgb *= appliedColor;
 
     // return the color of the texture
     return float4(colorSample);

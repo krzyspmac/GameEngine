@@ -54,7 +54,7 @@ void Scene::SetMainCharacter(CharacterRepresentation *rep)
     m_mainCharacter = rep;
 }
 
-SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlas *atlas, std::string name)
+SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlasI *atlas, std::string name)
 {
     SpriteAtlasItemI *item = atlas->GetItemForName(name);
     if (item != nullptr)
@@ -86,11 +86,31 @@ void Scene::SetMouseDownFunction(int mouseFunctionRef)
     m_mouseDownFunctionRef = mouseFunctionRef;
 }
 
-void Scene::RenderScene()
+void Scene::RenderSceneBackground()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
         SpriteDrawI *sprite = (*it);
+        if (sprite->GetType() != SPRITE_DRAW_TYPE_BACKGROUND)
+        {
+            continue;
+        }
+
+        Vector2& pos = sprite->GetPosition();
+        (*it)->DrawAt(pos.x, pos.y);
+    };
+}
+
+void Scene::RenderSceneForeground()
+{
+    for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
+    {
+        SpriteDrawI *sprite = (*it);
+        if (sprite->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
+        {
+            continue;
+        }
+
         Vector2& pos = sprite->GetPosition();
         (*it)->DrawAt(pos.x, pos.y);
     };
@@ -98,6 +118,21 @@ void Scene::RenderScene()
     for (auto it = m_characterRepresentations.begin(); it != m_characterRepresentations.end(); ++it)
     {
         (*it)->Render();
+    };
+}
+
+void Scene::RenderSceneLights()
+{
+    for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
+    {
+        SpriteDrawI *sprite = (*it);
+        if (sprite->GetType() != SPRITE_DRAW_TYPE_LIGHT)
+        {
+            continue;
+        }
+
+        Vector2& pos = sprite->GetPosition();
+        (*it)->DrawAt(pos.x, pos.y);
     };
 }
 

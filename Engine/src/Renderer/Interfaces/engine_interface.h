@@ -92,9 +92,21 @@ namespace engine
          */
         virtual void ProcessScript() = 0;
 
-        /** The main `update` method. Engine magic happens there.
+        /** The `update` method. Draw the background items.
          */
-        virtual void FrameDraw() = 0;
+        virtual void FrameDrawBackgroundObjects() = 0;
+
+        /** The `update` method. Draw the foreground items.
+         */
+        virtual void FrameDrawForegroundObjects() = 0;
+
+        /** The `update` method. Draw the top most items. Those do not get any effects.
+         */
+        virtual void FrameDrawTopObjects() = 0;
+
+        /** The `update` method. Draw the light items.
+         */
+        virtual void FrameDrawLightObjects() = 0;
 
         /** Executed at the end of the frame pass */
         virtual void FrameEnd() = 0;

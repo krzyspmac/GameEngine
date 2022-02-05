@@ -129,6 +129,31 @@ static int lua_SpriteDrawStatic_Draw(lua_State *L)
     return 0;
 }
 
+static int lua_SpriteDrawStatic_SetIsLight(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    bool value = lua_toboolean(L, 2);
+    spr->GetIsDrawable() = !value;
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_SetType(lua_State *L)
+{
+    SpriteDrawStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 1);
+    const char* type = lua_tostring(L, 2);
+
+//    std::vector<std::string> spriteTypes = { "background", "foreground", "light" };
+//    for (int i = 0; i < spriteTypes.size(); i++)
+//    {
+//        auto val = spriteTypes.at(i);
+//        if (val.compare(type) == 0)
+//        {
+//            spr->GetType() = (SpriteDrawType)i;
+//        }
+//    }
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -139,7 +164,9 @@ std::vector<luaL_Reg> SpriteDrawStatic::ScriptingInterfaceFunctions()
         {"SetPosition", &lua_SpriteDrawStatic_SetPosition},
         {"GetPosition", &lua_SpriteDrawStatic_GetPosition},
         {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
-        {"Draw", &lua_SpriteDrawStatic_Draw}
+        {"Draw", &lua_SpriteDrawStatic_Draw},
+        {"SetIsLight", &lua_SpriteDrawStatic_SetIsLight},
+        {"SetType", &lua_SpriteDrawStatic_SetType}
     });
     return result;
 }

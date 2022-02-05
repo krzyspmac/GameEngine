@@ -19,8 +19,17 @@
 #include <ratio>
 #include <thread>
 
+#include "sprite_draw_static.hpp"
+#include "scene_manager.hpp"
+#include "engine.hpp"
+
 using namespace engine;
 using namespace std::chrono;
+
+static SpriteDrawStatic *lightSprite = nullptr;
+
+static AAPAmbientLLight *lights = nullptr;
+static int lightCount = 2;
 
 static auto timeEngineStart = std::chrono::high_resolution_clock::now();
 
@@ -36,6 +45,34 @@ std::vector<EngineProviderMetalTargetTextureDescriptor*> renderStack;
 EngineProviderMetal::EngineProviderMetal()
 : EngineProviderI()
 {
+
+
+    AAPAmbientLLight light1;
+    light1.color = { 1, 1, 1 };
+    light1.ambientIntensity = 0.01;
+    light1.position = { 600, 300 };
+    light1.diffuse_size = 300.0f;
+    light1.diffuse_intensity = 1.0f;
+
+    AAPAmbientLLight light2;
+    light2.color = { 1, 1, 1 };
+    light2.ambientIntensity = 0.01;
+    light2.position = { 150, 300 };
+    light2.diffuse_size = 100.0f;
+    light2.diffuse_intensity = 1.0f;
+
+    lights = (AAPAmbientLLight*)malloc(sizeof(AAPAmbientLLight) * 2);
+
+    memcpy(&lights[0], &light1, sizeof(light1));
+    memcpy(&lights[1], &light2, sizeof(light2));
+
+    for (int i = 0; i < 2; i++)
+    {
+        AAPAmbientLLight *lll = &lights[i];
+        printf("intensity = %f, difuse_size = %f\n", lll->ambientIntensity, lll->diffuse_size);
+    }
+
+    printf("%f\n", (lights + sizeof(AAPAmbientLLight))->ambientIntensity);
 }
 
 void EngineProviderMetal::SetRendererDevice(MTL::Device *device)
@@ -178,6 +215,17 @@ std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float
 
 void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
 {
+    // Register temporary light data
+
+    if (lightSprite == nullptr)
+    {
+//        auto* atlas = GetMainEngine()->getAtlasManager().SpriteAtlasLoad("background.json", "background.png");
+//        auto& sceneManager = GetMainEngine()->getSceneManager();
+//        auto* scene = sceneManager.SceneGetCurrent();
+//        lightSprite = scene->LoadSpriteStatic(atlas, "background_light.tga");
+        printf("asd\n");
+    }
+
     // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
     if (!drawable->CanDraw()) { return; };
@@ -190,10 +238,6 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     // when using RendererTargetDrawablePush.
     MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
 
-    AAPAmbientLLight light;
-    light.color = { 1, 1, 1 };
-    light.ambientIntensity = 0.1;
-
     renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
     renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexWindowSize);
     renderToPipline->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexObjectOffset);
@@ -201,9 +245,14 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexObjectScale);
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
+
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
-    renderToPipline->setFragmentBytes(&light, sizeof(light), AAPLAmbientLightIndex);
-    
+    renderToPipline->setFragmentBytes(lights, sizeof(AAPAmbientLLight) * 2, AAPLVertexInputIndexLight);
+    renderToPipline->setFragmentBytes(&lightCount, sizeof(int), AAPLVertexInpueIndexLightCount);
+
+
+    int sss = sizeof(float);
+
     auto texture = drawable->GetTexture();
     if (texture != nullptr)
     {
@@ -213,6 +262,32 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
             renderToPipline->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
         }
     }
+
+//    auto* currentScene = GetMainEngine()->getSceneManager().SceneGetCurrent();
+//    if (currentScene != nullptr)
+//    {
+//        auto& sprites = currentScene->GetStaticSprites();
+//        auto items = filter<SpriteDrawStatic>(sprites, [](auto item) {
+//            return !item->GetIsDrawable();
+//        });
+//
+//        auto* first = items.at(0);
+//        auto drawable = static_cast<DrawableMetal*>(first->GetDrawable());
+//        auto texture = drawable->GetTexture()->GetMTLTextureHandle();
+//        renderToPipline->setFragmentTexture(texture, AAPLVertexInputIndexLightTextures);
+//    }
+//
+//    if (lightSprite)
+//    {
+//        auto lightDrawable = lightSprite->GetDrawable();
+//        if (lightDrawable != nullptr)
+//        {
+//            auto drawable = static_cast<DrawableMetal*>(lightDrawable);
+//            auto texture = drawable->GetTexture()->GetMTLTextureHandle();
+//
+//                //        renderToPipline->setFragmentTexture(texture, AAPLVertexInputIndexLightTextures);
+//        }
+//    }
 
     renderToPipline->drawPrimitives(MTL::PrimitiveTypeTriangleStrip, (NS::UInteger)0, (NS::UInteger)drawable->GetVertexCount());
 }

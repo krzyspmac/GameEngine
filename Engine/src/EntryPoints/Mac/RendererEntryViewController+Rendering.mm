@@ -77,7 +77,9 @@
 
         /** Render the scene */
         m_engine->FrameBegin();
-        m_engine->FrameDraw();
+        m_engine->FrameDrawBackgroundObjects();
+        m_engine->FrameDrawForegroundObjects();
+        m_engine->FrameDrawTopObjects();
 
         [encoder endEncoding];
     }

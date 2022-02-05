@@ -34,12 +34,20 @@ namespace engine
 
     /// Rederer
     public:
-        /**
-         Render the scene including all the objects that have been
-         added to it.
-         @private
+        /** Render the scene including only objects marked as `background`.
+            @private
         */
-        void RenderScene();
+        void RenderSceneBackground();
+
+        /** Render the scene including only objects marked as `foreground`.
+            @private
+        */
+        void RenderSceneForeground();
+
+        /** Render the scene including only objects marked as `light`.
+            @private
+        */
+        void RenderSceneLights();
 
         /**
          Called by the engine. Reacts to mouse clicks.
@@ -51,12 +59,12 @@ namespace engine
         /**
          \brief Load a sprite renderer.
 
-         Helper method to oad the sprite and puts it into the stack.
+         Helper method to load the sprite and puts it into the stack.
          Uses SpriteRendererManager.
          \include SampleSpriteStatic-helper.lua
          \see Scene::AddSpriteDrawStatic.
          */
-        SpriteDrawStatic *LoadSpriteStatic(SpriteAtlas *atlas, std::string name);
+        SpriteDrawStatic *LoadSpriteStatic(SpriteAtlasI *atlas, std::string name);
 
         /**
          \brief Load a character representation.
@@ -94,6 +102,10 @@ namespace engine
          \include Scene_MouseDown.lua
          */
         void SetMouseDownFunction(int mouseFunctionRef);
+
+    public: /** Getters */
+
+        auto& GetStaticSprites() { return m_staticSprites; };
 
     /// ScriptingInterface
     public:
