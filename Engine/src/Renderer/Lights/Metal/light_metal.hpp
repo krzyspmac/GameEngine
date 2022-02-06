@@ -21,6 +21,13 @@ namespace engine
         LightMetal(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
 
         AAPAmbientLLight& GetLightMetal() { return m_light; };
+
+        void SetIsEnabled(bool);
+        void SetColor(Color3);
+        void SetAmbientIntensity(float);
+        void SetDiffuseIntensity(float);
+        void SetDiffuseSize(float);
+        void SetPosition(Origin);
     };
 };
 

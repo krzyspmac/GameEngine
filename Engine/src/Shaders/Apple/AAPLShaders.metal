@@ -140,12 +140,15 @@ fragmentShader(
         for (int i = 0; i < lightCount; i++)
         {
             auto light = &lights[i];
-
-            float distance = metal::distance(in.position.xy, light->position);
-            float str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
-            half3 ambientColor = half3(light->color);
-            half3 ambientIntensity = half3(light->ambientIntensity);
-            appliedColor = min(1.f, appliedColor + min(1.f, ambientColor.rgb * min(1.f, (ambientIntensity + str))));
+            if (light->enabled > 0.f)
+            {
+                float distance = metal::distance(in.position.xy, light->position);
+                float str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
+                half3 ambientColor = half3(light->color);
+                half3 ambientIntensity = half3(light->ambientIntensity);
+                half3 diffuseIntensity = half3(light->diffuse_intensity);
+                appliedColor = min(1.f, appliedColor + min(1.f, ambientColor.rgb * min(1.f, (ambientIntensity + (diffuseIntensity * str)))));
+            }
         }
 
         colorSample.rgb *= appliedColor;

@@ -67,6 +67,18 @@ namespace engine
     };
 
     /**
+     Lights Management
+     */
+    class ConsoleLightManagementI: public ConsoleWindowI
+    {
+    public:
+        virtual ~ConsoleLightManagementI() { };
+
+        virtual void Render() = 0;
+        virtual void ToggleVisibility() = 0;
+    };
+
+    /**
      Defines the actual console renderer. Uses ConsoleAppRendererI for
      platform specific rendering.
      */

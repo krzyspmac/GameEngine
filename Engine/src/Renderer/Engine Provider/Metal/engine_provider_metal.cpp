@@ -205,7 +205,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
 
     auto& lightManager = GetMainEngine()->getLightMnaager();
-    int lightsCount = drawable->GetAcceptsLight() ? lightManager.GetLightBufferCount() : 0;
+    int lightsCount = drawable->GetAcceptsLight() && lightManager.GetLightActive() ? lightManager.GetLightBufferCount() : 0;
     renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), AAPLVertexInpueIndexLightCount);
     renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), AAPLVertexInputIndexLight);
 

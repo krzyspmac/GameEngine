@@ -16,6 +16,7 @@ using namespace engine;
 
 LightManager::LightManager()
     : m_lightCache(nullptr)
+    , m_lightsActive(true)
 {
     UpdateCache();
 }

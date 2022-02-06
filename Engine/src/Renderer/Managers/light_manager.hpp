@@ -19,10 +19,13 @@
 
 namespace engine
 {
+    /** LightManager
+        \addtogroup API_GLOBALS
+     */
     class LightManager
     {
         std::vector<std::unique_ptr<LightI>> m_lights;
-
+        bool m_lightsActive;
 #if TARGET_IOS || TARGET_OSX
         AAPAmbientLLight * m_lightCache;
         unsigned long m_lightCacheBufferSize;
@@ -40,6 +43,15 @@ namespace engine
         /** Delete all lights. */
         void DeleteAllLights();
 
+        /** Get the light array
+            @private */
+        auto& GetLights() { return m_lights; };
+
+        auto& GetLightActive() { return m_lightsActive; };
+
+        /** Update the cache when you change the lights. This needs a better aproach */
+        void UpdateCache();
+
     public: /** Rendering related */
 
 #if TARGET_IOS || TARGET_OSX
@@ -47,9 +59,6 @@ namespace engine
         auto GetLightBufferSize() { return m_lightCacheBufferSize; };
         auto GetLightBufferCount() { return m_lightCacheCount; };
 #endif
-
-    private:
-        void UpdateCache();
 
     private: /** scripting */
         /** @private */

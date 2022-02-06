@@ -42,7 +42,7 @@ function GameState:Register()
 	end)
 	
 	EventsManager:RegisterMouseMovedEvents(function(x, y)
-		print("Mouse position = " .. x .. ", " .. y)
+		--print("Mouse position = " .. x .. ", " .. y)
 	end)
 	
 	EventsManager:RegisterMouseClickedEvents(function(x, y)
@@ -90,8 +90,11 @@ function loadSprites()
 	
 	-- lights
 --	light = scene:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
+	light = LightManager:CreateLight(1, 1, 1, 0.1, 400, 350, 250, 1)
 	light1 = scene:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
-	light = LightManager:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
+
+	light:SetName("Main light")
+
 --	light1 = LightManager:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
 
 --	light = scene:LoadSpriteStatic(atlas, "background_light.tga")

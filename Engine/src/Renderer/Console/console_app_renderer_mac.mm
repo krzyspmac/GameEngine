@@ -72,10 +72,12 @@ void ConsoleAppRendererMac::PrepareForFrame(NSView *view,
 #endif
 }
 
-void ConsoleAppRendererMac::HandleEvent(NSEvent *event)
+bool ConsoleAppRendererMac::HandleEvent(NSEvent *event)
 {
 #if SHOW_CONSOLE
-    ImGui_ImplOSX_HandleEvent(event, m_view);
+    return ImGui_ImplOSX_HandleEvent(event, m_view);
+#else
+    return false;
 #endif
 }
 

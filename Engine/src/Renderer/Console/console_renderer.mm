@@ -12,6 +12,7 @@
 #include "engine.hpp"
 #include "console_logger.hpp"
 #include "console_terminal.hpp"
+#include "console_lights.hpp"
 
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #include <UIKit/UIKit.h>
@@ -33,6 +34,7 @@ ConsoleRenderer::ConsoleRenderer()
     this->m_platformRenderer = std::unique_ptr<ConsoleAppRendererI>(new ConsoleAppRendererMac());
     this->m_logger = new ConsoleLog();
     this->m_terminal = new ConsoleTerminal();
+    this->m_lightManagement = new ConsoleLightManagement();
 }
 
 ConsoleLogI& ConsoleRenderer::GetLogger()
@@ -43,6 +45,11 @@ ConsoleLogI& ConsoleRenderer::GetLogger()
 ConsoleTerminalI& ConsoleRenderer::GetTerminal()
 {
     return *m_terminal;
+}
+
+ConsoleLightManagementI& ConsoleRenderer::GetLightManagement()
+{
+    return *m_lightManagement;
 }
 
 void ConsoleRenderer::Setup()
@@ -96,10 +103,11 @@ void ConsoleRenderer::DoGui()
 {
 #if SHOW_CONSOLE
     DoMenuBar();
-    //ImGui::ShowDemoWindow();
+    ImGui::ShowDemoWindow();
 
     m_logger->Render();
     m_terminal->Render();
+    m_lightManagement->Render();
 #endif
 }
 
@@ -116,6 +124,11 @@ void ConsoleRenderer::DoMenuBar()
         if (ImGui::BeginMenu("Console"))
         {
             m_terminal->ToggleVisibility();
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("LightManager"))
+        {
+            m_lightManagement->ToggleVisibility();
             ImGui::EndMenu();
         }
         ImGui::EndMainMenuBar();
