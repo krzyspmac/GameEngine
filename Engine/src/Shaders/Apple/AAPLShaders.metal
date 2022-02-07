@@ -12,6 +12,10 @@ using namespace metal;
 // Include header shared between this Metal shader code and C code executing Metal API commands.
 #include "AAPLShaderTypes.h"
 
+// Some hardcoded defs in order not to include additional headers
+#define LIGHT_FALLOUT_TYPE_LINEAR       0.f
+#define LIGHT_FALLOUT_TYPE_QUADRATIC    1.f
+
 // Vertex shader outputs and fragment shader inputs
 struct RasterizerData
 {
@@ -143,7 +147,15 @@ fragmentShader(
             if (light->enabled > 0.f)
             {
                 float distance = metal::distance(in.position.xy, light->position);
-                float str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
+                float str = 0;
+                if (light->lightType == LIGHT_FALLOUT_TYPE_LINEAR)
+                {
+                    str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
+                }
+                else if (light->lightType == LIGHT_FALLOUT_TYPE_QUADRATIC)
+                {
+                }
+
                 half3 ambientColor = half3(light->color);
                 half3 ambientIntensity = half3(light->ambientIntensity);
                 half3 diffuseIntensity = half3(light->diffuse_intensity);

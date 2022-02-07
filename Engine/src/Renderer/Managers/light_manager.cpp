@@ -21,16 +21,21 @@ LightManager::LightManager()
     UpdateCache();
 }
 
-LightI *LightManager::CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+LightI *LightManager::CreateLight(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
 #if TARGET_OSX || TARGET_IOS
-    LightMetal *light = new LightMetal(color, ambientIntensity, position, diffuseSize, diffuseIntensity);
+    LightMetal *light = new LightMetal(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
     m_lights.emplace_back(std::unique_ptr<LightI>(std::move(light)));
     UpdateCache();
     return light;
 #else
     return nullptr;
 #endif
+}
+
+LightI *LightManager::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+{
+    return CreateLight(LightI::GetFalloutTypeForName(type), color, ambientIntensity, position, diffuseSize, diffuseIntensity);
 }
 
 void LightManager::DeleteLight(LightI *light)
@@ -85,16 +90,18 @@ SCRIPTING_INTERFACE_IMPL_NAME(LightManager);
 static int lua_LightManager_CreateLight(lua_State *L)
 {
     LightManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<LightManager>(L, 1);
-    float r = lua_tonumber(L, 2);
-    float g = lua_tonumber(L, 3);
-    float b = lua_tonumber(L, 4);
-    float ambientIntensity = lua_tonumber(L, 5);
-    int posX = lua_tonumber(L, 6);
-    int posY = lua_tonumber(L, 7);
-    float diffuseSize = lua_tonumber(L, 8);
-    float diffuseIntensity = lua_tonumber(L, 9);
 
-    auto *light = (Light*)mgr->CreateLight({r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
+    std::string type = lua_tostring(L, 2);
+    float r = lua_tonumber(L, 3);
+    float g = lua_tonumber(L, 4);
+    float b = lua_tonumber(L, 5);
+    float ambientIntensity = lua_tonumber(L, 6);
+    int posX = lua_tonumber(L, 7);
+    int posY = lua_tonumber(L, 8);
+    float diffuseSize = lua_tonumber(L, 9);
+    float diffuseIntensity = lua_tonumber(L, 10);
+
+    auto *light = (Light*)mgr->CreateLight(type, {r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
     light->ScriptingInterfaceRegisterFunctions(L, light);
     return 1;
 }

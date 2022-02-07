@@ -13,12 +13,50 @@
 
 namespace engine
 {
+    typedef enum
+    {
+        LIGHT_FALLOUT_TYPE_LINEAR       = 0
+      , LIGHT_FALLOUT_TYPE_QUADRATIC    = 1
+    } LightFalloutType;
+
+    typedef struct {
+        std::string name;
+        LightFalloutType type;
+    } LightInfo;
+
     class LightI
     {
     public:
-        LightI(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+        LightI(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
         { };
 
+        static std::vector<LightInfo>& LIGHT_TYPES() {
+            static std::vector<LightInfo> lightTypes =
+            {
+                { "linear", LIGHT_FALLOUT_TYPE_LINEAR }
+              , { "quadratic", LIGHT_FALLOUT_TYPE_QUADRATIC }
+            };
+
+            return lightTypes;
+        }
+
+        static LightFalloutType GetFalloutTypeForName(std::string type)
+        {
+            auto lightInfo = matching<LightInfo>(LightI::LIGHT_TYPES(), [&](LightInfo& info){
+                return info.name == type;
+            });
+            if (lightInfo != nullptr)
+            {
+                return lightInfo->type;
+            }
+            else
+            {
+                return LIGHT_FALLOUT_TYPE_LINEAR;
+            }
+        }
+
+        virtual LightFalloutType GetType() = 0;
+        virtual void SetType(LightFalloutType) = 0;
         virtual Color3& GetColor() = 0;
         virtual void SetColor(Color3) = 0;
         virtual bool GetIsEnabled() = 0;

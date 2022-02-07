@@ -54,6 +54,7 @@ typedef struct
 
 typedef struct
 {
+    float lightType;
     vector_float3 color;            // 0-2
     float ambientIntensity;         // 3
 

@@ -18,10 +18,11 @@ namespace engine
     {
         AAPAmbientLLight m_light;
     public:
-        LightMetal(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+        LightMetal(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
 
         AAPAmbientLLight& GetLightMetal() { return m_light; };
 
+        void SetType(LightFalloutType);
         void SetIsEnabled(bool);
         void SetColor(Color3);
         void SetAmbientIntensity(float);

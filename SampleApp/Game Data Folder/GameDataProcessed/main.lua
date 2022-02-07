@@ -90,8 +90,8 @@ function loadSprites()
 	
 	-- lights
 --	light = scene:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
-	light = LightManager:CreateLight(1, 1, 1, 0.1, 400, 350, 250, 1)
-	light1 = scene:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
+	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
+	light1 = scene:CreateLight("linear", 1, 1, 1, 0.01, 900, 350, 150, 0.5)
 
 	light:SetName("Main light")
 

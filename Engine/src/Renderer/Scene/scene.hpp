@@ -104,7 +104,7 @@ namespace engine
          \brief Creates a light and adds it to the scene. This is a helper function
          to the the LightManager.
          */
-        LightI* CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+        LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
 
     public: /** Getters */
 

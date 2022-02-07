@@ -9,6 +9,16 @@
 
 using namespace engine;
 
+LightFalloutType Light::GetType()
+{
+    return m_type;;
+}
+
+void Light::SetType(LightFalloutType value)
+{
+    m_type = value;
+}
+
 Color3& Light::GetColor()
 {
     return m_color;

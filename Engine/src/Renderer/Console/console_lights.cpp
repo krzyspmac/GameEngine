@@ -81,6 +81,39 @@ void ConsoleLightManagement::Render()
                     }
                 };
 
+                // Type
+                {
+                    auto selectedType = light->GetType();
+                    auto& lightTypesDesc = LightI::LIGHT_TYPES();
+                    auto* selectedDesc = matching<LightInfo>(lightTypesDesc, [&](LightInfo& info){
+                        return info.type == selectedType;
+                    });
+
+                    auto comboSelectedType = selectedDesc != nullptr ? selectedDesc->type : LIGHT_FALLOUT_TYPE_LINEAR;
+                    std::string combomSelectedName = selectedDesc != nullptr ? selectedDesc->name : "[unknown]";
+
+                    if (ImGui::BeginCombo("Fallout Type", combomSelectedName.c_str(), 0))
+                    {
+                        for (auto& descriptor : lightTypesDesc)
+                        {
+                            const bool is_selected = light->GetType() == descriptor.type;
+                            if (ImGui::Selectable(descriptor.name.c_str(), is_selected))
+                            {   comboSelectedType = descriptor.type;
+                            }
+                            if (is_selected)
+                            {   ImGui::SetItemDefaultFocus();
+                            }
+
+                        }
+                        ImGui::EndCombo();
+                    }
+
+                    if (comboSelectedType != selectedType)
+                    {   light->SetType(comboSelectedType);
+                        isDirty = true;
+                    };
+                };
+
                 // Ambient color
                 {
                     Color3 ambientColor = light->GetColor();

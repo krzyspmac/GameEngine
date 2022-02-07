@@ -122,9 +122,9 @@ void Scene::RenderSceneForeground()
     };
 }
 
-LightI* Scene::CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+LightI* Scene::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
-    auto* light = GetMainEngine()->getLightMnaager().CreateLight(color, ambientIntensity, position, diffuseSize, diffuseIntensity);
+    auto* light = GetMainEngine()->getLightMnaager().CreateLight(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
     if (light != nullptr)
     {
         m_lights.emplace_back(light);
@@ -196,16 +196,18 @@ static int lua_Scene_SetMouseDownFunction(lua_State *L)
 static int lua_Scene_CreateLight(lua_State *L)
 {
     Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
-    float r = lua_tonumber(L, 2);
-    float g = lua_tonumber(L, 3);
-    float b = lua_tonumber(L, 4);
-    float ambientIntensity = lua_tonumber(L, 5);
-    int posX = lua_tonumber(L, 6);
-    int posY = lua_tonumber(L, 7);
-    float diffuseSize = lua_tonumber(L, 8);
-    float diffuseIntensity = lua_tonumber(L, 9);
 
-    auto *light = (Light*)scene->CreateLight({r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
+    std::string lightType = lua_tostring(L, 2);
+    float r = lua_tonumber(L, 3);
+    float g = lua_tonumber(L, 4);
+    float b = lua_tonumber(L, 5);
+    float ambientIntensity = lua_tonumber(L, 6);
+    int posX = lua_tonumber(L, 7);
+    int posY = lua_tonumber(L, 8);
+    float diffuseSize = lua_tonumber(L, 9);
+    float diffuseIntensity = lua_tonumber(L, 10);
+
+    auto *light = (Light*)scene->CreateLight(lightType, {r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
     light->ScriptingInterfaceRegisterFunctions(L, light);
     return 0;
 }

@@ -35,7 +35,10 @@ namespace engine
         LightManager();
 
         /** Create a light. The result is being managed by the manager. */
-        LightI *CreateLight(Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+        LightI *CreateLight(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+
+        /** Create a light helper. Type as string (linear|quadratic) */
+        LightI *CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
 
         /** Delete a light. */
         void DeleteLight(LightI*);
