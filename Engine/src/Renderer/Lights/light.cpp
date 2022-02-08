@@ -6,6 +6,7 @@
 //
 
 #include "light.hpp"
+#include "engine.hpp"
 
 using namespace engine;
 

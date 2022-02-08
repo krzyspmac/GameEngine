@@ -21,18 +21,23 @@ namespace engine
 {
     /** LightManager
         \addtogroup API_GLOBALS
+
+        The LightManager keeps a list of light objects as well as data cache for various
+        different shaders. The cache gets updated on create/delete. Updates go
+        directly to the cache.
      */
     class LightManager
     {
         std::vector<std::unique_ptr<LightI>> m_lights;
         bool m_lightsActive;
 #if TARGET_IOS || TARGET_OSX
-        AAPAmbientLLight * m_lightCache;
+        AAPAmbientLLight *m_lightCache; /** kelp aligned to the m_lights light list */
         unsigned long m_lightCacheBufferSize;
         int m_lightCacheCount;
 #endif
     public:
         LightManager();
+        ~LightManager();
 
         /** Create a light. The result is being managed by the manager. */
         LightI *CreateLight(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
@@ -52,11 +57,13 @@ namespace engine
 
         auto& GetLightActive() { return m_lightsActive; };
 
-        /** Update the cache when you change the lights. This needs a better aproach */
+    private:
+#if TARGET_IOS || TARGET_OSX
+        AAPAmbientLLight *GetFirstFreeEntry();
         void UpdateCache();
-
-    public: /** Rendering related */
-
+#endif
+        
+    public:
 #if TARGET_IOS || TARGET_OSX
         AAPAmbientLLight *GetLightBuffer() { return m_lightCache; };
         auto GetLightBufferSize() { return m_lightCacheBufferSize; };

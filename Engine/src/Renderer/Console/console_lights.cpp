@@ -48,7 +48,6 @@ void ConsoleLightManagement::Render()
     }
 
     auto& lightManager = GetMainEngine()->getLightMnaager();
-    bool isDirty = false;
 
     ImGui::Checkbox("Lights Enabled", &lightManager.GetLightActive());
     ImGui::Separator();
@@ -77,7 +76,6 @@ void ConsoleLightManagement::Render()
                     if (isEnabled != light->GetIsEnabled())
                     {
                         light->SetIsEnabled(isEnabled);
-                        isDirty = true;
                     }
                 };
 
@@ -110,7 +108,6 @@ void ConsoleLightManagement::Render()
 
                     if (comboSelectedType != selectedType)
                     {   light->SetType(comboSelectedType);
-                        isDirty = true;
                     };
                 };
 
@@ -130,7 +127,6 @@ void ConsoleLightManagement::Render()
                     if (color.x != ambientColor.r || color.y != ambientColor.b || color.z != ambientColor.b)
                     {
                         light->SetColor({color.x, color.y, color.z});
-                        isDirty = true;
                     }
                 };
 
@@ -142,7 +138,6 @@ void ConsoleLightManagement::Render()
                     if (ambientIntensity != light->GetAmbientIntensity())
                     {
                         light->SetAmbientIntensity(ambientIntensity);
-                        isDirty = true;
                     }
                 };
 
@@ -154,7 +149,6 @@ void ConsoleLightManagement::Render()
                     if (diffuseIntensity != light->GetDiffuseIntensity())
                     {
                         light->SetDiffuseIntensity(diffuseIntensity);
-                        isDirty = true;
                     }
                 };
 
@@ -166,7 +160,6 @@ void ConsoleLightManagement::Render()
                     if (diffuseSize != light->GetDiffuseSize())
                     {
                         light->SetDiffuseSize(diffuseSize);
-                        isDirty = true;
                     }
                 };
 
@@ -183,7 +176,6 @@ void ConsoleLightManagement::Render()
                     if (x != position.x || y != position.y)
                     {
                         light->SetPosition({ (int)x, (int)y });
-                        isDirty = true;
                     }
                 }
 
@@ -192,11 +184,6 @@ void ConsoleLightManagement::Render()
             ++i;
         }
         ImGui::TreePop();
-
-        if (isDirty)
-        {
-            lightManager.UpdateCache();
-        }
     }
 
     ImGui::End();

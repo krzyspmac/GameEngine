@@ -8,6 +8,7 @@ truck = nil
 bg = nil
 font = nil
 initialAnimationDone = false
+light1 = nil
 
 ------------------------------------------------------------------------------------------
 -- game state
@@ -89,10 +90,8 @@ function loadSprites()
 	sky:SetPosition(1280/2, 200)
 	
 	-- lights
---	light = scene:CreateLight(1, 1, 1, 0.0, 400, 350, 250, 1)
 	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
 	light1 = scene:CreateLight("exponential", 1, 1, 1, 0.01, 900, 350, 11500, 0.5)
-
 	light:SetName("Main light")
 
 --	light1 = LightManager:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
@@ -118,6 +117,34 @@ function animateIntro()
 	group:Start()
 end
 
+function animateLights()
+	local animatorForward, animatorBackwards
+	
+	animatorForward = ValueAnimatorFactory:CreateLinear(0, 1280, 2, 0,
+		function(val)
+			local x, y = light1:GetPosition()
+			x = val
+			light1:SetPosition(x,y)
+		end,
+		function()
+			animatorBackwards:Start()
+	  	end
+	)
+	
+	animatorBackwards = ValueAnimatorFactory:CreateLinear(1280, 0, 2, 0,
+		function(val)
+			local x, y = light1:GetPosition()
+			x = val
+			light1:SetPosition(x,y)
+		end,
+		function()
+			animatorForward:Start()
+	  	end
+	)
+
+	animatorForward:Start()
+end
+
 ------------------------------------------------------------------------------------------
 -- event handling functions
 
@@ -131,6 +158,7 @@ function init()
 	gameState:Register()
 	loadSprites()
   	--animateIntro()
+  	animateLights()
 end
 
 function update ()

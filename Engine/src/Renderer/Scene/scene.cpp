@@ -209,7 +209,7 @@ static int lua_Scene_CreateLight(lua_State *L)
 
     auto *light = (Light*)scene->CreateLight(lightType, {r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
     light->ScriptingInterfaceRegisterFunctions(L, light);
-    return 0;
+    return 1;
 }
 
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()

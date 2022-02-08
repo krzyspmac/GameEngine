@@ -12,13 +12,33 @@
 #include "light_metal.hpp"
 #endif
 
+#define MAX_LIGHTS  100
+
 using namespace engine;
 
 LightManager::LightManager()
     : m_lightCache(nullptr)
     , m_lightsActive(true)
 {
+    m_lightCache = (AAPAmbientLLight*)malloc(sizeof(AAPAmbientLLight) * MAX_LIGHTS);
+    m_lightCacheCount = 0;
     UpdateCache();
+}
+
+LightManager::~LightManager()
+{
+    free(m_lightCache);
+}
+
+AAPAmbientLLight *LightManager::GetFirstFreeEntry()
+{
+    size_t nextIndex = std::max(m_lightCacheCount -1 + 1, 0);
+    if (nextIndex < MAX_LIGHTS)
+    {   return &m_lightCache[nextIndex];
+    }
+    else
+    {   return nullptr;
+    }
 }
 
 LightI *LightManager::CreateLight(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
@@ -60,25 +80,17 @@ void LightManager::DeleteAllLights()
 void LightManager::UpdateCache()
 {
 #if TARGET_IOS || TARGET_OSX
-    if (m_lightCache != nullptr)
+    m_lightCacheCount = 0;
+    for (int i = 0; i < m_lights.size(); i++)
     {
-        delete m_lightCache;
-        m_lightCache = nullptr;
+        auto* light = m_lights.at(i).get();
+        auto* lightMetal = static_cast<LightMetal*>(light);
+        auto* buffer = GetFirstFreeEntry();
+        lightMetal->SetBuffer(buffer);
+        m_lightCacheCount = i + 1;
     }
 
     m_lightCacheBufferSize = MAX(1, (int)m_lights.size()) * sizeof(AAPAmbientLLight);
-    m_lightCache = (AAPAmbientLLight*)malloc(m_lightCacheBufferSize);
-
-    int counter = 0;
-    for (auto& baseLight : m_lights)
-    {
-        auto& metalLight = static_cast<LightMetal&>(*baseLight);
-        auto& lightDescriptor = metalLight.GetLightMetal();
-        memcpy(&m_lightCache[counter++], &lightDescriptor, sizeof(lightDescriptor));
-    }
-
-    m_lightCacheCount = (int)m_lights.size();
-
 #endif
 }
 

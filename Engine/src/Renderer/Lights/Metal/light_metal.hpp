@@ -16,12 +16,11 @@ namespace engine
 {
     class LightMetal: public Light
     {
-        AAPAmbientLLight m_light;
+        AAPAmbientLLight *m_light;
     public:
-        LightMetal(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+        using Light::Light;
 
-        AAPAmbientLLight& GetLightMetal() { return m_light; };
-
+        void SetBuffer(AAPAmbientLLight*);
         void SetType(LightFalloutType);
         void SetIsEnabled(bool);
         void SetColor(Color3);
