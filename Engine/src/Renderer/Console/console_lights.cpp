@@ -49,7 +49,7 @@ void ConsoleLightManagement::Render()
 
     auto& lightManager = GetMainEngine()->getLightMnaager();
 
-    ImGui::Checkbox("Lights Enabled", &lightManager.GetLightActive());
+    ImGui::Checkbox("Lights Enabled", &lightManager.GetLightsActive());
     ImGui::Separator();
 
     if (ImGui::TreeNode("Lights List"))

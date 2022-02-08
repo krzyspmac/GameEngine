@@ -21,7 +21,7 @@ namespace engine
         using Light::Light;
 
         void SetBuffer(AAPAmbientLLight*);
-        void SetType(LightFalloutType);
+        void SetType(LightFalloffType);
         void SetIsEnabled(bool);
         void SetColor(Color3);
         void SetAmbientIntensity(float);

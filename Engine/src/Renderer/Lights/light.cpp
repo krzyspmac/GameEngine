@@ -10,12 +10,12 @@
 
 using namespace engine;
 
-LightFalloutType Light::GetType()
+LightFalloffType Light::GetType()
 {
     return m_type;;
 }
 
-void Light::SetType(LightFalloutType value)
+void Light::SetType(LightFalloffType value)
 {
     m_type = value;
 }

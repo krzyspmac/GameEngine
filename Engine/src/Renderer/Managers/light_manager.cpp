@@ -41,7 +41,7 @@ AAPAmbientLLight *LightManager::GetFirstFreeEntry()
     }
 }
 
-LightI *LightManager::CreateLight(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+Light *LightManager::CreateLight(LightFalloffType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
 #if TARGET_OSX || TARGET_IOS
     LightMetal *light = new LightMetal(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
@@ -53,12 +53,12 @@ LightI *LightManager::CreateLight(LightFalloutType type, Color3 color, float amb
 #endif
 }
 
-LightI *LightManager::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+Light *LightManager::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
     return CreateLight(LightI::GetFalloutTypeForName(type), color, ambientIntensity, position, diffuseSize, diffuseIntensity);
 }
 
-void LightManager::DeleteLight(LightI *light)
+void LightManager::DeleteLight(Light *light)
 {
     for (auto it = m_lights.begin(); it != m_lights.end(); ++it)
     {
@@ -92,6 +92,11 @@ void LightManager::UpdateCache()
 
     m_lightCacheBufferSize = MAX(1, (int)m_lights.size()) * sizeof(AAPAmbientLLight);
 #endif
+}
+
+void LightManager::SetLightsActive(bool value)
+{
+    m_lightsActive = value;
 }
 
 #pragma mark - Scripting Interface
@@ -133,12 +138,29 @@ static int lua_LightManager_DeleteAllLight(lua_State *L)
     return 0;
 }
 
+static int lua_LightManager_GetLightsActive(lua_State *L)
+{
+    LightManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<LightManager>(L, 1);
+    lua_pushnumber(L, mgr->GetLightsActive());
+    return 1;
+}
+
+static int lua_LightManager_SetLightsActive(lua_State *L)
+{
+    LightManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<LightManager>(L, 1);
+    bool value = lua_tonumber(L, 2);
+    mgr->SetLightsActive(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> LightManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         {"CreateLight", &lua_LightManager_CreateLight}
       , {"DeleteLight", &lua_LightManager_DeleteLight}
-      , {"DeleteAllLights", &lua_LightManager_DeleteAllLight},
+      , {"DeleteAllLights", &lua_LightManager_DeleteAllLight}
+      , {"GetLightsActive", &lua_LightManager_GetLightsActive}
+      , {"SetLightsActive", &lua_LightManager_SetLightsActive}
     });
     return result;
 }

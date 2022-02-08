@@ -34,7 +34,7 @@ void LightMetal::SetBuffer(AAPAmbientLLight *buffer)
     m_light = buffer;
 }
 
-void LightMetal::SetType(LightFalloutType type)
+void LightMetal::SetType(LightFalloffType type)
 {
     Light::SetType(type);
     m_light->lightType = (float)type;

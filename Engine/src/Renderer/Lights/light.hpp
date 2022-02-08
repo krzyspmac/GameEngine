@@ -16,7 +16,7 @@ namespace engine
     class Light: public LightI
     {
     protected:
-        LightFalloutType m_type;
+        LightFalloffType m_type;
         Color3  m_color;
         float   m_ambientIntensity;
         Origin  m_position;
@@ -26,7 +26,7 @@ namespace engine
 
         std::string m_name;
     public:
-        Light(LightFalloutType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+        Light(LightFalloffType type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
             : LightI(type, color, diffuseIntensity, position, diffuseSize, diffuseIntensity)
             , m_type(type)
             , m_color(color)
@@ -39,10 +39,10 @@ namespace engine
         { };
 
         /** Geter for the light fallout type */
-        LightFalloutType GetType();
+        LightFalloffType GetType();
 
         /** Setter for the light fallout type */
-        void SetType(LightFalloutType);
+        void SetType(LightFalloffType);
 
         /** Geter for the ambient color */
         Color3& GetColor();
