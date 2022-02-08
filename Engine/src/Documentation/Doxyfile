@@ -925,7 +925,11 @@ INPUT                  = ../Renderer/Scene/scene.hpp \
                          ../Renderer/Memory/release_pool.cpp \
                          ../Renderer/Memory/release_pool.hpp \
                          ../Renderer/Managers/events_manager.hpp \
-                         ../Renderer/Managers/events_manager.cpp
+                         ../Renderer/Managers/events_manager.cpp \
+                         ../Renderer/Lights/light.cpp \
+                         ../Renderer/Lights/light.hpp \
+                         ../Renderer/Managers/light_manager.cpp \
+                         ../Renderer/Managers/light_manager.hpp
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
