@@ -92,7 +92,7 @@ void ConsoleLightManagement::Render()
                     auto comboSelectedType = selectedDesc != nullptr ? selectedDesc->type : LIGHT_FALLOUT_TYPE_LINEAR;
                     std::string combomSelectedName = selectedDesc != nullptr ? selectedDesc->name : "[unknown]";
 
-                    if (ImGui::BeginCombo("Fallout Type", combomSelectedName.c_str(), 0))
+                    if (ImGui::BeginCombo("Falloff Type", combomSelectedName.c_str(), 0))
                     {
                         for (auto& descriptor : lightTypesDesc)
                         {

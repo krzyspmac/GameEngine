@@ -16,7 +16,7 @@ namespace engine
     typedef enum
     {
         LIGHT_FALLOUT_TYPE_LINEAR       = 0
-      , LIGHT_FALLOUT_TYPE_QUADRATIC    = 1
+      , LIGHT_FALLOUT_TYPE_EXP          = 1
     } LightFalloutType;
 
     typedef struct {
@@ -34,7 +34,7 @@ namespace engine
             static std::vector<LightInfo> lightTypes =
             {
                 { "linear", LIGHT_FALLOUT_TYPE_LINEAR }
-              , { "quadratic", LIGHT_FALLOUT_TYPE_QUADRATIC }
+              , { "exponential", LIGHT_FALLOUT_TYPE_EXP }
             };
 
             return lightTypes;

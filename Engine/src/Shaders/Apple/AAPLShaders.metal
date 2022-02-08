@@ -14,7 +14,7 @@ using namespace metal;
 
 // Some hardcoded defs in order not to include additional headers
 #define LIGHT_FALLOUT_TYPE_LINEAR       0.f
-#define LIGHT_FALLOUT_TYPE_QUADRATIC    1.f
+#define LIGHT_FALLOUT_TYPE_EXP          1.f
 
 // Vertex shader outputs and fragment shader inputs
 struct RasterizerData
@@ -31,18 +31,19 @@ struct RasterizerData
     float2 textureCoordinate;
 };
 
-/// Non-change'able data
-struct Uniforms
+// Light fallout functions
+float
+lightFalloutFunctionLinear(constant float *xValPtr, constant float *sizePtr)
 {
-  float4x4 modelMatrix;
-  float4x4 projectionMatrix;
-};
+    float x = float(*xValPtr);
+    float size = float(*sizePtr);
+    return max(size - x, 0.0f) / size;
+}
 
 vertex RasterizerData
 vertexShader(
     uint     vertexID                                 [[ vertex_id ]]
   , constant AAPLVertex       *vertices               [[ buffer(AAPLVertexInputIndexVertices) ]]
-  , constant Uniforms         *uniforms               [[ buffer(AAPLVertexInputIndexUniforms) ]]
   , constant float            *viewportScalePointer   [[ buffer(AAPLVertexInputIndexWindowScale) ]]
   , constant vector_float2    *viewportOffset         [[ buffer(AAPLVertexInputIndexObjectOffset) ]]
   , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
@@ -152,8 +153,9 @@ fragmentShader(
                 {
                     str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
                 }
-                else if (light->lightType == LIGHT_FALLOUT_TYPE_QUADRATIC)
+                else if (light->lightType == LIGHT_FALLOUT_TYPE_EXP)
                 {
+                    str = exp( 1 - (pow(distance, 2) / light->diffuse_size) );
                 }
 
                 half3 ambientColor = half3(light->color);
