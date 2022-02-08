@@ -27,7 +27,7 @@ ConsoleLog *ConsoleLog::Shared()
 }
 
 ConsoleLog::ConsoleLog()
-    : p_open(true)
+    : p_open(false)
 {
     shared = this;
     AutoScroll = true;

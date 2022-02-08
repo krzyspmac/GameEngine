@@ -14,6 +14,7 @@
 #include "sprite_draw_animated.hpp"
 #include "sprite_atlas.hpp"
 #include "character_representation.hpp"
+#include "light_interface.hpp"
 #include "common.h"
 #include <iostream>
 
@@ -24,6 +25,7 @@ namespace engine
         EngineProviderI& m_engineProvider;
         std::vector<SpriteDrawStatic*> m_staticSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
+        std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
     ///
@@ -34,12 +36,15 @@ namespace engine
 
     /// Rederer
     public:
-        /**
-         Render the scene including all the objects that have been
-         added to it.
-         @private
+        /** Render the scene including only objects marked as `background`.
+            @private
         */
-        void RenderScene();
+        void RenderSceneBackground();
+
+        /** Render the scene including only objects marked as `foreground`.
+            @private
+        */
+        void RenderSceneForeground();
 
         /**
          Called by the engine. Reacts to mouse clicks.
@@ -51,12 +56,12 @@ namespace engine
         /**
          \brief Load a sprite renderer.
 
-         Helper method to oad the sprite and puts it into the stack.
+         Helper method to load the sprite and puts it into the stack.
          Uses SpriteRendererManager.
          \include SampleSpriteStatic-helper.lua
          \see Scene::AddSpriteDrawStatic.
          */
-        SpriteDrawStatic *LoadSpriteStatic(SpriteAtlas *atlas, std::string name);
+        SpriteDrawStatic *LoadSpriteStatic(SpriteAtlasI *atlas, std::string name);
 
         /**
          \brief Load a character representation.
@@ -94,6 +99,16 @@ namespace engine
          \include Scene_MouseDown.lua
          */
         void SetMouseDownFunction(int mouseFunctionRef);
+
+        /**
+         \brief Creates a light and adds it to the scene. This is a helper function
+         to the the LightManager.
+         */
+        LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+
+    public: /** Getters */
+
+        auto& GetStaticSprites() { return m_staticSprites; };
 
     /// ScriptingInterface
     public:

@@ -19,6 +19,10 @@
 #include <ratio>
 #include <thread>
 
+#include "sprite_draw_static.hpp"
+#include "scene_manager.hpp"
+#include "engine.hpp"
+
 using namespace engine;
 using namespace std::chrono;
 
@@ -197,7 +201,13 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexObjectScale);
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
+
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
+
+    auto& lightManager = GetMainEngine()->getLightMnaager();
+    int lightsCount = drawable->GetAcceptsLight() && lightManager.GetLightsActive() ? lightManager.GetLightBufferCount() : 0;
+    renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), AAPLVertexInpueIndexLightCount);
+    renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), AAPLVertexInputIndexLight);
 
     auto texture = drawable->GetTexture();
     if (texture != nullptr)

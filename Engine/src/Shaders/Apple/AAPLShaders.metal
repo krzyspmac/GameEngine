@@ -12,6 +12,10 @@ using namespace metal;
 // Include header shared between this Metal shader code and C code executing Metal API commands.
 #include "AAPLShaderTypes.h"
 
+// Some hardcoded defs in order not to include additional headers
+#define LIGHT_FALLOUT_TYPE_LINEAR       0.f
+#define LIGHT_FALLOUT_TYPE_EXP          1.f
+
 // Vertex shader outputs and fragment shader inputs
 struct RasterizerData
 {
@@ -27,15 +31,25 @@ struct RasterizerData
     float2 textureCoordinate;
 };
 
+// Light fallout functions
+float
+lightFalloutFunctionLinear(constant float *xValPtr, constant float *sizePtr)
+{
+    float x = float(*xValPtr);
+    float size = float(*sizePtr);
+    return max(size - x, 0.0f) / size;
+}
+
 vertex RasterizerData
-vertexShader(uint vertexID [[vertex_id]],
-             constant AAPLVertex    *vertices               [[buffer(AAPLVertexInputIndexVertices)]],
-             constant float         *viewportScalePointer   [[buffer(AAPLVertexInputIndexWindowScale)]],
-             constant vector_float2 *viewportOffset         [[buffer(AAPLVertexInputIndexObjectOffset)]],
-             constant float         *objectScalePointer     [[buffer(AAPLVertexInputIndexObjectScale)]],
-             constant vector_float2 *objectSizePointer      [[buffer(AAPLVertexInputIndexObjectSize)]],
-             constant vector_float2 *viewportSizePointer    [[buffer(AAPLVertexInputIndexViewportSize)]]
-             )
+vertexShader(
+    uint     vertexID                                 [[ vertex_id ]]
+  , constant AAPLVertex       *vertices               [[ buffer(AAPLVertexInputIndexVertices) ]]
+  , constant float            *viewportScalePointer   [[ buffer(AAPLVertexInputIndexWindowScale) ]]
+  , constant vector_float2    *viewportOffset         [[ buffer(AAPLVertexInputIndexObjectOffset) ]]
+  , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
+  , constant vector_float2    *objectSizePointer      [[ buffer(AAPLVertexInputIndexObjectSize) ]]
+  , constant vector_float2    *viewportSizePointer    [[ buffer(AAPLVertexInputIndexViewportSize) ]]
+)
 {
     RasterizerData out;
 
@@ -78,7 +92,7 @@ vertexShader(uint vertexID [[vertex_id]],
     pixelSpacePosition.y -= objectTranslation.y / viewportScale;
 
     // To convert from positions in pixel space to positions in clip-space,
-    //  divide the pixel coordinates by half the size of the viewport.
+    // divide the pixel coordinates by half the size of the viewport.
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
     out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
 
@@ -90,11 +104,15 @@ vertexShader(uint vertexID [[vertex_id]],
 
 // Fragment function
 fragment float4
-fragmentShader(RasterizerData in [[stage_in]],
-               texture2d<half> colorTexture [[ texture(AAPLTextureIndexBaseColor) ]],
-               constant float *alphaPointer [[buffer(AAPLTextureIndexBaseAlpha)]]
-               )
+fragmentShader(
+     RasterizerData             in [[stage_in]]
+   , texture2d<half>            colorTexture     [[ texture(AAPLTextureIndexBaseColor) ]]
+   , constant float             *alphaPointer    [[ buffer(AAPLTextureIndexBaseAlpha) ]]
+   , constant AAPAmbientLLight  *lights          [[ buffer(AAPLVertexInputIndexLight) ]]
+   , constant int               *lightCountPtr   [[ buffer(AAPLVertexInpueIndexLightCount) ]]
+)
 {
+    // Texture sampler
     constexpr sampler textureSampler (mag_filter::nearest,
                                       min_filter::nearest);
 
@@ -116,6 +134,38 @@ fragmentShader(RasterizerData in [[stage_in]],
     if (colorSample.a <= 0.0001)
     {
         discard_fragment();
+        return float4(colorSample);
+    }
+
+    // Light calculation
+    int lightCount = int(*lightCountPtr);
+    if (lightCount)
+    {
+        half3 appliedColor = half3(0.f, 0.f, 0.f);
+        for (int i = 0; i < lightCount; i++)
+        {
+            auto light = &lights[i];
+            if (light->enabled > 0.f)
+            {
+                float distance = metal::distance(in.position.xy, light->position);
+                float str = 0;
+                if (light->lightType == LIGHT_FALLOUT_TYPE_LINEAR)
+                {
+                    str = max(light->diffuse_size - distance, 0.0f) / light->diffuse_size;
+                }
+                else if (light->lightType == LIGHT_FALLOUT_TYPE_EXP)
+                {
+                    str = exp( 1 - (pow(distance, 2) / light->diffuse_size) );
+                }
+
+                half3 ambientColor = half3(light->color);
+                half3 ambientIntensity = half3(light->ambientIntensity);
+                half3 diffuseIntensity = half3(light->diffuse_intensity);
+                appliedColor = min(1.f, appliedColor + min(1.f, ambientColor.rgb * min(1.f, (ambientIntensity + (diffuseIntensity * str)))));
+            }
+        }
+
+        colorSample.rgb *= appliedColor;
     }
 
     // return the color of the texture
@@ -153,24 +203,10 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     // Get the target final scale for the texture
     float targetAffineScale = float(*affineScalePointer);
 
-    // Calculate aspect ratio & scale
-//    float scaleX, scaleY, scale;
-//    scaleX = viewportSize.x / desiredViewportSize.x;
-//    scaleY = viewportSize.y / desiredViewportSize.y;
-
     float2 scale = viewportSize / desiredViewportSize;
-//    scale = min(scaleX, scaleY);
-    
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-//    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-//    out.position.xy = pixelSpacePosition.xy;//* scale/2;
     out.position.xy = pixelSpacePosition / scale * targetAffineScale;
-
-//    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-//    out.position.x = vertices[vertexID].position.x * 1;//aspectRatio;
-//    out.position.y = vertices[vertexID].position.y;
-
     out.textureCoordinate = vertices[vertexID].textureCoordinate;
 
     return out;

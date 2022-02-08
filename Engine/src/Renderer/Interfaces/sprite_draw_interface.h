@@ -15,12 +15,21 @@
 namespace engine
 {
 
+    typedef enum
+    {
+        SPRITE_DRAW_TYPE_BACKGROUND     = 0     // background sprites do not receive lights
+      , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
+    } SpriteDrawType;
+
     class SpriteDrawI
     {
     public:
         /// Scale applies to width and height. Does not modify x no y.
         SpriteDrawI(int scale)
-            : m_scale(scale), m_position(Vector2Zero)
+            : m_scale(scale)
+            , m_position(Vector2Zero)
+            , m_isDrawable(true)
+            , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
         { };
         
         virtual ~SpriteDrawI() { };
@@ -54,7 +63,20 @@ namespace engine
          */
         float GetAlpha() { return *m_drawable.get()->GetAlpha(); };
 
+        /** */
+        void SetAcceptsLight(bool val) { m_acceptsLight = val; m_drawable.get()->GetAcceptsLight() = val; };
+
     public: // Drawable related
+
+        /** Controls wheather this sprite is drawable at all. Default is yes. */
+        auto& GetIsDrawable() { return m_isDrawable; };
+
+        /** Controls the sprite type. Default is SPRITE_DRAW_TYPE_FOREGROUND */
+        auto& GetType() { return m_type; };
+
+        /** Control whether the object receives lights or not. If false it's
+            completely lit up. */
+        auto& GetAcceptsLight() { return m_acceptsLight; };
 
         /** Set the main drawable for this sprite */
         void SetDrawable(std::unique_ptr<DrawableSpriteI> val) { m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(val)); };
@@ -65,6 +87,9 @@ namespace engine
     protected:
         int m_scale;
         Vector2 m_position;
+        bool m_acceptsLight;
+        SpriteDrawType m_type;
+        bool m_isDrawable;
         std::unique_ptr<DrawableSpriteI> m_drawable;
     };
 };

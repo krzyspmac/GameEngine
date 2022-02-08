@@ -68,6 +68,38 @@ namespace engine
 
         return result;
     }
+
+    /** filter */
+    template<typename S>
+    std::vector<S*> filter(std::vector<S*>& source, std::function<bool(S*)> lambda)
+    {
+        std::vector<S*> result;
+
+        for (auto* srcItem : source)
+        {
+            if (lambda(srcItem))
+            {
+                result.push_back(srcItem);
+            }
+        }
+
+        return result;
+    }
+
+    /** matching */
+    template<typename S>
+    S* matching(std::vector<S>& source, std::function<bool(S&)> lambda)
+    {
+        for (auto& srcItem : source)
+        {
+            if (lambda(srcItem))
+            {
+                return &srcItem;
+            }
+        }
+
+        return nullptr;
+    };
 };
 
 #endif /* general_h */

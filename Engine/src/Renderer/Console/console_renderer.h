@@ -22,6 +22,7 @@ namespace engine
         bool m_isSetup;
         ConsoleLogI *m_logger;
         ConsoleTerminalI *m_terminal;
+        ConsoleLightManagementI *m_lightManagement;
 
     public:
         ConsoleRenderer();
@@ -33,6 +34,7 @@ namespace engine
 
         ConsoleLogI& GetLogger();
         ConsoleTerminalI& GetTerminal();
+        ConsoleLightManagementI& GetLightManagement();
 
         auto GetPlarformRenderer() { return m_platformRenderer.get(); };
 

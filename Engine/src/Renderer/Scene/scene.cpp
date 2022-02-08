@@ -9,6 +9,7 @@
 #include "scripting_engine.hpp"
 #include "character.hpp"
 #include "scripting_engine.hpp"
+#include "light.hpp"
 
 using namespace engine;
 
@@ -54,7 +55,7 @@ void Scene::SetMainCharacter(CharacterRepresentation *rep)
     m_mainCharacter = rep;
 }
 
-SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlas *atlas, std::string name)
+SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlasI *atlas, std::string name)
 {
     SpriteAtlasItemI *item = atlas->GetItemForName(name);
     if (item != nullptr)
@@ -86,11 +87,31 @@ void Scene::SetMouseDownFunction(int mouseFunctionRef)
     m_mouseDownFunctionRef = mouseFunctionRef;
 }
 
-void Scene::RenderScene()
+void Scene::RenderSceneBackground()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
         SpriteDrawI *sprite = (*it);
+        if (sprite->GetType() != SPRITE_DRAW_TYPE_BACKGROUND)
+        {
+            continue;
+        }
+
+        Vector2& pos = sprite->GetPosition();
+        (*it)->DrawAt(pos.x, pos.y);
+    };
+}
+
+void Scene::RenderSceneForeground()
+{
+    for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
+    {
+        SpriteDrawI *sprite = (*it);
+        if (sprite->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
+        {
+            continue;
+        }
+
         Vector2& pos = sprite->GetPosition();
         (*it)->DrawAt(pos.x, pos.y);
     };
@@ -99,6 +120,20 @@ void Scene::RenderScene()
     {
         (*it)->Render();
     };
+}
+
+LightI* Scene::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
+{
+    auto* light = GetMainEngine()->getLightMnaager().CreateLight(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
+    if (light != nullptr)
+    {
+        m_lights.emplace_back(light);
+        return light;
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
 #pragma mark - Scripting Interface
@@ -158,6 +193,25 @@ static int lua_Scene_SetMouseDownFunction(lua_State *L)
     return 0;
 }
 
+static int lua_Scene_CreateLight(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+
+    std::string lightType = lua_tostring(L, 2);
+    float r = lua_tonumber(L, 3);
+    float g = lua_tonumber(L, 4);
+    float b = lua_tonumber(L, 5);
+    float ambientIntensity = lua_tonumber(L, 6);
+    int posX = lua_tonumber(L, 7);
+    int posY = lua_tonumber(L, 8);
+    float diffuseSize = lua_tonumber(L, 9);
+    float diffuseIntensity = lua_tonumber(L, 10);
+
+    auto *light = (Light*)scene->CreateLight(lightType, {r, g, b}, ambientIntensity, {posX, posY}, diffuseSize, diffuseIntensity);
+    light->ScriptingInterfaceRegisterFunctions(L, light);
+    return 1;
+}
+
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -165,8 +219,8 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
         {"LoadSpriteStatic", &lua_Scene_LoadSpriteDrawStatic},
         {"LoadCharacter", &lua_Scene_LoadCharacter},
         {"SetMainCharacter", &lua_Scene_SetMainCharacter},
-        {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
-
+        {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction},
+        {"CreateLight", &lua_Scene_CreateLight}
     });
     return result;
 }

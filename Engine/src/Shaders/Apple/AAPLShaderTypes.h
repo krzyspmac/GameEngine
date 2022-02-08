@@ -29,8 +29,10 @@ typedef enum AAPLVertexInputIndex
 //   Metal API texture set calls
 typedef enum AAPLTextureIndex
 {
-    AAPLTextureIndexBaseColor = 0,
-    AAPLTextureIndexBaseAlpha = 1,
+    AAPLTextureIndexBaseColor           = 0,
+    AAPLTextureIndexBaseAlpha           = 1,
+    AAPLVertexInputIndexLight           = 2,        // An array of light information
+    AAPLVertexInpueIndexLightCount      = 3
 } AAPLTextureIndex;
 
 //  This structure defines the layout of vertices sent to the vertex
@@ -41,9 +43,37 @@ typedef struct
 {
     // Positions in pixel space. A value of 100 indicates 100 pixels from the origin/center.
     vector_float2 position;
-    
+
     // 2D texture coordinate
     vector_float2 textureCoordinate;
+
+    // The light amount; 0-1
+    float lightAmount;
 } AAPLVertex;
+
+typedef struct
+{
+    float lightType;
+    vector_float3 color;            // 0-2
+    float ambientIntensity;         // 3
+
+    vector_float2 position;         // 4-5
+    float diffuse_size;             // 6
+
+    float diffuse_intensity;        // 7
+
+    float enabled;                  // 8
+//    float reserved1;                // 9
+//    float reserved2;                // 10
+//    float reserved3;                // 11
+
+    /* Keep the structure aligned to 16 bytes!
+        _________________________
+       |0 1 2 3|4 5 6 7|8 9 10 11|
+        -------------------------
+       |       |       |         |
+       | chunk0| chunk1| chunk2  |
+    */
+} AAPAmbientLLight;
 
 #endif /* AAPLShaderTypes_h */

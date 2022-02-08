@@ -93,7 +93,8 @@ namespace engine
         /// rendered using ::DrawableTargetRender.
         virtual std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float) = 0;
 
-        /// Render the drawable for the current frame at x, y.
+        /// Render the drawable for the current frame at x, y. Throw in a drawable (or more)
+        /// that are to be taken as light sources.
         virtual void DrawableRender(DrawableI*, float, float) = 0;
 
         /// Render the target drawable for the current frame at x, y.

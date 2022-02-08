@@ -142,6 +142,9 @@ void Engine::FrameBegin()
 
     // Calculate performance
     MeasurePerformanceStart();
+
+    // Periodic updates update
+    m_periodicUpdatesManager.Update();
 }
 
 void Engine::ProcessScript()
@@ -149,21 +152,32 @@ void Engine::ProcessScript()
     m_scriptingEngine.callUpdate();
 }
 
-void Engine::FrameDraw()
+void Engine::FrameDrawBackgroundObjects()
 {
-    // Render scene
-    RenderScene();
+    Scene *scene = m_sceneManager.SceneGetCurrent();
+    if (scene != nullptr)
+    {
+        scene->RenderSceneBackground();
+    }
+}
 
+void Engine::FrameDrawForegroundObjects()
+{
+    Scene *scene = m_sceneManager.SceneGetCurrent();
+    if (scene != nullptr)
+    {
+        scene->RenderSceneForeground();
+    }
+}
+
+void Engine::FrameDrawLightObjects()
+{
+}
+
+void Engine::FrameDrawTopObjects()
+{
     // Draw the texts
     RenderSceneTexts();
-
-    // Render the current stack
-    m_engineProvider.RenderPresent();
-
-#if SHOW_CONSOLE
-    // Render the console if needed
-//    m_consoleRenderer.DoFrame();
-#endif
 }
 
 void Engine::FrameEnd()
@@ -191,13 +205,6 @@ void Engine::MeasurePerformanceEnd()
 
 void Engine::RenderScene()
 {
-    Scene *scene = m_sceneManager.SceneGetCurrent();
-    if (scene != nullptr)
-    {
-        scene->RenderScene();
-    }
-
-    m_periodicUpdatesManager.Update();
 }
 
 void Engine::RenderSceneTexts()

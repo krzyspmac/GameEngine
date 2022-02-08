@@ -77,7 +77,9 @@
 
         /** Render the scene */
         m_engine->FrameBegin();
-        m_engine->FrameDraw();
+        m_engine->FrameDrawBackgroundObjects();
+        m_engine->FrameDrawForegroundObjects();
+        m_engine->FrameDrawTopObjects();
 
         [encoder endEncoding];
     }
@@ -112,6 +114,7 @@
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 
         // Optionally draw the console
+#if TARGET_OSX
 #if SHOW_CONSOLE
         if (!m_consoleRenderer->GetConsoleHidden())
         {
@@ -128,6 +131,7 @@
 
             [encoder popDebugGroup];
         }
+#endif
 #endif
         /** End encoding */
         [encoder endEncoding];

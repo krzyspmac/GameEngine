@@ -174,6 +174,7 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
         auto drawable = provider.DrawableCreate(atlasItem, m_scale);
         drawable->SetTexture(m_texture);
         drawable->SetScale(m_scale);
+        drawable->GetAcceptsLight() = false;
         glyph.SetDrawable(drawable);
     }
 }

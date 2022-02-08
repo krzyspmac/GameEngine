@@ -186,6 +186,7 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">sprites/background.png</key>
+            <key type="filename">sprites/background_light.tga</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>

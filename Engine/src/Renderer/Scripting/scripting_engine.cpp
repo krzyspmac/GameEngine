@@ -19,6 +19,7 @@
 #include "animation_group_factory.hpp"
 #include "font_manager.hpp"
 #include "events_manager.hpp"
+#include "light_manager.hpp"
 
 using namespace engine;
 
@@ -165,6 +166,10 @@ void ScriptingEngine::registerFunctions()
     EventsManager &eventsManager = GetMainEngine()->getEventsManager();
     eventsManager.ScriptingInterfaceRegisterFunctions(L, &eventsManager);
     lua_setglobal(L, "EventsManager");
+
+    LightManager &lightManager = GetMainEngine()->getLightMnaager();
+    lightManager.ScriptingInterfaceRegisterFunctions(L, &lightManager);
+    lua_setglobal(L, "LightManager");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)

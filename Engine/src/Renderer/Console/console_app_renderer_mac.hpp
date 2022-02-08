@@ -40,7 +40,7 @@ namespace engine
 #if TARGET_OS_OSX
         void SetView(NSView*);
         void PrepareForFrame(NSView*, MTL::RenderPassDescriptor*, MTL::CommandBuffer*, MTL::RenderCommandEncoder*);
-        void HandleEvent(NSEvent*);
+        bool HandleEvent(NSEvent*);
 #endif
         bool IsSetup();
         void DoFrame(std::function<void(void)>);

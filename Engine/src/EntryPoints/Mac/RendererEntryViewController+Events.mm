@@ -31,6 +31,14 @@ using namespace engine;
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
     [NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskLeftMouseUp handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
+#if SHOW_CONSOLE
+        if (!self->m_consoleRenderer->GetConsoleHidden())
+        {
+            bool result = self->m_consoleRendererProvider->HandleEvent(event);
+            if (result) { return event; };
+        }
+#endif
+
         self->m_engine->getEventProvider().PushMouseLeftUp();
         return event;
     }];
@@ -128,6 +136,7 @@ using namespace engine;
 
 #pragma mark - Handling
 
+#if TARGET_OSX
 - (void)handle:(NSEvent*)event
 {
 #if SHOW_CONSOLE
@@ -137,6 +146,7 @@ using namespace engine;
     }
 #endif
 }
+#endif
 
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
