@@ -45,7 +45,7 @@ Light *LightManager::CreateLight(LightFalloffType type, Color3 color, float ambi
 {
 #if TARGET_OSX || TARGET_IOS
     LightMetal *light = new LightMetal(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
-    m_lights.emplace_back(std::unique_ptr<LightI>(std::move(light)));
+    m_lights.emplace_back(std::unique_ptr<Light>(std::move(light)));
     UpdateCache();
     return light;
 #else
