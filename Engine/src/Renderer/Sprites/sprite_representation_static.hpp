@@ -19,7 +19,7 @@ namespace engine
     {
     public:
         /** @private */
-        SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem, float scale);
+        SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem);
         virtual ~SpriteRepresentationStatic() { };
         
     public:

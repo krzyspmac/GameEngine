@@ -113,6 +113,12 @@
 		7F869FE22783970400E8CB01 /* textx.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD22783970400E8CB01 /* textx.json */; };
 		7F869FE32783970400E8CB01 /* polygons.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD32783970400E8CB01 /* polygons.json */; };
 		7F869FE42783970400E8CB01 /* room1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F869FD42783970400E8CB01 /* room1.png */; };
+		7F8E9BD327B5B58A00548567 /* TDS.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8E9BD127B5B58A00548567 /* TDS.png */; };
+		7F8E9BD427B5B58A00548567 /* TDS.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8E9BD127B5B58A00548567 /* TDS.png */; };
+		7F8E9BD527B5B58A00548567 /* TDS.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F8E9BD127B5B58A00548567 /* TDS.png */; };
+		7F8E9BD627B5B58A00548567 /* TDS.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8E9BD227B5B58A00548567 /* TDS.json */; };
+		7F8E9BD727B5B58A00548567 /* TDS.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8E9BD227B5B58A00548567 /* TDS.json */; };
+		7F8E9BD827B5B58A00548567 /* TDS.json in Resources */ = {isa = PBXBuildFile; fileRef = 7F8E9BD227B5B58A00548567 /* TDS.json */; };
 		7F927F462796B8B90052DB60 /* background.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F452796B8B90052DB60 /* background.tga */; };
 		7F927F482796FB430052DB60 /* background1.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F472796FB430052DB60 /* background1.tga */; };
 		7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */ = {isa = PBXBuildFile; fileRef = 7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */; };
@@ -204,6 +210,8 @@
 		7F869FD22783970400E8CB01 /* textx.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = textx.json; sourceTree = "<group>"; };
 		7F869FD32783970400E8CB01 /* polygons.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = polygons.json; sourceTree = "<group>"; };
 		7F869FD42783970400E8CB01 /* room1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = room1.png; sourceTree = "<group>"; };
+		7F8E9BD127B5B58A00548567 /* TDS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TDS.png; sourceTree = "<group>"; };
+		7F8E9BD227B5B58A00548567 /* TDS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = TDS.json; sourceTree = "<group>"; };
 		7F927F452796B8B90052DB60 /* background.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background.tga; sourceTree = "<group>"; };
 		7F927F472796FB430052DB60 /* background1.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = background1.tga; sourceTree = "<group>"; };
 		7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = DialogFont_retro.tga; sourceTree = "<group>"; };
@@ -367,6 +375,8 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7F8E9BD227B5B58A00548567 /* TDS.json */,
+				7F8E9BD127B5B58A00548567 /* TDS.png */,
 				7F927F4B27981BE20052DB60 /* DialogFont_retro.tga */,
 				7F927F472796FB430052DB60 /* background1.tga */,
 				7F927F452796B8B90052DB60 /* background.tga */,
@@ -511,10 +521,12 @@
 				7F869FD82783970400E8CB01 /* background.json in Resources */,
 				7F8499292787798B004127CB /* fireplace.png in Resources */,
 				7F869FDB2783970400E8CB01 /* room1.json in Resources */,
+				7F8E9BD627B5B58A00548567 /* TDS.json in Resources */,
 				7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */,
 				7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */,
 				7F869FD72783970400E8CB01 /* textx.png in Resources */,
 				7F869FD92783970400E8CB01 /* main.lua in Resources */,
+				7F8E9BD327B5B58A00548567 /* TDS.png in Resources */,
 				7F869FD62783970400E8CB01 /* brett_character.json in Resources */,
 				7FB8226E2788DB34008F0F7A /* parlor.json in Resources */,
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
@@ -544,6 +556,7 @@
 				7F3E900F279AFA6C003BB7B6 /* textx.png in Resources */,
 				7F3E9018279AFA6C003BB7B6 /* background1.tga in Resources */,
 				7F3E9010279AFA6C003BB7B6 /* characters.png in Resources */,
+				7F8E9BD427B5B58A00548567 /* TDS.png in Resources */,
 				7F6D1C8B279F186A0078D76A /* main.ini in Resources */,
 				7F3E900E279AFA6C003BB7B6 /* parlor.json in Resources */,
 				7F3E900D279AFA6C003BB7B6 /* background.json in Resources */,
@@ -559,6 +572,7 @@
 				7F3E9019279AFA6C003BB7B6 /* DialogFont_retro.tga in Resources */,
 				7F3E9003279AFA6C003BB7B6 /* brett.json in Resources */,
 				7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */,
+				7F8E9BD727B5B58A00548567 /* TDS.json in Resources */,
 				7F3E9005279AFA6C003BB7B6 /* background.tga in Resources */,
 				7F3E9009279AFA6C003BB7B6 /* background.png in Resources */,
 				7F3E9001279AFA6C003BB7B6 /* fireplace.json in Resources */,
@@ -582,6 +596,7 @@
 				7F3E917B279B0650003BB7B6 /* polygons.json in Resources */,
 				7F3E9186279B0650003BB7B6 /* parlor.json in Resources */,
 				7F3E9180279B0650003BB7B6 /* EnterCommand.ttf in Resources */,
+				7F8E9BD527B5B58A00548567 /* TDS.png in Resources */,
 				7F6D1C8C279F186A0078D76A /* main.ini in Resources */,
 				7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */,
 				7F3E9175279B0650003BB7B6 /* background.png in Resources */,
@@ -597,6 +612,7 @@
 				7F3E9176279B0650003BB7B6 /* DialogFont_retro.fnt in Resources */,
 				7F3E9182279B0650003BB7B6 /* background.jpg in Resources */,
 				7F3E9179279B0650003BB7B6 /* brett.png in Resources */,
+				7F8E9BD827B5B58A00548567 /* TDS.json in Resources */,
 				7F3E917C279B0650003BB7B6 /* brett_character.json in Resources */,
 				7F3E917D279B0650003BB7B6 /* fireplace.png in Resources */,
 				7F3E9172279B0650003BB7B6 /* main.lua in Resources */,

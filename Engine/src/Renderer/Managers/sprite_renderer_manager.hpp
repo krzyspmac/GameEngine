@@ -14,25 +14,29 @@
 
 namespace engine
 {
-    /**
-     SpriteRendererManager
-     \addtogroup API_GLOBALS
+    /** SpriteRendererManager
+        \addtogroup API_GLOBALS
      */
-    /**
-     Manages a list of sprite renderers. Those are used by the current
-     scene to render the appropriate sprites at particular timeframes.
+    /** Manages a list of sprite renderers. Those are used by the current
+        scene to render the appropriate sprites at particular timeframes.
      */
     class SpriteRendererManager
     {
     public:
-        /** Creates or gets a drawing handle for a sprite.
-            The result is cached.
-         */
+        /** Loads a sprite representation for a sprite atlas item descriptor.
+            The result is cached. */
         SpriteRepresetationI *SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite);
 
-        /** Creates or gets a drawing handle for a sprite
-         */
+        /** Loads a sprite representation for a sprite animation made up from
+            individual sprite atlas items.
+            The result is cached. */
+        /** @private */
         SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites);
+
+        /** Loads a sprite representation for a sprite animation made up of all the
+            frames in one sprite atlas.
+            The result is cached. */
+        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI*);
 
         /** Unloads the sprite draw.
          */

@@ -70,9 +70,29 @@ SpriteRepresentationStatic *Scene::SpriteStaticLoad(SpriteAtlasI *atlas, std::st
     return nullptr;
 }
 
+SpriteDrawAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas)
+{
+    if (atlas != nullptr)
+    {
+        SpriteDrawAnimated *renderer = (SpriteDrawAnimated*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(keyframeAnimationDelay, atlas);
+        if (renderer != nullptr)
+        {
+            SpriteAnimatedAdd(renderer);
+            return renderer;
+        }
+    }
+    return nullptr;
+
+}
+
 void Scene::SpriteStaticAdd(SpriteRepresentationStatic *renderer)
 {
     m_staticSprites.push_back(renderer);
+}
+
+void Scene::SpriteAnimatedAdd(SpriteDrawAnimated *renderer)
+{
+    m_animatedSprites.push_back(renderer);
 }
 
 CharacterRepresentation *Scene::LoadCharacter(std::string jsonFilename)
@@ -115,6 +135,16 @@ void Scene::RenderSceneForeground()
         Vector2& pos = sprite->GetPosition();
         (*it)->DrawAt(pos.x, pos.y);
     };
+
+    for (auto* item : m_animatedSprites)
+    {
+        if (item->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
+        {
+            continue;
+        }
+        Vector2& pos = item->GetPosition();
+        item->DrawAt(pos.x, pos.y);
+    }
 
     for (auto it = m_characterRepresentations.begin(); it != m_characterRepresentations.end(); ++it)
     {
@@ -164,6 +194,22 @@ static int lua_Scene_LoadSpriteDrawStatic(lua_State *L)
     else
     {
         return 0;
+    }
+}
+
+static int lua_Scene_SpriteAnimatedLoad(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    float keyframeDelayMs = lua_tonumber(L, 2);
+    SpriteAtlas *atlas = ScriptingEngineI::GetScriptingObjectPtr<SpriteAtlas>(L, 3);
+
+    SpriteDrawAnimated *representation = scene->SpriteAnimatedLoad(keyframeDelayMs, atlas);
+    if (representation != nullptr)
+    {   representation->ScriptingInterfaceRegisterFunctions(L, representation);
+        return 1;
+    }
+    else
+    {   return 0;
     }
 }
 
@@ -217,6 +263,7 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
     std::vector<luaL_Reg> result({
         {"SpriteStaticLoad", &lua_Scene_LoadSpriteDrawStatic}
       , {"SpriteStaticAdd", &lua_Scene_AddSpriteDrawStatic}
+      , {"SpriteAnimatedLoad", &lua_Scene_SpriteAnimatedLoad}
       , {"LoadCharacter", &lua_Scene_LoadCharacter}
       , {"SetMainCharacter", &lua_Scene_SetMainCharacter}
       , {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}

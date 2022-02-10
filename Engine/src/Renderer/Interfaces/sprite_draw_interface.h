@@ -57,7 +57,7 @@ namespace engine
         /** Sets the alpha. Values range from 0-1.
             Default value is 1.
          */
-        void SetAlpha(float val) { m_drawable.get()->SetAlpha(val); };
+        void SetAlpha(float val) { if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val); };
 
         /** Gets the curernt alpha. Values range from 0-1.
             Default value is 1.

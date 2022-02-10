@@ -12,10 +12,11 @@
 
 using namespace engine;
 
-SpriteRepresentationStatic::SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem, float scale)
-    : SpriteRepresetationI(scale), m_sprite(spriteAtlasItem)
+SpriteRepresentationStatic::SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem)
+    : SpriteRepresetationI(1.0f)
+    , m_sprite(spriteAtlasItem)
 {
-    auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, scale);
+    auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, 1.f);
     m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 

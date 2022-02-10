@@ -25,10 +25,12 @@ namespace engine
         /** @private */
         virtual ~SpriteAtlas();
 
-        /**
-         Get the specific atlas item for the name.
+        /** Get the specific atlas item for the name.
          */
         SpriteAtlasItemI *GetItemForName(std::string name);
+
+        /** Get all the sprite items */
+        std::vector<std::unique_ptr<SpriteAtlasItemI>>& GetAllItems();
 
         /** @private */
         std::string &GetFilename() { return m_filename; };
@@ -42,7 +44,7 @@ namespace engine
     private:
         std::string m_filename;
         TextureI *m_texture;
-        std::vector<SpriteAtlasItemI> m_items;
+        std::vector<std::unique_ptr<SpriteAtlasItemI>> m_items;
         bool m_flippedVertically;
 
     /// ScriptingInterface

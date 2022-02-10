@@ -24,6 +24,7 @@ namespace engine
     {
         EngineProviderI& m_engineProvider;
         std::vector<SpriteRepresentationStatic*> m_staticSprites;
+        std::vector<SpriteDrawAnimated*> m_animatedSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
         std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
@@ -64,6 +65,11 @@ namespace engine
         SpriteRepresentationStatic *SpriteStaticLoad(SpriteAtlasI *atlas, std::string name);
 
         /**
+         \brief Load a sprite renderer for animation
+         */
+        SpriteDrawAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
+
+        /**
          \brief Load a character representation.
 
          The character representation is loaded and put into cache.
@@ -89,6 +95,11 @@ namespace engine
          \include SampleSpriteStatic-lowlevel.lua
          */
         void SpriteStaticAdd(SpriteRepresentationStatic*);
+
+        /**
+         \brief Register a sprite renderer.
+         */
+        void SpriteAnimatedAdd(SpriteDrawAnimated*);
 
         /**
          \brief Set a mouse down function.

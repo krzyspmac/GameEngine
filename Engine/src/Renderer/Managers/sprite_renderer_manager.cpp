@@ -14,7 +14,7 @@ using namespace engine;
 
 SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite)
 {
-    SpriteRepresentationStatic *sd = new engine::SpriteRepresentationStatic(sprite, 1);
+    SpriteRepresentationStatic *sd = new SpriteRepresentationStatic(sprite);
 
     if (sd)
     {
@@ -25,14 +25,22 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(Spri
 
 SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites)
 {
-    engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, 1);
-
+    engine::SpriteDrawAnimated *sd = new SpriteDrawAnimated(sprites, frameAnimationDurationMs);
     if (sd)
     {
         m_spriteDraws.emplace_back(std::move(sd));
     }
     return sd;
+}
 
+SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI *atlas)
+{
+    engine::SpriteDrawAnimated *sd = SpriteDrawAnimated::CreateFromAtlas(atlas->GetAllItems(), frameAnimationDurationMs);
+    if (sd)
+    {
+        m_spriteDraws.emplace_back(std::move(sd));
+    }
+    return sd;
 }
 
 void SpriteRendererManager::SpriteDrawUnload(SpriteRepresetationI *spriteDraw)
