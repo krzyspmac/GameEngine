@@ -41,7 +41,15 @@ void MetalBufferManager::NewBlock(MTL::Device *device)
 
 void MetalBufferManager::Free()
 {
-    // TODO: to be implemented
+    for (auto& buffer : m_buffers)
+    {
+        buffer->release();
+    }
+
+    m_buffers.clear();
+    m_currentBuffer = nullptr;
+    m_currentBufferSize = 0;
+    m_currentBufferLeftBytes = DEFAULT_BLOCK_SIZE;
 }
 
 void MetalBufferManager::RegisterData(MTL::Device *device, void *bytes, size_t length, std::function<void(MTL::Buffer*, size_t offset)> result)
