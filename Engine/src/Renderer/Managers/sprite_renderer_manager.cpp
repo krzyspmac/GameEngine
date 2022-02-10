@@ -6,25 +6,24 @@
 //
 
 #include "sprite_renderer_manager.hpp"
-#include "sprite_draw_static.hpp"
+#include "sprite_representation_static.hpp"
 #include "sprite_draw_animated.hpp"
 #include "engine.hpp"
 
 using namespace engine;
 
-SpriteDrawI *SpriteRendererManager::SpriteDrawLoadStatic(SpriteAtlasItemI *sprite)
+SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite)
 {
-    SpriteDrawStatic *sd = new engine::SpriteDrawStatic(sprite, 1);
+    SpriteRepresentationStatic *sd = new engine::SpriteRepresentationStatic(sprite, 1);
 
     if (sd)
     {
-//        GetMainEngine()->getScripting().RegisterScriptingObject(sd);
         m_spriteDraws.emplace_back(std::move(sd));
     }
     return sd;
 }
 
-SpriteDrawI *SpriteRendererManager::SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
+SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
 {
     engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, 1);
 
@@ -36,11 +35,11 @@ SpriteDrawI *SpriteRendererManager::SpriteDrawLoadAnimated(std::vector<SpriteAtl
 
 }
 
-void SpriteRendererManager::SpriteDrawUnload(SpriteDrawI *spriteDraw)
+void SpriteRendererManager::SpriteDrawUnload(SpriteRepresetationI *spriteDraw)
 {
     for(auto it = std::begin(m_spriteDraws); it != std::end(m_spriteDraws); ++it)
     {
-        SpriteDrawI *item = it->get();
+        SpriteRepresetationI *item = it->get();
         if (item == spriteDraw)
         {
             m_spriteDraws.erase(it);
@@ -63,18 +62,17 @@ static int lua_SpriteRendererManager_spriteDrawLoadStatic(lua_State *L)
     SpriteRendererManager *spriteRendererManager = ScriptingEngineI::GetScriptingObjectPtr<SpriteRendererManager>(L, 1);
     SpriteAtlasItemI *atlasItem = ScriptingEngineI::GetNormalObjectPtr<SpriteAtlasItemI>(L, 2);
 
-    SpriteDrawStatic *result = (SpriteDrawStatic*)spriteRendererManager->SpriteDrawLoadStatic(atlasItem);
+    SpriteRepresentationStatic *result = (SpriteRepresentationStatic*)spriteRendererManager->SpriteRepresentationStaticLoad(atlasItem);
     if (result == nullptr) { return 0; };
 
     result->ScriptingInterfaceRegisterFunctions(L, result);
-    //lua_pushlightuserdata(L, result); // SpriteDrawStatic not scriptable for now
     return 1;
 }
 
 std::vector<luaL_Reg> SpriteRendererManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "SpriteDrawLoadStatic", &lua_SpriteRendererManager_spriteDrawLoadStatic}
+        { "SpriteRepresentationStaticLoad", &lua_SpriteRendererManager_spriteDrawLoadStatic}
     });
     return result;
 }

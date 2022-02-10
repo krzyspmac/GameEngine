@@ -19,7 +19,7 @@
 #include <ratio>
 #include <thread>
 
-#include "sprite_draw_static.hpp"
+#include "sprite_representation_static.hpp"
 #include "scene_manager.hpp"
 #include "engine.hpp"
 

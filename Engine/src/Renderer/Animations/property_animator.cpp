@@ -9,7 +9,7 @@
 
 using namespace engine;
 
-PropertyAnimator::PropertyAnimator(SpriteDrawI *sprite, ValueAnimator *valueAnimator)
+PropertyAnimator::PropertyAnimator(SpriteRepresetationI *sprite, ValueAnimator *valueAnimator)
     : AnimatableI()
     , m_sprite(sprite)
     , m_valueAnimator(std::move(valueAnimator))

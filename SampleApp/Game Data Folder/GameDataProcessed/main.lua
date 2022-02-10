@@ -78,13 +78,13 @@ function loadSprites()
 	scene:SetMouseDownFunction(mouseDown)
 
 	-- sky
-	sky2 = scene:LoadSpriteStatic(atlas, "background.png")
+	sky2 = scene:SpriteStaticLoad(atlas, "background.png")
 	sky2:SetScale(1)
 	sky2:SetAlpha(1)
 	sky2:SetPosition(0, 0)
 	sky2:SetAcceptsLight(true)
 
-	sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
+	sky = scene:SpriteStaticLoad(roomAtlas, "roombg")
 	sky:SetScale(1)
 	sky:SetAlpha(0)
 	sky:SetPosition(1280/2, 200)

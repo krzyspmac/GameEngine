@@ -12,7 +12,7 @@
 #include "texture_target.hpp"
 #include "vector2.hpp"
 #include "drawable_interface.h"
-#include "sprite_draw_static.hpp"
+#include "sprite_representation_static.hpp"
 
 namespace engine
 {
@@ -189,7 +189,7 @@ namespace engine
         CharacterWalkRenderer m_walkB;
         CharacterWalkRenderer m_standB;
 
-        std::unique_ptr<SpriteDrawStatic> m_bodySprite;
+        std::unique_ptr<SpriteRepresentationStatic> m_bodySprite;
     };
 
     inline CharacterWalkState CharacterWalkStateGetStanding(CharacterWalkState state)

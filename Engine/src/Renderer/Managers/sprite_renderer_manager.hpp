@@ -27,19 +27,19 @@ namespace engine
     public:
         /// Creates or gets a drawing handle for a sprite.
         /// The result is cached.
-        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
+        SpriteRepresetationI *SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite);
 
         /// Creates or gets a drawing handle for a sprite
-        SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
+        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
 
         /// Unloads the sprite draw.
-        void SpriteDrawUnload(SpriteDrawI *spriteDraw);
+        void SpriteDrawUnload(SpriteRepresetationI *spriteDraw);
 
         /// Unloads all.
         void SpriteDrawDisposeAll();
 
     private:
-        std::vector<std::unique_ptr<SpriteDrawI>> m_spriteDraws;
+        std::vector<std::unique_ptr<SpriteRepresetationI>> m_spriteDraws;
 
     /// ScriptingInterface
     public:

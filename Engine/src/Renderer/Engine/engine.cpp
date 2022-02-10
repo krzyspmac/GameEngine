@@ -9,7 +9,7 @@
 #include "font_bitmap.hpp"
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas.hpp"
-#include "sprite_draw_static.hpp"
+#include "sprite_representation_static.hpp"
 #include "sprite_draw_animated.hpp"
 #include "character_renderer.hpp"
 #include "character.hpp"

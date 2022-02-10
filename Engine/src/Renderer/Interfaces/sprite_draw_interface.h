@@ -21,18 +21,17 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
-    class SpriteDrawI
+    class SpriteRepresetationI
     {
     public:
-        /// Scale applies to width and height. Does not modify x no y.
-        SpriteDrawI(int scale)
+        SpriteRepresetationI(int scale)
             : m_scale(scale)
             , m_position(Vector2Zero)
             , m_isDrawable(true)
             , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
         { };
         
-        virtual ~SpriteDrawI() { };
+        virtual ~SpriteRepresetationI() { };
         
     public:
         /** Draws the sprite at a given coordinates. */
@@ -42,28 +41,34 @@ namespace engine
          */
         virtual void Draw() = 0;
 
+    public:
+        /** Scale getter */
+        float GetScale() { return m_scale; }
+
+        /** Scale setter */
         void SetScale(float x) { m_scale = x; };
 
-    public:
         /** Position this sprite in game coordinates */
         void SetPosition(Vector2 pos) { m_position = pos; };
 
         /** Get this sprite's position in game coordinates */
         Vector2& GetPosition() { return m_position; };
 
-        /**
-         Sets the alpha. Values range from 0-1.
-         Default value is 1.
+        /** Sets the alpha. Values range from 0-1.
+            Default value is 1.
          */
         void SetAlpha(float val) { m_drawable.get()->SetAlpha(val); };
 
-        /**
-         Gets the curernt alpha. Values range from 0-1.
-         Default value is 1.
+        /** Gets the curernt alpha. Values range from 0-1.
+            Default value is 1.
          */
         float GetAlpha() { return *m_drawable.get()->GetAlpha(); };
 
-        /** */
+        /** Control whether the object receives lights or not. If false it's
+            completely lit up. */
+        auto& GetAcceptsLight() { return m_acceptsLight; };
+
+        /** Lighting setter */
         void SetAcceptsLight(bool val) { m_acceptsLight = val; m_drawable.get()->GetAcceptsLight() = val; };
 
     public: // Drawable related
@@ -73,10 +78,6 @@ namespace engine
 
         /** Controls the sprite type. Default is SPRITE_DRAW_TYPE_FOREGROUND */
         auto& GetType() { return m_type; };
-
-        /** Control whether the object receives lights or not. If false it's
-            completely lit up. */
-        auto& GetAcceptsLight() { return m_acceptsLight; };
 
         /** Set the main drawable for this sprite */
         void SetDrawable(std::unique_ptr<DrawableSpriteI> val) { m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(val)); };

@@ -295,7 +295,7 @@ int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
 
     if (spritePointer)
     {
-        SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(spritePointer);
+        SpriteRepresetationI *sd = GetMainEngine()->getSpriteRendererManager().SpriteRepresentationStaticLoad(spritePointer);
         if (sd)
         {
             lua_pushlightuserdata(L, sd);
@@ -321,7 +321,7 @@ int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
 
     int frame_duration_ms = lua_tonumberx(L, 1, NULL);
 
-    SpriteDrawI *sd = GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadAnimated(sprites, frame_duration_ms);
+    SpriteRepresetationI *sd = GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(sprites, frame_duration_ms);
     if (sd)
     {
         lua_pushlightuserdata(L, sd);
@@ -339,11 +339,11 @@ int ScriptingEngine::L_spriteDrawRender(lua_State *L)
     int argc = lua_gettop(L);
     int y = lua_tonumberx(L, argc--, NULL);
     int x = lua_tonumberx(L, argc--, NULL);
-    SpriteDrawI *spriteRender = (SpriteDrawI*)lua_topointer(L, argc--);
+    SpriteRepresetationI *spriteRender = (SpriteRepresetationI*)lua_topointer(L, argc--);
 
     if (spriteRender)
     {
-        if (dynamic_cast<SpriteDrawI*>(spriteRender))
+        if (dynamic_cast<SpriteRepresetationI*>(spriteRender))
         {
             spriteRender->DrawAt(x, y);
         }

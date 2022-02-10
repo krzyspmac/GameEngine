@@ -37,11 +37,11 @@
 		7F13825D277505B600ED6D67 /* event_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138226277505B600ED6D67 /* event_provider.hpp */; };
 		7F138263277505B600ED6D67 /* file_access.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13822B277505B600ED6D67 /* file_access.mm */; };
 		7F138264277505B600ED6D67 /* file_access.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822C277505B600ED6D67 /* file_access.hpp */; };
-		7F138266277505B600ED6D67 /* sprite_draw_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_draw_static.hpp */; };
+		7F138266277505B600ED6D67 /* sprite_representation_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_representation_static.hpp */; };
 		7F138269277505B600ED6D67 /* sprite_atlas.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138232277505B600ED6D67 /* sprite_atlas.hpp */; };
 		7F13826B277505B600ED6D67 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */; };
 		7F13826E277505B600ED6D67 /* sprite_draw_animated.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */; };
-		7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_draw_static.cpp */; };
+		7F138272277505B600ED6D67 /* sprite_representation_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_representation_static.cpp */; };
 		7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138239277505B600ED6D67 /* sprite_interface_defs.h */; };
 		7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823A277505B600ED6D67 /* sprite_atlas.cpp */; };
 		7F13827A277505B600ED6D67 /* engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138240277505B600ED6D67 /* engine.hpp */; };
@@ -137,7 +137,7 @@
 		7F3E8EDF279AC8F9003BB7B6 /* file_access.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822C277505B600ED6D67 /* file_access.hpp */; };
 		7F3E8EE0279AC8F9003BB7B6 /* sprite_interface_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138239277505B600ED6D67 /* sprite_interface_defs.h */; };
 		7F3E8EE1279AC8F9003BB7B6 /* sprite_atlas.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138232277505B600ED6D67 /* sprite_atlas.hpp */; };
-		7F3E8EE2279AC8F9003BB7B6 /* sprite_draw_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_draw_static.hpp */; };
+		7F3E8EE2279AC8F9003BB7B6 /* sprite_representation_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_representation_static.hpp */; };
 		7F3E8EE3279AC8F9003BB7B6 /* sprite_draw_animated.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */; };
 		7F3E8EE4279AC8F9003BB7B6 /* sprite_draw_backbuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */; };
 		7F3E8EE5279AC8F9003BB7B6 /* event_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138226277505B600ED6D67 /* event_provider.hpp */; };
@@ -192,7 +192,7 @@
 		7F3E8F17279AC909003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F3E8F18279AC909003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7F3E8F19279AC909003BB7B6 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823A277505B600ED6D67 /* sprite_atlas.cpp */; };
-		7F3E8F1A279AC909003BB7B6 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_draw_static.cpp */; };
+		7F3E8F1A279AC909003BB7B6 /* sprite_representation_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_representation_static.cpp */; };
 		7F3E8F1B279AC909003BB7B6 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */; };
 		7F3E8F1C279AC909003BB7B6 /* sprite_draw_backbuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */; };
 		7F3E8F1D279AC909003BB7B6 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138225277505B600ED6D67 /* event_provider.cpp */; };
@@ -297,7 +297,7 @@
 		7F3E9101279B03F6003BB7B6 /* file_access.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822C277505B600ED6D67 /* file_access.hpp */; };
 		7F3E9102279B03F6003BB7B6 /* sprite_interface_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138239277505B600ED6D67 /* sprite_interface_defs.h */; };
 		7F3E9103279B03F6003BB7B6 /* sprite_atlas.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138232277505B600ED6D67 /* sprite_atlas.hpp */; };
-		7F3E9104279B03F6003BB7B6 /* sprite_draw_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_draw_static.hpp */; };
+		7F3E9104279B03F6003BB7B6 /* sprite_representation_static.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13822F277505B600ED6D67 /* sprite_representation_static.hpp */; };
 		7F3E9105279B03F6003BB7B6 /* sprite_draw_animated.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */; };
 		7F3E9106279B03F6003BB7B6 /* sprite_draw_backbuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */; };
 		7F3E9107279B03F6003BB7B6 /* event_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138226277505B600ED6D67 /* event_provider.hpp */; };
@@ -358,7 +358,7 @@
 		7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */; };
 		7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */; };
 		7F3E9142279B03F6003BB7B6 /* sprite_atlas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13823A277505B600ED6D67 /* sprite_atlas.cpp */; };
-		7F3E9143279B03F6003BB7B6 /* sprite_draw_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_draw_static.cpp */; };
+		7F3E9143279B03F6003BB7B6 /* sprite_representation_static.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138238277505B600ED6D67 /* sprite_representation_static.cpp */; };
 		7F3E9144279B03F6003BB7B6 /* sprite_draw_animated.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */; };
 		7F3E9145279B03F6003BB7B6 /* sprite_draw_backbuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */; };
 		7F3E9146279B03F6003BB7B6 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138225277505B600ED6D67 /* event_provider.cpp */; };
@@ -596,11 +596,11 @@
 		7F138226277505B600ED6D67 /* event_provider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_provider.hpp; sourceTree = "<group>"; };
 		7F13822B277505B600ED6D67 /* file_access.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = file_access.mm; sourceTree = "<group>"; };
 		7F13822C277505B600ED6D67 /* file_access.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = file_access.hpp; sourceTree = "<group>"; };
-		7F13822F277505B600ED6D67 /* sprite_draw_static.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_static.hpp; sourceTree = "<group>"; };
+		7F13822F277505B600ED6D67 /* sprite_representation_static.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite_representation_static.hpp; sourceTree = "<group>"; };
 		7F138232277505B600ED6D67 /* sprite_atlas.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite_atlas.hpp; sourceTree = "<group>"; };
 		7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_animated.cpp; sourceTree = "<group>"; };
 		7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_animated.hpp; sourceTree = "<group>"; };
-		7F138238277505B600ED6D67 /* sprite_draw_static.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_static.cpp; sourceTree = "<group>"; };
+		7F138238277505B600ED6D67 /* sprite_representation_static.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_representation_static.cpp; sourceTree = "<group>"; };
 		7F138239277505B600ED6D67 /* sprite_interface_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite_interface_defs.h; sourceTree = "<group>"; };
 		7F13823A277505B600ED6D67 /* sprite_atlas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_atlas.cpp; sourceTree = "<group>"; };
 		7F138240277505B600ED6D67 /* engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = engine.hpp; sourceTree = "<group>"; };
@@ -949,8 +949,8 @@
 				7F138239277505B600ED6D67 /* sprite_interface_defs.h */,
 				7F138232277505B600ED6D67 /* sprite_atlas.hpp */,
 				7F13823A277505B600ED6D67 /* sprite_atlas.cpp */,
-				7F13822F277505B600ED6D67 /* sprite_draw_static.hpp */,
-				7F138238277505B600ED6D67 /* sprite_draw_static.cpp */,
+				7F13822F277505B600ED6D67 /* sprite_representation_static.hpp */,
+				7F138238277505B600ED6D67 /* sprite_representation_static.cpp */,
 				7F138235277505B600ED6D67 /* sprite_draw_animated.hpp */,
 				7F138233277505B600ED6D67 /* sprite_draw_animated.cpp */,
 				7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */,
@@ -1347,7 +1347,7 @@
 				7F13826E277505B600ED6D67 /* sprite_draw_animated.hpp in Headers */,
 				7FC1311A2792FAF20094DF0C /* engine_interface.h in Headers */,
 				7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */,
-				7F138266277505B600ED6D67 /* sprite_draw_static.hpp in Headers */,
+				7F138266277505B600ED6D67 /* sprite_representation_static.hpp in Headers */,
 				7F7AE8D327A9B67F007BEB39 /* object_pool.hpp in Headers */,
 				4C9EA02B2792166F0082EB6A /* texture_metal.hpp in Headers */,
 				7FA2AB39277DD1A600AED89D /* character_manager.hpp in Headers */,
@@ -1519,7 +1519,7 @@
 				7FC971E827AF3B9600049146 /* light_metal.hpp in Headers */,
 				7F3E8EE0279AC8F9003BB7B6 /* sprite_interface_defs.h in Headers */,
 				7F3E8EE1279AC8F9003BB7B6 /* sprite_atlas.hpp in Headers */,
-				7F3E8EE2279AC8F9003BB7B6 /* sprite_draw_static.hpp in Headers */,
+				7F3E8EE2279AC8F9003BB7B6 /* sprite_representation_static.hpp in Headers */,
 				7F3E8EE3279AC8F9003BB7B6 /* sprite_draw_animated.hpp in Headers */,
 				7F3E8EE4279AC8F9003BB7B6 /* sprite_draw_backbuffer.hpp in Headers */,
 				7F3E8EE5279AC8F9003BB7B6 /* event_provider.hpp in Headers */,
@@ -1624,7 +1624,7 @@
 				7FC971EA27AF3B9600049146 /* light_metal.hpp in Headers */,
 				7F3E9102279B03F6003BB7B6 /* sprite_interface_defs.h in Headers */,
 				7F3E9103279B03F6003BB7B6 /* sprite_atlas.hpp in Headers */,
-				7F3E9104279B03F6003BB7B6 /* sprite_draw_static.hpp in Headers */,
+				7F3E9104279B03F6003BB7B6 /* sprite_representation_static.hpp in Headers */,
 				7F3E9105279B03F6003BB7B6 /* sprite_draw_animated.hpp in Headers */,
 				7F3E9106279B03F6003BB7B6 /* sprite_draw_backbuffer.hpp in Headers */,
 				7F3E9107279B03F6003BB7B6 /* event_provider.hpp in Headers */,
@@ -1936,7 +1936,7 @@
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
 				7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */,
 				4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */,
-				7F138272277505B600ED6D67 /* sprite_draw_static.cpp in Sources */,
+				7F138272277505B600ED6D67 /* sprite_representation_static.cpp in Sources */,
 				7FB824252789AF95008F0F7A /* pipe_output.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7F6D1CA1279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
@@ -2053,7 +2053,7 @@
 				7F3E8F17279AC909003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E8F18279AC909003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F3E8F19279AC909003BB7B6 /* sprite_atlas.cpp in Sources */,
-				7F3E8F1A279AC909003BB7B6 /* sprite_draw_static.cpp in Sources */,
+				7F3E8F1A279AC909003BB7B6 /* sprite_representation_static.cpp in Sources */,
 				7F3E8F1B279AC909003BB7B6 /* sprite_draw_animated.cpp in Sources */,
 				7F3E8F1C279AC909003BB7B6 /* sprite_draw_backbuffer.cpp in Sources */,
 				7F3E8F1D279AC909003BB7B6 /* event_provider.cpp in Sources */,
@@ -2137,7 +2137,7 @@
 				7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7F3E9142279B03F6003BB7B6 /* sprite_atlas.cpp in Sources */,
-				7F3E9143279B03F6003BB7B6 /* sprite_draw_static.cpp in Sources */,
+				7F3E9143279B03F6003BB7B6 /* sprite_representation_static.cpp in Sources */,
 				7F3E9144279B03F6003BB7B6 /* sprite_draw_animated.cpp in Sources */,
 				7F3E9145279B03F6003BB7B6 /* sprite_draw_backbuffer.cpp in Sources */,
 				7F3E9146279B03F6003BB7B6 /* event_provider.cpp in Sources */,

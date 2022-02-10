@@ -12,7 +12,7 @@
 using namespace engine;
 
 SpriteDrawAnimated::SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs, int scale)
-: SpriteDrawI(scale), m_sprites(sprites), m_maxWidth(0), m_maxHeight(0), m_frameAnimationDurationMs(frameAnimationDurationMs)
+: SpriteRepresetationI(scale), m_sprites(sprites), m_maxWidth(0), m_maxHeight(0), m_frameAnimationDurationMs(frameAnimationDurationMs)
 {
 //    PrepareAnimation();
 }

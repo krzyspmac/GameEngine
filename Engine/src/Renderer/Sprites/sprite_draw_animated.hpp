@@ -14,7 +14,7 @@
 namespace engine
 {
 
-    class SpriteDrawAnimated: public SpriteDrawI
+    class SpriteDrawAnimated: public SpriteRepresetationI
     {
     public:
         /// Asumming consecutive frames are laid out on the x-axis only!
