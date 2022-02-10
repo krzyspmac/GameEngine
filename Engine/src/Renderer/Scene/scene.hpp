@@ -11,7 +11,7 @@
 #include "scripting_engine_provider_interface.h"
 #include "engine_provider_interface.h"
 #include "sprite_representation_static.hpp"
-#include "sprite_draw_animated.hpp"
+#include "sprite_representation_animated.hpp"
 #include "sprite_atlas.hpp"
 #include "character_representation.hpp"
 #include "light_interface.hpp"

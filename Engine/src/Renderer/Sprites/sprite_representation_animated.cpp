@@ -5,7 +5,7 @@
 //  Created by krzysp on 22/12/2021.
 //
 
-#include "sprite_draw_animated.hpp"
+#include "sprite_representation_animated.hpp"
 #include "common_engine.h"
 #include "engine.hpp"
 

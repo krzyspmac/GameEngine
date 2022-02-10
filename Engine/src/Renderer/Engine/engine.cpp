@@ -10,7 +10,7 @@
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas.hpp"
 #include "sprite_representation_static.hpp"
-#include "sprite_draw_animated.hpp"
+#include "sprite_representation_animated.hpp"
 #include "character_renderer.hpp"
 #include "character.hpp"
 #include "character_mover.hpp"

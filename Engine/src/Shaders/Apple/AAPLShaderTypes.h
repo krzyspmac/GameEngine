@@ -46,9 +46,6 @@ typedef struct
 
     // 2D texture coordinate
     vector_float2 textureCoordinate;
-
-    // The light amount; 0-1
-    float lightAmount;
 } AAPLVertex;
 
 typedef struct

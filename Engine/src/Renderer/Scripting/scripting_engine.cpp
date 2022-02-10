@@ -321,7 +321,7 @@ int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
 
     int frame_duration_ms = lua_tonumberx(L, 1, NULL);
 
-    SpriteRepresetationI *sd = GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(sprites, frame_duration_ms);
+    SpriteRepresetationI *sd = GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(frame_duration_ms, sprites);
     if (sd)
     {
         lua_pushlightuserdata(L, sd);

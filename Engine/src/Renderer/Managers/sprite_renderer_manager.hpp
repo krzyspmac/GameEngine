@@ -25,17 +25,21 @@ namespace engine
     class SpriteRendererManager
     {
     public:
-        /// Creates or gets a drawing handle for a sprite.
-        /// The result is cached.
+        /** Creates or gets a drawing handle for a sprite.
+            The result is cached.
+         */
         SpriteRepresetationI *SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite);
 
-        /// Creates or gets a drawing handle for a sprite
-        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
+        /** Creates or gets a drawing handle for a sprite
+         */
+        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites);
 
-        /// Unloads the sprite draw.
+        /** Unloads the sprite draw.
+         */
         void SpriteDrawUnload(SpriteRepresetationI *spriteDraw);
 
-        /// Unloads all.
+        /** Unloads all.
+         */
         void SpriteDrawDisposeAll();
 
     private:

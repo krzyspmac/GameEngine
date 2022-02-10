@@ -7,7 +7,7 @@
 
 #include "sprite_renderer_manager.hpp"
 #include "sprite_representation_static.hpp"
-#include "sprite_draw_animated.hpp"
+#include "sprite_representation_animated.hpp"
 #include "engine.hpp"
 
 using namespace engine;
@@ -23,7 +23,7 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(Spri
     return sd;
 }
 
-SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
+SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites)
 {
     engine::SpriteDrawAnimated *sd = new engine::SpriteDrawAnimated(sprites, frameAnimationDurationMs, 1);
 
@@ -69,10 +69,23 @@ static int lua_SpriteRendererManager_spriteDrawLoadStatic(lua_State *L)
     return 1;
 }
 
+static int lua_SpriteRendererManager_spriteDrawLoadAnimated(lua_State *L)
+{
+    SpriteRendererManager *spriteRendererManager = ScriptingEngineI::GetScriptingObjectPtr<SpriteRendererManager>(L, 1);
+    SpriteAtlasItemI *atlasItem = ScriptingEngineI::GetNormalObjectPtr<SpriteAtlasItemI>(L, 2);
+
+    SpriteRepresentationStatic *result = (SpriteRepresentationStatic*)spriteRendererManager->SpriteRepresentationStaticLoad(atlasItem);
+    if (result == nullptr) { return 0; };
+
+    result->ScriptingInterfaceRegisterFunctions(L, result);
+    return 1;
+}
+
 std::vector<luaL_Reg> SpriteRendererManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "SpriteRepresentationStaticLoad", &lua_SpriteRendererManager_spriteDrawLoadStatic}
+        { "SpriteRepresentationStaticLoad", &lua_SpriteRendererManager_spriteDrawLoadStatic }
+      , { "SpriteRepresentationAnimatedLoad",  &lua_SpriteRendererManager_spriteDrawLoadAnimated }
     });
     return result;
 }

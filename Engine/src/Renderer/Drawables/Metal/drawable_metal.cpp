@@ -6,12 +6,14 @@
 //
 
 #include "drawable_metal.hpp"
+#include "engine_metal_buffer_manager.hpp"
 
 using namespace engine;
 
 DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     : DrawableSpriteI(atlasItem)
     , m_vertexBuffer(nullptr)
+    , m_vertexBufferOffset(0)
 {
     // Only process if the texture exists
     auto metalTextrue = (TextureMetal*)atlasItem->GetTexture();
@@ -54,20 +56,25 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     AAPLVertex data[] =
     {
         // Pixel positions, Texture coordinates, normals
-        { { -width2,  -height2 },   { x0, y1 }, { 1 } },
-        { { -width2,   height2 },   { x0, y0 }, { 1 } },
-        { {  width2,   height2 },   { x1, y0 }, { 1 } },
+        { { -width2,  -height2 },   { x0, y1 } },
+        { { -width2,   height2 },   { x0, y0 } },
+        { {  width2,   height2 },   { x1, y0 } },
 
-        { {  width2,    height2 },  { x1, y0 }, { 1 } },
-        { {  width2,   -height2 },  { x1, y1 }, { 1 } },
-        { { -width2,   -height2 },  { x0, y1 }, { 1 } },
+        { {  width2,    height2 },  { x1, y0 } },
+        { {  width2,   -height2 },  { x1, y1 } },
+        { { -width2,   -height2 },  { x0, y1 } },
     };
 
     // Allocate a buffer for metal with sufficient size. Set mode to shared.
-    m_vertexBuffer = device->newBuffer(sizeof(data), MTL::ResourceStorageModeShared);
+    MetalBufferManager::Shared()->RegisterData(device, data, sizeof(data), [&](MTL::Buffer *buffer, size_t offset){
+        m_vertexBuffer = buffer;
+        m_vertexBufferOffset = offset;
+    });
+
+    //m_vertexBuffer = device->newBuffer(sizeof(data), MTL::ResourceStorageModeShared);
 
     // Copy data over to the buffer.
-    memcpy(m_vertexBuffer->contents(), data, sizeof(data));
+    //memcpy(m_vertexBuffer->contents(), data, sizeof(data));
 
     // Store the number of vertices of the primitive.
     m_vertexCount = 6;
@@ -82,7 +89,7 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
 
 DrawableMetal::~DrawableMetal()
 {
-    m_vertexBuffer->release();
+    //m_vertexBuffer->release();
 }
 
 bool DrawableMetal::CanDraw()
@@ -98,6 +105,11 @@ vector_float2 *DrawableMetal::GetSize()
 MTL::Buffer *DrawableMetal::GetVertexBuffer()
 {
     return m_vertexBuffer;
+}
+
+size_t DrawableMetal::GetVertexBufferOffset()
+{
+    return m_vertexBufferOffset;
 }
 
 size_t DrawableMetal::GetVertexCount()
