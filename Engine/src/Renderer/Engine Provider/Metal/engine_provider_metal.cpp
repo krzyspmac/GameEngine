@@ -19,7 +19,7 @@
 #include <ratio>
 #include <thread>
 
-#include "sprite_draw_static.hpp"
+#include "sprite_representation_static.hpp"
 #include "scene_manager.hpp"
 #include "engine.hpp"
 
@@ -194,7 +194,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     // when using RendererTargetDrawablePush.
     MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
 
-    renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), 0, AAPLVertexInputIndexVertices);
+    renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), drawable->GetVertexBufferOffset(), AAPLVertexInputIndexVertices);
     renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexWindowSize);
     renderToPipline->setVertexBytes(&position, sizeof(simd_float2), AAPLVertexInputIndexObjectOffset);
     renderToPipline->setVertexBytes(&m_viewportScale, sizeof(float), AAPLVertexInputIndexWindowScale);

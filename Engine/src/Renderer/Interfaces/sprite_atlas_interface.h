@@ -85,6 +85,9 @@ namespace engine
          */
         virtual SpriteAtlasItemI *GetItemForName(std::string name) = 0;
 
+        /** Get all the sprites */
+        virtual std::vector<std::unique_ptr<SpriteAtlasItemI>>& GetAllItems() = 0;
+
         /** Mark this sprite atlas as using a flipped texture. For compatibility issues.
             @private
          */

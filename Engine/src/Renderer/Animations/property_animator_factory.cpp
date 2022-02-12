@@ -6,20 +6,20 @@
 //
 
 #include "property_animator_factory.hpp"
-#include "sprite_draw_static.hpp"
+#include "sprite_representation_static.hpp"
 #include "animation_curve_factory.hpp"
 #include "engine.hpp"
 
 using namespace engine;
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeIn( SpriteDrawI *sprite
+    ::FadeIn( SpriteRepresetationI *sprite
             , std::string curveType
             , float delay
             , float duration
             , CallableScriptFunctionSciptableInstance fFinishRef)
 {
-    SpriteDrawI &spr = *sprite;
+    SpriteRepresetationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -35,13 +35,13 @@ PropertyAnimator *PropertyAnimatorFactory
 }
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeIn(  SpriteDrawI *sprite
+    ::FadeIn(  SpriteRepresetationI *sprite
              , AnimationCurveType curveType
              , float delay
              , float duration
              , std::function<void(void)> fFinishRef)
 {
-    SpriteDrawI &spr = *sprite;
+    SpriteRepresetationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -56,13 +56,13 @@ PropertyAnimator *PropertyAnimatorFactory
 }
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeOut(  SpriteDrawI *sprite
+    ::FadeOut(  SpriteRepresetationI *sprite
               , std::string curveType
               , float delay
               , float duration
               , CallableScriptFunctionSciptableInstance fFinishRef)
 {
-    SpriteDrawI &spr = *sprite;
+    SpriteRepresetationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -78,13 +78,13 @@ PropertyAnimator *PropertyAnimatorFactory
 }
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeOut(SpriteDrawI *sprite
+    ::FadeOut(SpriteRepresetationI *sprite
               , AnimationCurveType curveType
               , float delay
               , float duration
               , std::function<void(void)> fFinishRef)
 {
-    SpriteDrawI &spr = *sprite;
+    SpriteRepresetationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -106,7 +106,7 @@ static int lua_PropertyAnimatorFactory_FadeIn(lua_State *L)
 {
     int argc = lua_gettop(L);
     PropertyAnimatorFactory *obj = ScriptingEngineI::GetScriptingObjectPtr<PropertyAnimatorFactory>(L, 1);
-    SpriteDrawStatic *spriteDraw = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 2);
+    SpriteRepresentationStatic *spriteDraw = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 2);
     float delay = lua_tonumberx(L, 3, NULL);
     float duration = lua_tonumberx(L, 4, NULL);
 
@@ -134,7 +134,7 @@ static int lua_PropertyAnimatorFactory_FadeOut(lua_State *L)
 {
     int argc = lua_gettop(L);
     PropertyAnimatorFactory *obj = ScriptingEngineI::GetScriptingObjectPtr<PropertyAnimatorFactory>(L, 1);
-    SpriteDrawStatic *spriteDraw = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 2);
+    SpriteRepresentationStatic *spriteDraw = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 2);
     float delay = lua_tonumberx(L, 3, NULL);
     float duration = lua_tonumberx(L, 4, NULL);
 

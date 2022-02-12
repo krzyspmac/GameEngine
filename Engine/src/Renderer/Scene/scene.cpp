@@ -55,24 +55,44 @@ void Scene::SetMainCharacter(CharacterRepresentation *rep)
     m_mainCharacter = rep;
 }
 
-SpriteDrawStatic *Scene::LoadSpriteStatic(SpriteAtlasI *atlas, std::string name)
+SpriteRepresentationStatic *Scene::SpriteStaticLoad(SpriteAtlasI *atlas, std::string name)
 {
     SpriteAtlasItemI *item = atlas->GetItemForName(name);
     if (item != nullptr)
     {
-        SpriteDrawStatic *renderer = (SpriteDrawStatic*)GetMainEngine()->getSpriteRendererManager().SpriteDrawLoadStatic(item);
+        SpriteRepresentationStatic *renderer = (SpriteRepresentationStatic*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationStaticLoad(item);
         if (renderer != nullptr)
         {
-            AddSpriteDrawStatic(renderer);
+            SpriteStaticAdd(renderer);
             return renderer;
         }
     }
     return nullptr;
 }
 
-void Scene::AddSpriteDrawStatic(SpriteDrawStatic *renderer)
+SpriteRepresentationAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas)
+{
+    if (atlas != nullptr)
+    {
+        SpriteRepresentationAnimated *renderer = (SpriteRepresentationAnimated*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(keyframeAnimationDelay, atlas);
+        if (renderer != nullptr)
+        {
+            SpriteAnimatedAdd(renderer);
+            return renderer;
+        }
+    }
+    return nullptr;
+
+}
+
+void Scene::SpriteStaticAdd(SpriteRepresentationStatic *renderer)
 {
     m_staticSprites.push_back(renderer);
+}
+
+void Scene::SpriteAnimatedAdd(SpriteRepresentationAnimated *renderer)
+{
+    m_animatedSprites.push_back(renderer);
 }
 
 CharacterRepresentation *Scene::LoadCharacter(std::string jsonFilename)
@@ -91,7 +111,7 @@ void Scene::RenderSceneBackground()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
-        SpriteDrawI *sprite = (*it);
+        SpriteRepresetationI *sprite = (*it);
         if (sprite->GetType() != SPRITE_DRAW_TYPE_BACKGROUND)
         {
             continue;
@@ -106,7 +126,7 @@ void Scene::RenderSceneForeground()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
-        SpriteDrawI *sprite = (*it);
+        SpriteRepresetationI *sprite = (*it);
         if (sprite->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
         {
             continue;
@@ -115,6 +135,16 @@ void Scene::RenderSceneForeground()
         Vector2& pos = sprite->GetPosition();
         (*it)->DrawAt(pos.x, pos.y);
     };
+
+    for (auto* item : m_animatedSprites)
+    {
+        if (item->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
+        {
+            continue;
+        }
+        Vector2& pos = item->GetPosition();
+        item->DrawAt(pos.x, pos.y);
+    }
 
     for (auto it = m_characterRepresentations.begin(); it != m_characterRepresentations.end(); ++it)
     {
@@ -145,8 +175,8 @@ SCRIPTING_INTERFACE_IMPL_NAME(Scene);
 static int lua_Scene_AddSpriteDrawStatic(lua_State *L)
 {
     Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
-    SpriteDrawStatic *sprite = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawStatic>(L, 2);
-    scene->AddSpriteDrawStatic(sprite);
+    SpriteRepresentationStatic *sprite = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 2);
+    scene->SpriteStaticAdd(sprite);
     return 0;
 }
 
@@ -155,7 +185,7 @@ static int lua_Scene_LoadSpriteDrawStatic(lua_State *L)
     Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
     SpriteAtlas *atlas = ScriptingEngineI::GetScriptingObjectPtr<SpriteAtlas>(L, 2);
     std::string itemName = lua_tostring(L, 3);
-    SpriteDrawStatic *sprite = scene->LoadSpriteStatic(atlas, itemName);
+    SpriteRepresentationStatic *sprite = scene->SpriteStaticLoad(atlas, itemName);
     if (sprite != nullptr)
     {
         sprite->ScriptingInterfaceRegisterFunctions(L, sprite);
@@ -164,6 +194,22 @@ static int lua_Scene_LoadSpriteDrawStatic(lua_State *L)
     else
     {
         return 0;
+    }
+}
+
+static int lua_Scene_SpriteAnimatedLoad(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    float keyframeDelayMs = lua_tonumber(L, 2);
+    SpriteAtlas *atlas = ScriptingEngineI::GetScriptingObjectPtr<SpriteAtlas>(L, 3);
+
+    SpriteRepresentationAnimated *representation = scene->SpriteAnimatedLoad(keyframeDelayMs, atlas);
+    if (representation != nullptr)
+    {   representation->ScriptingInterfaceRegisterFunctions(L, representation);
+        return 1;
+    }
+    else
+    {   return 0;
     }
 }
 
@@ -215,12 +261,13 @@ static int lua_Scene_CreateLight(lua_State *L)
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        {"AddSpriteDrawStatic", &lua_Scene_AddSpriteDrawStatic},
-        {"LoadSpriteStatic", &lua_Scene_LoadSpriteDrawStatic},
-        {"LoadCharacter", &lua_Scene_LoadCharacter},
-        {"SetMainCharacter", &lua_Scene_SetMainCharacter},
-        {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction},
-        {"CreateLight", &lua_Scene_CreateLight}
+        {"SpriteStaticLoad", &lua_Scene_LoadSpriteDrawStatic}
+      , {"SpriteStaticAdd", &lua_Scene_AddSpriteDrawStatic}
+      , {"SpriteAnimatedLoad", &lua_Scene_SpriteAnimatedLoad}
+      , {"LoadCharacter", &lua_Scene_LoadCharacter}
+      , {"SetMainCharacter", &lua_Scene_SetMainCharacter}
+      , {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
+      , {"CreateLight", &lua_Scene_CreateLight}
     });
     return result;
 }

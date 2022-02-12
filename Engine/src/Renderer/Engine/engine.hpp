@@ -69,7 +69,7 @@ namespace engine
     private:
         std::vector<std::unique_ptr<FontI>> m_fonts;
         std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;
-        std::vector<std::unique_ptr<SpriteDrawI>> m_spriteDraws;
+        std::vector<std::unique_ptr<SpriteRepresetationI>> m_spriteDraws;
 
         Uint64 m_performanceStart;
         Uint64 m_performanceEnd;

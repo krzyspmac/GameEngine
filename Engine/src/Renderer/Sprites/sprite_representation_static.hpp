@@ -15,44 +15,38 @@
 namespace engine
 {
 
-    class SpriteDrawStatic: public SpriteDrawI, public ScriptingInterface
+    class SpriteRepresentationStatic: public SpriteRepresetationI, public ScriptingInterface
     {
     public:
         /** @private */
-        SpriteDrawStatic(SpriteAtlasItemI *spriteAtlasItem, float scale);
-        virtual ~SpriteDrawStatic() { };
+        SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem);
+        virtual ~SpriteRepresentationStatic() { };
         
     public:
-        /**
-         Sets the scale.
+        /** Sets the scale.
          */
         void SetScale(float x);
 
-        /**
-         Sets the position for the sprite.
+        /** Sets the position for the sprite.
          */
         void SetPosition(Vector2 &pos);
 
-        /**
-         Gets the current position for the sprite.
+        /** Gets the current position for the sprite.
          */
         Vector2& GetPosition() { return m_position; };
 
-        /**
-         Get width & size of the sprite.
+        /** Get width & size of the sprite.
          */
         Size& GetSize() { return m_sprite->GetSize(); };
 
         /** Get the current sprite atlas item for this sprite */
         SpriteAtlasItemI *GetSpriteAtlasItem() { return m_sprite; };
 
-        /**
-         Draws the sprite.
+        /** Draws the sprite.
          */
         void DrawAt(int x, int y);
 
-        /**
-         Draws the sprite.
+        /** Draws the sprite.
          */
         void Draw();
 
@@ -64,7 +58,7 @@ namespace engine
     /// ScriptingInterface
     public:
         /// @private
-        SCRIPTING_INTERFACE_HEADERS(SpriteDrawStatic);
+        SCRIPTING_INTERFACE_HEADERS(SpriteRepresentationStatic);
     };
 };
 

@@ -22,6 +22,7 @@ namespace engine
     class DrawableMetal: public DrawableSpriteI
     {
         MTL::Buffer *m_vertexBuffer;
+        size_t m_vertexBufferOffset;
         vector_float2 m_size;
         TextureMetal *m_texture;
         size_t m_vertexCount;
@@ -32,6 +33,7 @@ namespace engine
         bool CanDraw();
     public: // vertex data
         MTL::Buffer *GetVertexBuffer();
+        size_t GetVertexBufferOffset();
         size_t GetVertexCount();
 
     public: // texture data

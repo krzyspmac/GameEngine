@@ -14,32 +14,40 @@
 
 namespace engine
 {
-    /**
-     SpriteRendererManager
-     \addtogroup API_GLOBALS
+    /** SpriteRendererManager
+        \addtogroup API_GLOBALS
      */
-    /**
-     Manages a list of sprite renderers. Those are used by the current
-     scene to render the appropriate sprites at particular timeframes.
+    /** Manages a list of sprite renderers. Those are used by the current
+        scene to render the appropriate sprites at particular timeframes.
      */
     class SpriteRendererManager
     {
     public:
-        /// Creates or gets a drawing handle for a sprite.
-        /// The result is cached.
-        SpriteDrawI *SpriteDrawLoadStatic(SpriteAtlasItemI *sprite);
+        /** Loads a sprite representation for a sprite atlas item descriptor.
+            The result is cached. */
+        SpriteRepresetationI *SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite);
 
-        /// Creates or gets a drawing handle for a sprite
-        SpriteDrawI *SpriteDrawLoadAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
+        /** Loads a sprite representation for a sprite animation made up from
+            individual sprite atlas items.
+            The result is cached. */
+        /** @private */
+        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites);
 
-        /// Unloads the sprite draw.
-        void SpriteDrawUnload(SpriteDrawI *spriteDraw);
+        /** Loads a sprite representation for a sprite animation made up of all the
+            frames in one sprite atlas.
+            The result is cached. */
+        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI*);
 
-        /// Unloads all.
+        /** Unloads the sprite draw.
+         */
+        void SpriteDrawUnload(SpriteRepresetationI *spriteDraw);
+
+        /** Unloads all.
+         */
         void SpriteDrawDisposeAll();
 
     private:
-        std::vector<std::unique_ptr<SpriteDrawI>> m_spriteDraws;
+        std::vector<std::unique_ptr<SpriteRepresetationI>> m_spriteDraws;
 
     /// ScriptingInterface
     public:

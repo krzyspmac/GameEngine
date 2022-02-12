@@ -104,8 +104,8 @@ void CharacterRenderer::PrepareCharacter()
 
     auto& anyRenderer = m_standB;
     auto body = anyRenderer.GetBodyRendererAtIndex(0);
-    auto sprite = new SpriteDrawStatic(body->GetSprite(), m_scale);
-    m_bodySprite = std::unique_ptr<SpriteDrawStatic>(std::move(sprite));
+    auto sprite = new SpriteRepresentationStatic(body->GetSprite());
+    m_bodySprite = std::unique_ptr<SpriteRepresentationStatic>(std::move(sprite));
 }
 
 void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimating, Vector2 position)

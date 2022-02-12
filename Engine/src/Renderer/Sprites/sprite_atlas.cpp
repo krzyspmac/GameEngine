@@ -49,7 +49,8 @@ SpriteAtlas::SpriteAtlas(std::string jsonFilename, std::string textureFilename)
                             rotated = cJSON_GetObjectItem(node, "rotated")->string;
 
                             this->m_texture = texture;
-                            m_items.emplace_back(SpriteAtlasItemI(texture, x, y, w, h, strcmp(rotated, "true") == 0, filename));
+                            auto *item = new SpriteAtlasItemI(texture, x, y, w, h, strcmp(rotated, "true") == 0, filename);
+                            m_items.emplace_back(std::unique_ptr<SpriteAtlasItemI>(std::move(item)));
                         }; // single frame
                     }; // for
                 }; // frame
@@ -79,13 +80,18 @@ SpriteAtlasItemI *SpriteAtlas::GetItemForName(std::string name)
 {
     for(auto it = std::begin(m_items); it != std::end(m_items); ++it)
     {
-        if (it->GetFilename().compare(name) == 0)
+        if (it->get()->GetFilename().compare(name) == 0)
         {
-            return &(*it);
+            return it->get();
         }
     }
 
-    return NULL;
+    return nullptr;
+}
+
+std::vector<std::unique_ptr<SpriteAtlasItemI>>& SpriteAtlas::GetAllItems()
+{
+    return m_items;
 }
 
 void SpriteAtlas::SetFlippedVertically(bool val)
@@ -93,7 +99,7 @@ void SpriteAtlas::SetFlippedVertically(bool val)
     m_flippedVertically = val;
     for (auto& item : m_items)
     {
-        item.SetFlippedVertically(val);
+        item.get()->SetFlippedVertically(val);
     }
 }
 

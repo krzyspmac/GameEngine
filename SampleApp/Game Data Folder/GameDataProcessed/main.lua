@@ -9,6 +9,8 @@ bg = nil
 font = nil
 initialAnimationDone = false
 light1 = nil
+tds = nil
+playerSprite = nil
 
 ------------------------------------------------------------------------------------------
 -- game state
@@ -67,37 +69,45 @@ function loadSprites()
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
 	local scene = SceneManager:SceneCreateNew()
 	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
+	local tdsSprite = AtlasManager:SpriteAtlasLoad( "TDS.json", "TDS.png")
 
 	-- character
 	character = scene:LoadCharacter("brett_character.json")
 	character:SetScale(1)
-	character:PlaceAt(0,0)
+	character:PlaceAt(300, 300)
 	--character:SetInverseWalkbox("polygons.json")
 	character:SetWalkingSpeed(600)
 	character:SetHidden(false)
 	scene:SetMouseDownFunction(mouseDown)
 
 	-- sky
-	sky2 = scene:LoadSpriteStatic(atlas, "background.png")
+	sky2 = scene:SpriteStaticLoad(atlas, "background.png")
 	sky2:SetScale(1)
 	sky2:SetAlpha(1)
 	sky2:SetPosition(0, 0)
 	sky2:SetAcceptsLight(true)
 
-	sky = scene:LoadSpriteStatic(roomAtlas, "roombg")
+	sky = scene:SpriteStaticLoad(roomAtlas, "roombg")
 	sky:SetScale(1)
 	sky:SetAlpha(0)
 	sky:SetPosition(1280/2, 200)
-	
+
+	tds = scene:SpriteAnimatedLoad(100, tdsSprite)
+	tds:SetPosition(200, 200)
+	tds:SetAlpha(0.5)
+	tds:SetScale(1.5)
+	tds:SetAcceptsLight(true)
+	tds:SetAnimationFrameDuration(250)
+
 	-- lights
 	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
 	light1 = scene:CreateLight("exponential", 1, 1, 1, 0.01, 900, 350, 11500, 0.5)
 	light:SetName("Main light")
-
---	light1 = LightManager:CreateLight(1, 1, 1, 0.01, 900, 350, 150, 0.5)
-
---	light = scene:LoadSpriteStatic(atlas, "background_light.tga")
---	light:SetType("light")
+	
+	-- player
+	local playerAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.png")
+	playerSprite = scene:SpriteAnimatedLoad(250, playerAtlas)
+	playerSprite:SetPosition(600, 300)
 end
 
 function registerResolutionChange()

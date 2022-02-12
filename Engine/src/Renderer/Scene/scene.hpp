@@ -10,8 +10,8 @@
 
 #include "scripting_engine_provider_interface.h"
 #include "engine_provider_interface.h"
-#include "sprite_draw_static.hpp"
-#include "sprite_draw_animated.hpp"
+#include "sprite_representation_static.hpp"
+#include "sprite_representation_animated.hpp"
 #include "sprite_atlas.hpp"
 #include "character_representation.hpp"
 #include "light_interface.hpp"
@@ -23,7 +23,8 @@ namespace engine
     class Scene
     {
         EngineProviderI& m_engineProvider;
-        std::vector<SpriteDrawStatic*> m_staticSprites;
+        std::vector<SpriteRepresentationStatic*> m_staticSprites;
+        std::vector<SpriteRepresentationAnimated*> m_animatedSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
         std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
@@ -61,7 +62,12 @@ namespace engine
          \include SampleSpriteStatic-helper.lua
          \see Scene::AddSpriteDrawStatic.
          */
-        SpriteDrawStatic *LoadSpriteStatic(SpriteAtlasI *atlas, std::string name);
+        SpriteRepresentationStatic *SpriteStaticLoad(SpriteAtlasI *atlas, std::string name);
+
+        /**
+         \brief Load a sprite renderer for animation
+         */
+        SpriteRepresentationAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
 
         /**
          \brief Load a character representation.
@@ -88,7 +94,12 @@ namespace engine
          Add a sprite renderer to the list of game objects.
          \include SampleSpriteStatic-lowlevel.lua
          */
-        void AddSpriteDrawStatic(SpriteDrawStatic*);
+        void SpriteStaticAdd(SpriteRepresentationStatic*);
+
+        /**
+         \brief Register a sprite renderer.
+         */
+        void SpriteAnimatedAdd(SpriteRepresentationAnimated*);
 
         /**
          \brief Set a mouse down function.

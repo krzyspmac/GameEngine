@@ -17,7 +17,7 @@ namespace engine
         It has a texture that is of the same size and can be set to accept
         the current rendering pass. Such a texture can then be rendered in one go.
      */
-    class SpriteDrawBackbuffer: public SpriteDrawI
+    class SpriteDrawBackbuffer: public SpriteRepresetationI
     {
         TextureTargetI *m_targetTexture;
     public:
