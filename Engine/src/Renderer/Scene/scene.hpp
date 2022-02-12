@@ -24,7 +24,7 @@ namespace engine
     {
         EngineProviderI& m_engineProvider;
         std::vector<SpriteRepresentationStatic*> m_staticSprites;
-        std::vector<SpriteDrawAnimated*> m_animatedSprites;
+        std::vector<SpriteRepresentationAnimated*> m_animatedSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
         std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
@@ -67,7 +67,7 @@ namespace engine
         /**
          \brief Load a sprite renderer for animation
          */
-        SpriteDrawAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
+        SpriteRepresentationAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
 
         /**
          \brief Load a character representation.
@@ -99,7 +99,7 @@ namespace engine
         /**
          \brief Register a sprite renderer.
          */
-        void SpriteAnimatedAdd(SpriteDrawAnimated*);
+        void SpriteAnimatedAdd(SpriteRepresentationAnimated*);
 
         /**
          \brief Set a mouse down function.

@@ -25,7 +25,7 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(Spri
 
 SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites)
 {
-    engine::SpriteDrawAnimated *sd = new SpriteDrawAnimated(sprites, frameAnimationDurationMs);
+    engine::SpriteRepresentationAnimated *sd = new SpriteRepresentationAnimated(sprites, frameAnimationDurationMs);
     if (sd)
     {
         m_spriteDraws.emplace_back(std::move(sd));
@@ -35,7 +35,7 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(in
 
 SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI *atlas)
 {
-    engine::SpriteDrawAnimated *sd = SpriteDrawAnimated::CreateFromAtlas(atlas->GetAllItems(), frameAnimationDurationMs);
+    engine::SpriteRepresentationAnimated *sd = SpriteRepresentationAnimated::CreateFromAtlas(atlas->GetAllItems(), frameAnimationDurationMs);
     if (sd)
     {
         m_spriteDraws.emplace_back(std::move(sd));

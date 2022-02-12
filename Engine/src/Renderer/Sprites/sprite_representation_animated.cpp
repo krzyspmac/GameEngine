@@ -12,7 +12,7 @@
 
 using namespace engine;
 
-SpriteDrawAnimated::SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
+SpriteRepresentationAnimated::SpriteRepresentationAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
     : SpriteRepresetationI(1.0f)
     , m_maxWidth(0)
     , m_maxHeight(0)
@@ -27,7 +27,7 @@ SpriteDrawAnimated::SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, i
     }
 }
 
-SpriteDrawAnimated::~SpriteDrawAnimated()
+SpriteRepresentationAnimated::~SpriteRepresentationAnimated()
 {
     auto& spriteManager = GetMainEngine()->getSpriteRendererManager();
 
@@ -37,7 +37,7 @@ SpriteDrawAnimated::~SpriteDrawAnimated()
     }
 }
 
-SpriteDrawAnimated *SpriteDrawAnimated::CreateFromAtlas(std::vector<std::unique_ptr<SpriteAtlasItemI>>& sprites, int frameAnimationDurationMs)
+SpriteRepresentationAnimated *SpriteRepresentationAnimated::CreateFromAtlas(std::vector<std::unique_ptr<SpriteAtlasItemI>>& sprites, int frameAnimationDurationMs)
 {
     std::vector<SpriteAtlasItemI*> array;
     for (auto& item : sprites)
@@ -45,15 +45,15 @@ SpriteDrawAnimated *SpriteDrawAnimated::CreateFromAtlas(std::vector<std::unique_
         array.emplace_back(item.get());
     }
 
-    return new SpriteDrawAnimated(array, frameAnimationDurationMs);
+    return new SpriteRepresentationAnimated(array, frameAnimationDurationMs);
 }
 
-void SpriteDrawAnimated::SetPosition(Vector2 &pos)
+void SpriteRepresentationAnimated::SetPosition(Vector2 &pos)
 {
     m_position = pos;
 }
 
-void SpriteDrawAnimated::SetScale(float value)
+void SpriteRepresentationAnimated::SetScale(float value)
 {
     for (auto& item : m_sprites)
     {
@@ -61,7 +61,7 @@ void SpriteDrawAnimated::SetScale(float value)
     }
 }
 
-void SpriteDrawAnimated::SetAlpha(float val)
+void SpriteRepresentationAnimated::SetAlpha(float val)
 {
     for (auto& item : m_sprites)
     {
@@ -69,43 +69,44 @@ void SpriteDrawAnimated::SetAlpha(float val)
     }
 }
 
-void SpriteDrawAnimated::PrepareAnimation()
+void SpriteRepresentationAnimated::PrepareAnimation()
 {
 }
 
-void SpriteDrawAnimated::DrawAt(int x, int y)
+void SpriteRepresentationAnimated::SetAcceptsLight(bool val)
+{
+    for (auto& item : m_sprites)
+    {
+        item->SetAcceptsLight(val);
+    }
+}
+
+void SpriteRepresentationAnimated::SetAnimationFrameDuration(float value)
+{
+    m_frameAnimationDurationMs = value;
+}
+
+void SpriteRepresentationAnimated::DrawAt(int x, int y)
 {
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
     Uint64 seconds = ticks / m_frameAnimationDurationMs;
     Uint64 spriteNo = seconds % m_sprites.size();
     SpriteRepresetationI *spriteItem = m_sprites.at(spriteNo);
-
     spriteItem->DrawAt(x, y);
-//
-//    GetMainEngine()->getProvider().DrawTexture(
-//       spriteItem->GetTexture(),
-//        x + ceil(m_scale *((m_maxWidth - spriteItem->GetWidth())/2)),
-//        y + ceil(m_scale *((m_maxHeight - spriteItem->GetHeight())/2)),
-//        spriteItem->GetX(),
-//        spriteItem->GetY(),
-//        spriteItem->GetWidth(),
-//        spriteItem->GetHeight(),
-//        m_scale
-//    );
 }
 
-void SpriteDrawAnimated::Draw()
+void SpriteRepresentationAnimated::Draw()
 {
     DrawAt(m_position.x, m_position.y);
 }
 
 #pragma mark - Scripting Interface
 
-SCRIPTING_INTERFACE_IMPL_NAME(SpriteDrawAnimated);
+SCRIPTING_INTERFACE_IMPL_NAME(SpriteRepresentationAnimated);
 
 static int lua_SpriteDrawStatic_SetScale(lua_State *L)
 {
-    SpriteDrawAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawAnimated>(L, 1);
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
     float scale = lua_tonumberx(L, 2, NULL);
     spr->SetScale(scale);
     return 0;
@@ -113,7 +114,7 @@ static int lua_SpriteDrawStatic_SetScale(lua_State *L)
 
 static int lua_SpriteDrawStatic_SetAlpha(lua_State *L)
 {
-    SpriteDrawAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawAnimated>(L, 1);
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
     float x = MAX(0, MIN(1, lua_tonumberx(L, 2, NULL)));
     spr->SetAlpha(x);
     return 0;
@@ -121,7 +122,7 @@ static int lua_SpriteDrawStatic_SetAlpha(lua_State *L)
 
 static int lua_SpriteDrawStatic_GetAlpha(lua_State *L)
 {
-    SpriteDrawAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawAnimated>(L, 1);
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
     float x = spr->GetAlpha();
     lua_pushnumber(L, x);
     return 1;
@@ -129,7 +130,7 @@ static int lua_SpriteDrawStatic_GetAlpha(lua_State *L)
 
 static int lua_SpriteDrawStatic_SetPosition(lua_State *L)
 {
-    SpriteDrawAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawAnimated>(L, 1);
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
     float x = lua_tonumberx(L, 2, nullptr);
     float y = lua_tonumberx(L, 3, nullptr);
     Vector2 pos = {x, y};
@@ -139,14 +140,45 @@ static int lua_SpriteDrawStatic_SetPosition(lua_State *L)
 
 static int lua_SpriteDrawStatic_GetPosition(lua_State *L)
 {
-    SpriteDrawAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteDrawAnimated>(L, 1);
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
     Vector2 pos = spr->GetPosition();
     lua_pushnumber(L, pos.x);
     lua_pushnumber(L, pos.y);
     return 2;
 }
 
-std::vector<luaL_Reg> SpriteDrawAnimated::ScriptingInterfaceFunctions()
+static int lua_SpriteDrawStatic_SetAcceptsLight(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    bool value = lua_toboolean(L, 2);
+    spr->SetAcceptsLight(value);
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_SetType(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    const char* type = lua_tostring(L, 2);
+
+    std::vector<std::string> spriteTypes = { "background", "foreground", "light" };
+    for (int i = 0; i < spriteTypes.size(); i++)
+    {
+        auto val = spriteTypes.at(i);
+        if (val.compare(type) == 0)
+        {
+            spr->GetType() = (SpriteDrawType)i;
+        }
+    }
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_SetAnimationFrameDuration(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    spr->SetAnimationFrameDuration(lua_tonumber(L, 2));
+    return 0;
+}
+std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         { "SetScale", &lua_SpriteDrawStatic_SetScale }
@@ -154,6 +186,9 @@ std::vector<luaL_Reg> SpriteDrawAnimated::ScriptingInterfaceFunctions()
       , { "GetAlpha", &lua_SpriteDrawStatic_GetAlpha }
       , { "SetPosition", &lua_SpriteDrawStatic_SetPosition }
       , { "GetPosition", &lua_SpriteDrawStatic_GetPosition }
+      , { "SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight }
+      , { "SetType", &lua_SpriteDrawStatic_SetType }
+      , { "SetAnimationFrameDuration", &lua_SpriteDrawStatic_SetAnimationFrameDuration }
     });
     return result;
 }

@@ -69,7 +69,7 @@ namespace engine
         auto& GetAcceptsLight() { return m_acceptsLight; };
 
         /** Lighting setter */
-        void SetAcceptsLight(bool val) { m_acceptsLight = val; m_drawable.get()->GetAcceptsLight() = val; };
+        void SetAcceptsLight(bool val) { m_acceptsLight = val; if(m_drawable.get() != nullptr) m_drawable.get()->GetAcceptsLight() = val; };
 
     public: // Drawable related
 

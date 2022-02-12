@@ -70,11 +70,11 @@ SpriteRepresentationStatic *Scene::SpriteStaticLoad(SpriteAtlasI *atlas, std::st
     return nullptr;
 }
 
-SpriteDrawAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas)
+SpriteRepresentationAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas)
 {
     if (atlas != nullptr)
     {
-        SpriteDrawAnimated *renderer = (SpriteDrawAnimated*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(keyframeAnimationDelay, atlas);
+        SpriteRepresentationAnimated *renderer = (SpriteRepresentationAnimated*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(keyframeAnimationDelay, atlas);
         if (renderer != nullptr)
         {
             SpriteAnimatedAdd(renderer);
@@ -90,7 +90,7 @@ void Scene::SpriteStaticAdd(SpriteRepresentationStatic *renderer)
     m_staticSprites.push_back(renderer);
 }
 
-void Scene::SpriteAnimatedAdd(SpriteDrawAnimated *renderer)
+void Scene::SpriteAnimatedAdd(SpriteRepresentationAnimated *renderer)
 {
     m_animatedSprites.push_back(renderer);
 }
@@ -203,7 +203,7 @@ static int lua_Scene_SpriteAnimatedLoad(lua_State *L)
     float keyframeDelayMs = lua_tonumber(L, 2);
     SpriteAtlas *atlas = ScriptingEngineI::GetScriptingObjectPtr<SpriteAtlas>(L, 3);
 
-    SpriteDrawAnimated *representation = scene->SpriteAnimatedLoad(keyframeDelayMs, atlas);
+    SpriteRepresentationAnimated *representation = scene->SpriteAnimatedLoad(keyframeDelayMs, atlas);
     if (representation != nullptr)
     {   representation->ScriptingInterfaceRegisterFunctions(L, representation);
         return 1;

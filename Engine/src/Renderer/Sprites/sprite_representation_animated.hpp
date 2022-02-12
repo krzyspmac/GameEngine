@@ -15,14 +15,14 @@
 
 namespace engine
 {
-    class SpriteDrawAnimated: public SpriteRepresetationI
+    class SpriteRepresentationAnimated: public SpriteRepresetationI
     {
     public:
 
-        SpriteDrawAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
-        virtual ~SpriteDrawAnimated();
+        SpriteRepresentationAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs);
+        virtual ~SpriteRepresentationAnimated();
         
-        static SpriteDrawAnimated *CreateFromAtlas(std::vector<std::unique_ptr<SpriteAtlasItemI>>& sprites, int frameAnimationDurationMs);
+        static SpriteRepresentationAnimated *CreateFromAtlas(std::vector<std::unique_ptr<SpriteAtlasItemI>>& sprites, int frameAnimationDurationMs);
 
     public:
 
@@ -41,6 +41,12 @@ namespace engine
         /** Set Alpha */
         void SetAlpha(float val);
 
+        /** Sets animation frame duration in ms */
+        void SetAnimationFrameDuration(float);
+
+    public: /** Overrides */
+
+        void SetAcceptsLight(bool val);
         void DrawAt(int x, int y);
         void Draw();
 
@@ -56,7 +62,7 @@ namespace engine
     /// ScriptingInterface
     public:
         /// @private
-        SCRIPTING_INTERFACE_HEADERS(SpriteDrawAnimated);
+        SCRIPTING_INTERFACE_HEADERS(SpriteRepresentationAnimated);
     };
 
 };

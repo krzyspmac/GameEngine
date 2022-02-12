@@ -10,6 +10,7 @@ font = nil
 initialAnimationDone = false
 light1 = nil
 tds = nil
+playerSprite = nil
 
 ------------------------------------------------------------------------------------------
 -- game state
@@ -95,11 +96,18 @@ function loadSprites()
 	tds:SetPosition(200, 200)
 	tds:SetAlpha(0.5)
 	tds:SetScale(1.5)
+	tds:SetAcceptsLight(true)
+	tds:SetAnimationFrameDuration(250)
 
 	-- lights
 	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
 	light1 = scene:CreateLight("exponential", 1, 1, 1, 0.01, 900, 350, 11500, 0.5)
 	light:SetName("Main light")
+	
+	-- player
+	local playerAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.png")
+	playerSprite = scene:SpriteAnimatedLoad(250, playerAtlas)
+	playerSprite:SetPosition(600, 300)
 end
 
 function registerResolutionChange()
