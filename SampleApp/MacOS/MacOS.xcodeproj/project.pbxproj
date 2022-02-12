@@ -16,6 +16,18 @@
 		7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB5278B31FA00B5772F /* Foundation.framework */; };
 		7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB7278B34D600B5772F /* Quartz.framework */; };
 		7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB9278B352400B5772F /* MetalKit.framework */; };
+		7F2F801527B7DAE50066B54C /* mago.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801327B7DAE50066B54C /* mago.fnt */; };
+		7F2F801627B7DAE50066B54C /* mago.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801327B7DAE50066B54C /* mago.fnt */; };
+		7F2F801727B7DAE50066B54C /* mago.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801327B7DAE50066B54C /* mago.fnt */; };
+		7F2F801827B7DAE50066B54C /* mago.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801427B7DAE50066B54C /* mago.png */; };
+		7F2F801927B7DAE50066B54C /* mago.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801427B7DAE50066B54C /* mago.png */; };
+		7F2F801A27B7DAE50066B54C /* mago.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801427B7DAE50066B54C /* mago.png */; };
+		7F2F801D27B7DBBF0066B54C /* at01.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801B27B7DBBF0066B54C /* at01.fnt */; };
+		7F2F801E27B7DBBF0066B54C /* at01.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801B27B7DBBF0066B54C /* at01.fnt */; };
+		7F2F801F27B7DBBF0066B54C /* at01.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801B27B7DBBF0066B54C /* at01.fnt */; };
+		7F2F802027B7DBBF0066B54C /* at01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801C27B7DBBF0066B54C /* at01.png */; };
+		7F2F802127B7DBBF0066B54C /* at01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801C27B7DBBF0066B54C /* at01.png */; };
+		7F2F802227B7DBBF0066B54C /* at01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801C27B7DBBF0066B54C /* at01.png */; };
 		7F3E8F68279AE6A2003BB7B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F66279AE6A2003BB7B6 /* Main.storyboard */; };
 		7F3E8F6A279AE6A4003BB7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F69279AE6A4003BB7B6 /* Assets.xcassets */; };
 		7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F6B279AE6A4003BB7B6 /* LaunchScreen.storyboard */; };
@@ -165,6 +177,10 @@
 		7F20ACB5278B31FA00B5772F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F20ACB7278B34D600B5772F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		7F20ACB9278B352400B5772F /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		7F2F801327B7DAE50066B54C /* mago.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mago.fnt; sourceTree = "<group>"; };
+		7F2F801427B7DAE50066B54C /* mago.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mago.png; sourceTree = "<group>"; };
+		7F2F801B27B7DBBF0066B54C /* at01.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = at01.fnt; sourceTree = "<group>"; };
+		7F2F801C27B7DBBF0066B54C /* at01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = at01.png; sourceTree = "<group>"; };
 		7F3CAAE1277093D500E0D74C /* MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F5B279AE6A2003BB7B6 /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F67279AE6A2003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -383,6 +399,10 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7F2F801B27B7DBBF0066B54C /* at01.fnt */,
+				7F2F801C27B7DBBF0066B54C /* at01.png */,
+				7F2F801327B7DAE50066B54C /* mago.fnt */,
+				7F2F801427B7DAE50066B54C /* mago.png */,
 				7FDCEF2527B7D5A500AE349F /* player_Idle.json */,
 				7FDCEF2627B7D5A500AE349F /* player_Idle.png */,
 				7F8E9BD227B5B58A00548567 /* TDS.json */,
@@ -521,6 +541,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */,
+				7F2F802027B7DBBF0066B54C /* at01.png in Resources */,
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
 				7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */,
 				7FB8226D2788DB34008F0F7A /* parlor.png in Resources */,
@@ -537,6 +558,7 @@
 				7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */,
 				7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */,
 				7F869FD72783970400E8CB01 /* textx.png in Resources */,
+				7F2F801527B7DAE50066B54C /* mago.fnt in Resources */,
 				7F869FD92783970400E8CB01 /* main.lua in Resources */,
 				7F8E9BD327B5B58A00548567 /* TDS.png in Resources */,
 				7F869FD62783970400E8CB01 /* brett_character.json in Resources */,
@@ -550,12 +572,14 @@
 				7F869FE32783970400E8CB01 /* polygons.json in Resources */,
 				7F869FD52783970400E8CB01 /* brett.png in Resources */,
 				7F869FE42783970400E8CB01 /* room1.png in Resources */,
+				7F2F801827B7DAE50066B54C /* mago.png in Resources */,
 				7F869FE12783970400E8CB01 /* main copy.lua in Resources */,
 				7F6D1C8A279F186A0078D76A /* main.ini in Resources */,
 				7F869FDD2783970400E8CB01 /* background.jpg in Resources */,
 				7F869FDF2783970400E8CB01 /* brett.json in Resources */,
 				7F869FDA2783970400E8CB01 /* characters.json in Resources */,
 				7F869FE22783970400E8CB01 /* textx.json in Resources */,
+				7F2F801D27B7DBBF0066B54C /* at01.fnt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,7 +587,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2F801927B7DAE50066B54C /* mago.png in Resources */,
 				7F3E9007279AFA6C003BB7B6 /* polygons.json in Resources */,
+				7F2F802127B7DBBF0066B54C /* at01.png in Resources */,
 				7F3E9016279AFA6C003BB7B6 /* textx.json in Resources */,
 				7F3E900F279AFA6C003BB7B6 /* textx.png in Resources */,
 				7F3E9018279AFA6C003BB7B6 /* background1.tga in Resources */,
@@ -577,12 +603,14 @@
 				7F3E9014279AFA6C003BB7B6 /* background.jpg in Resources */,
 				7F3E9000279AFA6C003BB7B6 /* parlor.tga in Resources */,
 				7F3E9008279AFA6C003BB7B6 /* characters.json in Resources */,
+				7F2F801627B7DAE50066B54C /* mago.fnt in Resources */,
 				7F3E9015279AFA6C003BB7B6 /* DialogFont_retro.png in Resources */,
 				7F3E9013279AFA6C003BB7B6 /* room1.json in Resources */,
 				7F3E9002279AFA6C003BB7B6 /* EnterCommand.ttf in Resources */,
 				7F3E9004279AFA6C003BB7B6 /* fireplace.png in Resources */,
 				7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */,
 				7F3E9019279AFA6C003BB7B6 /* DialogFont_retro.tga in Resources */,
+				7F2F801E27B7DBBF0066B54C /* at01.fnt in Resources */,
 				7F3E9003279AFA6C003BB7B6 /* brett.json in Resources */,
 				7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */,
 				7F8E9BD727B5B58A00548567 /* TDS.json in Resources */,
@@ -605,7 +633,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2F801A27B7DAE50066B54C /* mago.png in Resources */,
 				7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */,
+				7F2F802227B7DBBF0066B54C /* at01.png in Resources */,
 				7F3E9185279B0650003BB7B6 /* room1.png in Resources */,
 				7F3E917B279B0650003BB7B6 /* polygons.json in Resources */,
 				7F3E9186279B0650003BB7B6 /* parlor.json in Resources */,
@@ -619,12 +649,14 @@
 				7F3E9174279B0650003BB7B6 /* DialogFont_retro.tga in Resources */,
 				7F3E9177279B0650003BB7B6 /* brett.json in Resources */,
 				7F3E917E279B0650003BB7B6 /* background.json in Resources */,
+				7F2F801727B7DAE50066B54C /* mago.fnt in Resources */,
 				7F3E9188279B0650003BB7B6 /* characters.png in Resources */,
 				7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */,
 				7F3E917A279B0650003BB7B6 /* room1.json in Resources */,
 				7F3E9184279B0650003BB7B6 /* parlor.tga in Resources */,
 				7F3E9037279B015A003BB7B6 /* Main.storyboard in Resources */,
 				7F3E9176279B0650003BB7B6 /* DialogFont_retro.fnt in Resources */,
+				7F2F801F27B7DBBF0066B54C /* at01.fnt in Resources */,
 				7F3E9182279B0650003BB7B6 /* background.jpg in Resources */,
 				7F3E9179279B0650003BB7B6 /* brett.png in Resources */,
 				7F8E9BD827B5B58A00548567 /* TDS.json in Resources */,

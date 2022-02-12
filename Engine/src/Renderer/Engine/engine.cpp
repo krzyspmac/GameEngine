@@ -92,7 +92,7 @@ void Engine::Setup()
 
     // Load some debug fonts
 #if SHOW_FPS
-    m_displayFont = new FontBitmapRepresentation("DialogFont_retro.fnt", "DialogFont_retro.png", 1);
+    m_displayFont = new FontBitmapRepresentation("at01.fnt", "at01.png", 1);
 #endif
 
     // Load the main script file
@@ -217,7 +217,7 @@ void Engine::RenderSceneTexts()
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
     sprintf(mousePos, "Mouse testing: %d x %d", m_mousePosition.x, m_mousePosition.y);
 
-    m_displayFont->DrawAt(mousePos, 0, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
+    m_displayFont->DrawAt(mousePos, 20, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
 }
 
 void Engine::ApplyScaleTransformations()
