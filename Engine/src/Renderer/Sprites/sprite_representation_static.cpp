@@ -13,7 +13,7 @@
 using namespace engine;
 
 SpriteRepresentationStatic::SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem)
-    : SpriteRepresetationI(1.0f)
+    : SpriteRepresentationI(1.0f)
     , m_sprite(spriteAtlasItem)
 {
     auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, 1.f);
@@ -33,7 +33,7 @@ void SpriteRepresentationStatic::SetPosition(Vector2 &pos)
 
 void SpriteRepresentationStatic::SetScale(float x)
 {
-    SpriteRepresetationI::SetScale(x);
+    SpriteRepresentationI::SetScale(x);
     m_drawable->SetScale(x);
 }
 

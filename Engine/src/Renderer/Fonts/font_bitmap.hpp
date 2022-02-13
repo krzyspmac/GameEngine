@@ -139,6 +139,9 @@ namespace engine
         /** @private */
         virtual ~FontBitmapRepresentation() { };
 
+        /** Set Scale */
+        void SetScale(float);
+
         /**
          Draw the font at a given position with a given color.
 

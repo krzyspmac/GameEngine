@@ -21,17 +21,17 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
-    class SpriteRepresetationI
+    class SpriteRepresentationI
     {
     public:
-        SpriteRepresetationI(int scale)
+        SpriteRepresentationI(int scale)
             : m_scale(scale)
             , m_position(Vector2Zero)
             , m_isDrawable(true)
             , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
         { };
         
-        virtual ~SpriteRepresetationI() { };
+        virtual ~SpriteRepresentationI() { };
         
     public:
         /** Draws the sprite at a given coordinates. */

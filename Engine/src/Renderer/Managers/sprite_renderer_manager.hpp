@@ -10,6 +10,7 @@
 
 #include "scripting_engine_provider_interface.h"
 #include "sprite_draw_interface.h"
+#include "font_interface.h"
 #include <iostream>
 
 namespace engine
@@ -25,29 +26,33 @@ namespace engine
     public:
         /** Loads a sprite representation for a sprite atlas item descriptor.
             The result is cached. */
-        SpriteRepresetationI *SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite);
+        SpriteRepresentationI *SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite);
 
         /** Loads a sprite representation for a sprite animation made up from
             individual sprite atlas items.
             The result is cached. */
         /** @private */
-        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites);
+        SpriteRepresentationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites);
 
         /** Loads a sprite representation for a sprite animation made up of all the
             frames in one sprite atlas.
             The result is cached. */
-        SpriteRepresetationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI*);
+        SpriteRepresentationI *SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI*);
+
+        /** Loads a text sprite representation.
+            The result is cached. */
+        SpriteRepresentationI *SpriteRepresentationTextLoad(FontI*);
 
         /** Unloads the sprite draw.
          */
-        void SpriteDrawUnload(SpriteRepresetationI *spriteDraw);
+        void SpriteDrawUnload(SpriteRepresentationI *spriteDraw);
 
         /** Unloads all.
          */
         void SpriteDrawDisposeAll();
 
     private:
-        std::vector<std::unique_ptr<SpriteRepresetationI>> m_spriteDraws;
+        std::vector<std::unique_ptr<SpriteRepresentationI>> m_spriteDraws;
 
     /// ScriptingInterface
     public:

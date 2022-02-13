@@ -12,9 +12,11 @@
 #include "engine_provider_interface.h"
 #include "sprite_representation_static.hpp"
 #include "sprite_representation_animated.hpp"
+#include "sprite_representation_text.hpp"
 #include "sprite_atlas.hpp"
 #include "character_representation.hpp"
 #include "light_interface.hpp"
+#include "font_interface.h"
 #include "common.h"
 #include <iostream>
 
@@ -25,6 +27,7 @@ namespace engine
         EngineProviderI& m_engineProvider;
         std::vector<SpriteRepresentationStatic*> m_staticSprites;
         std::vector<SpriteRepresentationAnimated*> m_animatedSprites;
+        std::vector<SpriteRepresentationText*> m_textSprites;
         std::vector<CharacterRepresentation*> m_characterRepresentations;
         std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
@@ -69,6 +72,9 @@ namespace engine
          */
         SpriteRepresentationAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
 
+        /** \brief Load a drawable text representation */
+        SpriteRepresentationText *SpriteTextLoad(FontI*);
+
         /**
          \brief Load a character representation.
 
@@ -100,6 +106,10 @@ namespace engine
          \brief Register a sprite renderer.
          */
         void SpriteAnimatedAdd(SpriteRepresentationAnimated*);
+
+        /** Register a text renderer.
+         */
+        void SpriteTextAdd(SpriteRepresentationText *renderer);
 
         /**
          \brief Set a mouse down function.

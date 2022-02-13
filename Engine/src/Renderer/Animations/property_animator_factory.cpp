@@ -13,13 +13,13 @@
 using namespace engine;
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeIn( SpriteRepresetationI *sprite
+    ::FadeIn( SpriteRepresentationI *sprite
             , std::string curveType
             , float delay
             , float duration
             , CallableScriptFunctionSciptableInstance fFinishRef)
 {
-    SpriteRepresetationI &spr = *sprite;
+    SpriteRepresentationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -35,13 +35,13 @@ PropertyAnimator *PropertyAnimatorFactory
 }
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeIn(  SpriteRepresetationI *sprite
+    ::FadeIn(  SpriteRepresentationI *sprite
              , AnimationCurveType curveType
              , float delay
              , float duration
              , std::function<void(void)> fFinishRef)
 {
-    SpriteRepresetationI &spr = *sprite;
+    SpriteRepresentationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -56,13 +56,13 @@ PropertyAnimator *PropertyAnimatorFactory
 }
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeOut(  SpriteRepresetationI *sprite
+    ::FadeOut(  SpriteRepresentationI *sprite
               , std::string curveType
               , float delay
               , float duration
               , CallableScriptFunctionSciptableInstance fFinishRef)
 {
-    SpriteRepresetationI &spr = *sprite;
+    SpriteRepresentationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(
@@ -78,13 +78,13 @@ PropertyAnimator *PropertyAnimatorFactory
 }
 
 PropertyAnimator *PropertyAnimatorFactory
-    ::FadeOut(SpriteRepresetationI *sprite
+    ::FadeOut(SpriteRepresentationI *sprite
               , AnimationCurveType curveType
               , float delay
               , float duration
               , std::function<void(void)> fFinishRef)
 {
-    SpriteRepresetationI &spr = *sprite;
+    SpriteRepresentationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
         .Create(

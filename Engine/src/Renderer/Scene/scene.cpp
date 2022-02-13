@@ -10,6 +10,7 @@
 #include "character.hpp"
 #include "scripting_engine.hpp"
 #include "light.hpp"
+#include "font_bitmap.hpp"
 
 using namespace engine;
 
@@ -82,7 +83,19 @@ SpriteRepresentationAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationD
         }
     }
     return nullptr;
+}
 
+SpriteRepresentationText *Scene::SpriteTextLoad(FontI *font)
+{
+    if (font != nullptr)
+    {   auto *rep = (SpriteRepresentationText*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationTextLoad(font);
+        if (rep != nullptr)
+        {   SpriteTextAdd(rep);
+            return rep;
+        }
+    }
+
+    return nullptr;
 }
 
 void Scene::SpriteStaticAdd(SpriteRepresentationStatic *renderer)
@@ -93,6 +106,11 @@ void Scene::SpriteStaticAdd(SpriteRepresentationStatic *renderer)
 void Scene::SpriteAnimatedAdd(SpriteRepresentationAnimated *renderer)
 {
     m_animatedSprites.push_back(renderer);
+}
+
+void Scene::SpriteTextAdd(SpriteRepresentationText *renderer)
+{
+    m_textSprites.push_back(renderer);
 }
 
 CharacterRepresentation *Scene::LoadCharacter(std::string jsonFilename)
@@ -111,7 +129,7 @@ void Scene::RenderSceneBackground()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
-        SpriteRepresetationI *sprite = (*it);
+        SpriteRepresentationI *sprite = (*it);
         if (sprite->GetType() != SPRITE_DRAW_TYPE_BACKGROUND)
         {
             continue;
@@ -126,7 +144,7 @@ void Scene::RenderSceneForeground()
 {
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
-        SpriteRepresetationI *sprite = (*it);
+        SpriteRepresentationI *sprite = (*it);
         if (sprite->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
         {
             continue;
@@ -150,6 +168,11 @@ void Scene::RenderSceneForeground()
     {
         (*it)->Render();
     };
+
+    for (auto *textRep : m_textSprites)
+    {
+        textRep->Draw();
+    }
 }
 
 LightI* Scene::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
@@ -213,6 +236,20 @@ static int lua_Scene_SpriteAnimatedLoad(lua_State *L)
     }
 }
 
+static int lua_Scene_SpriteTextLoad(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    FontBitmapRepresentation *font = ScriptingEngineI::GetScriptingObjectPtr<FontBitmapRepresentation>(L, 2);
+    auto *sprite = scene->SpriteTextLoad(font);
+    if (sprite != nullptr)
+    {   sprite->ScriptingInterfaceRegisterFunctions(L, sprite);
+        return 1;
+    }
+    else
+    {   return 0;
+    }
+}
+
 static int lua_Scene_LoadCharacter(lua_State *L)
 {
     Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
@@ -264,6 +301,7 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
         {"SpriteStaticLoad", &lua_Scene_LoadSpriteDrawStatic}
       , {"SpriteStaticAdd", &lua_Scene_AddSpriteDrawStatic}
       , {"SpriteAnimatedLoad", &lua_Scene_SpriteAnimatedLoad}
+      , {"SpriteTextLoad", &lua_Scene_SpriteTextLoad}
       , {"LoadCharacter", &lua_Scene_LoadCharacter}
       , {"SetMainCharacter", &lua_Scene_SetMainCharacter}
       , {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}

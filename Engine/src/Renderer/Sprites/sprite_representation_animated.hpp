@@ -15,7 +15,7 @@
 
 namespace engine
 {
-    class SpriteRepresentationAnimated: public SpriteRepresetationI
+    class SpriteRepresentationAnimated: public SpriteRepresentationI
     {
     public:
 

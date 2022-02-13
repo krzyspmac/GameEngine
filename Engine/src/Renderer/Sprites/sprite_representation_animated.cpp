@@ -13,7 +13,7 @@
 using namespace engine;
 
 SpriteRepresentationAnimated::SpriteRepresentationAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
-    : SpriteRepresetationI(1.0f)
+    : SpriteRepresentationI(1.0f)
     , m_maxWidth(0)
     , m_maxHeight(0)
     , m_frameAnimationDurationMs(frameAnimationDurationMs)
@@ -91,7 +91,7 @@ void SpriteRepresentationAnimated::DrawAt(int x, int y)
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
     Uint64 seconds = ticks / m_frameAnimationDurationMs;
     Uint64 spriteNo = seconds % m_sprites.size();
-    SpriteRepresetationI *spriteItem = m_sprites.at(spriteNo);
+    SpriteRepresentationI *spriteItem = m_sprites.at(spriteNo);
     spriteItem->DrawAt(x, y);
 }
 

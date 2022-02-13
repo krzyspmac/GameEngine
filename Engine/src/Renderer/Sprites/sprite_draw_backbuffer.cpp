@@ -11,7 +11,7 @@
 using namespace engine;
 
 SpriteDrawBackbuffer::SpriteDrawBackbuffer(float width, float height)
-    : SpriteRepresetationI(1)
+    : SpriteRepresentationI(1)
 {
     EngineProviderI& provider = GetMainEngine()->getProvider();
     auto drawable = provider.DrawableTargetCreate(width, height);

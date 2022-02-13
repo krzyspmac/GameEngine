@@ -108,6 +108,15 @@ function loadSprites()
 	local playerAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.png")
 	playerSprite = scene:SpriteAnimatedLoad(250, playerAtlas)
 	playerSprite:SetPosition(600, 300)
+	
+	
+	-- font
+	local font = FontManager:LoadFont("at01.fnt", "at01.png")
+	local textSprite = scene:SpriteTextLoad(font)
+	textSprite:SetText("Test")
+	textSprite:SetPosition(300, 300)
+	textSprite:SetAcceptsLight(true)
+	textSprite:SetScale(2)
 end
 
 function registerResolutionChange()

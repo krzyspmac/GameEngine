@@ -29,6 +29,9 @@ namespace engine
          */
         std::string &getFontName() { return m_fontName; };
 
+        /** Set the scale */
+        virtual void SetScale(float) = 0;
+
         /**
          Draw the font. Uses the current engine provider.
          */

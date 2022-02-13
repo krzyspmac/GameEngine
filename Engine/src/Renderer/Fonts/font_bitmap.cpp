@@ -147,7 +147,6 @@ FontBitmapGlyph::FontBitmapGlyph(KeyValueProperties& properties)
 
 std::vector<std::unique_ptr<SpriteAtlasItemI>> spriteDescriptors;
 
-
 FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::string fontAtlas, float scale)
     : FontI(fntFile)
     , m_font(FontBitmapDescriptor(fntFile, fontAtlas))
@@ -162,12 +161,6 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
         auto rect = glyph.GetRect();
         auto offset = glyph.GetOffset();
 
-//        float xxx = 40;
-//        rect.origin.x -= xxx;
-//        rect.origin.y -= xxx;
-//        rect.size.width += 2*xxx;
-//        rect.size.height += 2*xxx;
-
         auto atlasItem = new SpriteAtlasItemI(m_texture, rect.origin.x - offset.width, rect.origin.y /*- offset.height*/, rect.size.width, rect.size.height, false, "");
         spriteDescriptors.emplace_back(std::unique_ptr<SpriteAtlasItemI>(atlasItem));
 
@@ -176,6 +169,15 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
         drawable->SetScale(m_scale);
         drawable->GetAcceptsLight() = false;
         glyph.SetDrawable(drawable);
+    }
+}
+
+void FontBitmapRepresentation::SetScale(float value)
+{
+    m_scale = value;
+    for (auto& it : m_font.GetGlyphs())
+    {
+        it.GetDrawable()->SetScale(value);
     }
 }
 
