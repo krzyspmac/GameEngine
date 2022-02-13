@@ -85,11 +85,13 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     // Store the size of the object
     m_size.x = (float)atlasItem->GetWidth();
     m_size.y = (float)atlasItem->GetHeight();
+
+    // Color mod
+    m_colorMod = {1.f, 1.f, 1.f};
 }
 
 DrawableMetal::~DrawableMetal()
 {
-    //m_vertexBuffer->release();
 }
 
 bool DrawableMetal::CanDraw()
@@ -115,6 +117,16 @@ size_t DrawableMetal::GetVertexBufferOffset()
 size_t DrawableMetal::GetVertexCount()
 {
     return m_vertexCount;
+}
+
+vector_float3 *DrawableMetal::GetColorModMetal()
+{
+    return &m_colorMod;
+}
+
+void DrawableMetal::SetColorMod(Color3 mod)
+{
+    m_colorMod = {mod.r, mod.g, mod.b};
 }
 
 /////

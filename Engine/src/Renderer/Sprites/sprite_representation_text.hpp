@@ -45,6 +45,7 @@ namespace engine
     public:
         void DrawAt(int x, int y);
         void Draw();
+        void SetColorMod(Color3 val);
 
     /// ScriptingInterface
     public:

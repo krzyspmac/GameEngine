@@ -110,7 +110,7 @@
         [encoder setVertexBytes:&viewportSize length:sizeof(viewportSize) atIndex:AAPLVertexInputIndexWindowSize];
         [encoder setVertexBytes:&desiredFramebufferTextureSize length:sizeof(desiredFramebufferTextureSize) atIndex:AAPLVertexInputIndexViewportSize];
         [encoder setVertexBytes:&affineScale length:sizeof(affineScale) atIndex:AAPLVertexInputIndexObjectScale];
-        [encoder setFragmentTexture:oscTargetTexture atIndex:AAPLTextureIndexBaseColor];
+        [encoder setFragmentTexture:oscTargetTexture atIndex:FragmentShaderIndexBaseColor];
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 
         // Optionally draw the console

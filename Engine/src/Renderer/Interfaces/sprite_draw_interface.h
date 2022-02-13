@@ -71,6 +71,12 @@ namespace engine
         /** Lighting setter */
         void SetAcceptsLight(bool val) { m_acceptsLight = val; if(m_drawable.get() != nullptr) m_drawable.get()->GetAcceptsLight() = val; };
 
+        /** Set the color mod */
+        void SetColorMod(Color3 val) { m_colorMod = val; if(m_drawable.get() != nullptr) m_drawable.get()->SetColorMod(val); };
+
+        /** Get the color mod */
+        Color3 GetColorMod() { return m_colorMod; };
+
     public: // Drawable related
 
         /** Controls wheather this sprite is drawable at all. Default is yes. */
@@ -90,6 +96,7 @@ namespace engine
         Vector2 m_position;
         bool m_acceptsLight;
         SpriteDrawType m_type;
+        Color3 m_colorMod;
         bool m_isDrawable;
         std::unique_ptr<DrawableSpriteI> m_drawable;
     };

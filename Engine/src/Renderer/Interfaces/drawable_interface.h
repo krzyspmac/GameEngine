@@ -27,6 +27,7 @@ namespace engine
     protected:
         TextureI *m_texture;
         Rect m_textureRect;
+        Color3 m_colorMod;
         float m_flipHorizontal;
         float m_scale;
         float m_alpha;
@@ -39,44 +40,51 @@ namespace engine
             , m_flippedHorizontally(false)
             , m_textureRect( { {0, 0}, {(int)width, (int)height} } )
             , m_acceptsLight(true)
+            , m_colorMod{1.f, 1.f, 1.f}
         { };
 
         virtual ~DrawableI() { };
 
         /** Can the sprite be drawn */
-        bool CanDraw() { return true; };
+        virtual bool CanDraw() { return true; };
 
         /** Set the drawable scale */
-        void SetScale(float val) { m_scale = val; }
+        virtual void SetScale(float val) { m_scale = val; }
 
         /** Get the drawable scale */
-        float *GetScale() { return &m_scale; };
+        virtual float *GetScale() { return &m_scale; };
 
         /** Set the drawable alpha; 0-1 */
-        void SetAlpha(float val) { m_alpha = val; };
+        virtual void SetAlpha(float val) { m_alpha = val; };
 
         /** Get the drawable alpha; 0-1 */
-        float *GetAlpha() { return &m_alpha; };
+        virtual float *GetAlpha() { return &m_alpha; };
+
+        /** Set the color mod */
+        virtual void SetColorMod(Color3 mod) { m_colorMod = mod; };
+
+        /** Get the color mod */
+        virtual Color3& GetColorMod() { return m_colorMod; };
 
     public: // Texture related
 
         /** Set the drawable texture */
-        void SetTexture(TextureI *texture) { m_texture = texture; };
+        virtual void SetTexture(TextureI *texture) { m_texture = texture; };
 
         /** Get the drawable texture */
-        TextureI *GetTexture() { return m_texture; };
+        virtual TextureI *GetTexture() { return m_texture; };
 
         /** Should the rendered sprite be flipped horizontally */
-        bool IsFlippedHorizontally() { return m_flippedHorizontally; }
+        virtual bool IsFlippedHorizontally() { return m_flippedHorizontally; }
 
         /** Set the rendered sprite be flipped horizontally */
-        void SetFlippedHorizontally(bool value) { m_flippedHorizontally = value; };
+        virtual void SetFlippedHorizontally(bool value) { m_flippedHorizontally = value; };
 
         /** Get the texture rect that this sprite is in */
-        Rect& GetTextureRect() { return m_textureRect; };
+        virtual Rect& GetTextureRect() { return m_textureRect; };
 
         /** */
-        bool& GetAcceptsLight() { return m_acceptsLight; };
+        virtual bool& GetAcceptsLight() { return m_acceptsLight; };
     };
 
     /** Declares an abstract interface dealing with a drawable for a sprite

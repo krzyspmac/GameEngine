@@ -184,7 +184,9 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
 {
     // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
-    if (!drawable->CanDraw()) { return; };
+    if (!drawable->CanDraw())
+    { return;
+    };
 
     // Some values to pass to the GPU
     static simd_float2 position = { 0, 0 };
@@ -202,20 +204,21 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
 
-    renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
+    renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), FragmentShaderIndexBaseAlpha);
 
     auto& lightManager = GetMainEngine()->getLightMnaager();
     int lightsCount = drawable->GetAcceptsLight() && lightManager.GetLightsActive() ? lightManager.GetLightBufferCount() : 0;
-    renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), AAPLVertexInpueIndexLightCount);
-    renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), AAPLVertexInputIndexLight);
-
+    renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), FragmentShaderIndexLightCount);
+    renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), FragmentShaderIndexLight);
+    renderToPipline->setFragmentBytes(drawable->GetColorModMetal(), sizeof(vector_float3), FragmentShaderIndexColorMod);
+    
     auto texture = drawable->GetTexture();
     if (texture != nullptr)
     {
         auto mtlTextureHandle = texture->GetMTLTextureHandle();
         if (mtlTextureHandle != nullptr)
         {
-            renderToPipline->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
+            renderToPipline->setFragmentTexture(mtlTextureHandle, FragmentShaderIndexBaseColor);
         }
     }
 

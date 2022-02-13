@@ -139,6 +139,16 @@ static int lua_SpriteDrawStatic_SetType(lua_State *L)
     return 0;
 }
 
+static int lua_SetColorMod(lua_State *L)
+{
+    SpriteRepresentationStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    spr->SetColorMod({r, g, b});
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -151,7 +161,8 @@ std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
         {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
         {"Draw", &lua_SpriteDrawStatic_Draw},
         {"SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight},
-        {"SetType", &lua_SpriteDrawStatic_SetType}
+        {"SetType", &lua_SpriteDrawStatic_SetType},
+        {"SetColorMod", &lua_SetColorMod}
     });
     return result;
 }

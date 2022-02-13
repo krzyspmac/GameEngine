@@ -25,15 +25,14 @@ typedef enum AAPLVertexInputIndex
                                                     // size of the framebuffer texture
 } AAPLVertexInputIndex;
 
-// Texture index values shared between shader and C code to ensure Metal shader buffer inputs match
-//   Metal API texture set calls
-typedef enum AAPLTextureIndex
+typedef enum FragmentShaderIndex
 {
-    AAPLTextureIndexBaseColor           = 0,
-    AAPLTextureIndexBaseAlpha           = 1,
-    AAPLVertexInputIndexLight           = 2,        // An array of light information
-    AAPLVertexInpueIndexLightCount      = 3
-} AAPLTextureIndex;
+    FragmentShaderIndexBaseColor        = 0,
+    FragmentShaderIndexBaseAlpha        = 1,
+    FragmentShaderIndexLight            = 2,        // An array of light information
+    FragmentShaderIndexLightCount       = 3,
+    FragmentShaderIndexColorMod         = 4
+} FragmentShaderIndex;
 
 //  This structure defines the layout of vertices sent to the vertex
 //  shader. This header is shared between the .metal shader and C code, to guarantee that
@@ -72,5 +71,10 @@ typedef struct
        | chunk0| chunk1| chunk2  |
     */
 } AAPAmbientLLight;
+
+typedef struct
+{
+    vector_float3 colorMod;
+} ShaderColorMod;
 
 #endif /* AAPLShaderTypes_h */

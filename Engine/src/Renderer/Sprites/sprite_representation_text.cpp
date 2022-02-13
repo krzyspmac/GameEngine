@@ -43,6 +43,11 @@ void SpriteRepresentationText::SetAcceptsLight(bool val)
     SpriteRepresentationI::SetAcceptsLight(val);
 }
 
+void SpriteRepresentationText::SetColorMod(Color3 val)
+{
+//    for (auto& it : m_)
+}
+
 void SpriteRepresentationText::DrawAt(int x, int y)
 {
     m_bitmapFont->DrawAt(m_text, x, y, 1, 1, 1, 1, TEXT_ALIGN_LEFT);
@@ -116,6 +121,16 @@ static int lua_SetAcceptsLight(lua_State *L)
     return 0;
 }
 
+static int lua_SetColorMod(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 2);
+    float b = lua_tonumber(L, 2);
+    spr->SetColorMod({r, g, b});
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -126,6 +141,7 @@ std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
       , { "SetPosition", &lua_SetPosition }
       , { "GetPosition", &lua_GetPosition }
       , { "SetAcceptsLight", &lua_SetAcceptsLight }
+      , { "SetColorMod", &lua_SetColorMod }
     });
     return result;
 }

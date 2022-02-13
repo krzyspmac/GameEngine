@@ -86,6 +86,13 @@ void SpriteRepresentationAnimated::SetAnimationFrameDuration(float value)
     m_frameAnimationDurationMs = value;
 }
 
+void SpriteRepresentationAnimated::SetColorMod(Color3 val)
+{
+    for (auto& item : m_sprites)
+    {   item->SetColorMod(val);
+    }
+}
+
 void SpriteRepresentationAnimated::DrawAt(int x, int y)
 {
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
@@ -178,6 +185,17 @@ static int lua_SpriteDrawStatic_SetAnimationFrameDuration(lua_State *L)
     spr->SetAnimationFrameDuration(lua_tonumber(L, 2));
     return 0;
 }
+
+static int lua_SpriteDrawStatic_SetColorMod(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    spr->SetColorMod({r, g, b});
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -189,6 +207,7 @@ std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions(
       , { "SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight }
       , { "SetType", &lua_SpriteDrawStatic_SetType }
       , { "SetAnimationFrameDuration", &lua_SpriteDrawStatic_SetAnimationFrameDuration }
+      , { "SetColorMod", &lua_SpriteDrawStatic_SetColorMod }
     });
     return result;
 }

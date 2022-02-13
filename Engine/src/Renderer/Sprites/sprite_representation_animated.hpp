@@ -49,7 +49,8 @@ namespace engine
         void SetAcceptsLight(bool val);
         void DrawAt(int x, int y);
         void Draw();
-
+        void SetColorMod(Color3);
+        
     private:
         void PrepareAnimation();
         
