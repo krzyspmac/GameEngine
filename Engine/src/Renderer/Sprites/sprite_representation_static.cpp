@@ -145,7 +145,8 @@ static int lua_SetColorMod(lua_State *L)
     float r = lua_tonumber(L, 2);
     float g = lua_tonumber(L, 3);
     float b = lua_tonumber(L, 4);
-    spr->SetColorMod({r, g, b});
+    float a = lua_tonumber(L, 5);
+    spr->SetColorMod({r, g, b, a});
     return 0;
 }
 

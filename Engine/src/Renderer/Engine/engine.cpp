@@ -217,7 +217,8 @@ void Engine::RenderSceneTexts()
     sprintf(mousePos, "%d x %d", m_mousePosition.x, m_mousePosition.y);
     sprintf(mousePos, "Mouse testing: %d x %d", m_mousePosition.x, m_mousePosition.y);
 
-    m_displayFont->DrawAt(mousePos, 20, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT);
+    static Color4 white = {1.f, 1.f, 1.f, 1.f};
+    m_displayFont->DrawAt(mousePos, 20, 0, 255, 255, 255, 255, TEXT_ALIGN_LEFT, white);
 }
 
 void Engine::ApplyScaleTransformations()

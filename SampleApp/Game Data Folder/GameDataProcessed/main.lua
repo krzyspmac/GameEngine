@@ -98,7 +98,7 @@ function loadSprites()
 	tds:SetScale(1.5)
 	tds:SetAcceptsLight(true)
 	tds:SetAnimationFrameDuration(250)
-	tds:SetColorMod(0.0, 1.0, 0.0)
+	tds:SetColorMod(0.0, 1.0, 0.0, 1.0)
 
 	-- lights
 	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
@@ -117,6 +117,7 @@ function loadSprites()
 	textSprite:SetPosition(300, 300)
 	textSprite:SetAcceptsLight(true)
 	textSprite:SetScale(2)
+	textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
 end
 
 function registerResolutionChange()

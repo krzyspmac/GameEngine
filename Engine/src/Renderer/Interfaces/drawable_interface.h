@@ -27,7 +27,7 @@ namespace engine
     protected:
         TextureI *m_texture;
         Rect m_textureRect;
-        Color3 m_colorMod;
+        Color4 m_colorMod;
         float m_flipHorizontal;
         float m_scale;
         float m_alpha;
@@ -40,7 +40,7 @@ namespace engine
             , m_flippedHorizontally(false)
             , m_textureRect( { {0, 0}, {(int)width, (int)height} } )
             , m_acceptsLight(true)
-            , m_colorMod{1.f, 1.f, 1.f}
+            , m_colorMod{1.f, 1.f, 1.f, 1.f}
         { };
 
         virtual ~DrawableI() { };
@@ -61,10 +61,10 @@ namespace engine
         virtual float *GetAlpha() { return &m_alpha; };
 
         /** Set the color mod */
-        virtual void SetColorMod(Color3 mod) { m_colorMod = mod; };
+        virtual void SetColorMod(Color4 mod) { m_colorMod = mod; };
 
         /** Get the color mod */
-        virtual Color3& GetColorMod() { return m_colorMod; };
+        virtual Color4& GetColorMod() { return m_colorMod; };
 
     public: // Texture related
 

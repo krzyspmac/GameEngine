@@ -181,7 +181,7 @@ void FontBitmapRepresentation::SetScale(float value)
     }
 }
 
-void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta)
+void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta, Color4 colorMod)
 {
     if (m_texture != nullptr)
     {
@@ -211,7 +211,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
                 float tx = x + (viewportScale * ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale)));
                 float ty = y + ceil((offset.height * m_scale * viewportScale));
 
-                provider.DrawableRender(drawable, tx, ty);
+                provider.DrawableRender(drawable, tx, ty, colorMod);
                 x += ceil((glyph->GetXAdvance() + charSpacing.x)) * m_scale * viewportScale;
             }
 
@@ -235,7 +235,7 @@ static int lua_FontBitmapRepresentation_DrawText(lua_State *L)
     int a = lua_tonumber(L, 8);
     //const char *align = lua_tostring(L, 9); // not yet supported
 
-    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT);
+    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT, {1.f, 1.f, 1.f});
     return 0;
 }
 

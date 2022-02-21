@@ -93,9 +93,14 @@ namespace engine
         /// rendered using ::DrawableTargetRender.
         virtual std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float) = 0;
 
-        /// Render the drawable for the current frame at x, y. Throw in a drawable (or more)
-        /// that are to be taken as light sources.
+        /// Render the drawable for the current frame at x, y. Uses the currently set lights
+        /// that are to be taken into account when rendering the game objects.
         virtual void DrawableRender(DrawableI*, float, float) = 0;
+
+        /// Render the drawable for the current frame at x, y. Uses the currently set lights
+        /// that are to be taken into account when rendering the game objects.
+        /// This version allows for custom color mod.
+        virtual void DrawableRender(DrawableI*, float, float, Color4) = 0;
 
         /// Render the target drawable for the current frame at x, y.
         virtual void DrawableTargetRender(DrawableTargetI*, float, float) = 0;

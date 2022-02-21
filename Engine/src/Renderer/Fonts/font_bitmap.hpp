@@ -156,7 +156,7 @@ namespace engine
          font:DrawAt("Sample Text", 0, 0, 255, 0, 0, 255, "left")
          \endcode
          */
-        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align);
+        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod);
 
     private: /** scripting */
         /** @private */

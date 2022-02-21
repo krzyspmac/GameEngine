@@ -9,6 +9,7 @@
 #define font_interface_h
 
 #include "common.h"
+#include "common_engine_impl.h"
 
 namespace engine
 {
@@ -35,7 +36,7 @@ namespace engine
         /**
          Draw the font. Uses the current engine provider.
          */
-        virtual void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align) = 0;
+        virtual void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod) = 0;
 
     private:
         std::string m_fontName;

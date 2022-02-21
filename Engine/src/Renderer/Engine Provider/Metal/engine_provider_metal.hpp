@@ -67,6 +67,7 @@ namespace engine
         std::unique_ptr<DrawableSpriteI> DrawableCreate(SpriteAtlasItemI*, float scale);
         std::unique_ptr<DrawableTargetI> DrawableTargetCreate(float, float);
         void DrawableRender(DrawableI*, float, float);
+        void DrawableRender(DrawableI*, float, float, Color4);
         void DrawableTargetRender(DrawableTargetI*, float, float);
 
     public:

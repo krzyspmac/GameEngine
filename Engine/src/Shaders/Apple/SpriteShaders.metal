@@ -86,7 +86,7 @@ fragmentShader(
    , constant float             *alphaPointer    [[ buffer (FragmentShaderIndexBaseAlpha)  ]]
    , constant AAPAmbientLLight  *lights          [[ buffer (FragmentShaderIndexLight)      ]]
    , constant int               *lightCountPtr   [[ buffer (FragmentShaderIndexLightCount) ]]
-   , constant vector_float3     *colorModPtr     [[ buffer (FragmentShaderIndexColorMod)   ]]
+   , constant vector_float4     *colorModPtr     [[ buffer (FragmentShaderIndexColorMod)   ]]
 )
 {
     // Texture sampler
@@ -115,8 +115,8 @@ fragmentShader(
     }
 
     // Apply the color mod
-    half3 colorMod = half3(*colorModPtr);
-    colorSample.rgb *= colorMod;
+    half4 colorMod = half4(*colorModPtr);
+    colorSample.rgba *= colorMod;
 
     // Light calculation
     int lightCount = int(*lightCountPtr);
