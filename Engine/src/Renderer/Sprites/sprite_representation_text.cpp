@@ -12,7 +12,7 @@ using namespace engine;
 SpriteRepresentationText::SpriteRepresentationText(FontI *font)
     : SpriteRepresentationI(1.f)
     , m_bitmapFont(font)
-    , m_shadowOffset({0.f, 0.f})
+    , m_shadowOffset({1.f, 1.f})
     , m_shadowColor({0.f, 0.f, 0.f, 0.f})
 {
 }
@@ -48,8 +48,22 @@ void SpriteRepresentationText::SetColorMod(Color4 val)
     SpriteRepresentationI::SetColorMod(val);
 }
 
+void SpriteRepresentationText::SetShadowColor(Color4 val)
+{
+    m_shadowColor = val;
+}
+
+void SpriteRepresentationText::SetShadowOffset(OriginF val)
+{
+    m_shadowOffset = val;
+}
+
 void SpriteRepresentationText::DrawAt(int x, int y)
 {
+    if (m_shadowColor.a > 0.f)
+    {
+        m_bitmapFont->DrawAt(m_text, x + m_shadowOffset.x, y + + m_shadowOffset.x, 1, 1, 1, 1, TEXT_ALIGN_LEFT, m_shadowColor);
+    }
     m_bitmapFont->DrawAt(m_text, x, y, 1, 1, 1, 1, TEXT_ALIGN_LEFT, GetColorMod());
 }
 
@@ -132,6 +146,26 @@ static int lua_SetColorMod(lua_State *L)
     return 0;
 }
 
+static int lua_SetShadowColor(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    float a = lua_tonumber(L, 5);
+    spr->SetShadowColor({r, g, b, a});
+    return 0;
+}
+
+static int lua_SetShadowOffset(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    float x = lua_tonumber(L, 2);
+    float y = lua_tonumber(L, 3);
+    spr->SetShadowOffset({x, y});
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -143,6 +177,8 @@ std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
       , { "GetPosition", &lua_GetPosition }
       , { "SetAcceptsLight", &lua_SetAcceptsLight }
       , { "SetColorMod", &lua_SetColorMod }
+      , { "SetShadowColor", &lua_SetShadowColor }
+      , { "SetShadowOffset", &lua_SetShadowOffset }
     });
     return result;
 }

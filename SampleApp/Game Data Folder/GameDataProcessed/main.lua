@@ -118,6 +118,8 @@ function loadSprites()
 	textSprite:SetAcceptsLight(true)
 	textSprite:SetScale(2)
 	textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
+	textSprite:SetShadowColor(1.0, 0.0, 0.0, 1.0)
+	textSprite:SetShadowOffset(2, 2)
 end
 
 function registerResolutionChange()

@@ -42,6 +42,12 @@ namespace engine
         /** Lighting setter */
         void SetAcceptsLight(bool val);
 
+        /** Shadow color. If alpha is <= 0 shadow is disabled. Default is clear color. */
+        void SetShadowColor(Color4);
+
+        /** Set shadow offset. Default is { 1, 1 } */
+        void SetShadowOffset(OriginF);
+
     public:
         void DrawAt(int x, int y);
         void Draw();
