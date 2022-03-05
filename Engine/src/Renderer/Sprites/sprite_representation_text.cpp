@@ -14,6 +14,8 @@ SpriteRepresentationText::SpriteRepresentationText(FontI *font)
     , m_bitmapFont(font)
     , m_shadowOffset({1.f, 1.f})
     , m_shadowColor({0.f, 0.f, 0.f, 0.f})
+    , m_lineMultiplier(1.f)
+    , m_textAlignment(TEXT_ALIGN_LEFT)
 {
 }
 
@@ -58,13 +60,36 @@ void SpriteRepresentationText::SetShadowOffset(OriginF val)
     m_shadowOffset = val;
 }
 
+void SpriteRepresentationText::SetLineHeightMultiplier(float lineMultiplier)
+{
+    m_lineMultiplier = lineMultiplier;
+}
+
+void SpriteRepresentationText::SetAlignment(std::string stringValue)
+{
+    typedef struct { std::string name; TEXT_ALIGNMENT value; } AlignmentInfo;
+    static AlignmentInfo values[] =
+    {
+        {"left", TEXT_ALIGN_LEFT}
+      , {"center", TEXT_ALIGN_CENTER}
+      , {"right", TEXT_ALIGN_RIGHT}
+    };
+
+    for(auto& v : values)
+    {   if (v.name.compare(stringValue) == 0)
+        {   m_textAlignment = v.value;
+            break;
+        }
+    }
+}
+
 void SpriteRepresentationText::DrawAt(int x, int y)
 {
     if (m_shadowColor.a > 0.f)
     {
-        m_bitmapFont->DrawAt(m_text, x + m_shadowOffset.x, y + + m_shadowOffset.x, 1, 1, 1, 1, TEXT_ALIGN_LEFT, m_shadowColor);
+        m_bitmapFont->DrawAt(m_text, x + m_shadowOffset.x, y + + m_shadowOffset.x, 1, 1, 1, 1, m_textAlignment, m_shadowColor, m_lineMultiplier);
     }
-    m_bitmapFont->DrawAt(m_text, x, y, 1, 1, 1, 1, TEXT_ALIGN_LEFT, GetColorMod());
+    m_bitmapFont->DrawAt(m_text, x, y, 1, 1, 1, 1, m_textAlignment, GetColorMod(), m_lineMultiplier);
 }
 
 void SpriteRepresentationText::Draw()
@@ -166,6 +191,22 @@ static int lua_SetShadowOffset(lua_State *L)
     return 0;
 }
 
+static int lua_SetLineHeightMultiplier(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    float value = lua_tonumber(L, 2);
+    spr->SetLineHeightMultiplier(value);
+    return 0;
+}
+
+static int lua_SetAlignment(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    std::string value = lua_tostring(L, 2);
+    spr->SetAlignment(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -179,6 +220,8 @@ std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
       , { "SetColorMod", &lua_SetColorMod }
       , { "SetShadowColor", &lua_SetShadowColor }
       , { "SetShadowOffset", &lua_SetShadowOffset }
+      , { "SetLineHeightMultiplier", &lua_SetLineHeightMultiplier }
+      , { "SetAlignment", &lua_SetAlignment }
     });
     return result;
 }

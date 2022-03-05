@@ -5,12 +5,11 @@ The Engine uses bitmap fonts. Those are comprised of the .fnt file (ascii) and t
 includes all the glyphs for that particular font.
 
 Bitmap fonts are simply a collection of glyphs that are treated like sprites by the engine.
-The drawing function converts the character in the text drawn into glyphs and those tell the engine
-which sprite to put where.
+The drawing functions simply layout glyphs at given coordinates.
 
-The engine does not use TTF or OTF fonts due to time constraints and efficiency. Besides creating
-your own bitmap font existing TTF or OTF fonts can be converted into bitmap fonts. 
-There is a number of tools. \see https://github.com/vladimirgamalyan/fontbm
+The engine does not use TTF or OTF fonts. Creating
+your own bitmap fonts from existing TTF or OTF fonts can be achieved by using a wide variety
+of tools.\see https://github.com/vladimirgamalyan/fontbm
 
 ## Loading
 
@@ -23,11 +22,25 @@ local font = FontManager:LoadFont("MyFont.fnt", "MyFont.png)
 
 One loaded the font stays until the scene manager clears the font cache.
 
-## Drawing
+## Sprite representation
 
-Once the font has been loaded it can be drawn in the *Update* function of your script.
-Like everything the font must be drawn in each frame.
+Once the font has been loaded a sprite representation can be created. A sprite representation
+is being created on a given scene and its lifecycle is linked to that scene.
 
 ```
-font:DrawAt("Some text!", 100, 100, 255, 0, 0, 255, "left")
+local textSprite = scene:SpriteTextLoad(font)
 ```
+
+Font sprite representations share a number of functions with general sprite representations.
+
+```
+textSprite:SetText("Test")
+textSprite:SetPosition(300, 300)
+textSprite:SetAcceptsLight(true)
+textSprite:SetScale(2)
+textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
+textSprite:SetShadowColor(1.0, 0.0, 0.0, 1.0)
+textSprite:SetShadowOffset(2, 2)
+```
+
+\see SpriteRepresentationText

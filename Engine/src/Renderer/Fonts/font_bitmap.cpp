@@ -181,41 +181,92 @@ void FontBitmapRepresentation::SetScale(float value)
     }
 }
 
-void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta, Color4 colorMod)
+void FontBitmapRepresentation::LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth)
 {
-    if (m_texture != nullptr)
+    size_t len = text.length();
+
+    if (len <= 0 && from < len && to < len)
+    {
+        return;
+    };
+
+    float viewportScale = GetMainEngine()->GetViewportScale();
+    auto& fontDescriptor = m_font.GetDescriptor();
+    auto& charSpacing = fontDescriptor.info.spacing;
+    auto& c = text.at(0);
+    int x = position.x;
+    int y = position.y;
+
+    int previousC = -1;
+    for (int i = from; i < to; i++)
+    {
+        c = text.at(i);
+
+        if (auto glyph = m_font.GetGlyph(c))
+        {
+            Size& offset = glyph->GetOffset();
+            auto drawable = glyph->GetDrawable();
+            float tx = x + (viewportScale * ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale)));
+            float ty = y + ceil((offset.height * m_scale * viewportScale));
+
+            drawLabmda(drawable, tx, ty);
+            x += ceil((glyph->GetXAdvance() + charSpacing.x)) * m_scale * viewportScale;
+        }
+
+        previousC = c;
+    }
+
+    lineWidth(x);
+}
+
+void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta, Color4 colorMod, float lineMultiplier)
+{
+    size_t len = text.length();
+
+    if (m_texture != nullptr && len > 0)
     {
         EngineProviderI& provider = GetMainEngine()->getProvider();
-        float viewportScale = GetMainEngine()->GetViewportScale();
         auto& fontDescriptor = m_font.GetDescriptor();
-        auto& charSpacing = fontDescriptor.info.spacing;
 
         int x = xo;
         int y = yo;
 
-        int previousC = -1;
-        for (auto& c: text)
+        int from = 0;
+        int to = 0;
+
+        for (int i = 0; i < len; i++)
         {
+            auto& c = text.at(i);
+
+            // Get line boundaries
             if (c == '\n')
             {
-                x = xo;
-                y += fontDescriptor.common.lineHeight;
-                previousC = -1;
+                to = i;
+            }
+            else if (i == len -1)
+            {
+                to = i + 1;
+            }
+            else
+            {
                 continue;
             }
 
-            if (auto glyph = m_font.GetGlyph(c))
-            {
-                Size& offset = glyph->GetOffset();
-                auto drawable = glyph->GetDrawable();
-                float tx = x + (viewportScale * ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale)));
-                float ty = y + ceil((offset.height * m_scale * viewportScale));
+            float lineWidth = 0;
+            LineRunner(text, from, to, {x, y}, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
+            }, [&](float width){
+                lineWidth = width;
+            });
 
+            LineRunner(text, from, to, {x - ((int)lineWidth/2), y}, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
                 provider.DrawableRender(drawable, tx, ty, colorMod);
-                x += ceil((glyph->GetXAdvance() + charSpacing.x)) * m_scale * viewportScale;
-            }
+            }, [&](float width) {
+            });
 
-            previousC = c;
+            x = xo;
+            from = to;
+
+            y += fontDescriptor.common.lineHeight * lineMultiplier * m_scale;
         }
     };
 }
@@ -235,7 +286,7 @@ static int lua_FontBitmapRepresentation_DrawText(lua_State *L)
     int a = lua_tonumber(L, 8);
     //const char *align = lua_tostring(L, 9); // not yet supported
 
-    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT, {1.f, 1.f, 1.f});
+    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT, {1.f, 1.f, 1.f}, 1.f);
     return 0;
 }
 

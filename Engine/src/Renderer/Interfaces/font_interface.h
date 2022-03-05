@@ -36,7 +36,7 @@ namespace engine
         /**
          Draw the font. Uses the current engine provider.
          */
-        virtual void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod) = 0;
+        virtual void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod, float lineMultiplier) = 0;
 
     private:
         std::string m_fontName;

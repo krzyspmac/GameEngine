@@ -156,7 +156,10 @@ namespace engine
          font:DrawAt("Sample Text", 0, 0, 255, 0, 0, 255, "left")
          \endcode
          */
-        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod);
+        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod, float lineMultiplier);
+
+    private:
+        void LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth);
 
     private: /** scripting */
         /** @private */

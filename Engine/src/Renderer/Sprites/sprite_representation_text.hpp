@@ -22,6 +22,8 @@ namespace engine
         std::string m_text;
         OriginF m_shadowOffset;
         Color4 m_shadowColor;
+        float m_lineMultiplier;
+        TEXT_ALIGNMENT m_textAlignment;
     public:
         SpriteRepresentationText(FontI*);
 
@@ -47,6 +49,14 @@ namespace engine
 
         /** Set shadow offset. Default is { 1, 1 } */
         void SetShadowOffset(OriginF);
+
+        /** Set the line multiplier. Default is 1.f and is based on what was initially
+            defined in the .fnt file */
+        void SetLineHeightMultiplier(float);
+
+        /** Set the alignment. "left"|"center"|"right"
+            */
+        void SetAlignment(std::string);
 
     public:
         void DrawAt(int x, int y);

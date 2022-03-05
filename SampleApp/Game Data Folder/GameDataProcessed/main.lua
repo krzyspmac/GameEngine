@@ -113,13 +113,15 @@ function loadSprites()
 	-- font
 	local font = FontManager:LoadFont("at01.fnt", "at01.png")
 	local textSprite = scene:SpriteTextLoad(font)
-	textSprite:SetText("Test")
-	textSprite:SetPosition(300, 300)
+	textSprite:SetText("One upon a time\na princess found a frog\nand drank some grog")
+	textSprite:SetPosition(1280, 300)
 	textSprite:SetAcceptsLight(true)
-	textSprite:SetScale(2)
+	textSprite:SetScale(3)
 	textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
 	textSprite:SetShadowColor(1.0, 0.0, 0.0, 1.0)
 	textSprite:SetShadowOffset(2, 2)
+	textSprite:SetLineHeightMultiplier(1.2)
+	textSprite:SetAlignment("center")
 end
 
 function registerResolutionChange()
