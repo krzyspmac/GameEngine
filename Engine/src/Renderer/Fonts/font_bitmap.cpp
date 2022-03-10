@@ -11,6 +11,9 @@
 
 using namespace engine;
 
+static Origin zeroPoint = {0, 0};
+static Origin point = {0, 0};
+
 #pragma mark - Font Bitmap
 
 FontBitmapDescriptor::FontBitmapDescriptor(std::string fntFile, std::string fontAtlas)
@@ -193,14 +196,13 @@ void FontBitmapRepresentation::LineRunner(std::string& text, int from, int to, O
     float viewportScale = GetMainEngine()->GetViewportScale();
     auto& fontDescriptor = m_font.GetDescriptor();
     auto& charSpacing = fontDescriptor.info.spacing;
-    auto& c = text.at(0);
     int x = position.x;
     int y = position.y;
 
     int previousC = -1;
     for (int i = from; i < to; i++)
     {
-        c = text.at(i);
+        auto& c = text.at(i);
 
         if (auto glyph = m_font.GetGlyph(c))
         {
@@ -253,12 +255,27 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
             }
 
             float lineWidth = 0;
-            LineRunner(text, from, to, {x, y}, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
+            LineRunner(text, from, to, zeroPoint, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
             }, [&](float width){
                 lineWidth = width;
             });
 
-            LineRunner(text, from, to, {x - ((int)lineWidth/2), y}, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
+            point.x = x;
+            point.y = y;
+
+            switch (ta)
+            {
+                case TEXT_ALIGN_LEFT:
+                    break;
+                case TEXT_ALIGN_CENTER:
+                    point.x -= lineWidth / 2.f;
+                    break;
+                case TEXT_ALIGN_RIGHT:
+                    point.x -= lineWidth;
+                    break;
+            };
+
+            LineRunner(text, from, to, point, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
                 provider.DrawableRender(drawable, tx, ty, colorMod);
             }, [&](float width) {
             });
