@@ -12,7 +12,7 @@
 
 using namespace engine;
 
-SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite)
+SpriteRepresentationI *SpriteRendererManager::SpriteRepresentationStaticLoad(SpriteAtlasItemI *sprite)
 {
     SpriteRepresentationStatic *sd = new SpriteRepresentationStatic(sprite);
 
@@ -23,7 +23,7 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationStaticLoad(Spri
     return sd;
 }
 
-SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites)
+SpriteRepresentationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, std::vector<SpriteAtlasItemI*> sprites)
 {
     engine::SpriteRepresentationAnimated *sd = new SpriteRepresentationAnimated(sprites, frameAnimationDurationMs);
     if (sd)
@@ -33,9 +33,9 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(in
     return sd;
 }
 
-SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI *atlas)
+SpriteRepresentationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(int frameAnimationDurationMs, SpriteAtlasI *atlas)
 {
-    engine::SpriteRepresentationAnimated *sd = SpriteRepresentationAnimated::CreateFromAtlas(atlas->GetAllItems(), frameAnimationDurationMs);
+    SpriteRepresentationAnimated *sd = SpriteRepresentationAnimated::CreateFromAtlas(atlas->GetAllItems(), frameAnimationDurationMs);
     if (sd)
     {
         m_spriteDraws.emplace_back(std::move(sd));
@@ -43,11 +43,21 @@ SpriteRepresetationI *SpriteRendererManager::SpriteRepresentationAnimatedLoad(in
     return sd;
 }
 
-void SpriteRendererManager::SpriteDrawUnload(SpriteRepresetationI *spriteDraw)
+SpriteRepresentationI *SpriteRendererManager::SpriteRepresentationTextLoad(FontI *font)
+{
+    SpriteRepresentationText *result = new SpriteRepresentationText(font);
+    if (result != nullptr)
+    {   m_spriteDraws.emplace_back(std::move(result));
+    }
+
+    return result;
+}
+
+void SpriteRendererManager::SpriteDrawUnload(SpriteRepresentationI *spriteDraw)
 {
     for(auto it = std::begin(m_spriteDraws); it != std::end(m_spriteDraws); ++it)
     {
-        SpriteRepresetationI *item = it->get();
+        SpriteRepresentationI *item = it->get();
         if (item == spriteDraw)
         {
             m_spriteDraws.erase(it);

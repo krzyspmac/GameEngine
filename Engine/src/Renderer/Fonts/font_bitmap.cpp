@@ -11,6 +11,9 @@
 
 using namespace engine;
 
+static Origin zeroPoint = {0, 0};
+static Origin point = {0, 0};
+
 #pragma mark - Font Bitmap
 
 FontBitmapDescriptor::FontBitmapDescriptor(std::string fntFile, std::string fontAtlas)
@@ -147,7 +150,6 @@ FontBitmapGlyph::FontBitmapGlyph(KeyValueProperties& properties)
 
 std::vector<std::unique_ptr<SpriteAtlasItemI>> spriteDescriptors;
 
-
 FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::string fontAtlas, float scale)
     : FontI(fntFile)
     , m_font(FontBitmapDescriptor(fntFile, fontAtlas))
@@ -162,12 +164,6 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
         auto rect = glyph.GetRect();
         auto offset = glyph.GetOffset();
 
-//        float xxx = 40;
-//        rect.origin.x -= xxx;
-//        rect.origin.y -= xxx;
-//        rect.size.width += 2*xxx;
-//        rect.size.height += 2*xxx;
-
         auto atlasItem = new SpriteAtlasItemI(m_texture, rect.origin.x - offset.width, rect.origin.y /*- offset.height*/, rect.size.width, rect.size.height, false, "");
         spriteDescriptors.emplace_back(std::unique_ptr<SpriteAtlasItemI>(atlasItem));
 
@@ -179,41 +175,115 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
     }
 }
 
-void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta)
+void FontBitmapRepresentation::SetScale(float value)
 {
-    if (m_texture != nullptr)
+    m_scale = value;
+    for (auto& it : m_font.GetGlyphs())
+    {
+        it.GetDrawable()->SetScale(value);
+    }
+}
+
+void FontBitmapRepresentation::LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth)
+{
+    size_t len = text.length();
+
+    if (len <= 0 && from < len && to < len)
+    {
+        return;
+    };
+
+    float viewportScale = GetMainEngine()->GetViewportScale();
+    auto& fontDescriptor = m_font.GetDescriptor();
+    auto& charSpacing = fontDescriptor.info.spacing;
+    int x = position.x;
+    int y = position.y;
+
+    int previousC = -1;
+    for (int i = from; i < to; i++)
+    {
+        auto& c = text.at(i);
+
+        if (auto glyph = m_font.GetGlyph(c))
+        {
+            Size& offset = glyph->GetOffset();
+            auto drawable = glyph->GetDrawable();
+            float tx = x + (viewportScale * ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale)));
+            float ty = y + ceil((offset.height * m_scale * viewportScale));
+
+            drawLabmda(drawable, tx, ty);
+            x += ceil((glyph->GetXAdvance() + charSpacing.x)) * m_scale * viewportScale;
+        }
+
+        previousC = c;
+    }
+
+    lineWidth(x);
+}
+
+void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta, Color4 colorMod, float lineMultiplier)
+{
+    size_t len = text.length();
+
+    if (m_texture != nullptr && len > 0)
     {
         EngineProviderI& provider = GetMainEngine()->getProvider();
-        float viewportScale = GetMainEngine()->GetViewportScale();
         auto& fontDescriptor = m_font.GetDescriptor();
-        auto& charSpacing = fontDescriptor.info.spacing;
 
         int x = xo;
         int y = yo;
 
-        int previousC = -1;
-        for (auto& c: text)
+        int from = 0;
+        int to = 0;
+
+        for (int i = 0; i < len; i++)
         {
+            auto& c = text.at(i);
+
+            // Get line boundaries
             if (c == '\n')
             {
-                x = xo;
-                y += fontDescriptor.common.lineHeight;
-                previousC = -1;
+                to = i;
+            }
+            else if (i == len -1)
+            {
+                to = i + 1;
+            }
+            else
+            {
                 continue;
             }
 
-            if (auto glyph = m_font.GetGlyph(c))
+            float lineWidth = 0;
+            LineRunner(text, from, to, zeroPoint, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
+            }, [&](float width){
+                lineWidth = width;
+            });
+
+            point.x = x;
+            point.y = y;
+
+            switch (ta)
             {
-                Size& offset = glyph->GetOffset();
-                auto drawable = glyph->GetDrawable();
-                float tx = x + (viewportScale * ceil((offset.width * m_scale) - (m_font.GetKerningAmount(previousC, c) * m_scale)));
-                float ty = y + ceil((offset.height * m_scale * viewportScale));
+                case TEXT_ALIGN_LEFT:
+                    break;
+                case TEXT_ALIGN_CENTER:
+                    point.x -= lineWidth / 2.f;
+                    break;
+                case TEXT_ALIGN_RIGHT:
+                    point.x -= lineWidth;
+                    break;
+            };
 
-                provider.DrawableRender(drawable, tx, ty);
-                x += ceil((glyph->GetXAdvance() + charSpacing.x)) * m_scale * viewportScale;
-            }
+            LineRunner(text, from, to, point, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
+                provider.DrawableRender(drawable, tx, ty, colorMod);
+            }, [&](float width) {
+            });
 
-            previousC = c;
+            x = xo;
+            from = to;
+
+            y += fontDescriptor.common.lineHeight * lineMultiplier * m_scale;
         }
     };
 }
@@ -233,7 +303,7 @@ static int lua_FontBitmapRepresentation_DrawText(lua_State *L)
     int a = lua_tonumber(L, 8);
     //const char *align = lua_tostring(L, 9); // not yet supported
 
-    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT);
+    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT, {1.f, 1.f, 1.f}, 1.f);
     return 0;
 }
 

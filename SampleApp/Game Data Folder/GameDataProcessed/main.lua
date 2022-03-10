@@ -98,16 +98,30 @@ function loadSprites()
 	tds:SetScale(1.5)
 	tds:SetAcceptsLight(true)
 	tds:SetAnimationFrameDuration(250)
+	tds:SetColorMod(0.0, 1.0, 0.0, 1.0)
 
 	-- lights
 	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
 	light1 = scene:CreateLight("exponential", 1, 1, 1, 0.01, 900, 350, 11500, 0.5)
 	light:SetName("Main light")
-	
+
 	-- player
 	local playerAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.png")
 	playerSprite = scene:SpriteAnimatedLoad(250, playerAtlas)
 	playerSprite:SetPosition(600, 300)
+
+	-- font
+	local font = FontManager:LoadFont("at01.fnt", "at01.png")
+	local textSprite = scene:SpriteTextLoad(font)
+	textSprite:SetText("Gallia\nest omnis divisa\nin partes tres")
+	textSprite:SetPosition(gameState.wantedWidth/2, gameState.wantedHeight/2)
+	textSprite:SetAcceptsLight(true)
+	textSprite:SetScale(3)
+	textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
+	textSprite:SetShadowColor(1.0, 0.0, 0.0, 1.0)
+	textSprite:SetShadowOffset(2, 2)
+	textSprite:SetLineHeightMultiplier(1.2)
+	textSprite:SetAlignment("center")
 end
 
 function registerResolutionChange()

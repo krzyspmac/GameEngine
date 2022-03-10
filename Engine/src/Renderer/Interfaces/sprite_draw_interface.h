@@ -21,17 +21,18 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
-    class SpriteRepresetationI
+    class SpriteRepresentationI
     {
     public:
-        SpriteRepresetationI(int scale)
+        SpriteRepresentationI(int scale)
             : m_scale(scale)
             , m_position(Vector2Zero)
             , m_isDrawable(true)
+            , m_colorMod({1.f, 1.f, 1.f})
             , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
         { };
         
-        virtual ~SpriteRepresetationI() { };
+        virtual ~SpriteRepresentationI() { };
         
     public:
         /** Draws the sprite at a given coordinates. */
@@ -71,6 +72,12 @@ namespace engine
         /** Lighting setter */
         void SetAcceptsLight(bool val) { m_acceptsLight = val; if(m_drawable.get() != nullptr) m_drawable.get()->GetAcceptsLight() = val; };
 
+        /** Set the color mod */
+        void SetColorMod(Color4 val) { m_colorMod = val; if(m_drawable.get() != nullptr) m_drawable.get()->SetColorMod(val); };
+
+        /** Get the color mod */
+        Color4 GetColorMod() { return m_colorMod; };
+
     public: // Drawable related
 
         /** Controls wheather this sprite is drawable at all. Default is yes. */
@@ -90,6 +97,7 @@ namespace engine
         Vector2 m_position;
         bool m_acceptsLight;
         SpriteDrawType m_type;
+        Color4 m_colorMod;
         bool m_isDrawable;
         std::unique_ptr<DrawableSpriteI> m_drawable;
     };

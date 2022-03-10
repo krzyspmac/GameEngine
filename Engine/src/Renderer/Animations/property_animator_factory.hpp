@@ -51,14 +51,14 @@ namespace engine
          end)
          \endcode
          */
-        PropertyAnimator *FadeIn(SpriteRepresetationI *sprite,
+        PropertyAnimator *FadeIn(SpriteRepresentationI *sprite,
                                  std::string curveType,
                                  float delay,
                                  float duration,
                                  CallableScriptFunctionSciptableInstance fFinishRef
                                  );
 
-        PropertyAnimator *FadeIn(SpriteRepresetationI *sprite,
+        PropertyAnimator *FadeIn(SpriteRepresentationI *sprite,
                                  AnimationCurveType curveType,
                                  float delay,
                                  float duration,
@@ -93,14 +93,14 @@ namespace engine
          end)
          \endcode
          */
-        PropertyAnimator *FadeOut(SpriteRepresetationI *sprite,
+        PropertyAnimator *FadeOut(SpriteRepresentationI *sprite,
                                   std::string curveType,
                                   float delay,
                                   float duration,
                                   CallableScriptFunctionSciptableInstance fFinishRef
                                  );
 
-        PropertyAnimator *FadeOut(SpriteRepresetationI *sprite,
+        PropertyAnimator *FadeOut(SpriteRepresentationI *sprite,
                                   AnimationCurveType curveType,
                                   float delay,
                                   float duration,

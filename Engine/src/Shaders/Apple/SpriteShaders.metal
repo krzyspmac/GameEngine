@@ -9,36 +9,12 @@ Metal shaders used for this sample
 
 using namespace metal;
 
-// Include header shared between this Metal shader code and C code executing Metal API commands.
 #include "AAPLShaderTypes.h"
+#include "SharedShaders.metal"
 
 // Some hardcoded defs in order not to include additional headers
 #define LIGHT_FALLOUT_TYPE_LINEAR       0.f
 #define LIGHT_FALLOUT_TYPE_EXP          1.f
-
-// Vertex shader outputs and fragment shader inputs
-struct RasterizerData
-{
-    // The [[position]] attribute of this member indicates that this value
-    // is the clip space position of the vertex when this structure is
-    // returned from the vertex function.
-    float4 position [[position]];
-
-    // Since this member does not have a special attribute qualifier, the rasterizer
-    // will interpolate its value with values of other vertices making up the triangle
-    // and pass that interpolated value to the fragment shader for each fragment in
-    // that triangle.
-    float2 textureCoordinate;
-};
-
-// Light fallout functions
-float
-lightFalloutFunctionLinear(constant float *xValPtr, constant float *sizePtr)
-{
-    float x = float(*xValPtr);
-    float size = float(*sizePtr);
-    return max(size - x, 0.0f) / size;
-}
 
 vertex RasterizerData
 vertexShader(
@@ -106,10 +82,11 @@ vertexShader(
 fragment float4
 fragmentShader(
      RasterizerData             in [[stage_in]]
-   , texture2d<half>            colorTexture     [[ texture(AAPLTextureIndexBaseColor) ]]
-   , constant float             *alphaPointer    [[ buffer(AAPLTextureIndexBaseAlpha) ]]
-   , constant AAPAmbientLLight  *lights          [[ buffer(AAPLVertexInputIndexLight) ]]
-   , constant int               *lightCountPtr   [[ buffer(AAPLVertexInpueIndexLightCount) ]]
+   , texture2d<half>            colorTexture     [[ texture(FragmentShaderIndexBaseColor)  ]]
+   , constant float             *alphaPointer    [[ buffer (FragmentShaderIndexBaseAlpha)  ]]
+   , constant AAPAmbientLLight  *lights          [[ buffer (FragmentShaderIndexLight)      ]]
+   , constant int               *lightCountPtr   [[ buffer (FragmentShaderIndexLightCount) ]]
+   , constant vector_float4     *colorModPtr     [[ buffer (FragmentShaderIndexColorMod)   ]]
 )
 {
     // Texture sampler
@@ -136,6 +113,10 @@ fragmentShader(
         discard_fragment();
         return float4(colorSample);
     }
+
+    // Apply the color mod
+    half4 colorMod = half4(*colorModPtr);
+    colorSample.rgba *= colorMod;
 
     // Light calculation
     int lightCount = int(*lightCountPtr);
@@ -170,56 +151,4 @@ fragmentShader(
 
     // return the color of the texture
     return float4(colorSample);
-}
-
-
-#pragma mark -
-#pragma mark Final presenter shaders
-
-// Vertex shader which adjusts positions by an aspect ratio and passes texture
-// coordinates through to the rasterizer.
-vertex RasterizerData
-presenterVertexShader(const uint vertexID [[ vertex_id ]],
-                      const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
-                      constant vector_float2  *viewportSizePointer [[buffer(AAPLVertexInputIndexWindowSize)]],
-                      constant float          *viewportScalePointer [[buffer(AAPLVertexInputIndexWindowScale)]],
-                      constant vector_float2  *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]],
-                      constant float          *affineScalePointer     [[buffer(AAPLVertexInputIndexObjectScale)]]
-                      )
-{
-    RasterizerData out;
-
-    // Index into the array of positions to get the current vertex.
-    // The positions are specified in pixel dimensions (i.e. a value of 100
-    // is 100 pixels from the origin).
-    float2 pixelSpacePosition = vertices[vertexID].position.xy;
-
-    // Get the viewport size and cast to float.
-    vector_float2 viewportSize = vector_float2(*viewportSizePointer);
-
-    // Get the desired viewport size; used to calaculate aspect ratio
-    vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
-
-    // Get the target final scale for the texture
-    float targetAffineScale = float(*affineScalePointer);
-
-    float2 scale = viewportSize / desiredViewportSize;
-
-    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-    out.position.xy = pixelSpacePosition / scale * targetAffineScale;
-    out.textureCoordinate = vertices[vertexID].textureCoordinate;
-
-    return out;
-}
-// Fragment shader that samples a texture and outputs the sampled color.
-fragment float4 presenterFragmentShader(RasterizerData in  [[stage_in]],
-                                        texture2d<float> texture [[texture(AAPLTextureIndexBaseColor)]])
-{
-    constexpr sampler simpleSampler;
-
-    // Sample data from the texture.
-    float4 colorSample = texture.sample(simpleSampler, in.textureCoordinate);
-
-    // Return the color sample as the final color.
-    return colorSample;
 }

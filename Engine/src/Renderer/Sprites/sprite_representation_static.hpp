@@ -15,7 +15,7 @@
 namespace engine
 {
 
-    class SpriteRepresentationStatic: public SpriteRepresetationI, public ScriptingInterface
+    class SpriteRepresentationStatic: public SpriteRepresentationI, public ScriptingInterface
     {
     public:
         /** @private */

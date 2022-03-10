@@ -26,10 +26,10 @@ namespace engine
         , public MemoryI
     {
         std::unique_ptr<ValueAnimator> m_valueAnimator;
-        SpriteRepresetationI *m_sprite;
+        SpriteRepresentationI *m_sprite;
 
     public:
-        PropertyAnimator(SpriteRepresetationI *sprite, ValueAnimator *valueAnimator);
+        PropertyAnimator(SpriteRepresentationI *sprite, ValueAnimator *valueAnimator);
         ~PropertyAnimator();
         
     public: // AnimatableI

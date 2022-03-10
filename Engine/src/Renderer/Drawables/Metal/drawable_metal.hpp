@@ -26,6 +26,7 @@ namespace engine
         vector_float2 m_size;
         TextureMetal *m_texture;
         size_t m_vertexCount;
+        vector_float3 m_colorMod;
     public: // DrawableSpriteI
         /** Construct a drawable for metal given a sprite descriptor */
         DrawableMetal(MTL::Device*, SpriteAtlasItemI*);
@@ -39,10 +40,13 @@ namespace engine
     public: // texture data
         vector_float2 *GetSize();
         TextureMetal *GetTexture() { return m_texture; };
+        vector_float3 *GetColorModMetal();
+        void SetColorMod(Color3 mod);
     };
 
     /** Defines a concrete metal class for the target drawable that is capable of
         accepting the render pass as its input.
+        note: not being used atm
      */
     class DrawableTargetMetal: public DrawableTargetI
     {

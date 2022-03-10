@@ -182,13 +182,27 @@ std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float
 
 void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
 {
+    DrawableRender(baseDrawable, x, y, baseDrawable->GetColorMod());
+}
+
+void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y, Color4 colorMod)
+{
     // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
-    if (!drawable->CanDraw()) { return; };
+    if (!drawable->CanDraw())
+    { return;
+    };
 
-    // Some values to pass to the GPU
+    // Some static values to pass to the GPU
     static simd_float2 position = { 0, 0 };
-    position.x = x; position.y = y;
+    position.x = x;
+    position.y = y;
+
+    static vector_float4 gpuColorMod = { 1.f, 1.f, 1.f, 1.f };
+    gpuColorMod.r = colorMod.r;
+    gpuColorMod.g = colorMod.g;
+    gpuColorMod.b = colorMod.b;
+    gpuColorMod.a = colorMod.a;
 
     // Pass data to the GPU. Render on screen or on offline-buffer specified
     // when using RendererTargetDrawablePush.
@@ -202,12 +216,13 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
 
-    renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), AAPLTextureIndexBaseAlpha);
+    renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), FragmentShaderIndexBaseAlpha);
 
     auto& lightManager = GetMainEngine()->getLightMnaager();
     int lightsCount = drawable->GetAcceptsLight() && lightManager.GetLightsActive() ? lightManager.GetLightBufferCount() : 0;
-    renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), AAPLVertexInpueIndexLightCount);
-    renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), AAPLVertexInputIndexLight);
+    renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), FragmentShaderIndexLightCount);
+    renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), FragmentShaderIndexLight);
+    renderToPipline->setFragmentBytes(&gpuColorMod, sizeof(vector_float4), FragmentShaderIndexColorMod);
 
     auto texture = drawable->GetTexture();
     if (texture != nullptr)
@@ -215,7 +230,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
         auto mtlTextureHandle = texture->GetMTLTextureHandle();
         if (mtlTextureHandle != nullptr)
         {
-            renderToPipline->setFragmentTexture(mtlTextureHandle, AAPLTextureIndexBaseColor);
+            renderToPipline->setFragmentTexture(mtlTextureHandle, FragmentShaderIndexBaseColor);
         }
     }
 

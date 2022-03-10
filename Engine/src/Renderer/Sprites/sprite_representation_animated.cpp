@@ -13,7 +13,7 @@
 using namespace engine;
 
 SpriteRepresentationAnimated::SpriteRepresentationAnimated(std::vector<SpriteAtlasItemI*> sprites, int frameAnimationDurationMs)
-    : SpriteRepresetationI(1.0f)
+    : SpriteRepresentationI(1.0f)
     , m_maxWidth(0)
     , m_maxHeight(0)
     , m_frameAnimationDurationMs(frameAnimationDurationMs)
@@ -86,12 +86,19 @@ void SpriteRepresentationAnimated::SetAnimationFrameDuration(float value)
     m_frameAnimationDurationMs = value;
 }
 
+void SpriteRepresentationAnimated::SetColorMod(Color4 val)
+{
+    for (auto& item : m_sprites)
+    {   item->SetColorMod(val);
+    }
+}
+
 void SpriteRepresentationAnimated::DrawAt(int x, int y)
 {
     Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
     Uint64 seconds = ticks / m_frameAnimationDurationMs;
     Uint64 spriteNo = seconds % m_sprites.size();
-    SpriteRepresetationI *spriteItem = m_sprites.at(spriteNo);
+    SpriteRepresentationI *spriteItem = m_sprites.at(spriteNo);
     spriteItem->DrawAt(x, y);
 }
 
@@ -178,6 +185,18 @@ static int lua_SpriteDrawStatic_SetAnimationFrameDuration(lua_State *L)
     spr->SetAnimationFrameDuration(lua_tonumber(L, 2));
     return 0;
 }
+
+static int lua_SpriteDrawStatic_SetColorMod(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    float a = lua_tonumber(L, 5);
+    spr->SetColorMod({r, g, b, a});
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -189,6 +208,7 @@ std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions(
       , { "SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight }
       , { "SetType", &lua_SpriteDrawStatic_SetType }
       , { "SetAnimationFrameDuration", &lua_SpriteDrawStatic_SetAnimationFrameDuration }
+      , { "SetColorMod", &lua_SpriteDrawStatic_SetColorMod }
     });
     return result;
 }

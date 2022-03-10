@@ -15,7 +15,7 @@
 
 /**
 
-\mainpage Some Project
+\mainpage Pictel 2d Game Engine
 
 ...
 
@@ -23,7 +23,7 @@ See \ref API_GLOBALS "Global API" for details on these functions.
 
 See \ref doxygen_fonts.md
 
-[Test with md type](doxygen_fonts.md)
+[Drawing Text](doxygen_fonts.md)
 
 */
 

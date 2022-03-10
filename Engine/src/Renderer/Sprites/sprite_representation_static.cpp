@@ -13,7 +13,7 @@
 using namespace engine;
 
 SpriteRepresentationStatic::SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem)
-    : SpriteRepresetationI(1.0f)
+    : SpriteRepresentationI(1.0f)
     , m_sprite(spriteAtlasItem)
 {
     auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, 1.f);
@@ -33,7 +33,7 @@ void SpriteRepresentationStatic::SetPosition(Vector2 &pos)
 
 void SpriteRepresentationStatic::SetScale(float x)
 {
-    SpriteRepresetationI::SetScale(x);
+    SpriteRepresentationI::SetScale(x);
     m_drawable->SetScale(x);
 }
 
@@ -139,6 +139,17 @@ static int lua_SpriteDrawStatic_SetType(lua_State *L)
     return 0;
 }
 
+static int lua_SetColorMod(lua_State *L)
+{
+    SpriteRepresentationStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    float a = lua_tonumber(L, 5);
+    spr->SetColorMod({r, g, b, a});
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -151,7 +162,8 @@ std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
         {"DrawAt", &lua_SpriteDrawStatic_DrawAt},
         {"Draw", &lua_SpriteDrawStatic_Draw},
         {"SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight},
-        {"SetType", &lua_SpriteDrawStatic_SetType}
+        {"SetType", &lua_SpriteDrawStatic_SetType},
+        {"SetColorMod", &lua_SetColorMod}
     });
     return result;
 }

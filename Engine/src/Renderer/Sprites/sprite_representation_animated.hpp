@@ -15,7 +15,7 @@
 
 namespace engine
 {
-    class SpriteRepresentationAnimated: public SpriteRepresetationI
+    class SpriteRepresentationAnimated: public SpriteRepresentationI
     {
     public:
 
@@ -49,7 +49,8 @@ namespace engine
         void SetAcceptsLight(bool val);
         void DrawAt(int x, int y);
         void Draw();
-
+        void SetColorMod(Color4);
+        
     private:
         void PrepareAnimation();
         
