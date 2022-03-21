@@ -28,6 +28,7 @@ FileMemoryBufferStreamFromFile::FileMemoryBufferStreamFromFile(std::string filen
     else
     {
         LOGGER().Log("Could not open file for reading: %s", filename.c_str());
+        m_size = -1;
     }
 }
 
@@ -65,6 +66,10 @@ size_t FileMemoryBufferStreamFromFile::Read(void *ptr, size_t size, size_t maxnu
 
 std::string FileMemoryBufferStreamFromFile::ReadBufferString()
 {
+    if (m_fp == nullptr)
+    {   return "";
+    }
+    
     char *memory = (char*)malloc((m_size + 1) * sizeof(char));
     if (memory)
     {
