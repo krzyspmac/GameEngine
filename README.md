@@ -40,6 +40,10 @@ In other words the engine currently:
 
 ![Sample engine screenshot](Readme/screenshot.png "title")
 
+## Scripting documentation
+
+Can be found at [https://krzyspmac.github.io/Pictel/](https://krzyspmac.github.io/Pictel/)
+
 ## Licence
 
 Copyright (c) 2022 Krzysztof Pawłowski
