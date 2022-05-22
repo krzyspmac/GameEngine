@@ -34,6 +34,7 @@ namespace engine
         void closeState();
         void loadFile(FileStreamI*);
         void loadChunk(char*);
+        void registerModuleSearcher();
         void registerFunctions();
 
     public:

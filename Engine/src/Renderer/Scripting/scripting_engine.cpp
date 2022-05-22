@@ -26,6 +26,9 @@ using namespace engine;
 /// Main accessor for easy access.
 static ScriptingEngine *sharedEngine = NULL;
 
+/// Main function loader
+int PictureModuleLoader(lua_State *L);
+
 engine::ScriptingEngine *GetScripting()
 {
     return sharedEngine;
@@ -46,6 +49,15 @@ void ScriptingEngine::newState()
     this->L = luaL_newstate();
     luaL_openlibs(L);
     luaopen_base(L);
+    registerModuleSearcher();
+}
+
+void ScriptingEngine::registerModuleSearcher()
+{
+    lua_register(L, "pictel_searcher", PictureModuleLoader);
+    std::string str;
+    str += "table.insert(package.searchers, 2, pictel_searcher) \n";
+    luaL_dostring(L, str.c_str());
 }
 
 void ScriptingEngine::closeState()
@@ -350,4 +362,24 @@ int ScriptingEngine::L_spriteDrawRender(lua_State *L)
     }
 
     return 0;
+}
+
+int PictureModuleLoader(lua_State *L){
+    std::string filename = lua_tostring(L, 1);
+    filename += ".lua";
+
+    auto  access = GetMainEngine()->getFileAccess().GetAccess(filename);
+    auto buffer = access->ReadBufferString();
+    auto* str = buffer.c_str();
+
+    if (luaL_loadbufferx(L, str, strlen(str), filename.c_str(), NULL) == 0)
+    {
+        // no priming needed as LUA will call the initialization function itself
+        return 1;
+    }
+    else
+    {   std::cout << "Final:" << lua_tostring(L, -1) << "\n";
+        GetMainEngine()->getConsoleRenderer().GetLogger().Log("Could not load %s module!", filename.c_str());
+        return 0;
+    }
 }
