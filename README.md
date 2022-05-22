@@ -6,6 +6,11 @@ Simply put - it's a 2D game pixel-engine written in C++ that, in theory, should 
 with MacOS/iOS, Windows & Linux. Most of the engine is platform agnostic. Only a small, specific
 parts of this software deal with the target platform like the actual renderer.
 
+This is a work in progress. Work done in no particular order and no set end-goal in mind.
+There's some metal in C++ implementation here. Some sprite management. Some LUA scripting
+added to the project. In the worse case scenario maybe it helps someone that dreams
+of building their own game engine from scratch ;)
+
 ## Idea behind it
 
 The general idea is to... write a 2D game engine. Mostly for educational purposes.
