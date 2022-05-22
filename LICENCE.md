@@ -1,34 +1,3 @@
-# Pictel
-
-## Short Description
-
-Simply put - it's a 2D game pixel-engine written in C++ that, in theory, should be compatible
-with MacOS/iOS, Windows & Linux. Most of the engine is platform agnostic. Only a small, specific
-parts of this software deal with the target platform like the actual renderer.
-
-## Idea behind it
-
-The general idea is to... write a 2D game engine. Mostly for educational purposes.
-The engine itself, as well as the first demo game, should be open-source and available
-for everyone. Game engines should not be magic.
-
-## Features
-
-The following is a partial, nowhere near complete, list of features and base
-assumptions.
-
-- [x] Written in C++
-- [x] Simple Sprite Engine (load, show, move)
-- [x] Simple Text Engine (load, show, move)
-- [ ] Simple Sound Engine (file stream audio, short clip play/pause)
-- [x] IMGUI for in-game control
-- [x] MacOS/iOS Renderer
-- [x] LUA as a script language (at least for now)
-- [ ] Windows Renderer
-- [ ] Linux Renderer
-
-## Licence
-
 Copyright (c) 2022 Krzysztof Pawłowski
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
