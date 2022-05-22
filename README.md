@@ -38,7 +38,7 @@ In other words the engine currently:
 - uses LUA to control the scene and provide functionality
 - has test sprites taken off the internet to showcase the functions
 
-![foo](readme/screenshot.png "title")
+![Sample engine screenshot](Readme/screenshot.png "title")
 
 ## Licence
 
