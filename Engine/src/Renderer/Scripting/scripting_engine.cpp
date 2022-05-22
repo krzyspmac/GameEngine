@@ -374,18 +374,8 @@ int PictureModuleLoader(lua_State *L){
 
     if (luaL_loadbufferx(L, str, strlen(str), filename.c_str(), NULL) == 0)
     {
-        // Call priming lua_pcall
-        int iErr = lua_pcall(L, 0, 0, 0);
-        if (iErr != 0)
-        {
-            std::cout << "Error:" << lua_tostring(L, -1) << "\n";
-            return 0;
-        }
-        else
-        {
-            lua_pop(L, 1);
-            return 1;
-        }
+        // no priming needed as LUA will call the initialization function itself
+        return 1;
     }
     else
     {   std::cout << "Final:" << lua_tostring(L, -1) << "\n";
