@@ -12,7 +12,7 @@ The general idea is to... write a 2D game engine. Mostly for educational purpose
 The engine itself, as well as the first demo game, should be open-source and available
 for everyone. Game engines should not be magic.
 
-## Features
+## Features/current state
 
 The following is a partial, nowhere near complete, list of features and base
 assumptions.
@@ -26,6 +26,19 @@ assumptions.
 - [x] LUA as a script language (at least for now)
 - [ ] Windows Renderer
 - [ ] Linux Renderer
+
+In other words the engine currently:
+- initialises the graphics context
+- draws sprites using Metal on MacOS/iOS
+- has some sprite animation
+- has some basic animation curves
+- light up the 2d scene by means of shaders (simple luminosity added to the plane)
+- deals with events (mouse, keyboards)
+- has basic IMGUI implementation
+- uses LUA to control the scene and provide functionality
+- has test sprites taken off the internet to showcase the functions
+
+![foo](readme/screenshot.png "title")
 
 ## Licence
 
