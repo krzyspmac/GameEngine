@@ -66,6 +66,21 @@
 		7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254C278DF96200529F29 /* engine_provider_metal.hpp */; };
 		7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
 		7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
+		7F3470A928527B5B00FDED71 /* PictelSound.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470A828527B4800FDED71 /* PictelSound.xcframework */; };
+		7F3470AA28527B5F00FDED71 /* PictelSound.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470A828527B4800FDED71 /* PictelSound.xcframework */; };
+		7F3470AB28527B6400FDED71 /* PictelSound.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470A828527B4800FDED71 /* PictelSound.xcframework */; };
+		7F3470B028527CB600FDED71 /* sound_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470AE28527C7D00FDED71 /* sound_file.cpp */; };
+		7F3470B128527CB600FDED71 /* sound_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470AE28527C7D00FDED71 /* sound_file.cpp */; };
+		7F3470B228527CB600FDED71 /* sound_file.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470AE28527C7D00FDED71 /* sound_file.cpp */; };
+		7F3470B528527EC500FDED71 /* sound_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3470B428527EAE00FDED71 /* sound_manager.hpp */; };
+		7F3470B628527EC600FDED71 /* sound_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3470B428527EAE00FDED71 /* sound_manager.hpp */; };
+		7F3470B728527EC600FDED71 /* sound_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3470B428527EAE00FDED71 /* sound_manager.hpp */; };
+		7F3470B828527F9700FDED71 /* sound_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470B328527EAE00FDED71 /* sound_manager.cpp */; };
+		7F3470B928527F9700FDED71 /* sound_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470B328527EAE00FDED71 /* sound_manager.cpp */; };
+		7F3470BA28527F9700FDED71 /* sound_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470B328527EAE00FDED71 /* sound_manager.cpp */; };
+		7F3470BC285286DF00FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BB285286DF00FDED71 /* AudioToolbox.framework */; };
+		7F3470BE285286F700FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BD285286F700FDED71 /* AudioToolbox.framework */; };
+		7F3470C02852870200FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BF2852870100FDED71 /* AudioToolbox.framework */; };
 		7F3E8E8D279AC8F9003BB7B6 /* doxygen_main.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D2277F85BF004A6107 /* doxygen_main.h */; };
 		7F3E8E8E279AC8F9003BB7B6 /* defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138243277505B600ED6D67 /* defs.h */; };
 		7F3E8E8F279AC8F9003BB7B6 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
@@ -635,6 +650,15 @@
 		7F26254C278DF96200529F29 /* engine_provider_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_provider_metal.hpp; sourceTree = "<group>"; };
 		7F262554278F570E00529F29 /* drawable_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_metal.cpp; sourceTree = "<group>"; };
 		7F262555278F570E00529F29 /* drawable_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_metal.hpp; sourceTree = "<group>"; };
+		7F3470A828527B4800FDED71 /* PictelSound.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PictelSound.xcframework; sourceTree = "<group>"; };
+		7F3470AD28527C5D00FDED71 /* sound_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sound_interfaces.h; sourceTree = "<group>"; };
+		7F3470AE28527C7D00FDED71 /* sound_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound_file.cpp; sourceTree = "<group>"; };
+		7F3470AF28527C7D00FDED71 /* sound_file.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sound_file.hpp; sourceTree = "<group>"; };
+		7F3470B328527EAE00FDED71 /* sound_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound_manager.cpp; sourceTree = "<group>"; };
+		7F3470B428527EAE00FDED71 /* sound_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sound_manager.hpp; sourceTree = "<group>"; };
+		7F3470BB285286DF00FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7F3470BD285286F700FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		7F3470BF2852870100FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7F3E8E27279AC8BA003BB7B6 /* libEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F2B279ADCDB003BB7B6 /* Engine-iOS-Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Engine-iOS-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F47279AE1A4003BB7B6 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
@@ -792,6 +816,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3470BC285286DF00FDED71 /* AudioToolbox.framework in Frameworks */,
+				7F3470A928527B5B00FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E901A279AFFFC003BB7B6 /* libcjson.a in Frameworks */,
 				7F3E901B279AFFFC003BB7B6 /* libimgui.a in Frameworks */,
 				7F3E901C279AFFFC003BB7B6 /* liblua.a in Frameworks */,
@@ -802,6 +828,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3470BE285286F700FDED71 /* AudioToolbox.framework in Frameworks */,
+				7F3470AA28527B5F00FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */,
 				7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */,
 				7F3E9022279B0056003BB7B6 /* liblua-ios.a in Frameworks */,
@@ -819,6 +847,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3470C02852870200FDED71 /* AudioToolbox.framework in Frameworks */,
+				7F3470AB28527B6400FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E9153279B0424003BB7B6 /* libcjson-tv.a in Frameworks */,
 				7F3E9155279B0424003BB7B6 /* libimgui-tv.a in Frameworks */,
 				7F3E9157279B0424003BB7B6 /* liblua-tv.a in Frameworks */,
@@ -913,6 +943,7 @@
 				7F13821F277505B600ED6D67 /* Scripting */,
 				7FF641CE277D17F20017D86D /* Console */,
 				7FF641C9277CE8BC0017D86D /* Loaders */,
+				7F3470AC28527C3900FDED71 /* Sound */,
 				7F13821B277505B600ED6D67 /* Textures */,
 				7F138223277505B600ED6D67 /* Engine Provider */,
 				7F13822A277505B600ED6D67 /* File Access */,
@@ -1031,10 +1062,40 @@
 			path = Metal;
 			sourceTree = "<group>";
 		};
+		7F3470A628527B4800FDED71 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				7F3470A728527B4800FDED71 /* Apple */,
+			);
+			name = Dependencies;
+			path = ../Dependencies;
+			sourceTree = "<group>";
+		};
+		7F3470A728527B4800FDED71 /* Apple */ = {
+			isa = PBXGroup;
+			children = (
+				7F3470A828527B4800FDED71 /* PictelSound.xcframework */,
+			);
+			path = Apple;
+			sourceTree = "<group>";
+		};
+		7F3470AC28527C3900FDED71 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				7F3470AD28527C5D00FDED71 /* sound_interfaces.h */,
+				7F3470AF28527C7D00FDED71 /* sound_file.hpp */,
+				7F3470AE28527C7D00FDED71 /* sound_file.cpp */,
+				7F3470B428527EAE00FDED71 /* sound_manager.hpp */,
+				7F3470B328527EAE00FDED71 /* sound_manager.cpp */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
 				7F138219277505B600ED6D67 /* src */,
+				7F3470A628527B4800FDED71 /* Dependencies */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
 				7F3CAAE2277093D500E0D74C /* Products */,
 			);
@@ -1056,6 +1117,9 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F3470BB285286DF00FDED71 /* AudioToolbox.framework */,
+				7F3470BD285286F700FDED71 /* AudioToolbox.framework */,
+				7F3470BF2852870100FDED71 /* AudioToolbox.framework */,
 				7F3E9152279B0424003BB7B6 /* libcjson-tv.a */,
 				7F3E9154279B0424003BB7B6 /* libimgui-tv.a */,
 				7F3E9156279B0424003BB7B6 /* liblua-tv.a */,
@@ -1442,6 +1506,7 @@
 				7FCAE7C8277E4EAA004A6107 /* sprite_atlas_manager.hpp in Headers */,
 				7FC1311C2792FAF20094DF0C /* callable_interface.h in Headers */,
 				7FE14B6427A6D70B008E6DAE /* events_manager_types.hpp in Headers */,
+				7F3470B728527EC600FDED71 /* sound_manager.hpp in Headers */,
 				7FCC81BE2780A0C8003025CB /* value_animator_factory.hpp in Headers */,
 				7FB8241E278993E0008F0F7A /* console_terminal.hpp in Headers */,
 				7F84990A278713BB004127CB /* animation_group_sequence.hpp in Headers */,
@@ -1500,6 +1565,7 @@
 				7F3E8EB1279AC8F9003BB7B6 /* time.hpp in Headers */,
 				7F3E8EB2279AC8F9003BB7B6 /* engine_state.hpp in Headers */,
 				7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */,
+				7F3470B628527EC600FDED71 /* sound_manager.hpp in Headers */,
 				7F3E8EB4279AC8F9003BB7B6 /* value_animator.hpp in Headers */,
 				7F3E8EB5279AC8F9003BB7B6 /* value_animator_factory.hpp in Headers */,
 				7F3E8EB6279AC8F9003BB7B6 /* property_animator.hpp in Headers */,
@@ -1607,6 +1673,7 @@
 				7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */,
 				7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */,
 				7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */,
+				7F3470B528527EC500FDED71 /* sound_manager.hpp in Headers */,
 				7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */,
 				7F3E90D7279B03F6003BB7B6 /* value_animator_factory.hpp in Headers */,
 				7F3E90D8279B03F6003BB7B6 /* property_animator.hpp in Headers */,
@@ -1975,6 +2042,7 @@
 				4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_representation_static.cpp in Sources */,
 				7FB824252789AF95008F0F7A /* pipe_output.cpp in Sources */,
+				7F3470BA28527F9700FDED71 /* sound_manager.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7F6D1CA1279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				4C9EA022279205C80082EB6A /* texture_target_metal.cpp in Sources */,
@@ -1988,6 +2056,7 @@
 				7FB8242D2789D3AD008F0F7A /* console_app_renderer_mac.mm in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
 				7FD5CBEA278A0C7100498B5F /* texture_manager.cpp in Sources */,
+				7F3470B028527CB600FDED71 /* sound_file.cpp in Sources */,
 				7FCAE7CB277E543E004A6107 /* sprite_renderer_manager.cpp in Sources */,
 				7F08C45627AF2441002FEB8F /* light_manager.cpp in Sources */,
 				7FCAE7BF277E36DD004A6107 /* scene_manager.cpp in Sources */,
@@ -2054,6 +2123,7 @@
 				7F3E8EF8279AC909003BB7B6 /* animation_group_factory.cpp in Sources */,
 				7F3E8EF9279AC909003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E8EFA279AC909003BB7B6 /* path_finder_helper.cpp in Sources */,
+				7F3470B928527F9700FDED71 /* sound_manager.cpp in Sources */,
 				7F3E8EFB279AC909003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
 				7F6D1CA2279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				7F3E8EFC279AC909003BB7B6 /* path_finder_graph.cpp in Sources */,
@@ -2067,6 +2137,7 @@
 				7F3E8F02279AC909003BB7B6 /* periodic_updates_manager.cpp in Sources */,
 				7F3E8F03279AC909003BB7B6 /* texture_manager.cpp in Sources */,
 				7F3E8F04279AC909003BB7B6 /* font_manager.cpp in Sources */,
+				7F3470B128527CB600FDED71 /* sound_file.cpp in Sources */,
 				7F3E8F05279AC909003BB7B6 /* scene_manager.cpp in Sources */,
 				7FC971EF27AF3BA100049146 /* light_manager.cpp in Sources */,
 				7F3E8F06279AC909003BB7B6 /* scene.cpp in Sources */,
@@ -2140,6 +2211,7 @@
 				7F3E9121279B03F6003BB7B6 /* animation_group_factory.cpp in Sources */,
 				7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */,
+				7F3470B828527F9700FDED71 /* sound_manager.cpp in Sources */,
 				7F3E9124279B03F6003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
 				7F6D1CA3279F4F810078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				7F3E9125279B03F6003BB7B6 /* path_finder_graph.cpp in Sources */,
@@ -2153,6 +2225,7 @@
 				7F3E912B279B03F6003BB7B6 /* periodic_updates_manager.cpp in Sources */,
 				7F3E912C279B03F6003BB7B6 /* texture_manager.cpp in Sources */,
 				7F3E912D279B03F6003BB7B6 /* font_manager.cpp in Sources */,
+				7F3470B228527CB600FDED71 /* sound_file.cpp in Sources */,
 				7F3E912E279B03F6003BB7B6 /* scene_manager.cpp in Sources */,
 				7FC971F127AF3BA100049146 /* light_manager.cpp in Sources */,
 				7F3E912F279B03F6003BB7B6 /* scene.cpp in Sources */,
@@ -2348,6 +2421,7 @@
 					"$(SRCROOT)/../../../Libraries/imgui",
 					"$(SRCROOT)/../../../Libraries/imgui/backends",
 					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
+					"$(SRCROOT)/../Dependencies/Apple/PictelSound.xcframework/macos-arm64_x86_64/Headers/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -2414,6 +2488,7 @@
 					"$(SRCROOT)/../../../Libraries/imgui",
 					"$(SRCROOT)/../../../Libraries/imgui/backends",
 					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
+					"$(SRCROOT)/../Dependencies/Apple/PictelSound.xcframework/macos-arm64_x86_64/Headers/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;

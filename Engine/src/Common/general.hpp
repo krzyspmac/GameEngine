@@ -100,6 +100,20 @@ namespace engine
 
         return nullptr;
     };
+
+    template<typename S>
+    S* matching(std::vector<std::unique_ptr<S>>& source, std::function<bool(S*)> lambda)
+    {
+        for (auto& srcItem : source)
+        {
+            if (lambda(srcItem.get()))
+            {
+                return srcItem.get();
+            }
+        }
+
+        return nullptr;
+    };
 };
 
 #endif /* general_h */

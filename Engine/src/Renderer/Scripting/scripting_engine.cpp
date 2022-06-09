@@ -20,6 +20,7 @@
 #include "font_manager.hpp"
 #include "events_manager.hpp"
 #include "light_manager.hpp"
+#include "sound_manager.hpp"
 
 using namespace engine;
 
@@ -182,6 +183,10 @@ void ScriptingEngine::registerFunctions()
     LightManager &lightManager = GetMainEngine()->getLightMnaager();
     lightManager.ScriptingInterfaceRegisterFunctions(L, &lightManager);
     lua_setglobal(L, "LightManager");
+
+    SoundManager &soundManager = GetMainEngine()->getSoundManager();
+    soundManager.ScriptingInterfaceRegisterFunctions(L, &soundManager);
+    lua_setglobal(L, "SoundManager");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)
