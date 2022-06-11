@@ -26,6 +26,8 @@ namespace engine
         void Play();
         void Pause();
         void Stop();
+        void SetVolume(double);
+        void SetLoops(bool);
 
     /// ScriptingInterface
     public:

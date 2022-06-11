@@ -60,6 +60,24 @@ void SoundFile::Stop()
     PictelSoundStop(m_soundRef);
 }
 
+void SoundFile::SetVolume(double volume)
+{
+    if (m_soundRef == nullptr)
+    {   return;
+    }
+
+    PictelSoundSetVolume(m_soundRef, volume);
+}
+
+void SoundFile::SetLoops(bool loops)
+{
+    if (m_soundRef == nullptr)
+    {   return;
+    }
+
+    PictelSoundSetLoops(m_soundRef, loops);
+}
+
 //
 // Scripting
 //
@@ -99,12 +117,38 @@ static int lua_Stop(lua_State *L)
     return 0;
 }
 
+static int lua_SetVolume(lua_State *L)
+{
+    SoundFile **ptr = (SoundFile**)luaL_checkudata(
+        L, 1, SoundFile::ScriptingInterfaceName().c_str()
+    );
+    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
+
+    double volume = lua_tonumber(L, 2);
+    (*ptr)->SetVolume(volume);
+    return 0;
+}
+
+static int lua_SetLoops(lua_State *L)
+{
+    SoundFile **ptr = (SoundFile**)luaL_checkudata(
+        L, 1, SoundFile::ScriptingInterfaceName().c_str()
+    );
+    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
+
+    bool loops = lua_tonumber(L, 2);
+    (*ptr)->SetLoops(loops);
+    return 0;
+}
+
 std::vector<luaL_Reg> SoundFile::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "Play",   &lua_Play }
-    ,   { "Pause",  &lua_Pause }
-    ,   { "Stop",   &lua_Stop }
+        { "Play",       &lua_Play }
+    ,   { "Pause",      &lua_Pause }
+    ,   { "Stop",       &lua_Stop }
+    ,   { "SetVolume",  &lua_SetVolume }
+    ,   { "SetLoops",   &lua_SetLoops }
     });
     return result;
 }

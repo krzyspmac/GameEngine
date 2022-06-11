@@ -34,6 +34,12 @@ namespace engine
 
         /** Stops the sound file */
         virtual void Stop() = 0;
+
+        /** Set the volume. 0.0-1.0 */
+        virtual void SetVolume(double) = 0;
+
+        /** Set the looping attribute */
+        virtual void SetLoops(bool) = 0;
     };
 
     class SoundManagerI
