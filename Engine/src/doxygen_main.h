@@ -8,9 +8,9 @@
 #ifndef doxygen_main_h
 #define doxygen_main_h
 
-/**
-\defgroup API_GLOBALS Global Variables
-\brief A list of globally available variables to be used in LUA scripts.
+/** \defgroup API_GLOBALS Global Variables
+    A list of globally available objects to be used in LUA scripts. Those manage
+    a wide variety of objects and state.
 */
 
 /**
@@ -24,6 +24,8 @@ See \ref API_GLOBALS "Global API" for details on these functions.
 See \ref doxygen_fonts.md
 
 [Drawing Text](doxygen_fonts.md)
+
+[Sound](doxygen_sounds.md)
 
 */
 

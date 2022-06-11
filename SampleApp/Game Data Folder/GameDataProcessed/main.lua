@@ -16,6 +16,7 @@ initialAnimationDone = false
 light1 = nil
 tds = nil
 playerSprite = nil
+sound = nil
 
 gameState = GameState:new()
 
@@ -104,6 +105,17 @@ function loadSprites()
 	textSprite:SetAlignment("center")
 end
 
+function loadSounds()
+    sound = SoundManager:Load("Rondo_Alla_Turka.ogg")
+    soundObserverRef = sound:AddObserver(function(state)
+    	print("State = " .. state)
+    	if state == 10 then
+    		sound:RemoveObserver(soundObserverRef)
+    	end
+    end)
+    sound:Play()
+end
+
 function registerResolutionChange()
 --	EngineState:SetOnScreenSizeChange(gameState:onResolutionChange)
 end
@@ -163,6 +175,7 @@ function init()
 	loadSprites()
   	--animateIntro()
   	animateLights()
+   loadSounds()
 end
 
 function update ()

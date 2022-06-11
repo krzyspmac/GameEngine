@@ -30,6 +30,7 @@
 #include "font_manager.hpp"
 #include "engine_setup_interface.h"
 #include "light_manager.hpp"
+#include "sound_manager.hpp"
 
 namespace engine
 {
@@ -65,7 +66,8 @@ namespace engine
                 m_viewportSize(viewportSize),
                 m_consoleRenderer(consoleRenderer),
                 m_time(engineProvider),
-                m_lightManager(*(new LightManager()))
+                m_lightManager(*(new LightManager())),
+                m_soundManager(*(new SoundManager()))
         { }
 
     /// Setup
@@ -173,6 +175,9 @@ namespace engine
         LightManager& getLightMnaager() { return m_lightManager; };
 
         ///
+        SoundManager& getSoundManager() { return m_soundManager; };
+
+        ///
         SpriteAtlasManager& getAtlasManager() { return m_spriteAtlasManager; };
 
         ///
@@ -231,6 +236,7 @@ namespace engine
         SceneManager &m_sceneManager;
         CharacterManager &m_characterManager;
         LightManager &m_lightManager;
+        SoundManager &m_soundManager;
 
         engine::Origin m_mousePosition;
         Time m_time;
