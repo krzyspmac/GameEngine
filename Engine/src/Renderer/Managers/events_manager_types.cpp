@@ -12,11 +12,7 @@ using namespace engine;
 /** Mouse Position Holders */
 void EventHolderScriptCallableMousePosition::Process(Origin *val)
 {
-    m_function.PerformCall([&](lua_State *L){
-        lua_pushnumber(L, val->x);
-        lua_pushnumber(L, val->y);
-        return 2;
-    });
+    m_script.CallWithParameters(val->x, val->y);
 }
 
 /** Key shortcuts holders */
@@ -54,7 +50,5 @@ bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bo
 
 void EventHolderKeyShortcutPressedScript::Process(void*)
 {
-    m_function.PerformCall([](lua_State *l){
-        return 0;
-    });
+    m_script.CallWithParameters();
 }

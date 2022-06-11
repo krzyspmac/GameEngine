@@ -16,8 +16,8 @@ ValueAnimator *ValueAnimatorFactory::Create(
        CallableCurveLamba *curve
      , float delay
      , float duration
-     , CallableScriptFunctionNumber functionUpdateRef
-     , CallableScriptFunctionSciptableInstance functionEndRef)
+     , CallableScriptFunctionParameters1<float> functionUpdateRef
+     , CallableScriptFunctionParametersEmpty functionEndRef)
 {
     ValueAnimator *function = new ValueAnimator(
         std::unique_ptr<CallableCurveLamba>(curve)

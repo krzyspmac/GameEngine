@@ -55,7 +55,7 @@ namespace engine
                                  std::string curveType,
                                  float delay,
                                  float duration,
-                                 CallableScriptFunctionSciptableInstance fFinishRef
+                                 CallableScriptFunctionParametersEmpty fFinishRef
                                  );
 
         PropertyAnimator *FadeIn(SpriteRepresentationI *sprite,
@@ -97,7 +97,7 @@ namespace engine
                                   std::string curveType,
                                   float delay,
                                   float duration,
-                                  CallableScriptFunctionSciptableInstance fFinishRef
+                                  CallableScriptFunctionParametersEmpty fFinishRef
                                  );
 
         PropertyAnimator *FadeOut(SpriteRepresentationI *sprite,

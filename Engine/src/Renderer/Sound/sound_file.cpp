@@ -115,7 +115,7 @@ void SoundFile::RemoveObserver(SoundFileStateObserverI* observer)
 
 void SoundFileStateObserverLUA::UpdateState(SoundFileState state)
 {
-    m_luaFunc.PerformCall(state);
+    m_luaFunc.CallWithParameters(state);
 }
 
 void SoundFileStateObserverLUA::PerformStateCallback(PlayerState state)

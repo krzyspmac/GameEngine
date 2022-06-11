@@ -17,11 +17,11 @@ namespace engine
 {
     class SoundFileStateObserverLUA: public SoundFileStateObserverI, public PictelSound::PlayerCallbackI
     {
-        CallableScriptFunctionNumber m_luaFunc;
+        CallableScriptFunctionParameters1<int> m_luaFunc;
     public:
         SoundFileStateObserverLUA(CallableScriptFunctionI::CallableScriptFunctionRef function)
         :   SoundFileStateObserverI()
-        ,   m_luaFunc(CallableScriptFunctionNumber(function))
+        ,   m_luaFunc(CallableScriptFunctionParameters1<int>(function))
         { };
 
         void UpdateState(SoundFileState);

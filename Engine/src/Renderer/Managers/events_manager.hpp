@@ -87,7 +87,7 @@ namespace engine
             end)
             \endcode
          */
-        EventIdentifier RegisterMouseMovedEvents(CallableScriptFunctionSciptableInstance);
+        EventIdentifier RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float>);
 
         /** Register a mouse click event handler for C++.
             @private */
@@ -101,7 +101,7 @@ namespace engine
             end)
             \endcode
             */
-        EventIdentifier RegisterMouseClickedEvents(CallableScriptFunctionSciptableInstance);
+        EventIdentifier RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float>);
 
         /** Register a key combination for C++.
             @private */
@@ -115,7 +115,7 @@ namespace engine
             end)
             \endcode
          */
-        EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionSciptableInstance);
+        EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionParametersEmpty);
 
         /** Unregisters an event for a given identifier. */
         void UnregisterEvent(EventIdentifier);

@@ -67,20 +67,19 @@ namespace engine
     class EventHolderScript
     {
     protected:
-        CallableScriptFunctionSciptableInstance m_function;
     public:
-        EventHolderScript(CallableScriptFunctionSciptableInstance fnc)
-            : m_function(fnc)
-        { };
+        EventHolderScript() { };
     };
 
     /** @private */
     class EventHolderScriptCallableMousePosition: public EventHolderI<Origin>, public EventHolderScript
     {
+        CallableScriptFunctionParameters2<float, float> m_script;
     public:
-        EventHolderScriptCallableMousePosition(EventIdentifier identifier, CallableScriptFunctionSciptableInstance fnc)
+        EventHolderScriptCallableMousePosition(EventIdentifier identifier, CallableScriptFunctionParameters2<float, float> fnc)
             : EventHolderI<Origin>(identifier)
-            , EventHolderScript(fnc)
+            , EventHolderScript()
+            , m_script(fnc)
         { };
 
         void Process(Origin *val);
@@ -118,11 +117,13 @@ namespace engine
     /** Script variation of the EventHolderKeyShortcutPressed */
     class EventHolderKeyShortcutPressedScript: public EventHolderI<void>, public EventHolderKeyShortcutPressed, public EventHolderScript
     {
+        CallableScriptFunctionParametersEmpty m_script;
     public:
-        EventHolderKeyShortcutPressedScript(EventIdentifier identifier, CallableScriptFunctionSciptableInstance fnc, std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys)
+        EventHolderKeyShortcutPressedScript(EventIdentifier identifier, CallableScriptFunctionParametersEmpty fnc, std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys)
             : EventHolderI<void>(identifier)
             , EventHolderKeyShortcutPressed(modifiers, keys)
-            , EventHolderScript(fnc)
+            , EventHolderScript()
+            , m_script(fnc)
         { };
 
         void Process(void *val);

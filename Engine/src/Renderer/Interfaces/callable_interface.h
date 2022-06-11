@@ -8,6 +8,9 @@
 #ifndef callable_interface_h
 #define callable_interface_h
 
+#include "scripting_interfaces.h"
+#include "callable.hpp"
+
 namespace engine
 {
     /**
@@ -36,6 +39,19 @@ namespace engine
         virtual R f(V progress) = 0;
     };
 
+    /** A concrete instance of the whole parameter stack */
+    class CallableParameterStackI
+    {
+    public:
+        typedef int CallableScriptFunctionRef;
+    protected:
+        CallableScriptFunctionRef m_functionRef;
+    public:
+        CallableParameterStackI(CallableScriptFunctionRef ref): m_functionRef(ref) { };
+
+        bool CanCall() { return m_functionRef != -1; };
+    };
+
     /**
      An abstract definition of the callable function to be used in the script when
      specified by the documentation. Various script related functionality will
@@ -59,7 +75,6 @@ namespace engine
          @private
          */
         virtual bool CanCall() = 0;
-        /// override and provide some kind of perform function method
     };
 };
 

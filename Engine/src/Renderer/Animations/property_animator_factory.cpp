@@ -17,7 +17,7 @@ PropertyAnimator *PropertyAnimatorFactory
             , std::string curveType
             , float delay
             , float duration
-            , CallableScriptFunctionSciptableInstance fFinishRef)
+            , CallableScriptFunctionParametersEmpty fFinishRef)
 {
     SpriteRepresentationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
@@ -60,7 +60,7 @@ PropertyAnimator *PropertyAnimatorFactory
               , std::string curveType
               , float delay
               , float duration
-              , CallableScriptFunctionSciptableInstance fFinishRef)
+              , CallableScriptFunctionParametersEmpty fFinishRef)
 {
     SpriteRepresentationI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
@@ -110,11 +110,11 @@ static int lua_PropertyAnimatorFactory_FadeIn(lua_State *L)
     float delay = lua_tonumberx(L, 3, NULL);
     float duration = lua_tonumberx(L, 4, NULL);
 
-    CallableScriptFunctionSciptableInstance function = CallableScriptFunctionSciptableInstance(-1);
+    CallableScriptFunctionParametersEmpty function = CallableScriptFunctionParametersEmpty::empty();
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
     if (argc > 4)
     {
-        function = CallableScriptFunctionSciptableInstance(functionEndRef);
+        function = CallableScriptFunctionParametersEmpty(functionEndRef);
     }
 
     PropertyAnimator *result = obj->FadeIn(spriteDraw, "linear", delay, duration, function);
@@ -138,11 +138,11 @@ static int lua_PropertyAnimatorFactory_FadeOut(lua_State *L)
     float delay = lua_tonumberx(L, 3, NULL);
     float duration = lua_tonumberx(L, 4, NULL);
 
-    CallableScriptFunctionSciptableInstance function = CallableScriptFunctionSciptableInstance(-1);
+    CallableScriptFunctionParametersEmpty function = CallableScriptFunctionParametersEmpty::empty();
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
     if (argc > 4)
     {
-        function = CallableScriptFunctionSciptableInstance(functionEndRef);
+        function = CallableScriptFunctionParametersEmpty(functionEndRef);
     }
 
     PropertyAnimator *result = obj->FadeOut(spriteDraw, "linear", delay, duration, function);

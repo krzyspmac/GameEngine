@@ -28,43 +28,6 @@ float CallableCurveLamba::f(float progress)
 
 /**
  */
-CallableScriptFunctionParamless::CallableScriptFunctionParamless(CallableScriptFunctionRef ref)
-    : CallableScriptFunctionI(ref)
-    , m_ref(ref)
-{
-}
-
-void CallableScriptFunctionParamless::PerformCall()
-{
-    if (!CanCall()) { return; };
-    
-    ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
-    se.CallRegistryFunction(GetFunctionRef(), [&](lua_State *L){
-        return 0;
-    });
-}
-
-/**
- */
-CallableScriptFunctionNumber::CallableScriptFunctionNumber(CallableScriptFunctionRef ref)
-   : CallableScriptFunctionI(ref)
-   , m_ref(ref)
-{
-}
-
-void CallableScriptFunctionNumber::PerformCall(float val)
-{
-    if (!CanCall()) { return; };
-
-    ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
-    se.CallRegistryFunction((int)GetFunctionRef(), [&](lua_State *L){
-        lua_pushnumber(L, val);
-        return 1;
-    });
-}
-
-/**
- */
 CallableScriptFunctionSciptableInstance::CallableScriptFunctionSciptableInstance(CallableScriptFunctionRef ref)
    : CallableScriptFunctionI(ref)
    , m_ref(ref)
