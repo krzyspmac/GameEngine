@@ -66,6 +66,9 @@
 		7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254C278DF96200529F29 /* engine_provider_metal.hpp */; };
 		7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
 		7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
+		7F27C45F28551736001AA216 /* scripting_interfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F27C45E28551736001AA216 /* scripting_interfaces.h */; };
+		7F27C46028551736001AA216 /* scripting_interfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F27C45E28551736001AA216 /* scripting_interfaces.h */; };
+		7F27C46128551736001AA216 /* scripting_interfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F27C45E28551736001AA216 /* scripting_interfaces.h */; };
 		7F3470A928527B5B00FDED71 /* PictelSound.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470A828527B4800FDED71 /* PictelSound.xcframework */; };
 		7F3470AA28527B5F00FDED71 /* PictelSound.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470A828527B4800FDED71 /* PictelSound.xcframework */; };
 		7F3470AB28527B6400FDED71 /* PictelSound.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470A828527B4800FDED71 /* PictelSound.xcframework */; };
@@ -650,6 +653,7 @@
 		7F26254C278DF96200529F29 /* engine_provider_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_provider_metal.hpp; sourceTree = "<group>"; };
 		7F262554278F570E00529F29 /* drawable_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_metal.cpp; sourceTree = "<group>"; };
 		7F262555278F570E00529F29 /* drawable_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_metal.hpp; sourceTree = "<group>"; };
+		7F27C45E28551736001AA216 /* scripting_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scripting_interfaces.h; path = ../../src/Renderer/Interfaces/scripting_interfaces.h; sourceTree = "<group>"; };
 		7F3470A828527B4800FDED71 /* PictelSound.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PictelSound.xcframework; sourceTree = "<group>"; };
 		7F3470AD28527C5D00FDED71 /* sound_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sound_interfaces.h; sourceTree = "<group>"; };
 		7F3470AE28527C7D00FDED71 /* sound_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound_file.cpp; sourceTree = "<group>"; };
@@ -1096,6 +1100,7 @@
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
+				7F27C45E28551736001AA216 /* scripting_interfaces.h */,
 				7F138219277505B600ED6D67 /* src */,
 				7F3470A628527B4800FDED71 /* Dependencies */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
@@ -1493,6 +1498,7 @@
 				7FC1311B2792FAF20094DF0C /* character_mover_interface.h in Headers */,
 				7FE2E5D6277B234E00538094 /* function.hpp in Headers */,
 				7F13828B277505B600ED6D67 /* common.h in Headers */,
+				7F27C45F28551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F08C45327AF22F2002FEB8F /* light.hpp in Headers */,
 				7FF21D7B2784EA33005C52C4 /* property_animator_factory.hpp in Headers */,
 				7FD5CBEB278A0C7100498B5F /* texture_manager.hpp in Headers */,
@@ -1541,6 +1547,7 @@
 				7F3E8E97279AC8F9003BB7B6 /* polygon.hpp in Headers */,
 				7F3E8E98279AC8F9003BB7B6 /* performance.hpp in Headers */,
 				7F3E8E99279AC8F9003BB7B6 /* key_value.hpp in Headers */,
+				7F27C46028551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F3E8E9A279AC8F9003BB7B6 /* RendererEntryViewController.h in Headers */,
 				7F3E8E9B279AC8F9003BB7B6 /* room.hpp in Headers */,
 				7F3E8E9C279AC8F9003BB7B6 /* engine_interface.h in Headers */,
@@ -1649,6 +1656,7 @@
 				7F3E90B9279B03F6003BB7B6 /* polygon.hpp in Headers */,
 				7F3E90BA279B03F6003BB7B6 /* performance.hpp in Headers */,
 				7F3E90BB279B03F6003BB7B6 /* key_value.hpp in Headers */,
+				7F27C46128551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F3E90BC279B03F6003BB7B6 /* RendererEntryViewController.h in Headers */,
 				7F3E90BD279B03F6003BB7B6 /* room.hpp in Headers */,
 				7F3E90BE279B03F6003BB7B6 /* engine_interface.h in Headers */,

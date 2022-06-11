@@ -23,7 +23,7 @@ namespace engine
     class EngineState
     {
         std::function<void(Size, float)> m_screenSizeChangeHandler;
-        CallableScriptFunctionSciptableInstance m_screenSizeChangeScriptHandler;
+        CallableScriptFunctionParameters3<float, float, float> m_screenSizeChangeScriptHandler;
     public:
         EngineState();
     public:
@@ -71,7 +71,7 @@ namespace engine
             end)
             \endcode
          */
-        void SetOnScreenSizeChange(CallableScriptFunctionSciptableInstance);
+        void SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>);
 
         /** Inform that the screen size has changed. */
         /** @private */

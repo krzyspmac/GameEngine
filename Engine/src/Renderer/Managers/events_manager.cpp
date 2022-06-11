@@ -131,7 +131,7 @@ EventIdentifier EventsManager::RegisterMouseMovedEvents(std::function<void(Origi
     return identifier;
 }
 
-EventIdentifier EventsManager::RegisterMouseMovedEvents(CallableScriptFunctionSciptableInstance caller)
+EventIdentifier EventsManager::RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float> caller)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_mouseMovesScript.push_back(EventHolderMouseMovedScript(identifier, caller));
@@ -145,7 +145,7 @@ EventIdentifier EventsManager::RegisterMouseClickedEvents(std::function<void(voi
     return identifier;;
 }
 
-EventIdentifier EventsManager::RegisterMouseClickedEvents(CallableScriptFunctionSciptableInstance caller)
+EventIdentifier EventsManager::RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float> caller)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_mouseClickedScript.push_back(EventHolderMouseClickedScript(identifier, caller));
@@ -159,7 +159,7 @@ EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> mo
     return identifier;
 }
 
-EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionSciptableInstance fnc)
+EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionParametersEmpty fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_keyshortcutsScript.push_back(EventHolderKeyShortcutPressedScript(identifier, fnc, modifiers, keys));
@@ -235,8 +235,7 @@ static int lua_EventsManager_RegisterMouseMoveEvents(lua_State *L)
     EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
 
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto lambda = CallableScriptFunctionSciptableInstance(functionEndRef);
-    auto identifier = mgr->RegisterMouseMovedEvents(lambda);
+    auto identifier = mgr->RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float>(functionEndRef));
     lua_pushnumber(L, identifier);
     return 1;
 }
@@ -246,8 +245,7 @@ static int lua_EventsManager_RegisterMouseClickedEvents(lua_State *L)
     EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
 
     int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto lambda = CallableScriptFunctionSciptableInstance(functionEndRef);
-    auto identifier = mgr->RegisterMouseClickedEvents(lambda);
+    auto identifier = mgr->RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float>(functionEndRef));
     lua_pushnumber(L, identifier);
     return 1;
 }
@@ -268,7 +266,7 @@ static int lua_EventsManager_RegisterKeyShortcutsEvents(lua_State *L)
         return cs.at(0);
     });
 
-    auto identifier = mgr->RegisterKeyShortcut(modifiers, keys, CallableScriptFunctionSciptableInstance(fnRef));
+    auto identifier = mgr->RegisterKeyShortcut(modifiers, keys, CallableScriptFunctionParametersEmpty(fnRef));
     lua_pushnumber(L, identifier);
     return 1;
 }

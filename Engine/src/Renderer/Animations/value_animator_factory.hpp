@@ -57,8 +57,8 @@ namespace engine
         ValueAnimator *Create(CallableCurveLamba *curve,
                               float delay,
                               float duration,
-                              CallableScriptFunctionNumber functionUpdateRef,
-                              CallableScriptFunctionSciptableInstance functionEndRef);
+                              CallableScriptFunctionParameters1<float> functionUpdateRef,
+                              CallableScriptFunctionParametersEmpty functionEndRef);
 
         /** @private */
         ValueAnimator *Create(CallableCurveLamba *curve,

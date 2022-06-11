@@ -25,6 +25,7 @@ gameState = GameState:new()
 
 function GameState:Register()
 	EngineState:SetOnScreenSizeChange(function(w, h, d)
+		print("Screen parameters changed to " .. w .. "x" .. h .. " at " .. d)
 		self:OnResolutionChange(w, h, d)
 	end)
 	
@@ -173,8 +174,8 @@ end
 function init()
 	gameState:Register()
 	loadSprites()
-  	--animateIntro()
-  	animateLights()
+  	animateIntro()
+  	--animateLights()
    loadSounds()
 end
 

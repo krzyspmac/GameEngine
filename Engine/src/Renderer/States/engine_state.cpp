@@ -13,7 +13,7 @@ using namespace engine;
 
 EngineState::EngineState()
     : m_screenSizeChangeHandler(nullptr)
-    , m_screenSizeChangeScriptHandler(CallableScriptFunctionSciptableInstance::none())
+    , m_screenSizeChangeScriptHandler(CallableScriptFunctionParameters3<float, float, float>::empty())
 {
 
 }
@@ -28,7 +28,7 @@ void EngineState::SetOnScreenSizeChange(std::function<void (Size, float)> lambda
     m_screenSizeChangeHandler = lambda;
 }
 
-void EngineState::SetOnScreenSizeChange(CallableScriptFunctionSciptableInstance handler)
+void EngineState::SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float> handler)
 {
     m_screenSizeChangeScriptHandler = handler;
 }
@@ -42,12 +42,7 @@ void EngineState::SendScreenSizeChangeEvent(Size size, float density)
 
     if (m_screenSizeChangeScriptHandler.CanCall())
     {
-        m_screenSizeChangeScriptHandler.PerformCall([&](lua_State *L){
-            lua_pushnumber(L, size.width);
-            lua_pushnumber(L, size.height);
-            lua_pushnumber(L, density);
-            return 3;
-        });
+        m_screenSizeChangeScriptHandler.CallWithParameters(size.width, size.height, density);
     }
 }
 
@@ -87,7 +82,7 @@ static int lua_EngineState_SetOnScreenSizeChange(lua_State *L)
 {
     EngineState *obj = ScriptingEngineI::GetScriptingObjectPtr<EngineState>(L, 1);
     int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    obj->SetOnScreenSizeChange(CallableScriptFunctionSciptableInstance(fnRef));
+    obj->SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>(fnRef));
     return 0;
 }
 

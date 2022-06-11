@@ -20,6 +20,8 @@ extern "C" {
 }
 #endif //__cplusplus
 
+#include "scripting_interfaces.h"
+
 namespace engine
 {
 
@@ -28,7 +30,7 @@ namespace engine
      */
     typedef void* SCRIPT_STATE;
 
-    class ScriptingEngineI
+    class ScriptingEngineI: public ScriptingEngineRegistryCallerI
     {
     public:
         ///
@@ -89,20 +91,6 @@ namespace engine
         {
             return (T*)lua_topointer(L, index);
         };
-
-        /**
-         Calls a registry function that is a code that has been created
-         in LUA when passing a `function` as a parameter, i.e.:
-             f = function()
-            end)
-
-         Allows the aller to put in parameters if needed. Call with a lambda,
-         register the parameters as necessary and return the number of parameters
-         added.
-
-         Checks if funcRef >= 0, otherwise does nothing.
-         */
-        virtual void CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda) = 0;
     };
 
     /// Provides an interface for the classes to

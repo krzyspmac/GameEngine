@@ -12,7 +12,7 @@
 
 using namespace engine;
 
-ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, CallableScriptFunctionNumber functionUpdateRef, CallableScriptFunctionSciptableInstance functionEndRef)
+ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, CallableScriptFunctionParameters1<float> functionUpdateRef, CallableScriptFunctionParametersEmpty functionEndRef)
     : AnimatableI()
     , MemoryI()
     , m_engineProvider(GetMainEngine()->getProvider())
@@ -39,9 +39,9 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int dela
     , m_secondsTotal(seconds)
     , m_secondsStart(-1)
     , m_val(curve->GetMin())
-    , m_updateFuncRef(CallableScriptFunctionNumber(-1))
+    , m_updateFuncRef(CallableScriptFunctionParameters1<float>::empty())
     , m_updateFunc(functionUpdate)
-    , m_endFuncRef(CallableScriptFunctionSciptableInstance(-1))
+    , m_endFuncRef(CallableScriptFunctionParametersEmpty::empty())
     , m_endFunc(functionEnd)
     , m_isStopped(true)
 {
@@ -96,7 +96,7 @@ void ValueAnimator::CallbackExecute()
 {
     if (m_updateFuncRef.CanCall())
     {
-        m_updateFuncRef.PerformCall(m_val);
+        m_updateFuncRef.CallWithParameters(m_val);
     }
 
     if (m_updateFunc != nullptr)
@@ -125,7 +125,7 @@ void ValueAnimator::Update()
     }
 }
 
-void ValueAnimator::SetFunctionUpdate(CallableScriptFunctionNumber f)
+void ValueAnimator::SetFunctionUpdate(CallableScriptFunctionParameters1<float> f)
 {
     m_updateFuncRef = f;
 }
@@ -135,7 +135,7 @@ void ValueAnimator::SetFunctionUpdate(std::function<void(float)> f)
     m_updateFunc = f;
 }
 
-void ValueAnimator::SetFunctionFinish(CallableScriptFunctionSciptableInstance f)
+void ValueAnimator::SetFunctionFinish(CallableScriptFunctionParametersEmpty f)
 {
     m_endFuncRef = f;
 }
@@ -145,7 +145,7 @@ void ValueAnimator::SetFunctionFinish(std::function<void(ValueAnimator*)> f)
     m_endFunc = f;
 }
 
-CallableScriptFunctionNumber ValueAnimator::GetunctionUpdateRef()
+CallableScriptFunctionParameters1<float> ValueAnimator::GetunctionUpdateRef()
 {
     return m_updateFuncRef;
 }
@@ -155,7 +155,7 @@ std::function<void(float)> ValueAnimator::GetFunctionUpdate()
     return m_updateFunc;
 }
 
-CallableScriptFunctionSciptableInstance ValueAnimator::GetFunctionFinishRef()
+CallableScriptFunctionParametersEmpty ValueAnimator::GetFunctionFinishRef()
 {
     return m_endFuncRef;
 }

@@ -47,9 +47,9 @@ namespace engine
         double m_secondsStart;
         double m_secondsPassed;
         double m_val;
-        CallableScriptFunctionNumber m_updateFuncRef;
+        CallableScriptFunctionParameters1<float> m_updateFuncRef;
         std::function<void(float)> m_updateFunc;
-        CallableScriptFunctionSciptableInstance m_endFuncRef;
+        CallableScriptFunctionParametersEmpty m_endFuncRef;
         std::function<void(ValueAnimator*)> m_endFunc;
         bool m_isStopped;
     public:
@@ -60,8 +60,8 @@ namespace engine
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
                       int delay,
                       double seconds,
-                      CallableScriptFunctionNumber functionUpdateRef,
-                      CallableScriptFunctionSciptableInstance functionEndRef);
+                      CallableScriptFunctionParameters1<float> functionUpdateRef,
+                      CallableScriptFunctionParametersEmpty functionEndRef);
 
         /**
          Create the value animator with callaback as C++ lambdas.
@@ -77,14 +77,14 @@ namespace engine
         ~ValueAnimator();
 
     public:
-        void SetFunctionUpdate(CallableScriptFunctionNumber f);
+        void SetFunctionUpdate(CallableScriptFunctionParameters1<float> f);
         void SetFunctionUpdate(std::function<void(float)> f);
-        void SetFunctionFinish(CallableScriptFunctionSciptableInstance f);
+        void SetFunctionFinish(CallableScriptFunctionParametersEmpty f);
         void SetFunctionFinish(std::function<void(ValueAnimator*)> f);
 
-        CallableScriptFunctionNumber GetunctionUpdateRef();
+        CallableScriptFunctionParameters1<float> GetunctionUpdateRef();
         std::function<void(float)> GetFunctionUpdate();
-        CallableScriptFunctionSciptableInstance GetFunctionFinishRef();
+        CallableScriptFunctionParametersEmpty GetFunctionFinishRef();
         std::function<void(ValueAnimator*)> GetFunctionFinish();
 
     /// AnimatableI

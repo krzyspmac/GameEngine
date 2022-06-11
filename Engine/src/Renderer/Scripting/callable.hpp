@@ -12,6 +12,14 @@
 #include "callable_interface.h"
 #include "scripting_engine_provider_interface.h"
 
+#ifdef __cplusplus
+extern "C" {
+    #include "lua.h"
+    #include "lualib.h"
+    #include "lauxlib.h"
+}
+#endif //__cplusplus
+
 namespace engine
 {
     /**
@@ -33,91 +41,6 @@ namespace engine
         float GetMax() { return m_max; };
         float GetDiff() { return m_diff; };
         float f(float progress);
-    };
-
-    /**
-     Callable Script Function.
-     */
-    class CallableScriptFunctionParamless: public CallableScriptFunctionI
-    {
-        CallableScriptFunctionRef m_ref = -1;
-    public:
-        static CallableScriptFunctionParamless none;
-    public:
-        /**
-         Construct a callable function by providing a reference for it.
-         In LUA this is:
-         SomeObject(function() ... end)
-         */
-        /**
-         Construct a callable function by providing a reference for it.
-         The function takes no parameters and expectes no result.
-         \code{lua}
-         function ()
-         end
-         \endcode
-         */
-        CallableScriptFunctionParamless(CallableScriptFunctionRef functionRef);
-
-        /**
-         Return the ref to the callable function.
-         Available only in C++
-         @private
-         */
-        CallableScriptFunctionRef& GetFunctionRef(){ return m_ref; };
-
-        /**
-         Perform the call.
-         Available only in C++.
-         @private
-         */
-        void PerformCall();
-
-        /**
-         Available only in C++
-         @private
-         */
-        bool CanCall() { return m_ref != -1; };
-    };
-
-    /**
-     Callable Script Encapsulation for a single number parameter.
-     */
-    class CallableScriptFunctionNumber: public CallableScriptFunctionI
-    {
-        CallableScriptFunctionRef m_ref = - 1;
-    public:
-        static CallableScriptFunctionNumber none;
-    public:
-        /**
-         Construct a callable function by providing a reference for it.
-         The function takes one paramter (float) and expectes no result.
-         \code{lua}
-         function (val)
-         end
-         \endcode
-         */
-        CallableScriptFunctionNumber(CallableScriptFunctionRef functionRef);
-
-        /**
-         Return the ref to the callable function.
-         Available only in C++
-         @private
-         */
-        CallableScriptFunctionRef& GetFunctionRef(){ return m_ref; };
-
-        /**
-         Perform the call.
-         Available only in C++.
-         @private
-         */
-        void PerformCall(float val);
-
-        /**
-         Available only in C++
-         @private
-         */
-        bool CanCall() { return m_ref != -1; };
     };
 
     /**
@@ -163,6 +86,87 @@ namespace engine
          @private
          */
         bool CanCall() { return m_ref != -1; };
+    };
+
+    class CallableScriptFunctionParametersEmpty: public CallableScriptFunctionSciptableInstance
+    {
+    public:
+        static CallableScriptFunctionParametersEmpty empty() {
+            return CallableScriptFunctionParametersEmpty(-1);
+        };
+
+        CallableScriptFunctionParametersEmpty(CallableScriptFunctionRef ref)
+        :   CallableScriptFunctionSciptableInstance(ref)
+        { };
+
+        void CallWithParameters() {
+            PerformCall([&](lua_State *L){
+                return 0;
+            });
+        }
+    };
+
+    template <typename A>
+    class CallableScriptFunctionParameters1: public CallableScriptFunctionSciptableInstance
+    {
+    public:
+        static CallableScriptFunctionParameters1<A> empty() {
+            return CallableScriptFunctionParameters1<A>(-1);
+        };
+
+        CallableScriptFunctionParameters1(CallableScriptFunctionRef ref)
+        :   CallableScriptFunctionSciptableInstance(ref)
+        { };
+
+        void CallWithParameters(A p1) {
+            PerformCall([&](lua_State *L){
+                lua_pushnumber(L, p1);
+                return 1;
+            });
+        }
+    };
+
+    template <typename A, typename B>
+    class CallableScriptFunctionParameters2: public CallableScriptFunctionSciptableInstance
+    {
+    public:
+        static CallableScriptFunctionParameters2<A, B> empty() {
+            return CallableScriptFunctionParameters2<A, B>(-1);
+        };
+
+        CallableScriptFunctionParameters2(CallableScriptFunctionRef ref)
+        :   CallableScriptFunctionSciptableInstance(ref)
+        { };
+
+        void CallWithParameters(A p1, B p2) {
+            PerformCall([&](lua_State *L){
+                lua_pushnumber(L, p1);
+                lua_pushnumber(L, p2);
+                return 2;
+            });
+        }
+    };
+
+    template <typename A, typename B, typename C>
+    class CallableScriptFunctionParameters3: public CallableScriptFunctionSciptableInstance
+    {
+    public:
+        static CallableScriptFunctionParameters3<A, B, C> empty() {
+            return CallableScriptFunctionParameters3<A, B, C>(-1);
+        };
+
+        CallableScriptFunctionParameters3(CallableScriptFunctionRef ref)
+        :   CallableScriptFunctionSciptableInstance(ref)
+        { };
+
+        void CallWithParameters(A p1, B p2, C p3) {
+            PerformCall([&](lua_State *L){
+                lua_pushnumber(L, p1);
+                lua_pushnumber(L, p2);
+                lua_pushnumber(L, p3);
+                return 3;
+            });
+        }
     };
 
 };
