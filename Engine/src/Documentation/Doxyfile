@@ -936,7 +936,8 @@ INPUT                  = ../Renderer/Scene/scene.hpp \
                          ../Renderer/Sound/sound_file.hpp \
                          ../Renderer/Sound/sound_manager.cpp \
                          ../Renderer/Sound/sound_manager.hpp \
-                         ../Renderer/Sound/sound_interfaces.h
+                         ../Renderer/Sound/sound_interfaces.h \
+                         ../doxygen_sounds.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
