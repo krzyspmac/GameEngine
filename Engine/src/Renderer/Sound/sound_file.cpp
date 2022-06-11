@@ -10,72 +10,117 @@
 
 using namespace engine;
 
+static inline SoundFileState PictelSoundState2SoundFileState(PlayerState);
+
 SoundFile::SoundFile(std::string filename)
 :   SoundFileI(filename)
 {
-    m_soundRef = PictelSoundCreate(GetMainEngine()->getFileAccess().GetFullPath(filename).c_str());
+    m_soundPlayer = PictelSound::PlayerI::CreateFromFile(GetMainEngine()->getFileAccess().GetFullPath(filename).c_str());
 }
 
 SoundFile::~SoundFile()
 {
-    if (m_soundRef != nullptr)
-    {   PictelSoundRelease(m_soundRef);
-        m_soundRef = nullptr;
+    if (m_soundPlayer != nullptr)
+    {   delete m_soundPlayer;
+        m_soundPlayer = nullptr;
     }
 }
 
 bool SoundFile::Preapre()
 {
-    if (m_soundRef == nullptr)
+    if (m_soundPlayer == nullptr)
     {   return false;
     }
 
-    return PictelSoundOpen(m_soundRef);
+    return m_soundPlayer->Open();
 }
 
 void SoundFile::Play()
 {
-    if (m_soundRef == nullptr)
+    if (m_soundPlayer == nullptr)
     {   return;
     }
 
-    PictelSoundPlay(m_soundRef);
+    m_soundPlayer->Play();
 }
 
 void SoundFile::Pause()
 {
-    if (m_soundRef == nullptr)
+    if (m_soundPlayer == nullptr)
     {   return;
     }
 
-    PictelSoundPause(m_soundRef);
+    m_soundPlayer->Pause();
 }
 
 void SoundFile::Stop()
 {
-    if (m_soundRef == nullptr)
+    if (m_soundPlayer == nullptr)
     {   return;
     }
 
-    PictelSoundStop(m_soundRef);
+    m_soundPlayer->Stop();
 }
 
 void SoundFile::SetVolume(double volume)
 {
-    if (m_soundRef == nullptr)
+    if (m_soundPlayer == nullptr)
     {   return;
     }
 
-    PictelSoundSetVolume(m_soundRef, volume);
+    m_soundPlayer->SetVolume(volume);
 }
 
 void SoundFile::SetLoops(bool loops)
 {
-    if (m_soundRef == nullptr)
+    if (m_soundPlayer == nullptr)
     {   return;
     }
 
-    PictelSoundSetLoops(m_soundRef, loops);
+    m_soundPlayer->SetLoops(loops);
+}
+
+SoundFileState SoundFile::GetState()
+{
+    if (m_soundPlayer == nullptr)
+    {   return UNKNOWN;
+    }
+
+    return PictelSoundState2SoundFileState(m_soundPlayer->GetState());
+}
+
+SoundFileStateObserverI* SoundFile::AddObserver(CallableScriptFunctionI::CallableScriptFunctionRef function)
+{
+    if (m_soundPlayer == nullptr)
+    {   return nullptr;
+    }
+
+    auto callback = new SoundFileStateObserverLUA(function);
+    m_soundPlayer->AddCallback(std::move(callback));
+    return callback;
+}
+
+void SoundFile::RemoveObserver(SoundFileStateObserverI* observer)
+{
+    if (m_soundPlayer == nullptr)
+    {   return;
+    }
+
+    m_soundPlayer->RemoveCallback((SoundFileStateObserverLUA*)observer);
+}
+
+//
+// SoundFileStateObserverLUA
+//
+
+void SoundFileStateObserverLUA::UpdateState(SoundFileState state)
+{
+    m_luaFunc.PerformCall(state);
+}
+
+void SoundFileStateObserverLUA::PerformStateCallback(PlayerState state)
+{
+    UpdateState(PictelSoundState2SoundFileState(state));
 }
 
 //
@@ -141,14 +186,54 @@ static int lua_SetLoops(lua_State *L)
     return 0;
 }
 
+static int lua_AddObserver(lua_State *L)
+{
+    SoundFile *obj = ScriptingEngineI::GetScriptingObjectPtr<SoundFile>(L, 1);
+    int functionRef = luaL_ref( L, LUA_REGISTRYINDEX );
+
+    auto result = obj->AddObserver(functionRef);
+    lua_pushlightuserdata(L, result);
+    return 1;
+}
+
+static int lua_RemoveObserver(lua_State *L)
+{
+    SoundFile *obj = ScriptingEngineI::GetScriptingObjectPtr<SoundFile>(L, 1);
+    SoundFileStateObserverI *observer = (SoundFileStateObserverI*)lua_touserdata(L, 2);
+
+    obj->RemoveObserver(observer);
+    return 0;
+}
+
 std::vector<luaL_Reg> SoundFile::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
-        { "Play",       &lua_Play }
-    ,   { "Pause",      &lua_Pause }
-    ,   { "Stop",       &lua_Stop }
-    ,   { "SetVolume",  &lua_SetVolume }
-    ,   { "SetLoops",   &lua_SetLoops }
+        { "Play",           &lua_Play }
+    ,   { "Pause",          &lua_Pause }
+    ,   { "Stop",           &lua_Stop }
+    ,   { "SetVolume",      &lua_SetVolume }
+    ,   { "SetLoops",       &lua_SetLoops }
+    ,   { "AddObserver",    &lua_AddObserver }
+    ,   { "RemoveObserver", &lua_RemoveObserver }
     });
     return result;
+}
+
+inline SoundFileState PictelSoundState2SoundFileState(PlayerState state)
+{
+    switch (state)
+    {
+        case PLAYER_STOPPED:
+            return STOPPED;
+        case PLAYER_PREPARED:
+            return PREPARED;
+        case PLAYER_PLAYING:
+            return PLAYING;
+        case PLAYER_PAUSED:
+            return PAUSED;
+        case PLAYER_STOPPING:
+            return PLAYING;
+        case PLAYER_DISCARDED:
+            return UNKNOWN;
+    }
 }

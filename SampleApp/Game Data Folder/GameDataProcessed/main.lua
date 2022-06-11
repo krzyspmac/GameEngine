@@ -107,6 +107,12 @@ end
 
 function loadSounds()
     sound = SoundManager:Load("Rondo_Alla_Turka.ogg")
+    soundObserverRef = sound:AddObserver(function(state)
+    	print("State = " .. state)
+    	if state == 10 then
+    		sound:RemoveObserver(soundObserverRef)
+    	end
+    end)
     sound:Play()
 end
 

@@ -40,7 +40,8 @@ In other words the engine currently:
 - light up the 2d scene by means of shaders (simple luminosity added to the plane)
 - deals with events (mouse, keyboards)
 - has basic IMGUI implementation
-- uses LUA to control the scene and provide functionality
+- uses [Pictel-Sound](https://github.com/krzyspmac/Pictel-sound) for simple ogg/vorbis music playback
+- uses LUA to control the scene and provides some basic functionality
 - has test sprites taken off the internet to showcase the functions
 
 ![Sample engine screenshot](Readme/screenshot.png "title")

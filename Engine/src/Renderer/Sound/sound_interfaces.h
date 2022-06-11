@@ -10,9 +10,28 @@
 
 #include <iostream>
 #include <vector>
+#include "callable.hpp"
 
 namespace engine
 {
+    typedef enum
+    {
+        UNKNOWN     = -1,
+        IDLE        = 0,
+        PREPARED    = 10,
+        STOPPED     = 11,
+        PLAYING     = 12,
+        PAUSED      = 13
+    } SoundFileState;
+
+    class SoundFileStateObserverI
+    {
+    public:
+        SoundFileStateObserverI() { };
+
+        virtual void UpdateState(SoundFileState) = 0;
+    };
+
     class SoundFileI
     {
     public:
@@ -40,6 +59,16 @@ namespace engine
 
         /** Set the looping attribute */
         virtual void SetLoops(bool) = 0;
+
+        /** Get the player state */
+        virtual SoundFileState GetState() = 0;
+
+        /** Add an observer as a lua function. Returns an object that can be used later
+            to remove the observer as well. */
+        virtual SoundFileStateObserverI* AddObserver(CallableScriptFunctionI::CallableScriptFunctionRef) = 0;
+
+        /** Remove an observer */
+        virtual void RemoveObserver(SoundFileStateObserverI*) = 0;
     };
 
     class SoundManagerI
