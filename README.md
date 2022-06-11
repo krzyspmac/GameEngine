@@ -25,8 +25,8 @@ assumptions.
 - [x] Written in C++
 - [x] Simple Sprite Engine (load, show, move)
 - [x] Simple Text Engine (load, show, move)
-- [ ] Simple Sound Engine (file stream audio, short clip play/pause)
-- [x] IMGUI for in-game control
+- [x] Simple Sound Engine (file stream audio, short clip play/pause)
+- [ ] IMGUI for in-game control
 - [x] MacOS/iOS Renderer
 - [x] LUA as a script language (at least for now)
 - [ ] Windows Renderer
