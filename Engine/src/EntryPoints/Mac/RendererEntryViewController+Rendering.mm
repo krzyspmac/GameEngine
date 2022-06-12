@@ -70,6 +70,7 @@
     {
         id<MTLRenderCommandEncoder> encoder = [commandBuffer renderCommandEncoderWithDescriptor:oscRenderPassDescriptor];
         [encoder setRenderPipelineState:oscPipelineState];
+        [encoder setDepthStencilState:oscDepthStencilTest];
 
         /** Pass in the C++ bridge to the MTLRendererCommandEncoder */
         m_engineProvider->SetRendererCommandEncoder((__bridge MTL::RenderCommandEncoder*)encoder);

@@ -46,6 +46,26 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState directi
     return m_walkR;
 }
 
+void CharacterRenderer::SetZPosition(float value)
+{
+    CharacterWalkState directions[] = { STAND_RIGHT, RIGHT, STAND_LEFT, LEFT };
+    int directionsCount = sizeof(directions) / sizeof(CharacterWalkState);
+
+    for (int i = 0; i < directionsCount; i++)
+    {
+        CharacterWalkState state = (CharacterWalkState)directions[i];
+        CharacterWalkRenderer &characterRenderer = GetRenderer(state);
+        for (int n = 0; n < characterRenderer.GetBodyAnimationCount(); n++)
+        {
+            characterRenderer.GetBodyRendererAtIndex(n)->GetDrawable()->SetZPosition(value);
+        }
+        for (int n = 0; n < characterRenderer.GetHeadAnimationCount(); n++)
+        {
+            characterRenderer.GetHeadRendererAtIndex(n)->GetDrawable()->SetZPosition(value);
+        }
+    }
+}
+
 void CharacterRenderer::AppendBodyWalkAnimationFrame(CharacterWalkState direction, SpriteAtlasItemI *sprite, int offsetX, int offsetY, int headOffsetX, int headOffsetY)
 {
     if (sprite)

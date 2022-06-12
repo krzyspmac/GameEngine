@@ -33,7 +33,8 @@ vertexShader(
     // The positions are specified in pixel dimensions (i.e. a value of 100
     // is 100 pixels from the origin).
     float2 pixelSpacePosition = vertices[vertexID].position.xy;
-
+    float pixelZSpacePosition = vertices[vertexID].position.z;
+    
     // Get the viewport size and cast to float.
     vector_float2 viewportSize = vector_float2(*viewportSizePointer);
 
@@ -71,7 +72,8 @@ vertexShader(
     // divide the pixel coordinates by half the size of the viewport.
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
     out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-
+    out.position.z = pixelZSpacePosition;
+    
     // Pass the input color directly to the rasterizer.
     out.textureCoordinate = vertices[vertexID].textureCoordinate;
 

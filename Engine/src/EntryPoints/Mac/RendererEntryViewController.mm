@@ -50,6 +50,8 @@ using namespace engine;
 {
     mtkView = (MTKView*)self.view;
     mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
+    mtkView.depthStencilPixelFormat = MTLPixelFormatDepth32Float;
+    mtkView.clearDepth = 1.0;
 }
 
 - (void)setupEngine
@@ -155,7 +157,8 @@ using namespace engine;
     [renderePipelineDescriptor setLabel:@"Simple Pipeline"];
     [renderePipelineDescriptor setVertexFunction:vertexFunction];
     [renderePipelineDescriptor setFragmentFunction:fragmentFunction];
-
+    [renderePipelineDescriptor setDepthAttachmentPixelFormat:mtkView.depthStencilPixelFormat];
+    
     MTLRenderPipelineColorAttachmentDescriptor *renderbufferAttachment = renderePipelineDescriptor.colorAttachments[0];
     [renderbufferAttachment setPixelFormat:mtkView.colorPixelFormat];
     [renderbufferAttachment setBlendingEnabled:YES];
@@ -174,7 +177,7 @@ using namespace engine;
         NSLog(@"Failed to create pipeline state: %@.", error);
         // TODO: error handling
     }
-
+    
     commandQueue = [device newCommandQueue];
 }
 
@@ -200,20 +203,35 @@ using namespace engine;
     {
         oscTargetTexture = nil;
     }
-
     oscTargetTexture = [device newTextureWithDescriptor:texDescriptor];
+    
+    MTLTextureDescriptor *depthTexDescriptor = [MTLTextureDescriptor new];
+    depthTexDescriptor.textureType = MTLTextureType2D;
+    depthTexDescriptor.width = framebufferTextureSize.x;
+    depthTexDescriptor.height = framebufferTextureSize.y;
+    depthTexDescriptor.pixelFormat = MTLPixelFormatDepth32Float;//MTLPixelFormatRGBA8Unorm;
+    depthTexDescriptor.usage = MTLTextureUsageRenderTarget |
+                          MTLTextureUsageShaderRead;
+
+    if (oscTargetDepthTexture)
+    {
+        oscTargetDepthTexture = nil;
+    }
+    oscTargetDepthTexture = [device newTextureWithDescriptor:depthTexDescriptor];
 
     oscRenderPassDescriptor = [MTLRenderPassDescriptor new];
     oscRenderPassDescriptor.colorAttachments[0].texture = oscTargetTexture;
     oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;//MTLLoadActionLoad;//MTLLoadActionClear;
     oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 1, 1);
     oscRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
+    oscRenderPassDescriptor.depthAttachment.texture = oscTargetDepthTexture;
 
-    MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
+    MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor = [renderePipelineDescriptor copy]; //[[MTLRenderPipelineDescriptor alloc] init];
     oscRenderePipelineDescriptor.label = @"Offline Render Pipeline";
-    oscRenderePipelineDescriptor.sampleCount = 1;
+    oscRenderePipelineDescriptor.sampleCount = mtkView.sampleCount;
     oscRenderePipelineDescriptor.vertexFunction = oscVertexFunction;
     oscRenderePipelineDescriptor.fragmentFunction = oscFragmentFunction;
+    oscRenderePipelineDescriptor.depthAttachmentPixelFormat = mtkView.depthStencilPixelFormat;
 
     MTLRenderPipelineColorAttachmentDescriptor *colorAttch = oscRenderePipelineDescriptor.colorAttachments[0];
     colorAttch.pixelFormat = oscTargetTexture.pixelFormat;
@@ -224,10 +242,16 @@ using namespace engine;
     colorAttch.sourceAlphaBlendFactor      = MTLBlendFactorSourceAlpha;
     colorAttch.destinationRGBBlendFactor   = MTLBlendFactorOneMinusSourceAlpha;
     colorAttch.destinationAlphaBlendFactor = MTLBlendFactorOneMinusSourceAlpha;
-
+    
     NSError *error;
     oscPipelineState = [device newRenderPipelineStateWithDescriptor:oscRenderePipelineDescriptor error:&error];
+    
     NSAssert(oscPipelineState, @"Failed to create pipeline state to render to screen: %@", error);
+    
+    MTLDepthStencilDescriptor *depthDescriptor = [MTLDepthStencilDescriptor new];
+    depthDescriptor.depthCompareFunction = MTLCompareFunctionLessEqual;
+    depthDescriptor.depthWriteEnabled = YES;
+    oscDepthStencilTest = [device newDepthStencilStateWithDescriptor:depthDescriptor];
 }
 
 - (void)recreateOffscreenRenderingPipeline

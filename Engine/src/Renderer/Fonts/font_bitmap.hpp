@@ -145,6 +145,9 @@ namespace engine
         
         /** Set Alpha */
         void SetAlpha(float);
+        
+        /** Set Z-position */
+        void SetZPosition(float);
 
         /**
          Draw the font at a given position with a given color.

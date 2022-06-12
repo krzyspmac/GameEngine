@@ -39,6 +39,11 @@ namespace engine
          */
         void Draw(Vector2& position);
 
+        /**
+         Set Z-position
+         */
+        void SetZPosition(float);
+
     /// ScriptingInterface
     public:
         /**

@@ -81,6 +81,14 @@ void SpriteRepresentationAnimated::SetAcceptsLight(bool val)
     }
 }
 
+void SpriteRepresentationAnimated::SetZPosition(float zPos)
+{
+    for (auto& item : m_sprites)
+    {
+        item->SetZPosition(zPos);
+    }
+}
+
 void SpriteRepresentationAnimated::SetAnimationFrameDuration(float value)
 {
     m_frameAnimationDurationMs = value;
@@ -197,6 +205,14 @@ static int lua_SpriteDrawStatic_SetColorMod(lua_State *L)
     return 0;
 }
 
+static int lua_SpriteDrawStatic_SetZPosition(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    float value = lua_tonumber(L, 2);
+    spr->SetZPosition(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -209,6 +225,7 @@ std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions(
       , { "SetType", &lua_SpriteDrawStatic_SetType }
       , { "SetAnimationFrameDuration", &lua_SpriteDrawStatic_SetAnimationFrameDuration }
       , { "SetColorMod", &lua_SpriteDrawStatic_SetColorMod }
+      , { "SetZPosition", &lua_SpriteDrawStatic_SetZPosition }
     });
     return result;
 }

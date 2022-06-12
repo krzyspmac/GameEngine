@@ -39,6 +39,13 @@ namespace engine
          */
         Size& GetSize() { return m_sprite->GetSize(); };
 
+        /** Set the z-axis position.
+            Possible values range from 0.0 to 1.0, 0.0 being closest to the "camera" and
+            1.0 being further away. Of two object: one being at 1.0 and one being at 0.0
+            the one at 0.0 will overlap the one at 1.0.
+            */
+        void SetZPosition(float zPos);
+
         /** Get the current sprite atlas item for this sprite */
         SpriteAtlasItemI *GetSpriteAtlasItem() { return m_sprite; };
 

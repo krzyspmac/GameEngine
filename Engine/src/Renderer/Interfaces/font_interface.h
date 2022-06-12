@@ -35,6 +35,9 @@ namespace engine
 
         /** Set alpha */
         virtual void SetAlpha(float) = 0;
+        
+        /** Set z-position */
+        virtual void SetZPosition(float) = 0;
 
         /**
          Draw the font. Uses the current engine provider.

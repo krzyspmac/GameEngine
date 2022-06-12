@@ -37,6 +37,9 @@ namespace engine
 
         /// Set the character scale
         virtual void SetScale(float scale) = 0;
+        
+        /// Set the z-position
+        virtual void SetZPosition(float) = 0;
 
     /// Character actions
     public:

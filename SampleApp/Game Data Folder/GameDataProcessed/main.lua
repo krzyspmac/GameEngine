@@ -60,6 +60,7 @@ function loadSprites()
 	--character:SetInverseWalkbox("polygons.json")
 	character:SetWalkingSpeed(600)
 	character:SetHidden(false)
+	character:SetZPosition(0)
 	scene:SetMouseDownFunction(mouseDown)
 
 	-- sky
@@ -68,14 +69,14 @@ function loadSprites()
 	sky2:SetAlpha(1)
 	sky2:SetPosition(0, 0)
 	sky2:SetAcceptsLight(true)
-
+	 
 	sky = scene:SpriteStaticLoad(roomAtlas, "roombg")
 	sky:SetScale(1)
 	sky:SetAlpha(0)
-	sky:SetPosition(1280/2, 200)
+	sky:SetPosition(1280/2, 300)
 
 	tds = scene:SpriteAnimatedLoad(100, tdsSprite)
-	tds:SetPosition(200, 200)
+	tds:SetPosition(410, 180)
 	tds:SetAlpha(0.5)
 	tds:SetScale(1.5)
 	tds:SetAcceptsLight(true)
@@ -91,7 +92,8 @@ function loadSprites()
 	local playerAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.png")
 	playerSprite = scene:SpriteAnimatedLoad(250, playerAtlas)
 	playerSprite:SetPosition(600, 300)
-
+	playerSprite:SetZPosition(0.5)
+	
 	-- font
 	local font = FontManager:LoadFont("at01.fnt", "at01.png")
 	local textSprite = scene:SpriteTextLoad(font)
@@ -104,6 +106,7 @@ function loadSprites()
 	textSprite:SetShadowOffset(2, 2)
 	textSprite:SetLineHeightMultiplier(1.2)
 	textSprite:SetAlignment("center")
+	textSprite:SetZPosition(0.4)
 end
 
 function loadSounds()
@@ -174,9 +177,9 @@ end
 function init()
 	gameState:Register()
 	loadSprites()
-  	animateIntro()
-  	--animateLights()
-   loadSounds()
+  	--animateIntro()
+  	animateLights()
+   --loadSounds()
 end
 
 function update ()

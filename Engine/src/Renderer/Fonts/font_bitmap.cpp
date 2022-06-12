@@ -194,6 +194,14 @@ void FontBitmapRepresentation::SetAlpha(float value)
     }
 }
 
+void FontBitmapRepresentation::SetZPosition(float value)
+{
+    for (auto& it : m_font.GetGlyphs())
+    {
+        it.GetDrawable()->SetZPosition(value);
+    }
+}
+
 void FontBitmapRepresentation::LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth)
 {
     size_t len = text.length();

@@ -62,6 +62,11 @@ namespace engine
          Sets the character scale.
          */
         void SetScale(float val);
+        
+        /**
+         Set the z-position
+         */
+        void SetZPosition(float val);
 
         /**
          Walks to a specific place. Uses walkboxes if provided.
