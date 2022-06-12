@@ -38,6 +38,7 @@ void SpriteRepresentationText::SetPosition(Vector2 pos)
 void SpriteRepresentationText::SetAlpha(float val)
 {
     SpriteRepresentationI::SetAlpha(val);
+    m_bitmapFont->SetAlpha(val);
 }
 
 void SpriteRepresentationText::SetAcceptsLight(bool val)

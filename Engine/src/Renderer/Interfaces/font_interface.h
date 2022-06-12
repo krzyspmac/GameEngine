@@ -33,6 +33,9 @@ namespace engine
         /** Set the scale */
         virtual void SetScale(float) = 0;
 
+        /** Set alpha */
+        virtual void SetAlpha(float) = 0;
+
         /**
          Draw the font. Uses the current engine provider.
          */
