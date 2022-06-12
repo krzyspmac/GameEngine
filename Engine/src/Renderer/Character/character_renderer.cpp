@@ -48,7 +48,16 @@ CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState directi
 
 void CharacterRenderer::SetZPosition(float value)
 {
-    CharacterWalkState directions[] = { STAND_RIGHT, RIGHT, STAND_LEFT, LEFT };
+    CharacterWalkState directions[] = {
+        STAND_RIGHT,
+        RIGHT,
+        LEFT,
+        STAND_LEFT,
+        FORWARD,
+        STAND_FORWARD,
+        BACKWARD,
+        STAND_BACKWARD
+    };
     int directionsCount = sizeof(directions) / sizeof(CharacterWalkState);
 
     for (int i = 0; i < directionsCount; i++)
