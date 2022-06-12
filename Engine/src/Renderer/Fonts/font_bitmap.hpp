@@ -128,6 +128,7 @@ namespace engine
         FontBitmapDescriptor m_font;
         TextureI *m_texture;
         float m_scale;
+        float m_alpha;
     public:
         /**
          Create a bitmap bit.
@@ -141,6 +142,9 @@ namespace engine
 
         /** Set Scale */
         void SetScale(float);
+        
+        /** Set Alpha */
+        void SetAlpha(float);
 
         /**
          Draw the font at a given position with a given color.

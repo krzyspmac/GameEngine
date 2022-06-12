@@ -155,6 +155,7 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
     , m_font(FontBitmapDescriptor(fntFile, fontAtlas))
     , m_texture(GetMainEngine()->getTextureManager().LoadTexture(fontAtlas))
     , m_scale(scale)
+    , m_alpha(1.0f)
 {
     EngineProviderI& provider = GetMainEngine()->getProvider();
 
@@ -181,6 +182,15 @@ void FontBitmapRepresentation::SetScale(float value)
     for (auto& it : m_font.GetGlyphs())
     {
         it.GetDrawable()->SetScale(value);
+    }
+}
+
+void FontBitmapRepresentation::SetAlpha(float value)
+{
+    m_alpha = value;
+    for (auto& it : m_font.GetGlyphs())
+    {
+        it.GetDrawable()->SetAlpha(value);
     }
 }
 
