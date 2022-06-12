@@ -70,8 +70,10 @@
 
     /** Offscreen rendering */
     id<MTLTexture> oscTargetTexture;
+    id<MTLTexture> oscTargetDepthTexture;
     id<MTLFunction> oscVertexFunction;
     id<MTLFunction> oscFragmentFunction;
+    id<MTLDepthStencilState> oscDepthStencilTest;
     MTLRenderPassDescriptor *oscRenderPassDescriptor;
     MTLRenderPipelineDescriptor *oscRenderePipelineDescriptor;
     id<MTLRenderPipelineState> oscPipelineState;

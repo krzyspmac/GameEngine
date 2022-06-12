@@ -154,6 +154,11 @@ void Character::SetScale(float scale)
     m_characterRenderer->SetScale(scale);
 }
 
+void Character::SetZPosition(float value)
+{
+    m_characterRenderer->SetZPosition(value);
+}
+
 void Character::Draw(Vector2& position)
 {
     m_characterRenderer->Draw(m_walkState, m_isWalking, m_talking, position);

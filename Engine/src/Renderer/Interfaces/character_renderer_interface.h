@@ -169,6 +169,9 @@ namespace engine
 
         /// Sets the scale.
         virtual void SetScale(float scale) = 0;
+        
+        /// Set the z-position
+        virtual void SetZPosition(float) = 0;
 
         /// Draw all the character.
         virtual void Draw(CharacterWalkState, bool isWalking, bool isTalking, Vector2& position) = 0;

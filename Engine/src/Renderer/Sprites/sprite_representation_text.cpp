@@ -41,6 +41,11 @@ void SpriteRepresentationText::SetAlpha(float val)
     m_bitmapFont->SetAlpha(val);
 }
 
+void SpriteRepresentationText::SetZPosition(float zPos)
+{
+    m_bitmapFont->SetZPosition(zPos);
+}
+
 void SpriteRepresentationText::SetAcceptsLight(bool val)
 {
     SpriteRepresentationI::SetAcceptsLight(val);
@@ -208,6 +213,14 @@ static int lua_SetAlignment(lua_State *L)
     return 0;
 }
 
+static int lua_SetZPosition(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    float value = lua_tonumber(L, 2);
+    spr->SetZPosition(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -223,6 +236,7 @@ std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
       , { "SetShadowOffset", &lua_SetShadowOffset }
       , { "SetLineHeightMultiplier", &lua_SetLineHeightMultiplier }
       , { "SetAlignment", &lua_SetAlignment }
+      , { "SetZPosition", &lua_SetZPosition }
     });
     return result;
 }

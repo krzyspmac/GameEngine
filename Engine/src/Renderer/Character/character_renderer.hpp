@@ -27,7 +27,8 @@ namespace engine {
         void PrepareCharacter();
 
         void SetScale(float scale) { m_scale = scale; };
-
+        void SetZPosition(float);
+        
         void DrawBody(CharacterWalkRenderer&, bool isAnimating, Vector2 position);
         void DrawHead(CharacterWalkRenderer&, bool isAnimating, Vector2 position);
         void Draw(CharacterWalkState, bool isWalking, bool isTalking, Vector2& position);

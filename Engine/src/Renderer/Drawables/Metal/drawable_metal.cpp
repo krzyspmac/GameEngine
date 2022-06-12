@@ -52,29 +52,31 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     float height = ceil(textureCoodinagtes.size.height);
     float width2 = ceil(width/2);
     float height2 = ceil(height/2);
+    
+    // Standard, default z-axis vertex position. In metal 0 if closer to the screen, 1 is farther.
+    // By default we put our sprites at the end. Setting DrawableI::SetZPosition(0) brings the
+    // sprite to the front.
+    static float zStdPos = 1.0f;
 
     AAPLVertex data[] =
     {
         // Pixel positions, Texture coordinates, normals
-        { { -width2,  -height2 },   { x0, y1 } },
-        { { -width2,   height2 },   { x0, y0 } },
-        { {  width2,   height2 },   { x1, y0 } },
+        { { -width2,  -height2, zStdPos, 0.0 },   { x0, y1 } },
+        { { -width2,   height2, zStdPos, 0.0 },   { x0, y0 } },
+        { {  width2,   height2, zStdPos, 0.0 },   { x1, y0 } },
 
-        { {  width2,    height2 },  { x1, y0 } },
-        { {  width2,   -height2 },  { x1, y1 } },
-        { { -width2,   -height2 },  { x0, y1 } },
+        { {  width2,    height2, zStdPos, 0.0 },  { x1, y0 } },
+        { {  width2,   -height2, zStdPos, 0.0 },  { x1, y1 } },
+        { { -width2,   -height2, zStdPos, 0.0 },  { x0, y1 } },
     };
-
+    
+    m_dataSize = sizeof(data);
+    
     // Allocate a buffer for metal with sufficient size. Set mode to shared.
-    MetalBufferManager::Shared()->RegisterData(device, data, sizeof(data), [&](MTL::Buffer *buffer, size_t offset){
+    MetalBufferManager::Shared()->RegisterData(device, data, m_dataSize, [&](MTL::Buffer *buffer, size_t offset){
         m_vertexBuffer = buffer;
         m_vertexBufferOffset = offset;
     });
-
-    //m_vertexBuffer = device->newBuffer(sizeof(data), MTL::ResourceStorageModeShared);
-
-    // Copy data over to the buffer.
-    //memcpy(m_vertexBuffer->contents(), data, sizeof(data));
 
     // Store the number of vertices of the primitive.
     m_vertexCount = 6;
@@ -102,6 +104,20 @@ bool DrawableMetal::CanDraw()
 vector_float2 *DrawableMetal::GetSize()
 {
     return &m_size;
+}
+
+void DrawableMetal::SetZPosition(float value)
+{
+    DrawableSpriteI::SetZPosition(value);
+
+    size_t offset = m_dataSize / m_vertexCount;
+    size_t i;
+    char * ptr = (char*)m_vertexBuffer->contents() + m_vertexBufferOffset;
+    for (i = 0; i < m_vertexCount; i++)
+    {
+        AAPLVertex *vertex = (AAPLVertex*)((char*)ptr + (i*offset));
+        vertex->position[2] = value;
+    }
 }
 
 MTL::Buffer *DrawableMetal::GetVertexBuffer()

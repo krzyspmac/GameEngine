@@ -23,6 +23,7 @@ namespace engine
     {
         MTL::Buffer *m_vertexBuffer;
         size_t m_vertexBufferOffset;
+        size_t m_dataSize;
         vector_float2 m_size;
         TextureMetal *m_texture;
         size_t m_vertexCount;
@@ -30,6 +31,7 @@ namespace engine
     public: // DrawableSpriteI
         /** Construct a drawable for metal given a sprite descriptor */
         DrawableMetal(MTL::Device*, SpriteAtlasItemI*);
+        void SetZPosition(float value);
         virtual ~DrawableMetal();
         bool CanDraw();
     public: // vertex data

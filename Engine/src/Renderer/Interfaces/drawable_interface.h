@@ -31,12 +31,14 @@ namespace engine
         float m_flipHorizontal;
         float m_scale;
         float m_alpha;
+        float m_zPos;
         bool m_flippedHorizontally;
         bool m_acceptsLight;
     public:
         DrawableI(float width, float height)
             : m_scale(1.0f)
             , m_alpha(1.0f)
+            , m_zPos(0.0f)
             , m_flippedHorizontally(false)
             , m_textureRect( { {0, 0}, {(int)width, (int)height} } )
             , m_acceptsLight(true)
@@ -53,6 +55,13 @@ namespace engine
 
         /** Get the drawable scale */
         virtual float *GetScale() { return &m_scale; };
+        
+        /** Set the z-axis position.
+            Possible values range from 0.0 to 1.0, 0.0 being closest to the "camera" and
+            1.0 being further away. Of two object: one being at 1.0 and one being at 0.0
+            the one at 0.0 will overlap the one at 1.0.
+            */
+        virtual void SetZPosition(float value) { m_zPos = value; };
 
         /** Set the drawable alpha; 0-1 */
         virtual void SetAlpha(float val) { m_alpha = val; };

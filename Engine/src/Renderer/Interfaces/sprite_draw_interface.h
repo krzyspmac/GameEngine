@@ -27,6 +27,7 @@ namespace engine
         SpriteRepresentationI(int scale)
             : m_scale(scale)
             , m_position(Vector2Zero)
+            , m_zPosition(0.0f)
             , m_isDrawable(true)
             , m_colorMod({1.f, 1.f, 1.f})
             , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
@@ -49,11 +50,21 @@ namespace engine
         /** Scale setter */
         void SetScale(float x) { m_scale = x; };
 
-        /** Position this sprite in game coordinates */
+        /** Position this sprite in x,y axis game coordinates */
         void SetPosition(Vector2 pos) { m_position = pos; };
-
+        
         /** Get this sprite's position in game coordinates */
         Vector2& GetPosition() { return m_position; };
+        
+        /** Set the z-axis position.
+            Possible values range from 0.0 to 1.0, 0.0 being closest to the "camera" and
+            1.0 being further away. Of two object: one being at 1.0 and one being at 0.0
+            the one at 0.0 will overlap the one at 1.0.
+            */
+        void SetZPosition(float zPos) { m_zPosition = zPos; };
+
+        /** Get the z-axis position */
+        float& GetZPosition() { return m_zPosition; };
 
         /** Sets the alpha. Values range from 0-1.
             Default value is 1.
@@ -95,6 +106,7 @@ namespace engine
     protected:
         int m_scale;
         Vector2 m_position;
+        float m_zPosition;
         bool m_acceptsLight;
         SpriteDrawType m_type;
         Color4 m_colorMod;

@@ -93,6 +93,7 @@ void Engine::Setup()
     // Load some debug fonts
 #if SHOW_FPS
     m_displayFont = new FontBitmapRepresentation("at01.fnt", "at01.png", 1);
+    m_displayFont->SetZPosition(0);
 #endif
 
     // Load the main script file

@@ -39,6 +39,11 @@ void CharacterRepresentation::SetScale(float val)
     m_character->SetScale(val);
 }
 
+void CharacterRepresentation::SetZPosition(float val)
+{
+    m_character->SetZPosition(val);
+}
+
 Vector2& CharacterRepresentation::GetPosition()
 {
     return m_mover->GetCharacterPosition();
@@ -164,6 +169,14 @@ static int lua_CharacterRepresentation_SetHidden(lua_State *L)
     return 0;
 }
 
+static int lua_CharacterRepresentation_SetZPosition(lua_State *L)
+{
+    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
+    float value = lua_tonumber(L, 2);
+    sender->SetZPosition(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -174,7 +187,8 @@ std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
         {"SetInverseWalkbox", &lua_CharacterRepresentation_SetInverseWalkbox},
         {"WalkTo", &lua_CharacterRepresentation_WalkTo},
         {"SetWalkingSpeed", &lua_CharacterRepresentation_SetWalkingSpeed},
-        {"SetHidden", &lua_CharacterRepresentation_SetHidden}
+        {"SetHidden", &lua_CharacterRepresentation_SetHidden},
+        {"SetZPosition", &lua_CharacterRepresentation_SetZPosition}
     });
     return result;
 }

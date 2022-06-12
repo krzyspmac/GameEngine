@@ -31,6 +31,12 @@ void SpriteRepresentationStatic::SetPosition(Vector2 &pos)
     m_position = pos;
 }
 
+void SpriteRepresentationStatic::SetZPosition(float zPos)
+{
+    SpriteRepresentationI::SetZPosition(zPos);
+    m_drawable->SetZPosition(zPos);
+}
+
 void SpriteRepresentationStatic::SetScale(float x)
 {
     SpriteRepresentationI::SetScale(x);
@@ -150,6 +156,14 @@ static int lua_SetColorMod(lua_State *L)
     return 0;
 }
 
+static int lua_setZPosition(lua_State *L)
+{
+    SpriteRepresentationStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 1);
+    float value = lua_tonumber(L, 2);
+    spr->SetZPosition(value);
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -163,7 +177,8 @@ std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
         {"Draw", &lua_SpriteDrawStatic_Draw},
         {"SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight},
         {"SetType", &lua_SpriteDrawStatic_SetType},
-        {"SetColorMod", &lua_SetColorMod}
+        {"SetColorMod", &lua_SetColorMod},
+        {"SetZPosition", &lua_setZPosition}
     });
     return result;
 }

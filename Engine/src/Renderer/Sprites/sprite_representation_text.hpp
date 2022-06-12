@@ -40,6 +40,8 @@ namespace engine
             Default value is 1.
          */
         void SetAlpha(float val);
+        
+        void SetZPosition(float zPos);
 
         /** Lighting setter */
         void SetAcceptsLight(bool val);
