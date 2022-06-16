@@ -25,20 +25,29 @@ namespace engine
     class SceneManager
     {
     public:
-        SceneManager(): m_currentScene(nullptr) { };
+        SceneManager()
+        :   m_current(nullptr)
+        { };
 
     public:
         /// Creates a new scene. Removes the old one and removes it data.
         Scene* SceneCreateNew();
 
         /// Get the current scene.
-        Scene* SceneGetCurrent() { return m_currentScene.get(); };
+        Scene* SceneGetCurrent() { return m_current; };
 
         /// Unload the current scene.
-        void SceneUnloadCurrent();
-        
+        void SceneUnload(Scene*);
+
+        /// Make active.
+        void SceneMakeActive(Scene*);
+
     private:
-        std::unique_ptr<Scene> m_currentScene;
+        std::vector<std::unique_ptr<Scene>>::iterator GetFor(Scene*);
+
+    private:
+        std::vector<std::unique_ptr<Scene>> m_scenes;
+        Scene* m_current;
 
     /// ScriptingInterface
     public:

@@ -9,9 +9,9 @@
 
 using namespace engine;
 
-PropertyAnimator::PropertyAnimator(SpriteRepresentationI *sprite, ValueAnimator *valueAnimator)
+PropertyAnimator::PropertyAnimator(SpritePropertyManipulatorsI *sprite, ValueAnimator *valueAnimator)
     : AnimatableI()
-    , m_sprite(sprite)
+    , m_sprite(nullptr)
     , m_valueAnimator(std::move(valueAnimator))
 {
     m_valueAnimator.get()->AnimatableSetFinishLambda([&](AnimatableI *sender){

@@ -64,7 +64,7 @@ bool IniReader::UpdateSection(char *srcLine)
     }
 
     // Compare to a rudimental list of sections
-    static std::string types[] = { "RESOLUTION" };
+    static std::string types[] = { "RESOLUTION", "RENDERER" };
 
     for (int i = 0; i < sizeof(types); i++)
     {
@@ -104,6 +104,18 @@ void IniReader::ParseKeyValue(char *line)
                 m_engineSetup.resolution.height = std::stoi(val);
             }
 
+            break;
+        }
+        case RENDER_CLR_COLOR:
+        {
+            if (key == "clear_color")
+            {
+                sscanf(val.c_str(), "%f,%f,%f,%f",
+                       &m_engineSetup.backgroundColor.r,
+                       &m_engineSetup.backgroundColor.g,
+                       &m_engineSetup.backgroundColor.b,
+                       &m_engineSetup.backgroundColor.a);
+            }
             break;
         }
     }

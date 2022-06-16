@@ -11,20 +11,36 @@ using namespace engine;
 
 Scene* SceneManager::SceneCreateNew()
 {
-    if (m_currentScene != nullptr)
-    {
-        SceneUnloadCurrent();
-    }
-    m_currentScene = std::unique_ptr<Scene>(std::move(new Scene()));
-    return m_currentScene.get();
+    m_scenes.emplace_back(std::unique_ptr<Scene>(std::move(new Scene())));
+    return m_scenes.at(m_scenes.size()-1).get();
 }
 
-void SceneManager::SceneUnloadCurrent()
+void SceneManager::SceneUnload(Scene *scene)
 {
-    if (m_currentScene != nullptr)
-    {
-        m_currentScene.reset();
+    auto existing = GetFor(scene);
+    if (existing != m_scenes.end())
+    {   m_scenes.erase(existing);
     }
+    m_current = nullptr;
+}
+
+void SceneManager::SceneMakeActive(Scene* scene)
+{
+    auto existing = GetFor(scene);
+    if (existing != m_scenes.end())
+    {   m_current = existing->get();
+    }
+}
+
+std::vector<std::unique_ptr<Scene>>::iterator SceneManager::GetFor(Scene* scene)
+{
+    for (auto it = m_scenes.begin(); it != m_scenes.end(); it++)
+    {   if (it->get() == scene)
+        {   return it;
+        }
+    }
+
+    return m_scenes.end();
 }
 
 #pragma mark - Scripting
@@ -57,14 +73,31 @@ static int lua_SceneManager_SceneGetCurrent(lua_State *L)
     return 1;
 }
 
-static int lua_SceneManager_SceneUnloadCurrent(lua_State *L)
+static int lua_SceneManager_SceneUnload(lua_State *L)
 {
     SceneManager **ptr = (SceneManager**)luaL_checkudata(
         L, 1, SceneManager::ScriptingInterfaceName().c_str()
     );
+    Scene **scene = (Scene**)luaL_checkudata(
+        L, 2, Scene::ScriptingInterfaceName().c_str()
+    );
     if (ptr == nullptr) { return 0; }
     if (dynamic_cast<SceneManager*>(*ptr) == nullptr) { return 0; }
-    (*ptr)->SceneUnloadCurrent();
+    (*ptr)->SceneUnload(*scene);
+    return 0;
+}
+
+static int lua_SceneManager_SceneMakeActive(lua_State *L)
+{
+    SceneManager **ptr = (SceneManager**)luaL_checkudata(
+        L, 1, SceneManager::ScriptingInterfaceName().c_str()
+    );
+    Scene **scene = (Scene**)luaL_checkudata(
+        L, 2, Scene::ScriptingInterfaceName().c_str()
+    );
+    if (ptr == nullptr) { return 0; }
+    if (dynamic_cast<SceneManager*>(*ptr) == nullptr) { return 0; }
+    (*ptr)->SceneMakeActive(*scene);
     return 0;
 }
 
@@ -73,7 +106,8 @@ std::vector<luaL_Reg> SceneManager::ScriptingInterfaceFunctions()
     std::vector<luaL_Reg> result({
         { "SceneCreateNew", &lua_SceneManager_CreateNew },
         { "SceneGetCurrent", &lua_SceneManager_SceneGetCurrent },
-        { "SceneUnloadCurrent", &lua_SceneManager_SceneUnloadCurrent }
+        { "SceneUnload", &lua_SceneManager_SceneUnload },
+        { "SceneMakeActive", &lua_SceneManager_SceneMakeActive}
     });
     return result;
 }

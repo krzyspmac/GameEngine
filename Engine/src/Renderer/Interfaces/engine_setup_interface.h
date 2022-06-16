@@ -13,7 +13,7 @@
 
 namespace engine
 {
-    typedef struct
+    typedef struct EngineSetup
     {
         /** The initial resolution */
         Size resolution;
@@ -27,6 +27,16 @@ namespace engine
         /** Can mark the setup as dirty to inform the main renderer pass that
             changes have to pulled and reintegrated. */
         bool isDirty;
+
+        /** Renderer background color */
+        Color4 backgroundColor;
+
+        EngineSetup()
+        :   resolution( {320, 200} )
+        ,   affineScale( 1.0 )
+        ,   isDirty(false)
+        ,   backgroundColor({1.0, 0.0, 1.0, 1.0})
+        { };
     } EngineSetup;
 };
 
