@@ -107,7 +107,7 @@ PropertyAnimator *PropertyAnimatorFactory
                   curve
                 , delay
                 , duration
-                , [&](float val) { printf("%f", val); }
+                , [&](float val) { }
                 , nullptr);
     linearAnimator->SetFunctionFinish(fFinishRef);
 
