@@ -171,7 +171,7 @@ function init()
 	   loadSprites()
 	   SceneManager:SceneMakeActive(scene)
 	   animateLights()
-	   loadSounds()
+	   --loadSounds()
    end)
 end
 

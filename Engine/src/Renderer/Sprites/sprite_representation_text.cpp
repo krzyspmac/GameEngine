@@ -15,7 +15,8 @@ SpriteRepresentationText::SpriteRepresentationText(FontI *font)
     , m_shadowOffset({1.f, 1.f})
     , m_shadowColor({0.f, 0.f, 0.f, 0.f})
     , m_lineMultiplier(1.f)
-    , m_textAlignment(TEXT_ALIGN_LEFT)
+    , m_textHorizontalAlignment(TEXT_ALIGN_LEFT)
+    , m_textVerticalAlignment(TEXT_ALIGN_TOP)
 {
 }
 
@@ -71,9 +72,9 @@ void SpriteRepresentationText::SetLineHeightMultiplier(float lineMultiplier)
     m_lineMultiplier = lineMultiplier;
 }
 
-void SpriteRepresentationText::SetAlignment(std::string stringValue)
+void SpriteRepresentationText::SetHorizontalAlignment(std::string stringValue)
 {
-    typedef struct { std::string name; TEXT_ALIGNMENT value; } AlignmentInfo;
+    typedef struct { std::string name; TEXT_HORIZONTAL_ALIGNMENT value; } AlignmentInfo;
     static AlignmentInfo values[] =
     {
         {"left", TEXT_ALIGN_LEFT}
@@ -83,7 +84,25 @@ void SpriteRepresentationText::SetAlignment(std::string stringValue)
 
     for(auto& v : values)
     {   if (v.name.compare(stringValue) == 0)
-        {   m_textAlignment = v.value;
+        {   m_textHorizontalAlignment = v.value;
+            break;
+        }
+    }
+}
+
+void SpriteRepresentationText::SetVerticalAlignment(std::string stringValue)
+{
+    typedef struct { std::string name; TEXT_VERTICAL_ALIGNMENT value; } AlignmentInfo;
+    static AlignmentInfo values[] =
+    {
+        {"top", TEXT_ALIGN_TOP}
+      , {"middle", TEXT_ALIGN_MIDDLE}
+      , {"bottom", TEXT_ALIGN_BOTTOM}
+    };
+
+    for(auto& v : values)
+    {   if (v.name.compare(stringValue) == 0)
+        {   m_textVerticalAlignment = v.value;
             break;
         }
     }
@@ -93,9 +112,9 @@ void SpriteRepresentationText::DrawAt(int x, int y)
 {
     if (m_shadowColor.a > 0.f)
     {
-        m_bitmapFont->DrawAt(m_text, x + m_shadowOffset.x, y + + m_shadowOffset.x, 1, 1, 1, 1, m_textAlignment, m_shadowColor, m_lineMultiplier);
+        m_bitmapFont->DrawAt(m_text, x + m_shadowOffset.x, y + m_shadowOffset.x, 1, 1, 1, 1, m_textHorizontalAlignment, m_textVerticalAlignment , m_shadowColor, m_lineMultiplier);
     }
-    m_bitmapFont->DrawAt(m_text, x, y, 1, 1, 1, 1, m_textAlignment, GetColorMod(), m_lineMultiplier);
+    m_bitmapFont->DrawAt(m_text, x, y, 1, 1, 1, 1, m_textHorizontalAlignment, m_textVerticalAlignment, GetColorMod(), m_lineMultiplier);
 }
 
 void SpriteRepresentationText::Draw()
@@ -113,6 +132,14 @@ static int lua_SetText(lua_State *L)
     std::string text = lua_tostring(L, 2);
     obj->SetText(text);
     return 0;
+}
+
+static int lua_GetText(lua_State *L)
+{
+    SpriteRepresentationText *obj = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    std::string text = obj->GetText();
+    lua_pushstring(L, text.c_str());
+    return 1;
 }
 
 static int lua_SetScale(lua_State *L)
@@ -205,11 +232,19 @@ static int lua_SetLineHeightMultiplier(lua_State *L)
     return 0;
 }
 
-static int lua_SetAlignment(lua_State *L)
+static int lua_SetHorizontalAlignment(lua_State *L)
 {
     SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
     std::string value = lua_tostring(L, 2);
-    spr->SetAlignment(value);
+    spr->SetHorizontalAlignment(value);
+    return 0;
+}
+
+static int lua_SetVerticalAlignment(lua_State *L)
+{
+    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
+    std::string value = lua_tostring(L, 2);
+    spr->SetVerticalAlignment(value);
     return 0;
 }
 
@@ -225,6 +260,7 @@ std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
         { "SetText", &lua_SetText }
+      , { "GetText", &lua_GetText }
       , { "SetScale", &lua_SetScale }
       , { "SetAlpha", &lua_SetAlpha }
       , { "GetAlpha", &lua_GetAlpha }
@@ -235,7 +271,8 @@ std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
       , { "SetShadowColor", &lua_SetShadowColor }
       , { "SetShadowOffset", &lua_SetShadowOffset }
       , { "SetLineHeightMultiplier", &lua_SetLineHeightMultiplier }
-      , { "SetAlignment", &lua_SetAlignment }
+      , { "SetHorizontalAlignment", &lua_SetHorizontalAlignment }
+      , { "SetVerticalAlignment", &lua_SetVerticalAlignment }
       , { "SetZPosition", &lua_SetZPosition }
     });
     return result;

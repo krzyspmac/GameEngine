@@ -23,12 +23,16 @@ namespace engine
         OriginF m_shadowOffset;
         Color4 m_shadowColor;
         float m_lineMultiplier;
-        TEXT_ALIGNMENT m_textAlignment;
+        TEXT_HORIZONTAL_ALIGNMENT m_textHorizontalAlignment;
+        TEXT_VERTICAL_ALIGNMENT m_textVerticalAlignment;
     public:
         SpriteRepresentationText(FontI*);
 
         /** Text */
         void SetText(std::string);
+        
+        /** Get text */
+        std::string GetText() { return m_text; };
 
         /** Scale setter */
         void SetScale(float x);
@@ -56,9 +60,13 @@ namespace engine
             defined in the .fnt file */
         void SetLineHeightMultiplier(float);
 
-        /** Set the alignment. "left"|"center"|"right"
+        /** Set the horizontal alignment. "left"|"center"|"right"
             */
-        void SetAlignment(std::string);
+        void SetHorizontalAlignment(std::string);
+        
+        /** Set the vertical alignment. "top"|"middle"|"bottom"
+            */
+        void SetVerticalAlignment(std::string);
 
     public:
         void DrawAt(int x, int y);
