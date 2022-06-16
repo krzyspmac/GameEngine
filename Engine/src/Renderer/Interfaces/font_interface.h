@@ -17,7 +17,13 @@ namespace engine
         TEXT_ALIGN_LEFT     = 0,
         TEXT_ALIGN_CENTER   = 1,
         TEXT_ALIGN_RIGHT    = 2
-    } TEXT_ALIGNMENT;
+    } TEXT_HORIZONTAL_ALIGNMENT;
+
+    typedef enum {
+        TEXT_ALIGN_TOP      = 0,
+        TEXT_ALIGN_MIDDLE   = 1,
+        TEXT_ALIGN_BOTTOM   = 2
+    } TEXT_VERTICAL_ALIGNMENT;
 
     class FontI
     {
@@ -42,7 +48,18 @@ namespace engine
         /**
          Draw the font. Uses the current engine provider.
          */
-        virtual void DrawAt(std::string text, float x, float, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod, float lineMultiplier) = 0;
+        virtual void DrawAt(std::string text,
+                            float x,
+                            float y,
+                            int r,
+                            int g,
+                            int b,
+                            int a,
+                            TEXT_HORIZONTAL_ALIGNMENT hAlign,
+                            TEXT_VERTICAL_ALIGNMENT vAlign,
+                            Color4 colorMod,
+                            float lineMultiplier
+                            ) = 0;
 
     private:
         std::string m_fontName;

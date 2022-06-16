@@ -156,14 +156,15 @@ namespace engine
          @param g       - green; 0-255
          @param b       - blue; 0-255
          @param a       - alpha; 0-255
-         @param align   - left|center|right (string)
+         @param hAlign   - left|center|right (string)
+         @param vAlign   - top|middle|bottom (string)
 
          \code{lua}
          local font = FontManager:LoadFont("someFont.fnt", "someFont.png")
          font:DrawAt("Sample Text", 0, 0, 255, 0, 0, 255, "left")
          \endcode
          */
-        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod, float lineMultiplier);
+        void DrawAt(std::string text, float x, float y, int r, int g, int b, int a, TEXT_HORIZONTAL_ALIGNMENT hAlign, TEXT_VERTICAL_ALIGNMENT vAlign, Color4 colorMod, float lineMultiplier);
 
     private:
         void LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth);

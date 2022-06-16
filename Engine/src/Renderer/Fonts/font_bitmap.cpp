@@ -239,17 +239,40 @@ void FontBitmapRepresentation::LineRunner(std::string& text, int from, int to, O
     lineWidth(x);
 }
 
-void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_ALIGNMENT ta, Color4 colorMod, float lineMultiplier)
+void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int r, int g, int b, int a, TEXT_HORIZONTAL_ALIGNMENT hta, TEXT_VERTICAL_ALIGNMENT vta, Color4 colorMod, float lineMultiplier)
 {
     size_t len = text.length();
-
+    
     if (m_texture != nullptr && len > 0)
     {
         EngineProviderI& provider = GetMainEngine()->getProvider();
         auto& fontDescriptor = m_font.GetDescriptor();
 
+        int lineCount = 1;
+        for (int i = 0; i < len; i++)
+        {
+            if (text.at(i) == '\n')
+            {
+                lineCount++;
+            }
+        }
+        
         int x = xo;
         int y = yo;
+        
+        int totalHeight = lineCount * fontDescriptor.common.lineHeight * lineMultiplier * m_scale;
+        
+        switch (vta)
+        {
+            case TEXT_ALIGN_TOP:
+                break;
+            case TEXT_ALIGN_MIDDLE:
+                y -= round(totalHeight/2);
+                break;
+            case TEXT_ALIGN_BOTTOM:
+                y -= totalHeight;
+                break;
+        }
 
         int from = 0;
         int to = 0;
@@ -281,7 +304,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
             point.x = x;
             point.y = y;
 
-            switch (ta)
+            switch (hta)
             {
                 case TEXT_ALIGN_LEFT:
                     break;
@@ -321,7 +344,7 @@ static int lua_FontBitmapRepresentation_DrawText(lua_State *L)
     int a = lua_tonumber(L, 8);
     //const char *align = lua_tostring(L, 9); // not yet supported
 
-    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT, {1.f, 1.f, 1.f}, 1.f);
+    font->DrawAt(text, x, y, r, g, b, a, TEXT_ALIGN_LEFT, TEXT_ALIGN_TOP, {1.f, 1.f, 1.f}, 1.f);
     return 0;
 }
 
