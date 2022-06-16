@@ -31,6 +31,9 @@
 		7F2F802027B7DBBF0066B54C /* at01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801C27B7DBBF0066B54C /* at01.png */; };
 		7F2F802127B7DBBF0066B54C /* at01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801C27B7DBBF0066B54C /* at01.png */; };
 		7F2F802227B7DBBF0066B54C /* at01.png in Resources */ = {isa = PBXBuildFile; fileRef = 7F2F801C27B7DBBF0066B54C /* at01.png */; };
+		7F30224E285B5E0A0053D211 /* game_intro.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F30224D285B5E0A0053D211 /* game_intro.lua */; };
+		7F30224F285B5E0A0053D211 /* game_intro.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F30224D285B5E0A0053D211 /* game_intro.lua */; };
+		7F302250285B5E0A0053D211 /* game_intro.lua in Resources */ = {isa = PBXBuildFile; fileRef = 7F30224D285B5E0A0053D211 /* game_intro.lua */; };
 		7F3470C22852870F00FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470C12852870F00FDED71 /* AudioToolbox.framework */; };
 		7F3470C42852878800FDED71 /* Rondo_Alla_Turka.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 7F3470C32852878800FDED71 /* Rondo_Alla_Turka.ogg */; };
 		7F3470C52852878800FDED71 /* Rondo_Alla_Turka.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 7F3470C32852878800FDED71 /* Rondo_Alla_Turka.ogg */; };
@@ -189,6 +192,7 @@
 		7F2F801427B7DAE50066B54C /* mago.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mago.png; sourceTree = "<group>"; };
 		7F2F801B27B7DBBF0066B54C /* at01.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = at01.fnt; sourceTree = "<group>"; };
 		7F2F801C27B7DBBF0066B54C /* at01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = at01.png; sourceTree = "<group>"; };
+		7F30224D285B5E0A0053D211 /* game_intro.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = game_intro.lua; sourceTree = "<group>"; };
 		7F3470C12852870F00FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7F3470C32852878800FDED71 /* Rondo_Alla_Turka.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = Rondo_Alla_Turka.ogg; sourceTree = "<group>"; };
 		7F3CAAE1277093D500E0D74C /* MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,6 +415,7 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
+				7F30224D285B5E0A0053D211 /* game_intro.lua */,
 				7F3470C32852878800FDED71 /* Rondo_Alla_Turka.ogg */,
 				7F21C7B027E8F3B0003DC8F5 /* game_state.lua */,
 				7F2F801B27B7DBBF0066B54C /* at01.fnt */,
@@ -570,6 +575,7 @@
 				7F8E9BD627B5B58A00548567 /* TDS.json in Resources */,
 				7FDCEF2A27B7D5A500AE349F /* player_Idle.png in Resources */,
 				7FDCEF2727B7D5A500AE349F /* player_Idle.json in Resources */,
+				7F30224E285B5E0A0053D211 /* game_intro.lua in Resources */,
 				7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */,
 				7F927F4C27981BE20052DB60 /* DialogFont_retro.tga in Resources */,
 				7F869FD72783970400E8CB01 /* textx.png in Resources */,
@@ -638,6 +644,7 @@
 				7F3E9006279AFA6C003BB7B6 /* main copy.lua in Resources */,
 				7FDCEF2B27B7D5A500AE349F /* player_Idle.png in Resources */,
 				7F3E9017279AFA6C003BB7B6 /* parlor.png in Resources */,
+				7F30224F285B5E0A0053D211 /* game_intro.lua in Resources */,
 				7F3E900B279AFA6C003BB7B6 /* DialogFont_retro.fnt in Resources */,
 				7F3E9011279AFA6C003BB7B6 /* brett.png in Resources */,
 				7F3E8F6A279AE6A4003BB7B6 /* Assets.xcassets in Resources */,
@@ -686,6 +693,7 @@
 				7F3E9183279B0650003BB7B6 /* textx.png in Resources */,
 				7FDCEF2C27B7D5A500AE349F /* player_Idle.png in Resources */,
 				7F3E9189279B0650003BB7B6 /* background1.tga in Resources */,
+				7F302250285B5E0A0053D211 /* game_intro.lua in Resources */,
 				7F3E9170279B0650003BB7B6 /* DialogFont_retro.png in Resources */,
 				7F3E9178279B0650003BB7B6 /* fireplace.json in Resources */,
 				7F3E9187279B0650003BB7B6 /* background.tga in Resources */,
