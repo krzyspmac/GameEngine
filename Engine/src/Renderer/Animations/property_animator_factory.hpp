@@ -51,14 +51,14 @@ namespace engine
          end)
          \endcode
          */
-        PropertyAnimator *FadeIn(SpriteRepresentationI *sprite,
+        PropertyAnimator *FadeIn(SpritePropertyManipulatorsI *sprite,
                                  std::string curveType,
                                  float delay,
                                  float duration,
                                  CallableScriptFunctionParametersEmpty fFinishRef
                                  );
 
-        PropertyAnimator *FadeIn(SpriteRepresentationI *sprite,
+        PropertyAnimator *FadeIn(SpritePropertyManipulatorsI *sprite,
                                  AnimationCurveType curveType,
                                  float delay,
                                  float duration,
@@ -93,19 +93,33 @@ namespace engine
          end)
          \endcode
          */
-        PropertyAnimator *FadeOut(SpriteRepresentationI *sprite,
+        PropertyAnimator *FadeOut(SpritePropertyManipulatorsI *sprite,
                                   std::string curveType,
                                   float delay,
                                   float duration,
                                   CallableScriptFunctionParametersEmpty fFinishRef
                                  );
 
-        PropertyAnimator *FadeOut(SpriteRepresentationI *sprite,
+        PropertyAnimator *FadeOut(SpritePropertyManipulatorsI *sprite,
                                   AnimationCurveType curveType,
                                   float delay,
                                   float duration,
                                   std::function<void(void)> fFinishRef
                                  );
+
+        /**
+         Creates a "wait" animator that does nothing.
+
+         \code{lua}
+         local propertyAnimator = PropertyAnimatorFactory:Wait(1, 3, function()
+            -- animation is finished
+         end)
+         \endcode
+         */
+        PropertyAnimator *Wait(float delay,
+                               float duration,
+                               CallableScriptFunctionParametersEmpty
+                               );
 
         
     /// ScriptingInterface

@@ -222,7 +222,16 @@ using namespace engine;
     oscRenderPassDescriptor = [MTLRenderPassDescriptor new];
     oscRenderPassDescriptor.colorAttachments[0].texture = oscTargetTexture;
     oscRenderPassDescriptor.colorAttachments[0].loadAction = MTLLoadActionClear;//MTLLoadActionLoad;//MTLLoadActionClear;
-    oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(1, 0, 1, 1);
+    float backgroundColor[4] = {1.0, 0.0, 1.0, 1.0};
+    if (m_engine != nullptr)
+    {
+        backgroundColor[0] = m_engine->GetEngineSetup().backgroundColor.r;
+        backgroundColor[1] = m_engine->GetEngineSetup().backgroundColor.g;
+        backgroundColor[2] = m_engine->GetEngineSetup().backgroundColor.b;
+        backgroundColor[3] = m_engine->GetEngineSetup().backgroundColor.a;
+
+    }
+    oscRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColorMake(backgroundColor[0], backgroundColor[1], backgroundColor[2], backgroundColor[3]);
     oscRenderPassDescriptor.colorAttachments[0].storeAction = MTLStoreActionStore;
     oscRenderPassDescriptor.depthAttachment.texture = oscTargetDepthTexture;
 

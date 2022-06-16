@@ -29,7 +29,7 @@ namespace engine
         SpriteRepresentationI *m_sprite;
 
     public:
-        PropertyAnimator(SpriteRepresentationI *sprite, ValueAnimator *valueAnimator);
+        PropertyAnimator(SpritePropertyManipulatorsI *sprite, ValueAnimator *valueAnimator);
         ~PropertyAnimator();
         
     public: // AnimatableI

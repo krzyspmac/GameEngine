@@ -21,7 +21,14 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
-    class SpriteRepresentationI
+    class SpritePropertyManipulatorsI
+    {
+    public:
+        virtual void SetAlpha(float) = 0;
+        virtual float GetAlpha() = 0;
+    };
+
+    class SpriteRepresentationI: public SpritePropertyManipulatorsI
     {
     public:
         SpriteRepresentationI(int scale)

@@ -24,8 +24,9 @@ namespace engine
     {
         typedef enum
         {
-            UNKNOWN         = 0,
-            RESOLUTION      = 1
+            UNKNOWN             = 0,
+            RESOLUTION          = 1,
+            RENDER_CLR_COLOR    = 2
         } IniSectionType;
 
         EngineSetup m_engineSetup;

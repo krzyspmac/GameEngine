@@ -2,6 +2,7 @@
 -- requires
 
 require "game_state"
+require "game_intro"
 
 ------------------------------------------------------------------------------------------
 -- globals for the script
@@ -48,8 +49,9 @@ end
 -- loading functions
 
 function loadSprites()	
+
 	local atlas = AtlasManager:SpriteAtlasLoad( "background.json", "background.png" )
-	local scene = SceneManager:SceneCreateNew()
+	scene = SceneManager:SceneCreateNew()
 	local roomAtlas = AtlasManager:SpriteAtlasLoad( "parlor.json", "parlor.png" )
 	local tdsSprite = AtlasManager:SpriteAtlasLoad( "TDS.json", "TDS.png")
 
@@ -93,20 +95,6 @@ function loadSprites()
 	playerSprite = scene:SpriteAnimatedLoad(250, playerAtlas)
 	playerSprite:SetPosition(600, 300)
 	playerSprite:SetZPosition(0.5)
-	
-	-- font
-	local font = FontManager:LoadFont("at01.fnt", "at01.png")
-	local textSprite = scene:SpriteTextLoad(font)
-	textSprite:SetText("Gallia\nest omnis divisa\nin partes tres")
-	textSprite:SetPosition(gameState.wantedWidth/2, gameState.wantedHeight/2)
-	textSprite:SetAcceptsLight(true)
-	textSprite:SetScale(3)
-	textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
-	textSprite:SetShadowColor(1.0, 0.0, 0.0, 1.0)
-	textSprite:SetShadowOffset(2, 2)
-	textSprite:SetLineHeightMultiplier(1.2)
-	textSprite:SetAlignment("center")
-	textSprite:SetZPosition(0.4)
 end
 
 function loadSounds()
@@ -118,10 +106,6 @@ function loadSounds()
     	end
     end)
     sound:Play()
-end
-
-function registerResolutionChange()
---	EngineState:SetOnScreenSizeChange(gameState:onResolutionChange)
 end
 
 function animateIntro()
@@ -176,10 +160,18 @@ end
 
 function init()
 	gameState:Register()
-	loadSprites()
+	
   	--animateIntro()
-  	animateLights()
-   --loadSounds()
+  	
+    --loadSounds()
+    
+   local gameIntro = GameIntroScene:New()
+   gameIntro:Setup()
+   gameIntro:Start(function()
+	   loadSprites()
+	   SceneManager:SceneMakeActive(scene)
+	   animateLights()
+   end)
 end
 
 function update ()
