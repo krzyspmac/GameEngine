@@ -2,6 +2,10 @@ print("module.game_intro loaded")
 
 require("game_general")
 
+local i18n = require 'script_locales'
+require 'script_locales_en'
+i18n.setLocale("en")
+
 ------------------------------------------------------------------------------------------
 -- GameIntroScene
 -- animate over a bunch of text lines
@@ -18,8 +22,8 @@ function GameIntroScene:New()
 	o.font = FontManager:LoadFont("at01.fnt", "at01.png")
 	
 	o.texts = {
-		  "Gallia est omnis divisa in partes tres️,"
-		, "quarum unam incolunt Belgae, aliam Aquitanin\ntertiam qui ipsorum lingua Celtae,\nnostra Galli appellantur."
+		  i18n.translate("introLine1")
+		, i18n.translate("introLine2")
 	}
 	o.textsCount = tableLength(o.texts)
 	o.textsIndex = 1
