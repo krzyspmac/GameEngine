@@ -20,7 +20,7 @@ EngineState::EngineState()
 
 Size EngineState::GetViewportSize()
 {
-    return GetMainEngine()->getProvider().GetDesiredViewport();
+    return ENGINE().getProvider().GetDesiredViewport();
 }
 
 void EngineState::SetOnScreenSizeChange(std::function<void (Size, float)> lambda)
@@ -48,7 +48,7 @@ void EngineState::SendScreenSizeChangeEvent(Size size, float density)
 
 void EngineState::SetViewportSize(Size size, float scale)
 {
-    auto& engineSetup = GetMainEngine()->GetEngineSetup();
+    auto& engineSetup = ENGINE().GetEngineSetup();
     engineSetup.resolution.width = size.width;
     engineSetup.resolution.height = size.height;
     engineSetup.affineScale = scale;

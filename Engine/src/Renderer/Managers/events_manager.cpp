@@ -101,7 +101,7 @@ int EventsManager::DoEvents()
             }
             case EVENT_MOUSEUP:
             {
-                auto mouseLocation = &(GetMainEngine()->GetMousPosition());
+                auto mouseLocation = &(ENGINE().GetMousPosition());
 
                 for (auto& codeHandler : m_mouseClicks)
                 {

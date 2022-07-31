@@ -17,9 +17,9 @@ using namespace engine;
 Scene::Scene()
 :   m_mainCharacter(nullptr),
     m_mouseDownFunctionRef(-1),
-    m_engineProvider(GetMainEngine()->getProvider())
+    m_engineProvider(ENGINE().getProvider())
 {
-    GetMainEngine()->getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
+    ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
         Vector2 pos;
         pos.x = (*clicked).x;
@@ -42,7 +42,7 @@ void Scene::MouseClicked(Vector2 pos)
 
     if (m_mouseDownFunctionRef > -1)
     {
-        ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
+        ScriptingEngine& se = (ScriptingEngine&)ENGINE().getScripting();
         se.CallRegistryFunction(m_mouseDownFunctionRef, [&](lua_State *L){
             lua_pushnumber(L, pos.x);
             lua_pushnumber(L, pos.y);
@@ -61,7 +61,7 @@ SpriteRepresentationStatic *Scene::SpriteStaticLoad(SpriteAtlasI *atlas, std::st
     SpriteAtlasItemI *item = atlas->GetItemForName(name);
     if (item != nullptr)
     {
-        SpriteRepresentationStatic *renderer = (SpriteRepresentationStatic*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationStaticLoad(item);
+        SpriteRepresentationStatic *renderer = (SpriteRepresentationStatic*)ENGINE().getSpriteRendererManager().SpriteRepresentationStaticLoad(item);
         if (renderer != nullptr)
         {
             SpriteStaticAdd(renderer);
@@ -75,7 +75,7 @@ SpriteRepresentationAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationD
 {
     if (atlas != nullptr)
     {
-        SpriteRepresentationAnimated *renderer = (SpriteRepresentationAnimated*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(keyframeAnimationDelay, atlas);
+        SpriteRepresentationAnimated *renderer = (SpriteRepresentationAnimated*)ENGINE().getSpriteRendererManager().SpriteRepresentationAnimatedLoad(keyframeAnimationDelay, atlas);
         if (renderer != nullptr)
         {
             SpriteAnimatedAdd(renderer);
@@ -88,7 +88,7 @@ SpriteRepresentationAnimated *Scene::SpriteAnimatedLoad(float keyframeAnimationD
 SpriteRepresentationText *Scene::SpriteTextLoad(FontI *font)
 {
     if (font != nullptr)
-    {   auto *rep = (SpriteRepresentationText*)GetMainEngine()->getSpriteRendererManager().SpriteRepresentationTextLoad(font);
+    {   auto *rep = (SpriteRepresentationText*)ENGINE().getSpriteRendererManager().SpriteRepresentationTextLoad(font);
         if (rep != nullptr)
         {   SpriteTextAdd(rep);
             return rep;
@@ -115,7 +115,7 @@ void Scene::SpriteTextAdd(SpriteRepresentationText *renderer)
 
 CharacterRepresentation *Scene::LoadCharacter(std::string jsonFilename)
 {
-    CharacterRepresentation *rep = GetMainEngine()->getCharacterManager().LoadCharacter(jsonFilename);
+    CharacterRepresentation *rep = ENGINE().getCharacterManager().LoadCharacter(jsonFilename);
     m_characterRepresentations.emplace_back(rep);
     return rep;
 }
@@ -177,7 +177,7 @@ void Scene::RenderSceneForeground()
 
 LightI* Scene::CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity)
 {
-    auto* light = GetMainEngine()->getLightMnaager().CreateLight(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
+    auto* light = ENGINE().getLightMnaager().CreateLight(type, color, ambientIntensity, position, diffuseSize, diffuseIntensity);
     if (light != nullptr)
     {
         m_lights.emplace_back(light);

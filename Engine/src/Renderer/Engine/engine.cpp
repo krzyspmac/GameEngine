@@ -17,6 +17,7 @@
 #include "polygon_loader.hpp"
 #include "animation_curve_factory.hpp"
 #include "ini_reader.hpp"
+#include "static_objects.hpp"
 
 #ifdef __cplusplus
 extern "C" {
@@ -30,9 +31,9 @@ using namespace engine;
 
 /// Main accessor for easy access.
 EngineI *sharedEngine = NULL;
-engine::EngineI *GetMainEngine()
+engine::EngineI &ENGINE()
 {
-    return sharedEngine;
+    return *sharedEngine;
 }
 
 Engine::Engine(EngineProviderI &engineProvider,
@@ -52,6 +53,8 @@ Engine::Engine(EngineProviderI &engineProvider,
     : EngineI(engineProvider, textureManager, fileAccess, fontManager, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize)
     , m_viewportScale(1)
 {
+    StaticObjects::init();
+    StaticObjects::engine_provide(this);
     sharedEngine = this;
     SetCapRate(60);
 

@@ -21,7 +21,7 @@ PropertyAnimator *PropertyAnimatorFactory
 {
     SpritePropertyManipulatorsI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
-    ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
+    ValueAnimator *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
                 , delay
@@ -43,7 +43,7 @@ PropertyAnimator *PropertyAnimatorFactory
 {
     SpritePropertyManipulatorsI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
-    ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
+    ValueAnimator *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
                 , delay
@@ -64,7 +64,7 @@ PropertyAnimator *PropertyAnimatorFactory
 {
     SpritePropertyManipulatorsI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
-    ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
+    ValueAnimator *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
                 , delay
@@ -86,7 +86,7 @@ PropertyAnimator *PropertyAnimatorFactory
 {
     SpritePropertyManipulatorsI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
-    ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
+    ValueAnimator *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
                 , delay
@@ -102,7 +102,7 @@ PropertyAnimator *PropertyAnimatorFactory
     ::Wait(float delay, float duration, CallableScriptFunctionParametersEmpty fFinishRef)
 {
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(LINEAR));
-    ValueAnimator *linearAnimator = GetMainEngine()->getValueAnimatorFactory()
+    ValueAnimator *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
                 , delay
@@ -140,7 +140,7 @@ static int lua_PropertyAnimatorFactory_FadeIn(lua_State *L)
     PropertyAnimator *result = obj->FadeIn(spriteDraw, curveType, delay, duration, function);
     if (result != nullptr)
     {
-        GetMainEngine()->getReleasePool().Sink(result);
+        ENGINE().getReleasePool().Sink(result);
         result->ScriptingInterfaceRegisterFunctions(L, result);
         return 1;
     }
@@ -171,7 +171,7 @@ static int lua_PropertyAnimatorFactory_FadeOut(lua_State *L)
     PropertyAnimator *result = obj->FadeOut(spriteDraw, "linear", delay, duration, function);
     if (result)
     {
-        GetMainEngine()->getReleasePool().Sink(result);
+        ENGINE().getReleasePool().Sink(result);
         result->ScriptingInterfaceRegisterFunctions(L, result);
         return 1;
     }
@@ -198,7 +198,7 @@ static int lua_PropertyAnimatorFactory_Wait(lua_State *L)
     PropertyAnimator *result = obj->Wait(delay, duration, function);
     if (result)
     {
-        GetMainEngine()->getReleasePool().Sink(result);
+        ENGINE().getReleasePool().Sink(result);
         result->ScriptingInterfaceRegisterFunctions(L, result);
         return 1;
     }

@@ -29,7 +29,7 @@ void FontBitmapDescriptor::Prepare(std::string fntFile)
     size_t len = 0;
     ssize_t read;
 
-    std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(fntFile.c_str()));
+    std::unique_ptr<FileStreamI> stream(ENGINE().getFileAccess().GetAccess(fntFile.c_str()));
 
     fp = stream->GetFP(); //fopen(fntFile.c_str(), "r");
     if (fp == NULL)
@@ -153,11 +153,11 @@ std::vector<std::unique_ptr<SpriteAtlasItemI>> spriteDescriptors;
 FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::string fontAtlas, float scale)
     : FontI(fntFile)
     , m_font(FontBitmapDescriptor(fntFile, fontAtlas))
-    , m_texture(GetMainEngine()->getTextureManager().LoadTexture(fontAtlas))
+    , m_texture(ENGINE().getTextureManager().LoadTexture(fontAtlas))
     , m_scale(scale)
     , m_alpha(1.0f)
 {
-    EngineProviderI& provider = GetMainEngine()->getProvider();
+    EngineProviderI& provider = ENGINE().getProvider();
 
 
     for (auto &glyph : m_font.GetGlyphs())
@@ -211,7 +211,7 @@ void FontBitmapRepresentation::LineRunner(std::string& text, int from, int to, O
         return;
     };
 
-    float viewportScale = GetMainEngine()->GetViewportScale();
+    float viewportScale = ENGINE().GetViewportScale();
     auto& fontDescriptor = m_font.GetDescriptor();
     auto& charSpacing = fontDescriptor.info.spacing;
     int x = position.x;
@@ -245,7 +245,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
     
     if (m_texture != nullptr && len > 0)
     {
-        EngineProviderI& provider = GetMainEngine()->getProvider();
+        EngineProviderI& provider = ENGINE().getProvider();
         auto& fontDescriptor = m_font.GetDescriptor();
 
         int lineCount = 1;

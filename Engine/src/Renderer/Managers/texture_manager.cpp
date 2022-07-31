@@ -16,8 +16,8 @@ TextureI *TextureManager::LoadTexture(std::string filename)
     TextureI *result = GetTexture(filename);
     if (!result)
     {
-        FileAccessI& fileAccess = GetMainEngine()->getFileAccess();
-        EngineProviderI& engineProvider = GetMainEngine()->getProvider();
+        FileAccessI& fileAccess = ENGINE().getFileAccess();
+        EngineProviderI& engineProvider = ENGINE().getProvider();
 
         std::unique_ptr<FileStreamI> stream(fileAccess.GetAccess(filename));
         result = engineProvider.LoadTexture(filename, stream.get());
@@ -32,7 +32,7 @@ TextureI *TextureManager::LoadTexture(std::string filename)
 
 TextureTargetI *TextureManager::CreateTargetTexture(int width, int height)
 {
-    EngineProviderI& engineProvider = GetMainEngine()->getProvider();
+    EngineProviderI& engineProvider = ENGINE().getProvider();
     return engineProvider.CreateTargetTexture(width, height);
 }
 
@@ -52,7 +52,7 @@ TextureI *TextureManager::GetTexture(std::string name)
 
 void TextureManager::UnloadTexture(TextureI *texture)
 {
-    EngineProviderI& engineProvider = GetMainEngine()->getProvider();
+    EngineProviderI& engineProvider = ENGINE().getProvider();
 
     for(auto it = std::begin(m_textures); it != std::end(m_textures); ++it)
     {

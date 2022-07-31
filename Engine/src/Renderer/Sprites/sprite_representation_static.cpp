@@ -16,13 +16,13 @@ SpriteRepresentationStatic::SpriteRepresentationStatic(SpriteAtlasItemI *spriteA
     : SpriteRepresentationI(1.0f)
     , m_sprite(spriteAtlasItem)
 {
-    auto drawable = GetMainEngine()->getProvider().DrawableCreate(spriteAtlasItem, 1.f);
+    auto drawable = ENGINE().getProvider().DrawableCreate(spriteAtlasItem, 1.f);
     m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }
 
 void SpriteRepresentationStatic::DrawAt(int x, int y)
 {
-    EngineProviderI &provider = GetMainEngine()->getProvider();
+    EngineProviderI &provider = ENGINE().getProvider();
     provider.DrawableRender(m_drawable.get(), x, y);
 }
 

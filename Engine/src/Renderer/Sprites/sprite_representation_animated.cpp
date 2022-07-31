@@ -18,7 +18,7 @@ SpriteRepresentationAnimated::SpriteRepresentationAnimated(std::vector<SpriteAtl
     , m_maxHeight(0)
     , m_frameAnimationDurationMs(frameAnimationDurationMs)
 {
-    auto& spriteManager = GetMainEngine()->getSpriteRendererManager();
+    auto& spriteManager = ENGINE().getSpriteRendererManager();
 
     for (auto& item : sprites)
     {
@@ -29,7 +29,7 @@ SpriteRepresentationAnimated::SpriteRepresentationAnimated(std::vector<SpriteAtl
 
 SpriteRepresentationAnimated::~SpriteRepresentationAnimated()
 {
-    auto& spriteManager = GetMainEngine()->getSpriteRendererManager();
+    auto& spriteManager = ENGINE().getSpriteRendererManager();
 
     for (auto* item : m_sprites)
     {
@@ -103,7 +103,7 @@ void SpriteRepresentationAnimated::SetColorMod(Color4 val)
 
 void SpriteRepresentationAnimated::DrawAt(int x, int y)
 {
-    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 ticks = ENGINE().getProvider().GetTicks();
     Uint64 seconds = ticks / m_frameAnimationDurationMs;
     Uint64 spriteNo = seconds % m_sprites.size();
     SpriteRepresentationI *spriteItem = m_sprites.at(spriteNo);

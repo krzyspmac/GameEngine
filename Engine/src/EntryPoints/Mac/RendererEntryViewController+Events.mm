@@ -81,7 +81,7 @@ using namespace engine;
             self->m_consoleRendererProvider->HandleEvent(event);
         }
 #endif
-        auto& eventsProvider = GetMainEngine()->getEventProvider();
+        auto& eventsProvider = ENGINE().getEventProvider();
         switch (event.type)
         {
             case NSEventTypeKeyDown:

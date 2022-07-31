@@ -15,7 +15,7 @@ static inline SoundFileState PictelSoundState2SoundFileState(PlayerState);
 SoundFile::SoundFile(std::string filename)
 :   SoundFileI(filename)
 {
-    m_soundPlayer = PictelSound::PlayerI::CreateFromFile(GetMainEngine()->getFileAccess().GetFullPath(filename).c_str());
+    m_soundPlayer = PictelSound::PlayerI::CreateFromFile(ENGINE().getFileAccess().GetFullPath(filename).c_str());
 }
 
 SoundFile::~SoundFile()

@@ -13,7 +13,7 @@ using namespace engine;
 SpriteDrawBackbuffer::SpriteDrawBackbuffer(float width, float height)
     : SpriteRepresentationI(1)
 {
-    EngineProviderI& provider = GetMainEngine()->getProvider();
+    EngineProviderI& provider = ENGINE().getProvider();
     auto drawable = provider.DrawableTargetCreate(width, height);
 //    m_drawable = std::unique_ptr<DrawableI>(std::move((DrawableI*)drawable));
 

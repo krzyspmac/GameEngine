@@ -47,7 +47,7 @@ void ConsoleLightManagement::Render()
         return;
     }
 
-    auto& lightManager = GetMainEngine()->getLightMnaager();
+    auto& lightManager = ENGINE().getLightMnaager();
 
     ImGui::Checkbox("Lights Enabled", &lightManager.GetLightsActive());
     ImGui::Separator();

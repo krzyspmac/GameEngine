@@ -89,7 +89,7 @@ std::vector<Line*> PathFinderUtils::IntersectsLines(Line &myLine, std::vector<Li
 
 bool PathFinderUtils::IsPointWithingViewport(Vector2 &point)
 {
-    Size &viewportSize = GetMainEngine()->GetViewport();
+    Size &viewportSize = ENGINE().GetViewport();
     if (point.x > 0 && point.x < viewportSize.width && point.y > 0 && point.y < viewportSize.height)
     {
         return true;

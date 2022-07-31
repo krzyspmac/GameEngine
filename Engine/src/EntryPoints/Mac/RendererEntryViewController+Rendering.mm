@@ -23,7 +23,7 @@
 
     if (density > 0)
     {
-        GetMainEngine()->getEngineState().SendScreenSizeChangeEvent(
+        ENGINE().getEngineState().SendScreenSizeChangeEvent(
             { static_cast<int>(size.width), static_cast<int>(size.height) }
           , density
         );
@@ -33,13 +33,13 @@
 - (void)drawInMTKView:(nonnull MTKView *)view
 {
     /** The main engine */
-    auto engine = GetMainEngine();
+    auto &engine = ENGINE();
 
     /** Engine state */
-    auto& engineSetup = engine->GetEngineSetup();
+    auto& engineSetup = engine.GetEngineSetup();
 
     /** The main engine provider */
-    auto& provider = engine->getProvider();
+    auto& provider = engine.getProvider();
 
     /** Update the engine if needed*/
     m_engine->SetViewportScale(density);

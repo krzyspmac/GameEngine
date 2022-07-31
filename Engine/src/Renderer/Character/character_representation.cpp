@@ -67,7 +67,7 @@ void CharacterRepresentation::WalkTo(Vector2& position)
 
 void CharacterRepresentation::SetInverseWalkbox(std::string polygonJsonFilename)
 {
-    std::vector<Polygon> polygonList = PolygonLoader::Load(GetMainEngine()->getFileAccess().GetAccess(polygonJsonFilename));
+    std::vector<Polygon> polygonList = PolygonLoader::Load(ENGINE().getFileAccess().GetAccess(polygonJsonFilename));
     m_pathFinder = std::unique_ptr<PathFinder>(new PathFinder(polygonList));
 }
 

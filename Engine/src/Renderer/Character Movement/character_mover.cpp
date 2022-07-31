@@ -72,7 +72,7 @@ void CharacterMover::PathSegmentSet(size_t index)
 
         m_segmentInitialOrigin = segmentLine.GetP1();
         m_segmentLastSeconds = 0;
-        m_segmentStartTicks = GetMainEngine()->getProvider().GetTicks();
+        m_segmentStartTicks = ENGINE().getProvider().GetTicks();
         m_character->SetWalking(true);
     }
     else
@@ -101,7 +101,7 @@ void CharacterMover::Update()
 
 void CharacterMover::UpdateMovePath()
 {
-    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 ticks = ENGINE().getProvider().GetTicks();
     Uint64 ticksDelta = ticks - m_segmentStartTicks;
     double seconds = ticksDelta / 1000.0;
 

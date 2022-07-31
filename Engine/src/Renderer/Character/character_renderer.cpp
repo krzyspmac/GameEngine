@@ -18,7 +18,7 @@ CharacterRenderer::CharacterRenderer(SpriteAtlasI *characterAtlas, int scale)
 CharacterRenderer::~CharacterRenderer()
 {
     // TODO: memory management
-//    GetMainEngine()->getTextureManager().UnloadTexture(m_bufferTexture);
+//    ENGINE().getTextureManager().UnloadTexture(m_bufferTexture);
 }
 
 CharacterWalkRenderer &CharacterRenderer::GetRenderer(CharacterWalkState direction)
@@ -144,7 +144,7 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
         return;
     }
 
-    auto& provider = GetMainEngine()->getProvider();
+    auto& provider = ENGINE().getProvider();
     int m_maxWidth = renderer.GetBodyMaxWidth();
 
     Uint64 ticks = provider.GetTicks();
@@ -185,10 +185,10 @@ void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimati
 {
     if (!renderer.GetHeadAnimationCount()) { return; }
 
-    auto& provider = GetMainEngine()->getProvider();
+    auto& provider = ENGINE().getProvider();
     int m_maxWidth = renderer.GetHeadMaxWidth();
 
-    Uint64 ticks = GetMainEngine()->getProvider().GetTicks();
+    Uint64 ticks = ENGINE().getProvider().GetTicks();
     Uint64 seconds = ticks / renderer.GetHeadAnimationDelay();
     Uint32 frameCount = (Uint32)renderer.GetHeadAnimationCount();
     Uint32 frameNo = (seconds % frameCount);
@@ -234,7 +234,7 @@ void CharacterRenderer::DrawOriginCrosshair(EngineProviderI &provider)
 void CharacterRenderer::Draw(CharacterWalkState state, bool isWalking, bool isTalking, Vector2& position)
 {
     // Get the engine provider. All drawing functions go through there.
-    EngineProviderI &provider = GetMainEngine()->getProvider();
+    EngineProviderI &provider = ENGINE().getProvider();
 
     // Get the current walk renderer.
     CharacterWalkRenderer &renderer = GetRenderer(state);

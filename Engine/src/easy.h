@@ -9,10 +9,11 @@
 #define easy_h
 
 #include "engine_interface.h"
-    #define ENGINE() GetMainEngine()
+#include "static_objects.hpp"
+    #define ENGINE() StaticObjects::engine()
 
 #include "console_renderer_interface.h"
-    #define LOGGER() ENGINE()->getConsoleRenderer().GetLogger()
-    #define TERMINAL() ENGINE()->getConsoleRenderer().GetTerminal()
+    #define LOGGER() ENGINE().getConsoleRenderer().GetLogger()
+    #define TERMINAL() ENGINE().getConsoleRenderer().GetTerminal()
 
 #endif /* easy_h */

@@ -66,7 +66,7 @@ static int lua_ValueAnimatorFactory_CreateLinear(lua_State *L)
     
     if (function != nullptr)
     {
-        GetMainEngine()->getReleasePool().Sink(function);
+        ENGINE().getReleasePool().Sink(function);
         function->ScriptingInterfaceRegisterFunctions(L, function);
         return 1;
     }

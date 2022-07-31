@@ -158,7 +158,7 @@ bool PathFinder::IntersectsAnyline(Line &myLine)
 void PathFinder::Draw()
 {
 #if RENDER_DEBUG_LINES
-    EngineProviderI &provider = GetMainEngine()->getProvider();
+    EngineProviderI &provider = ENGINE().getProvider();
 
 #if RENDER_CONNECTION_LINES
     provider.RenderSetColor(RENDER_CONNECTION_LINES_C);
@@ -227,7 +227,7 @@ void PathFinder::Draw()
 
 void PathFinder::DrawLine(Line &line)
 {
-    EngineProviderI &provider = GetMainEngine()->getProvider();
+    EngineProviderI &provider = ENGINE().getProvider();
     Vector2 &p1 = line.GetP1();
     Vector2 &p2 = line.GetP2();
     provider.RenderDrawLine(p1.x, p1.y, p2.x, p2.y);
@@ -235,7 +235,7 @@ void PathFinder::DrawLine(Line &line)
 
 void PathFinder::DrawPoint(Vector2 &point)
 {
-    EngineProviderI &provider = GetMainEngine()->getProvider();
+    EngineProviderI &provider = ENGINE().getProvider();
     provider.RenderDrawPoint(point.x, point.y);
 }
 

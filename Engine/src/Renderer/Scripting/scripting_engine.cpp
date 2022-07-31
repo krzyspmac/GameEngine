@@ -132,59 +132,59 @@ void ScriptingEngine::registerFunctions()
 
 
     // Register global objects to be used at the start of the script lifecycle.
-    CharacterManager &mgr = GetMainEngine()->getCharacterManager();
+    CharacterManager &mgr = ENGINE().getCharacterManager();
     mgr.ScriptingInterfaceRegisterFunctions(L, &mgr);
     lua_setglobal(L, "CharacterManager");
 
-    SceneManager &sceneManager = GetMainEngine()->getSceneManager();
+    SceneManager &sceneManager = ENGINE().getSceneManager();
     sceneManager.ScriptingInterfaceRegisterFunctions(L, &sceneManager);
     lua_setglobal(L, "SceneManager");
 
-    SpriteAtlasManager &atlasManager = GetMainEngine()->getAtlasManager();
+    SpriteAtlasManager &atlasManager = ENGINE().getAtlasManager();
     atlasManager.ScriptingInterfaceRegisterFunctions(L, &atlasManager);
     lua_setglobal(L, "AtlasManager");
 
-    SpriteRendererManager &spriteRendererManager = GetMainEngine()->getSpriteRendererManager();
+    SpriteRendererManager &spriteRendererManager = ENGINE().getSpriteRendererManager();
     spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
     lua_setglobal(L, "SpriteRendererManager");
 
-    Time &time = GetMainEngine()->getTime();
+    Time &time = ENGINE().getTime();
     time.ScriptingInterfaceRegisterFunctions(L, &time);
     lua_setglobal(L, "Time");
 
-    ValueAnimatorFactory &animationFactory = GetMainEngine()->getValueAnimatorFactory();
+    ValueAnimatorFactory &animationFactory = ENGINE().getValueAnimatorFactory();
     animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
     lua_setglobal(L, "ValueAnimatorFactory");
 
-    PropertyAnimatorFactory &propertyAnimator = GetMainEngine()->getPropertyAnimatorFactory();
+    PropertyAnimatorFactory &propertyAnimator = ENGINE().getPropertyAnimatorFactory();
     propertyAnimator.ScriptingInterfaceRegisterFunctions(L, &propertyAnimator);
     lua_setglobal(L, "PropertyAnimatorFactory");
 
-    EngineState &engineState = GetMainEngine()->getEngineState();
+    EngineState &engineState = ENGINE().getEngineState();
     engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);
     lua_setglobal(L, "EngineState");
     
-    MemoryReleasePool &releasePool = GetMainEngine()->getReleasePool();
+    MemoryReleasePool &releasePool = ENGINE().getReleasePool();
     releasePool.ScriptingInterfaceRegisterFunctions(L, &releasePool);
     lua_setglobal(L, "MemoryReleasePool");
     
-    AnimationGroupFactory &animationGroupFactory = GetMainEngine()->getAnimationGroupFactory();
+    AnimationGroupFactory &animationGroupFactory = ENGINE().getAnimationGroupFactory();
     animationGroupFactory.ScriptingInterfaceRegisterFunctions(L, &animationGroupFactory);
     lua_setglobal(L, "AnimationGroupFactory");
 
-    FontManager &fontManager = GetMainEngine()->getFontManager();
+    FontManager &fontManager = ENGINE().getFontManager();
     fontManager.ScriptingInterfaceRegisterFunctions(L, &fontManager);
     lua_setglobal(L, "FontManager");
 
-    EventsManager &eventsManager = GetMainEngine()->getEventsManager();
+    EventsManager &eventsManager = ENGINE().getEventsManager();
     eventsManager.ScriptingInterfaceRegisterFunctions(L, &eventsManager);
     lua_setglobal(L, "EventsManager");
 
-    LightManager &lightManager = GetMainEngine()->getLightMnaager();
+    LightManager &lightManager = ENGINE().getLightMnaager();
     lightManager.ScriptingInterfaceRegisterFunctions(L, &lightManager);
     lua_setglobal(L, "LightManager");
 
-    SoundManager &soundManager = GetMainEngine()->getSoundManager();
+    SoundManager &soundManager = ENGINE().getSoundManager();
     soundManager.ScriptingInterfaceRegisterFunctions(L, &soundManager);
     lua_setglobal(L, "SoundManager");
 };
@@ -233,7 +233,7 @@ int ScriptingEngine::L_textureLoad(lua_State *L)
     int argc = lua_gettop(L);
     const char *msgX = (char *) lua_tostring (L, argc);
 
-    TextureI *texture = GetMainEngine()->getTextureManager().LoadTexture(msgX);
+    TextureI *texture = ENGINE().getTextureManager().LoadTexture(msgX);
     lua_pushlightuserdata(L, texture);
 
     return 1;
@@ -247,7 +247,7 @@ int ScriptingEngine::L_unloadTexture(lua_State *L)
 
     if (texturePointer != NULL)
     {
-        GetMainEngine()->getTextureManager().UnloadTexture(texturePointer);
+        ENGINE().getTextureManager().UnloadTexture(texturePointer);
     }
 
     return 0;
@@ -264,7 +264,7 @@ int ScriptingEngine::L_drawTexture(lua_State *L)
 //
 //    if (texturePointer != NULL)
 //    {
-//        GetMainEngine()->getProvider().DrawTexture(texturePointer, x, y);
+//        ENGINE().getProvider().DrawTexture(texturePointer, x, y);
 //    }
 //
     return 0;
@@ -277,7 +277,7 @@ int ScriptingEngine::L_spriteAtlasLoad(lua_State *L)
     const char *texture_path = (char *) lua_tostring (L, argc--);
     const char *json_path = (char *) lua_tostring (L, argc--);
 
-    SpriteAtlasI *atlas = GetMainEngine()->getAtlasManager().SpriteAtlasLoad(json_path, texture_path);
+    SpriteAtlasI *atlas = ENGINE().getAtlasManager().SpriteAtlasLoad(json_path, texture_path);
     lua_pushlightuserdata(L, atlas);
 
     return 1;
@@ -312,7 +312,7 @@ int ScriptingEngine::L_spriteDrawStaticCreate(lua_State *L)
 
     if (spritePointer)
     {
-        SpriteRepresentationI *sd = GetMainEngine()->getSpriteRendererManager().SpriteRepresentationStaticLoad(spritePointer);
+        SpriteRepresentationI *sd = ENGINE().getSpriteRendererManager().SpriteRepresentationStaticLoad(spritePointer);
         if (sd)
         {
             lua_pushlightuserdata(L, sd);
@@ -338,7 +338,7 @@ int ScriptingEngine::L_spriteDrawAnimatedCreate(lua_State *L)
 
     int frame_duration_ms = lua_tonumberx(L, 1, NULL);
 
-    SpriteRepresentationI *sd = GetMainEngine()->getSpriteRendererManager().SpriteRepresentationAnimatedLoad(frame_duration_ms, sprites);
+    SpriteRepresentationI *sd = ENGINE().getSpriteRendererManager().SpriteRepresentationAnimatedLoad(frame_duration_ms, sprites);
     if (sd)
     {
         lua_pushlightuserdata(L, sd);
@@ -373,7 +373,7 @@ int PictureModuleLoader(lua_State *L){
     std::string filename = lua_tostring(L, 1);
     filename += ".lua";
 
-    auto  access = GetMainEngine()->getFileAccess().GetAccess(filename);
+    auto  access = ENGINE().getFileAccess().GetAccess(filename);
     auto buffer = access->ReadBufferString();
     auto* str = buffer.c_str();
 
@@ -384,7 +384,7 @@ int PictureModuleLoader(lua_State *L){
     }
     else
     {   std::cout << "Final:" << lua_tostring(L, -1) << "\n";
-        GetMainEngine()->getConsoleRenderer().GetLogger().Log("Could not load %s module!", filename.c_str());
+        ENGINE().getConsoleRenderer().GetLogger().Log("Could not load %s module!", filename.c_str());
         return 0;
     }
 }

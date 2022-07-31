@@ -15,8 +15,8 @@ using namespace engine;
 ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, CallableScriptFunctionParameters1<float> functionUpdateRef, CallableScriptFunctionParametersEmpty functionEndRef)
     : AnimatableI()
     , MemoryI()
-    , m_engineProvider(GetMainEngine()->getProvider())
-    , m_time(GetMainEngine()->getTime())
+    , m_engineProvider(ENGINE().getProvider())
+    , m_time(ENGINE().getTime())
     , m_secondsDelay(delay)
     , m_secondsTotal(seconds)
     , m_secondsStart(-1)
@@ -33,8 +33,8 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int dela
 ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, std::function<void(float)> functionUpdate, std::function<void(ValueAnimator*)> functionEnd)
     : AnimatableI()
     , MemoryI()
-    , m_engineProvider(GetMainEngine()->getProvider())
-    , m_time(GetMainEngine()->getTime())
+    , m_engineProvider(ENGINE().getProvider())
+    , m_time(ENGINE().getTime())
     , m_secondsDelay(delay)
     , m_secondsTotal(seconds)
     , m_secondsStart(-1)
@@ -57,14 +57,14 @@ void ValueAnimator::Start()
 {
     m_secondsStart = m_time.GetFrameStartSec();
     m_isStopped = false;
-    GetMainEngine()->getPeriodicUpdatesManager().Add(this);
+    ENGINE().getPeriodicUpdatesManager().Add(this);
     this->Keep();
 }
 
 void ValueAnimator::Stop()
 {
     m_isStopped = true;
-    GetMainEngine()->getPeriodicUpdatesManager().Remove(this);
+    ENGINE().getPeriodicUpdatesManager().Remove(this);
     
     if (m_animatableFinishL != nullptr)
     {
