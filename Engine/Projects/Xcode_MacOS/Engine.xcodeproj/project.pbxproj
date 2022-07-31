@@ -437,6 +437,18 @@
 		7F7AE8D327A9B67F007BEB39 /* object_pool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7AE8CF27A9B67F007BEB39 /* object_pool.hpp */; };
 		7F7AE8D427A9B67F007BEB39 /* object_pool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7AE8CF27A9B67F007BEB39 /* object_pool.hpp */; };
 		7F7AE8D527A9B67F007BEB39 /* object_pool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7AE8CF27A9B67F007BEB39 /* object_pool.hpp */; };
+		7F7EA07228967C9900A09199 /* system_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07128967C9900A09199 /* system_utils.hpp */; };
+		7F7EA07328967C9900A09199 /* system_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07128967C9900A09199 /* system_utils.hpp */; };
+		7F7EA07428967C9900A09199 /* system_utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07128967C9900A09199 /* system_utils.hpp */; };
+		7F7EA07628967E7400A09199 /* system_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EA07528967E7400A09199 /* system_utils.cpp */; };
+		7F7EA07728967E7400A09199 /* system_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EA07528967E7400A09199 /* system_utils.cpp */; };
+		7F7EA07828967E7400A09199 /* system_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EA07528967E7400A09199 /* system_utils.cpp */; };
+		7F7EA07B28967EEF00A09199 /* system_utils_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EA07928967EEF00A09199 /* system_utils_mac.mm */; };
+		7F7EA07C28967EEF00A09199 /* system_utils_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EA07928967EEF00A09199 /* system_utils_mac.mm */; };
+		7F7EA07D28967EEF00A09199 /* system_utils_mac.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F7EA07928967EEF00A09199 /* system_utils_mac.mm */; };
+		7F7EA07E28967EEF00A09199 /* system_utils_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */; };
+		7F7EA07F28967EEF00A09199 /* system_utils_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */; };
+		7F7EA08028967EEF00A09199 /* system_utils_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */; };
 		7F849909278713BB004127CB /* animation_group_sequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F849907278713BB004127CB /* animation_group_sequence.cpp */; };
 		7F84990A278713BB004127CB /* animation_group_sequence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F849908278713BB004127CB /* animation_group_sequence.hpp */; };
 		7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F84990B27872F28004127CB /* font_bitmap.cpp */; };
@@ -717,6 +729,12 @@
 		7F7967C927752175003ABD3E /* file_memory_buffer_stream_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_file.cpp; sourceTree = "<group>"; };
 		7F7967CD27752191003ABD3E /* file_memory_buffer_stream_resource.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = file_memory_buffer_stream_resource.cpp; sourceTree = "<group>"; };
 		7F7AE8CF27A9B67F007BEB39 /* object_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = object_pool.hpp; sourceTree = "<group>"; };
+		7F7EA06F2896779500A09199 /* doxygen_executable.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = doxygen_executable.md; sourceTree = "<group>"; };
+		7F7EA070289678E800A09199 /* doxygen_ini.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = doxygen_ini.md; sourceTree = "<group>"; };
+		7F7EA07128967C9900A09199 /* system_utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = system_utils.hpp; sourceTree = "<group>"; };
+		7F7EA07528967E7400A09199 /* system_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = system_utils.cpp; sourceTree = "<group>"; };
+		7F7EA07928967EEF00A09199 /* system_utils_mac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = system_utils_mac.mm; sourceTree = "<group>"; };
+		7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = system_utils_mac.hpp; sourceTree = "<group>"; };
 		7F849907278713BB004127CB /* animation_group_sequence.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group_sequence.cpp; sourceTree = "<group>"; };
 		7F849908278713BB004127CB /* animation_group_sequence.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_sequence.hpp; sourceTree = "<group>"; };
 		7F84990B27872F28004127CB /* font_bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font_bitmap.cpp; sourceTree = "<group>"; };
@@ -915,6 +933,8 @@
 				7FCAE7D2277F85BF004A6107 /* doxygen_main.h */,
 				7F708917278A1CEF00A501CB /* doxygen_fonts.md */,
 				7FC68D472854D29D0060A167 /* doxygen_sounds.md */,
+				7F7EA06F2896779500A09199 /* doxygen_executable.md */,
+				7F7EA070289678E800A09199 /* doxygen_ini.md */,
 				7F138243277505B600ED6D67 /* defs.h */,
 				7F3E8F80279AECF0003BB7B6 /* prefix.pch */,
 				7F138251277505B600ED6D67 /* common.h */,
@@ -1238,6 +1258,23 @@
 			path = "Path Finding";
 			sourceTree = "<group>";
 		};
+		7F7EA08128967EF400A09199 /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				7F7EA08228967EFC00A09199 /* mac */,
+			);
+			path = platform;
+			sourceTree = "<group>";
+		};
+		7F7EA08228967EFC00A09199 /* mac */ = {
+			isa = PBXGroup;
+			children = (
+				7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */,
+				7F7EA07928967EEF00A09199 /* system_utils_mac.mm */,
+			);
+			path = mac;
+			sourceTree = "<group>";
+		};
 		7FC131072792CDB70094DF0C /* SDL */ = {
 			isa = PBXGroup;
 			children = (
@@ -1372,6 +1409,9 @@
 				7F6D1C81279F14690078D76A /* ini_reader.hpp */,
 				7F6D1C80279F14690078D76A /* ini_reader.cpp */,
 				7F7AE8CF27A9B67F007BEB39 /* object_pool.hpp */,
+				7F7EA07128967C9900A09199 /* system_utils.hpp */,
+				7F7EA07528967E7400A09199 /* system_utils.cpp */,
+				7F7EA08128967EF400A09199 /* platform */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1505,11 +1545,13 @@
 				7FC131192792FAF20094DF0C /* console_renderer_interface.h in Headers */,
 				7F13828A277505B600ED6D67 /* common_engine.h in Headers */,
 				7FB8242E2789D3AD008F0F7A /* console_app_renderer_mac.hpp in Headers */,
+				7F7EA07228967C9900A09199 /* system_utils.hpp in Headers */,
 				7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */,
 				7F869FC32780F6F800E8CB01 /* engine_state.hpp in Headers */,
 				7FE2E5CD277A3FA900538094 /* path_finder_graph.hpp in Headers */,
 				7F84990E27872F28004127CB /* font_bitmap.hpp in Headers */,
 				7F08C45727AF2441002FEB8F /* light_manager.hpp in Headers */,
+				7F7EA07E28967EEF00A09199 /* system_utils_mac.hpp in Headers */,
 				7FC131212792FAF20094DF0C /* path_finder_interface.h in Headers */,
 				7FCAE7C8277E4EAA004A6107 /* sprite_atlas_manager.hpp in Headers */,
 				7FC1311C2792FAF20094DF0C /* callable_interface.h in Headers */,
@@ -1604,7 +1646,9 @@
 				7F3E8ECA279AC8F9003BB7B6 /* character_interface.h in Headers */,
 				7F3E8ECB279AC8F9003BB7B6 /* character.hpp in Headers */,
 				7F3E8ECC279AC8F9003BB7B6 /* character_manager.hpp in Headers */,
+				7F7EA07F28967EEF00A09199 /* system_utils_mac.hpp in Headers */,
 				7F3E8ECD279AC8F9003BB7B6 /* character_representation.hpp in Headers */,
+				7F7EA07328967C9900A09199 /* system_utils.hpp in Headers */,
 				7F3E8ECE279AC8F9003BB7B6 /* character_interface_impl.hpp in Headers */,
 				7F3E8ECF279AC8F9003BB7B6 /* scripting_engine.hpp in Headers */,
 				7F3E8ED0279AC8F9003BB7B6 /* callable.hpp in Headers */,
@@ -1713,7 +1757,9 @@
 				7F3E90EC279B03F6003BB7B6 /* character_interface.h in Headers */,
 				7F3E90ED279B03F6003BB7B6 /* character.hpp in Headers */,
 				7F3E90EE279B03F6003BB7B6 /* character_manager.hpp in Headers */,
+				7F7EA08028967EEF00A09199 /* system_utils_mac.hpp in Headers */,
 				7F3E90EF279B03F6003BB7B6 /* character_representation.hpp in Headers */,
+				7F7EA07428967C9900A09199 /* system_utils.hpp in Headers */,
 				7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */,
 				7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */,
 				7F3E90F2279B03F6003BB7B6 /* callable.hpp in Headers */,
@@ -2028,6 +2074,7 @@
 				7FB8241927890479008F0F7A /* console_logger.cpp in Sources */,
 				7FCAE7D0277F5872004A6107 /* character_representation.cpp in Sources */,
 				7FA2AB38277DD1A600AED89D /* character_manager.cpp in Sources */,
+				7F7EA07628967E7400A09199 /* system_utils.cpp in Sources */,
 				7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */,
 				7FB823E32788E199008F0F7A /* console_renderer.mm in Sources */,
 				7FF21D762784E99A005C52C4 /* property_animator.cpp in Sources */,
@@ -2042,6 +2089,7 @@
 				4C255DE427859E3100D0B30A /* animation_curve_factory.cpp in Sources */,
 				7F26254D278DF96200529F29 /* engine_provider_metal.cpp in Sources */,
 				7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */,
+				7F7EA07B28967EEF00A09199 /* system_utils_mac.mm in Sources */,
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7FCAE7C3277E3A68004A6107 /* scene.cpp in Sources */,
 				7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */,
@@ -2109,6 +2157,7 @@
 				7F3E8F20279AC914003BB7B6 /* RendererEntryViewController.mm in Sources */,
 				7F3E8F21279AC914003BB7B6 /* console_renderer.mm in Sources */,
 				7F3E8F22279AC914003BB7B6 /* console_app_renderer_mac.mm in Sources */,
+				7F7EA07728967E7400A09199 /* system_utils.cpp in Sources */,
 				7F3E8F23279AC914003BB7B6 /* AAPLImage.mm in Sources */,
 				7F3E8F24279AC914003BB7B6 /* texture_metal.mm in Sources */,
 				7F3E8F25279AC914003BB7B6 /* file_access.mm in Sources */,
@@ -2123,6 +2172,7 @@
 				7F3E8EEF279AC909003BB7B6 /* time.cpp in Sources */,
 				7F3E8EF0279AC909003BB7B6 /* engine_state.cpp in Sources */,
 				7F3E8EF1279AC909003BB7B6 /* animation_curve_factory.cpp in Sources */,
+				7F7EA07C28967EEF00A09199 /* system_utils_mac.mm in Sources */,
 				7F3E8EF2279AC909003BB7B6 /* value_animator.cpp in Sources */,
 				7F3E8EF3279AC909003BB7B6 /* value_animator_factory.cpp in Sources */,
 				7F3E8EF4279AC909003BB7B6 /* property_animator.cpp in Sources */,
@@ -2197,6 +2247,7 @@
 				7F3E910B279B03F6003BB7B6 /* RendererEntryViewController.mm in Sources */,
 				7F3E910C279B03F6003BB7B6 /* console_renderer.mm in Sources */,
 				7F3E910D279B03F6003BB7B6 /* console_app_renderer_mac.mm in Sources */,
+				7F7EA07828967E7400A09199 /* system_utils.cpp in Sources */,
 				7F3E910E279B03F6003BB7B6 /* AAPLImage.mm in Sources */,
 				7F3E910F279B03F6003BB7B6 /* texture_metal.mm in Sources */,
 				7F3E9110279B03F6003BB7B6 /* file_access.mm in Sources */,
@@ -2211,6 +2262,7 @@
 				7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */,
 				7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */,
 				7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */,
+				7F7EA07D28967EEF00A09199 /* system_utils_mac.mm in Sources */,
 				7F3E911B279B03F6003BB7B6 /* value_animator.cpp in Sources */,
 				7F3E911C279B03F6003BB7B6 /* value_animator_factory.cpp in Sources */,
 				7F3E911D279B03F6003BB7B6 /* property_animator.cpp in Sources */,

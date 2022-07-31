@@ -16,9 +16,11 @@ var searchData=
   ['getlightsactive_13',['GetLightsActive',['../classengine_1_1_light_manager.html#a957b46d7da735e6d59ca4469d3839fcc',1,'engine::LightManager']]],
   ['getname_14',['GetName',['../classengine_1_1_light.html#a3a44c6d0bd1142465da1fec61afa1d3c',1,'engine::Light']]],
   ['getposition_15',['GetPosition',['../classengine_1_1_character_representation.html#a0412347549b3f2cf8ec13386e6043abe',1,'engine::CharacterRepresentation::GetPosition()'],['../classengine_1_1_light.html#a7728d38f2fc1e7d7de79dc77151ef4ca',1,'engine::Light::GetPosition()']]],
-  ['getstaticsprites_16',['GetStaticSprites',['../classengine_1_1_scene.html#aba16a21cdf4611effedcb424d9a35bd1',1,'engine::Scene']]],
-  ['gettype_17',['GetType',['../classengine_1_1_light.html#a3fc9fa8e045ca9a22ad2f0ed77aabf59',1,'engine::Light']]],
-  ['getviewportsize_18',['GetViewportSize',['../classengine_1_1_engine_state.html#affba636e05875d61395c08d72fdf83cc',1,'engine::EngineState']]],
-  ['groupanimationssequence_19',['GroupAnimationsSequence',['../classengine_1_1_animation_group_factory.html#a063fd6ef42da23d0c10f8ae77274cdb2',1,'engine::AnimationGroupFactory']]],
-  ['groupanimationssimulataneus_20',['GroupAnimationsSimulataneus',['../classengine_1_1_animation_group_factory.html#a576e38e663b008354c09fc44ae396bf7',1,'engine::AnimationGroupFactory']]]
+  ['getstate_16',['GetState',['../classengine_1_1_sound_file.html#a3575f26b8ceda4a9692b3283bbd8bbef',1,'engine::SoundFile::GetState()'],['../classengine_1_1_sound_file_i.html#ae04336e4387f129829d5542a898bffca',1,'engine::SoundFileI::GetState()']]],
+  ['getstaticsprites_17',['GetStaticSprites',['../classengine_1_1_scene.html#aba16a21cdf4611effedcb424d9a35bd1',1,'engine::Scene']]],
+  ['gettext_18',['GetText',['../classengine_1_1_sprite_representation_text.html#a63c87d1c115e35331c3b14a20bc73d25',1,'engine::SpriteRepresentationText']]],
+  ['gettype_19',['GetType',['../classengine_1_1_light.html#a3fc9fa8e045ca9a22ad2f0ed77aabf59',1,'engine::Light']]],
+  ['getviewportsize_20',['GetViewportSize',['../classengine_1_1_engine_state.html#affba636e05875d61395c08d72fdf83cc',1,'engine::EngineState']]],
+  ['groupanimationssequence_21',['GroupAnimationsSequence',['../classengine_1_1_animation_group_factory.html#a063fd6ef42da23d0c10f8ae77274cdb2',1,'engine::AnimationGroupFactory']]],
+  ['groupanimationssimulataneus_22',['GroupAnimationsSimulataneus',['../classengine_1_1_animation_group_factory.html#a576e38e663b008354c09fc44ae396bf7',1,'engine::AnimationGroupFactory']]]
 ];

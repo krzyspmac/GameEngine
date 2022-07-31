@@ -7,6 +7,7 @@
 
 #include "ini_reader.hpp"
 #include "key_value.hpp"
+#include "system_utils.hpp"
 #include <stdio.h>
 
 using namespace engine;
@@ -20,31 +21,46 @@ IniReader::IniReader(std::string path)
     FILE *fp = fopen(cPath, "r");
     if (fp)
     {
-        char * line = NULL;
-        size_t len = 0;
-        ssize_t read;
+        // Update any defaults first
+        ProcessDefaults();
 
-        while ((read = getline(&line, &len, fp)) != -1)
-        {
-            if (strlen(line) < 1) { continue; };
-            if (line[0] == ';') { continue; };
+        // Process the file
+        ProcessFile(fp);
 
-            if (UpdateSection(line))
-            {
-                continue;
-            }
-            else
-            {
-                ParseKeyValue(line);
-            }
-
-            printf("%s\n", line);
-        }
         fclose(fp);
     }
     else
     {
         throw "No .ini file found!";
+    }
+}
+
+void IniReader::ProcessDefaults()
+{
+    m_engineSetup.gameFolder = IniReader::Variables::rpath();
+}
+
+void IniReader::ProcessFile(FILE *fp)
+{
+    char * line = NULL;
+    size_t len = 0;
+    ssize_t read;
+
+    while ((read = getline(&line, &len, fp)) != -1)
+    {
+        if (strlen(line) < 1) { continue; };
+        if (line[0] == ';') { continue; };
+
+        if (UpdateSection(line))
+        {
+            continue;
+        }
+        else
+        {
+            ParseKeyValue(line);
+        }
+
+        printf("%s\n", line);
     }
 }
 
@@ -115,6 +131,10 @@ void IniReader::ParseKeyValue(char *line)
                        &m_engineSetup.backgroundColor.g,
                        &m_engineSetup.backgroundColor.b,
                        &m_engineSetup.backgroundColor.a);
+            }
+            else if (key == "game_folder")
+            {
+                m_engineSetup.gameFolder = val;
             }
             break;
         }

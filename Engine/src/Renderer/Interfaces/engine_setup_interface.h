@@ -15,6 +15,9 @@ namespace engine
 {
     typedef struct EngineSetup
     {
+        /** The game folder in relation to the executable path */
+        std::string gameFolder;
+
         /** The initial resolution */
         Size resolution;
 

@@ -20,6 +20,9 @@
 #include <iostream>
 
 #include "file_access_provider.h"
+#include "system_utils.hpp"
+#include "ini_reader.hpp"
+#include "easy.h"
 
 namespace fs = std::filesystem;
 
@@ -47,7 +50,19 @@ int FileAccess::LoadPackedFile(std::string filename)
 
 int FileAccess::LoadDirectory(std::string directory)
 {
-    m_dataDirectory = directory;
+    auto systemUtils = FileUtils::shared();
+
+    std::string rpath("");
+    if (systemUtils->GetCurrentFolder(rpath))
+    {
+        m_dataDirectory = replaceAll(directory, IniReader::Variables::rpath(), rpath);
+    }
+    else
+    {
+        LOGGER().Log("Could not get the rPath from the system. Will keep the local directiry as %s.", directory.c_str());
+        m_dataDirectory = directory;
+    }
+
     return 0;
 }
 
@@ -80,7 +95,16 @@ std::string FileAccess::GetFullPath(std::string filename)
     }
     else
     {
-        return "";
+        auto systemUtils = FileUtils::shared();
+        std::string currentFolder("");
+        if (systemUtils->GetCurrentFolder(currentFolder))
+        {
+            return currentFolder + separator() + filename;
+        }
+        else
+        {
+            return "";
+        }
     }
 }
 
