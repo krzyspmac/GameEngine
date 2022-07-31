@@ -17,7 +17,7 @@ using namespace engine;
 Character::Character(std::string jsonDefinition)
 : CharacterI(jsonDefinition)
 {
-    std::unique_ptr<FileStreamI> stream(GetMainEngine()->getFileAccess().GetAccess(jsonDefinition));
+    std::unique_ptr<FileStreamI> stream(ENGINE().getFileAccess().GetAccess(jsonDefinition));
 
     auto buffer = stream->ReadBufferString();
     const char *jsonSource = buffer.c_str();
@@ -35,7 +35,7 @@ Character::Character(std::string jsonDefinition)
                 char *atlasFilename = cJSON_GetObjectItem(atlasNode, "json")->valuestring;
                 char *atlasTexture = cJSON_GetObjectItem(atlasNode, "texture")->valuestring;
 
-                atlas = GetMainEngine()->getAtlasManager().SpriteAtlasLoad(atlasFilename, atlasTexture);
+                atlas = ENGINE().getAtlasManager().SpriteAtlasLoad(atlasFilename, atlasTexture);
                 if (atlas)
                 {
                     m_characterRenderer = std::unique_ptr<CharacterRendererI>(new CharacterRenderer(atlas, 1));

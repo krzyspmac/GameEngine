@@ -253,7 +253,7 @@ namespace engine
 };
 
 /// Main accessor for easy access.
-engine::EngineI *GetMainEngine();
+engine::EngineI &ENGINE();
 
 #endif /* engine_interface_h */
 

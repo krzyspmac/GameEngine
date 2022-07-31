@@ -16,7 +16,7 @@ namespace engine
 
     inline void performanceMeasure(std::string what, std::function<void(void)>lambda)
     {
-        EngineProviderI &provider = GetMainEngine()->getProvider();
+        EngineProviderI &provider = ENGINE().getProvider();
         Uint64 start = provider.GetTicks();
 
         lambda();

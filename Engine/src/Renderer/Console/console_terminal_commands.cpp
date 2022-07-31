@@ -16,7 +16,7 @@ static bool IsCommand(std::string cmdLine, std::string cmd);
 static std::string GetRestOfCommand(std::string cmdLine, std::string cmd);
 
 /* Defines */
-#define GET_TERMINAL(x) GetMainEngine()->getConsoleRenderer().GetTerminal()
+#define GET_TERMINAL(x) ENGINE().getConsoleRenderer().GetTerminal()
 
 using namespace engine;
 
@@ -79,7 +79,7 @@ bool ConsoleTerminalCmdLuaExec::Process(const char *commandLine)
     if (IsCommand(cmdLine, "lua_eval"))
     {
         auto rest = GetRestOfCommand(cmdLine, "lua_eval");
-        GetMainEngine()->getScripting().loadChunk((char*)rest.c_str());
+        ENGINE().getScripting().loadChunk((char*)rest.c_str());
         return true;
     }
 

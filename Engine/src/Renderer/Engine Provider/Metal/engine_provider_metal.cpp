@@ -218,7 +218,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
 
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), FragmentShaderIndexBaseAlpha);
 
-    auto& lightManager = GetMainEngine()->getLightMnaager();
+    auto& lightManager = ENGINE().getLightMnaager();
     int lightsCount = drawable->GetAcceptsLight() && lightManager.GetLightsActive() ? lightManager.GetLightBufferCount() : 0;
     renderToPipline->setFragmentBytes(&lightsCount, sizeof(int), FragmentShaderIndexLightCount);
     renderToPipline->setFragmentBytes(lightManager.GetLightBuffer(), lightManager.GetLightBufferSize(), FragmentShaderIndexLight);

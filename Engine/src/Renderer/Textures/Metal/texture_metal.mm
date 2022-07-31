@@ -18,7 +18,7 @@ TextureMetal::TextureMetal(MTL::Device *device, std::string filename)
     : TextureI(nullptr, filename, Vector2Zero)
     , m_texture(nullptr)
 {
-    std::string path = GetMainEngine()->getFileAccess().GetFullPath(filename);
+    std::string path = ENGINE().getFileAccess().GetFullPath(filename);
 
 #if USES_METAL_TEXTURE_LOADING
     m_texture = TextureMetalTGA::CreateFrom(path, device, &m_options.flippedHorizontally, &m_options.flippedVertically);

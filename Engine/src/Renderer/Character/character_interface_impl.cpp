@@ -12,6 +12,6 @@ using namespace engine;
 
 void CharacterBodyPartRendererI::PrepareDrawable()
 {
-    auto drawable = GetMainEngine()->getProvider().DrawableCreate(m_bodySprite, 1);
+    auto drawable = ENGINE().getProvider().DrawableCreate(m_bodySprite, 1);
     m_drawable = std::unique_ptr<DrawableSpriteI>(std::move(drawable));
 }

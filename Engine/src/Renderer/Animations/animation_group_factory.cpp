@@ -55,7 +55,7 @@ static int lua_AnimationGroup_GroupAnimations(lua_State *L)
             if (group != nullptr)
             {
                 group->ScriptingInterfaceRegisterFunctions(L, group);
-                GetMainEngine()->getReleasePool().Sink(group);
+                ENGINE().getReleasePool().Sink(group);
                 return 1;
             }
             break;
@@ -66,7 +66,7 @@ static int lua_AnimationGroup_GroupAnimations(lua_State *L)
             if (group != nullptr)
             {
                 group->ScriptingInterfaceRegisterFunctions(L, group);
-                GetMainEngine()->getReleasePool().Sink(group);
+                ENGINE().getReleasePool().Sink(group);
                 return 1;
             }
             break;

@@ -38,7 +38,7 @@ void CallableScriptFunctionSciptableInstance::PerformCall(std::function<int(lua_
 {
     if (!CanCall()) { return; };
     
-    ScriptingEngine& se = (ScriptingEngine&)GetMainEngine()->getScripting();
+    ScriptingEngine& se = (ScriptingEngine&)ENGINE().getScripting();
     se.CallRegistryFunction((int)GetFunctionRef(), [&](lua_State *L){
         return block(L);
     });

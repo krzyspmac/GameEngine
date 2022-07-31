@@ -61,7 +61,7 @@ void ConsoleRenderer::Setup()
 
 void ConsoleRenderer::SetupEvents()
 {
-    GetMainEngine()->getEventsManager().RegisterKeyShortcut( {FLAG_NONE}, { CODE_TIDLE }, [&](void*) {
+    ENGINE().getEventsManager().RegisterKeyShortcut( {FLAG_NONE}, { CODE_TIDLE }, [&](void*) {
         this->SetConsoleHidden(!m_hidden);
     });
 }
