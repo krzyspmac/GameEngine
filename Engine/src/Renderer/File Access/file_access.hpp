@@ -20,6 +20,7 @@ namespace engine
 
         int LoadPackedFile(std::string filename);
 
+        /// Load the game directory by providing the "game_folder" variable.
         int LoadDirectory(std::string directory);
 
         std::string GetResourcesDirectory();

@@ -33,11 +33,25 @@ namespace engine
         IniSectionType m_currentSectionType;
     public:
         IniReader(std::string path);
+        void ProcessDefaults();
+        void ProcessFile(FILE*);
         EngineSetup GetSetup();
 
     private:
         bool UpdateSection(char *);
         void ParseKeyValue(char *);
+
+
+    public:
+
+        class Variables
+        {
+        public:
+            static std::string rpath()
+            {
+                return "@rpath";
+            }
+        };
     };
 };
 

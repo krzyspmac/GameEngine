@@ -86,8 +86,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a3ede1437c50df230c0ddadceb4e61795"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9dab038d248c3fe33c5eafc4ec2a1902"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_font_bitmap_representation.html#a9dab038d248c3fe33c5eafc4ec2a1902">SetScale</a> (float)</td></tr>
 <tr class="separator:a9dab038d248c3fe33c5eafc4ec2a1902"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8d0cf9260ac99ed1b4c62dc90cc13d6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_font_bitmap_representation.html#ae8d0cf9260ac99ed1b4c62dc90cc13d6">DrawAt</a> (std::string text, float x, float y, int r, int g, int b, int a, TEXT_ALIGNMENT align, Color4 colorMod, float lineMultiplier)</td></tr>
-<tr class="separator:ae8d0cf9260ac99ed1b4c62dc90cc13d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87a51b189ff961a3b658af89f3f267f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_font_bitmap_representation.html#a87a51b189ff961a3b658af89f3f267f6">SetAlpha</a> (float)</td></tr>
+<tr class="separator:a87a51b189ff961a3b658af89f3f267f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcf1c7f318aec2083907bace1b5a7c5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_font_bitmap_representation.html#afcf1c7f318aec2083907bace1b5a7c5f">SetZPosition</a> (float)</td></tr>
+<tr class="separator:afcf1c7f318aec2083907bace1b5a7c5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49113d2b922c430d94ce5e6612639b18"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_font_bitmap_representation.html#a49113d2b922c430d94ce5e6612639b18">DrawAt</a> (std::string text, float x, float y, int r, int g, int b, int a, TEXT_HORIZONTAL_ALIGNMENT hAlign, TEXT_VERTICAL_ALIGNMENT vAlign, Color4 colorMod, float lineMultiplier)</td></tr>
+<tr class="separator:a49113d2b922c430d94ce5e6612639b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Declares the rendering engine for the font. </p>
@@ -134,8 +138,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae8d0cf9260ac99ed1b4c62dc90cc13d6" name="ae8d0cf9260ac99ed1b4c62dc90cc13d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae8d0cf9260ac99ed1b4c62dc90cc13d6">&#9670;&nbsp;</a></span>DrawAt()</h2>
+<a id="a49113d2b922c430d94ce5e6612639b18" name="a49113d2b922c430d94ce5e6612639b18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49113d2b922c430d94ce5e6612639b18">&#9670;&nbsp;</a></span>DrawAt()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -185,8 +189,14 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TEXT_ALIGNMENT&#160;</td>
-          <td class="paramname"><em>align</em>, </td>
+          <td class="paramtype">TEXT_HORIZONTAL_ALIGNMENT&#160;</td>
+          <td class="paramname"><em>hAlign</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TEXT_VERTICAL_ALIGNMENT&#160;</td>
+          <td class="paramname"><em>vAlign</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -214,13 +224,33 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">g</td><td>- green; 0-255 </td></tr>
     <tr><td class="paramname">b</td><td>- blue; 0-255 </td></tr>
     <tr><td class="paramname">a</td><td>- alpha; 0-255 </td></tr>
-    <tr><td class="paramname">align</td><td>- left|center|right (string)</td></tr>
+    <tr><td class="paramname">hAlign</td><td>- left|center|right (string) </td></tr>
+    <tr><td class="paramname">vAlign</td><td>- top|middle|bottom (string)</td></tr>
   </table>
   </dd>
 </dl>
 <div class="fragment"><div class="line">local font = FontManager:LoadFont(&quot;someFont.fnt&quot;, &quot;someFont.png&quot;)</div>
 <div class="line">font:DrawAt(&quot;Sample Text&quot;, 0, 0, 255, 0, 0, 255, &quot;left&quot;)</div>
 </div><!-- fragment --> 
+</div>
+</div>
+<a id="a87a51b189ff961a3b658af89f3f267f6" name="a87a51b189ff961a3b658af89f3f267f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87a51b189ff961a3b658af89f3f267f6">&#9670;&nbsp;</a></span>SetAlpha()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FontBitmapRepresentation::SetAlpha </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Set Alpha </p>
+
 </div>
 </div>
 <a id="a9dab038d248c3fe33c5eafc4ec2a1902" name="a9dab038d248c3fe33c5eafc4ec2a1902"></a>
@@ -239,6 +269,25 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Set Scale </p>
+
+</div>
+</div>
+<a id="afcf1c7f318aec2083907bace1b5a7c5f" name="afcf1c7f318aec2083907bace1b5a7c5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcf1c7f318aec2083907bace1b5a7c5f">&#9670;&nbsp;</a></span>SetZPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FontBitmapRepresentation::SetZPosition </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Set Z-position </p>
 
 </div>
 </div>

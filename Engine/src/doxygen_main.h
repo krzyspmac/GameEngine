@@ -19,6 +19,10 @@
 
 ...
 
+See [Init params](doxygen_ini.md) to get a list ini params.
+
+See [Command Line parameters](doxygen_executable.md) to get a list of command-line parameters.
+
 See \ref API_GLOBALS "Global API" for details on these functions.
 
 See \ref doxygen_fonts.md

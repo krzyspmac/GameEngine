@@ -70,10 +70,7 @@ Engine::~Engine()
 
 void Engine::Setup()
 {
-    // Preare the file access functions
-    m_fileAccess.LoadDirectory(m_fileAccess.GetResourcesDirectory());
-
-    // Read the ini file. If not existing - exit with a proper message.
+    // Read the ini file first. It may change various engine properties.
     try
     {
         std::string path = m_fileAccess.GetFullPath("main.ini");
@@ -85,6 +82,9 @@ void Engine::Setup()
         printf("Exception found while loading main.ini: %s.\n", exception);
         exit(1);
     }
+
+    // Preare the file access functions
+    m_fileAccess.LoadDirectory(m_engineSetup.gameFolder);
 
     // Register time helper for future reference.
     // Needed to scripts at the start of execution.

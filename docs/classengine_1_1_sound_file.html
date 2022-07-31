@@ -100,8 +100,71 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7b10fc7b3cec6b9a3e7caa4925b860a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41111f522c530158f536bd06f3eae647"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_sound_file.html#a41111f522c530158f536bd06f3eae647">SetLoops</a> (bool)</td></tr>
 <tr class="separator:a41111f522c530158f536bd06f3eae647"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3575f26b8ceda4a9692b3283bbd8bbef"><td class="memItemLeft" align="right" valign="top">SoundFileState&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_sound_file.html#a3575f26b8ceda4a9692b3283bbd8bbef">GetState</a> ()</td></tr>
+<tr class="separator:a3575f26b8ceda4a9692b3283bbd8bbef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73c41939103ae1def49534223cea9829"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classengine_1_1_sound_file_state_observer_i.html">SoundFileStateObserverI</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_sound_file.html#a73c41939103ae1def49534223cea9829">AddObserver</a> (CallableScriptFunctionI::CallableScriptFunctionRef)</td></tr>
+<tr class="separator:a73c41939103ae1def49534223cea9829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d16e43f3c3a0d4a77f53ed4180fba2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_sound_file.html#a64d16e43f3c3a0d4a77f53ed4180fba2">RemoveObserver</a> (<a class="el" href="classengine_1_1_sound_file_state_observer_i.html">SoundFileStateObserverI</a> *)</td></tr>
+<tr class="separator:a64d16e43f3c3a0d4a77f53ed4180fba2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a73c41939103ae1def49534223cea9829" name="a73c41939103ae1def49534223cea9829"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73c41939103ae1def49534223cea9829">&#9670;&nbsp;</a></span>AddObserver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classengine_1_1_sound_file_state_observer_i.html">SoundFileStateObserverI</a> * SoundFile::AddObserver </td>
+          <td>(</td>
+          <td class="paramtype">CallableScriptFunctionI::CallableScriptFunctionRef&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Add an observer as a lua function. Returns an object that can be used later to remove the observer as well. </p>
+
+<p>Implements <a class="el" href="classengine_1_1_sound_file_i.html#aabafe4f6033497b10cf3160e703ca563">engine::SoundFileI</a>.</p>
+
+</div>
+</div>
+<a id="a3575f26b8ceda4a9692b3283bbd8bbef" name="a3575f26b8ceda4a9692b3283bbd8bbef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3575f26b8ceda4a9692b3283bbd8bbef">&#9670;&nbsp;</a></span>GetState()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SoundFileState SoundFile::GetState </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Get the player state </p>
+
+<p>Implements <a class="el" href="classengine_1_1_sound_file_i.html#ae04336e4387f129829d5542a898bffca">engine::SoundFileI</a>.</p>
+
+</div>
+</div>
 <a id="aa8488d30ca390b65acbf16eaa7b873f9" name="aa8488d30ca390b65acbf16eaa7b873f9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa8488d30ca390b65acbf16eaa7b873f9">&#9670;&nbsp;</a></span>Pause()</h2>
 
@@ -183,6 +246,35 @@ Public Member Functions</h2></td></tr>
 <p >Prepares the sound file </p>
 
 <p>Implements <a class="el" href="classengine_1_1_sound_file_i.html#ad12eb21524c90a0a92fd5b9e1db3c0dd">engine::SoundFileI</a>.</p>
+
+</div>
+</div>
+<a id="a64d16e43f3c3a0d4a77f53ed4180fba2" name="a64d16e43f3c3a0d4a77f53ed4180fba2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64d16e43f3c3a0d4a77f53ed4180fba2">&#9670;&nbsp;</a></span>RemoveObserver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SoundFile::RemoveObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classengine_1_1_sound_file_state_observer_i.html">SoundFileStateObserverI</a> *&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Remove an observer </p>
+
+<p>Implements <a class="el" href="classengine_1_1_sound_file_i.html#a967c83a3d93fa5f923d32276dda024f1">engine::SoundFileI</a>.</p>
 
 </div>
 </div>
