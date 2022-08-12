@@ -14,6 +14,40 @@
 using namespace engine;
 
 PropertyAnimator *PropertyAnimatorFactory
+    ::SetAlpha( AnimatablePropertiesI *_object
+              , std::string curveType
+              , float alpha
+              , float delay
+              , float duration
+              , CallableScriptFunctionParametersEmpty fFinishRef
+)
+{
+    AnimatablePropertiesI& object = *_object;
+
+    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
+    ValueAnimator *linearAnimator = ENGINE().getValueAnimatorFactory()
+        .Create(
+                  curve
+                , delay
+                , duration
+                , [&](ValueAnimator *self) {
+                    float from = object.GetAlpha();
+                    float to = static_cast<Holder1<float>*>(self->GetContext())->Get();
+                    self->GetCurve()->get()->SetMin(from);
+                    self->GetCurve()->get()->SetMax(to);
+                }
+                , [&](ValueAnimator *self, float val) {
+                    object.SetAlpha(val);
+                }
+                , nullptr);
+    linearAnimator->SetContext(new Holder1<float>(alpha));
+    linearAnimator->SetFunctionFinish(fFinishRef);
+
+    PropertyAnimator *result = new PropertyAnimator(_object, linearAnimator);
+    return result;
+}
+
+PropertyAnimator *PropertyAnimatorFactory
     ::FadeIn( AnimatablePropertiesI *sprite
             , std::string curveType
             , float delay
@@ -27,7 +61,8 @@ PropertyAnimator *PropertyAnimatorFactory
                   curve
                 , delay
                 , duration
-                , [&](float val) { spr.SetAlpha(val); }
+                , [&](ValueAnimator *self) { }
+                , [&](ValueAnimator *self, float val) { spr.SetAlpha(val); }
                 , nullptr);
     linearAnimator->SetFunctionFinish(fFinishRef);
 
@@ -49,7 +84,8 @@ PropertyAnimator *PropertyAnimatorFactory
                   curve
                 , delay
                 , duration
-                , [&](float val) { spr.SetAlpha(val); }
+                , [&](ValueAnimator *self) { }
+                , [&](ValueAnimator *self, float val) { spr.SetAlpha(val); }
                 , nullptr);
     linearAnimator->SetFunctionFinish(fFinishRef);
 
@@ -65,7 +101,7 @@ PropertyMultipleAnimator *PropertyAnimatorFactory
                   , float duration
                   , CallableScriptFunctionParametersEmpty fFinishRef)
 {
-    AnimatablePropertiesI &spr = *sprite;
+    AnimatablePropertiesI &object = *sprite;
 
     auto startingOffset = sprite->GetPosition();
 
@@ -75,11 +111,18 @@ PropertyMultipleAnimator *PropertyAnimatorFactory
                   curveX
                 , delay
                 , duration
-                , [&](float val) {
-                    spr.SetPosition({val, spr.GetPosition().y});
+                , [&](ValueAnimator *self) {
+                    Vector2 from = object.GetPosition();
+                    float to = static_cast<Holder1<Vector2>*>(self->GetContext())->Get().x;
+                    self->GetCurve()->get()->SetMin(from.x);
+                    self->GetCurve()->get()->SetMax(to);
+                }
+                , [&](ValueAnimator *self, float val) {
+                    object.SetPosition({val, object.GetPosition().y});
                 }
                 , nullptr);
-    linearAnimatorX->SetFunctionFinish(fFinishRef);
+    //linearAnimatorX->SetFunctionFinish(fFinishRef); only one of the animators should trigger the end function
+    linearAnimatorX->SetContext(new Holder1<Vector2>(offset));
 
     CallableCurveLamba *curveY = new CallableCurveLamba(startingOffset.y, offset.y, AnimationCurveFactory::Create(curveType));
     ValueAnimator *linearAnimatorY = ENGINE().getValueAnimatorFactory()
@@ -87,11 +130,18 @@ PropertyMultipleAnimator *PropertyAnimatorFactory
                   curveY
                 , delay
                 , duration
-                , [&](float val) {
-                    spr.SetPosition({spr.GetPosition().x, val});
+                , [&](ValueAnimator *self) {
+                    Vector2 from = object.GetPosition();
+                    float to = static_cast<Holder1<Vector2>*>(self->GetContext())->Get().y;
+                    self->GetCurve()->get()->SetMin(from.y);
+                    self->GetCurve()->get()->SetMax(to);
+                }
+                , [&](ValueAnimator *self, float val) {
+                    object.SetPosition({object.GetPosition().x, val});
                 }
                 , nullptr);
     linearAnimatorY->SetFunctionFinish(fFinishRef);
+    linearAnimatorY->SetContext(new Holder1<Vector2>(offset));
 
     std::vector<ValueAnimator*> list;
     list.emplace_back(linearAnimatorX);
@@ -105,15 +155,6 @@ PropertyMultipleAnimator *PropertyAnimatorFactory
     return result;
 }
 
-PropertyAnimator *SetPosition(AnimatablePropertiesI *object,
-                              std::string curveType,
-                              Vector2 offset,
-                              float delay,
-                              float duration,
-                              CallableScriptFunctionParametersEmpty fFinishRef
-                              );
-
-
 PropertyAnimator *PropertyAnimatorFactory
     ::Wait(float delay, float duration, CallableScriptFunctionParametersEmpty fFinishRef)
 {
@@ -123,7 +164,8 @@ PropertyAnimator *PropertyAnimatorFactory
                   curve
                 , delay
                 , duration
-                , [&](float val) { }
+                , [&](ValueAnimator *self) { }
+                , [&](ValueAnimator *self, float val) { }
                 , nullptr);
     linearAnimator->SetFunctionFinish(fFinishRef);
 
@@ -134,6 +176,38 @@ PropertyAnimator *PropertyAnimatorFactory
 #pragma mark - Scripting Interface
 
 SCRIPTING_INTERFACE_IMPL_NAME(PropertyAnimatorFactory);
+
+static int lua_PropertyAnimatorFactory_SetAlpha(lua_State *L)
+{
+    int argc = lua_gettop(L);
+    PropertyAnimatorFactory *obj = ScriptingEngineI::GetScriptingObjectPtr<PropertyAnimatorFactory>(L, 1);
+    SpritePropertyManipulatorsI **spriteDrawPtr = (SpritePropertyManipulatorsI**)lua_touserdata(L, 2);
+    SpritePropertyManipulatorsI *spriteDraw = *spriteDrawPtr;
+
+    std::string curveType = lua_tostring(L, 3); // linear
+    float alpha = lua_tonumber(L, 4);
+    float delay = lua_tonumberx(L, 5, NULL);
+    float duration = lua_tonumberx(L, 6, NULL);
+
+    CallableScriptFunctionParametersEmpty function = CallableScriptFunctionParametersEmpty::empty();
+    int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    if (argc > 6)
+    {
+        function = CallableScriptFunctionParametersEmpty(functionEndRef);
+    }
+
+    PropertyAnimator *result = obj->SetAlpha(spriteDraw, curveType, alpha, delay, duration, function);
+    if (result != nullptr)
+    {
+        ENGINE().getReleasePool().Sink(result);
+        result->ScriptingInterfaceRegisterFunctions(L, result);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
 
 static int lua_PropertyAnimatorFactory_FadeIn(lua_State *L)
 {
@@ -262,6 +336,7 @@ std::vector<luaL_Reg> PropertyAnimatorFactory::ScriptingInterfaceFunctions()
     std::vector<luaL_Reg> result({
         {"FadeIn",      &lua_PropertyAnimatorFactory_FadeIn}
     ,   {"FadeOut",     &lua_PropertyAnimatorFactory_FadeOut}
+    ,   {"SetAlpha",    &lua_PropertyAnimatorFactory_SetAlpha}
     ,   {"SetPosition", &lua_PropertyAnimatorFactory_SetPosition}
     ,   {"Wait",        &lua_PropertyAnimatorFactory_Wait},
     });

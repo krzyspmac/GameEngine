@@ -12,8 +12,15 @@
 
 using namespace engine;
 
-ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, CallableScriptFunctionParameters1<float> functionUpdateRef, CallableScriptFunctionParametersEmpty functionEndRef)
-    : AnimatableI()
+ValueAnimator
+    ::ValueAnimator(
+        std::unique_ptr<CallableCurveLamba> curve
+      , int delay
+      , double seconds
+      , CallableScriptFunctionParametersEmpty functionStartRef
+      , CallableScriptFunctionParameters1<float> functionUpdateRef
+      , CallableScriptFunctionParametersEmpty functionEndRef
+)   : AnimatableI()
     , MemoryI()
     , m_engineProvider(ENGINE().getProvider())
     , m_time(ENGINE().getTime())
@@ -21,17 +28,27 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int dela
     , m_secondsTotal(seconds)
     , m_secondsStart(-1)
     , m_val(curve->GetMin())
+    , m_startFuncRef(functionStartRef)
+    , m_startFunc(nullptr)
     , m_updateFuncRef(functionUpdateRef)
     , m_updateFunc(nullptr)
     , m_endFuncRef(functionEndRef)
     , m_endFunc(nullptr)
     , m_isStopped(true)
+    , m_context(nullptr)
 {
     m_curve = std::move(curve);
 }
 
-ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int delay, double seconds, std::function<void(float)> functionUpdate, std::function<void(ValueAnimator*)> functionEnd)
-    : AnimatableI()
+ValueAnimator
+    ::ValueAnimator(
+         std::unique_ptr<CallableCurveLamba> curve
+       , int delay
+       , double seconds
+       , std::function<void(ValueAnimator*)> functionStartFunc
+       , std::function<void(ValueAnimator*, float)> functionUpdate
+       , std::function<void(ValueAnimator*)> functionEnd
+)   : AnimatableI()
     , MemoryI()
     , m_engineProvider(ENGINE().getProvider())
     , m_time(ENGINE().getTime())
@@ -39,22 +56,38 @@ ValueAnimator::ValueAnimator(std::unique_ptr<CallableCurveLamba> curve, int dela
     , m_secondsTotal(seconds)
     , m_secondsStart(-1)
     , m_val(curve->GetMin())
+    , m_startFuncRef(-1)
+    , m_startFunc(functionStartFunc)
     , m_updateFuncRef(CallableScriptFunctionParameters1<float>::empty())
     , m_updateFunc(functionUpdate)
     , m_endFuncRef(CallableScriptFunctionParametersEmpty::empty())
     , m_endFunc(functionEnd)
     , m_isStopped(true)
+    , m_context(nullptr)
 {
     m_curve = std::move(curve);
 }
 
 ValueAnimator::~ValueAnimator()
 {
+    FreeContext();
     printf("ValueAnimator released\n");
+}
+
+void ValueAnimator::FreeContext()
+{
+    if (m_context != nullptr)
+    {
+        free(m_context); m_context = nullptr;
+    }
 }
 
 void ValueAnimator::Start()
 {
+    if (m_startFunc != nullptr)
+    {   m_startFunc(this);
+    }
+    
     m_secondsStart = m_time.GetFrameStartSec();
     m_isStopped = false;
     ENGINE().getPeriodicUpdatesManager().Add(this);
@@ -65,7 +98,7 @@ void ValueAnimator::Stop()
 {
     m_isStopped = true;
     ENGINE().getPeriodicUpdatesManager().Remove(this);
-    
+
     if (m_animatableFinishL != nullptr)
     {
         m_animatableFinishL(this);
@@ -101,7 +134,7 @@ void ValueAnimator::CallbackExecute()
 
     if (m_updateFunc != nullptr)
     {
-        m_updateFunc(m_val);
+        m_updateFunc(this, m_val);
     }
 }
 
@@ -130,7 +163,7 @@ void ValueAnimator::SetFunctionUpdate(CallableScriptFunctionParameters1<float> f
     m_updateFuncRef = f;
 }
 
-void ValueAnimator::SetFunctionUpdate(std::function<void(float)> f)
+void ValueAnimator::SetFunctionUpdate(std::function<void(ValueAnimator*, float)> f)
 {
     m_updateFunc = f;
 }
@@ -150,7 +183,7 @@ CallableScriptFunctionParameters1<float> ValueAnimator::GetunctionUpdateRef()
     return m_updateFuncRef;
 }
 
-std::function<void(float)> ValueAnimator::GetFunctionUpdate()
+std::function<void(ValueAnimator*, float)> ValueAnimator::GetFunctionUpdate()
 {
     return m_updateFunc;
 }
@@ -163,6 +196,17 @@ CallableScriptFunctionParametersEmpty ValueAnimator::GetFunctionFinishRef()
 std::function<void(ValueAnimator*)> ValueAnimator::GetFunctionFinish()
 {
     return m_endFunc;
+}
+
+void ValueAnimator::SetContext(void* context)
+{
+    FreeContext();
+    m_context = context;
+}
+
+void *ValueAnimator::GetContext()
+{
+    return m_context;
 }
 
 #pragma mark - Scripting Interface

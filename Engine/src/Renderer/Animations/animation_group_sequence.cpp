@@ -21,6 +21,7 @@ AnimationGroupSequence::AnimationGroupSequence(CallableScriptFunctionSciptableIn
 
 void AnimationGroupSequence::Start()
 {
+    m_iCurrentAnimatable = 0;
     PlayCurrent();
 }
 

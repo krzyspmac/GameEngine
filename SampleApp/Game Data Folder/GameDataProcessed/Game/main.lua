@@ -189,19 +189,45 @@ end
 
 function shakeScreen()
     local propertyAnimatorDown, propertyAnimatorUp
+    local counter = 0
 
-    propertyAnimatorDown = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 100, 0, 5, 
+    propertyAnimatorDown = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 10, 0, .5/200, 
         function()
             propertyAnimatorUp:Start()
         end
     )
 
-    propertyAnimatorUp = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 0, 0, 5, 
+    propertyAnimatorUp = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 0, 0, .5/200, 
         function()
-            propertyAnimatorDown:Start()
+            counter = counter + 1
+            if counter < 500000 then
+                propertyAnimatorDown:Start()
+            end
         end
     )
     propertyAnimatorDown:Start()
+
+    local group
+
+	group = AnimationGroupFactory:GroupAnimations(
+		'sequence'
+	,	PropertyAnimatorFactory:SetAlpha(EngineScreen, "linear", 0, 0, .5/2, 
+            function()
+            end
+        )
+    ,	PropertyAnimatorFactory:SetAlpha(EngineScreen, "linear", 1, 0, .5/2, 
+        function()
+        end
+    )
+	,	function()
+            counter = counter + 1
+            if counter < 50 then
+                group:Start()
+            end
+		end
+	)
+    -- group:Start()
+
 end
 
 ------------------------------------------------------------------------------------------

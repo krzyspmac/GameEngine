@@ -106,12 +106,15 @@
             { {  1,   1 },  { 1.0, 0.0 } },
         };
 
-        static simd_float2 position = { 0, 0 };
+        static simd_float2 position = { 0.f, 0.f };
+        static float alpha = { 1.f };
 
         engine::EngineScreenI &engineScreen = m_engine->getEngineScreen();
+
         auto screenOffset = engineScreen.GetPosition();
         position.x = screenOffset.x;
         position.y = screenOffset.y;
+        alpha = engineScreen.GetAlpha();
 
         // Draw the offscreen texture
         [encoder setVertexBytes:&quadVertices length:sizeof(quadVertices) atIndex:AAPLVertexInputIndexVertices];
@@ -120,6 +123,7 @@
         [encoder setVertexBytes:&affineScale length:sizeof(affineScale) atIndex:AAPLVertexInputIndexObjectScale];
         [encoder setVertexBytes:&position length:sizeof(position) atIndex:AAPLVertexInputIndexObjectOffset];
         [encoder setFragmentTexture:oscTargetTexture atIndex:FragmentShaderIndexBaseColor];
+        [encoder setFragmentBytes: &alpha length:sizeof(float) atIndex:FragmentShaderIndexBaseAlpha];
         [encoder drawPrimitives:MTLPrimitiveTypeTriangle vertexStart:0 vertexCount:6];
 
         // Optionally draw the console

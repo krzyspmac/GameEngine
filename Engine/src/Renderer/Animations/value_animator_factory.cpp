@@ -16,6 +16,7 @@ ValueAnimator *ValueAnimatorFactory::Create(
        CallableCurveLamba *curve
      , float delay
      , float duration
+     , CallableScriptFunctionParametersEmpty functionStartRef
      , CallableScriptFunctionParameters1<float> functionUpdateRef
      , CallableScriptFunctionParametersEmpty functionEndRef)
 {
@@ -23,6 +24,7 @@ ValueAnimator *ValueAnimatorFactory::Create(
         std::unique_ptr<CallableCurveLamba>(curve)
       , delay
       , duration
+      , functionStartRef
       , functionUpdateRef
       , functionEndRef);
     return function;
@@ -32,13 +34,15 @@ ValueAnimator *ValueAnimatorFactory::Create(
       CallableCurveLamba *curve
     , float delay
     , float duration
-    , std::function<void(float)> functionUpdateRef
+    , std::function<void(ValueAnimator*)> functionStartRef
+    , std::function<void(ValueAnimator*, float)> functionUpdateRef
     , std::function<void(ValueAnimator*)> functionEndRef)
 {
     ValueAnimator *function = new ValueAnimator(
         std::unique_ptr<CallableCurveLamba>(curve)
       , delay
       , duration
+      , functionStartRef
       , functionUpdateRef
       , functionEndRef);
     return function;
@@ -61,6 +65,7 @@ static int lua_ValueAnimatorFactory_CreateLinear(lua_State *L)
         new CallableCurveLamba(min, max, AnimationCurveFactory::Create(LINEAR))
       , delay
       , seconds
+      , -1
       , functionUpdateRef
       , functionEndRef);
     

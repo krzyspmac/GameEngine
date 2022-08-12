@@ -24,33 +24,51 @@ namespace engine
     class PropertyAnimatorFactory
     {
     public:
-        /**
-         Creates a `fade in` effect that animates SpriteDrawI::SetAlpha.
-         @param object      - the sprite renderer to animate
-         @param curveType   - 'linear'
-         @param delay       - initial delay in seconds; pass 0 to start without delay
-         @param duration    - duration in seconds
-         @param fFinishRef  - finish function ref; function parameter is the created
-                              PropertyAnimator. [optiona] LUA can ommit this parameter
+        /** Creates a SetAlpha effect that animates the alpha channel to a specific
+            value over a given time interval.
+            @param object      - the sprite renderer to animate
+            @param curveType   - 'linear'
+            @param alpha       - alpha value
+            @param delay       - initial delay in seconds; pass 0 to start without delay
+            @param duration    - duration in seconds
+            @param fFinishRef  - finish function ref; function parameter is the created
+                                  PropertyAnimator. [optiona] LUA can ommit this parameter
+         */
+        PropertyAnimator *SetAlpha(AnimatablePropertiesI *object,
+                                   std::string curveType,
+                                   float alpha,
+                                   float delay,
+                                   float duration,
+                                   CallableScriptFunctionParametersEmpty fFinishRef
+                                   );
 
-         \code{lua}
-         -- fade in the skySprite for 3 seconds with a 1 second delay
-         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3)
-         \endcode
+        /** Creates a `fade in` effect that animates the alpha channel to a specific
+            value over a given time interval.
+            @param object      - the sprite renderer to animate
+            @param curveType   - 'linear'
+            @param delay       - initial delay in seconds; pass 0 to start without delay
+            @param duration    - duration in seconds
+            @param fFinishRef  - finish function ref; function parameter is the created
+                                  PropertyAnimator. [optiona] LUA can ommit this parameter
 
-         \code{lua}
-         -- fade in the skySprite for 3 seconds with a 1 second delay and pass in a completion function
-         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function()
-            -- animation is finished
-         end)
-         \endcode
+             \code{lua}
+             -- fade in the skySprite for 3 seconds with a 1 second delay
+             local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3)
+             \endcode
 
-         \code{lua}
-         -- fade in the skySprite for 3 seconds with a 1 second delay and pass in a completion function
-         local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function(animator)
-            print("Animator " .. animator .. " is finished")
-         end)
-         \endcode
+             \code{lua}
+             -- fade in the skySprite for 3 seconds with a 1 second delay and pass in a completion function
+             local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function()
+                -- animation is finished
+             end)
+             \endcode
+
+             \code{lua}
+             -- fade in the skySprite for 3 seconds with a 1 second delay and pass in a completion function
+             local propertyAnimator = PropertyAnimatorFactory:FadeIn(skySprite, 1, 3, function(animator)
+                print("Animator " .. animator .. " is finished")
+             end)
+             \endcode
          */
         PropertyAnimator *FadeIn(AnimatablePropertiesI *object,
                                  std::string curveType,

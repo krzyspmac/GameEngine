@@ -54,13 +54,26 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     return out;
 }
 // Fragment shader that samples a texture and outputs the sampled color.
-fragment float4 presenterFragmentShader(RasterizerData in  [[stage_in]],
-                                        texture2d<float> texture [[texture(FragmentShaderIndexBaseColor)]])
+fragment float4 presenterFragmentShader(
+      RasterizerData    in              [[stage_in]]
+    , texture2d<float>  texture         [[texture (FragmentShaderIndexBaseColor)]]
+    , constant float    *alphaPointer   [[ buffer (FragmentShaderIndexBaseAlpha)]]
+)
 {
     constexpr sampler simpleSampler;
 
     // Sample data from the texture.
     float4 colorSample = texture.sample(simpleSampler, in.textureCoordinate);
+
+    // If still visible combine with the fragment's alpha
+    colorSample.a *= *alphaPointer;
+
+    if (colorSample.a <= 0.0001)
+    {
+        discard_fragment();
+        return float4(colorSample);
+    }
+
 
     // Return the color sample as the final color.
     return colorSample;

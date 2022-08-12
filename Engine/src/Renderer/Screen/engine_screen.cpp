@@ -12,7 +12,7 @@ using namespace engine;
 EngineScreen::EngineScreen()
     : m_position({0.0f, 0.0f})
     , m_zPosition(0.0f)
-    , m_alpha(0.0f)
+    , m_alpha(1.0f)
 {
 }
 

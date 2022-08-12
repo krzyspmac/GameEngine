@@ -40,6 +40,9 @@ namespace engine
         float GetMin() { return m_min; };
         float GetMax() { return m_max; };
         float GetDiff() { return m_diff; };
+
+        void SetMin(float value) { m_min = value; };
+        void SetMax(float value) { m_max = value; };
         float f(float progress);
     };
 
