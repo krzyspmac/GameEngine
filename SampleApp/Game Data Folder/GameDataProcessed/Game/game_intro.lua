@@ -20,10 +20,13 @@ function GameIntroScene:New()
 	
 	o.scene = SceneManager:SceneCreateNew()
 	o.font = FontManager:LoadFont("at01.fnt", "at01.png")
+    o.animationDuration = 0.1
+    o.animationDelay = 0.1
 	
 	o.texts = {
 		  i18n.translate("introLine1")
 		, i18n.translate("introLine2")
+		, i18n.translate("introLine3")
 	}
 	o.textsCount = tableLength(o.texts)
 	o.textsIndex = 1
@@ -84,10 +87,10 @@ function GameIntroScene:FadeTexts(text)
 	
 	local group = AnimationGroupFactory:GroupAnimations(
 		'sequence'
-	,	PropertyAnimatorFactory:FadeIn(self.textSprite, "linear", 0, 0.5)
-	,	PropertyAnimatorFactory:Wait(0, delay)
-	,	PropertyAnimatorFactory:FadeOut(self.textSprite, "linear", 0, 0.5)
-	,	PropertyAnimatorFactory:Wait(0, 1)
+	,	PropertyAnimatorFactory:FadeIn(self.textSprite, "linear", 0, self.animationDuration)
+	,	PropertyAnimatorFactory:Wait(0, self.animationDelay)
+	,	PropertyAnimatorFactory:FadeOut(self.textSprite, "linear", 0, self.animationDuration)
+	,	PropertyAnimatorFactory:Wait(0, self.animationDelay)
 	,	function()
 			self:Next()
 		end

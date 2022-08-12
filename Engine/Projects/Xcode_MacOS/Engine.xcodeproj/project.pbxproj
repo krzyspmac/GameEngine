@@ -413,6 +413,13 @@
 		7F6428A12779183C00EE9E2C /* polygon.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289F2779183C00EE9E2C /* polygon.hpp */; };
 		7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428A227791A9100EE9E2C /* path_finder.cpp */; };
 		7F6428A527791A9100EE9E2C /* path_finder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6428A327791A9100EE9E2C /* path_finder.hpp */; };
+		7F67033A28A60D1200319218 /* engine_screen_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033928A60C8B00319218 /* engine_screen_interface.h */; };
+		7F67033B28A60D1300319218 /* engine_screen_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033928A60C8B00319218 /* engine_screen_interface.h */; };
+		7F67033C28A60D1300319218 /* engine_screen_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033928A60C8B00319218 /* engine_screen_interface.h */; };
+		7F67034028A60D5500319218 /* engine_screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67033E28A60D5500319218 /* engine_screen.cpp */; };
+		7F67034128A60D5500319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
+		7F67034228A60D8E00319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
+		7F67034328A60D8E00319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
 		7F6D1C82279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
 		7F6D1C83279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
 		7F6D1C84279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
@@ -721,6 +728,9 @@
 		7F64289F2779183C00EE9E2C /* polygon.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = polygon.hpp; sourceTree = "<group>"; };
 		7F6428A227791A9100EE9E2C /* path_finder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = path_finder.cpp; sourceTree = "<group>"; };
 		7F6428A327791A9100EE9E2C /* path_finder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = path_finder.hpp; sourceTree = "<group>"; };
+		7F67033928A60C8B00319218 /* engine_screen_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_screen_interface.h; sourceTree = "<group>"; };
+		7F67033E28A60D5500319218 /* engine_screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_screen.cpp; sourceTree = "<group>"; };
+		7F67033F28A60D5500319218 /* engine_screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_screen.hpp; sourceTree = "<group>"; };
 		7F6D1C80279F14690078D76A /* ini_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ini_reader.cpp; sourceTree = "<group>"; };
 		7F6D1C81279F14690078D76A /* ini_reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ini_reader.hpp; sourceTree = "<group>"; };
 		7F6D1C88279F14CA0078D76A /* engine_setup_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_setup_interface.h; sourceTree = "<group>"; };
@@ -973,6 +983,7 @@
 				7F6428972778CC1D00EE9E2C /* Character Movement */,
 				7F64289C2779176400EE9E2C /* Path Finding */,
 				7FCAE7CD277E5605004A6107 /* Managers */,
+				7F67033D28A60D2900319218 /* Screen */,
 				7FCAE7BC277E36C7004A6107 /* Scene */,
 				7F64288127779CCA00EE9E2C /* Character */,
 				7F13821F277505B600ED6D67 /* Scripting */,
@@ -1267,6 +1278,15 @@
 			path = "Path Finding";
 			sourceTree = "<group>";
 		};
+		7F67033D28A60D2900319218 /* Screen */ = {
+			isa = PBXGroup;
+			children = (
+				7F67033F28A60D5500319218 /* engine_screen.hpp */,
+				7F67033E28A60D5500319218 /* engine_screen.cpp */,
+			);
+			path = Screen;
+			sourceTree = "<group>";
+		};
 		7F7EA08128967EF400A09199 /* platform */ = {
 			isa = PBXGroup;
 			children = (
@@ -1295,6 +1315,7 @@
 			isa = PBXGroup;
 			children = (
 				7F6D1C88279F14CA0078D76A /* engine_setup_interface.h */,
+				7F67033928A60C8B00319218 /* engine_screen_interface.h */,
 				7FC1310B2792FAF20094DF0C /* engine_interface.h */,
 				7FC131182792FAF20094DF0C /* engine_provider_interface.h */,
 				7FCC129327984DD5002ECABD /* engine_events_provider_interface.h */,
@@ -1545,6 +1566,7 @@
 				7FC131242792FAF20094DF0C /* animation_interface.h in Headers */,
 				7FC131262792FAF20094DF0C /* drawable_interface.h in Headers */,
 				7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */,
+				7F67034128A60D5500319218 /* engine_screen.hpp in Headers */,
 				7F08C44327AF20A5002FEB8F /* light_interface.hpp in Headers */,
 				7FCC81C32780A2A8003025CB /* value_animator.hpp in Headers */,
 				7F2497E827B942FA001D871A /* sprite_representation_text.hpp in Headers */,
@@ -1566,6 +1588,7 @@
 				7F7EA07228967C9900A09199 /* system_utils.hpp in Headers */,
 				7F138286277505B600ED6D67 /* common_engine_impl.h in Headers */,
 				7F869FC32780F6F800E8CB01 /* engine_state.hpp in Headers */,
+				7F67033A28A60D1200319218 /* engine_screen_interface.h in Headers */,
 				7FE2E5CD277A3FA900538094 /* path_finder_graph.hpp in Headers */,
 				7F84990E27872F28004127CB /* font_bitmap.hpp in Headers */,
 				7F08C45727AF2441002FEB8F /* light_manager.hpp in Headers */,
@@ -1650,6 +1673,7 @@
 				7FC971F027AF3BA100049146 /* light_manager.hpp in Headers */,
 				7F3E8EBD279AC8F9003BB7B6 /* path_finder_line_graph_node.hpp in Headers */,
 				7F3E8EBE279AC8F9003BB7B6 /* path_finder_graph.hpp in Headers */,
+				7F67034228A60D8E00319218 /* engine_screen.hpp in Headers */,
 				7F3E8EBF279AC8F9003BB7B6 /* path_finder.hpp in Headers */,
 				7F7AE8D427A9B67F007BEB39 /* object_pool.hpp in Headers */,
 				7F3E8EC0279AC8F9003BB7B6 /* path.hpp in Headers */,
@@ -1658,6 +1682,7 @@
 				7F3E8EC3279AC8F9003BB7B6 /* sprite_renderer_manager.hpp in Headers */,
 				7F3E8EC4279AC8F9003BB7B6 /* periodic_updates_manager.hpp in Headers */,
 				7F3E8EC5279AC8F9003BB7B6 /* texture_manager.hpp in Headers */,
+				7F67033B28A60D1300319218 /* engine_screen_interface.h in Headers */,
 				7F3E8EC6279AC8F9003BB7B6 /* font_manager.hpp in Headers */,
 				7F3E8EC7279AC8F9003BB7B6 /* scene_manager.hpp in Headers */,
 				7F3E8EC8279AC8F9003BB7B6 /* scene.hpp in Headers */,
@@ -1762,6 +1787,7 @@
 				7FC971F227AF3BA100049146 /* light_manager.hpp in Headers */,
 				7F3E90DF279B03F6003BB7B6 /* path_finder_line_graph_node.hpp in Headers */,
 				7F3E90E0279B03F6003BB7B6 /* path_finder_graph.hpp in Headers */,
+				7F67034328A60D8E00319218 /* engine_screen.hpp in Headers */,
 				7F3E90E1279B03F6003BB7B6 /* path_finder.hpp in Headers */,
 				7F7AE8D527A9B67F007BEB39 /* object_pool.hpp in Headers */,
 				7F3E90E2279B03F6003BB7B6 /* path.hpp in Headers */,
@@ -1770,6 +1796,7 @@
 				7F3E90E5279B03F6003BB7B6 /* sprite_renderer_manager.hpp in Headers */,
 				7F3E90E6279B03F6003BB7B6 /* periodic_updates_manager.hpp in Headers */,
 				7F3E90E7279B03F6003BB7B6 /* texture_manager.hpp in Headers */,
+				7F67033C28A60D1300319218 /* engine_screen_interface.h in Headers */,
 				7F3E90E8279B03F6003BB7B6 /* font_manager.hpp in Headers */,
 				7F3E90E9279B03F6003BB7B6 /* scene_manager.hpp in Headers */,
 				7F3E90EA279B03F6003BB7B6 /* scene.hpp in Headers */,
@@ -2105,6 +2132,7 @@
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7F8E9BCB27B5ABBC00548567 /* engine_metal_buffer_manager.cpp in Sources */,
 				7F6D1CA7279F50590078D76A /* RendererEntryViewController+Rendering.mm in Sources */,
+				7F67034028A60D5500319218 /* engine_screen.cpp in Sources */,
 				7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */,
 				7FCAE7C7277E4EAA004A6107 /* sprite_atlas_manager.cpp in Sources */,
 				4C255DE427859E3100D0B30A /* animation_curve_factory.cpp in Sources */,

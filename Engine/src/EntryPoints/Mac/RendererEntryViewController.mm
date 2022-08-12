@@ -52,6 +52,7 @@ using namespace engine;
     mtkView.colorPixelFormat = MTLPixelFormatBGRA8Unorm_sRGB;//.bgra8Unorm_srgb
     mtkView.depthStencilPixelFormat = MTLPixelFormatDepth32Float;
     mtkView.clearDepth = 1.0;
+//    mtkView.preferredFramesPerSecond = 120;
 }
 
 - (void)setupEngine

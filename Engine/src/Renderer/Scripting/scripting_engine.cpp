@@ -21,6 +21,7 @@
 #include "events_manager.hpp"
 #include "light_manager.hpp"
 #include "sound_manager.hpp"
+#include "engine_screen.hpp"
 
 using namespace engine;
 
@@ -130,7 +131,6 @@ void ScriptingEngine::registerFunctions()
     lua_pushcclosure(L, &ScriptingEngine::L_spriteDrawRender, 0);
     lua_setglobal (L, "L_spriteDrawRender");
 
-
     // Register global objects to be used at the start of the script lifecycle.
     CharacterManager &mgr = ENGINE().getCharacterManager();
     mgr.ScriptingInterfaceRegisterFunctions(L, &mgr);
@@ -187,6 +187,10 @@ void ScriptingEngine::registerFunctions()
     SoundManager &soundManager = ENGINE().getSoundManager();
     soundManager.ScriptingInterfaceRegisterFunctions(L, &soundManager);
     lua_setglobal(L, "SoundManager");
+
+    EngineScreen &engineScreen = ENGINE().getEngineScreen();
+    engineScreen.ScriptingInterfaceRegisterFunctions(L, &engineScreen);
+    lua_setglobal(L, "EngineScreen");
 };
 
 void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda)

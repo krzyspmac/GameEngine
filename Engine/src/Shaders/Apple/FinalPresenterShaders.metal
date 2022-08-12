@@ -15,11 +15,12 @@ using namespace metal;
 // coordinates through to the rasterizer.
 vertex RasterizerData
 presenterVertexShader(const uint vertexID [[ vertex_id ]],
-                      const device AAPLVertex *vertices [[ buffer(AAPLVertexInputIndexVertices) ]],
-                      constant vector_float2  *viewportSizePointer [[buffer(AAPLVertexInputIndexWindowSize)]],
+                      const device AAPLVertex *vertices             [[ buffer(AAPLVertexInputIndexVertices) ]],
+                      constant vector_float2  *viewportSizePointer  [[buffer(AAPLVertexInputIndexWindowSize)]],
                       constant float          *viewportScalePointer [[buffer(AAPLVertexInputIndexWindowScale)]],
                       constant vector_float2  *desiredViewportSizePointer [[buffer(AAPLVertexInputIndexViewportSize)]],
-                      constant float          *affineScalePointer     [[buffer(AAPLVertexInputIndexObjectScale)]]
+                      constant float          *affineScalePointer   [[buffer(AAPLVertexInputIndexObjectScale)]],
+                      constant vector_float2  *screenPosition       [[buffer(AAPLVertexInputIndexObjectOffset)]]
                       )
 {
     RasterizerData out;
@@ -35,10 +36,16 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     // Get the desired viewport size; used to calaculate aspect ratio
     vector_float2 desiredViewportSize = vector_float2(*desiredViewportSizePointer);
 
+    // Get the screenOffset
+    vector_float2 screenOffset = vector_float2(*screenPosition);
+
     // Get the target final scale for the texture
     float targetAffineScale = float(*affineScalePointer);
-
     float2 scale = viewportSize / desiredViewportSize;
+
+    // Apply translation
+    pixelSpacePosition.x += (screenOffset.x / viewportSize.x) * scale.x * 2;
+    pixelSpacePosition.y -= (screenOffset.y / viewportSize.y) * scale.y * 2;
 
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
     out.position.xy = pixelSpacePosition / scale * targetAffineScale;

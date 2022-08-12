@@ -18,6 +18,7 @@ light1 = nil
 tds = nil
 playerSprite = nil
 sound = nil
+sky5 = nil
 
 gameState = GameState:new()
 
@@ -72,10 +73,18 @@ function loadSprites()
 	sky2:SetPosition(0, 0)
 	sky2:SetAcceptsLight(true)
 	 
-	sky = scene:SpriteStaticLoad(roomAtlas, "roombg")
-	sky:SetScale(1)
-	sky:SetAlpha(0)
-	sky:SetPosition(1280/2, 300)
+	-- sky = scene:SpriteStaticLoad(roomAtlas, "roombg")
+	-- sky:SetScale(1)
+	-- sky:SetAlpha(0)
+	-- sky:SetPosition(1280/2, 300)
+
+    local backgroundAtlas = AtlasManager:SpriteAtlasLoad("set_background.json", "set_background.png")
+    -- sky = scene:SpriteStaticLoad(backgroundAtlas, "1.png")
+
+    local sky2 = scene:SpriteStaticLoad(backgroundAtlas, "2.png")
+    local sky3 = scene:SpriteStaticLoad(backgroundAtlas, "3.png")
+    sky5 = scene:SpriteStaticLoad(backgroundAtlas, "tile79.png")
+    sky5:SetScale(0.5)
 
 	tds = scene:SpriteAnimatedLoad(100, tdsSprite)
 	tds:SetPosition(410, 180)
@@ -89,6 +98,7 @@ function loadSprites()
 	light = LightManager:CreateLight("linear", 1, 1, 1, 0.1, 400, 350, 250, 1)
 	light1 = scene:CreateLight("exponential", 1, 1, 1, 0.01, 900, 350, 11500, 0.5)
 	light:SetName("Main light")
+    LightManager:SetLightsActive(false)
 
 	-- player
 	local playerAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.png")
@@ -149,6 +159,34 @@ function animateLights()
 	animatorForward:Start()
 end
 
+function animateTrees()
+    local animatorForward, animatorBackwards
+
+	animatorForward = ValueAnimatorFactory:CreateLinear(0, 50, 1, 0,
+		function(val)
+			local x, y = sky5:GetPosition()
+			x = val
+			sky5:SetPosition(x,y)
+		end,
+		function()
+			animatorBackwards:Start()
+	  	end
+	)
+
+    animatorBackwards = ValueAnimatorFactory:CreateLinear(50, 0, 1, 0,
+        function(val)
+            local x, y = sky5:GetPosition()
+			x = val
+			sky5:SetPosition(x,y)
+        end,
+        function()
+            animatorForward:Start()
+        end
+    )
+
+    animatorForward:Start()
+end
+
 ------------------------------------------------------------------------------------------
 -- event handling functions
 
@@ -171,6 +209,9 @@ function init()
 	   loadSprites()
 	   SceneManager:SceneMakeActive(scene)
 	   animateLights()
+       animateTrees()
+
+       EngineScreen:SetOffset(0, 0)
 	   --loadSounds()
    end)
 end
