@@ -9,8 +9,8 @@
 
 using namespace engine;
 
-PropertyAnimator::PropertyAnimator(SpritePropertyManipulatorsI *sprite, ValueAnimator *valueAnimator)
-    : AnimatableI()
+PropertyAnimator::PropertyAnimator(AnimatablePropertiesI *sprite, ValueAnimator *valueAnimator)
+    : PropertyAnimatorI()
     , m_sprite(nullptr)
     , m_valueAnimator(std::move(valueAnimator))
 {
@@ -40,6 +40,7 @@ void PropertyAnimator::Stop()
 
 void PropertyAnimator::FreeMem()
 {
+    m_valueAnimator->FreeMem();
     MemoryI::FreeMem();
 }
 

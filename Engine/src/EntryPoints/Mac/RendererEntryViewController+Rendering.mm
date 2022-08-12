@@ -109,7 +109,7 @@
         static simd_float2 position = { 0, 0 };
 
         engine::EngineScreenI &engineScreen = m_engine->getEngineScreen();
-        auto screenOffset = engineScreen.GetScreenOffset();
+        auto screenOffset = engineScreen.GetPosition();
         position.x = screenOffset.x;
         position.y = screenOffset.y;
 

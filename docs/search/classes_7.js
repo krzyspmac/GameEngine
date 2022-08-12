@@ -10,6 +10,10 @@ var searchData=
   ['soundmanageri_7',['SoundManagerI',['../classengine_1_1_sound_manager_i.html',1,'engine']]],
   ['spriteatlas_8',['SpriteAtlas',['../classengine_1_1_sprite_atlas.html',1,'engine']]],
   ['spriteatlasmanager_9',['SpriteAtlasManager',['../classengine_1_1_sprite_atlas_manager.html',1,'engine']]],
-  ['spriterenderermanager_10',['SpriteRendererManager',['../classengine_1_1_sprite_renderer_manager.html',1,'engine']]],
-  ['spriterepresentationtext_11',['SpriteRepresentationText',['../classengine_1_1_sprite_representation_text.html',1,'engine']]]
+  ['spritepropertymanipulatorsi_10',['SpritePropertyManipulatorsI',['../classengine_1_1_sprite_property_manipulators_i.html',1,'engine']]],
+  ['spriterenderermanager_11',['SpriteRendererManager',['../classengine_1_1_sprite_renderer_manager.html',1,'engine']]],
+  ['spriterepresentationanimated_12',['SpriteRepresentationAnimated',['../classengine_1_1_sprite_representation_animated.html',1,'engine']]],
+  ['spriterepresentationi_13',['SpriteRepresentationI',['../classengine_1_1_sprite_representation_i.html',1,'engine']]],
+  ['spriterepresentationstatic_14',['SpriteRepresentationStatic',['../classengine_1_1_sprite_representation_static.html',1,'engine']]],
+  ['spriterepresentationtext_15',['SpriteRepresentationText',['../classengine_1_1_sprite_representation_text.html',1,'engine']]]
 ];

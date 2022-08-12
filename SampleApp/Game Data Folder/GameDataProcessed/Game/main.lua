@@ -187,6 +187,23 @@ function animateTrees()
     animatorForward:Start()
 end
 
+function shakeScreen()
+    local propertyAnimatorDown, propertyAnimatorUp
+
+    propertyAnimatorDown = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 100, 0, 5, 
+        function()
+            propertyAnimatorUp:Start()
+        end
+    )
+
+    propertyAnimatorUp = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 0, 0, 5, 
+        function()
+            propertyAnimatorDown:Start()
+        end
+    )
+    propertyAnimatorDown:Start()
+end
+
 ------------------------------------------------------------------------------------------
 -- event handling functions
 
@@ -211,7 +228,8 @@ function init()
 	   animateLights()
        animateTrees()
 
-       EngineScreen:SetOffset(0, 0)
+    --    EngineScreen:SetOffset(0, 0)
+       shakeScreen()
 	   --loadSounds()
    end)
 end

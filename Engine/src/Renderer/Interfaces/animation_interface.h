@@ -9,6 +9,7 @@
 #define animation_h
 
 #include "common.h"
+#include "common_engine_impl.h"
 
 namespace engine
 {
@@ -61,6 +62,33 @@ namespace engine
         /**
          */
         std::function<void(AnimatableI*)> AnimatableGetFinishLambda() { return m_animatableFinishL; };
+    };
+
+    /** Defines the properties that can be animated */
+    class AnimatablePropertiesI
+    {
+    public:
+        /** Scale setter */
+        virtual void SetAlpha(float) = 0;
+
+        /** Scale getter */
+        virtual float GetAlpha() = 0;
+
+        virtual void SetScale(float x) = 0;
+        virtual float GetScale() = 0;
+
+        /** Position this sprite in x,y axis game coordinates */
+        virtual void SetPosition(Vector2 pos) = 0;
+
+        /** Set the z-axis position.
+            Possible values range from 0.0 to 1.0, 0.0 being closest to the "camera" and
+            1.0 being further away. Of two object: one being at 1.0 and one being at 0.0
+            the one at 0.0 will overlap the one at 1.0.
+            */
+        virtual void SetZPosition(float zPos) = 0;
+
+        /** Get this sprite's position in game coordinates */
+        virtual Vector2& GetPosition() = 0;
     };
 
     /**

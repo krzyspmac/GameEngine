@@ -9,14 +9,12 @@
 #define engine_screen_interface_h
 
 #include "vector2.hpp"
+#include "animation_interface.h"
 
 namespace engine
 {
-    class EngineScreenI
+    class EngineScreenI: public AnimatablePropertiesI
     {
-    public:
-        virtual void SetScreenOffset(Vector2) = 0;
-        virtual Vector2& GetScreenOffset() = 0;
     };
 };
 

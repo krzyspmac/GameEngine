@@ -420,6 +420,8 @@
 		7F67034128A60D5500319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
 		7F67034228A60D8E00319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
 		7F67034328A60D8E00319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
+		7F67034728A6271100319218 /* property_animator_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67034528A6271100319218 /* property_animator_multiple.cpp */; };
+		7F67034828A6271100319218 /* property_animator_multiple.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67034628A6271100319218 /* property_animator_multiple.hpp */; };
 		7F6D1C82279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
 		7F6D1C83279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
 		7F6D1C84279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
@@ -731,6 +733,9 @@
 		7F67033928A60C8B00319218 /* engine_screen_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_screen_interface.h; sourceTree = "<group>"; };
 		7F67033E28A60D5500319218 /* engine_screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_screen.cpp; sourceTree = "<group>"; };
 		7F67033F28A60D5500319218 /* engine_screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_screen.hpp; sourceTree = "<group>"; };
+		7F67034428A626B000319218 /* property_animator_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = property_animator_interface.h; sourceTree = "<group>"; };
+		7F67034528A6271100319218 /* property_animator_multiple.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = property_animator_multiple.cpp; sourceTree = "<group>"; };
+		7F67034628A6271100319218 /* property_animator_multiple.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = property_animator_multiple.hpp; sourceTree = "<group>"; };
 		7F6D1C80279F14690078D76A /* ini_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ini_reader.cpp; sourceTree = "<group>"; };
 		7F6D1C81279F14690078D76A /* ini_reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ini_reader.hpp; sourceTree = "<group>"; };
 		7F6D1C88279F14CA0078D76A /* engine_setup_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_setup_interface.h; sourceTree = "<group>"; };
@@ -1334,6 +1339,7 @@
 				7FC131152792FAF20094DF0C /* animation_interface.h */,
 				7FC131162792FAF20094DF0C /* file_access_provider.h */,
 				7F08C44227AF1FBF002FEB8F /* light_interface.hpp */,
+				7F67034428A626B000319218 /* property_animator_interface.h */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1402,6 +1408,8 @@
 				7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */,
 				7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */,
 				7FF21D752784E99A005C52C4 /* property_animator.hpp */,
+				7F67034528A6271100319218 /* property_animator_multiple.cpp */,
+				7F67034628A6271100319218 /* property_animator_multiple.hpp */,
 				7FF21D742784E99A005C52C4 /* property_animator.cpp */,
 				7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */,
 				7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */,
@@ -1557,6 +1565,7 @@
 				7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */,
 				7F13827E277505B600ED6D67 /* defs.h in Headers */,
 				7F8E9BCE27B5ABBC00548567 /* engine_metal_buffer_manager.hpp in Headers */,
+				7F67034828A6271100319218 /* property_animator_multiple.hpp in Headers */,
 				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
 				4C255DED2785CA9100D0B30A /* animation_group_factory.hpp in Headers */,
 				7FE2E5DA277B23BC00538094 /* vector2.hpp in Headers */,
@@ -2173,6 +2182,7 @@
 				7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */,
 				7FE2E5D0277B13B000538094 /* path.cpp in Sources */,
 				7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */,
+				7F67034728A6271100319218 /* property_animator_multiple.cpp in Sources */,
 				7F869FBA2780C41F00E8CB01 /* periodic_updates_manager.cpp in Sources */,
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
 				7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */,
