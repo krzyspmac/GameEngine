@@ -209,28 +209,6 @@ function shakeScreen()
         end
     )
     propertyAnimatorDown:Start()
-
-    local group
-
-	group = AnimationGroupFactory:GroupAnimations(
-		'sequence'
-	,	PropertyAnimatorFactory:SetAlpha(EngineScreen, "linear", 0, 0, .5/2, 
-            function()
-            end
-        )
-    ,	PropertyAnimatorFactory:SetAlpha(EngineScreen, "linear", 1, 0, .5/2, 
-        function()
-        end
-    )
-	,	function()
-            counter = counter + 1
-            if counter < 50 then
-                group:Start()
-            end
-		end
-	)
-    -- group:Start()
-
 end
 
 ------------------------------------------------------------------------------------------
