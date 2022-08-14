@@ -29,6 +29,12 @@ void SceneManager::SceneMakeActive(Scene* scene)
     auto existing = GetFor(scene);
     if (existing != m_scenes.end())
     {   m_current = existing->get();
+        if (m_current != nullptr)
+        {   for (auto it = std::begin(m_scenes); it != std::end(m_scenes); it++)
+            {   it->get()->SetIsActivated(false);
+            }
+            m_current->SetIsActivated(true);
+        }
     }
 }
 

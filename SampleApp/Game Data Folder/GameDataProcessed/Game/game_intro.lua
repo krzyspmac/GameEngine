@@ -48,6 +48,19 @@ function GameIntroScene:Setup()
 	textSprite:SetAlpha(0)
 
 	self.textSprite = textSprite
+
+    self:RegisterEvents()
+end
+
+function GameIntroScene:RegisterEvents()
+    EventsManager:RegisterMouseClickedEvents(function(x, y)
+        if self.scene:GetIsActivated() then
+            print("GameIntroScene Mouse clicked position = " .. x .. ", " .. y)
+        end
+    end)
+end
+
+function GameIntroScene:DeregisterEvents()
 end
 
 function GameIntroScene:Start(endFunction)
@@ -100,5 +113,6 @@ function GameIntroScene:FadeTexts(text)
 end
 
 function GameIntroScene:End()
+    self:DeregisterEvents()
 	self.endFunction()
 end

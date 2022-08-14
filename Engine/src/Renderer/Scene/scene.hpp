@@ -32,6 +32,7 @@ namespace engine
         std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
+        bool m_isActive;
     ///
     public:
 
@@ -55,6 +56,13 @@ namespace engine
          @private
          */
         void MouseClicked(Vector2 pos);
+
+    public: // States
+
+        /** @private */
+        void SetIsActivated(bool value) { m_isActive = value; };
+
+        bool GetIsActivated() { return m_isActive; };
 
     public:
         /**

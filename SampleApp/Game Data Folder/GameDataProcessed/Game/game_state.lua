@@ -26,3 +26,10 @@ function GameState:OnResolutionChange(width, height, density)
 	-- the resolution itself. Scale will suffice.
 	EngineState:SetViewportSize(gameState.wantedWidth, gameState.wantedHeight, scale)
 end
+
+function GameState:PerformRegister()
+	EngineState:SetOnScreenSizeChange(function(w, h, d)
+		print("Screen parameters changed to " .. w .. "x" .. h .. " at " .. d)
+		self:OnResolutionChange(w, h, d)
+	end)
+end

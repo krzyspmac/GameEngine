@@ -85,9 +85,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae5311ba8ea9c2303cf643e1983ffcb44"><td class="memItemLeft" align="right" valign="top"><a id="ae5311ba8ea9c2303cf643e1983ffcb44" name="ae5311ba8ea9c2303cf643e1983ffcb44"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFunctionUpdate</b> (<a class="el" href="classengine_1_1_callable_script_function_parameters1.html">CallableScriptFunctionParameters1</a>&lt; float &gt; f)</td></tr>
 <tr class="separator:ae5311ba8ea9c2303cf643e1983ffcb44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24bd0699927281b40fc365ed53465b18"><td class="memItemLeft" align="right" valign="top"><a id="a24bd0699927281b40fc365ed53465b18" name="a24bd0699927281b40fc365ed53465b18"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFunctionUpdate</b> (std::function&lt; void(float)&gt; f)</td></tr>
-<tr class="separator:a24bd0699927281b40fc365ed53465b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab833ef9c5ebb3bc372d4ac677a8b5cb5"><td class="memItemLeft" align="right" valign="top"><a id="ab833ef9c5ebb3bc372d4ac677a8b5cb5" name="ab833ef9c5ebb3bc372d4ac677a8b5cb5"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFunctionUpdate</b> (std::function&lt; void(<a class="el" href="classengine_1_1_value_animator.html">ValueAnimator</a> *, float)&gt; f)</td></tr>
+<tr class="separator:ab833ef9c5ebb3bc372d4ac677a8b5cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac359aee9b412f05e05c467680adeeb40"><td class="memItemLeft" align="right" valign="top"><a id="ac359aee9b412f05e05c467680adeeb40" name="ac359aee9b412f05e05c467680adeeb40"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFunctionFinish</b> (<a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a> f)</td></tr>
 <tr class="separator:ac359aee9b412f05e05c467680adeeb40"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -97,15 +97,23 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetFunctionFinish</b>
 <tr class="memitem:aeb911bc5b885511fc1b5d091a47b11fb"><td class="memItemLeft" align="right" valign="top"><a id="aeb911bc5b885511fc1b5d091a47b11fb" name="aeb911bc5b885511fc1b5d091a47b11fb"></a>
 <a class="el" href="classengine_1_1_callable_script_function_parameters1.html">CallableScriptFunctionParameters1</a>&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetunctionUpdateRef</b> ()</td></tr>
 <tr class="separator:aeb911bc5b885511fc1b5d091a47b11fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab2b299714554f86d8c5c160a43977e15"><td class="memItemLeft" align="right" valign="top"><a id="ab2b299714554f86d8c5c160a43977e15" name="ab2b299714554f86d8c5c160a43977e15"></a>
-std::function&lt; void(float)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetFunctionUpdate</b> ()</td></tr>
-<tr class="separator:ab2b299714554f86d8c5c160a43977e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aada6fc0a3853020951f79be4a62849"><td class="memItemLeft" align="right" valign="top"><a id="a6aada6fc0a3853020951f79be4a62849" name="a6aada6fc0a3853020951f79be4a62849"></a>
+std::function&lt; void(<a class="el" href="classengine_1_1_value_animator.html">ValueAnimator</a> *, float)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetFunctionUpdate</b> ()</td></tr>
+<tr class="separator:a6aada6fc0a3853020951f79be4a62849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0d7e0ad8ac3180d526c3665f41d206e"><td class="memItemLeft" align="right" valign="top"><a id="ab0d7e0ad8ac3180d526c3665f41d206e" name="ab0d7e0ad8ac3180d526c3665f41d206e"></a>
 <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetFunctionFinishRef</b> ()</td></tr>
 <tr class="separator:ab0d7e0ad8ac3180d526c3665f41d206e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a73a06dd001fdc6bd4ca6af5a0b65ba6b"><td class="memItemLeft" align="right" valign="top"><a id="a73a06dd001fdc6bd4ca6af5a0b65ba6b" name="a73a06dd001fdc6bd4ca6af5a0b65ba6b"></a>
 std::function&lt; void(<a class="el" href="classengine_1_1_value_animator.html">ValueAnimator</a> *)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetFunctionFinish</b> ()</td></tr>
 <tr class="separator:a73a06dd001fdc6bd4ca6af5a0b65ba6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8732860bac314fb2a4fbd8fb6d8cf905"><td class="memItemLeft" align="right" valign="top"><a id="a8732860bac314fb2a4fbd8fb6d8cf905" name="a8732860bac314fb2a4fbd8fb6d8cf905"></a>
+auto&#160;</td><td class="memItemRight" valign="bottom"><b>GetCurve</b> ()</td></tr>
+<tr class="separator:a8732860bac314fb2a4fbd8fb6d8cf905"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab06981ed14813a5d70eae04ff6d7b597"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_value_animator.html#ab06981ed14813a5d70eae04ff6d7b597">SetContext</a> (void *)</td></tr>
+<tr class="separator:ab06981ed14813a5d70eae04ff6d7b597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759a78d9d5249169fc37e6cbf4f22c9a"><td class="memItemLeft" align="right" valign="top"><a id="a759a78d9d5249169fc37e6cbf4f22c9a" name="a759a78d9d5249169fc37e6cbf4f22c9a"></a>
+void *&#160;</td><td class="memItemRight" valign="bottom"><b>GetContext</b> ()</td></tr>
+<tr class="separator:a759a78d9d5249169fc37e6cbf4f22c9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76a7b9a01e05538383712b826f09fbd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_value_animator.html#a76a7b9a01e05538383712b826f09fbd9">Start</a> ()</td></tr>
 <tr class="memdesc:a76a7b9a01e05538383712b826f09fbd9"><td class="mdescLeft">&#160;</td><td class="mdescRight">AnimatableI.  <a href="classengine_1_1_value_animator.html#a76a7b9a01e05538383712b826f09fbd9">More...</a><br /></td></tr>
 <tr class="separator:a76a7b9a01e05538383712b826f09fbd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,6 +152,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> ()</td></t
 
 <p>MemoryI. </p>
 <p >Relase the memory if this object. </p>
+
+</div>
+</div>
+<a id="ab06981ed14813a5d70eae04ff6d7b597" name="ab06981ed14813a5d70eae04ff6d7b597"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab06981ed14813a5d70eae04ff6d7b597">&#9670;&nbsp;</a></span>SetContext()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ValueAnimator::SetContext </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Store the context. Takes ownership of the object </p>
 
 </div>
 </div>

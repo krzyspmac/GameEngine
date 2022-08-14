@@ -15,9 +15,10 @@
 using namespace engine;
 
 Scene::Scene()
-:   m_mainCharacter(nullptr),
-    m_mouseDownFunctionRef(-1),
-    m_engineProvider(ENGINE().getProvider())
+    : m_mainCharacter(nullptr)
+    , m_mouseDownFunctionRef(-1)
+    , m_engineProvider(ENGINE().getProvider())
+    , m_isActive(false)
 {
     ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
@@ -295,6 +296,13 @@ static int lua_Scene_CreateLight(lua_State *L)
     return 1;
 }
 
+static int lua_Scene_GetIsActivated(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+    lua_pushboolean(L, scene->GetIsActivated());
+    return 1;
+}
+
 std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -306,6 +314,7 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
       , {"SetMainCharacter", &lua_Scene_SetMainCharacter}
       , {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
       , {"CreateLight", &lua_Scene_CreateLight}
+      , {"GetIsActivated", &lua_Scene_GetIsActivated}
     });
     return result;
 }

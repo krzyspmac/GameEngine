@@ -76,12 +76,14 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aa80fad1aced1b0f4064dc1f0eac48dd2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_property_animator_factory.html#aa80fad1aced1b0f4064dc1f0eac48dd2">SetAlpha</a> (AnimatablePropertiesI *object, std::string curveType, float alpha, float delay, float duration, <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a> fFinishRef)</td></tr>
+<tr class="separator:aa80fad1aced1b0f4064dc1f0eac48dd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba3aaf6855906d779fe7480f01a396b2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_property_animator_factory.html#aba3aaf6855906d779fe7480f01a396b2">FadeIn</a> (AnimatablePropertiesI *object, std::string curveType, float delay, float duration, <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a> fFinishRef)</td></tr>
 <tr class="separator:aba3aaf6855906d779fe7480f01a396b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed3717d4cd1863a64e4eb2ddcfd21e8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_property_animator_factory.html#aed3717d4cd1863a64e4eb2ddcfd21e8d">FadeOut</a> (AnimatablePropertiesI *object, std::string curveType, float delay, float duration, <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a> fFinishRef)</td></tr>
 <tr class="separator:aed3717d4cd1863a64e4eb2ddcfd21e8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf37e5cddcf073fdfdcd3b19d5a343d8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_property_animator_factory.html#aaf37e5cddcf073fdfdcd3b19d5a343d8">SetPosition</a> (AnimatablePropertiesI *object, std::string curveType, Vector2 offset, float delay, float duration, <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a> fFinishRef)</td></tr>
-<tr class="separator:aaf37e5cddcf073fdfdcd3b19d5a343d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6a22adec0e22b316587792f328dfc3b"><td class="memItemLeft" align="right" valign="top">PropertyMultipleAnimator *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_property_animator_factory.html#ae6a22adec0e22b316587792f328dfc3b">SetPosition</a> (AnimatablePropertiesI *object, std::string curveType, Vector2 offset, float delay, float duration, <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a> fFinishRef)</td></tr>
+<tr class="separator:ae6a22adec0e22b316587792f328dfc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba18e3890bc8d78a1645ad5698bc9427"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_property_animator_factory.html#aba18e3890bc8d78a1645ad5698bc9427">Wait</a> (float delay, float duration, <a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a>)</td></tr>
 <tr class="separator:aba18e3890bc8d78a1645ad5698bc9427"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -129,7 +131,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Creates a <code>fade in</code> effect that animates SpriteDrawI::SetAlpha. </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Creates a <code>fade in</code> effect that animates the alpha channel to a specific value over a given time interval. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">object</td><td>- the sprite renderer to animate </td></tr>
     <tr><td class="paramname">curveType</td><td>- 'linear' </td></tr>
@@ -218,14 +220,77 @@ Public Member Functions</h2></td></tr>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="aaf37e5cddcf073fdfdcd3b19d5a343d8" name="aaf37e5cddcf073fdfdcd3b19d5a343d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaf37e5cddcf073fdfdcd3b19d5a343d8">&#9670;&nbsp;</a></span>SetPosition()</h2>
+<a id="aa80fad1aced1b0f4064dc1f0eac48dd2" name="aa80fad1aced1b0f4064dc1f0eac48dd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa80fad1aced1b0f4064dc1f0eac48dd2">&#9670;&nbsp;</a></span>SetAlpha()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> * PropertyAnimatorFactory::SetPosition </td>
+          <td class="memname"><a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a> * PropertyAnimatorFactory::SetAlpha </td>
+          <td>(</td>
+          <td class="paramtype">AnimatablePropertiesI *&#160;</td>
+          <td class="paramname"><em>object</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>curveType</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>alpha</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delay</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classengine_1_1_callable_script_function_parameters_empty.html">CallableScriptFunctionParametersEmpty</a>&#160;</td>
+          <td class="paramname"><em>fFinishRef</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Creates a SetAlpha effect that animates the alpha channel to a specific value over a given time interval. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">object</td><td>- the sprite renderer to animate </td></tr>
+    <tr><td class="paramname">curveType</td><td>- 'linear' </td></tr>
+    <tr><td class="paramname">alpha</td><td>- alpha value </td></tr>
+    <tr><td class="paramname">delay</td><td>- initial delay in seconds; pass 0 to start without delay </td></tr>
+    <tr><td class="paramname">duration</td><td>- duration in seconds </td></tr>
+    <tr><td class="paramname">fFinishRef</td><td>- finish function ref; function parameter is the created <a class="el" href="classengine_1_1_property_animator.html">PropertyAnimator</a>. [optiona] LUA can ommit this parameter </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae6a22adec0e22b316587792f328dfc3b" name="ae6a22adec0e22b316587792f328dfc3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6a22adec0e22b316587792f328dfc3b">&#9670;&nbsp;</a></span>SetPosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">PropertyMultipleAnimator * PropertyAnimatorFactory::SetPosition </td>
           <td>(</td>
           <td class="paramtype">AnimatablePropertiesI *&#160;</td>
           <td class="paramname"><em>object</em>, </td>
