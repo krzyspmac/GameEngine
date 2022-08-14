@@ -79,7 +79,7 @@ namespace engine
                       std::function<void(ValueAnimator*)> functionEndRef);
 
         /** @private */
-        ~ValueAnimator();
+        virtual ~ValueAnimator();
 
     public:
         void SetFunctionUpdate(CallableScriptFunctionParameters1<float> f);

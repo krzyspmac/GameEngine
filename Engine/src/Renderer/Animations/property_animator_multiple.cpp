@@ -57,9 +57,6 @@ void PropertyMultipleAnimator::Stop()
 
 void PropertyMultipleAnimator::FreeMem()
 {
-    for (auto it = std::begin(m_animators); it != std::end(m_animators); it++)
-    {   it->get()->FreeMem();
-    }
     MemoryI::FreeMem();
 }
 

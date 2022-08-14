@@ -200,8 +200,11 @@ function shakeScreen()
     propertyAnimatorUp = PropertyAnimatorFactory:SetPosition(EngineScreen, "linear", 0, 0, 0, .5/200, 
         function()
             counter = counter + 1
-            if counter < 500000 then
+            if counter < 50 then
                 propertyAnimatorDown:Start()
+            else
+                propertyAnimatorDown:FreeMem()
+                propertyAnimatorUp:FreeMem()
             end
         end
     )
