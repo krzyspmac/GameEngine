@@ -18,9 +18,10 @@ Scene::Scene()
     : m_mainCharacter(nullptr)
     , m_mouseDownFunctionRef(-1)
     , m_engineProvider(ENGINE().getProvider())
+    , m_mouseDownIdentifier(-1)
     , m_isActive(false)
 {
-    ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
+    m_mouseDownIdentifier = ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
         Origin *clicked = (Origin*)mouse;
         Vector2 pos;
         pos.x = (*clicked).x;
@@ -32,6 +33,7 @@ Scene::Scene()
 
 Scene::~Scene()
 {
+    ENGINE().getEventsManager().UnregisterEvent(m_mouseDownIdentifier);
 }
 
 void Scene::MouseClicked(Vector2 pos)

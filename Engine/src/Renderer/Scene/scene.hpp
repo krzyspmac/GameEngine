@@ -32,6 +32,7 @@ namespace engine
         std::vector<LightI*> m_lights;
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
+        unsigned int m_mouseDownIdentifier;
         bool m_isActive;
     ///
     public:
