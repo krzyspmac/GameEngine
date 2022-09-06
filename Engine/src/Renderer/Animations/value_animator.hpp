@@ -47,11 +47,14 @@ namespace engine
         double m_secondsStart;
         double m_secondsPassed;
         double m_val;
+        std::function<void(ValueAnimator*)> m_startFunc;
+        CallableScriptFunctionParametersEmpty m_startFuncRef;
         CallableScriptFunctionParameters1<float> m_updateFuncRef;
-        std::function<void(float)> m_updateFunc;
+        std::function<void(ValueAnimator*, float)> m_updateFunc;
         CallableScriptFunctionParametersEmpty m_endFuncRef;
         std::function<void(ValueAnimator*)> m_endFunc;
         bool m_isStopped;
+        void *m_context;
     public:
         /**
          Create the value animator with callaback as script functions.
@@ -60,6 +63,7 @@ namespace engine
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
                       int delay,
                       double seconds,
+                      CallableScriptFunctionParametersEmpty functionStartRef,
                       CallableScriptFunctionParameters1<float> functionUpdateRef,
                       CallableScriptFunctionParametersEmpty functionEndRef);
 
@@ -70,22 +74,30 @@ namespace engine
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
                       int delay,
                       double seconds,
-                      std::function<void(float)> functionUpdateRef,
+                      std::function<void(ValueAnimator*)> functionStartRef,
+                      std::function<void(ValueAnimator*, float)> functionUpdateRef,
                       std::function<void(ValueAnimator*)> functionEndRef);
 
         /** @private */
-        ~ValueAnimator();
+        virtual ~ValueAnimator();
 
     public:
         void SetFunctionUpdate(CallableScriptFunctionParameters1<float> f);
-        void SetFunctionUpdate(std::function<void(float)> f);
+        void SetFunctionUpdate(std::function<void(ValueAnimator*, float)> f);
         void SetFunctionFinish(CallableScriptFunctionParametersEmpty f);
         void SetFunctionFinish(std::function<void(ValueAnimator*)> f);
 
         CallableScriptFunctionParameters1<float> GetunctionUpdateRef();
-        std::function<void(float)> GetFunctionUpdate();
+        std::function<void(ValueAnimator*, float)> GetFunctionUpdate();
         CallableScriptFunctionParametersEmpty GetFunctionFinishRef();
         std::function<void(ValueAnimator*)> GetFunctionFinish();
+
+        auto GetCurve() { return &m_curve; }
+
+        /** Store the context. Takes ownership of the object*/
+        void SetContext(void*);
+        
+        void *GetContext();
 
     /// AnimatableI
     public:
@@ -119,6 +131,9 @@ namespace engine
 
         /** @private */
         void CallbackExecute();
+
+        /** @private */
+        void FreeContext();
 
     // AnimationPeriodicUpdateI
     public:

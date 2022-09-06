@@ -883,8 +883,10 @@ INPUT                  = ../Renderer/Scene/scene.hpp \
                          ../Renderer/Character/character_representation.hpp \
                          ../Renderer/Sprites/sprite_atlas.cpp \
                          ../Renderer/Sprites/sprite_atlas.hpp \
-                         ../Renderer/Sprites/sprite_draw_static.cpp \
-                         ../Renderer/Sprites/sprite_draw_static.hpp \
+                         ../Renderer/Sprites/sprite_representation_static.hpp \
+                         ../Renderer/Sprites/sprite_representation_static.cpp \
+                         ../Renderer/Sprites/sprite_representation_animated.hpp \
+                         ../Renderer/Sprites/sprite_representation_animated.hpp \
                          ../Renderer/Managers/events_manager.cpp \
                          ../Renderer/Managers/sprite_atlas_manager.cpp \
                          ../Renderer/Managers/sprite_atlas_manager.hpp \
@@ -937,8 +939,10 @@ INPUT                  = ../Renderer/Scene/scene.hpp \
                          ../Renderer/Sound/sound_manager.cpp \
                          ../Renderer/Sound/sound_manager.hpp \
                          ../Renderer/Sound/sound_interfaces.h \
+						 ../Renderer/Interfaces/sprite_draw_interface.h \
                          ../doxygen_sounds.md \
-                         ../doxygen_executable.md
+                         ../doxygen_executable.md \
+                         ../doxygen_ini.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

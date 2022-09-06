@@ -11,6 +11,7 @@
 #include "general.hpp"
 #include "vector2.hpp"
 #include "line.hpp"
+#include "holder.hpp"
 
 namespace engine
 {

@@ -57,6 +57,7 @@ namespace engine
         ValueAnimator *Create(CallableCurveLamba *curve,
                               float delay,
                               float duration,
+                              CallableScriptFunctionParametersEmpty functionStartRef,
                               CallableScriptFunctionParameters1<float> functionUpdateRef,
                               CallableScriptFunctionParametersEmpty functionEndRef);
 
@@ -64,7 +65,8 @@ namespace engine
         ValueAnimator *Create(CallableCurveLamba *curve,
                               float delay,
                               float duration,
-                              std::function<void(float)> functionUpdateRef,
+                              std::function<void(ValueAnimator*)> functionStartRef,
+                              std::function<void(ValueAnimator*, float)> functionUpdateRef,
                               std::function<void(ValueAnimator*)> functionEndRef);
 
     /// ScriptingInterface

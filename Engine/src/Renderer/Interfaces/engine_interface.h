@@ -31,6 +31,7 @@
 #include "engine_setup_interface.h"
 #include "light_manager.hpp"
 #include "sound_manager.hpp"
+#include "engine_screen.hpp"
 
 namespace engine
 {
@@ -67,7 +68,8 @@ namespace engine
                 m_consoleRenderer(consoleRenderer),
                 m_time(engineProvider),
                 m_lightManager(*(new LightManager())),
-                m_soundManager(*(new SoundManager()))
+                m_soundManager(*(new SoundManager())),
+                m_engineScreen(*(new EngineScreen()))
         { }
 
     /// Setup
@@ -203,6 +205,9 @@ namespace engine
 
         ///
         EngineState& getEngineState() { return m_engineState; };
+
+        ///
+        EngineScreen& getEngineScreen() { return m_engineScreen; };
         
         ///
         MemoryReleasePool& getReleasePool() { return m_releasePool; };
@@ -237,6 +242,7 @@ namespace engine
         CharacterManager &m_characterManager;
         LightManager &m_lightManager;
         SoundManager &m_soundManager;
+        EngineScreen &m_engineScreen;
 
         engine::Origin m_mousePosition;
         Time m_time;

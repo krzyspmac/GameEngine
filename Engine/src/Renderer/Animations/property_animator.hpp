@@ -12,43 +12,28 @@
 #include "value_animator.hpp"
 #include "sprite_draw_interface.h"
 #include "animation_interface.h"
+#include "property_animator_interface.h"
 #include "memory.h"
 
 namespace engine
 {
     /**
-     Provides a way to animate properties by using ValueAnimator
-     concrete instances.
-     Takes ownership of the value animator.
+     Provides a way to animate one value.
      */
-    class PropertyAnimator
-        : public AnimatableI
-        , public MemoryI
+    class PropertyAnimator: public PropertyAnimatorI
     {
         std::unique_ptr<ValueAnimator> m_valueAnimator;
         SpriteRepresentationI *m_sprite;
 
     public:
-        PropertyAnimator(SpritePropertyManipulatorsI *sprite, ValueAnimator *valueAnimator);
-        ~PropertyAnimator();
+        PropertyAnimator(AnimatablePropertiesI *sprite, ValueAnimator *valueAnimator);
+        virtual ~PropertyAnimator();
         
     public: // AnimatableI
-        /**
-         Starts the animation. Adds the animation to the default engine run loop so
-         it runs automatically. It will periodically call the function
-         specified when creating the function.
-         */
         void Start();
-
-        /**
-         Stops the animation.
-         */
         void Stop();
         
     public: // MemoryI
-        /**
-         Release this object.
-         */
         void FreeMem();
 
     /// ScriptingInterface

@@ -11,6 +11,7 @@
 #include "sprite_atlas_interface.h"
 #include "drawable_interface.h"
 #include "common_engine_impl.h"
+#include "animation_interface.h"
 
 namespace engine
 {
@@ -21,11 +22,9 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
-    class SpritePropertyManipulatorsI
+    class SpritePropertyManipulatorsI: public AnimatablePropertiesI
     {
     public:
-        virtual void SetAlpha(float) = 0;
-        virtual float GetAlpha() = 0;
     };
 
     class SpriteRepresentationI: public SpritePropertyManipulatorsI
@@ -50,39 +49,17 @@ namespace engine
          */
         virtual void Draw() = 0;
 
+    public: // AnimatablePropertiesI
+        float       GetScale() { return m_scale; }
+        void        SetScale(float x) { m_scale = x; };
+        void        SetPosition(Vector2 pos) { m_position = pos; };
+        Vector2&    GetPosition() { return m_position; };
+        void        SetZPosition(float zPos) { m_zPosition = zPos; };
+        float&      GetZPosition() { return m_zPosition; };
+        void        SetAlpha(float val) { if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val); };
+        float       GetAlpha() { return *m_drawable.get()->GetAlpha(); };
+
     public:
-        /** Scale getter */
-        float GetScale() { return m_scale; }
-
-        /** Scale setter */
-        void SetScale(float x) { m_scale = x; };
-
-        /** Position this sprite in x,y axis game coordinates */
-        void SetPosition(Vector2 pos) { m_position = pos; };
-        
-        /** Get this sprite's position in game coordinates */
-        Vector2& GetPosition() { return m_position; };
-        
-        /** Set the z-axis position.
-            Possible values range from 0.0 to 1.0, 0.0 being closest to the "camera" and
-            1.0 being further away. Of two object: one being at 1.0 and one being at 0.0
-            the one at 0.0 will overlap the one at 1.0.
-            */
-        void SetZPosition(float zPos) { m_zPosition = zPos; };
-
-        /** Get the z-axis position */
-        float& GetZPosition() { return m_zPosition; };
-
-        /** Sets the alpha. Values range from 0-1.
-            Default value is 1.
-         */
-        void SetAlpha(float val) { if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val); };
-
-        /** Gets the curernt alpha. Values range from 0-1.
-            Default value is 1.
-         */
-        float GetAlpha() { return *m_drawable.get()->GetAlpha(); };
-
         /** Control whether the object receives lights or not. If false it's
             completely lit up. */
         auto& GetAcceptsLight() { return m_acceptsLight; };
