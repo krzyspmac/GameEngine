@@ -20,8 +20,8 @@ function GameIntroScene:New()
 	
 	o.scene = SceneManager:SceneCreateNew()
 	o.font = FontManager:LoadFont("at01.fnt", "at01.png")
-    o.animationDuration = 0.1
-    o.animationDelay = 0.1
+    o.animationDuration = 0.01
+    o.animationDelay = 0.01
 	
 	o.texts = {
 		  i18n.translate("introLine1")
