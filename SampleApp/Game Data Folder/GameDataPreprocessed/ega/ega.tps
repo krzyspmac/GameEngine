@@ -136,7 +136,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>../../GameDataProcessed/Game/ega.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
