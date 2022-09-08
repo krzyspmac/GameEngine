@@ -35,6 +35,7 @@ namespace engine
     public: // DrawableI
         void SetRotation(float, float, float);
         void GetRotation(float*, float*, float*);
+        auto& GetRotationLowLevel() { return m_rotation; };
         void SetRotateable(bool);
     public: // DrawableSpriteI
         /** Construct a drawable for metal given a sprite descriptor */

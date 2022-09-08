@@ -204,10 +204,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresen
     gpuColorMod.b = colorMod.b;
     gpuColorMod.a = colorMod.a;
 
-    float r1, r2, r3;
-    drawable->GetRotation(&r1, &r2, &r3);
-    simd_float3 rotation = { r1, r2, r3 };
-
+    auto &rotation = drawable->GetRotationLowLevel();
     auto &rotationMatrix = drawable->GetRotationMatrix();
 
     // Pass data to the GPU. Render on screen or on offline-buffer specified
