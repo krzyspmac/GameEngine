@@ -204,9 +204,37 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     gpuColorMod.b = colorMod.b;
     gpuColorMod.a = colorMod.a;
 
+    auto size = *(drawable->GetSize());
+
+    float L = x; //drawData->DisplayPos.x;
+    float R = x + size.x;//drawData->DisplayPos.x + drawData->DisplaySize.x;
+    float T = y;//drawData->DisplayPos.y;
+    float B = y + size.y; //drawData->DisplayPos.y + drawData->DisplaySize.y;
+    float N = 0.0;//(float)viewport.znear;
+    float F = 2.0f;//(float)viewport.zfar;
+
+    const float ortho_projection[4][4] =
+    {
+        { 2.0f/(R-L),   0.0f,           0.0f,   0.0f },
+        { 0.0f,         2.0f/(T-B),     0.0f,   0.0f },
+        { 0.0f,         0.0f,        1/(F-N),   0.0f },
+        { (R+L)/(L-R),  (T+B)/(B-T), N/(F-N),   1.0f },
+    };
+
     // Pass data to the GPU. Render on screen or on offline-buffer specified
     // when using RendererTargetDrawablePush.
     MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
+
+    Time &mTime = ENGINE().getTime();
+
+    static float rot = 0.0f;
+
+//    if (mTime.GetEngineStartSec() && 5.0 == 0) {
+
+        rot += 0.01;
+//    }
+
+    if (rot >= 360) { rot = 0.0f; };
 
     renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), drawable->GetVertexBufferOffset(), AAPLVertexInputIndexVertices);
     renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexWindowSize);
@@ -215,6 +243,10 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexObjectScale);
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
+    renderToPipline->setVertexBytes(&rot, sizeof(float), AAPLVertexInputIndexRot);
+    renderToPipline->setVertexBytes(&ortho_projection, sizeof(ortho_projection), AAPLVertexInputIndexOrtho);
+
+
 
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), FragmentShaderIndexBaseAlpha);
 

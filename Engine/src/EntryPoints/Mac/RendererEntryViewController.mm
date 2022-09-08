@@ -159,6 +159,14 @@ using namespace engine;
     [renderePipelineDescriptor setVertexFunction:vertexFunction];
     [renderePipelineDescriptor setFragmentFunction:fragmentFunction];
     [renderePipelineDescriptor setDepthAttachmentPixelFormat:mtkView.depthStencilPixelFormat];
+
+    MTLVertexDescriptor * vertexDescriptor = [MTLVertexDescriptor vertexDescriptor];
+    vertexDescriptor.attributes[0].format = MTLVertexFormatFloat3;
+    vertexDescriptor.attributes[0].offset = 0;
+    vertexDescriptor.attributes[0].bufferIndex = 0;
+    vertexDescriptor.layouts[0].stride = (3 + 2) * sizeof(float);
+
+    renderePipelineDescriptor.vertexDescriptor = vertexDescriptor;
     
     MTLRenderPipelineColorAttachmentDescriptor *renderbufferAttachment = renderePipelineDescriptor.colorAttachments[0];
     [renderbufferAttachment setPixelFormat:mtkView.colorPixelFormat];
@@ -242,6 +250,20 @@ using namespace engine;
     oscRenderePipelineDescriptor.vertexFunction = oscVertexFunction;
     oscRenderePipelineDescriptor.fragmentFunction = oscFragmentFunction;
     oscRenderePipelineDescriptor.depthAttachmentPixelFormat = mtkView.depthStencilPixelFormat;
+
+    MTLVertexDescriptor * vertexDescriptor = [MTLVertexDescriptor vertexDescriptor];
+    vertexDescriptor.attributes[0].format = MTLVertexFormatFloat3;
+    vertexDescriptor.attributes[0].offset = 0;
+    vertexDescriptor.attributes[0].bufferIndex = 0;
+    vertexDescriptor.attributes[1].format = MTLVertexFormatFloat2;
+    vertexDescriptor.attributes[1].offset = sizeof(vector_float3);
+    vertexDescriptor.attributes[1].bufferIndex = 0;
+    vertexDescriptor.layouts[0].stride = sizeof(AAPLVertex);//(5) * sizeof(float);
+    vertexDescriptor.layouts[0].stepRate = 1;
+    vertexDescriptor.layouts[0].stepFunction = MTLVertexStepFunctionPerVertex;
+
+
+    oscRenderePipelineDescriptor.vertexDescriptor = vertexDescriptor;
 
     MTLRenderPipelineColorAttachmentDescriptor *colorAttch = oscRenderePipelineDescriptor.colorAttachments[0];
     colorAttch.pixelFormat = oscTargetTexture.pixelFormat;

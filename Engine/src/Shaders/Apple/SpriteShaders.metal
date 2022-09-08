@@ -16,15 +16,25 @@ using namespace metal;
 #define LIGHT_FALLOUT_TYPE_LINEAR       0.f
 #define LIGHT_FALLOUT_TYPE_EXP          1.f
 
+inline float angle2rad(float angle) {
+    return M_PI_F * angle / 180.0f;
+}
+
+struct Uniforms {
+    float4x4 projectionMatrix;
+};
+
 vertex RasterizerData
 vertexShader(
-    uint     vertexID                                 [[ vertex_id ]]
-  , constant AAPLVertex       *vertices               [[ buffer(AAPLVertexInputIndexVertices) ]]
+    const AAPLVertexIn        vertices                [[ stage_in ]]
+  , constant AAPLVertex       *vertices_o             [[ buffer(AAPLVertexInputIndexVertices) ]]
   , constant float            *viewportScalePointer   [[ buffer(AAPLVertexInputIndexWindowScale) ]]
   , constant vector_float2    *viewportOffset         [[ buffer(AAPLVertexInputIndexObjectOffset) ]]
   , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
   , constant vector_float2    *objectSizePointer      [[ buffer(AAPLVertexInputIndexObjectSize) ]]
   , constant vector_float2    *viewportSizePointer    [[ buffer(AAPLVertexInputIndexViewportSize) ]]
+  , constant float            *rot                    [[ buffer(AAPLVertexInputIndexRot) ]]
+  , constant Uniforms         &uniforms               [[buffer(AAPLVertexInputIndexOrtho)]]
 )
 {
     RasterizerData out;
@@ -32,8 +42,8 @@ vertexShader(
     // Index into the array of positions to get the current vertex.
     // The positions are specified in pixel dimensions (i.e. a value of 100
     // is 100 pixels from the origin).
-    float2 pixelSpacePosition = vertices[vertexID].position.xy;
-    float pixelZSpacePosition = vertices[vertexID].position.z;
+
+    float4 pixelSpacePosition = vertices.position;
     
     // Get the viewport size and cast to float.
     vector_float2 viewportSize = vector_float2(*viewportSizePointer);
@@ -68,14 +78,27 @@ vertexShader(
     pixelSpacePosition.x += objectTranslation.x / viewportScale;
     pixelSpacePosition.y -= objectTranslation.y / viewportScale;
 
+    float angle = angle2rad(*rot);//M_PI_F / 4.0;
+
+    float ccc = cos(angle);
+    float sss = sin(angle);
+
+    float4x4 rotationMatrixX = float4x4{
+    {ccc,        -sss,          0,     0},
+    {sss,        ccc,           0,     0},
+    {0.0,               0.0,                1.0,     0},
+    {0.0,               0.0,                0.0,     1}
+    };
+
     // To convert from positions in pixel space to positions in clip-space,
     // divide the pixel coordinates by half the size of the viewport.
-    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-    out.position.z = pixelZSpacePosition;
-    
+
+    out.position = rotationMatrixX * pixelSpacePosition;
+    out.position.x /= viewportSize.x / 2.0;
+    out.position.y /= viewportSize.y / 2.0;
+
     // Pass the input color directly to the rasterizer.
-    out.textureCoordinate = vertices[vertexID].textureCoordinate;
+    out.textureCoordinate = vertices.textureCoordinate;
 
     return out;
 }

@@ -56,20 +56,21 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     // Standard, default z-axis vertex position. In metal 0 if closer to the screen, 1 is farther.
     // By default we put our sprites at the end. Setting DrawableI::SetZPosition(0) brings the
     // sprite to the front.
-    static float zStdPos = 1.0f;
+    static float zStdPos = 0.0f;
 
     AAPLVertex data[] =
     {
         // Pixel positions, Texture coordinates, normals
-        { { -width2,  -height2, zStdPos, 0.0 },   { x0, y1 } },
-        { { -width2,   height2, zStdPos, 0.0 },   { x0, y0 } },
-        { {  width2,   height2, zStdPos, 0.0 },   { x1, y0 } },
+        { { -width2,  -height2, zStdPos },   { x0, y1 } },
+        { { -width2,   height2, zStdPos },   { x0, y0 } },
+        { {  width2,   height2, zStdPos },   { x1, y0 } },
 
-        { {  width2,    height2, zStdPos, 0.0 },  { x1, y0 } },
-        { {  width2,   -height2, zStdPos, 0.0 },  { x1, y1 } },
-        { { -width2,   -height2, zStdPos, 0.0 },  { x0, y1 } },
+        { {  width2,    height2, zStdPos },  { x1, y0 } },
+        { {  width2,   -height2, zStdPos },  { x1, y1 } },
+        { { -width2,   -height2, zStdPos },  { x0, y1 } },
     };
-    
+
+
     m_dataSize = sizeof(data);
     
     // Allocate a buffer for metal with sufficient size. Set mode to shared.

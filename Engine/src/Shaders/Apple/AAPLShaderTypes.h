@@ -23,6 +23,8 @@ typedef enum AAPLVertexInputIndex
     AAPLVertexInputIndexViewportSize    = 6,        // the current viewport size; usually
                                                     // set at the beginning; this is also the
                                                     // size of the framebuffer texture
+    AAPLVertexInputIndexRot             = 7,
+    AAPLVertexInputIndexOrtho             = 8,
 } AAPLVertexInputIndex;
 
 typedef enum FragmentShaderIndex
@@ -33,7 +35,6 @@ typedef enum FragmentShaderIndex
     FragmentShaderIndexLightCount       = 3,
     FragmentShaderIndexColorMod         = 4
 } FragmentShaderIndex;
-
 //  This structure defines the layout of vertices sent to the vertex
 //  shader. This header is shared between the .metal shader and C code, to guarantee that
 //  the layout of the vertex array in the C code matches the layout that the .metal
@@ -41,10 +42,11 @@ typedef enum FragmentShaderIndex
 typedef struct
 {
     // Positions in pixel space. A value of 100 indicates 100 pixels from the origin/center.
-    vector_float4 position;
+    vector_float3 position;
 
     // 2D texture coordinate
     vector_float2 textureCoordinate;
+
 } AAPLVertex;
 
 typedef struct
