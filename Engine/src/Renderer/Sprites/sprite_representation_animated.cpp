@@ -73,6 +73,16 @@ void SpriteRepresentationAnimated::PrepareAnimation()
 {
 }
 
+void SpriteRepresentationAnimated::SetRotation(Rotation rotation)
+{
+    SpriteRepresentationI::SetRotation(rotation);
+    
+    for (auto& item : m_sprites)
+    {
+        item->SetRotation(rotation);
+    }
+}
+
 void SpriteRepresentationAnimated::SetAcceptsLight(bool val)
 {
     for (auto& item : m_sprites)
@@ -213,6 +223,26 @@ static int lua_SpriteDrawStatic_SetZPosition(lua_State *L)
     return 0;
 }
 
+static int lua_SpriteDrawStatic_SetRotation(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    float value = lua_tonumber(L, 2);
+    float vec1 = lua_tonumber(L, 3);
+    float vec2 = lua_tonumber(L, 4);
+    spr->SetRotation(Rotation(DEG2RAD(value), Vector2(vec1, vec2)));
+    return 0;
+}
+
+static int lua_SpriteDrawStatic_GetRotation(lua_State *L)
+{
+    SpriteRepresentationAnimated *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationAnimated>(L, 1);
+    auto &rotation = spr->GetRotation();
+    lua_pushnumber(L, RAD2DEG(rotation.angle));
+    lua_pushnumber(L, rotation.anchor.x);
+    lua_pushnumber(L, rotation.anchor.y);
+    return 3;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -226,6 +256,8 @@ std::vector<luaL_Reg> SpriteRepresentationAnimated::ScriptingInterfaceFunctions(
       , { "SetAnimationFrameDuration", &lua_SpriteDrawStatic_SetAnimationFrameDuration }
       , { "SetColorMod", &lua_SpriteDrawStatic_SetColorMod }
       , { "SetZPosition", &lua_SpriteDrawStatic_SetZPosition }
+      , { "SetRotation", &lua_SpriteDrawStatic_SetRotation }
+      , { "GetRotation", &lua_SpriteDrawStatic_GetRotation }
     });
     return result;
 }

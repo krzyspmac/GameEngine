@@ -123,7 +123,6 @@ fragmentShader(
 
     // Sample the texture to obtain a color
     half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
-//    colorSample.rgba = 1.f;
 
     // Get the chosen alpha transparency for the object
     float alpha = float(*alphaPointer);

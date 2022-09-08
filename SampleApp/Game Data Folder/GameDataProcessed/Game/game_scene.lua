@@ -71,6 +71,10 @@ function GameActionScene:New()
         end
     end
 
+    local animatedSpriteAtlas = AtlasManager:SpriteAtlasLoad("TDS.json", "TDS.png")
+    o.animated = o.scene:SpriteAnimatedLoad(100, animatedSpriteAtlas)
+    o.animatedRotation = 0
+
     return o
 end
 
@@ -107,4 +111,10 @@ function GameActionScene:Update()
 
         object:SetRotation(angle, v1, v2)
     end
+
+    o.animatedRotation = o.animatedRotation + 1
+    if o.animatedRotation > 360 then
+        o.animatedRotation = 0
+    end
+    o.animated:SetRotation(o.animatedRotation, 0, 0)
 end
