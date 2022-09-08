@@ -95,12 +95,12 @@ namespace engine
 
         /// Render the drawable for the current frame at x, y. Uses the currently set lights
         /// that are to be taken into account when rendering the game objects.
-        virtual void DrawableRender(DrawableI*, float, float) = 0;
+        virtual void DrawableRender(DrawableI*, SpriteRepresentationI *spr, float, float) = 0;
 
         /// Render the drawable for the current frame at x, y. Uses the currently set lights
         /// that are to be taken into account when rendering the game objects.
         /// This version allows for custom color mod.
-        virtual void DrawableRender(DrawableI*, float, float, Color4) = 0;
+        virtual void DrawableRender(DrawableI*, SpriteRepresentationI *spr, float, float, Color4) = 0;
 
         /// Render the target drawable for the current frame at x, y.
         virtual void DrawableTargetRender(DrawableTargetI*, float, float) = 0;

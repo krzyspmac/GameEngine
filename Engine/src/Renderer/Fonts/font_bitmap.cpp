@@ -172,6 +172,7 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
         drawable->SetTexture(m_texture);
         drawable->SetScale(m_scale);
         drawable->GetAcceptsLight() = false;
+        drawable->SetRotateable(false);
         glyph.SetDrawable(drawable);
     }
 }
@@ -317,7 +318,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
             };
 
             LineRunner(text, from, to, point, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
-                provider.DrawableRender(drawable, tx, ty, colorMod);
+                provider.DrawableRender(drawable, nullptr, tx, ty, colorMod);
             }, [&](float width) {
             });
 

@@ -16,24 +16,36 @@ using namespace metal;
 #define LIGHT_FALLOUT_TYPE_LINEAR       0.f
 #define LIGHT_FALLOUT_TYPE_EXP          1.f
 
+inline float DEG2RAD(float angle) {
+    return M_PI_F * angle / 180.0f;
+}
+
+struct Uniforms {
+    float4x4 projectionMatrix;
+};
+
 vertex RasterizerData
 vertexShader(
-    uint     vertexID                                 [[ vertex_id ]]
-  , constant AAPLVertex       *vertices               [[ buffer(AAPLVertexInputIndexVertices) ]]
+    const AAPLVertexIn        vertices                [[ stage_in ]]
   , constant float            *viewportScalePointer   [[ buffer(AAPLVertexInputIndexWindowScale) ]]
   , constant vector_float2    *viewportOffset         [[ buffer(AAPLVertexInputIndexObjectOffset) ]]
   , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
   , constant vector_float2    *objectSizePointer      [[ buffer(AAPLVertexInputIndexObjectSize) ]]
   , constant vector_float2    *viewportSizePointer    [[ buffer(AAPLVertexInputIndexViewportSize) ]]
+  , constant vector_float3    *rot                    [[ buffer(AAPLVertexInputIndexRot) ]]
+  , constant float4x4         *rotationMatrix         [[ buffer(AAPLVertexInputIndexRotationMatrix) ]]
 )
 {
     RasterizerData out;
 
+    // Rotation
+    vector_float3 rotation = *rot;
+    float4x4 rotationMatrixX = *rotationMatrix;
+
     // Index into the array of positions to get the current vertex.
     // The positions are specified in pixel dimensions (i.e. a value of 100
     // is 100 pixels from the origin).
-    float2 pixelSpacePosition = vertices[vertexID].position.xy;
-    float pixelZSpacePosition = vertices[vertexID].position.z;
+    float4 pixelSpacePosition = vertices.position;
     
     // Get the viewport size and cast to float.
     vector_float2 viewportSize = vector_float2(*viewportSizePointer);
@@ -52,30 +64,44 @@ vertexShader(
 
     // Get the target object translation
     vector_float2 objectTranslation = vector_float2(*viewportOffset);
-    objectTranslation.xy *= viewportScale;
+    vector_float2 objectTranslationScaled = objectTranslation * viewportScale;
+
+    // ** translate the object by rotation vector factor
+    vector_float2 rotationTranslation = {
+        -rotation[1] * objectSize.x / 2,
+        -rotation[2] * objectSize.y / 2
+    };
+    pixelSpacePosition.xy += rotationTranslation.xy;
+
+    // Apply rotation
+    if (rotation[0] != 0.)
+    {
+        pixelSpacePosition = rotationMatrixX * pixelSpacePosition;
+    }
+
+    // ** reset any translation related to rotation
+    pixelSpacePosition.x -= rotationTranslation.x;
+    pixelSpacePosition.y -= rotationTranslation.y;
 
     // Scale the object based on the viewport scale
     pixelSpacePosition.xy *= viewportScale;
 
-    // Sacle the object based on internal scale
+    // Scale the object based on internal scale
     pixelSpacePosition.xy *= objectScale;
 
     // Translate to top-left corner
-    pixelSpacePosition.x -= (viewportSize.x - objectSizeScaled.x)/2;
-    pixelSpacePosition.y += (viewportSize.y - objectSizeScaled.y)/2;
+    pixelSpacePosition.x -= (viewportSize.x - objectSizeScaled.x) / 2;
+    pixelSpacePosition.y += (viewportSize.y - objectSizeScaled.y) / 2;
 
     // Apply translation
-    pixelSpacePosition.x += objectTranslation.x / viewportScale;
-    pixelSpacePosition.y -= objectTranslation.y / viewportScale;
+    pixelSpacePosition.x += objectTranslationScaled.x / viewportScale;
+    pixelSpacePosition.y -= objectTranslationScaled.y / viewportScale;
 
-    // To convert from positions in pixel space to positions in clip-space,
-    // divide the pixel coordinates by half the size of the viewport.
-    out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
-    out.position.xy = pixelSpacePosition / (viewportSize / 2.0);
-    out.position.z = pixelZSpacePosition;
-    
+    out.position = pixelSpacePosition;
+    out.position.xy /= viewportSize / 2.0f;
+
     // Pass the input color directly to the rasterizer.
-    out.textureCoordinate = vertices[vertexID].textureCoordinate;
+    out.textureCoordinate = vertices.textureCoordinate;
 
     return out;
 }

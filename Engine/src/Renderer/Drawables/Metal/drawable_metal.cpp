@@ -56,20 +56,20 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     // Standard, default z-axis vertex position. In metal 0 if closer to the screen, 1 is farther.
     // By default we put our sprites at the end. Setting DrawableI::SetZPosition(0) brings the
     // sprite to the front.
-    static float zStdPos = 1.0f;
+    static float zStdPos = 0.0f;
 
     AAPLVertex data[] =
     {
         // Pixel positions, Texture coordinates, normals
-        { { -width2,  -height2, zStdPos, 0.0 },   { x0, y1 } },
-        { { -width2,   height2, zStdPos, 0.0 },   { x0, y0 } },
-        { {  width2,   height2, zStdPos, 0.0 },   { x1, y0 } },
+        { { -width2,  -height2, zStdPos },   { x0, y1 } },
+        { { -width2,   height2, zStdPos },   { x0, y0 } },
+        { {  width2,   height2, zStdPos },   { x1, y0 } },
 
-        { {  width2,    height2, zStdPos, 0.0 },  { x1, y0 } },
-        { {  width2,   -height2, zStdPos, 0.0 },  { x1, y1 } },
-        { { -width2,   -height2, zStdPos, 0.0 },  { x0, y1 } },
+        { {  width2,    height2, zStdPos },  { x1, y0 } },
+        { {  width2,   -height2, zStdPos },  { x1, y1 } },
+        { { -width2,   -height2, zStdPos },  { x0, y1 } },
     };
-    
+
     m_dataSize = sizeof(data);
     
     // Allocate a buffer for metal with sufficient size. Set mode to shared.
@@ -90,6 +90,17 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
 
     // Color mod
     m_colorMod = {1.f, 1.f, 1.f};
+
+    // Rotation
+    m_rotation[0] = 0.0f;
+    m_rotation[1] = 0.0f;
+    m_rotation[2] = 0.0f;
+
+    m_rotationMatrix = simd::float4x4();
+    m_rotationMatrix.columns[0] = { 0.f, 0.f, 0.f, 0.f};
+    m_rotationMatrix.columns[1] = { 0.f, 1.f, 0.f, 0.f};
+    m_rotationMatrix.columns[2] = { 0.f, 0.f, 1.f, 0.f};
+    m_rotationMatrix.columns[3] = { 0.f, 0.f, 0.f, 1.f};
 }
 
 DrawableMetal::~DrawableMetal()
@@ -104,6 +115,37 @@ bool DrawableMetal::CanDraw()
 vector_float2 *DrawableMetal::GetSize()
 {
     return &m_size;
+}
+
+void DrawableMetal::SetRotateable(bool value)
+{
+    m_rotatable = value;
+}
+
+void DrawableMetal::SetRotation(float angle, float v1x, float v1y)
+{
+    if (!m_rotatable)
+    {   return;
+    }
+    
+    m_rotation[0] = angle;
+    m_rotation[1] = v1x;
+    m_rotation[2] = v1y;
+
+    float calcCos = cos(angle);
+    float calcSin = sin(angle);
+
+    m_rotationMatrix.columns[0][0] = calcCos;
+    m_rotationMatrix.columns[0][1] = -calcSin;
+    m_rotationMatrix.columns[1][0] = calcSin;
+    m_rotationMatrix.columns[1][1] = calcCos;
+}
+
+void DrawableMetal::GetRotation(float *outAngle, float *outV1x, float *outV1y)
+{
+    *outAngle = m_rotation[0];
+    *outV1x = m_rotation[1];
+    *outV1y = m_rotation[2];
 }
 
 void DrawableMetal::SetZPosition(float value)

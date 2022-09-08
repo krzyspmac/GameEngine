@@ -10,6 +10,7 @@
 
 #include "general.hpp"
 #include "vector2.hpp"
+#include "rotation.hpp"
 #include "line.hpp"
 #include "holder.hpp"
 

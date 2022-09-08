@@ -68,6 +68,9 @@ namespace engine
             */
         void SetVerticalAlignment(std::string);
 
+        /** Override text rotation. Texts do not rotate. */
+        void SetRotation(Rotation);
+
     public:
         void DrawAt(int x, int y);
         void Draw();

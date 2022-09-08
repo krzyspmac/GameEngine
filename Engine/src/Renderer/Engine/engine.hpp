@@ -48,8 +48,7 @@ namespace engine
         int ProcessEvents();
         void FrameBegin();
         void ProcessScript();
-        void FrameDrawBackgroundObjects();
-        void FrameDrawForegroundObjects();
+        void FrameDrawObjects();
         void FrameDrawLightObjects();
         void FrameDrawTopObjects();
         void FrameEnd();

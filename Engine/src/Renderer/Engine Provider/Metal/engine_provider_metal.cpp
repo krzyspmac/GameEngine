@@ -180,12 +180,12 @@ std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float
     return std::unique_ptr<DrawableTargetI>(std::move(drawable));
 }
 
-void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
+void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresentationI *spr, float x, float y)
 {
-    DrawableRender(baseDrawable, x, y, baseDrawable->GetColorMod());
+    DrawableRender(baseDrawable, spr, x, y, baseDrawable->GetColorMod());
 }
 
-void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y, Color4 colorMod)
+void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresentationI *spr, float x, float y, Color4 colorMod)
 {
     // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
@@ -204,6 +204,9 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     gpuColorMod.b = colorMod.b;
     gpuColorMod.a = colorMod.a;
 
+    auto &rotation = drawable->GetRotationLowLevel();
+    auto &rotationMatrix = drawable->GetRotationMatrix();
+
     // Pass data to the GPU. Render on screen or on offline-buffer specified
     // when using RendererTargetDrawablePush.
     MTL::RenderCommandEncoder *renderToPipline = m_renderEncoder;
@@ -215,6 +218,8 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexObjectScale);
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
+    renderToPipline->setVertexBytes(&rotation, sizeof(rotation), AAPLVertexInputIndexRot);
+    renderToPipline->setVertexBytes(&rotationMatrix, sizeof(rotationMatrix), AAPLVertexInputIndexRotationMatrix);
 
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), FragmentShaderIndexBaseAlpha);
 

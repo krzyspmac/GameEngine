@@ -17,6 +17,7 @@ namespace engine
     {
     private:
         Vector2 m_position;
+        Rotation m_rotation;
         float m_zPosition;
         float m_alpha;
     public:
@@ -31,6 +32,8 @@ namespace engine
         float&      GetZPosition() { return m_zPosition; };
         void        SetAlpha(float val) { m_alpha = val; };
         float       GetAlpha() { return m_alpha; };
+        void        SetRotation(Rotation rotation) { m_rotation = rotation; };
+        Rotation    &GetRotation() { return m_rotation; }
 
     private: /** scripting */
         /** @private */

@@ -38,6 +38,9 @@ namespace engine
          */
         Vector2& GetPosition() { return m_position; };
 
+        /** Set the rotation and pass it to the drawable */
+        void SetRotation(Rotation rotation);
+
         /** Set Alpha */
         void SetAlpha(float val);
         

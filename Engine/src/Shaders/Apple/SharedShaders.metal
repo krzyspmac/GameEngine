@@ -23,3 +23,21 @@ struct RasterizerData
     float2 textureCoordinate;
 };
 
+typedef enum {
+  Position = 0,
+  TextureCoordinate = 1,
+} Attributes;
+
+typedef struct
+{
+    // Positions in pixel space. A value of 100 indicates 100 pixels from the origin/center.
+//    vector_float3 position;
+//
+//    // 2D texture coordinate
+//    vector_float2 textureCoordinate;
+
+    vector_float4 position [[attribute(Position)]];
+    vector_float2 textureCoordinate [[attribute(TextureCoordinate)]];
+
+
+} AAPLVertexIn;

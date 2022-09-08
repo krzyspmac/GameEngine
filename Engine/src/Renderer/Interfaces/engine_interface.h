@@ -98,13 +98,9 @@ namespace engine
          */
         virtual void ProcessScript() = 0;
 
-        /** The `update` method. Draw the background items.
-         */
-        virtual void FrameDrawBackgroundObjects() = 0;
-
         /** The `update` method. Draw the foreground items.
          */
-        virtual void FrameDrawForegroundObjects() = 0;
+        virtual void FrameDrawObjects() = 0;
 
         /** The `update` method. Draw the top most items. Those do not get any effects.
          */

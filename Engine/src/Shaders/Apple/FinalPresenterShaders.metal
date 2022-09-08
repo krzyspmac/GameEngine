@@ -11,6 +11,10 @@ using namespace metal;
 #include "AAPLShaderTypes.h"
 #include "SharedShaders.metal"
 
+inline float angle2rad(float angle) {
+    return M_PI_F * angle / 180.0f;
+}
+
 // Vertex shader which adjusts positions by an aspect ratio and passes texture
 // coordinates through to the rasterizer.
 vertex RasterizerData
@@ -47,8 +51,21 @@ presenterVertexShader(const uint vertexID [[ vertex_id ]],
     pixelSpacePosition.x += (screenOffset.x / viewportSize.x) * scale.x * 2;
     pixelSpacePosition.y -= (screenOffset.y / viewportSize.y) * scale.y * 2;
 
+    float angle = angle2rad(0);//M_PI_F / 4.0;
+
+    float4x4 rotationMatrix = float4x4{
+    {cos(angle),        -sin(angle),          0,     0},
+    {sin(angle),        cos(angle),           0,     0},
+    {0.0,               0.0,                1.0,     0},
+    {0.0,               0.0,                0.0,     1}
+    };
+
+
+
     out.position = vector_float4(0.0, 0.0, 0.0, 1.0);
     out.position.xy = pixelSpacePosition / scale * targetAffineScale;
+    out.position = rotationMatrix * out.position;
+
     out.textureCoordinate = vertices[vertexID].textureCoordinate;
 
     return out;
