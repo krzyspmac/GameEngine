@@ -25,6 +25,8 @@ typedef enum AAPLVertexInputIndex
                                                     // size of the framebuffer texture
     AAPLVertexInputIndexRot             = 7,
     AAPLVertexInputIndexOrtho           = 8,
+    AAPLVertexInputIndexTranslation     = 9,
+    AAPLVertexInputIndexTranslationInv  = 10
 } AAPLVertexInputIndex;
 
 typedef enum FragmentShaderIndex
