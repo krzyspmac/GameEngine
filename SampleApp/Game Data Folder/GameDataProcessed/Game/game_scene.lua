@@ -31,6 +31,7 @@ function GameActionScene:Setup()
     -- self.spriteSky:SetScale(self.confScale)
     -- self.spriteFloor:SetScale(self.confScale)
     self.spriteBackground:SetScale(1)
+    self.spriteBackground:SetRotation(45, 1, 1);
     -- self.spriteBackground:SetPosition(300, 300)
 
     EventsManager:RegisterMouseClickedEvents(function(x, y)

@@ -16,7 +16,7 @@ using namespace metal;
 #define LIGHT_FALLOUT_TYPE_LINEAR       0.f
 #define LIGHT_FALLOUT_TYPE_EXP          1.f
 
-inline float angle2rad(float angle) {
+inline float DEG2RAD(float angle) {
     return M_PI_F * angle / 180.0f;
 }
 
@@ -33,16 +33,18 @@ vertexShader(
   , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
   , constant vector_float2    *objectSizePointer      [[ buffer(AAPLVertexInputIndexObjectSize) ]]
   , constant vector_float2    *viewportSizePointer    [[ buffer(AAPLVertexInputIndexViewportSize) ]]
-  , constant float            *rot                    [[ buffer(AAPLVertexInputIndexRot) ]]
+  , constant vector_float2    *rot                    [[ buffer(AAPLVertexInputIndexRot) ]]
   , constant Uniforms         &uniforms               [[buffer(AAPLVertexInputIndexOrtho)]]
 )
 {
     RasterizerData out;
 
+    // Rotation
+    vector_float2 rotation = *rot;
+
     // Index into the array of positions to get the current vertex.
     // The positions are specified in pixel dimensions (i.e. a value of 100
     // is 100 pixels from the origin).
-
     float4 pixelSpacePosition = vertices.position;
     
     // Get the viewport size and cast to float.
@@ -78,16 +80,16 @@ vertexShader(
     pixelSpacePosition.x += objectTranslation.x / viewportScale;
     pixelSpacePosition.y -= objectTranslation.y / viewportScale;
 
-    float angle = angle2rad(*rot);//M_PI_F / 4.0;
-
+    // Apply rotation
+    float angle = DEG2RAD(rotation.x);
     float ccc = cos(angle);
     float sss = sin(angle);
 
     float4x4 rotationMatrixX = float4x4{
-    {ccc,        -sss,          0,     0},
-    {sss,        ccc,           0,     0},
-    {0.0,               0.0,                1.0,     0},
-    {0.0,               0.0,                0.0,     1}
+    {ccc,        -sss,      0.f,     0.f},
+    {sss,        ccc,       0.f,     0.f},
+    {0.f,        0.f,       1.0f,    0.f},
+    {0.f,        0.f,       0.f,     1.f}
     };
 
     // To convert from positions in pixel space to positions in clip-space,

@@ -317,7 +317,7 @@ void FontBitmapRepresentation::DrawAt(std::string text, float xo, float yo, int 
             };
 
             LineRunner(text, from, to, point, lineMultiplier, [&](DrawableI *drawable, float tx, float ty){
-                provider.DrawableRender(drawable, tx, ty, colorMod);
+                provider.DrawableRender(drawable, nullptr, tx, ty, colorMod);
             }, [&](float width) {
             });
 

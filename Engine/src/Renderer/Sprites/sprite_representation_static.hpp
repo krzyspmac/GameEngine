@@ -49,6 +49,9 @@ namespace engine
         /** Get the current sprite atlas item for this sprite */
         SpriteAtlasItemI *GetSpriteAtlasItem() { return m_sprite; };
 
+        /** Set the rotation and pass it to the drawable */
+        void SetRotation(Rotation rotation);
+
         /** Draws the sprite.
          */
         void DrawAt(int x, int y);

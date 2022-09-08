@@ -23,7 +23,7 @@ SpriteRepresentationStatic::SpriteRepresentationStatic(SpriteAtlasItemI *spriteA
 void SpriteRepresentationStatic::DrawAt(int x, int y)
 {
     EngineProviderI &provider = ENGINE().getProvider();
-    provider.DrawableRender(m_drawable.get(), x, y);
+    provider.DrawableRender(m_drawable.get(), this, x, y);
 }
 
 void SpriteRepresentationStatic::SetPosition(Vector2 &pos)
@@ -35,6 +35,12 @@ void SpriteRepresentationStatic::SetZPosition(float zPos)
 {
     SpriteRepresentationI::SetZPosition(zPos);
     m_drawable->SetZPosition(zPos);
+}
+
+void SpriteRepresentationStatic::SetRotation(Rotation rotation)
+{
+    SpriteRepresentationI::SetRotation(rotation);
+    m_drawable->SetRotation(rotation.angle, rotation.anchor.x, rotation.anchor.y);
 }
 
 void SpriteRepresentationStatic::SetScale(float x)
@@ -164,6 +170,16 @@ static int lua_setZPosition(lua_State *L)
     return 0;
 }
 
+static int lua_setRotation(lua_State *L)
+{
+    SpriteRepresentationStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 1);
+    float value = lua_tonumber(L, 2);
+    float vec1 = lua_tonumber(L, 3);
+    float vec2 = lua_tonumber(L, 4);
+    spr->SetRotation(Rotation(value, Vector2(vec1, vec2)));
+    return 0;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -178,7 +194,8 @@ std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
         {"SetAcceptsLight", &lua_SpriteDrawStatic_SetAcceptsLight},
         {"SetType", &lua_SpriteDrawStatic_SetType},
         {"SetColorMod", &lua_SetColorMod},
-        {"SetZPosition", &lua_setZPosition}
+        {"SetZPosition", &lua_setZPosition},
+        {"SetRotation", &lua_setRotation}
     });
     return result;
 }

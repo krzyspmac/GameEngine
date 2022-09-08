@@ -28,9 +28,14 @@ namespace engine
         TextureMetal *m_texture;
         size_t m_vertexCount;
         vector_float3 m_colorMod;
+        vector_float3 m_rotation;
+    public:
+        DrawableMetal(MTL::Device*, SpriteAtlasItemI*);
+    public: // DrawableI
+        void SetRotation(float, float, float);
+        void GetRotation(float*, float*, float*);
     public: // DrawableSpriteI
         /** Construct a drawable for metal given a sprite descriptor */
-        DrawableMetal(MTL::Device*, SpriteAtlasItemI*);
         void SetZPosition(float value);
         virtual ~DrawableMetal();
         bool CanDraw();
@@ -66,6 +71,12 @@ namespace engine
     public:
         DrawableTargetMetal(MTL::Device*, MTL::CommandBuffer*, TextureTargetMetal*);
         ~DrawableTargetMetal();
+
+    public:
+        void SetRotation(float, float, float) { };
+        void GetRotation(float*, float*, float*) { };
+
+    public:
         bool CanDraw();
         void UpdateCommandEncoder(MTL::CommandBuffer*);
         MTL::RenderCommandEncoder *GetEncoder() { return m_encoder; };

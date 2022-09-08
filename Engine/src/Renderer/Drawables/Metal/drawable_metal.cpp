@@ -70,7 +70,6 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
         { { -width2,   -height2, zStdPos },  { x0, y1 } },
     };
 
-
     m_dataSize = sizeof(data);
     
     // Allocate a buffer for metal with sufficient size. Set mode to shared.
@@ -91,6 +90,11 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
 
     // Color mod
     m_colorMod = {1.f, 1.f, 1.f};
+
+    // Rotation
+    m_rotation[0] = 0.0f;
+    m_rotation[1] = 0.0f;
+    m_rotation[2] = 0.0f;
 }
 
 DrawableMetal::~DrawableMetal()
@@ -105,6 +109,20 @@ bool DrawableMetal::CanDraw()
 vector_float2 *DrawableMetal::GetSize()
 {
     return &m_size;
+}
+
+void DrawableMetal::SetRotation(float angle, float v1x, float v1y)
+{
+    m_rotation[0] = angle;
+    m_rotation[1] = v1x;
+    m_rotation[2] = v1y;
+}
+
+void DrawableMetal::GetRotation(float *outAngle, float *outV1x, float *outV1y)
+{
+    *outAngle = m_rotation[0];
+    *outV1x = m_rotation[1];
+    *outV1y = m_rotation[2];
 }
 
 void DrawableMetal::SetZPosition(float value)

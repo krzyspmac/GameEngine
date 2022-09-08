@@ -176,6 +176,7 @@ void CharacterRenderer::DrawBody(CharacterWalkRenderer &renderer, bool isAnimati
     drawable->SetScale(m_scale);
     provider.DrawableRender(
         drawable
+      , nullptr
       , position.x - (widthDifference * m_scale) - ceil(bodyRenderer->GetBodyOffsetX() * m_scale)  // - (m_bodyWidth * m_scale / 2)
       , position.y
     );
@@ -205,6 +206,7 @@ void CharacterRenderer::DrawHead(CharacterWalkRenderer &renderer, bool isAnimati
 
     provider.DrawableRender(
         drawable
+      , nullptr
       , position.x - ceil(x * m_scale)
       , position.y - (m_headHeadHeight * m_scale * 2)  // + y + (m_headHeadHeight * m_scale)
     );

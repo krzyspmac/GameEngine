@@ -180,12 +180,12 @@ std::unique_ptr<DrawableTargetI> EngineProviderMetal::DrawableTargetCreate(float
     return std::unique_ptr<DrawableTargetI>(std::move(drawable));
 }
 
-void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y)
+void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresentationI *spr, float x, float y)
 {
-    DrawableRender(baseDrawable, x, y, baseDrawable->GetColorMod());
+    DrawableRender(baseDrawable, spr, x, y, baseDrawable->GetColorMod());
 }
 
-void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float y, Color4 colorMod)
+void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresentationI *spr, float x, float y, Color4 colorMod)
 {
     // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);
@@ -203,6 +203,10 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     gpuColorMod.g = colorMod.g;
     gpuColorMod.b = colorMod.b;
     gpuColorMod.a = colorMod.a;
+
+    float r1, r2, r3;
+    drawable->GetRotation(&r1, &r2, &r3);
+    simd_float3 rotation = { r1, r2, r3 };
 
     auto size = *(drawable->GetSize());
 
@@ -229,12 +233,21 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
 
     static float rot = 0.0f;
 
+//    rot = drawable->GetRotation
+
 //    if (mTime.GetEngineStartSec() && 5.0 == 0) {
 
-        rot += 0.01;
+//        rot += 0.01;
 //    }
 
     if (rot >= 360) { rot = 0.0f; };
+
+    if (spr != nullptr)
+    {
+//        rot = spr->GetRotation().angle;
+    }
+
+
 
     renderToPipline->setVertexBuffer(drawable->GetVertexBuffer(), drawable->GetVertexBufferOffset(), AAPLVertexInputIndexVertices);
     renderToPipline->setVertexBytes(&m_viewportSize, sizeof(m_viewportSize), AAPLVertexInputIndexWindowSize);
@@ -243,10 +256,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, float x, float
     renderToPipline->setVertexBytes(drawable->GetScale(), sizeof(float), AAPLVertexInputIndexObjectScale);
     renderToPipline->setVertexBytes(drawable->GetSize(), sizeof(vector_float2), AAPLVertexInputIndexObjectSize);
     renderToPipline->setVertexBytes(&m_desiredViewport, sizeof(vector_float2), AAPLVertexInputIndexViewportSize);
-    renderToPipline->setVertexBytes(&rot, sizeof(float), AAPLVertexInputIndexRot);
-    renderToPipline->setVertexBytes(&ortho_projection, sizeof(ortho_projection), AAPLVertexInputIndexOrtho);
-
-
+    renderToPipline->setVertexBytes(&rotation, sizeof(rotation), AAPLVertexInputIndexRot);
 
     renderToPipline->setFragmentBytes(drawable->GetAlpha(), sizeof(float), FragmentShaderIndexBaseAlpha);
 

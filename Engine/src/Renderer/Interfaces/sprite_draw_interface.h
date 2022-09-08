@@ -34,6 +34,7 @@ namespace engine
             : m_scale(scale)
             , m_position(Vector2Zero)
             , m_zPosition(0.0f)
+            , m_rotation(Rotation::empty())
             , m_isDrawable(true)
             , m_colorMod({1.f, 1.f, 1.f})
             , m_type(SPRITE_DRAW_TYPE_FOREGROUND)
@@ -58,6 +59,8 @@ namespace engine
         float&      GetZPosition() { return m_zPosition; };
         void        SetAlpha(float val) { if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val); };
         float       GetAlpha() { return *m_drawable.get()->GetAlpha(); };
+        void        SetRotation(Rotation rotation) { m_rotation = rotation; };
+        Rotation    &GetRotation() { return m_rotation; }
 
     public:
         /** Control whether the object receives lights or not. If false it's
@@ -91,6 +94,7 @@ namespace engine
         int m_scale;
         Vector2 m_position;
         float m_zPosition;
+        Rotation m_rotation;
         bool m_acceptsLight;
         SpriteDrawType m_type;
         Color4 m_colorMod;

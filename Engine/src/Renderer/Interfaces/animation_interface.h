@@ -89,6 +89,12 @@ namespace engine
 
         /** Get this sprite's position in game coordinates */
         virtual Vector2& GetPosition() = 0;
+
+        /** Set rotation, specify anchor point in x,y (-1 -> 1)*/
+        virtual void SetRotation(Rotation) = 0;
+
+        /** Get this sprite's rotation */
+        virtual Rotation &GetRotation() = 0;
     };
 
     /**

@@ -75,6 +75,12 @@ namespace engine
         /** Get the color mod */
         virtual Color4& GetColorMod() { return m_colorMod; };
 
+        /** Rotation, low-level */
+        virtual void SetRotation(float, float, float) = 0;
+
+        /** Rotation, low-level */
+        virtual void GetRotation(float*, float*, float*) = 0;
+
     public: // Texture related
 
         /** Set the drawable texture */
