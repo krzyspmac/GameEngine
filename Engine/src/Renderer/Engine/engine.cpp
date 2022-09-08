@@ -156,21 +156,12 @@ void Engine::ProcessScript()
     m_scriptingEngine.callUpdate();
 }
 
-void Engine::FrameDrawBackgroundObjects()
+void Engine::FrameDrawObjects()
 {
     Scene *scene = m_sceneManager.SceneGetCurrent();
     if (scene != nullptr)
     {
-        scene->RenderSceneBackground();
-    }
-}
-
-void Engine::FrameDrawForegroundObjects()
-{
-    Scene *scene = m_sceneManager.SceneGetCurrent();
-    if (scene != nullptr)
-    {
-        scene->RenderSceneForeground();
+        scene->RenderSceneSprites();
     }
 }
 

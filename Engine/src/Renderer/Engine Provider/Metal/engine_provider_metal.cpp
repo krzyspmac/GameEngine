@@ -208,16 +208,6 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresen
     drawable->GetRotation(&r1, &r2, &r3);
     simd_float3 rotation = { r1, r2, r3 };
 
-    if (*drawable->GetScale() != 1.f)
-    {
-        r1 += DEG2RAD(0.6);
-        if (r1 >= M_PI)
-        {
-            r1 = 0.f;
-        }
-        drawable->SetRotation(r1, r2, r3);
-    }
-
     auto &rotationMatrix = drawable->GetRotationMatrix();
 
     // Pass data to the GPU. Render on screen or on offline-buffer specified

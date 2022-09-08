@@ -17,6 +17,7 @@
 #include "character_representation.hpp"
 #include "light_interface.hpp"
 #include "font_interface.h"
+#include "callable.hpp"
 #include "common.h"
 #include <iostream>
 
@@ -33,6 +34,7 @@ namespace engine
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
         unsigned int m_mouseDownIdentifier;
+        CallableScriptFunctionSciptableInstance m_frameUpdateCallback;
         bool m_isActive;
     ///
     public:
@@ -42,15 +44,11 @@ namespace engine
 
     /// Rederer
     public:
-        /** Render the scene including only objects marked as `background`.
+        /** Render the scene sprites. If set this will also call the update function
+            before any rendering occurs.
             @private
         */
-        void RenderSceneBackground();
-
-        /** Render the scene including only objects marked as `foreground`.
-            @private
-        */
-        void RenderSceneForeground();
+        void RenderSceneSprites();
 
         /**
          Called by the engine. Reacts to mouse clicks.
@@ -135,6 +133,13 @@ namespace engine
          to the the LightManager.
          */
         LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
+
+        /**
+         \brief Register for a frame update. This will permamently add the observer
+         for the frame udpate. The frame update funciton will be called only for
+         the active scene.
+         */
+        void RegisterFrameUpdate(CallableScriptFunctionParametersEmpty);
 
     public: /** Getters */
 

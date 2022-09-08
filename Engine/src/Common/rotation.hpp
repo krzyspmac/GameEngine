@@ -48,8 +48,12 @@ namespace engine
     } Rotation;
 
     inline float DEG2RAD(float angle) {
-        return M_PI * angle / 180.0f;
+        return M_PI * angle / 180.f;
     }
+
+    inline float RAD2DEG(float angle) {
+        return angle * 180.f / M_PI;
+    };
 };
 
 #endif /* rotation_h */

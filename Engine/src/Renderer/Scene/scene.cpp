@@ -19,6 +19,7 @@ Scene::Scene()
     , m_mouseDownFunctionRef(-1)
     , m_engineProvider(ENGINE().getProvider())
     , m_mouseDownIdentifier(-1)
+    , m_frameUpdateCallback(CallableScriptFunctionParametersEmpty::none())
     , m_isActive(false)
 {
     m_mouseDownIdentifier = ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
@@ -128,41 +129,25 @@ void Scene::SetMouseDownFunction(int mouseFunctionRef)
     m_mouseDownFunctionRef = mouseFunctionRef;
 }
 
-void Scene::RenderSceneBackground()
+void Scene::RenderSceneSprites()
 {
+    if (m_frameUpdateCallback.CanCall())
+    {
+        m_frameUpdateCallback.PerformCall([&](lua_State *L){
+            this->ScriptingInterfaceRegisterFunctions(L, this);
+            return 1;
+        });
+    }
+
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
         SpriteRepresentationI *sprite = (*it);
-        if (sprite->GetType() != SPRITE_DRAW_TYPE_BACKGROUND)
-        {
-            continue;
-        }
-
-        Vector2& pos = sprite->GetPosition();
-        (*it)->DrawAt(pos.x, pos.y);
-    };
-}
-
-void Scene::RenderSceneForeground()
-{
-    for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
-    {
-        SpriteRepresentationI *sprite = (*it);
-        if (sprite->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
-        {
-            continue;
-        }
-
         Vector2& pos = sprite->GetPosition();
         (*it)->DrawAt(pos.x, pos.y);
     };
 
     for (auto* item : m_animatedSprites)
     {
-        if (item->GetType() != SPRITE_DRAW_TYPE_FOREGROUND)
-        {
-            continue;
-        }
         Vector2& pos = item->GetPosition();
         item->DrawAt(pos.x, pos.y);
     }
@@ -190,6 +175,11 @@ LightI* Scene::CreateLight(std::string type, Color3 color, float ambientIntensit
     {
         return nullptr;
     }
+}
+
+void Scene::RegisterFrameUpdate(CallableScriptFunctionParametersEmpty function)
+{
+    m_frameUpdateCallback = function;
 }
 
 #pragma mark - Scripting Interface
@@ -298,6 +288,17 @@ static int lua_Scene_CreateLight(lua_State *L)
     return 1;
 }
 
+static int lua_Scene_RegisterFrameUpdate(lua_State *L)
+{
+    Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
+
+    int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    CallableScriptFunctionParametersEmpty function = CallableScriptFunctionParametersEmpty(functionEndRef);
+
+    scene->RegisterFrameUpdate(function);
+    return 0;
+}
+
 static int lua_Scene_GetIsActivated(lua_State *L)
 {
     Scene *scene = ScriptingEngineI::GetScriptingObjectPtr<Scene>(L, 1);
@@ -316,6 +317,7 @@ std::vector<luaL_Reg> Scene::ScriptingInterfaceFunctions()
       , {"SetMainCharacter", &lua_Scene_SetMainCharacter}
       , {"SetMouseDownFunction", &lua_Scene_SetMouseDownFunction}
       , {"CreateLight", &lua_Scene_CreateLight}
+      , {"RegisterFrameUpdate", &lua_Scene_RegisterFrameUpdate}
       , {"GetIsActivated", &lua_Scene_GetIsActivated}
     });
     return result;

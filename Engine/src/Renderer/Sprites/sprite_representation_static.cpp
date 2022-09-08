@@ -180,6 +180,16 @@ static int lua_setRotation(lua_State *L)
     return 0;
 }
 
+static int lua_getRotation(lua_State *L)
+{
+    SpriteRepresentationStatic *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationStatic>(L, 1);
+    auto &rotation = spr->GetRotation();
+    lua_pushnumber(L, RAD2DEG(rotation.angle));
+    lua_pushnumber(L, rotation.anchor.x);
+    lua_pushnumber(L, rotation.anchor.y);
+    return 3;
+}
+
 std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -195,7 +205,8 @@ std::vector<luaL_Reg> SpriteRepresentationStatic::ScriptingInterfaceFunctions()
         {"SetType", &lua_SpriteDrawStatic_SetType},
         {"SetColorMod", &lua_SetColorMod},
         {"SetZPosition", &lua_setZPosition},
-        {"SetRotation", &lua_setRotation}
+        {"SetRotation", &lua_setRotation},
+        {"GetRotation", &lua_getRotation}
     });
     return result;
 }
