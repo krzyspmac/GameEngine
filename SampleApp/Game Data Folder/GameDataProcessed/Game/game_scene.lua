@@ -30,9 +30,9 @@ function GameActionScene:Setup()
     -- self.spriteBackground:SetScale(self.confScale)
     -- self.spriteSky:SetScale(self.confScale)
     -- self.spriteFloor:SetScale(self.confScale)
-    self.spriteBackground:SetScale(1)
-    self.spriteBackground:SetRotation(45, 1, 1);
-    -- self.spriteBackground:SetPosition(300, 300)
+    self.spriteBackground:SetScale(0.25)
+    self.spriteBackground:SetRotation(0, -1, -1);
+    self.spriteBackground:SetPosition(300, 300)
 
     EventsManager:RegisterMouseClickedEvents(function(x, y)
         print("GameActionScene Mouse clicked position = " .. x .. ", " .. y)

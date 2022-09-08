@@ -95,6 +95,12 @@ DrawableMetal::DrawableMetal(MTL::Device *device, SpriteAtlasItemI *atlasItem)
     m_rotation[0] = 0.0f;
     m_rotation[1] = 0.0f;
     m_rotation[2] = 0.0f;
+
+    m_rotationMatrix = simd::float4x4();
+    m_rotationMatrix.columns[0] = { 0.f, 0.f, 0.f, 0.f};
+    m_rotationMatrix.columns[1] = { 0.f, 1.f, 0.f, 0.f};
+    m_rotationMatrix.columns[2] = { 0.f, 0.f, 1.f, 0.f};
+    m_rotationMatrix.columns[3] = { 0.f, 0.f, 0.f, 1.f};
 }
 
 DrawableMetal::~DrawableMetal()
@@ -111,11 +117,28 @@ vector_float2 *DrawableMetal::GetSize()
     return &m_size;
 }
 
+void DrawableMetal::SetRotateable(bool value)
+{
+    m_rotatable = value;
+}
+
 void DrawableMetal::SetRotation(float angle, float v1x, float v1y)
 {
+    if (!m_rotatable)
+    {   return;
+    }
+    
     m_rotation[0] = angle;
     m_rotation[1] = v1x;
     m_rotation[2] = v1y;
+
+    float calcCos = cos(angle);
+    float calcSin = sin(angle);
+
+    m_rotationMatrix.columns[0][0] = calcCos;
+    m_rotationMatrix.columns[0][1] = -calcSin;
+    m_rotationMatrix.columns[1][0] = calcSin;
+    m_rotationMatrix.columns[1][1] = calcCos;
 }
 
 void DrawableMetal::GetRotation(float *outAngle, float *outV1x, float *outV1y)

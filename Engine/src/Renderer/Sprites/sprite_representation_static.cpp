@@ -176,7 +176,7 @@ static int lua_setRotation(lua_State *L)
     float value = lua_tonumber(L, 2);
     float vec1 = lua_tonumber(L, 3);
     float vec2 = lua_tonumber(L, 4);
-    spr->SetRotation(Rotation(value, Vector2(vec1, vec2)));
+    spr->SetRotation(Rotation(DEG2RAD(value), Vector2(vec1, vec2)));
     return 0;
 }
 

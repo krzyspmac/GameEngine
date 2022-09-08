@@ -47,6 +47,11 @@ void SpriteRepresentationText::SetZPosition(float zPos)
     m_bitmapFont->SetZPosition(zPos);
 }
 
+void SpriteRepresentationText::SetRotation(Rotation)
+{
+    // do nothing
+}
+
 void SpriteRepresentationText::SetAcceptsLight(bool val)
 {
     SpriteRepresentationI::SetAcceptsLight(val);

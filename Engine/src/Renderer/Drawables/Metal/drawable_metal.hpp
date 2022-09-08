@@ -29,11 +29,13 @@ namespace engine
         size_t m_vertexCount;
         vector_float3 m_colorMod;
         vector_float3 m_rotation;
+        simd::float4x4 m_rotationMatrix;
     public:
         DrawableMetal(MTL::Device*, SpriteAtlasItemI*);
     public: // DrawableI
         void SetRotation(float, float, float);
         void GetRotation(float*, float*, float*);
+        void SetRotateable(bool);
     public: // DrawableSpriteI
         /** Construct a drawable for metal given a sprite descriptor */
         void SetZPosition(float value);
@@ -49,6 +51,9 @@ namespace engine
         TextureMetal *GetTexture() { return m_texture; };
         vector_float3 *GetColorModMetal();
         void SetColorMod(Color3 mod);
+
+    public: // Hardware implementation based
+        auto& GetRotationMatrix() { return m_rotationMatrix; };
     };
 
     /** Defines a concrete metal class for the target drawable that is capable of
@@ -75,7 +80,7 @@ namespace engine
     public:
         void SetRotation(float, float, float) { };
         void GetRotation(float*, float*, float*) { };
-
+        void SetRotateable(bool) { };
     public:
         bool CanDraw();
         void UpdateCommandEncoder(MTL::CommandBuffer*);

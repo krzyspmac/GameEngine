@@ -14,11 +14,18 @@
 #include "common.h"
 #include "vector2.hpp"
 
-namespace engine {
-
-    typedef struct Rotation {
-
+namespace engine
+{
+    typedef struct Rotation
+    {
+        /** Angle in radians */
         float angle;
+
+        /** Point pointing to the anchor position that is used during the rotation
+            -1,1       1,1
+                  0,0
+            -1,-1      1,-1
+        */
         Vector2 anchor;
 
         Rotation()
@@ -40,6 +47,9 @@ namespace engine {
         }
     } Rotation;
 
+    inline float DEG2RAD(float angle) {
+        return M_PI * angle / 180.0f;
+    }
 };
 
 #endif /* rotation_h */

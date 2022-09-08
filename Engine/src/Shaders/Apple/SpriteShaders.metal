@@ -27,20 +27,20 @@ struct Uniforms {
 vertex RasterizerData
 vertexShader(
     const AAPLVertexIn        vertices                [[ stage_in ]]
-  , constant AAPLVertex       *vertices_o             [[ buffer(AAPLVertexInputIndexVertices) ]]
   , constant float            *viewportScalePointer   [[ buffer(AAPLVertexInputIndexWindowScale) ]]
   , constant vector_float2    *viewportOffset         [[ buffer(AAPLVertexInputIndexObjectOffset) ]]
   , constant float            *objectScalePointer     [[ buffer(AAPLVertexInputIndexObjectScale) ]]
   , constant vector_float2    *objectSizePointer      [[ buffer(AAPLVertexInputIndexObjectSize) ]]
   , constant vector_float2    *viewportSizePointer    [[ buffer(AAPLVertexInputIndexViewportSize) ]]
-  , constant vector_float2    *rot                    [[ buffer(AAPLVertexInputIndexRot) ]]
-  , constant Uniforms         &uniforms               [[buffer(AAPLVertexInputIndexOrtho)]]
+  , constant vector_float3    *rot                    [[ buffer(AAPLVertexInputIndexRot) ]]
+  , constant float4x4         *rotationMatrix         [[ buffer(AAPLVertexInputIndexRotationMatrix) ]]
 )
 {
     RasterizerData out;
 
     // Rotation
-    vector_float2 rotation = *rot;
+    vector_float3 rotation = *rot;
+    float4x4 rotationMatrixX = *rotationMatrix;
 
     // Index into the array of positions to get the current vertex.
     // The positions are specified in pixel dimensions (i.e. a value of 100
@@ -64,40 +64,41 @@ vertexShader(
 
     // Get the target object translation
     vector_float2 objectTranslation = vector_float2(*viewportOffset);
-    objectTranslation.xy *= viewportScale;
+    vector_float2 objectTranslationScaled = objectTranslation * viewportScale;
+
+    // ** translate the object by rotation vector factor
+    vector_float2 rotationTranslation = {
+        -rotation[1] * objectSize.x / 2,
+        -rotation[2] * objectSize.y / 2
+    };
+    pixelSpacePosition.xy += rotationTranslation.xy;
+
+    // Apply rotation
+    if (rotation[0] != 0.)
+    {
+        pixelSpacePosition = rotationMatrixX * pixelSpacePosition;
+    }
+
+    // ** reset any translation related to rotation
+    pixelSpacePosition.x -= rotationTranslation.x;
+    pixelSpacePosition.y -= rotationTranslation.y;
 
     // Scale the object based on the viewport scale
     pixelSpacePosition.xy *= viewportScale;
 
-    // Sacle the object based on internal scale
+    // Scale the object based on internal scale
     pixelSpacePosition.xy *= objectScale;
 
     // Translate to top-left corner
-    pixelSpacePosition.x -= (viewportSize.x - objectSizeScaled.x)/2;
-    pixelSpacePosition.y += (viewportSize.y - objectSizeScaled.y)/2;
+    pixelSpacePosition.x -= (viewportSize.x - objectSizeScaled.x) / 2;
+    pixelSpacePosition.y += (viewportSize.y - objectSizeScaled.y) / 2;
 
     // Apply translation
-    pixelSpacePosition.x += objectTranslation.x / viewportScale;
-    pixelSpacePosition.y -= objectTranslation.y / viewportScale;
+    pixelSpacePosition.x += objectTranslationScaled.x / viewportScale;
+    pixelSpacePosition.y -= objectTranslationScaled.y / viewportScale;
 
-    // Apply rotation
-    float angle = DEG2RAD(rotation.x);
-    float ccc = cos(angle);
-    float sss = sin(angle);
-
-    float4x4 rotationMatrixX = float4x4{
-    {ccc,        -sss,      0.f,     0.f},
-    {sss,        ccc,       0.f,     0.f},
-    {0.f,        0.f,       1.0f,    0.f},
-    {0.f,        0.f,       0.f,     1.f}
-    };
-
-    // To convert from positions in pixel space to positions in clip-space,
-    // divide the pixel coordinates by half the size of the viewport.
-
-    out.position = rotationMatrixX * pixelSpacePosition;
-    out.position.x /= viewportSize.x / 2.0;
-    out.position.y /= viewportSize.y / 2.0;
+    out.position = pixelSpacePosition;
+    out.position.xy /= viewportSize / 2.0f;
 
     // Pass the input color directly to the rasterizer.
     out.textureCoordinate = vertices.textureCoordinate;
@@ -122,6 +123,7 @@ fragmentShader(
 
     // Sample the texture to obtain a color
     half4 colorSample = colorTexture.sample(textureSampler, in.textureCoordinate);
+//    colorSample.rgba = 1.f;
 
     // Get the chosen alpha transparency for the object
     float alpha = float(*alphaPointer);

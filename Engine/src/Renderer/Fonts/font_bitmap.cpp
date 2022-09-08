@@ -172,6 +172,7 @@ FontBitmapRepresentation::FontBitmapRepresentation(std::string fntFile, std::str
         drawable->SetTexture(m_texture);
         drawable->SetScale(m_scale);
         drawable->GetAcceptsLight() = false;
+        drawable->SetRotateable(false);
         glyph.SetDrawable(drawable);
     }
 }

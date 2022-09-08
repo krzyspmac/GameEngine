@@ -34,6 +34,7 @@ namespace engine
         float m_zPos;
         bool m_flippedHorizontally;
         bool m_acceptsLight;
+        bool m_rotatable;
     public:
         DrawableI(float width, float height)
             : m_scale(1.0f)
@@ -43,6 +44,7 @@ namespace engine
             , m_textureRect( { {0, 0}, {(int)width, (int)height} } )
             , m_acceptsLight(true)
             , m_colorMod{1.f, 1.f, 1.f, 1.f}
+            , m_rotatable(true)
         { };
 
         virtual ~DrawableI() { };
@@ -80,6 +82,9 @@ namespace engine
 
         /** Rotation, low-level */
         virtual void GetRotation(float*, float*, float*) = 0;
+
+        /** Rotatable */
+        virtual void SetRotateable(bool) = 0;
 
     public: // Texture related
 
