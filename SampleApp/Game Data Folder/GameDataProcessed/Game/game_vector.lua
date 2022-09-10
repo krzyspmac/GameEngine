@@ -44,10 +44,15 @@ function mt.__le(lhs, rhs)
 end
 
 function mt:__tostring()
-    return "("..self.x..", "..self.y..")"
+    return "Vector2("..self.x..", "..self.y..")"
 end
 
 -- functionalities
+
+mt.set = function(self, x, y)
+    self.x = x
+    self.y = y
+end
 
 mt.translateBy = function(self, x, y)
     self.x = self.x + x
@@ -94,5 +99,5 @@ local ctor = function(cls, ...)
     return new(...)
 end
 
--- return the whole module
+-- return the module
 return setmetatable({}, { __call = ctor })
