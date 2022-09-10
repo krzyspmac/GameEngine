@@ -43,6 +43,10 @@ function GameActionScene:Setup()
         self:UpdateMovement()
     end)
 
+    EventsManager:RegisterKeyShortcutsEvents("", "w", function()
+        print("w pressed")
+    end)
+
     self.scene:RegisterFrameUpdate(function()
         self:Update()
     end)
@@ -58,8 +62,8 @@ function GameActionScene:UpdateMovement()
 end
 
 function GameActionScene:Update()
-
     -- modify the position
+    self.im:frameUpdate()
 
     -- update character location
     local x, y = self.im.position:unpack()
