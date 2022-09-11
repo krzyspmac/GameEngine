@@ -29,7 +29,7 @@ namespace engine
     /** The base class for all event holder types. Identifier is used to mark
         the event in order to remove it from the event hander list. */
     /** @private */
-    template <class T>
+    template <typename T>
     class EventHolderI
     {
         EventIdentifier m_identifier;
@@ -128,6 +128,21 @@ namespace engine
 
         void Process(void *val);
     };
+
+    /** Script variation of the EventHolderKeyShortcutPressed */
+    class EventHolderKeyDown: public EventHolderI<char>, public EventHolderScript
+    {
+        CallableScriptFunctionParameters1<char> m_script;
+    public:
+        EventHolderKeyDown(EventIdentifier identifier, CallableScriptFunctionParameters1<char> fnc)
+            : EventHolderI<char>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(char*);
+    };
+
 };
 
 #endif /* events_manager_types_hpp */

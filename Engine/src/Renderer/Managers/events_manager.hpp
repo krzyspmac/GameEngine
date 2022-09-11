@@ -117,6 +117,11 @@ namespace engine
          */
         EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionParametersEmpty);
 
+        /** Register any key down event */
+        EventIdentifier RegisterKeyDown(CallableScriptFunctionParameters1<char>);
+
+        EventIdentifier RegisterKeyUp(CallableScriptFunctionParameters1<char>);
+
         /** Unregisters an event for a given identifier. */
         void UnregisterEvent(EventIdentifier);
 
@@ -151,10 +156,12 @@ namespace engine
         std::vector<EventHolderMouseClickedScript> m_mouseClickedScript;
         std::vector<EventHolderKeyShortcutLambda> m_keyshortcuts;
         std::vector<EventHolderKeyShortcutPressedScript> m_keyshortcutsScript;
-
+        std::vector<EventHolderKeyDown> m_keyDowns;
+        std::vector<EventHolderKeyDown> m_keyUps;
         bool m_shiftKeyDown;
         bool m_controlKeyDown;
         bool m_keys[KEY_TABLE_SIZE];
+        char m_keysWrapper[2];
     };
 };
 

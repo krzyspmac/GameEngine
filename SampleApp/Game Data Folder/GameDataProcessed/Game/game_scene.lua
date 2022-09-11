@@ -7,6 +7,7 @@ require "game_vector"
 
 local Vector2 = require "game_vector"
 local IntertiaManager = require "game_inertia_manager"
+local GameInput = require "game_input"
 
 --------------------------------
 -- class definition
@@ -19,6 +20,7 @@ function GameActionScene:New()
     setmetatable(o, GameActionScene)
     self.__index = self
 
+    o.gameInput = GameInput()
     o.im = IntertiaManager()
 
     o.scene = SceneManager:SceneCreateNew()
@@ -33,9 +35,12 @@ function GameActionScene:New()
 end
 
 function GameActionScene:Setup()
+    -- setup
+    self.gameInput:Register()
+
+    -- sprites
     self.spriteBackground:SetScale(0.25)
     self.spriteBackground:SetPosition(300, 300)
-
     self.im.position:set(300, 300)
 
     EventsManager:RegisterMouseClickedEvents(function(x, y)
@@ -44,7 +49,7 @@ function GameActionScene:Setup()
     end)
 
     EventsManager:RegisterKeyShortcutsEvents("", "w", function()
-        print("w pressed")
+        self:UpdateMovement()
     end)
 
     self.scene:RegisterFrameUpdate(function()
@@ -58,10 +63,15 @@ function GameActionScene:Activate()
 end
 
 function GameActionScene:UpdateMovement()
-    o.im:advance()
+    --o.im:advance()
 end
 
 function GameActionScene:Update()
+    -- apply game input
+    if self.gameInput.directionRight then
+        self.im:advance()
+    end
+
     -- modify the position
     self.im:frameUpdate()
 

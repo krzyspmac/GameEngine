@@ -17,6 +17,9 @@ local new = function()
       , maxSpeed  = MAX_SPEED    -- the maxmum speed
       , incSpeed  = INC_SPEED    -- the speed increase
       , fallSpeed = FLL_SPEED    -- the speed fallout
+
+      , forceApplied = false
+      , lastForceApplied = false
     }
     return setmetatable(obj, mt)
 end
@@ -32,7 +35,14 @@ mt.advance = function(self)
 end
 
 mt.frameUpdate = function(self)
+    if self.lastForceApplied ~= self.forceApplied then
+        print("Force applied = " .. tostring(self.forceApplied))
+
+        self.lastForceApplied = self.forceApplied
+    end
+
     local frameDeltaSecs = self.timeMgr:GetFrameDeltaSec()
+
 end
 
 -- closing and definition

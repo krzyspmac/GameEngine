@@ -129,7 +129,7 @@ using namespace engine;
         }
 
         // TODO: do not send all events to the system!
-        return event;
+        return NULL;
     }];
 #endif
 }
@@ -201,6 +201,11 @@ using namespace engine;
     [self handle:event];
 }
 
+- (void)keyDown:(NSEvent *)event             {
+    [self handle:event];
+    
+}
+- (void)keyUp:(NSEvent *)event               { [self handle:event]; };
 - (void)mouseDown:(NSEvent *)event           { [self handle:event]; }
 - (void)rightMouseDown:(NSEvent *)event      { [self handle:event]; }
 - (void)otherMouseDown:(NSEvent *)event      { [self handle:event]; }
