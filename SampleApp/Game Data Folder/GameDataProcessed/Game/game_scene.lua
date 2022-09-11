@@ -1,7 +1,13 @@
 --------------------------------
 -- requires
 
-require("game_general")
+require "game_general"
+require "game_inertia_manager"
+require "game_vector"
+
+local Vector2 = require "game_vector"
+local IntertiaManager = require "game_inertia_manager"
+local GameInput = require "game_input"
 
 --------------------------------
 -- class definition
@@ -14,62 +20,12 @@ function GameActionScene:New()
     setmetatable(o, GameActionScene)
     self.__index = self
 
-    o.confScale = 2.0
+    o.gameInput = GameInput()
+    o.im = IntertiaManager()
 
     o.scene = SceneManager:SceneCreateNew()
     o.atlas = AtlasManager:SpriteAtlasLoad("background.json", "background.png")
     o.spriteBackground = o.scene:SpriteStaticLoad(o.atlas, "background.png")
-    -- o.atlas = AtlasManager:SpriteAtlasLoad("ega.json", "ega.png")
-    -- o.spriteBackground = o.scene:SpriteStaticLoad(o.atlas, "background.png")
-    -- o.spriteSky = o.scene:SpriteStaticLoad(o.atlas, "sky.png")
-    -- o.spriteFloor = o.scene:SpriteStaticLoad(o.atlas, "floor.png")
-
-    foo = {}
-    table.insert(foo, "bar")
-
-    o.objCount = 1000
-
-    o.objects = {}
-
-    local x = 0
-    local y = 0
-
-    for index=0,o.objCount do
-        object = o.scene:SpriteStaticLoad(o.atlas, "background.png")
-
-        table.insert(
-            o.objects
-          , object
-        )
-
-        object:SetScale(0.25)
-        object:SetPosition(x, y)
-        object:SetRotation(0, -1, -1)
-
-        x = x + 10
-        y = y + 10
-
-        if x > 1000 then 
-            x = 0
-        end
-
-        if y > 200 then
-            y = 0
-        end
-        
-    end
-
-    local angle = 0
-
-    for index=1,o.objCount do
-        local object = o.objects[index]
-        object:SetRotation(angle, -1, -1)
-
-        angle = angle + 10
-        if angle > 360 then
-            angle = 0
-        end
-    end
 
     local animatedSpriteAtlas = AtlasManager:SpriteAtlasLoad("TDS.json", "TDS.png")
     o.animated = o.scene:SpriteAnimatedLoad(100, animatedSpriteAtlas)
@@ -79,15 +35,21 @@ function GameActionScene:New()
 end
 
 function GameActionScene:Setup()
-    -- self.spriteBackground:SetScale(self.confScale)
-    -- self.spriteSky:SetScale(self.confScale)
-    -- self.spriteFloor:SetScale(self.confScale)
+    -- setup
+    self.gameInput:Register()
+
+    -- sprites
     self.spriteBackground:SetScale(0.25)
-    -- self.spriteBackground:SetRotation(0, -1, -1);
     self.spriteBackground:SetPosition(300, 300)
+    self.im.position:set(300, 300)
 
     EventsManager:RegisterMouseClickedEvents(function(x, y)
         print("GameActionScene Mouse clicked position = " .. x .. ", " .. y)
+        self:UpdateMovement()
+    end)
+
+    EventsManager:RegisterKeyShortcutsEvents("", "w", function()
+        self:UpdateMovement()
     end)
 
     self.scene:RegisterFrameUpdate(function()
@@ -100,21 +62,18 @@ function GameActionScene:Activate()
     SceneManager:SceneMakeActive(self.scene)
 end
 
+function GameActionScene:UpdateMovement()
+    --o.im:advance()
+end
+
 function GameActionScene:Update()
-    for index=1,o.objCount do
-        local object = self.objects[index]
-        local angle, v1, v2 = object:GetRotation()
-        angle = angle + 1
-        if angle > 360 then
-            angle = 0
-        end
+    -- apply game input
+    self.im:updateForceVector(self.gameInput.vector)
 
-        object:SetRotation(angle, v1, v2)
-    end
+    -- modify the position
+    self.im:frameUpdate()
 
-    o.animatedRotation = o.animatedRotation + 1
-    if o.animatedRotation > 360 then
-        o.animatedRotation = 0
-    end
-    o.animated:SetRotation(o.animatedRotation, 0, 0)
+    -- update character location
+    local x, y = self.im.position:unpack()
+    self.animated:SetPosition(x, y)
 end

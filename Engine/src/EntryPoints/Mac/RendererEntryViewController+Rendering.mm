@@ -80,6 +80,7 @@
         m_engine->FrameBegin();
         m_engine->FrameDrawObjects();
         m_engine->FrameDrawTopObjects();
+        m_engine->FrameEnd();
 
         [encoder endEncoding];
     }

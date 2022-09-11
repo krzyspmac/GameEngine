@@ -18,6 +18,8 @@ EventsManager::EventsManager(EventProviderI &provider, EngineProviderI &enginePr
     , m_controlKeyDown(false)
 {
     bzero(m_keys, KEY_TABLE_SIZE);
+    m_keysWrapper[0] = '\0';
+    m_keysWrapper[1] = '\0';
 }
 
 int EventsManager::DoEvents()
@@ -58,11 +60,24 @@ int EventsManager::DoEvents()
             {
                 auto* event = static_cast<EventKeyStateChanged*>(baseEvent);
                 auto& key = event->GetKey();
-                auto& state = m_keys[key];
                 auto& isDown = event->GetIsDown();
-                if (state != isDown)
+
+                m_keys[key] = isDown;
+                m_keysWrapper[0] = key;
+
+                if (isDown)
                 {
-                    m_keys[key] = isDown;
+                    for (auto& keyHandler : m_keyDowns)
+                    {
+                        keyHandler.Process(m_keysWrapper);
+                    }
+                }
+                else
+                {
+                    for (auto& keyHandler : m_keyUps)
+                    {
+                        keyHandler.Process(m_keysWrapper);
+                    }
                 }
 
                 for (auto& keyHandler : m_keyshortcuts)
@@ -166,6 +181,20 @@ EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> mo
     return identifier;
 }
 
+EventIdentifier EventsManager::RegisterKeyDown(CallableScriptFunctionParameters1<char> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_keyDowns.push_back(EventHolderKeyDown(identifier, fnc));
+    return identifier;
+}
+
+EventIdentifier EventsManager::RegisterKeyUp(CallableScriptFunctionParameters1<char> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_keyUps.push_back(EventHolderKeyDown(identifier, fnc));
+    return identifier;
+}
+
 void EventsManager::UnregisterEvent(EventIdentifier identifier)
 {
     for (auto it = m_mouseMoves.begin(); it != m_mouseMoves.end(); it++)
@@ -213,6 +242,22 @@ void EventsManager::UnregisterEvent(EventIdentifier identifier)
         if ((*it).GetIdentifier() == identifier)
         {
             m_keyshortcutsScript.erase(it);
+            return;
+        }
+    }
+    for (auto it = m_keyDowns.begin(); it != m_keyDowns.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_keyDowns.erase(it);
+            return;
+        }
+    }
+    for (auto it = m_keyUps.begin(); it != m_keyUps.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_keyUps.erase(it);
             return;
         }
     }
@@ -293,6 +338,24 @@ static int lua_EventsManager_IsControlDown(lua_State *L)
     return 1;
 }
 
+static int lua_EventsManager_RegisterKeyDown(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto identifier = mgr->RegisterKeyDown(CallableScriptFunctionParameters1<char>(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
+static int lua_EventsManager_RegisterKeyUp(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto identifier = mgr->RegisterKeyUp(CallableScriptFunctionParameters1<char>(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
 std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -302,6 +365,8 @@ std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
       , { "UnregisterEvent", &lua_EventsManager_UnregisterEvent }
       , { "IsShiftDown", &lua_EventsManager_IsShiftDown }
       , { "IsControlDown", &lua_EventsManager_IsControlDown }
+      , { "RegisterKeyDown", &lua_EventsManager_RegisterKeyDown }
+      , { "RegisterKeyUp", &lua_EventsManager_RegisterKeyUp }
     });
     return result;
 }

@@ -52,3 +52,14 @@ void EventHolderKeyShortcutPressedScript::Process(void*)
 {
     m_script.CallWithParameters();
 }
+
+void EventHolderKeyDown::Process(char *c)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            lua_pushstring(L, c);
+            return 1;
+        });
+    }
+}
