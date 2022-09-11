@@ -484,6 +484,12 @@
 		7FAE022B28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FB2018627941D0200D0F5FE /* sprite_draw_backbuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */; };
 		7FB2018727941D0200D0F5FE /* sprite_draw_backbuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */; };
+		7FB6520128CE65D9006F7030 /* engine_screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67033E28A60D5500319218 /* engine_screen.cpp */; };
+		7FB6520228CE65D9006F7030 /* engine_screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67033E28A60D5500319218 /* engine_screen.cpp */; };
+		7FB6520328CE65F8006F7030 /* property_animator_multiple.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67034628A6271100319218 /* property_animator_multiple.hpp */; };
+		7FB6520428CE65F9006F7030 /* property_animator_multiple.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67034628A6271100319218 /* property_animator_multiple.hpp */; };
+		7FB6520528CE65FC006F7030 /* property_animator_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67034528A6271100319218 /* property_animator_multiple.cpp */; };
+		7FB6520628CE65FD006F7030 /* property_animator_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67034528A6271100319218 /* property_animator_multiple.cpp */; };
 		7FB823E32788E199008F0F7A /* console_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB823E12788E199008F0F7A /* console_renderer.mm */; };
 		7FB8241927890479008F0F7A /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
 		7FB8241A27890479008F0F7A /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
@@ -1664,6 +1670,7 @@
 				7F3E8EA2279AC8F9003BB7B6 /* font_interface.h in Headers */,
 				7FC971EC27AF3B9A00049146 /* light.hpp in Headers */,
 				7F3E8EA3279AC8F9003BB7B6 /* character_mover_interface.h in Headers */,
+				7FB6520328CE65F8006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */,
 				7F3E8EA5279AC8F9003BB7B6 /* character_renderer_interface.h in Headers */,
 				7F3E8EA6279AC8F9003BB7B6 /* texture_interface.h in Headers */,
@@ -1780,6 +1787,7 @@
 				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
 				7FC971EE27AF3B9A00049146 /* light.hpp in Headers */,
 				7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */,
+				7FB6520428CE65F9006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
 				7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */,
 				7F3E90C8279B03F6003BB7B6 /* texture_interface.h in Headers */,
@@ -2248,6 +2256,7 @@
 				7F3E8EEB279AC909003BB7B6 /* room.cpp in Sources */,
 				7F8E9BCC27B5ABBC00548567 /* engine_metal_buffer_manager.cpp in Sources */,
 				7F6D1CA8279F50590078D76A /* RendererEntryViewController+Rendering.mm in Sources */,
+				7FB6520128CE65D9006F7030 /* engine_screen.cpp in Sources */,
 				7F3E8EED279AC909003BB7B6 /* drawable_metal.cpp in Sources */,
 				7F3E8EEE279AC909003BB7B6 /* release_pool.cpp in Sources */,
 				7F3E8EEF279AC909003BB7B6 /* time.cpp in Sources */,
@@ -2288,6 +2297,7 @@
 				7F3E8F09279AC909003BB7B6 /* character_manager.cpp in Sources */,
 				7F3E8F0A279AC909003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */,
+				7FB6520528CE65FC006F7030 /* property_animator_multiple.cpp in Sources */,
 				7F3E8F0C279AC909003BB7B6 /* scripting_engine.cpp in Sources */,
 				7F3E8F0D279AC909003BB7B6 /* callable.cpp in Sources */,
 				7F3E8F0E279AC909003BB7B6 /* console_logger.cpp in Sources */,
@@ -2339,6 +2349,7 @@
 				7F3E9114279B03F6003BB7B6 /* room.cpp in Sources */,
 				7F8E9BCD27B5ABBC00548567 /* engine_metal_buffer_manager.cpp in Sources */,
 				7F6D1CA9279F505A0078D76A /* RendererEntryViewController+Rendering.mm in Sources */,
+				7FB6520228CE65D9006F7030 /* engine_screen.cpp in Sources */,
 				7F3E9116279B03F6003BB7B6 /* drawable_metal.cpp in Sources */,
 				7F3E9117279B03F6003BB7B6 /* release_pool.cpp in Sources */,
 				7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */,
@@ -2379,6 +2390,7 @@
 				7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */,
 				7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */,
+				7FB6520628CE65FD006F7030 /* property_animator_multiple.cpp in Sources */,
 				7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */,
 				7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */,
 				7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */,

@@ -13,8 +13,12 @@ using namespace engine;
 int FileUtilsMac::GetCurrentFolder(std::string& out)
 {
     NSBundle* bundle = [NSBundle mainBundle];
+#if TARGET_IOS
+    NSString* path = [[bundle pathForResource:@"Info" ofType:@"plist"] stringByDeletingLastPathComponent];
+#else
     NSString* resourceDirectoryPath = [bundle bundlePath];
     NSString* path = [resourceDirectoryPath stringByAppendingString: @"/Contents/Resources"];
+#endif
 
     out = [path cStringUsingEncoding:NSUTF8StringEncoding];
     return -1;

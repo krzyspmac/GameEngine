@@ -221,6 +221,7 @@ using namespace engine;
     depthTexDescriptor.pixelFormat = MTLPixelFormatDepth32Float;//MTLPixelFormatRGBA8Unorm;
     depthTexDescriptor.usage = MTLTextureUsageRenderTarget |
                           MTLTextureUsageShaderRead;
+    depthTexDescriptor.storageMode = MTLStorageModePrivate;
 
     if (oscTargetDepthTexture)
     {
