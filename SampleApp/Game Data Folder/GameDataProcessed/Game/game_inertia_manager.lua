@@ -30,7 +30,6 @@ end
 
 mt.updateForceVector = function(self, value)
     self.forceVector = value:normalized()
-    print(tostring(self.forceVector))
 end
 
 mt.advance = function(self)
