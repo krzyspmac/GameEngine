@@ -3,8 +3,8 @@ local Vector2 = require "game_vector"
 
 -- defines
 local MAX_SPEED = 100   -- maximum speed (px/s)
-local INC_SPEED = 10    -- speed increase when force applied (in px/s)
-local FLL_SPEED = 20    -- speed fall when force not applied (in px/s)
+local INC_SPEED = 5     -- speed increase when force applied (in px/s)
+local DMP_SPEED = -2    -- speed fall when force not applied (in px/s)
 
 -- class definition
 local mt = {}
@@ -13,10 +13,11 @@ local mt = {}
 local new = function()
     local obj = {
         position = Vector2()     -- the character position
+      , movement = Vector2()     -- the speed in all axis
+
       , timeMgr   = Time
-      , maxSpeed  = MAX_SPEED    -- the maxmum speed
-      , incSpeed  = INC_SPEED    -- the speed increase
-      , fallSpeed = FLL_SPEED    -- the speed fallout
+      , speedIncrease = 0
+      , speedDump = 0
 
       , forceApplied = false
       , lastForceApplied = false
@@ -30,8 +31,32 @@ end
 
 -- functions
 
+mt.setForceApplied = function(self, value)
+    self.forceApplied = value
+end
+
 mt.advance = function(self)
-    self.position:translateBy(1, 0)
+    if self.forceApplied then
+        local frameDeltaSecs = self.timeMgr:GetFrameDeltaSec()
+        self.speedIncrease = math.min(INC_SPEED, frameDeltaSecs * INC_SPEED)
+    else
+        self.speedIncrease = 0
+    end
+end
+
+mt.damper = function(self)
+    local frameDeltaSecs = self.timeMgr:GetFrameDeltaSec()
+    self.speedDump = math.max(DMP_SPEED, frameDeltaSecs * DMP_SPEED)
+end
+
+mt.updatePosition = function(self)
+    local movementX, movementY = self.movement:unpack()
+    movementX = math.max(0, movementX + self.speedIncrease + self.speedDump)
+    self.movement:setX(movementX)
+end
+
+mt.afterFrameReset = function(self)
+    self.forceApplied = false
 end
 
 mt.frameUpdate = function(self)
@@ -43,6 +68,20 @@ mt.frameUpdate = function(self)
 
     local frameDeltaSecs = self.timeMgr:GetFrameDeltaSec()
 
+    -- increse the speed if force applied
+    self:advance()
+
+    -- damper the movement vector by env. factor
+    self:damper()
+
+    -- apply force to the movement vector if available
+    self:updatePosition()
+
+    -- modify the position by the movement vector
+    self.position:translateByVector(self.movement)
+
+    -- reset
+    self:afterFrameReset()
 end
 
 -- closing and definition

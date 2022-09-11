@@ -69,7 +69,7 @@ end
 function GameActionScene:Update()
     -- apply game input
     if self.gameInput.directionRight then
-        self.im:advance()
+        self.im:setForceApplied(true)
     end
 
     -- modify the position

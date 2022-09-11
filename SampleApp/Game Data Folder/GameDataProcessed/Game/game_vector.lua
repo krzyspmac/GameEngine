@@ -49,12 +49,35 @@ end
 
 -- functionalities
 
+mt.x = function(self)
+    return self.x
+end
+
+mt.y = function(self)
+    return self.y
+end
+
 mt.set = function(self, x, y)
     self.x = x
     self.y = y
 end
 
+mt.setX = function(self, x)
+    self.x = x
+end
+
+mt.setY = function(self, y)
+    self.y = y
+end
+
 mt.translateBy = function(self, x, y)
+    self.x = self.x + x
+    self.y = self.y + y
+end
+
+mt.translateByVector = function(self, rhs)
+    assert(is_vector(rhs), "Type mismatch: vector expected.")
+    local x, y = rhs:unpack()
     self.x = self.x + x
     self.y = self.y + y
 end
