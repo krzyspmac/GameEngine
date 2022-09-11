@@ -25,7 +25,11 @@ end
 
 function mt.__sub(lhs, rhs)
     assert(is_vector(lhs) and is_vector(rhs), "Type mismatch: vector expected.")
-    return new(lhs.x - rhs.y, lhs.x - rhs.y)
+    return new(lhs.x - rhs.x, lhs.y - rhs.y)
+end
+
+function mt.__mul(lhs, value)
+    return new(lhs.x * value, lhs.y * value)
 end
 
 function mt.__eq(lhs, rhs)
@@ -82,6 +86,15 @@ mt.translateByVector = function(self, rhs)
     self.y = self.y + y
 end
 
+mt.inversed = function(self)
+    return new(-self.x, -self.y)
+end
+
+mt.scale = function(self, value)
+    self.x = self.x * value
+    self.y = self.y * value
+end
+
 mt.copy = function(self)
     return new(self.x, self.y)
 end
@@ -108,6 +121,7 @@ mt.normalize = function(self)
         self.x = self.x / len
         self.y = self.y / len
     end
+    return self
 end
 
 mt.normalized = function(self)
@@ -115,7 +129,7 @@ mt.normalized = function(self)
 end
 
 -- closing and definition
-mt.__index =  mt
+mt.__index = mt
 
 -- constructor passing
 local ctor = function(cls, ...)

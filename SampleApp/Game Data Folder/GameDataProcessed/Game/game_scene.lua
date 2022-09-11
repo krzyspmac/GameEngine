@@ -68,9 +68,7 @@ end
 
 function GameActionScene:Update()
     -- apply game input
-    if self.gameInput.directionRight then
-        self.im:setForceApplied(true)
-    end
+    self.im:updateForceVector(self.gameInput.vector)
 
     -- modify the position
     self.im:frameUpdate()
