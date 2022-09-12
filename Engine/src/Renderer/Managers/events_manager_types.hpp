@@ -143,6 +143,20 @@ namespace engine
         void Process(char*);
     };
 
+    /** Gamepad Stick Event Handler */
+    class EventHolderGamepadStickAxis: public EventHolderI<Vector2>, public EventHolderScript
+    {
+        CallableScriptFunctionParameters1<Vector2> m_script;
+    public:
+        EventHolderGamepadStickAxis(EventIdentifier identifier, CallableScriptFunctionParameters1<Vector2> fnc)
+            : EventHolderI<Vector2>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(Vector2*);
+    };
+
 };
 
 #endif /* events_manager_types_hpp */

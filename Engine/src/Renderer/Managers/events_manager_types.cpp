@@ -63,3 +63,15 @@ void EventHolderKeyDown::Process(char *c)
         });
     }
 }
+
+void EventHolderGamepadStickAxis::Process(Vector2 *vector)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            lua_pushnumber(L, vector->x);
+            lua_pushnumber(L, vector->y);
+            return 2;
+        });
+    }
+}

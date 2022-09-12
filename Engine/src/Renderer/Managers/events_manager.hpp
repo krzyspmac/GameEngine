@@ -122,6 +122,10 @@ namespace engine
 
         EventIdentifier RegisterKeyUp(CallableScriptFunctionParameters1<char>);
 
+        EventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
+
+        EventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
+
         /** Unregisters an event for a given identifier. */
         void UnregisterEvent(EventIdentifier);
 
@@ -158,6 +162,8 @@ namespace engine
         std::vector<EventHolderKeyShortcutPressedScript> m_keyshortcutsScript;
         std::vector<EventHolderKeyDown> m_keyDowns;
         std::vector<EventHolderKeyDown> m_keyUps;
+        std::vector<EventHolderGamepadStickAxis> m_leftStickAxisChange;
+        std::vector<EventHolderGamepadStickAxis> m_rightStickAxisChange;
         bool m_shiftKeyDown;
         bool m_controlKeyDown;
         bool m_keys[KEY_TABLE_SIZE];

@@ -129,6 +129,33 @@ int EventsManager::DoEvents()
                 }
                 break;
             }
+            case EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE:
+            {
+                auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+                auto& vector = event->GetVector();
+
+                switch (event->GetThumbstickType())
+                {
+                    case GAMEPAD_THUMBSTICK_AXIS_LEFT:
+                    {
+                        for (auto& codeHandler : m_leftStickAxisChange)
+                        {
+                            codeHandler.Process(&vector);
+                        }
+                        break;
+                    }
+                    case GAMEPAD_THUMBSTICK_AXIS_RIGHT:
+                    {
+                        for (auto& codeHandler : m_rightStickAxisChange)
+                        {
+                            codeHandler.Process(&vector);
+                        }
+                        break;
+                    }
+                }
+
+                break;
+            }
             case EVENT_QUIT:
             {
                 return 1;
@@ -192,6 +219,20 @@ EventIdentifier EventsManager::RegisterKeyUp(CallableScriptFunctionParameters1<c
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_keyUps.push_back(EventHolderKeyDown(identifier, fnc));
+    return identifier;
+}
+
+EventIdentifier EventsManager::RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_leftStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
+    return identifier;
+}
+
+EventIdentifier EventsManager::RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_rightStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
@@ -261,6 +302,22 @@ void EventsManager::UnregisterEvent(EventIdentifier identifier)
             return;
         }
     }
+    for (auto it = m_leftStickAxisChange.begin(); it != m_leftStickAxisChange.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_leftStickAxisChange.erase(it);
+            return;
+        }
+    }
+    for (auto it = m_rightStickAxisChange.begin(); it != m_rightStickAxisChange.end(); it++)
+    {
+        if ((*it).GetIdentifier() == identifier)
+        {
+            m_rightStickAxisChange.erase(it);
+            return;
+        }
+    }
 }
 
 void EventsManager::UnregisterAllEvents()
@@ -268,6 +325,10 @@ void EventsManager::UnregisterAllEvents()
     m_mouseMoves.clear();
     m_mouseClicks.clear();
     m_keyshortcuts.clear();
+    m_keyDowns.clear();
+    m_keyUps.clear();
+    m_leftStickAxisChange.clear();
+    m_rightStickAxisChange.clear();
 }
 
 #pragma mark - Scripting Interface
@@ -356,6 +417,24 @@ static int lua_EventsManager_RegisterKeyUp(lua_State *L)
     return 1;
 }
 
+static int lua_EventsManager_RegisterLeftThumbstickAxis(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto identifier = mgr->RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
+static int lua_EventsManager_RegisterRightThumbstickAxis(lua_State *L)
+{
+    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto identifier = mgr->RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
 std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -367,6 +446,8 @@ std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
       , { "IsControlDown", &lua_EventsManager_IsControlDown }
       , { "RegisterKeyDown", &lua_EventsManager_RegisterKeyDown }
       , { "RegisterKeyUp", &lua_EventsManager_RegisterKeyUp }
+      , { "RegisterLeftThumbstickAxis", lua_EventsManager_RegisterLeftThumbstickAxis }
+      , { "RegisterRightThumbstickAxis", lua_EventsManager_RegisterRightThumbstickAxis }
     });
     return result;
 }

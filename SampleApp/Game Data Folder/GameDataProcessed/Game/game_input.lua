@@ -40,6 +40,14 @@ mt.Register = function(self)
         self.keys[key] = false
         self:Update()
     end)
+
+    EventsManager:RegisterLeftThumbstickAxis(function(x, y)
+        self.vector:set(x, y)
+    end)
+    
+    EventsManager:RegisterRightThumbstickAxis(function(x, y)
+        self.vector:set(x*3, y*3)
+    end)
 end
 
 mt.Update = function(self)

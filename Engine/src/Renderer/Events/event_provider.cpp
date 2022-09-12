@@ -42,6 +42,12 @@ EventProvider::EventProvider()
         m_poolKeyStateChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
     }
 
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventGamepadThumbstickAxisChanged();
+        });
+        m_poolThumbstickAxisChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
 }
 
 ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
@@ -58,6 +64,8 @@ ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
             return m_poolMouseMove.get();
         case EVENT_MOUSEUP:
             return m_poolMouseLeftUp.get();
+        case EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE:
+            return m_poolThumbstickAxisChanged.get();
         case EVENT_QUIT:
             return nullptr;
     }
@@ -129,6 +137,30 @@ void EventProvider::PushKeyStateChange(unsigned short key, bool pressed)
         auto* event = static_cast<EventKeyStateChanged*>(baseEvent);
         event->GetKey() = key;
         event->GetIsDown() = pressed;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushLeftThumbstickAxisChange(float xAxis, float yAxis)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+        event->GetVector() = Vector2(xAxis, yAxis);
+        event->GetThumbstickType() = GAMEPAD_THUMBSTICK_AXIS_LEFT;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushRightThumbstickAxisChange(float xAxis, float yAxis)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+        event->GetVector() = Vector2(xAxis, yAxis);
+        event->GetThumbstickType() = GAMEPAD_THUMBSTICK_AXIS_RIGHT;
         EventPush(baseEvent);
     }
 }

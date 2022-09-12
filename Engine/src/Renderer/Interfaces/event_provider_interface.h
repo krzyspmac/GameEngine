@@ -20,8 +20,15 @@ namespace engine
       , EVENT_KEY_STATE_CHANGE
       , EVENT_MOUSEMOVE
       , EVENT_MOUSEUP
+      , EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE
       , EVENT_QUIT
     } EventType;
+
+    typedef enum
+    {
+        GAMEPAD_THUMBSTICK_AXIS_LEFT = 0,
+        GAMEPAD_THUMBSTICK_AXIS_RIGHT
+    } GamepadThunbstickAxis;
 
     typedef enum
     {
@@ -86,11 +93,32 @@ namespace engine
         bool& GetIsDown() { return m_keyDown; };
     };
 
+    class EventGamepadThumbstickAxisChanged: public EventI
+    {
+        Vector2 m_vector;
+        GamepadThunbstickAxis m_thumbstick;
+    public:
+        EventGamepadThumbstickAxisChanged()
+            : EventI(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE)
+            , m_vector(Vector2Zero)
+            , m_thumbstick(GAMEPAD_THUMBSTICK_AXIS_LEFT)
+        { };
+
+        auto& GetVector() { return m_vector; };
+        auto& GetThumbstickType() { return m_thumbstick; };
+    };
+
     /** Declares an abstract interface to provide real events directly into the
         engine. The platform code should setup its own processing and pass those
         events to the event provider.
 
         During one frame multiple events can be passed.
+
+        Those events are then converted into internal events and distributed
+        further to game scripts.
+
+        There exists a finate queue for each type of pre-declared pool of events
+        so that there is little to no overhead of object-creation/deletion.
      */
     class EventProviderI
     {
@@ -110,6 +138,12 @@ namespace engine
 
         /** Key state changed */
         virtual void PushKeyStateChange(unsigned short, bool) = 0;
+
+        /** Set left gamepad axis, both axis at the same time. Not queued. */
+        virtual void PushLeftThumbstickAxisChange(float, float) = 0;
+
+        /** Set right gamepad axis, both axis at the same time. Not queued. */
+        virtual void PushRightThumbstickAxisChange(float, float) = 0;
 
         /** Poll an event from the queue. */
         virtual bool PollEvent(EventI **outEvent) = 0;

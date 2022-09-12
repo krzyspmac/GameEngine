@@ -22,6 +22,7 @@ using namespace engine;
     [self setupMouseClickEvents];
     [self setupMouseMovedEvents];
     [self setupKeyEvents];
+    [self setupControllers];
 
     didSetupEvents = YES;
 }
@@ -201,10 +202,7 @@ using namespace engine;
     [self handle:event];
 }
 
-- (void)keyDown:(NSEvent *)event             {
-    [self handle:event];
-    
-}
+- (void)keyDown:(NSEvent *)event             { [self handle:event]; }
 - (void)keyUp:(NSEvent *)event               { [self handle:event]; };
 - (void)mouseDown:(NSEvent *)event           { [self handle:event]; }
 - (void)rightMouseDown:(NSEvent *)event      { [self handle:event]; }
@@ -219,6 +217,55 @@ using namespace engine;
 - (void)otherMouseDragged:(NSEvent *)event   { [self handle:event]; }
 - (void)scrollWheel:(NSEvent *)event         { [self handle:event]; }
 
+#endif // defined(TARGET_IOS) || defined(TARGET_TVOS)
+
+- (void)setupControllers
+{
+#if USE_CONTROLLERS
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(didConnectController:) name:GCControllerDidConnectNotification object:nil];
+    [center addObserver:self selector:@selector(didDisconnectController:) name:GCControllerDidDisconnectNotification object:nil];
+    [self processController];
 #endif
+}
+
+#if USE_CONTROLLERS
+
+- (void)didConnectController:(NSNotification*)notification
+{
+    [self processController];
+}
+
+- (void)didDisconnectController:(NSNotification*)notification
+{
+    [self processController];
+}
+
+- (void)resetController
+{
+    self.controller = nil;
+    self.controllerProfile = nil;
+    self.leftThumbstick.valueChangedHandler = nil;
+    self.rightThumbstick.valueChangedHandler = nil;
+}
+
+- (void)processController
+{
+    NSArray<GCController*> *controllers = [GCController controllers];
+    self.controller = [controllers firstObject];
+    self.controllerProfile = self.controller.extendedGamepad;
+    self.leftThumbstick = self.controllerProfile.leftThumbstick;
+    self.rightThumbstick = self.controllerProfile.rightThumbstick;
+
+    self.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        self->m_engine->getEventProvider().PushLeftThumbstickAxisChange(xValue, -yValue);
+    };
+
+    self.rightThumbstick.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        self->m_engine->getEventProvider().PushRightThumbstickAxisChange(xValue, -yValue);
+    };
+}
+
+#endif // USE_CONTROLLERS
 
 @end

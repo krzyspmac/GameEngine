@@ -10,6 +10,7 @@
 
 #define SHOW_FPS        1   /* shows the FPS on the screen */
 #define SHOW_CONSOLE    1
+#define USE_CONTROLLERS 1
 
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
     #define TARGET_IOS  1

@@ -16,14 +16,16 @@
     #include <Foundation/Foundation.hpp>
     #include <Metal/Metal.hpp>
     #include <QuartzCore/QuartzCore.hpp>
-    #define PlatformViewController UIViewController
+    #include <GameController/GameController.h>
+    #define PlatformViewController GCEventViewController
 #else
     #import <Cocoa/Cocoa.h>
     #include <MetalKit/MetalKit.h>
     #include <Foundation/Foundation.hpp>
     #include <Metal/Metal.hpp>
     #include <QuartzCore/QuartzCore.hpp>
-    #define PlatformViewController NSViewController
+    #include <GameController/GameController.h>
+    #define PlatformViewController GCEventViewController
 #endif
 
 #include <stdio.h>
@@ -117,6 +119,13 @@
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
 @property (weak) NSWindow *parentWindow;
+#endif
+
+#if USE_CONTROLLERS
+@property (nonatomic, weak) GCController *controller;
+@property (nonatomic, weak) GCExtendedGamepad *controllerProfile;
+@property (nonatomic, weak) GCControllerDirectionPad *leftThumbstick;
+@property (nonatomic, weak) GCControllerDirectionPad *rightThumbstick;
 #endif
 
 - (void)recreateOffscreenRenderingPipeline;
