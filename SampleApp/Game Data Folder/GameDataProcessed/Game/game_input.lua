@@ -27,40 +27,37 @@ end
 -- functionalities
 
 mt.Setup = function(self)
+    self:Update()
 end
 
 mt.Register = function(self)
     EventsManager:RegisterKeyDown(function(key)
         self.keys[key] = true
-        if self.keys[self.keyRight] then
-            self.vector:setX(1.0)
-        end
-        if self.keys[self.keyLeft] then
-            self.vector:setX(-1.0)
-        end
-        if self.keys[self.keyUp] then
-            self.vector:setY(-1.0)
-        end
-        if self.keys[self.keyDown] then
-            self.vector:setY(1.0)
-        end
+        self:Update()
     end)
 
     EventsManager:RegisterKeyUp(function(key)
         self.keys[key] = false
-        if self.keys[self.keyRight] ~= true then
-            self.vector:setX(0.0)
-        end
-        if self.keys[self.keyLeft] ~= true then
-            self.vector:setX(0.0)
-        end
-        if self.keys[self.keyUp] ~= true then
-            self.vector:setY(0.0)
-        end
-        if self.keys[self.keyDown] ~= true then
-            self.vector:setY(0.0)
-        end
+        self:Update()
     end)
+end
+
+mt.Update = function(self)
+    if self.keys[self.keyRight] then
+        self.vector:setX(1.0)
+    elseif self.keys[self.keyLeft] then
+        self.vector:setX(-1.0)
+    else
+        self.vector:setX(0.0)
+    end
+
+    if self.keys[self.keyUp] then
+        self.vector:setY(-1.0)
+    elseif self.keys[self.keyDown] then
+        self.vector:setY(1.0)
+    else
+        self.vector:setY(0.0)
+    end
 end
 
 -- result
