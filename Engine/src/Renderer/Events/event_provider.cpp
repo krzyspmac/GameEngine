@@ -48,6 +48,13 @@ EventProvider::EventProvider()
         });
         m_poolThumbstickAxisChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
     }
+
+    {
+        auto *pool = new ObjectPool<EventI>(10, [](void){
+            return new EventGamepadConnectionChanged(GAMEPAD_TYPE_UNKNOWN, GAMEPAD_MAKE_UNKNOWN, GAMEPAD_CONNECTION_STATUS_UNKNOWN);
+        });
+        m_poolGamepadConnectionChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
 }
 
 ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
@@ -66,6 +73,8 @@ ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
             return m_poolMouseLeftUp.get();
         case EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE:
             return m_poolThumbstickAxisChanged.get();
+        case EVENT_GAMEPAD_CONNECTION_CHANGE:
+            return m_poolGamepadConnectionChanged.get();
         case EVENT_QUIT:
             return nullptr;
     }
@@ -161,6 +170,19 @@ void EventProvider::PushRightThumbstickAxisChange(float xAxis, float yAxis)
         auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
         event->GetVector() = Vector2(xAxis, yAxis);
         event->GetThumbstickType() = GAMEPAD_THUMBSTICK_AXIS_RIGHT;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_CONNECTION_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadConnectionChanged*>(baseEvent);
+        event->GetGamepadType() = gamepadType;
+        event->GetGamepadFamily() = gamepadFamily;
+        event->GetConnectionStatus() = connectionStatus;
         EventPush(baseEvent);
     }
 }

@@ -17,6 +17,7 @@
 #include "callable.hpp"
 #include "events_manager_types.hpp"
 #include "object_pool.hpp"
+#include "gamepad_interface.h"
 
 namespace engine
 {
@@ -122,9 +123,32 @@ namespace engine
 
         EventIdentifier RegisterKeyUp(CallableScriptFunctionParameters1<char>);
 
+        /** Register a left thumbstick axis change. If not avilable will not get called
+
+            \code{lua}
+             EventsManager:RegisterLeftThumbstickAxis(function(x, y)
+                 -- process, like: self.vector:set(x, y)
+             end)
+            \endcode
+         */
         EventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
 
+
+        /** Register a right thumbstick axis change. If not avilable will not get called
+
+            \code{lua}
+             EventsManager:RegisterRightThumbstickAxis(function(x, y)
+                 -- process, like: self.vector:set(x, y)
+             end)
+            \endcode
+         */
         EventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
+
+        /** Register for gamepad connection/disconnection */
+        EventIdentifier RegisterGamepadConnection(CallableScriptFunctionParameters2<GamepadI, bool>);
+
+        /** Retrieve the gamepads */
+        auto& GetGamepads() { return m_gamepads; };
 
         /** Unregisters an event for a given identifier. */
         void UnregisterEvent(EventIdentifier);
@@ -164,6 +188,8 @@ namespace engine
         std::vector<EventHolderKeyDown> m_keyUps;
         std::vector<EventHolderGamepadStickAxis> m_leftStickAxisChange;
         std::vector<EventHolderGamepadStickAxis> m_rightStickAxisChange;
+        std::vector<EventHolderGamepadConnection> m_gamepadConnection;
+        std::vector<std::unique_ptr<GamepadI>> m_gamepads;
         bool m_shiftKeyDown;
         bool m_controlKeyDown;
         bool m_keys[KEY_TABLE_SIZE];

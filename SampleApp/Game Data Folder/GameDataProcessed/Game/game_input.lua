@@ -14,6 +14,7 @@ local new = function()
       , keyLeft = 'a'
       , directionRight = false
       , vector = Vector2()
+      , gamepad = nil
     }
     local o = setmetatable(obj, mt)
     o:Setup()
@@ -31,6 +32,16 @@ mt.Setup = function(self)
 end
 
 mt.Register = function(self)
+    self:registerKeys()
+    
+    EventsManager:RegisterGamepadConnection(function(gamepad)
+        self:processGamepadConnection()
+    end)
+
+    self:processGamepadConnection()
+end
+
+mt.registerKeys = function(self)
     EventsManager:RegisterKeyDown(function(key)
         self.keys[key] = true
         self:Update()
@@ -40,14 +51,24 @@ mt.Register = function(self)
         self.keys[key] = false
         self:Update()
     end)
+end
 
-    EventsManager:RegisterLeftThumbstickAxis(function(x, y)
-        self.vector:set(x, y)
-    end)
-    
-    EventsManager:RegisterRightThumbstickAxis(function(x, y)
-        self.vector:set(x*3, y*3)
-    end)
+mt.processGamepadConnection = function(self)
+    self.gamepad = EventsManager:GetGamepad()
+
+    if self.gamepad then
+        print("Gamepad exists: type=" .. tostring(self.gamepad))
+
+        self.gamepad:RegisterLeftThumbstickAxis(function(x, y)
+            self.vector:set(x, y)
+        end)
+
+        self.gamepad:RegisterRightThumbstickAxis(function(x, y)
+            self.vector:set(x*3, y*3)
+        end)    
+    else
+        print("No gamepad")
+    end
 end
 
 mt.Update = function(self)

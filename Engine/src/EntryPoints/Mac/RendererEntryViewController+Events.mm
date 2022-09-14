@@ -257,6 +257,8 @@ using namespace engine;
     self.leftThumbstick = self.controllerProfile.leftThumbstick;
     self.rightThumbstick = self.controllerProfile.rightThumbstick;
 
+    [self updateControllerScripts];
+
     self.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
         self->m_engine->getEventProvider().PushLeftThumbstickAxisChange(xValue, -yValue);
     };
@@ -264,6 +266,18 @@ using namespace engine;
     self.rightThumbstick.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
         self->m_engine->getEventProvider().PushRightThumbstickAxisChange(xValue, -yValue);
     };
+}
+
+- (void)updateControllerScripts
+{
+    if (self.controller != nil)
+    {
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED);
+    }
+    else
+    {
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_DISCRONNECTED);
+    }
 }
 
 #endif // USE_CONTROLLERS

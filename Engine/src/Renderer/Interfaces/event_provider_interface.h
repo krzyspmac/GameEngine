@@ -21,6 +21,7 @@ namespace engine
       , EVENT_MOUSEMOVE
       , EVENT_MOUSEUP
       , EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE
+      , EVENT_GAMEPAD_CONNECTION_CHANGE
       , EVENT_QUIT
     } EventType;
 
@@ -38,6 +39,27 @@ namespace engine
       , FLAG_ALT
       , FLAG_COMMAND
     } EventFlagType;
+
+    typedef enum
+    {
+        GAMEPAD_TYPE_UNKNOWN = 0,
+        GAMEPAD_TYPE_SIMPLE = 1,
+        GAMEPAD_TYPE_EXTENDED = 2,
+    } GamepadType;
+
+    typedef enum
+    {
+        GAMEPAD_MAKE_UNKNOWN = 0,
+        GAMEPAD_MAKE_SONY = 1,
+        GAMEPAD_MAKE_MICROSOFT = 2,
+    } GamepadMakeFamily;
+
+    typedef enum
+    {
+        GAMEPAD_CONNECTION_STATUS_UNKNOWN = 0,
+        GAMEPAD_CONNECTION_STATUS_CONNECTED = 1,
+        GAMEPAD_CONNECTION_STATUS_DISCRONNECTED = 2
+    } GamepadConnectionStatus;
 
     EventFlagType String2EventFlagType(std::string);
 
@@ -108,6 +130,24 @@ namespace engine
         auto& GetThumbstickType() { return m_thumbstick; };
     };
 
+    class EventGamepadConnectionChanged: public EventI
+    {
+        GamepadType m_gamepadType;
+        GamepadMakeFamily m_gamepadFamily;
+        GamepadConnectionStatus m_connectionStatus;
+    public:
+        EventGamepadConnectionChanged(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus)
+            : EventI(EVENT_GAMEPAD_CONNECTION_CHANGE)
+            , m_gamepadType(gamepadType)
+            , m_gamepadFamily(gamepadFamily)
+            , m_connectionStatus(connectionStatus)
+        { };
+
+        auto& GetGamepadType() { return m_gamepadType; };
+        auto& GetGamepadFamily() { return m_gamepadFamily; };
+        auto& GetConnectionStatus() { return m_connectionStatus; };
+    };
+
     /** Declares an abstract interface to provide real events directly into the
         engine. The platform code should setup its own processing and pass those
         events to the event provider.
@@ -144,6 +184,9 @@ namespace engine
 
         /** Set right gamepad axis, both axis at the same time. Not queued. */
         virtual void PushRightThumbstickAxisChange(float, float) = 0;
+
+        /** Push gamepad connection event */
+        virtual void PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus) = 0;
 
         /** Poll an event from the queue. */
         virtual bool PollEvent(EventI **outEvent) = 0;

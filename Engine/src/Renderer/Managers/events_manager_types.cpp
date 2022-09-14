@@ -6,6 +6,7 @@
 //
 
 #include "events_manager_types.hpp"
+#include "gamepad.hpp"
 
 using namespace engine;
 
@@ -72,6 +73,23 @@ void EventHolderGamepadStickAxis::Process(Vector2 *vector)
             lua_pushnumber(L, vector->x);
             lua_pushnumber(L, vector->y);
             return 2;
+        });
+    }
+}
+
+void EventHolderGamepadConnection::Process(GamepadI *gamepad)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            auto *ptr = dynamic_cast<Gamepad*>(gamepad);
+            if (ptr != nullptr)
+            {   ptr->ScriptingInterfaceRegisterFunctions(L, ptr);
+                return 1;
+            }
+            else
+            {   return 0;
+            }
         });
     }
 }

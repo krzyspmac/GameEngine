@@ -7,6 +7,7 @@
 
 #include "events_manager.hpp"
 #include "engine.hpp"
+#include "gamepad.hpp"
 
 using namespace engine;
 
@@ -132,28 +133,40 @@ int EventsManager::DoEvents()
             case EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE:
             {
                 auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
-                auto& vector = event->GetVector();
-
-                switch (event->GetThumbstickType())
+                for (auto& gamepad : m_gamepads)
                 {
-                    case GAMEPAD_THUMBSTICK_AXIS_LEFT:
+                    auto *ptr = gamepad.get();
+                    if (ptr != nullptr)
                     {
-                        for (auto& codeHandler : m_leftStickAxisChange)
-                        {
-                            codeHandler.Process(&vector);
-                        }
-                        break;
-                    }
-                    case GAMEPAD_THUMBSTICK_AXIS_RIGHT:
-                    {
-                        for (auto& codeHandler : m_rightStickAxisChange)
-                        {
-                            codeHandler.Process(&vector);
-                        }
-                        break;
+                        ptr->ProcessEvent(event);
                     }
                 }
+                break;
+            }
+            case EVENT_GAMEPAD_CONNECTION_CHANGE:
+            {
+                auto* event = static_cast<EventGamepadConnectionChanged*>(baseEvent);
 
+                m_gamepads.clear();
+
+                if (event->GetConnectionStatus() == GAMEPAD_CONNECTION_STATUS_CONNECTED)
+                {
+                    auto *gamepad = new Gamepad(event->GetGamepadType(), event->GetGamepadFamily());
+                    m_gamepads.emplace_back(std::move(gamepad));
+
+                    for (auto& codeHandler : m_gamepadConnection)
+                    {
+                        codeHandler.Process(gamepad);
+                    }
+                }
+                else
+                {
+                    for (auto& codeHandler : m_gamepadConnection)
+                    {
+                        codeHandler.Process(nullptr);
+                    }
+
+                }
                 break;
             }
             case EVENT_QUIT:
@@ -219,6 +232,13 @@ EventIdentifier EventsManager::RegisterKeyUp(CallableScriptFunctionParameters1<c
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_keyUps.push_back(EventHolderKeyDown(identifier, fnc));
+    return identifier;
+}
+
+EventIdentifier EventsManager::RegisterGamepadConnection(CallableScriptFunctionParameters2<GamepadI, bool> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_gamepadConnection.push_back(EventHolderGamepadConnection(identifier, fnc));
     return identifier;
 }
 
@@ -327,6 +347,7 @@ void EventsManager::UnregisterAllEvents()
     m_keyshortcuts.clear();
     m_keyDowns.clear();
     m_keyUps.clear();
+    m_gamepadConnection.clear();
     m_leftStickAxisChange.clear();
     m_rightStickAxisChange.clear();
 }
@@ -417,24 +438,35 @@ static int lua_EventsManager_RegisterKeyUp(lua_State *L)
     return 1;
 }
 
-static int lua_EventsManager_RegisterLeftThumbstickAxis(lua_State *L)
+static int lua_EventsManager_RegisterGamepadConnection(lua_State *L)
 {
     EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
     int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
+    auto identifier = mgr->RegisterGamepadConnection(CallableScriptFunctionParameters2<GamepadI, bool>(fnRef));
     lua_pushnumber(L, identifier);
     return 1;
 }
 
-static int lua_EventsManager_RegisterRightThumbstickAxis(lua_State *L)
+static int lua_EventsManager_GetGamepad(lua_State *L)
 {
     EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
+    auto& gamepads = mgr->GetGamepads();
+    if (gamepads.size())
+    {
+        auto *first = gamepads.at(0).get();
+        if (first != nullptr)
+        {
+            auto *ptr = dynamic_cast<Gamepad*>(first);
+            if (ptr != nullptr)
+            {
+                ptr->ScriptingInterfaceRegisterFunctions(L, ptr);
+                return 1;
+            }
+        }
+    }
 
+    return 0;
+}
 std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
@@ -446,8 +478,8 @@ std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
       , { "IsControlDown", &lua_EventsManager_IsControlDown }
       , { "RegisterKeyDown", &lua_EventsManager_RegisterKeyDown }
       , { "RegisterKeyUp", &lua_EventsManager_RegisterKeyUp }
-      , { "RegisterLeftThumbstickAxis", lua_EventsManager_RegisterLeftThumbstickAxis }
-      , { "RegisterRightThumbstickAxis", lua_EventsManager_RegisterRightThumbstickAxis }
+      , { "RegisterGamepadConnection", lua_EventsManager_RegisterGamepadConnection }
+      , { "GetGamepad", lua_EventsManager_GetGamepad }
     });
     return result;
 }

@@ -402,6 +402,15 @@
 		7F3E9157279B0424003BB7B6 /* liblua-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9156279B0424003BB7B6 /* liblua-tv.a */; };
 		7F3E915A279B0448003BB7B6 /* SpriteShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* SpriteShaders.metal */; };
 		7F3E918E279B06DC003BB7B6 /* Engine-TV-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E918C279B06C2003BB7B6 /* Engine-TV-MetalLib.metallib */; };
+		7F40C5A228D2732000B0865F /* gamepad_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A128D2732000B0865F /* gamepad_interface.h */; };
+		7F40C5A328D2732000B0865F /* gamepad_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A128D2732000B0865F /* gamepad_interface.h */; };
+		7F40C5A428D2732000B0865F /* gamepad_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A128D2732000B0865F /* gamepad_interface.h */; };
+		7F40C5A828D2740400B0865F /* gamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F40C5A628D2740400B0865F /* gamepad.cpp */; };
+		7F40C5A928D2740400B0865F /* gamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F40C5A628D2740400B0865F /* gamepad.cpp */; };
+		7F40C5AA28D2740400B0865F /* gamepad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F40C5A628D2740400B0865F /* gamepad.cpp */; };
+		7F40C5AB28D2740400B0865F /* gamepad.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A728D2740400B0865F /* gamepad.hpp */; };
+		7F40C5AC28D2740400B0865F /* gamepad.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A728D2740400B0865F /* gamepad.hpp */; };
+		7F40C5AD28D2740400B0865F /* gamepad.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A728D2740400B0865F /* gamepad.hpp */; };
 		7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */; };
 		7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */; };
 		7F64288427779CD400EE9E2C /* character_renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F64288227779CD400EE9E2C /* character_renderer.cpp */; };
@@ -725,6 +734,9 @@
 		7F3E9169279B0459003BB7B6 /* Engine-TV-Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Engine-TV-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E918C279B06C2003BB7B6 /* Engine-TV-MetalLib.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; name = "Engine-TV-MetalLib.metallib"; path = "../Debug-appletvsimulator/Engine-TV-MetalLib.metallib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E918D279B06CA003BB7B6 /* Engine-TV-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = "Engine-TV-Bundle.bundle"; path = "../Debug-appletvsimulator/Engine-TV-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F40C5A128D2732000B0865F /* gamepad_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = gamepad_interface.h; sourceTree = "<group>"; };
+		7F40C5A628D2740400B0865F /* gamepad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gamepad.cpp; sourceTree = "<group>"; };
+		7F40C5A728D2740400B0865F /* gamepad.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamepad.hpp; sourceTree = "<group>"; };
 		7F61F29F2770A17B0037FA21 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		7F63D829279A0C6100139E14 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RendererEntryViewController.mm; sourceTree = "<group>"; };
@@ -1002,6 +1014,7 @@
 				7F6428972778CC1D00EE9E2C /* Character Movement */,
 				7F64289C2779176400EE9E2C /* Path Finding */,
 				7FCAE7CD277E5605004A6107 /* Managers */,
+				7F40C5A528D273EC00B0865F /* Gamepad */,
 				7F67033D28A60D2900319218 /* Screen */,
 				7FCAE7BC277E36C7004A6107 /* Scene */,
 				7F64288127779CCA00EE9E2C /* Character */,
@@ -1233,6 +1246,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		7F40C5A528D273EC00B0865F /* Gamepad */ = {
+			isa = PBXGroup;
+			children = (
+				7F40C5A728D2740400B0865F /* gamepad.hpp */,
+				7F40C5A628D2740400B0865F /* gamepad.cpp */,
+			);
+			path = Gamepad;
+			sourceTree = "<group>";
+		};
 		7F63D82B279A0C9500139E14 /* EntryPoints */ = {
 			isa = PBXGroup;
 			children = (
@@ -1354,6 +1376,7 @@
 				7FC131162792FAF20094DF0C /* file_access_provider.h */,
 				7F08C44227AF1FBF002FEB8F /* light_interface.hpp */,
 				7F67034428A626B000319218 /* property_animator_interface.h */,
+				7F40C5A128D2732000B0865F /* gamepad_interface.h */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1567,6 +1590,7 @@
 				7F8499162787464F004127CB /* key_value.hpp in Headers */,
 				4C9EA03127921D8D0082EB6A /* AAPLImage.h in Headers */,
 				7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */,
+				7F40C5AB28D2740400B0865F /* gamepad.hpp in Headers */,
 				7FF641E1277D22E50017D86D /* events_manager.hpp in Headers */,
 				7FCAE7D1277F5872004A6107 /* character_representation.hpp in Headers */,
 				7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */,
@@ -1623,6 +1647,7 @@
 				7FC131212792FAF20094DF0C /* path_finder_interface.h in Headers */,
 				7FCAE7C8277E4EAA004A6107 /* sprite_atlas_manager.hpp in Headers */,
 				7FC1311C2792FAF20094DF0C /* callable_interface.h in Headers */,
+				7F40C5A228D2732000B0865F /* gamepad_interface.h in Headers */,
 				7FE14B6427A6D70B008E6DAE /* events_manager_types.hpp in Headers */,
 				7F3470B728527EC600FDED71 /* sound_manager.hpp in Headers */,
 				7FCC81BE2780A0C8003025CB /* value_animator_factory.hpp in Headers */,
@@ -1715,6 +1740,7 @@
 				7F3E8EC7279AC8F9003BB7B6 /* scene_manager.hpp in Headers */,
 				7F3E8EC8279AC8F9003BB7B6 /* scene.hpp in Headers */,
 				7F3E8EC9279AC8F9003BB7B6 /* character_renderer.hpp in Headers */,
+				7F40C5A328D2732000B0865F /* gamepad_interface.h in Headers */,
 				7F3E8ECA279AC8F9003BB7B6 /* character_interface.h in Headers */,
 				7F3E8ECB279AC8F9003BB7B6 /* character.hpp in Headers */,
 				7F3E8ECC279AC8F9003BB7B6 /* character_manager.hpp in Headers */,
@@ -1739,6 +1765,7 @@
 				7F3E8EDB279AC8F9003BB7B6 /* texture.hpp in Headers */,
 				7F3E8EDC279AC8F9003BB7B6 /* texture_target.hpp in Headers */,
 				7F3E8EDE279AC8F9003BB7B6 /* engine_provider_metal.hpp in Headers */,
+				7F40C5AC28D2740400B0865F /* gamepad.hpp in Headers */,
 				7F15D02328A64E970057F653 /* holder.hpp in Headers */,
 				7F3E8EDF279AC8F9003BB7B6 /* file_access.hpp in Headers */,
 				7F08C44427AF20A6002FEB8F /* light_interface.hpp in Headers */,
@@ -1832,6 +1859,7 @@
 				7F3E90E9279B03F6003BB7B6 /* scene_manager.hpp in Headers */,
 				7F3E90EA279B03F6003BB7B6 /* scene.hpp in Headers */,
 				7F3E90EB279B03F6003BB7B6 /* character_renderer.hpp in Headers */,
+				7F40C5A428D2732000B0865F /* gamepad_interface.h in Headers */,
 				7F3E90EC279B03F6003BB7B6 /* character_interface.h in Headers */,
 				7F3E90ED279B03F6003BB7B6 /* character.hpp in Headers */,
 				7F3E90EE279B03F6003BB7B6 /* character_manager.hpp in Headers */,
@@ -1856,6 +1884,7 @@
 				7F3E90FD279B03F6003BB7B6 /* texture.hpp in Headers */,
 				7F3E90FE279B03F6003BB7B6 /* texture_target.hpp in Headers */,
 				7F3E9100279B03F6003BB7B6 /* engine_provider_metal.hpp in Headers */,
+				7F40C5AD28D2740400B0865F /* gamepad.hpp in Headers */,
 				7F15D02428A64E970057F653 /* holder.hpp in Headers */,
 				7F3E9101279B03F6003BB7B6 /* file_access.hpp in Headers */,
 				7F08C44527AF20A6002FEB8F /* light_interface.hpp in Headers */,
@@ -2216,6 +2245,7 @@
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
 				7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */,
 				7F708915278A13D800A501CB /* font_manager.cpp in Sources */,
+				7F40C5A828D2740400B0865F /* gamepad.cpp in Sources */,
 				7F6D1C82279F14690078D76A /* ini_reader.cpp in Sources */,
 				7FE14B6127A6D70B008E6DAE /* events_manager_types.cpp in Sources */,
 				7F8499152787464F004127CB /* key_value.cpp in Sources */,
@@ -2302,6 +2332,7 @@
 				7F3E8F0D279AC909003BB7B6 /* callable.cpp in Sources */,
 				7F3E8F0E279AC909003BB7B6 /* console_logger.cpp in Sources */,
 				7F3E8F0F279AC909003BB7B6 /* console_terminal.cpp in Sources */,
+				7F40C5A928D2740400B0865F /* gamepad.cpp in Sources */,
 				7F6D1C83279F14690078D76A /* ini_reader.cpp in Sources */,
 				7FE14B6227A6D70B008E6DAE /* events_manager_types.cpp in Sources */,
 				7F3E8F10279AC909003BB7B6 /* console_terminal_commands.cpp in Sources */,
@@ -2395,6 +2426,7 @@
 				7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */,
 				7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */,
 				7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */,
+				7F40C5AA28D2740400B0865F /* gamepad.cpp in Sources */,
 				7F6D1C84279F14690078D76A /* ini_reader.cpp in Sources */,
 				7FE14B6327A6D70B008E6DAE /* events_manager_types.cpp in Sources */,
 				7F3E9139279B03F6003BB7B6 /* console_terminal_commands.cpp in Sources */,

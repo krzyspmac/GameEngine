@@ -21,6 +21,7 @@ namespace engine
         std::unique_ptr<ObjectPool<EventI>> m_poolKeyFlagStateChanged;
         std::unique_ptr<ObjectPool<EventI>> m_poolKeyStateChanged;
         std::unique_ptr<ObjectPool<EventI>> m_poolThumbstickAxisChanged;
+        std::unique_ptr<ObjectPool<EventI>> m_poolGamepadConnectionChanged;
 
         std::vector<EventI*> m_eventQueue;
     public:
@@ -33,6 +34,7 @@ namespace engine
         void    PushKeyStateChange(unsigned short, bool);
         void    PushLeftThumbstickAxisChange(float, float);
         void    PushRightThumbstickAxisChange(float, float);
+        void    PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus);
 
         bool    PollEvent(EventI **outEvent);
 
