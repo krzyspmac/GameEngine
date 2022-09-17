@@ -15,6 +15,8 @@
 
 using namespace engine;
 
+static GamepadButtonAction GamepadButtonActionFromPressed(bool);
+
 @implementation RendererEntryViewController (Events)
 
 #pragma mark - Setup
@@ -271,34 +273,34 @@ using namespace engine;
         weakEngine->getEventProvider().PushDpadAxisChange(xValue, -yValue);
     };
     self.handlerButtonA = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonB = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonX = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonY = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonMenu = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_MENU, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_MENU, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonOptions = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_OPTIONS, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_OPTIONS, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonLeftShoulder = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_TRIGGER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_TRIGGER, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonLeftTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_SHOULDER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_SHOULDER, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonRightShoulder = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_TRIGGER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_TRIGGER, GamepadButtonActionFromPressed(pressed), button.value));
     };
     self.handlerButtonRightTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_SHOULDER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_SHOULDER, GamepadButtonActionFromPressed(pressed), button.value));
     };
 }
 
@@ -363,3 +365,10 @@ using namespace engine;
 #endif // USE_CONTROLLERS
 
 @end
+
+#pragma mark - Helpers
+
+GamepadButtonAction GamepadButtonActionFromPressed(bool pressed)
+{
+    return pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED;
+}
