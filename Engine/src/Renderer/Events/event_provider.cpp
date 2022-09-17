@@ -174,7 +174,7 @@ void EventProvider::PushRightThumbstickAxisChange(float xAxis, float yAxis)
     }
 }
 
-void EventProvider::PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus)
+void EventProvider::PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle)
 {
     EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_CONNECTION_CHANGE);
     if (baseEvent != nullptr)
@@ -183,6 +183,7 @@ void EventProvider::PushGamepadConnectionEvent(GamepadType gamepadType, GamepadM
         event->GetGamepadType() = gamepadType;
         event->GetGamepadFamily() = gamepadFamily;
         event->GetConnectionStatus() = connectionStatus;
+        event->GetDeviceHandle() = handle;
         EventPush(baseEvent);
     }
 }

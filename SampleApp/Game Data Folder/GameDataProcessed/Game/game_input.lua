@@ -65,7 +65,9 @@ mt.processGamepadConnection = function(self)
 
         self.gamepad:RegisterRightThumbstickAxis(function(x, y)
             self.vector:set(x*3, y*3)
-        end)    
+        end)
+
+        self.gamepad:SetLight(1, 0, 0)
     else
         print("No gamepad")
     end

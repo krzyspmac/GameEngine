@@ -78,6 +78,13 @@ GamepadEventIdentifier Gamepad::RegisterRightThumbstickAxis(CallableScriptFuncti
     return identifier;
 }
 
+void Gamepad::SetLight(Color3 color)
+{
+    if (m_handle != nullptr)
+    {   m_handle->SetLight(color);
+    }
+}
+
 /** Scripting interface */
 
 SCRIPTING_INTERFACE_IMPL_NAME(Gamepad);
@@ -100,11 +107,22 @@ static int lua_RegisterRightThumbstickAxis(lua_State *L)
     return 1;
 }
 
+static int lua_SetLight(lua_State *L)
+{
+    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
+    float r = lua_tonumber(L, 2);
+    float g = lua_tonumber(L, 3);
+    float b = lua_tonumber(L, 4);
+    mgr->SetLight({r, g, b});
+    return 0;
+}
+
 std::vector<luaL_Reg> Gamepad::ScriptingInterfaceFunctions()
 {
     std::vector<luaL_Reg> result({
           { "RegisterLeftThumbstickAxis", lua_RegisterLeftThumbstickAxis }
         , { "RegisterRightThumbstickAxis", lua_RegisterRightThumbstickAxis }
+        , { "SetLight", lua_SetLight }
     });
     return result;
 }

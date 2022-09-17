@@ -151,7 +151,8 @@ int EventsManager::DoEvents()
 
                 if (event->GetConnectionStatus() == GAMEPAD_CONNECTION_STATUS_CONNECTED)
                 {
-                    auto *gamepad = new Gamepad(event->GetGamepadType(), event->GetGamepadFamily());
+                    auto *gamepadHandle = event->GetDeviceHandle();
+                    auto *gamepad = new Gamepad(event->GetGamepadType(), event->GetGamepadFamily(), gamepadHandle);
                     m_gamepads.emplace_back(std::move(gamepad));
 
                     for (auto& codeHandler : m_gamepadConnection)

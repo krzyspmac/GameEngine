@@ -9,6 +9,10 @@
 #include "common.h"
 #include "common_engine_impl.h"
 
+#ifdef APPLE
+#include "gamepad_apple_handle.hpp"
+#endif
+
 using namespace engine;
 
 @implementation RendererEntryViewController (Events)
@@ -247,6 +251,7 @@ using namespace engine;
     self.controllerProfile = nil;
     self.leftThumbstick.valueChangedHandler = nil;
     self.rightThumbstick.valueChangedHandler = nil;
+    
 }
 
 - (void)processController
@@ -272,11 +277,12 @@ using namespace engine;
 {
     if (self.controller != nil)
     {
-        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED);
+        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
     }
     else
     {
-        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_DISCRONNECTED);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_DISCRONNECTED, nil);
     }
 }
 

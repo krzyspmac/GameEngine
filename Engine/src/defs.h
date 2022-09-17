@@ -18,6 +18,10 @@
     #define TARGET_OSX  1
 #endif
 
+#if defined(TARGET_IOS) || defined(TARGET_OSX)
+    #define APPLE       1
+#endif
+
 #define KEY_TABLE_SIZE 256
 
 #endif /* defs_h */

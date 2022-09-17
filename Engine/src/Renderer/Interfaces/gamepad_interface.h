@@ -19,13 +19,16 @@ namespace engine
 
     class GamepadI
     {
+    protected:
         GamepadType m_gamepadType;
         GamepadMakeFamily m_gamepadFamily;
+        GamepadDeviceHandleI *m_handle;
 
     public:
-        GamepadI(GamepadType type, GamepadMakeFamily family)
+        GamepadI(GamepadType type, GamepadMakeFamily family, GamepadDeviceHandleI *handle)
             : m_gamepadType(type)
             , m_gamepadFamily(family)
+            , m_handle(handle)
         { };
 
         virtual ~GamepadI() { };
@@ -36,6 +39,8 @@ namespace engine
         virtual void UnregisterAllEvents() = 0;
         virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
         virtual GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
+
+        virtual void SetLight(Color3) = 0;
     };
 };
 

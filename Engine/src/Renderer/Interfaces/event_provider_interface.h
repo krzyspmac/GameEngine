@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "common_engine_impl.h"
+#include "event_provider_interface.h"
 
 namespace engine
 {
@@ -62,6 +63,25 @@ namespace engine
     } GamepadConnectionStatus;
 
     EventFlagType String2EventFlagType(std::string);
+
+    /** The physical gamepad functionalities. Some of them might not be available
+        for every gamepad type. */
+    class GamepadDeviceFunctionsI
+    {
+    public:
+        GamepadDeviceFunctionsI() { };
+        virtual ~GamepadDeviceFunctionsI() { };
+
+        virtual void SetLight(Color3) = 0;
+    };
+
+    /** The physical gamepad handle to exeute functions */
+    class GamepadDeviceHandleI: public GamepadDeviceFunctionsI
+    {
+    public:
+        GamepadDeviceHandleI(): GamepadDeviceFunctionsI() { };
+        virtual ~GamepadDeviceHandleI() { };
+    };
 
     /** Declares an abstract interface for different type of events received from
         the platform handlers. */
@@ -135,17 +155,20 @@ namespace engine
         GamepadType m_gamepadType;
         GamepadMakeFamily m_gamepadFamily;
         GamepadConnectionStatus m_connectionStatus;
+        GamepadDeviceHandleI *m_handle;
     public:
         EventGamepadConnectionChanged(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus)
             : EventI(EVENT_GAMEPAD_CONNECTION_CHANGE)
             , m_gamepadType(gamepadType)
             , m_gamepadFamily(gamepadFamily)
             , m_connectionStatus(connectionStatus)
+            , m_handle(nullptr)
         { };
 
         auto& GetGamepadType() { return m_gamepadType; };
         auto& GetGamepadFamily() { return m_gamepadFamily; };
         auto& GetConnectionStatus() { return m_connectionStatus; };
+        auto& GetDeviceHandle() { return m_handle; };
     };
 
     /** Declares an abstract interface to provide real events directly into the
@@ -186,7 +209,7 @@ namespace engine
         virtual void PushRightThumbstickAxisChange(float, float) = 0;
 
         /** Push gamepad connection event */
-        virtual void PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus) = 0;
+        virtual void PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle) = 0;
 
         /** Poll an event from the queue. */
         virtual bool PollEvent(EventI **outEvent) = 0;
