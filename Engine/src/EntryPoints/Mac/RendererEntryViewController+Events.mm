@@ -271,22 +271,28 @@ using namespace engine;
         weakEngine->getEventProvider().PushDpadAxisChange(xValue, -yValue);
     };
     self.handlerButtonA = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
     self.handlerButtonB = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
     self.handlerButtonX = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
     self.handlerButtonY = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
     self.handlerButtonMenu = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_MENU, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_MENU, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
     self.handlerButtonOptions = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
-        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_OPTIONS, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_OPTIONS, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+    };
+    self.handlerButtonLeftShoulder = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_TRIGGER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+    };
+    self.handlerButtonLeftTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_SHOULDER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
 }
 
@@ -313,6 +319,8 @@ using namespace engine;
         self.controllerExtendedProfile.buttonY.valueChangedHandler = self.handlerButtonY;
         self.controllerExtendedProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
         self.controllerExtendedProfile.buttonOptions.valueChangedHandler = self.handlerButtonOptions;
+        self.controllerExtendedProfile.leftShoulder.valueChangedHandler = self.handlerButtonLeftShoulder;
+        self.controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
     }
     else if (self.controllerMicroProfile != nil)
     {

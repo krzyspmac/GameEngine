@@ -71,8 +71,8 @@ mt.processGamepadConnection = function(self)
             self.vector:set(x/2, y/2)
         end)
 
-        self.gamepad:RegisterButtonTapped(function(buttonType, buttonAction)
-            print("Button = " .. buttonType .. ", buttonAciton = " .. buttonAction)
+        self.gamepad:RegisterButtonTapped(function(buttonType, buttonAction, buttonValue)
+            print("Button = " .. buttonType .. ", buttonAciton = " .. buttonAction .. ", buttonValue = " .. buttonValue)
         end)
 
         self.gamepad:SetLight(1, 0, 0)

@@ -184,9 +184,9 @@ namespace engine
     /** Gamepad Button Event Holder */
     class EventHolderGamepadButton: public EventHolderI<GamepadButtonActionHolder>, public EventHolderScript
     {
-        CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction> m_script;
+        CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float> m_script;
     public:
-        EventHolderGamepadButton(EventIdentifier identifier, CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction> fnc)
+        EventHolderGamepadButton(EventIdentifier identifier, CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float> fnc)
             : EventHolderI<GamepadButtonActionHolder>(identifier)
             , EventHolderScript()
             , m_script(fnc)

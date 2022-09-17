@@ -101,7 +101,8 @@ void EventHolderGamepadButton::Process(GamepadButtonActionHolder *descriptor)
         m_script.PerformCall([&](lua_State *L){
             lua_pushnumber(L, descriptor->button);
             lua_pushnumber(L, descriptor->action);
-            return 2;
+            lua_pushnumber(L, descriptor->value);
+            return 3;
         });
     }
 }

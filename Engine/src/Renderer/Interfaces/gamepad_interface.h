@@ -16,23 +16,7 @@
 namespace engine
 {
     typedef unsigned int GamepadEventIdentifier;
-
-    /**
-     All face buttons are required to be analog in the Extended profile. These must be arranged
-     in the diamond pattern given below:
-
-       Y
-      / \
-     X   B
-      \ /
-       A
-
-     */
-//    @property (nonatomic, readonly) GCControllerButtonInput *buttonA;
-//    @property (nonatomic, readonly) GCControllerButtonInput *buttonB;
-//    @property (nonatomic, readonly) GCControllerButtonInput *buttonX;
-//    @property (nonatomic, readonly) GCControllerButtonInput *buttonY;
-
+    
     class GamepadI
     {
     protected:
@@ -56,7 +40,7 @@ namespace engine
         virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
         virtual GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
         virtual GamepadEventIdentifier RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterButtonTapped(CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction>) = 0;
+        virtual GamepadEventIdentifier RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float>) = 0;
 
         virtual void SetLight(Color3) = 0;
     };

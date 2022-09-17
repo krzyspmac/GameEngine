@@ -104,7 +104,7 @@ GamepadEventIdentifier Gamepad::RegisterDpadAxis(CallableScriptFunctionParameter
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterButtonTapped(CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction> fnc)
+GamepadEventIdentifier Gamepad::RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_buttonChange.push_back(EventHolderGamepadButton(identifier, fnc));
@@ -153,7 +153,7 @@ static int lua_RegisterButtonAction(lua_State *L)
 {
     Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
     int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterButtonTapped(CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction>(fnRef));
+    auto identifier = mgr->RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float>(fnRef));
     lua_pushnumber(L, identifier);
     return 1;
 }

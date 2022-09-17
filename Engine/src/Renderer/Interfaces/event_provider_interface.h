@@ -64,14 +64,27 @@ namespace engine
         GAMEPAD_CONNECTION_STATUS_DISCRONNECTED = 2
     } GamepadConnectionStatus;
 
+    /**
+     All face buttons are required to be analog in the Extended profile. These must be arranged
+     in the diamond pattern given below:
+
+       Y
+      / \
+     X   B
+      \ /
+       A
+
+     */
     typedef enum
     {
-        GAMEPAD_BUTTON_A        = 0
-      , GAMEPAD_BUTTON_B        = 1
-      , GAMEPAD_BUTTON_X        = 2
-      , GAMEPAD_BUTTON_Y        = 3
-      , GAMEPAD_BUTTON_MENU     = 4
-      , GAMEPAD_BUTTON_OPTIONS  = 5
+        GAMEPAD_BUTTON_A                = 0
+      , GAMEPAD_BUTTON_B                = 1
+      , GAMEPAD_BUTTON_X                = 2
+      , GAMEPAD_BUTTON_Y                = 3
+      , GAMEPAD_BUTTON_MENU             = 4
+      , GAMEPAD_BUTTON_OPTIONS          = 5
+      , GAMEPAD_BUTTON_LEFT_TRIGGER     = 6
+      , GAMEPAD_BUTTON_LEFT_SHOULDER    = 7
     } GamepadButtonType;
 
     typedef enum
@@ -82,13 +95,20 @@ namespace engine
 
     typedef struct GamepadButtonActionHolder
     {
+        /** button type */
         GamepadButtonType button;
+
+        /** button action, pressed, depressed, etc. */
         GamepadButtonAction action;
 
-        GamepadButtonActionHolder(GamepadButtonType button, GamepadButtonAction action)
+        /** button value, for certain buttons this can be between 0.0 and 1.0*/
+        float value;
+
+        GamepadButtonActionHolder(GamepadButtonType button, GamepadButtonAction action, float value)
         {
             this->button = button;
             this->action = action;
+            this->value = value;
         }
     } GamepadButtonActionHolder;
 
@@ -186,7 +206,7 @@ namespace engine
     public:
         EventGamepadButtonEventChanged()
             : EventI(EVENT_GAMEPAD_BUTTON_ACTION_CHANGE)
-            , m_action(GamepadButtonActionHolder(GAMEPAD_BUTTON_A, GAMEPAD_BUTTON_ACTION_PRESSED))
+            , m_action(GamepadButtonActionHolder(GAMEPAD_BUTTON_A, GAMEPAD_BUTTON_ACTION_PRESSED, 0.0f))
         { };
 
         auto& GetAction() { return m_action; };

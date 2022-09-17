@@ -42,7 +42,7 @@ namespace engine
         GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
         GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
         GamepadEventIdentifier RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>);
-        GamepadEventIdentifier RegisterButtonTapped(CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction>);
+        GamepadEventIdentifier RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float>);
         void SetLight(Color3 color);
     private:
 
