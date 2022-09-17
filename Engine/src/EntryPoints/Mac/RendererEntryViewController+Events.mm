@@ -270,17 +270,23 @@ using namespace engine;
     self.dpadThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
         weakEngine->getEventProvider().PushDpadAxisChange(xValue, -yValue);
     };
-    self.handerButtonA = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+    self.handlerButtonA = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
     };
-    self.handerButtonB = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+    self.handlerButtonB = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
     };
-    self.handerButtonX = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+    self.handlerButtonX = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
     };
-    self.handerButtonY = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+    self.handlerButtonY = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+    };
+    self.handlerButtonMenu = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_MENU, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+    };
+    self.handlerButtonOptions = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_OPTIONS, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
     };
 }
 
@@ -301,15 +307,20 @@ using namespace engine;
         self.rightThumbstick.valueChangedHandler = self.rightThumbstickHandler;
         self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
 
-        self.controllerExtendedProfile.buttonA.valueChangedHandler = self.handerButtonA;
-        self.controllerExtendedProfile.buttonB.valueChangedHandler = self.handerButtonB;
-        self.controllerExtendedProfile.buttonX.valueChangedHandler = self.handerButtonX;
-        self.controllerExtendedProfile.buttonY.valueChangedHandler = self.handerButtonY;
+        self.controllerExtendedProfile.buttonA.valueChangedHandler = self.handlerButtonA;
+        self.controllerExtendedProfile.buttonB.valueChangedHandler = self.handlerButtonB;
+        self.controllerExtendedProfile.buttonX.valueChangedHandler = self.handlerButtonX;
+        self.controllerExtendedProfile.buttonY.valueChangedHandler = self.handlerButtonY;
+        self.controllerExtendedProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
+        self.controllerExtendedProfile.buttonOptions.valueChangedHandler = self.handlerButtonOptions;
     }
     else if (self.controllerMicroProfile != nil)
     {
         self.controllerDPad = self.controllerMicroProfile.dpad;
         self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+        self.controllerMicroProfile.buttonA.valueChangedHandler = self.handlerButtonA;
+        self.controllerMicroProfile.buttonX.valueChangedHandler = self.handlerButtonX;
+        self.controllerMicroProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
     }
 
     [self updateControllerScripts];

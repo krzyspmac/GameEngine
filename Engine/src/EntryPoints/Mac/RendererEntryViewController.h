@@ -133,10 +133,13 @@
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler rightThumbstickHandler;
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler dpadThumbstickHandler;
 
-@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonA;
-@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonB;
-@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonX;
-@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonY;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonA;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonB;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonX;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonY;
+
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonMenu;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonOptions;
 
 #endif
 

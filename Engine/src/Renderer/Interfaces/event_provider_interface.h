@@ -66,10 +66,12 @@ namespace engine
 
     typedef enum
     {
-        GAMEPAD_BUTTON_A    = 0
-      , GAMEPAD_BUTTON_B    = 1
-      , GAMEPAD_BUTTON_X    = 2
-      , GAMEPAD_BUTTON_Y    = 3
+        GAMEPAD_BUTTON_A        = 0
+      , GAMEPAD_BUTTON_B        = 1
+      , GAMEPAD_BUTTON_X        = 2
+      , GAMEPAD_BUTTON_Y        = 3
+      , GAMEPAD_BUTTON_MENU     = 4
+      , GAMEPAD_BUTTON_OPTIONS  = 5
     } GamepadButtonType;
 
     typedef enum
