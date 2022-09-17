@@ -294,6 +294,12 @@ using namespace engine;
     self.handlerButtonLeftTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_SHOULDER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
     };
+    self.handlerButtonRightShoulder = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_TRIGGER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+    };
+    self.handlerButtonRightTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_SHOULDER, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED, button.value));
+    };
 }
 
 - (void)processController
@@ -321,6 +327,8 @@ using namespace engine;
         self.controllerExtendedProfile.buttonOptions.valueChangedHandler = self.handlerButtonOptions;
         self.controllerExtendedProfile.leftShoulder.valueChangedHandler = self.handlerButtonLeftShoulder;
         self.controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
+        self.controllerExtendedProfile.rightShoulder.valueChangedHandler = self.handlerButtonRightShoulder;
+        self.controllerExtendedProfile.rightTrigger.valueChangedHandler = self.handlerButtonRightTrigger;
     }
     else if (self.controllerMicroProfile != nil)
     {

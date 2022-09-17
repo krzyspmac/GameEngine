@@ -141,6 +141,9 @@
 @property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonLeftShoulder;
 @property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonLeftTrigger;
 
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonRightShoulder;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonRightTrigger;
+
 @property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonMenu;
 @property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonOptions;
 

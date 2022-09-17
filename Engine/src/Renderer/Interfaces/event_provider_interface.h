@@ -85,6 +85,8 @@ namespace engine
       , GAMEPAD_BUTTON_OPTIONS          = 5
       , GAMEPAD_BUTTON_LEFT_TRIGGER     = 6
       , GAMEPAD_BUTTON_LEFT_SHOULDER    = 7
+      , GAMEPAD_BUTTON_RIGHT_TRIGGER    = 8
+      , GAMEPAD_BUTTON_RIGHT_SHOULDER   = 9
     } GamepadButtonType;
 
     typedef enum
