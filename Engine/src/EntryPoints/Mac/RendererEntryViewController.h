@@ -146,7 +146,6 @@
 
 @property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonMenu;
 @property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonOptions;
-
 #endif
 
 - (void)recreateOffscreenRenderingPipeline;
