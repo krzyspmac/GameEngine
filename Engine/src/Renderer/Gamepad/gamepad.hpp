@@ -22,6 +22,7 @@ namespace engine
         GamepadEventIdentifier m_identifierCounter;
         std::vector<EventHolderGamepadStickAxis> m_leftStickAxisChange;
         std::vector<EventHolderGamepadStickAxis> m_rightStickAxisChange;
+        std::vector<EventHolderGamepadStickAxis> m_dpadAxisChange;
 
     public:
         Gamepad(GamepadType type, GamepadMakeFamily family, GamepadDeviceHandleI *handle)
@@ -37,6 +38,7 @@ namespace engine
         void UnregisterAllEvents();
         GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
         GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
+        GamepadEventIdentifier RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>);
         void SetLight(Color3 color);
     private:
 

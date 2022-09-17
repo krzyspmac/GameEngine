@@ -49,6 +49,14 @@ void Gamepad::ProcessEvent(EventGamepadThumbstickAxisChanged* event)
             }
             break;
         }
+        case GAMEPAD_DPAD:
+        {
+            for (auto& codeHandler : m_dpadAxisChange)
+            {
+                codeHandler.Process(&vector);
+            }
+            break;
+        }
     }
 }
 
@@ -56,12 +64,14 @@ void Gamepad::UnregisterEvent(GamepadEventIdentifier identifier)
 {
     TemplateRemoveIfMatching<EventHolderGamepadStickAxis>(m_leftStickAxisChange, identifier);
     TemplateRemoveIfMatching<EventHolderGamepadStickAxis>(m_rightStickAxisChange, identifier);
+    TemplateRemoveIfMatching<EventHolderGamepadStickAxis>(m_dpadAxisChange, identifier);
 }
 
 void Gamepad::UnregisterAllEvents()
 {
     m_leftStickAxisChange.clear();
     m_rightStickAxisChange.clear();
+    m_dpadAxisChange.clear();
 }
 
 GamepadEventIdentifier Gamepad::RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2> fnc)
@@ -75,6 +85,13 @@ GamepadEventIdentifier Gamepad::RegisterRightThumbstickAxis(CallableScriptFuncti
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_rightStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
+    return identifier;
+}
+
+GamepadEventIdentifier Gamepad::RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_dpadAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
@@ -107,6 +124,15 @@ static int lua_RegisterRightThumbstickAxis(lua_State *L)
     return 1;
 }
 
+static int lua_RegisterDpadAxis(lua_State *L)
+{
+    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto identifier = mgr->RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
 static int lua_SetLight(lua_State *L)
 {
     Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
@@ -122,6 +148,7 @@ std::vector<luaL_Reg> Gamepad::ScriptingInterfaceFunctions()
     std::vector<luaL_Reg> result({
           { "RegisterLeftThumbstickAxis", lua_RegisterLeftThumbstickAxis }
         , { "RegisterRightThumbstickAxis", lua_RegisterRightThumbstickAxis }
+        , { "RegisterDpadAxis", lua_RegisterDpadAxis }
         , { "SetLight", lua_SetLight }
     });
     return result;

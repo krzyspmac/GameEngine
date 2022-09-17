@@ -39,6 +39,7 @@ namespace engine
         virtual void UnregisterAllEvents() = 0;
         virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
         virtual GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
+        virtual GamepadEventIdentifier RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
 
         virtual void SetLight(Color3) = 0;
     };

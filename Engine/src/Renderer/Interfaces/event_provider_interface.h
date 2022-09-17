@@ -28,8 +28,9 @@ namespace engine
 
     typedef enum
     {
-        GAMEPAD_THUMBSTICK_AXIS_LEFT = 0,
-        GAMEPAD_THUMBSTICK_AXIS_RIGHT
+        GAMEPAD_THUMBSTICK_AXIS_LEFT = 0
+      , GAMEPAD_THUMBSTICK_AXIS_RIGHT
+      , GAMEPAD_DPAD
     } GamepadThunbstickAxis;
 
     typedef enum
@@ -207,6 +208,9 @@ namespace engine
 
         /** Set right gamepad axis, both axis at the same time. Not queued. */
         virtual void PushRightThumbstickAxisChange(float, float) = 0;
+
+        /** Set dpad axis, both axis at the same time. Not queued. */
+        virtual void PushDpadAxisChange(float, float) = 0;
 
         /** Push gamepad connection event */
         virtual void PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle) = 0;

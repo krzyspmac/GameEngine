@@ -229,6 +229,8 @@ using namespace engine;
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didConnectController:) name:GCControllerDidConnectNotification object:nil];
     [center addObserver:self selector:@selector(didDisconnectController:) name:GCControllerDidDisconnectNotification object:nil];
+
+    [self setupControllerHandlers];
     [self processController];
 #endif
 }
@@ -248,34 +250,62 @@ using namespace engine;
 - (void)resetController
 {
     self.controller = nil;
-    self.controllerProfile = nil;
+    self.controllerMicroProfile = nil;
+    self.controllerExtendedProfile = nil;
+    self.controllerDPad = nil;
     self.leftThumbstick.valueChangedHandler = nil;
     self.rightThumbstick.valueChangedHandler = nil;
-    
+}
+
+- (void)setupControllerHandlers
+{
+    Engine *weakEngine = self->m_engine;
+
+    self.leftThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        weakEngine->getEventProvider().PushLeftThumbstickAxisChange(xValue, -yValue);
+    };
+    self.rightThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        weakEngine->getEventProvider().PushRightThumbstickAxisChange(xValue, -yValue);
+    };
+    self.dpadThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        weakEngine->getEventProvider().PushDpadAxisChange(xValue, -yValue);
+    };
 }
 
 - (void)processController
 {
     NSArray<GCController*> *controllers = [GCController controllers];
     self.controller = [controllers firstObject];
-    self.controllerProfile = self.controller.extendedGamepad;
-    self.leftThumbstick = self.controllerProfile.leftThumbstick;
-    self.rightThumbstick = self.controllerProfile.rightThumbstick;
+    self.controllerMicroProfile = self.controller.microGamepad;
+    self.controllerExtendedProfile = self.controller.extendedGamepad;
+
+    if (self.controllerExtendedProfile != nil)
+    {
+        self.leftThumbstick = self.controllerExtendedProfile.leftThumbstick;
+        self.rightThumbstick = self.controllerExtendedProfile.rightThumbstick;
+        self.controllerDPad = self.controllerExtendedProfile.dpad;
+
+        self.leftThumbstick.valueChangedHandler = self.leftThumbstickHandler;
+        self.rightThumbstick.valueChangedHandler = self.rightThumbstickHandler;
+        self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+    }
+    else if (self.controllerMicroProfile != nil)
+    {
+        self.controllerDPad = self.controllerMicroProfile.dpad;
+        self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+    }
 
     [self updateControllerScripts];
-
-    self.leftThumbstick.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
-        self->m_engine->getEventProvider().PushLeftThumbstickAxisChange(xValue, -yValue);
-    };
-
-    self.rightThumbstick.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
-        self->m_engine->getEventProvider().PushRightThumbstickAxisChange(xValue, -yValue);
-    };
 }
 
 - (void)updateControllerScripts
 {
-    if (self.controller != nil)
+    if (self.controllerExtendedProfile != nil)
+    {
+        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
+    }
+    else if (self.controllerMicroProfile != nil)
     {
         GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
         m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);

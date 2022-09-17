@@ -67,6 +67,10 @@ mt.processGamepadConnection = function(self)
             self.vector:set(x*3, y*3)
         end)
 
+        self.gamepad:RegisterDpadAxis(function(x, y)
+            self.vector:set(x/2, y/2)
+        end)
+
         self.gamepad:SetLight(1, 0, 0)
     else
         print("No gamepad")

@@ -34,6 +34,7 @@ namespace engine
         void    PushKeyStateChange(unsigned short, bool);
         void    PushLeftThumbstickAxisChange(float, float);
         void    PushRightThumbstickAxisChange(float, float);
+        void    PushDpadAxisChange(float, float);
         void    PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle);
 
         bool    PollEvent(EventI **outEvent);

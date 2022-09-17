@@ -123,9 +123,15 @@
 
 #if USE_CONTROLLERS
 @property (nonatomic, weak) GCController *controller;
-@property (nonatomic, weak) GCExtendedGamepad *controllerProfile;
+@property (nonatomic, weak) GCExtendedGamepad *controllerExtendedProfile;
+@property (nonatomic, weak) GCMicroGamepad *controllerMicroProfile;
+@property (nonatomic, weak) GCControllerDirectionPad *controllerDPad;
 @property (nonatomic, weak) GCControllerDirectionPad *leftThumbstick;
 @property (nonatomic, weak) GCControllerDirectionPad *rightThumbstick;
+
+@property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler leftThumbstickHandler;
+@property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler rightThumbstickHandler;
+@property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler dpadThumbstickHandler;
 #endif
 
 - (void)recreateOffscreenRenderingPipeline;

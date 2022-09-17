@@ -174,6 +174,18 @@ void EventProvider::PushRightThumbstickAxisChange(float xAxis, float yAxis)
     }
 }
 
+void EventProvider::PushDpadAxisChange(float xAxis, float yAxis)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+        event->GetVector() = Vector2(xAxis, yAxis);
+        event->GetThumbstickType() = GAMEPAD_DPAD;
+        EventPush(baseEvent);
+    }
+}
+
 void EventProvider::PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle)
 {
     EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_CONNECTION_CHANGE);
