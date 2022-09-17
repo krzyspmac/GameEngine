@@ -14,6 +14,7 @@
 #include "engine_provider_interface.h"
 #include "common_engine_impl.h"
 #include "scripting_engine_provider_interface.h"
+#include "gamepad_interface.h"
 #include "callable.hpp"
 #include "defs.h"
 
@@ -26,19 +27,28 @@ namespace engine
      */
     typedef unsigned int EventIdentifier;
 
-    /** The base class for all event holder types. Identifier is used to mark
-        the event in order to remove it from the event hander list. */
-    /** @private */
-    template <typename T>
-    class EventHolderI
+    /** The base for all event holders */
+    class EventHolderIdentifier
     {
         EventIdentifier m_identifier;
     public:
-        EventHolderI(EventIdentifier identifier)
+        EventHolderIdentifier(EventIdentifier identifier)
             : m_identifier(identifier)
         { };
 
         auto GetIdentifier() { return m_identifier; };
+    };
+
+    /** The base class for all event holder types. Identifier is used to mark
+        the event in order to remove it from the event hander list. */
+    /** @private */
+    template <typename T>
+    class EventHolderI: public EventHolderIdentifier
+    {
+    public:
+        EventHolderI(EventIdentifier identifier)
+            : EventHolderIdentifier(identifier)
+        { };
 
     public:
         virtual void Process(T*) = 0;
@@ -143,6 +153,47 @@ namespace engine
         void Process(char*);
     };
 
+    /** Gamepad Connection Event Handler */
+    class EventHolderGamepadConnection: public EventHolderI<GamepadI>, public EventHolderScript
+    {
+        CallableScriptFunctionParameters2<GamepadI, bool> m_script;
+    public:
+        EventHolderGamepadConnection(EventIdentifier identifier, CallableScriptFunctionParameters2<GamepadI, bool> fnc)
+            : EventHolderI<GamepadI>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(GamepadI*);
+    };
+
+    /** Gamepad Stick Event Handler */
+    class EventHolderGamepadStickAxis: public EventHolderI<Vector2>, public EventHolderScript
+    {
+        CallableScriptFunctionParameters1<Vector2> m_script;
+    public:
+        EventHolderGamepadStickAxis(EventIdentifier identifier, CallableScriptFunctionParameters1<Vector2> fnc)
+            : EventHolderI<Vector2>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(Vector2*);
+    };
+
+    /** Gamepad Button Event Holder */
+    class EventHolderGamepadButton: public EventHolderI<GamepadButtonActionHolder>, public EventHolderScript
+    {
+        CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float> m_script;
+    public:
+        EventHolderGamepadButton(EventIdentifier identifier, CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float> fnc)
+            : EventHolderI<GamepadButtonActionHolder>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(GamepadButtonActionHolder*);
+    };
 };
 
 #endif /* events_manager_types_hpp */

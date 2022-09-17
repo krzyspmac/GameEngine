@@ -9,7 +9,13 @@
 #include "common.h"
 #include "common_engine_impl.h"
 
+#ifdef APPLE
+#include "gamepad_apple_handle.hpp"
+#endif
+
 using namespace engine;
+
+static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 
 @implementation RendererEntryViewController (Events)
 
@@ -22,6 +28,7 @@ using namespace engine;
     [self setupMouseClickEvents];
     [self setupMouseMovedEvents];
     [self setupKeyEvents];
+    [self setupControllers];
 
     didSetupEvents = YES;
 }
@@ -201,10 +208,7 @@ using namespace engine;
     [self handle:event];
 }
 
-- (void)keyDown:(NSEvent *)event             {
-    [self handle:event];
-    
-}
+- (void)keyDown:(NSEvent *)event             { [self handle:event]; }
 - (void)keyUp:(NSEvent *)event               { [self handle:event]; };
 - (void)mouseDown:(NSEvent *)event           { [self handle:event]; }
 - (void)rightMouseDown:(NSEvent *)event      { [self handle:event]; }
@@ -219,6 +223,152 @@ using namespace engine;
 - (void)otherMouseDragged:(NSEvent *)event   { [self handle:event]; }
 - (void)scrollWheel:(NSEvent *)event         { [self handle:event]; }
 
+#endif // defined(TARGET_IOS) || defined(TARGET_TVOS)
+
+- (void)setupControllers
+{
+#if USE_CONTROLLERS
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    [center addObserver:self selector:@selector(didConnectController:) name:GCControllerDidConnectNotification object:nil];
+    [center addObserver:self selector:@selector(didDisconnectController:) name:GCControllerDidDisconnectNotification object:nil];
+
+    [self setupControllerHandlers];
+    [self processController];
 #endif
+}
+
+#if USE_CONTROLLERS
+
+- (void)didConnectController:(NSNotification*)notification
+{
+    [self processController];
+}
+
+- (void)didDisconnectController:(NSNotification*)notification
+{
+    [self processController];
+}
+
+- (void)resetController
+{
+    self.controller = nil;
+    self.controllerMicroProfile = nil;
+    self.controllerExtendedProfile = nil;
+    self.controllerDPad = nil;
+    self.leftThumbstick.valueChangedHandler = nil;
+    self.rightThumbstick.valueChangedHandler = nil;
+}
+
+- (void)setupControllerHandlers
+{
+    Engine *weakEngine = self->m_engine;
+
+    self.leftThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        weakEngine->getEventProvider().PushLeftThumbstickAxisChange(xValue, -yValue);
+    };
+    self.rightThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        weakEngine->getEventProvider().PushRightThumbstickAxisChange(xValue, -yValue);
+    };
+    self.dpadThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
+        weakEngine->getEventProvider().PushDpadAxisChange(xValue, -yValue);
+    };
+    self.handlerButtonA = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonB = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonX = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonY = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonMenu = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_MENU, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonOptions = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_OPTIONS, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonLeftShoulder = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_TRIGGER, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonLeftTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_SHOULDER, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonRightShoulder = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_TRIGGER, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonRightTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_SHOULDER, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+}
+
+- (void)processController
+{
+    NSArray<GCController*> *controllers = [GCController controllers];
+    self.controller = [controllers firstObject];
+    self.controllerMicroProfile = self.controller.microGamepad;
+    self.controllerExtendedProfile = self.controller.extendedGamepad;
+
+    if (self.controllerExtendedProfile != nil)
+    {
+        self.leftThumbstick = self.controllerExtendedProfile.leftThumbstick;
+        self.rightThumbstick = self.controllerExtendedProfile.rightThumbstick;
+        self.controllerDPad = self.controllerExtendedProfile.dpad;
+
+        self.leftThumbstick.valueChangedHandler = self.leftThumbstickHandler;
+        self.rightThumbstick.valueChangedHandler = self.rightThumbstickHandler;
+        self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+
+        self.controllerExtendedProfile.buttonA.valueChangedHandler = self.handlerButtonA;
+        self.controllerExtendedProfile.buttonB.valueChangedHandler = self.handlerButtonB;
+        self.controllerExtendedProfile.buttonX.valueChangedHandler = self.handlerButtonX;
+        self.controllerExtendedProfile.buttonY.valueChangedHandler = self.handlerButtonY;
+        self.controllerExtendedProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
+        self.controllerExtendedProfile.buttonOptions.valueChangedHandler = self.handlerButtonOptions;
+        self.controllerExtendedProfile.leftShoulder.valueChangedHandler = self.handlerButtonLeftShoulder;
+        self.controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
+        self.controllerExtendedProfile.rightShoulder.valueChangedHandler = self.handlerButtonRightShoulder;
+        self.controllerExtendedProfile.rightTrigger.valueChangedHandler = self.handlerButtonRightTrigger;
+    }
+    else if (self.controllerMicroProfile != nil)
+    {
+        self.controllerDPad = self.controllerMicroProfile.dpad;
+        self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+        self.controllerMicroProfile.buttonA.valueChangedHandler = self.handlerButtonA;
+        self.controllerMicroProfile.buttonX.valueChangedHandler = self.handlerButtonX;
+        self.controllerMicroProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
+    }
+
+    [self updateControllerScripts];
+}
+
+- (void)updateControllerScripts
+{
+    if (self.controllerExtendedProfile != nil)
+    {
+        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
+    }
+    else if (self.controllerMicroProfile != nil)
+    {
+        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_SIMPLE, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
+    }
+    else
+    {
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_DISCRONNECTED, nil);
+    }
+}
+
+#endif // USE_CONTROLLERS
 
 @end
+
+#pragma mark - Helpers
+
+GamepadButtonAction GamepadButtonActionFromPressed(bool pressed)
+{
+    return pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED;
+}

@@ -42,6 +42,26 @@ EventProvider::EventProvider()
         m_poolKeyStateChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
     }
 
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventGamepadThumbstickAxisChanged();
+        });
+        m_poolThumbstickAxisChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
+    {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventGamepadButtonEventChanged();
+        });
+        m_poolGamepadButtonActionChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
+    {
+        auto *pool = new ObjectPool<EventI>(10, [](void){
+            return new EventGamepadConnectionChanged(GAMEPAD_TYPE_UNKNOWN, GAMEPAD_MAKE_UNKNOWN, GAMEPAD_CONNECTION_STATUS_UNKNOWN);
+        });
+        m_poolGamepadConnectionChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
 }
 
 ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
@@ -58,6 +78,12 @@ ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
             return m_poolMouseMove.get();
         case EVENT_MOUSEUP:
             return m_poolMouseLeftUp.get();
+        case EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE:
+            return m_poolThumbstickAxisChanged.get();
+        case EVENT_GAMEPAD_BUTTON_ACTION_CHANGE:
+            return m_poolGamepadButtonActionChanged.get();
+        case EVENT_GAMEPAD_CONNECTION_CHANGE:
+            return m_poolGamepadConnectionChanged.get();
         case EVENT_QUIT:
             return nullptr;
     }
@@ -129,6 +155,67 @@ void EventProvider::PushKeyStateChange(unsigned short key, bool pressed)
         auto* event = static_cast<EventKeyStateChanged*>(baseEvent);
         event->GetKey() = key;
         event->GetIsDown() = pressed;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushLeftThumbstickAxisChange(float xAxis, float yAxis)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+        event->GetVector() = Vector2(xAxis, yAxis);
+        event->GetThumbstickType() = GAMEPAD_THUMBSTICK_AXIS_LEFT;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushRightThumbstickAxisChange(float xAxis, float yAxis)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+        event->GetVector() = Vector2(xAxis, yAxis);
+        event->GetThumbstickType() = GAMEPAD_THUMBSTICK_AXIS_RIGHT;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushDpadAxisChange(float xAxis, float yAxis)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
+        event->GetVector() = Vector2(xAxis, yAxis);
+        event->GetThumbstickType() = GAMEPAD_DPAD;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushButtonAction(GamepadButtonActionHolder action)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_BUTTON_ACTION_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadButtonEventChanged*>(baseEvent);
+        event->GetAction() = action;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_CONNECTION_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadConnectionChanged*>(baseEvent);
+        event->GetGamepadType() = gamepadType;
+        event->GetGamepadFamily() = gamepadFamily;
+        event->GetConnectionStatus() = connectionStatus;
+        event->GetDeviceHandle() = handle;
         EventPush(baseEvent);
     }
 }

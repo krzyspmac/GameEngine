@@ -16,14 +16,16 @@
     #include <Foundation/Foundation.hpp>
     #include <Metal/Metal.hpp>
     #include <QuartzCore/QuartzCore.hpp>
-    #define PlatformViewController UIViewController
+    #include <GameController/GameController.h>
+    #define PlatformViewController GCEventViewController
 #else
     #import <Cocoa/Cocoa.h>
     #include <MetalKit/MetalKit.h>
     #include <Foundation/Foundation.hpp>
     #include <Metal/Metal.hpp>
     #include <QuartzCore/QuartzCore.hpp>
-    #define PlatformViewController NSViewController
+    #include <GameController/GameController.h>
+    #define PlatformViewController GCEventViewController
 #endif
 
 #include <stdio.h>
@@ -117,6 +119,33 @@
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
 @property (weak) NSWindow *parentWindow;
+#endif
+
+#if USE_CONTROLLERS
+@property (nonatomic, weak) GCController *controller;
+@property (nonatomic, weak) GCExtendedGamepad *controllerExtendedProfile;
+@property (nonatomic, weak) GCMicroGamepad *controllerMicroProfile;
+@property (nonatomic, weak) GCControllerDirectionPad *controllerDPad;
+@property (nonatomic, weak) GCControllerDirectionPad *leftThumbstick;
+@property (nonatomic, weak) GCControllerDirectionPad *rightThumbstick;
+
+@property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler leftThumbstickHandler;
+@property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler rightThumbstickHandler;
+@property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler dpadThumbstickHandler;
+
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonA;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonB;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonX;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonY;
+
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonLeftShoulder;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonLeftTrigger;
+
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonRightShoulder;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonRightTrigger;
+
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonMenu;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handlerButtonOptions;
 #endif
 
 - (void)recreateOffscreenRenderingPipeline;

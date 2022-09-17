@@ -20,6 +20,9 @@ namespace engine
         std::unique_ptr<ObjectPool<EventI>> m_poolMouseLeftUp;
         std::unique_ptr<ObjectPool<EventI>> m_poolKeyFlagStateChanged;
         std::unique_ptr<ObjectPool<EventI>> m_poolKeyStateChanged;
+        std::unique_ptr<ObjectPool<EventI>> m_poolThumbstickAxisChanged;
+        std::unique_ptr<ObjectPool<EventI>> m_poolGamepadButtonActionChanged;
+        std::unique_ptr<ObjectPool<EventI>> m_poolGamepadConnectionChanged;
 
         std::vector<EventI*> m_eventQueue;
     public:
@@ -30,6 +33,12 @@ namespace engine
         void    PushMouseLeftUp();
         void    PushFlagsChange(EventFlagType, bool);
         void    PushKeyStateChange(unsigned short, bool);
+        void    PushLeftThumbstickAxisChange(float, float);
+        void    PushRightThumbstickAxisChange(float, float);
+        void    PushDpadAxisChange(float, float);
+        void    PushButtonAction(GamepadButtonActionHolder);
+        void    PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle);
+
         bool    PollEvent(EventI **outEvent);
 
     private:

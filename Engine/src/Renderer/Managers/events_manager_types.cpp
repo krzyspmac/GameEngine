@@ -6,6 +6,7 @@
 //
 
 #include "events_manager_types.hpp"
+#include "gamepad.hpp"
 
 using namespace engine;
 
@@ -60,6 +61,48 @@ void EventHolderKeyDown::Process(char *c)
         m_script.PerformCall([&](lua_State *L){
             lua_pushstring(L, c);
             return 1;
+        });
+    }
+}
+
+void EventHolderGamepadStickAxis::Process(Vector2 *vector)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            lua_pushnumber(L, vector->x);
+            lua_pushnumber(L, vector->y);
+            return 2;
+        });
+    }
+}
+
+void EventHolderGamepadConnection::Process(GamepadI *gamepad)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            auto *ptr = dynamic_cast<Gamepad*>(gamepad);
+            if (ptr != nullptr)
+            {   ptr->ScriptingInterfaceRegisterFunctions(L, ptr);
+                return 1;
+            }
+            else
+            {   return 0;
+            }
+        });
+    }
+}
+
+void EventHolderGamepadButton::Process(GamepadButtonActionHolder *descriptor)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            lua_pushnumber(L, descriptor->button);
+            lua_pushnumber(L, descriptor->action);
+            lua_pushnumber(L, descriptor->value);
+            return 3;
         });
     }
 }

@@ -29,7 +29,7 @@ end
 -- functions
 
 mt.updateForceVector = function(self, value)
-    self.forceVector = value:normalized()
+    self.forceVector = value
 end
 
 mt.advance = function(self)
