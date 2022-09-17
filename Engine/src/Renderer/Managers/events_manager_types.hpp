@@ -181,6 +181,19 @@ namespace engine
         void Process(Vector2*);
     };
 
+    /** Gamepad Button Event Holder */
+    class EventHolderGamepadButton: public EventHolderI<GamepadButtonActionHolder>, public EventHolderScript
+    {
+        CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction> m_script;
+    public:
+        EventHolderGamepadButton(EventIdentifier identifier, CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction> fnc)
+            : EventHolderI<GamepadButtonActionHolder>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(GamepadButtonActionHolder*);
+    };
 };
 
 #endif /* events_manager_types_hpp */

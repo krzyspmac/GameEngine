@@ -132,6 +132,12 @@
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler leftThumbstickHandler;
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler rightThumbstickHandler;
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler dpadThumbstickHandler;
+
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonA;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonB;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonX;
+@property (nonatomic, copy) GCControllerButtonValueChangedHandler handerButtonY;
+
 #endif
 
 - (void)recreateOffscreenRenderingPipeline;

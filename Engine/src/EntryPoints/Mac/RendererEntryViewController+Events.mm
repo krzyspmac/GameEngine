@@ -270,6 +270,18 @@ using namespace engine;
     self.dpadThumbstickHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {
         weakEngine->getEventProvider().PushDpadAxisChange(xValue, -yValue);
     };
+    self.handerButtonA = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_A, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+    };
+    self.handerButtonB = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_B, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+    };
+    self.handerButtonX = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_X, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+    };
+    self.handerButtonY = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_Y, pressed ? GAMEPAD_BUTTON_ACTION_PRESSED : GAMEPAD_BUTTON_ACTION_DEPRESSED));
+    };
 }
 
 - (void)processController
@@ -288,6 +300,11 @@ using namespace engine;
         self.leftThumbstick.valueChangedHandler = self.leftThumbstickHandler;
         self.rightThumbstick.valueChangedHandler = self.rightThumbstickHandler;
         self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+
+        self.controllerExtendedProfile.buttonA.valueChangedHandler = self.handerButtonA;
+        self.controllerExtendedProfile.buttonB.valueChangedHandler = self.handerButtonB;
+        self.controllerExtendedProfile.buttonX.valueChangedHandler = self.handerButtonX;
+        self.controllerExtendedProfile.buttonY.valueChangedHandler = self.handerButtonY;
     }
     else if (self.controllerMicroProfile != nil)
     {
@@ -308,7 +325,7 @@ using namespace engine;
     else if (self.controllerMicroProfile != nil)
     {
         GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
-        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_SIMPLE, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
     }
     else
     {

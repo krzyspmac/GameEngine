@@ -50,6 +50,13 @@ EventProvider::EventProvider()
     }
 
     {
+        auto *pool = new ObjectPool<EventI>(POOL_COUNT_PER_TYPE, [](void){
+            return new EventGamepadButtonEventChanged();
+        });
+        m_poolGamepadButtonActionChanged = std::unique_ptr<ObjectPool<EventI>>(std::move(pool));
+    }
+
+    {
         auto *pool = new ObjectPool<EventI>(10, [](void){
             return new EventGamepadConnectionChanged(GAMEPAD_TYPE_UNKNOWN, GAMEPAD_MAKE_UNKNOWN, GAMEPAD_CONNECTION_STATUS_UNKNOWN);
         });
@@ -73,6 +80,8 @@ ObjectPool<EventI> *EventProvider::EventsPoolForType(EventType type)
             return m_poolMouseLeftUp.get();
         case EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE:
             return m_poolThumbstickAxisChanged.get();
+        case EVENT_GAMEPAD_BUTTON_ACTION_CHANGE:
+            return m_poolGamepadButtonActionChanged.get();
         case EVENT_GAMEPAD_CONNECTION_CHANGE:
             return m_poolGamepadConnectionChanged.get();
         case EVENT_QUIT:
@@ -182,6 +191,17 @@ void EventProvider::PushDpadAxisChange(float xAxis, float yAxis)
         auto* event = static_cast<EventGamepadThumbstickAxisChanged*>(baseEvent);
         event->GetVector() = Vector2(xAxis, yAxis);
         event->GetThumbstickType() = GAMEPAD_DPAD;
+        EventPush(baseEvent);
+    }
+}
+
+void EventProvider::PushButtonAction(GamepadButtonActionHolder action)
+{
+    EventI *baseEvent = EventsPoolDequeue(EVENT_GAMEPAD_BUTTON_ACTION_CHANGE);
+    if (baseEvent != nullptr)
+    {
+        auto* event = static_cast<EventGamepadButtonEventChanged*>(baseEvent);
+        event->GetAction() = action;
         EventPush(baseEvent);
     }
 }

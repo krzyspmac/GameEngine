@@ -22,6 +22,7 @@ namespace engine
       , EVENT_MOUSEMOVE
       , EVENT_MOUSEUP
       , EVENT_GAMEPAD_THUMSTICK_AXIS_CHANGE
+      , EVENT_GAMEPAD_BUTTON_ACTION_CHANGE
       , EVENT_GAMEPAD_CONNECTION_CHANGE
       , EVENT_QUIT
     } EventType;
@@ -62,6 +63,32 @@ namespace engine
         GAMEPAD_CONNECTION_STATUS_CONNECTED = 1,
         GAMEPAD_CONNECTION_STATUS_DISCRONNECTED = 2
     } GamepadConnectionStatus;
+
+    typedef enum
+    {
+        GAMEPAD_BUTTON_A    = 0
+      , GAMEPAD_BUTTON_B    = 1
+      , GAMEPAD_BUTTON_X    = 2
+      , GAMEPAD_BUTTON_Y    = 3
+    } GamepadButtonType;
+
+    typedef enum
+    {
+        GAMEPAD_BUTTON_ACTION_PRESSED = 0,
+        GAMEPAD_BUTTON_ACTION_DEPRESSED = 1,
+    } GamepadButtonAction;
+
+    typedef struct GamepadButtonActionHolder
+    {
+        GamepadButtonType button;
+        GamepadButtonAction action;
+
+        GamepadButtonActionHolder(GamepadButtonType button, GamepadButtonAction action)
+        {
+            this->button = button;
+            this->action = action;
+        }
+    } GamepadButtonActionHolder;
 
     EventFlagType String2EventFlagType(std::string);
 
@@ -151,6 +178,18 @@ namespace engine
         auto& GetThumbstickType() { return m_thumbstick; };
     };
 
+    class EventGamepadButtonEventChanged: public EventI
+    {
+        GamepadButtonActionHolder m_action;
+    public:
+        EventGamepadButtonEventChanged()
+            : EventI(EVENT_GAMEPAD_BUTTON_ACTION_CHANGE)
+            , m_action(GamepadButtonActionHolder(GAMEPAD_BUTTON_A, GAMEPAD_BUTTON_ACTION_PRESSED))
+        { };
+
+        auto& GetAction() { return m_action; };
+    };
+
     class EventGamepadConnectionChanged: public EventI
     {
         GamepadType m_gamepadType;
@@ -211,6 +250,9 @@ namespace engine
 
         /** Set dpad axis, both axis at the same time. Not queued. */
         virtual void PushDpadAxisChange(float, float) = 0;
+
+        /** Push button action */
+        virtual void PushButtonAction(GamepadButtonActionHolder) = 0;
 
         /** Push gamepad connection event */
         virtual void PushGamepadConnectionEvent(GamepadType gamepadType, GamepadMakeFamily gamepadFamily, GamepadConnectionStatus connectionStatus, GamepadDeviceHandleI *handle) = 0;

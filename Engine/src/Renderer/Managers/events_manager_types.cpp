@@ -93,3 +93,15 @@ void EventHolderGamepadConnection::Process(GamepadI *gamepad)
         });
     }
 }
+
+void EventHolderGamepadButton::Process(GamepadButtonActionHolder *descriptor)
+{
+    if (m_script.CanCall())
+    {
+        m_script.PerformCall([&](lua_State *L){
+            lua_pushnumber(L, descriptor->button);
+            lua_pushnumber(L, descriptor->action);
+            return 2;
+        });
+    }
+}

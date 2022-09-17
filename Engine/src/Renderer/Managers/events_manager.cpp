@@ -143,6 +143,21 @@ int EventsManager::DoEvents()
                 }
                 break;
             }
+            case EVENT_GAMEPAD_BUTTON_ACTION_CHANGE:
+            {
+                auto *event = static_cast<EventGamepadButtonEventChanged*>(baseEvent);
+                auto& action = event->GetAction();
+
+                for (auto& gamepad : m_gamepads)
+                {
+                    auto *ptr = gamepad.get();
+                    if (ptr != nullptr)
+                    {
+                        ptr->ProcessButtonEvent(&action);
+                    }
+                }
+                break;
+            }
             case EVENT_GAMEPAD_CONNECTION_CHANGE:
             {
                 auto* event = static_cast<EventGamepadConnectionChanged*>(baseEvent);

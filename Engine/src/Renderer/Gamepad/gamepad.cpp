@@ -60,6 +60,14 @@ void Gamepad::ProcessEvent(EventGamepadThumbstickAxisChanged* event)
     }
 }
 
+void Gamepad::ProcessButtonEvent(GamepadButtonActionHolder *action)
+{
+    for (auto& codeHandler : m_buttonChange)
+    {
+        codeHandler.Process(action);
+    }
+}
+
 void Gamepad::UnregisterEvent(GamepadEventIdentifier identifier)
 {
     TemplateRemoveIfMatching<EventHolderGamepadStickAxis>(m_leftStickAxisChange, identifier);
@@ -72,6 +80,7 @@ void Gamepad::UnregisterAllEvents()
     m_leftStickAxisChange.clear();
     m_rightStickAxisChange.clear();
     m_dpadAxisChange.clear();
+    m_buttonChange.clear();
 }
 
 GamepadEventIdentifier Gamepad::RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2> fnc)
@@ -92,6 +101,13 @@ GamepadEventIdentifier Gamepad::RegisterDpadAxis(CallableScriptFunctionParameter
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_dpadAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
+    return identifier;
+}
+
+GamepadEventIdentifier Gamepad::RegisterButtonTapped(CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_buttonChange.push_back(EventHolderGamepadButton(identifier, fnc));
     return identifier;
 }
 
@@ -133,6 +149,15 @@ static int lua_RegisterDpadAxis(lua_State *L)
     return 1;
 }
 
+static int lua_RegisterButtonAction(lua_State *L)
+{
+    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
+    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
+    auto identifier = mgr->RegisterButtonTapped(CallableScriptFunctionParameters2<GamepadButtonType, GamepadButtonAction>(fnRef));
+    lua_pushnumber(L, identifier);
+    return 1;
+}
+
 static int lua_SetLight(lua_State *L)
 {
     Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
@@ -149,6 +174,7 @@ std::vector<luaL_Reg> Gamepad::ScriptingInterfaceFunctions()
           { "RegisterLeftThumbstickAxis", lua_RegisterLeftThumbstickAxis }
         , { "RegisterRightThumbstickAxis", lua_RegisterRightThumbstickAxis }
         , { "RegisterDpadAxis", lua_RegisterDpadAxis }
+        , { "RegisterButtonTapped", lua_RegisterButtonAction }
         , { "SetLight", lua_SetLight }
     });
     return result;
