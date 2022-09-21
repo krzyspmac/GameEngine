@@ -292,6 +292,13 @@ using namespace engine;
     [self setupOffscreenRenderingPipeline];
 }
 
+#if defined(TARGET_IOS)
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+}
+#endif
+
 @end
 
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)

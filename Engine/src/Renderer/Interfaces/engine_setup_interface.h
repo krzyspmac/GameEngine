@@ -21,8 +21,16 @@ namespace engine
         /** The initial resolution */
         Size resolution;
 
-        /** Uses the gamepad if connected. The last one will be used. */
+        /** Uses the gamepad if connected. The last one will be used.
+            Default is true.
+         */
         bool gamepad_support;
+
+        /** Uses the gamepad virtual interface when gamepad is not availagle;
+            only on iOS.
+            Default is false.
+         */
+        bool gamepad_virtual_support;
 
         /** The scale to apply to the whole framebuffer. Allows for keeping
             the framebuffer resolution while scaling the whole screen.
@@ -40,6 +48,7 @@ namespace engine
         EngineSetup()
         :   resolution( {320, 200} )
         ,   gamepad_support(true)
+        ,   gamepad_virtual_support(false)
         ,   affineScale( 1.0 )
         ,   isDirty(false)
         ,   backgroundColor({1.0, 0.0, 1.0, 1.0})

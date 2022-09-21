@@ -88,7 +88,7 @@ bool IniReader::UpdateSection(std::string &srcLine)
     }
 
     // Compare to a rudimental list of sections
-    static std::string types[] = { "RESOLUTION", "RENDERER", "INPUT" };
+    static std::string types[] = { "RESOLUTION", "RENDERER", "INPUT", "PHONE" };
 
     for (int i = 0; i < sizeof(types); i++)
     {
@@ -151,6 +151,18 @@ void IniReader::ParseKeyValue(std::string &line)
             if (key == "gamepad_support")
             {
                 m_engineSetup.gamepad_support = val == "true";
+            }
+            else if (key == "gamepad_virtual_support")
+            {
+                m_engineSetup.gamepad_virtual_support = val == "true";
+            }
+            break;
+        }
+        case PHONE:
+        {
+            if (key == "orientation")
+            {
+                // TODO:
             }
             break;
         }

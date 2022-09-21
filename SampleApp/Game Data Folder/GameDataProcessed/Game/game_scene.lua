@@ -27,7 +27,7 @@ function GameActionScene:New()
     o.atlas = AtlasManager:SpriteAtlasLoad("background.json", "background.png")
     o.spriteBackground = o.scene:SpriteStaticLoad(o.atlas, "background.png")
 
-    local animatedSpriteAtlas = AtlasManager:SpriteAtlasLoad("TDS.json", "TDS.png")
+    local animatedSpriteAtlas = AtlasManager:SpriteAtlasLoad("player_Idle.json", "player_Idle.tga")
     o.animated = o.scene:SpriteAnimatedLoad(100, animatedSpriteAtlas)
     o.animatedRotation = 0
 
