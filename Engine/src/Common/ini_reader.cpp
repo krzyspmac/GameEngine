@@ -13,6 +13,7 @@
 using namespace engine;
 
 static std::string GetSectionName(std::string &srcLine);
+static VirtualGamepadConfiguration GetVirtualGamepadButtonType(std::string &name);
 
 IniReader::IniReader(std::string path)
     : m_currentSectionType(UNKNOWN)
@@ -156,6 +157,22 @@ void IniReader::ParseKeyValue(std::string &line)
             {
                 m_engineSetup.gamepad_virtual_support = val == "true";
             }
+            else if (key == "gamepad_virtual_buttons")
+            {
+                size_t configuration = GamepadConfiguration_Unknown;
+
+                auto components = split_components(val, "|");
+                for (auto it = components.begin(); it != components.end(); ++it)
+                {
+                    VirtualGamepadConfiguration type = GetVirtualGamepadButtonType(*it);
+                    if (type != GamepadConfiguration_Unknown)
+                    {
+                        configuration |= (size_t)type;
+                    }
+                }
+
+                m_engineSetup.gamepad_virtual_configuration = (VirtualGamepadConfiguration)configuration;
+            }
             break;
         }
         case PHONE:
@@ -168,6 +185,21 @@ void IniReader::ParseKeyValue(std::string &line)
         }
     }
 }
+
+VirtualGamepadConfiguration GetVirtualGamepadButtonType(std::string &name)
+{
+    auto *types = VirtualGameConfigurationButtonMapping::shared();
+    for (auto it = types->begin(); it != types->end(); ++it)
+    {
+        if (it->name == name)
+        {
+            return it->mapping;
+        }
+    }
+
+    return GamepadConfiguration_Unknown;
+}
+
 
 std::string GetSectionName(std::string &srcLine)
 {

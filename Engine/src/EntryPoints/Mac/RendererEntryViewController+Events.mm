@@ -359,12 +359,24 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     {   return;
     }
 
+    auto &engineSetup = m_engine->GetEngineSetup();
+    auto buttonConfig = engineSetup.gamepad_virtual_configuration;
+
     GCVirtualControllerConfiguration *configuration = [[GCVirtualControllerConfiguration alloc] init];
     NSMutableSet<NSString*> *elements = [[NSMutableSet<NSString*> alloc] init];
-    [elements addObject:GCInputLeftThumbstick];
-    [elements addObject:GCInputRightThumbstick];
-    [elements addObject:GCInputButtonA];
-    [elements addObject:GCInputLeftTrigger];
+
+    if (buttonConfig & GamepadConfiguration_LeftThumbstick)
+    {   [elements addObject:GCInputLeftThumbstick];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightThumbstick)
+    {   [elements addObject:GCInputRightThumbstick];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonA)
+    {   [elements addObject:GCInputButtonA];
+    }
+
     configuration.elements = elements;
 
     GCVirtualController *virtualController = [GCVirtualController virtualControllerWithConfiguration:configuration];

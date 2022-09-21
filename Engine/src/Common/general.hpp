@@ -125,6 +125,9 @@ namespace engine
 
         return nullptr;
     };
+
+    /** Split into separate components */
+    std::vector<std::string> split_components(std::string source, std::string splitBy);
 };
 
 #endif /* general_h */
