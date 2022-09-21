@@ -21,6 +21,9 @@ namespace engine
         /** The initial resolution */
         Size resolution;
 
+        /** Uses the gamepad if connected. The last one will be used. */
+        bool gamepad_support;
+
         /** The scale to apply to the whole framebuffer. Allows for keeping
             the framebuffer resolution while scaling the whole screen.
             Default is 1.
@@ -36,6 +39,7 @@ namespace engine
 
         EngineSetup()
         :   resolution( {320, 200} )
+        ,   gamepad_support(true)
         ,   affineScale( 1.0 )
         ,   isDirty(false)
         ,   backgroundColor({1.0, 0.0, 1.0, 1.0})

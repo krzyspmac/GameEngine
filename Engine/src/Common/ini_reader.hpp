@@ -15,9 +15,16 @@ namespace engine
 {
     /** The go-to class for ini file reader
         \code{ini}
+        ; Game resolution
         [RESOLUTION]
         width=1280
         height=720
+        gamepad_support=true
+
+        ; Renderer setup
+        [RENDERER]
+        game_folder=@rpath/Game
+        clear_color=1.0,0.0,0.0,1.0
         \endcode{ini}
      */
     class IniReader
@@ -26,7 +33,8 @@ namespace engine
         {
             UNKNOWN             = 0,
             RESOLUTION          = 1,
-            RENDER_CLR_COLOR    = 2
+            RENDERER            = 2,
+            INPUT               = 3
         } IniSectionType;
 
         EngineSetup m_engineSetup;
@@ -38,8 +46,8 @@ namespace engine
         EngineSetup GetSetup();
 
     private:
-        bool UpdateSection(char *);
-        void ParseKeyValue(char *);
+        bool UpdateSection(std::string &srcLine);
+        void ParseKeyValue(std::string &srcLine);
 
 
     public:

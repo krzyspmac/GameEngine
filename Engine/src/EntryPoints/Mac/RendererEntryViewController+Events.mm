@@ -306,7 +306,14 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 
 - (void)processController
 {
+    [self resetController];
+
     NSArray<GCController*> *controllers = [GCController controllers];
+
+    if (!ENGINE().GetEngineSetup().gamepad_support)
+    {   return;
+    }
+
     self.controller = [controllers firstObject];
     self.controllerMicroProfile = self.controller.microGamepad;
     self.controllerExtendedProfile = self.controller.extendedGamepad;

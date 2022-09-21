@@ -12,7 +12,7 @@
 
 using namespace engine;
 
-std::string GetSectionName(char *srcLine);
+static std::string GetSectionName(std::string &srcLine);
 
 IniReader::IniReader(std::string path)
     : m_currentSectionType(UNKNOWN)
@@ -42,25 +42,33 @@ void IniReader::ProcessDefaults()
 
 void IniReader::ProcessFile(FILE *fp)
 {
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
+    char * _line = NULL;
+    size_t _len = 0;
+    ssize_t _read;
 
-    while ((read = getline(&line, &len, fp)) != -1)
+    while ((_read = getline(&_line, &_len, fp)) != -1)
     {
-        if (strlen(line) < 1) { continue; };
-        if (line[0] == ';') { continue; };
+        if (strlen(_line) < 1) { continue; };
 
-        if (UpdateSection(line))
+        std::string lineCut = std::string(_line);
+        auto commentPos = lineCut.find(";");
+        if (commentPos != std::string::npos)
+        {
+            lineCut = lineCut.substr(0, commentPos);
+            trim(lineCut);
+            lineCut += "\n";
+        }
+
+        if (UpdateSection(lineCut))
         {
             continue;
         }
         else
         {
-            ParseKeyValue(line);
+            ParseKeyValue(lineCut);
         }
 
-        printf("%s\n", line);
+        printf("IniReader: %s\n", lineCut.c_str());
     }
 }
 
@@ -69,7 +77,7 @@ EngineSetup IniReader::GetSetup()
     return m_engineSetup;
 }
 
-bool IniReader::UpdateSection(char *srcLine)
+bool IniReader::UpdateSection(std::string &srcLine)
 {
     // Get the section name if possible
     std::string sectionName = GetSectionName(srcLine);
@@ -80,7 +88,7 @@ bool IniReader::UpdateSection(char *srcLine)
     }
 
     // Compare to a rudimental list of sections
-    static std::string types[] = { "RESOLUTION", "RENDERER" };
+    static std::string types[] = { "RESOLUTION", "RENDERER", "INPUT" };
 
     for (int i = 0; i < sizeof(types); i++)
     {
@@ -94,7 +102,7 @@ bool IniReader::UpdateSection(char *srcLine)
     return false;
 }
 
-void IniReader::ParseKeyValue(char *line)
+void IniReader::ParseKeyValue(std::string &line)
 {
     KeyValueProperties keyValue(line);
     if (!keyValue.GetValues().size()) { return; };
@@ -122,7 +130,7 @@ void IniReader::ParseKeyValue(char *line)
 
             break;
         }
-        case RENDER_CLR_COLOR:
+        case RENDERER:
         {
             if (key == "clear_color")
             {
@@ -138,10 +146,18 @@ void IniReader::ParseKeyValue(char *line)
             }
             break;
         }
+        case INPUT:
+        {
+            if (key == "gamepad_support")
+            {
+                m_engineSetup.gamepad_support = val == "true";
+            }
+            break;
+        }
     }
 }
 
-std::string GetSectionName(char *srcLine)
+std::string GetSectionName(std::string &srcLine)
 {
     static std::string types[] = { "RESOLUTION" };
     std::string line(srcLine);
