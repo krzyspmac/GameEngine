@@ -29,6 +29,7 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     [self setupMouseMovedEvents];
     [self setupKeyEvents];
     [self setupControllers];
+    [self createVirtualControllerIfNeeded];
 
     didSetupEvents = YES;
 }
@@ -228,6 +229,10 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 - (void)setupControllers
 {
 #if USE_CONTROLLERS
+    if (!ENGINE().GetEngineSetup().gamepad_support)
+    {   return;
+    }
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didConnectController:) name:GCControllerDidConnectNotification object:nil];
     [center addObserver:self selector:@selector(didDisconnectController:) name:GCControllerDidDisconnectNotification object:nil];
@@ -247,16 +252,6 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 - (void)didDisconnectController:(NSNotification*)notification
 {
     [self processController];
-}
-
-- (void)resetController
-{
-    self.controller = nil;
-    self.controllerMicroProfile = nil;
-    self.controllerExtendedProfile = nil;
-    self.controllerDPad = nil;
-    self.leftThumbstick.valueChangedHandler = nil;
-    self.rightThumbstick.valueChangedHandler = nil;
 }
 
 - (void)setupControllerHandlers
@@ -306,17 +301,25 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 
 - (void)processController
 {
-    [self resetController];
+    [self setupController];
+    [self updateControllerScripts];
+}
 
-    NSArray<GCController*> *controllers = [GCController controllers];
-
+- (void)setupController
+{
     if (!ENGINE().GetEngineSetup().gamepad_support)
     {   return;
     }
 
+    NSArray<GCController*> *controllers = [GCController controllers];
     self.controller = [controllers firstObject];
-    self.controllerMicroProfile = self.controller.microGamepad;
-    self.controllerExtendedProfile = self.controller.extendedGamepad;
+    [self setupControllerProfiles: self.controller];
+}
+
+- (void)setupControllerProfiles:(GCController*)controller
+{
+    self.controllerMicroProfile = controller.microGamepad;
+    self.controllerExtendedProfile = controller.extendedGamepad;
 
     if (self.controllerExtendedProfile != nil)
     {
@@ -347,8 +350,44 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
         self.controllerMicroProfile.buttonX.valueChangedHandler = self.handlerButtonX;
         self.controllerMicroProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
     }
+}
 
-    [self updateControllerScripts];
+- (void)createVirtualController
+{
+#if TARGET_IOS
+    if (!ENGINE().GetEngineSetup().gamepad_virtual_support)
+    {   return;
+    }
+
+    GCVirtualControllerConfiguration *configuration = [[GCVirtualControllerConfiguration alloc] init];
+    NSMutableSet<NSString*> *elements = [[NSMutableSet<NSString*> alloc] init];
+    [elements addObject:GCInputLeftThumbstick];
+    [elements addObject:GCInputRightThumbstick];
+    [elements addObject:GCInputButtonA];
+    [elements addObject:GCInputLeftTrigger];
+    configuration.elements = elements;
+
+    GCVirtualController *virtualController = [GCVirtualController virtualControllerWithConfiguration:configuration];
+
+    self.virtualController = virtualController;
+    self.controller = virtualController.controller;
+
+    [virtualController connectWithReplyHandler:^(NSError * _Nullable error) {
+        NSLog(@"setupVirtualController::connectWithReplyHandler: %@", error);
+    }];
+
+    [self setupControllerProfiles:virtualController.controller];
+#endif
+}
+
+- (void)createVirtualControllerIfNeeded
+{
+#if TARGET_IOS
+    if (!self.virtualController)
+    {
+        [self createVirtualController];
+    }
+#endif
 }
 
 - (void)updateControllerScripts

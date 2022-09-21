@@ -41,10 +41,19 @@ using namespace engine;
     [self mtkView:mtkView drawableSizeWillChange:mtkView.drawableSize];
 }
 
+#if TARGET_OSX
 - (void)viewDidAppear
 {
+    [super viewDidAppear];
     [self setupEvents];
 }
+#elif TARGET_IOS
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self setupEvents];
+}
+#endif
 
 - (void)setupView
 {

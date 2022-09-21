@@ -122,7 +122,10 @@
 #endif
 
 #if USE_CONTROLLERS
-@property (nonatomic, weak) GCController *controller;
+@property (nonatomic, strong) GCController *controller;
+#if TARGET_IOS
+@property (nonatomic, strong) GCVirtualController *virtualController;
+#endif
 @property (nonatomic, weak) GCExtendedGamepad *controllerExtendedProfile;
 @property (nonatomic, weak) GCMicroGamepad *controllerMicroProfile;
 @property (nonatomic, weak) GCControllerDirectionPad *controllerDPad;
