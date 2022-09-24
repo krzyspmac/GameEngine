@@ -297,6 +297,12 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     self.handlerButtonRightTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_SHOULDER, GamepadButtonActionFromPressed(pressed), button.value));
     };
+    self.handlerButtonLeftThumbstickButton = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_THUMBSTICK_BTN, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonRightThumbstickButton = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_THUMBSTICK_BTN, GamepadButtonActionFromPressed(pressed), button.value));
+    };
 }
 
 - (void)processController
@@ -341,6 +347,8 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
         self.controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
         self.controllerExtendedProfile.rightShoulder.valueChangedHandler = self.handlerButtonRightShoulder;
         self.controllerExtendedProfile.rightTrigger.valueChangedHandler = self.handlerButtonRightTrigger;
+        self.controllerExtendedProfile.leftThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
+        self.controllerExtendedProfile.rightThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
     }
     else if (self.controllerMicroProfile != nil)
     {
@@ -365,6 +373,10 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     GCVirtualControllerConfiguration *configuration = [[GCVirtualControllerConfiguration alloc] init];
     NSMutableSet<NSString*> *elements = [[NSMutableSet<NSString*> alloc] init];
 
+    if (buttonConfig & GamepadConfiguration_DirectionPad)
+    {   [elements addObject:GCInputDirectionPad];
+    }
+
     if (buttonConfig & GamepadConfiguration_LeftThumbstick)
     {   [elements addObject:GCInputLeftThumbstick];
     }
@@ -377,7 +389,41 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     {   [elements addObject:GCInputButtonA];
     }
 
-    configuration.elements = elements;
+    if (buttonConfig & GamepadConfiguration_ButtonB)
+    {   [elements addObject:GCInputButtonB];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonX)
+    {   [elements addObject:GCInputButtonX];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonY)
+    {   [elements addObject:GCInputButtonY];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftShoulder)
+    {   [elements addObject:GCInputLeftShoulder];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightShoulder)
+    {   [elements addObject:GCInputRightShoulder];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftTrigger)
+    {   [elements addObject:GCInputLeftTrigger];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightTrigger)
+    {   [elements addObject:GCInputRightTrigger];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftThumbstickBtn)
+    {   [elements addObject:GCInputLeftThumbstickButton];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightThumbstickBtn)
+    {   [elements addObject:GCInputRightThumbstickButton];
+    }
 
     GCVirtualController *virtualController = [GCVirtualController virtualControllerWithConfiguration:configuration];
 
