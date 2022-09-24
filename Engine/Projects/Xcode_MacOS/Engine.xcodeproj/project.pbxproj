@@ -130,7 +130,7 @@
 		7F3E8EAE279AC8F9003BB7B6 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
 		7F3E8EAF279AC8F9003BB7B6 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D732784DDE0005C52C4 /* memory.h */; };
 		7F3E8EB0279AC8F9003BB7B6 /* release_pool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DDC27858CBA00D0B30A /* release_pool.hpp */; };
-		7F3E8EB1279AC8F9003BB7B6 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
+		7F3E8EB1279AC8F9003BB7B6 /* time_base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time_base.hpp */; };
 		7F3E8EB2279AC8F9003BB7B6 /* engine_state.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FC12780F6F800E8CB01 /* engine_state.hpp */; };
 		7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
 		7F3E8EB4279AC8F9003BB7B6 /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
@@ -190,7 +190,7 @@
 		7F3E8EEB279AC909003BB7B6 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
 		7F3E8EED279AC909003BB7B6 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
 		7F3E8EEE279AC909003BB7B6 /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
-		7F3E8EEF279AC909003BB7B6 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
+		7F3E8EEF279AC909003BB7B6 /* time_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time_base.cpp */; };
 		7F3E8EF0279AC909003BB7B6 /* engine_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FC02780F6F800E8CB01 /* engine_state.cpp */; };
 		7F3E8EF1279AC909003BB7B6 /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
 		7F3E8EF2279AC909003BB7B6 /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
@@ -289,7 +289,7 @@
 		7F3E90D0279B03F6003BB7B6 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
 		7F3E90D1279B03F6003BB7B6 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D732784DDE0005C52C4 /* memory.h */; };
 		7F3E90D2279B03F6003BB7B6 /* release_pool.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DDC27858CBA00D0B30A /* release_pool.hpp */; };
-		7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
+		7F3E90D3279B03F6003BB7B6 /* time_base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time_base.hpp */; };
 		7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FC12780F6F800E8CB01 /* engine_state.hpp */; };
 		7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
 		7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
@@ -355,7 +355,7 @@
 		7F3E9114279B03F6003BB7B6 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
 		7F3E9116279B03F6003BB7B6 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
 		7F3E9117279B03F6003BB7B6 /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
-		7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
+		7F3E9118279B03F6003BB7B6 /* time_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time_base.cpp */; };
 		7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FC02780F6F800E8CB01 /* engine_state.cpp */; };
 		7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
 		7F3E911B279B03F6003BB7B6 /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
@@ -509,6 +509,12 @@
 		7FAD023B28DF3E2F006EA640 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD023828DF3E2F006EA640 /* globals.cpp */; };
 		7FAD024828DF4584006EA640 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; };
 		7FAD024928DF459B006EA640 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D829279A0C6100139E14 /* MetalKit.framework */; };
+		7FAD036028DF9664006EA640 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD035E28DF9664006EA640 /* time.cpp */; };
+		7FAD036128DF9664006EA640 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD035E28DF9664006EA640 /* time.cpp */; };
+		7FAD036228DF9664006EA640 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD035E28DF9664006EA640 /* time.cpp */; };
+		7FAD036328DF9664006EA640 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD035F28DF9664006EA640 /* time.hpp */; };
+		7FAD036428DF9664006EA640 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD035F28DF9664006EA640 /* time.hpp */; };
+		7FAD036528DF9664006EA640 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD035F28DF9664006EA640 /* time.hpp */; };
 		7FAE022928CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FAE022A28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FAE022B28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
@@ -584,8 +590,8 @@
 		7FCAE7CC277E543E004A6107 /* sprite_renderer_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CA277E543E004A6107 /* sprite_renderer_manager.hpp */; };
 		7FCAE7D0277F5872004A6107 /* character_representation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7CE277F5872004A6107 /* character_representation.cpp */; };
 		7FCAE7D1277F5872004A6107 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
-		7FCAE7D6278073B9004A6107 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
-		7FCAE7D7278073B9004A6107 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
+		7FCAE7D6278073B9004A6107 /* time_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time_base.cpp */; };
+		7FCAE7D7278073B9004A6107 /* time_base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time_base.hpp */; };
 		7FCC81BD2780A0C8003025CB /* value_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */; };
 		7FCC81BE2780A0C8003025CB /* value_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */; };
 		7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
@@ -727,6 +733,7 @@
 		7F27C45E28551736001AA216 /* scripting_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scripting_interfaces.h; path = ../../src/Renderer/Interfaces/scripting_interfaces.h; sourceTree = "<group>"; };
 		7F2CD18328D5E51200A5516D /* gamepad_apple_handle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gamepad_apple_handle.mm; sourceTree = "<group>"; };
 		7F2CD18428D5E51200A5516D /* gamepad_apple_handle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamepad_apple_handle.hpp; sourceTree = "<group>"; };
+		7F2DAFC328DFA06A0044EF8D /* time_scriptng.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time_scriptng.hpp; sourceTree = "<group>"; };
 		7F3470A828527B4800FDED71 /* PictelSound.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PictelSound.xcframework; sourceTree = "<group>"; };
 		7F3470AD28527C5D00FDED71 /* sound_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sound_interfaces.h; sourceTree = "<group>"; };
 		7F3470AE28527C7D00FDED71 /* sound_file.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound_file.cpp; sourceTree = "<group>"; };
@@ -822,10 +829,12 @@
 		7FAD022228DF2BF8006EA640 /* RendererEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RendererEntry.h; sourceTree = "<group>"; };
 		7FAD022328DF2BF8006EA640 /* RendererEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RendererEntry.m; sourceTree = "<group>"; };
 		7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RendererEntryViewController+Protocol.h"; sourceTree = "<group>"; };
-		7FAD023728DF3C3B006EA640 /* rust_wrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rust_wrapper.hpp; sourceTree = "<group>"; };
+		7FAD023728DF3C3B006EA640 /* globals.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = globals.hpp; sourceTree = "<group>"; };
 		7FAD023828DF3E2F006EA640 /* globals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = globals.cpp; sourceTree = "<group>"; };
 		7FAD034B28DF46FB006EA640 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		7FAD035228DF69BF006EA640 /* scripting_exposed_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripting_exposed_interface.h; sourceTree = "<group>"; };
+		7FAD035E28DF9664006EA640 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
+		7FAD035F28DF9664006EA640 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
 		7FAE022828CA269C00788004 /* rotation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rotation.hpp; sourceTree = "<group>"; };
 		7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_backbuffer.cpp; sourceTree = "<group>"; };
 		7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_backbuffer.hpp; sourceTree = "<group>"; };
@@ -874,8 +883,8 @@
 		7FCAE7CE277F5872004A6107 /* character_representation.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_representation.cpp; sourceTree = "<group>"; };
 		7FCAE7CF277F5872004A6107 /* character_representation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_representation.hpp; sourceTree = "<group>"; };
 		7FCAE7D2277F85BF004A6107 /* doxygen_main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = doxygen_main.h; sourceTree = "<group>"; };
-		7FCAE7D4278073B9004A6107 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
-		7FCAE7D5278073B9004A6107 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
+		7FCAE7D4278073B9004A6107 /* time_base.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time_base.cpp; sourceTree = "<group>"; };
+		7FCAE7D5278073B9004A6107 /* time_base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time_base.hpp; sourceTree = "<group>"; };
 		7FCC129327984DD5002ECABD /* engine_events_provider_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_events_provider_interface.h; sourceTree = "<group>"; };
 		7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = value_animator_factory.cpp; sourceTree = "<group>"; };
 		7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = value_animator_factory.hpp; sourceTree = "<group>"; };
@@ -1405,7 +1414,7 @@
 			isa = PBXGroup;
 			children = (
 				7FAD035228DF69BF006EA640 /* scripting_exposed_interface.h */,
-				7FAD023728DF3C3B006EA640 /* rust_wrapper.hpp */,
+				7FAD023728DF3C3B006EA640 /* globals.hpp */,
 				7FAD023828DF3E2F006EA640 /* globals.cpp */,
 			);
 			path = RustWrapper;
@@ -1493,8 +1502,11 @@
 		7FCAE7D3278073AE004A6107 /* States */ = {
 			isa = PBXGroup;
 			children = (
-				7FCAE7D5278073B9004A6107 /* time.hpp */,
-				7FCAE7D4278073B9004A6107 /* time.cpp */,
+				7FCAE7D5278073B9004A6107 /* time_base.hpp */,
+				7FCAE7D4278073B9004A6107 /* time_base.cpp */,
+				7F2DAFC328DFA06A0044EF8D /* time_scriptng.hpp */,
+				7FAD035F28DF9664006EA640 /* time.hpp */,
+				7FAD035E28DF9664006EA640 /* time.cpp */,
 				7F869FC12780F6F800E8CB01 /* engine_state.hpp */,
 				7F869FC02780F6F800E8CB01 /* engine_state.cpp */,
 			);
@@ -1632,7 +1644,7 @@
 				7FCAE6D427AD345D00589EDE /* AAPLShaderTypes.h in Headers */,
 				7FB2018727941D0200D0F5FE /* sprite_draw_backbuffer.hpp in Headers */,
 				7FBDB67D27AFE18D00B3DFCC /* console_lights.hpp in Headers */,
-				7FCAE7D7278073B9004A6107 /* time.hpp in Headers */,
+				7FCAE7D7278073B9004A6107 /* time_base.hpp in Headers */,
 				7FE2E5DE277B24AD00538094 /* line.hpp in Headers */,
 				7FF21D772784E99A005C52C4 /* property_animator.hpp in Headers */,
 				7FC131252792FAF20094DF0C /* file_access_provider.h in Headers */,
@@ -1642,6 +1654,7 @@
 				7F13826E277505B600ED6D67 /* sprite_representation_animated.hpp in Headers */,
 				7FC1311A2792FAF20094DF0C /* engine_interface.h in Headers */,
 				7F64288A2777C51D00EE9E2C /* character_interface.h in Headers */,
+				7FAD036328DF9664006EA640 /* time.hpp in Headers */,
 				7F138266277505B600ED6D67 /* sprite_representation_static.hpp in Headers */,
 				7F7AE8D327A9B67F007BEB39 /* object_pool.hpp in Headers */,
 				4C9EA02B2792166F0082EB6A /* texture_metal.hpp in Headers */,
@@ -1764,6 +1777,7 @@
 				7F3E8EA2279AC8F9003BB7B6 /* font_interface.h in Headers */,
 				7FC971EC27AF3B9A00049146 /* light.hpp in Headers */,
 				7FAD022528DF2BF8006EA640 /* RendererEntry.h in Headers */,
+				7FAD036428DF9664006EA640 /* time.hpp in Headers */,
 				7F3E8EA3279AC8F9003BB7B6 /* character_mover_interface.h in Headers */,
 				7FB6520328CE65F8006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */,
@@ -1778,7 +1792,7 @@
 				7F3E8EAE279AC8F9003BB7B6 /* drawable_metal.hpp in Headers */,
 				7F3E8EAF279AC8F9003BB7B6 /* memory.h in Headers */,
 				7F3E8EB0279AC8F9003BB7B6 /* release_pool.hpp in Headers */,
-				7F3E8EB1279AC8F9003BB7B6 /* time.hpp in Headers */,
+				7F3E8EB1279AC8F9003BB7B6 /* time_base.hpp in Headers */,
 				7F3E8EB2279AC8F9003BB7B6 /* engine_state.hpp in Headers */,
 				7FAD022C28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */,
@@ -1885,6 +1899,7 @@
 				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
 				7FC971EE27AF3B9A00049146 /* light.hpp in Headers */,
 				7FAD022628DF2BF8006EA640 /* RendererEntry.h in Headers */,
+				7FAD036528DF9664006EA640 /* time.hpp in Headers */,
 				7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */,
 				7FB6520428CE65F9006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
@@ -1899,7 +1914,7 @@
 				7F3E90D0279B03F6003BB7B6 /* drawable_metal.hpp in Headers */,
 				7F3E90D1279B03F6003BB7B6 /* memory.h in Headers */,
 				7F3E90D2279B03F6003BB7B6 /* release_pool.hpp in Headers */,
-				7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */,
+				7F3E90D3279B03F6003BB7B6 /* time_base.hpp in Headers */,
 				7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */,
 				7FAD022D28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */,
@@ -2284,7 +2299,7 @@
 				7F138275277505B600ED6D67 /* sprite_atlas.cpp in Sources */,
 				7FCAE7C3277E3A68004A6107 /* scene.cpp in Sources */,
 				7F6428A427791A9100EE9E2C /* path_finder.cpp in Sources */,
-				7FCAE7D6278073B9004A6107 /* time.cpp in Sources */,
+				7FCAE7D6278073B9004A6107 /* time_base.cpp in Sources */,
 				7FBDB67A27AFE18D00B3DFCC /* console_lights.cpp in Sources */,
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
 				7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */,
@@ -2311,6 +2326,7 @@
 				7FCAE7CB277E543E004A6107 /* sprite_renderer_manager.cpp in Sources */,
 				7F08C45627AF2441002FEB8F /* light_manager.cpp in Sources */,
 				7FCAE7BF277E36DD004A6107 /* scene_manager.cpp in Sources */,
+				7FAD036028DF9664006EA640 /* time.cpp in Sources */,
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
 				7FC4CFFB28969603006E92F6 /* static_objects.cpp in Sources */,
 				7F849909278713BB004127CB /* animation_group_sequence.cpp in Sources */,
@@ -2367,7 +2383,7 @@
 				7FB6520128CE65D9006F7030 /* engine_screen.cpp in Sources */,
 				7F3E8EED279AC909003BB7B6 /* drawable_metal.cpp in Sources */,
 				7F3E8EEE279AC909003BB7B6 /* release_pool.cpp in Sources */,
-				7F3E8EEF279AC909003BB7B6 /* time.cpp in Sources */,
+				7F3E8EEF279AC909003BB7B6 /* time_base.cpp in Sources */,
 				7F3E8EF0279AC909003BB7B6 /* engine_state.cpp in Sources */,
 				7F3E8EF1279AC909003BB7B6 /* animation_curve_factory.cpp in Sources */,
 				7F7EA07C28967EEF00A09199 /* system_utils_mac.mm in Sources */,
@@ -2402,6 +2418,7 @@
 				7FC971EF27AF3BA100049146 /* light_manager.cpp in Sources */,
 				7F3E8F06279AC909003BB7B6 /* scene.cpp in Sources */,
 				7F3E8F07279AC909003BB7B6 /* character_renderer.cpp in Sources */,
+				7FAD036128DF9664006EA640 /* time.cpp in Sources */,
 				7FC4CFFD28969655006E92F6 /* static_objects.cpp in Sources */,
 				7F3E8F08279AC909003BB7B6 /* character.cpp in Sources */,
 				7F3E8F09279AC909003BB7B6 /* character_manager.cpp in Sources */,
@@ -2465,7 +2482,7 @@
 				7FB6520228CE65D9006F7030 /* engine_screen.cpp in Sources */,
 				7F3E9116279B03F6003BB7B6 /* drawable_metal.cpp in Sources */,
 				7F3E9117279B03F6003BB7B6 /* release_pool.cpp in Sources */,
-				7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */,
+				7F3E9118279B03F6003BB7B6 /* time_base.cpp in Sources */,
 				7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */,
 				7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */,
 				7F7EA07D28967EEF00A09199 /* system_utils_mac.mm in Sources */,
@@ -2500,6 +2517,7 @@
 				7FC971F127AF3BA100049146 /* light_manager.cpp in Sources */,
 				7F3E912F279B03F6003BB7B6 /* scene.cpp in Sources */,
 				7F3E9130279B03F6003BB7B6 /* character_renderer.cpp in Sources */,
+				7FAD036228DF9664006EA640 /* time.cpp in Sources */,
 				7FC4CFFE28969655006E92F6 /* static_objects.cpp in Sources */,
 				7F3E9131279B03F6003BB7B6 /* character.cpp in Sources */,
 				7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */,

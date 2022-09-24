@@ -6,7 +6,7 @@
 //
 
 #include <stdio.h>
-#include "rust_wrapper.hpp"
+#include "globals.hpp"
 #include "easy.h"
 
 using namespace engine;
@@ -16,7 +16,7 @@ Globals::Globals()
     printf("Sample class init\n");
 }
 
-engine::Time& Globals::time()
+engine::Time *Globals::time()
 {
-    return ENGINE().getTime();
+    return &(ENGINE().getTime());
 }

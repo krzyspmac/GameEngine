@@ -11,7 +11,7 @@ fn main() {
     // println!("cargo:rustc-link-search=/Users/Shared/Shared Documents/NoBackup/xcode_temporary/Build/Products/Debug");
 
     let bindings = bindgen::Builder::default()
-        .header("/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/RustWrapper/rust_wrapper.hpp")
+        .header("/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/RustWrapper/globals.hpp")
 
         .clang_arg("-std=c++20")
         .clang_arg("-DSCRIPTING_WRAPPER_BUILD")
@@ -21,6 +21,7 @@ fn main() {
 
         .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src")
         .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Common")
+        .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/RustWrapper")
 
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Animations")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Character Movement")
@@ -44,6 +45,9 @@ fn main() {
         .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/States")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Static Objects")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Textures")
+
+        // .opaque_type("engine::TimeBase")
+        // .opaque_type("TimeBase")
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
         .generate()
         .expect("Unable to generate bindings");

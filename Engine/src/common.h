@@ -40,6 +40,12 @@
     #define Sint8   int8_t
 #endif // SCRIPTING_WRAPPER_BUILD
 
+#ifdef SCRIPTING_WRAPPER_BUILD
+    class DummyClass
+    {
+    };
+#endif
+
 #ifndef SCRIPTING_WRAPPER_BUILD
     #ifdef __cplusplus
     extern "C" {

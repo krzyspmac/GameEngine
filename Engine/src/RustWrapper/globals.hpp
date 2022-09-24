@@ -19,7 +19,7 @@ namespace engine
         Globals();
 
     public:
-        static engine::Time &time();
+        static engine::Time *time();
     };
 }
 
