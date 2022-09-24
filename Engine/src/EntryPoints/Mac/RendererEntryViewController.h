@@ -28,6 +28,8 @@
     #define PlatformViewController GCEventViewController
 #endif
 
+#import "RendererEntryViewController+Protocol.h"
+
 #include <stdio.h>
 #include "common.h"
 #include "defs.h"
@@ -58,7 +60,7 @@
 #define INITIAL_SCREEN_WIDTH  320
 #define INITIAL_SCREEN_HEIGHT 200
 
-@interface RendererEntryViewController : PlatformViewController
+@interface RendererEntryViewController : PlatformViewController <RendererViewControllerProtocol>
 {
     /** Metal related */
     id<MTLDevice> device;
@@ -118,7 +120,8 @@
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
-@property (weak) NSWindow *parentWindow;
+@property (nonatomic, weak) NSWindow *parentWindow;
+@property (nonatomic, assign) void (*frameUpdate)(void);
 #endif
 
 #if USE_CONTROLLERS

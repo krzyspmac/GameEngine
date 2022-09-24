@@ -495,6 +495,15 @@
 		7F8E9BD027B5ABBC00548567 /* engine_metal_buffer_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F8E9BCA27B5ABBC00548567 /* engine_metal_buffer_manager.hpp */; };
 		7FA2AB38277DD1A600AED89D /* character_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2AB36277DD1A600AED89D /* character_manager.cpp */; };
 		7FA2AB39277DD1A600AED89D /* character_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FA2AB37277DD1A600AED89D /* character_manager.hpp */; };
+		7FAD022428DF2BF8006EA640 /* RendererEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022228DF2BF8006EA640 /* RendererEntry.h */; };
+		7FAD022528DF2BF8006EA640 /* RendererEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022228DF2BF8006EA640 /* RendererEntry.h */; };
+		7FAD022628DF2BF8006EA640 /* RendererEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022228DF2BF8006EA640 /* RendererEntry.h */; };
+		7FAD022728DF2BF8006EA640 /* RendererEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD022328DF2BF8006EA640 /* RendererEntry.m */; };
+		7FAD022828DF2BF8006EA640 /* RendererEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD022328DF2BF8006EA640 /* RendererEntry.m */; };
+		7FAD022928DF2BF8006EA640 /* RendererEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD022328DF2BF8006EA640 /* RendererEntry.m */; };
+		7FAD022B28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */; };
+		7FAD022C28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */; };
+		7FAD022D28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */; };
 		7FAE022928CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FAE022A28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FAE022B28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
@@ -805,6 +814,9 @@
 		7F8E9BCA27B5ABBC00548567 /* engine_metal_buffer_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_metal_buffer_manager.hpp; sourceTree = "<group>"; };
 		7FA2AB36277DD1A600AED89D /* character_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = character_manager.cpp; sourceTree = "<group>"; };
 		7FA2AB37277DD1A600AED89D /* character_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_manager.hpp; sourceTree = "<group>"; };
+		7FAD022228DF2BF8006EA640 /* RendererEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RendererEntry.h; sourceTree = "<group>"; };
+		7FAD022328DF2BF8006EA640 /* RendererEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RendererEntry.m; sourceTree = "<group>"; };
+		7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RendererEntryViewController+Protocol.h"; sourceTree = "<group>"; };
 		7FAE022828CA269C00788004 /* rotation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rotation.hpp; sourceTree = "<group>"; };
 		7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_backbuffer.cpp; sourceTree = "<group>"; };
 		7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_backbuffer.hpp; sourceTree = "<group>"; };
@@ -1294,6 +1306,9 @@
 		7F63D82C279A0C9500139E14 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
+				7FAD022228DF2BF8006EA640 /* RendererEntry.h */,
+				7FAD022328DF2BF8006EA640 /* RendererEntry.m */,
+				7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */,
 				7F63D82E279A0C9500139E14 /* RendererEntryViewController.h */,
 				7F63D82D279A0C9500139E14 /* RendererEntryViewController.mm */,
 				7F6D1C99279F4BDB0078D76A /* RendererEntryViewController+Rendering.mm */,
@@ -1590,6 +1605,7 @@
 				7F64288E2777C59D00EE9E2C /* character.hpp in Headers */,
 				7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */,
 				7F6428A527791A9100EE9E2C /* path_finder.hpp in Headers */,
+				7FAD022B28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */,
 				7FCAE6D427AD345D00589EDE /* AAPLShaderTypes.h in Headers */,
 				7FB2018727941D0200D0F5FE /* sprite_draw_backbuffer.hpp in Headers */,
 				7FBDB67D27AFE18D00B3DFCC /* console_lights.hpp in Headers */,
@@ -1633,6 +1649,7 @@
 				7F6D1C85279F14690078D76A /* ini_reader.hpp in Headers */,
 				7F2CD18628D5E51200A5516D /* gamepad_apple_handle.hpp in Headers */,
 				7FC131202792FAF20094DF0C /* font_interface.h in Headers */,
+				7FAD022428DF2BF8006EA640 /* RendererEntry.h in Headers */,
 				7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */,
 				7F13827E277505B600ED6D67 /* defs.h in Headers */,
 				7FAE022928CA269C00788004 /* rotation.hpp in Headers */,
@@ -1723,6 +1740,7 @@
 				7F3E8EA1279AC8F9003BB7B6 /* drawable_interface.h in Headers */,
 				7F3E8EA2279AC8F9003BB7B6 /* font_interface.h in Headers */,
 				7FC971EC27AF3B9A00049146 /* light.hpp in Headers */,
+				7FAD022528DF2BF8006EA640 /* RendererEntry.h in Headers */,
 				7F3E8EA3279AC8F9003BB7B6 /* character_mover_interface.h in Headers */,
 				7FB6520328CE65F8006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */,
@@ -1739,6 +1757,7 @@
 				7F3E8EB0279AC8F9003BB7B6 /* release_pool.hpp in Headers */,
 				7F3E8EB1279AC8F9003BB7B6 /* time.hpp in Headers */,
 				7F3E8EB2279AC8F9003BB7B6 /* engine_state.hpp in Headers */,
+				7FAD022C28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */,
 				7F3470B628527EC600FDED71 /* sound_manager.hpp in Headers */,
 				7F3E8EB4279AC8F9003BB7B6 /* value_animator.hpp in Headers */,
@@ -1842,6 +1861,7 @@
 				7F3E90C3279B03F6003BB7B6 /* drawable_interface.h in Headers */,
 				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
 				7FC971EE27AF3B9A00049146 /* light.hpp in Headers */,
+				7FAD022628DF2BF8006EA640 /* RendererEntry.h in Headers */,
 				7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */,
 				7FB6520428CE65F9006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
@@ -1858,6 +1878,7 @@
 				7F3E90D2279B03F6003BB7B6 /* release_pool.hpp in Headers */,
 				7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */,
 				7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */,
+				7FAD022D28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */,
 				7F3470B528527EC500FDED71 /* sound_manager.hpp in Headers */,
 				7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */,
@@ -2257,6 +2278,7 @@
 				7FB2018627941D0200D0F5FE /* sprite_draw_backbuffer.cpp in Sources */,
 				7FF21D6F2784C6E0005C52C4 /* callable.cpp in Sources */,
 				7FB8241D278993E0008F0F7A /* console_terminal.cpp in Sources */,
+				7FAD022728DF2BF8006EA640 /* RendererEntry.m in Sources */,
 				7F2497E527B942FA001D871A /* sprite_representation_text.cpp in Sources */,
 				7FB8242D2789D3AD008F0F7A /* console_app_renderer_mac.mm in Sources */,
 				7F7967CF27752191003ABD3E /* file_memory_buffer_stream_resource.cpp in Sources */,
@@ -2346,6 +2368,7 @@
 				7F3E8F00279AC909003BB7B6 /* sprite_atlas_manager.cpp in Sources */,
 				7F3E8F01279AC909003BB7B6 /* sprite_renderer_manager.cpp in Sources */,
 				7F2497E627B942FA001D871A /* sprite_representation_text.cpp in Sources */,
+				7FAD022828DF2BF8006EA640 /* RendererEntry.m in Sources */,
 				7F3E8F02279AC909003BB7B6 /* periodic_updates_manager.cpp in Sources */,
 				7F3E8F03279AC909003BB7B6 /* texture_manager.cpp in Sources */,
 				7F3E8F04279AC909003BB7B6 /* font_manager.cpp in Sources */,
@@ -2442,6 +2465,7 @@
 				7F3E9129279B03F6003BB7B6 /* sprite_atlas_manager.cpp in Sources */,
 				7F3E912A279B03F6003BB7B6 /* sprite_renderer_manager.cpp in Sources */,
 				7F2497E727B942FA001D871A /* sprite_representation_text.cpp in Sources */,
+				7FAD022928DF2BF8006EA640 /* RendererEntry.m in Sources */,
 				7F3E912B279B03F6003BB7B6 /* periodic_updates_manager.cpp in Sources */,
 				7F3E912C279B03F6003BB7B6 /* texture_manager.cpp in Sources */,
 				7F3E912D279B03F6003BB7B6 /* font_manager.cpp in Sources */,
@@ -2569,6 +2593,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CFLAGS = "-DTARGET_MACOS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2591,6 +2616,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CFLAGS = "-DTARGET_MACOS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

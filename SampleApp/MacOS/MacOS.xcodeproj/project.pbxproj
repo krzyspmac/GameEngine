@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7F0F951A28DB7E03001222C5 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F0F951928DB7E03001222C5 /* GameController.framework */; };
-		7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
+		7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
 		7F1382C827750C0800ED6D67 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F1382C727750C0800ED6D67 /* main.mm */; };
@@ -22,7 +22,7 @@
 		7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F6B279AE6A4003BB7B6 /* LaunchScreen.storyboard */; };
 		7F3E8F70279AE6A4003BB7B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F6F279AE6A4003BB7B6 /* main.m */; };
 		7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F74279AE6F8003BB7B6 /* Info-iOS.plist */; };
-		7F3E8F83279AEE17003BB7B6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
+		7F3E8F83279AEE17003BB7B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
 		7F3E8F86279AF176003BB7B6 /* libEngine-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F85279AF176003BB7B6 /* libEngine-iOS.a */; };
 		7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F8A279AF17C003BB7B6 /* Metal.framework */; };
 		7F3E8F8D279AF17C003BB7B6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F8B279AF17C003BB7B6 /* MetalKit.framework */; };
@@ -31,7 +31,7 @@
 		7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E9038279B015C003BB7B6 /* Assets.xcassets */; };
 		7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E903A279B015C003BB7B6 /* LaunchScreen.storyboard */; };
 		7F3E903E279B015C003BB7B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E903D279B015C003BB7B6 /* main.m */; };
-		7F3E9042279B0311003BB7B6 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
+		7F3E9042279B0311003BB7B6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.m */; };
 		7F3E9048279B039E003BB7B6 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9046279B039E003BB7B6 /* MetalKit.framework */; };
 		7F3E9049279B039E003BB7B6 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9047279B039E003BB7B6 /* Metal.framework */; };
 		7F3E916D279B060A003BB7B6 /* libEngine-TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E916C279B060A003BB7B6 /* libEngine-TV.a */; };
@@ -46,6 +46,7 @@
 		7F7EA08628968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
 		7F7EA08728968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
 		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
+		7FAD022F28DF3163006EA640 /* libyour_crate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAD022E28DF3163006EA640 /* libyour_crate.a */; };
 		7FB6520028CE6582006F7030 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB651FF28CE6582006F7030 /* AudioToolbox.framework */; };
 		7FCC12962798D792002ECABD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCC12952798D792002ECABD /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -61,12 +62,21 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		7FF973AF28DF1B7400DB101C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7F0F951928DB7E03001222C5 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		7F13829E2775082800ED6D67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
+		7F13829E2775082800ED6D67 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7F1382A22775086200ED6D67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F1382A42775086200ED6D67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -115,6 +125,10 @@
 		7F6D1C89279F186A0078D76A /* main.ini */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.ini; sourceTree = "<group>"; };
 		7F7EA08428968BDA00A09199 /* Game */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Game; sourceTree = "<group>"; };
 		7F9EB6CF279A163700384C0B /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FAD01F128DF2069006EA640 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		7FAD01F728DF2232006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
+		7FAD01F928DF2455006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
+		7FAD022E28DF3163006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
 		7FB651FF28CE6582006F7030 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FCC12952798D792002ECABD /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
@@ -125,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FAD022F28DF3163006EA640 /* libyour_crate.a in Frameworks */,
 				7F3470C22852870F00FDED71 /* AudioToolbox.framework in Frameworks */,
 				7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */,
 				7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */,
@@ -167,7 +182,7 @@
 				7F3E8F7E279AEB1B003BB7B6 /* Defs.h */,
 				7F3E8F7F279AEB78003BB7B6 /* PrefixHeader.pch */,
 				7F13829D2775082800ED6D67 /* AppDelegate.h */,
-				7F13829E2775082800ED6D67 /* AppDelegate.mm */,
+				7F13829E2775082800ED6D67 /* AppDelegate.m */,
 				7F1382C727750C0800ED6D67 /* main.mm */,
 				7F1382A02775086200ED6D67 /* Resources */,
 			);
@@ -213,6 +228,10 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FAD01F728DF2232006EA640 /* libyour_crate.a */,
+				7FAD01F928DF2455006EA640 /* libyour_crate.a */,
+				7FAD022E28DF3163006EA640 /* libyour_crate.a */,
+				7FAD01F128DF2069006EA640 /* libresolv.tbd */,
 				7F0F951928DB7E03001222C5 /* GameController.framework */,
 				7F3470C12852870F00FDED71 /* AudioToolbox.framework */,
 				7FB651FF28CE6582006F7030 /* AudioToolbox.framework */,
@@ -297,6 +316,7 @@
 				7F3CAADE277093D500E0D74C /* Frameworks */,
 				7F3CAADF277093D500E0D74C /* Resources */,
 				7F3CAAFA2770947500E0D74C /* Embed Frameworks */,
+				7FF973AF28DF1B7400DB101C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -451,7 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1382C827750C0800ED6D67 /* main.mm in Sources */,
-				7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */,
+				7F13829F2775082800ED6D67 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,7 +479,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3E8F83279AEE17003BB7B6 /* AppDelegate.mm in Sources */,
+				7F3E8F83279AEE17003BB7B6 /* AppDelegate.m in Sources */,
 				7F3E8F70279AE6A4003BB7B6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -468,7 +488,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3E9042279B0311003BB7B6 /* AppDelegate.mm in Sources */,
+				7F3E9042279B0311003BB7B6 /* AppDelegate.m in Sources */,
 				7F3E903E279B015C003BB7B6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,7 +598,8 @@
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				LIBRARY_SEARCH_PATHS = "/Users/krzysp/Desktop/Rust-cargo-embedded/hello_world/target/debug";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -640,7 +661,8 @@
 					"$(SRCROOT)/../../Engine/src/**",
 					"$(SRCROOT)/../../Libraries/Lua/code/src",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				LIBRARY_SEARCH_PATHS = "/Users/krzysp/Desktop/Rust-cargo-embedded/hello_world/target/debug";
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_LDFLAGS = "-ObjC";

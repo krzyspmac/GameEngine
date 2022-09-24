@@ -6,7 +6,9 @@
 //
 
 #import "AppDelegate.h"
-#import "RendererEntryViewController.h"
+#import "RendererEntry.h"
+
+void rust_function(void);
 
 @interface AppDelegate ()
 
@@ -25,16 +27,22 @@
 {
     if (self = [super init])
     {
-        RendererEntryViewController *rootViewController = [[RendererEntryViewController alloc] initWithNibName:nil bundle:nil];
+        id<RendererViewControllerProtocol> rootViewController = [RendererEntry instantiate];
+        
         self.window = [[NSWindow alloc] initWithContentRect:NSZeroRect
                                                   styleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable | NSWindowStyleMaskMiniaturizable
                                                     backing:NSBackingStoreBuffered
                                                       defer:NO];
+        
         rootViewController.parentWindow = self.window;
-        self.window.contentViewController = rootViewController;
+        rootViewController.frameUpdate = &rust_function;
+        self.window.contentViewController = (NSViewController*)rootViewController;
         [self.window orderFront:self];
         [self.window center];
         [self.window becomeKeyWindow];
+
+        rust_function();
+
     }
     return self;
 }
@@ -52,6 +60,7 @@
 //    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
 //    self.window.rootViewController = rootViewController;
 //    [self.window makeKeyAndVisible];
+
     return YES;
 }
 
