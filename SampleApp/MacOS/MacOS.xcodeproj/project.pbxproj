@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F0F951A28DB7E03001222C5 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F0F951928DB7E03001222C5 /* GameController.framework */; };
 		7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
 		7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A32775086200ED6D67 /* MainMenu.xib */; };
@@ -63,6 +64,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7F0F951928DB7E03001222C5 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/GameController.framework; sourceTree = DEVELOPER_DIR; };
 		7F13829D2775082800ED6D67 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7F13829E2775082800ED6D67 /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F0F951A28DB7E03001222C5 /* GameController.framework in Frameworks */,
 				7FB6520028CE6582006F7030 /* AudioToolbox.framework in Frameworks */,
 				7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */,
 				7F3E8F8D279AF17C003BB7B6 /* MetalKit.framework in Frameworks */,
@@ -210,6 +213,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F0F951928DB7E03001222C5 /* GameController.framework */,
 				7F3470C12852870F00FDED71 /* AudioToolbox.framework */,
 				7FB651FF28CE6582006F7030 /* AudioToolbox.framework */,
 				7F3E916C279B060A003BB7B6 /* libEngine-TV.a */,

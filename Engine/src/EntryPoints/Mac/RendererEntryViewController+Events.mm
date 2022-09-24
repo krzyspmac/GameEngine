@@ -29,6 +29,7 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     [self setupMouseMovedEvents];
     [self setupKeyEvents];
     [self setupControllers];
+    [self createVirtualControllerIfNeeded];
 
     didSetupEvents = YES;
 }
@@ -228,6 +229,10 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 - (void)setupControllers
 {
 #if USE_CONTROLLERS
+    if (!ENGINE().GetEngineSetup().gamepad_support)
+    {   return;
+    }
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(didConnectController:) name:GCControllerDidConnectNotification object:nil];
     [center addObserver:self selector:@selector(didDisconnectController:) name:GCControllerDidDisconnectNotification object:nil];
@@ -247,16 +252,6 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 - (void)didDisconnectController:(NSNotification*)notification
 {
     [self processController];
-}
-
-- (void)resetController
-{
-    self.controller = nil;
-    self.controllerMicroProfile = nil;
-    self.controllerExtendedProfile = nil;
-    self.controllerDPad = nil;
-    self.leftThumbstick.valueChangedHandler = nil;
-    self.rightThumbstick.valueChangedHandler = nil;
 }
 
 - (void)setupControllerHandlers
@@ -302,21 +297,35 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     self.handlerButtonRightTrigger = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
         weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_SHOULDER, GamepadButtonActionFromPressed(pressed), button.value));
     };
+    self.handlerButtonLeftThumbstickButton = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_LEFT_THUMBSTICK_BTN, GamepadButtonActionFromPressed(pressed), button.value));
+    };
+    self.handlerButtonRightThumbstickButton = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
+        weakEngine->getEventProvider().PushButtonAction(engine::GamepadButtonActionHolder(GAMEPAD_BUTTON_RIGHT_THUMBSTICK_BTN, GamepadButtonActionFromPressed(pressed), button.value));
+    };
 }
 
 - (void)processController
 {
-    [self resetController];
+    [self setupController];
+    [self updateControllerScripts];
+}
 
-    NSArray<GCController*> *controllers = [GCController controllers];
-
+- (void)setupController
+{
     if (!ENGINE().GetEngineSetup().gamepad_support)
     {   return;
     }
 
+    NSArray<GCController*> *controllers = [GCController controllers];
     self.controller = [controllers firstObject];
-    self.controllerMicroProfile = self.controller.microGamepad;
-    self.controllerExtendedProfile = self.controller.extendedGamepad;
+    [self setupControllerProfiles: self.controller];
+}
+
+- (void)setupControllerProfiles:(GCController*)controller
+{
+    self.controllerMicroProfile = controller.microGamepad;
+    self.controllerExtendedProfile = controller.extendedGamepad;
 
     if (self.controllerExtendedProfile != nil)
     {
@@ -338,6 +347,8 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
         self.controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
         self.controllerExtendedProfile.rightShoulder.valueChangedHandler = self.handlerButtonRightShoulder;
         self.controllerExtendedProfile.rightTrigger.valueChangedHandler = self.handlerButtonRightTrigger;
+        self.controllerExtendedProfile.leftThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
+        self.controllerExtendedProfile.rightThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
     }
     else if (self.controllerMicroProfile != nil)
     {
@@ -347,8 +358,94 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
         self.controllerMicroProfile.buttonX.valueChangedHandler = self.handlerButtonX;
         self.controllerMicroProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
     }
+}
 
-    [self updateControllerScripts];
+- (void)createVirtualController
+{
+#if TARGET_IOS
+    if (!ENGINE().GetEngineSetup().gamepad_virtual_support)
+    {   return;
+    }
+
+    auto &engineSetup = m_engine->GetEngineSetup();
+    auto buttonConfig = engineSetup.gamepad_virtual_configuration;
+
+    GCVirtualControllerConfiguration *configuration = [[GCVirtualControllerConfiguration alloc] init];
+    NSMutableSet<NSString*> *elements = [[NSMutableSet<NSString*> alloc] init];
+
+    if (buttonConfig & GamepadConfiguration_DirectionPad)
+    {   [elements addObject:GCInputDirectionPad];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftThumbstick)
+    {   [elements addObject:GCInputLeftThumbstick];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightThumbstick)
+    {   [elements addObject:GCInputRightThumbstick];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonA)
+    {   [elements addObject:GCInputButtonA];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonB)
+    {   [elements addObject:GCInputButtonB];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonX)
+    {   [elements addObject:GCInputButtonX];
+    }
+
+    if (buttonConfig & GamepadConfiguration_ButtonY)
+    {   [elements addObject:GCInputButtonY];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftShoulder)
+    {   [elements addObject:GCInputLeftShoulder];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightShoulder)
+    {   [elements addObject:GCInputRightShoulder];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftTrigger)
+    {   [elements addObject:GCInputLeftTrigger];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightTrigger)
+    {   [elements addObject:GCInputRightTrigger];
+    }
+
+    if (buttonConfig & GamepadConfiguration_LeftThumbstickBtn)
+    {   [elements addObject:GCInputLeftThumbstickButton];
+    }
+
+    if (buttonConfig & GamepadConfiguration_RightThumbstickBtn)
+    {   [elements addObject:GCInputRightThumbstickButton];
+    }
+
+    GCVirtualController *virtualController = [GCVirtualController virtualControllerWithConfiguration:configuration];
+
+    self.virtualController = virtualController;
+    self.controller = virtualController.controller;
+
+    [virtualController connectWithReplyHandler:^(NSError * _Nullable error) {
+        NSLog(@"setupVirtualController::connectWithReplyHandler: %@", error);
+    }];
+
+    [self setupControllerProfiles:virtualController.controller];
+#endif
+}
+
+- (void)createVirtualControllerIfNeeded
+{
+#if TARGET_IOS
+    if (!self.virtualController)
+    {
+        [self createVirtualController];
+    }
+#endif
 }
 
 - (void)updateControllerScripts

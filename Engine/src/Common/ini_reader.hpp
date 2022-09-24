@@ -34,7 +34,8 @@ namespace engine
             UNKNOWN             = 0,
             RESOLUTION          = 1,
             RENDERER            = 2,
-            INPUT               = 3
+            INPUT               = 3,
+            PHONE               = 4
         } IniSectionType;
 
         EngineSetup m_engineSetup;

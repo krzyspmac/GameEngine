@@ -77,16 +77,18 @@ namespace engine
      */
     typedef enum
     {
-        GAMEPAD_BUTTON_A                = 0
-      , GAMEPAD_BUTTON_B                = 1
-      , GAMEPAD_BUTTON_X                = 2
-      , GAMEPAD_BUTTON_Y                = 3
-      , GAMEPAD_BUTTON_MENU             = 4
-      , GAMEPAD_BUTTON_OPTIONS          = 5
-      , GAMEPAD_BUTTON_LEFT_TRIGGER     = 6
-      , GAMEPAD_BUTTON_LEFT_SHOULDER    = 7
-      , GAMEPAD_BUTTON_RIGHT_TRIGGER    = 8
-      , GAMEPAD_BUTTON_RIGHT_SHOULDER   = 9
+        GAMEPAD_BUTTON_A                     = 0
+      , GAMEPAD_BUTTON_B                     = 1
+      , GAMEPAD_BUTTON_X                     = 2
+      , GAMEPAD_BUTTON_Y                     = 3
+      , GAMEPAD_BUTTON_MENU                  = 4
+      , GAMEPAD_BUTTON_OPTIONS               = 5
+      , GAMEPAD_BUTTON_LEFT_TRIGGER          = 6
+      , GAMEPAD_BUTTON_LEFT_SHOULDER         = 7
+      , GAMEPAD_BUTTON_RIGHT_TRIGGER         = 8
+      , GAMEPAD_BUTTON_RIGHT_SHOULDER        = 9
+      , GAMEPAD_BUTTON_LEFT_THUMBSTICK_BTN   = 10
+      , GAMEPAD_BUTTON_RIGHT_THUMBSTICK_BTN  = 11
     } GamepadButtonType;
 
     typedef enum
