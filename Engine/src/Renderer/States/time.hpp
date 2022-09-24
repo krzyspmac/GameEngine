@@ -8,10 +8,13 @@
 #ifndef time_hpp
 #define time_hpp
 
+#ifndef SCRIPTING_WRAPPER_BUILD
 #include "scripting_engine_provider_interface.h"
-#include "common.h"
 #include "engine_provider_interface.h"
 #include <iostream>
+#endif
+
+#include "common.h"
 
 namespace engine
 {
@@ -21,7 +24,10 @@ namespace engine
      */
     class Time
     {
+    private:
+        __scriptintWrapperHidden(
         EngineProviderI& m_engineProvider;
+        )
         Uint64 m_beginning;
         Uint64 m_engineStart;
         double m_engineStatSec;
@@ -32,8 +38,10 @@ namespace engine
         Uint64 m_frameDelta;
         double m_frameDeltaSec;
     public:
+        __scriptintWrapperHidden(
         /** @private */
         Time(EngineProviderI &provider);
+        )
 
     public:
 
@@ -80,10 +88,12 @@ namespace engine
         /** @private */
         void PostUpdate();
 
+    __scriptintWrapperHidden(
     /// ScriptingInterface
     public:
         /** @private */
         SCRIPTING_INTERFACE_HEADERS(Time);
+    )
     };
 };
 

@@ -44,11 +44,6 @@
     /** Update the engine if needed*/
     m_engine->SetViewportScale(density);
 
-    if (self.frameUpdate != nil)
-    {
-        self.frameUpdate();
-    }
-
     /** Recreate the offscreen texture if needed */
     desiredFramebufferTextureSize.x = engineSetup.resolution.width;
     desiredFramebufferTextureSize.y = engineSetup.resolution.height;

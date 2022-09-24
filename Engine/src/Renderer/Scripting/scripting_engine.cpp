@@ -23,6 +23,8 @@
 #include "sound_manager.hpp"
 #include "engine_screen.hpp"
 
+#include "scripting_exposed_interface.h"
+
 using namespace engine;
 
 /// Main accessor for easy access.
@@ -218,6 +220,19 @@ void ScriptingEngine::callInit()
     {
         std::cout << "Error:" << lua_tostring(L, -1) << "\n";
     }
+
+    auto initFunction = ENGINE().GetEngineSetup().initFunction;
+    if (initFunction == nullptr)
+    {
+        std::cout << "Error: No init function setup. Cannot start engine." << std::endl;
+    }
+    else
+    {
+        initFunction();
+    }
+
+//    pictel_game_script_init();
+//    rust_function();
 }
 
 void ScriptingEngine::callUpdate()
@@ -229,6 +244,8 @@ void ScriptingEngine::callUpdate()
     if (lua_pcall(L, 0, 0, 0) != 0) {
         std::cout << "Error:" << lua_tostring(L, -1) << "\n";
     }
+
+    ENGINE().GetEngineSetup().frameUpdateFunction();
 }
 
 /// loadTexture(name)

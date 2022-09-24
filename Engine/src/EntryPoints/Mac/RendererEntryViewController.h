@@ -121,7 +121,8 @@
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
 @property (nonatomic, weak) NSWindow *parentWindow;
-@property (nonatomic, assign) void (*frameUpdate)(void);
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngienInitFnc;
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngineFrameUpdteFnc;
 #endif
 
 #if USE_CONTROLLERS

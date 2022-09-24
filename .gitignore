@@ -6,3 +6,4 @@ RendererAppSDL/RendererAppSDL.xcworkspace/xcuserdata/krzysp.xcuserdatad/UserInte
 *.xcuserstate
 SampleApp/MacOS/MacOS.xcworkspace/xcuserdata/krzysp.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
 SampleApp/MacOS/MacOS.xcworkspace/xcuserdata/krzysp.xcuserdatad/xcdebugger/Expressions.xcexplist
+SampleApp/Game Data Folder/Rust-cargo-embedded/hello_world/target

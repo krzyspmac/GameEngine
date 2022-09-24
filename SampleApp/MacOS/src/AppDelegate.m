@@ -7,6 +7,7 @@
 
 #import "AppDelegate.h"
 #import "RendererEntry.h"
+#import "scripting_exposed_interface.h"
 
 void rust_function(void);
 
@@ -19,6 +20,10 @@ void rust_function(void);
 #endif
 
 @end
+
+/// Must-have initializer functions
+void pictel_game_script_init(void);
+void pictel_game_script_frame_update(void);
 
 @implementation AppDelegate
 
@@ -35,13 +40,14 @@ void rust_function(void);
                                                       defer:NO];
         
         rootViewController.parentWindow = self.window;
-        rootViewController.frameUpdate = &rust_function;
+        rootViewController.gameEngienInitFnc = &pictel_game_script_init;
+        rootViewController.gameEngineFrameUpdteFnc = &pictel_game_script_frame_update;
         self.window.contentViewController = (NSViewController*)rootViewController;
         [self.window orderFront:self];
         [self.window center];
         [self.window becomeKeyWindow];
 
-        rust_function();
+        pictel_game_script_init();
 
     }
     return self;

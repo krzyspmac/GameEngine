@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "common_engine_impl.h"
+#include "scripting_exposed_interface.h"
 
 namespace engine
 {
@@ -70,6 +71,12 @@ namespace engine
         /** Renderer background color */
         Color4 backgroundColor;
 
+        /** Scripting init function */
+        ScriptingFunctionVoid initFunction;
+
+        /** Scripting frame-update function */
+        ScriptingFunctionVoid frameUpdateFunction;
+
         EngineSetup()
         :   resolution( {320, 200} )
         ,   gamepad_support(true)
@@ -78,6 +85,7 @@ namespace engine
         ,   affineScale( 1.0 )
         ,   isDirty(false)
         ,   backgroundColor({1.0, 0.0, 1.0, 1.0})
+        ,   initFunction(nullptr)
         { };
     } EngineSetup;
 

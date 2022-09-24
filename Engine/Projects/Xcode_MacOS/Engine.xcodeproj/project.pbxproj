@@ -504,6 +504,11 @@
 		7FAD022B28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */; };
 		7FAD022C28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */; };
 		7FAD022D28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */; };
+		7FAD023928DF3E2F006EA640 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD023828DF3E2F006EA640 /* globals.cpp */; };
+		7FAD023A28DF3E2F006EA640 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD023828DF3E2F006EA640 /* globals.cpp */; };
+		7FAD023B28DF3E2F006EA640 /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FAD023828DF3E2F006EA640 /* globals.cpp */; };
+		7FAD024828DF4584006EA640 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; };
+		7FAD024928DF459B006EA640 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D829279A0C6100139E14 /* MetalKit.framework */; };
 		7FAE022928CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FAE022A28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
 		7FAE022B28CA269C00788004 /* rotation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FAE022828CA269C00788004 /* rotation.hpp */; };
@@ -817,6 +822,10 @@
 		7FAD022228DF2BF8006EA640 /* RendererEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RendererEntry.h; sourceTree = "<group>"; };
 		7FAD022328DF2BF8006EA640 /* RendererEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RendererEntry.m; sourceTree = "<group>"; };
 		7FAD022A28DF2FFC006EA640 /* RendererEntryViewController+Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RendererEntryViewController+Protocol.h"; sourceTree = "<group>"; };
+		7FAD023728DF3C3B006EA640 /* rust_wrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rust_wrapper.hpp; sourceTree = "<group>"; };
+		7FAD023828DF3E2F006EA640 /* globals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = globals.cpp; sourceTree = "<group>"; };
+		7FAD034B28DF46FB006EA640 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		7FAD035228DF69BF006EA640 /* scripting_exposed_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scripting_exposed_interface.h; sourceTree = "<group>"; };
 		7FAE022828CA269C00788004 /* rotation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rotation.hpp; sourceTree = "<group>"; };
 		7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_backbuffer.cpp; sourceTree = "<group>"; };
 		7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_backbuffer.hpp; sourceTree = "<group>"; };
@@ -910,6 +919,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FAD024928DF459B006EA640 /* MetalKit.framework in Frameworks */,
+				7FAD024828DF4584006EA640 /* Metal.framework in Frameworks */,
 				7F3470BC285286DF00FDED71 /* AudioToolbox.framework in Frameworks */,
 				7F3470A928527B5B00FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E901A279AFFFC003BB7B6 /* libcjson.a in Frameworks */,
@@ -1012,6 +1023,7 @@
 				7F138250277505B600ED6D67 /* common_engine.h */,
 				7F13824C277505B600ED6D67 /* common_engine_impl.h */,
 				7FB8242F2789DCF6008F0F7A /* easy.h */,
+				7FAD023628DF3C2F006EA640 /* RustWrapper */,
 				7FE2E5D2277B233900538094 /* Common */,
 				7F63D82B279A0C9500139E14 /* EntryPoints */,
 				7FDDAF9A2776872100578F86 /* Game */,
@@ -1235,6 +1247,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FAD034B28DF46FB006EA640 /* CoreAudio.framework */,
 				7F3470BB285286DF00FDED71 /* AudioToolbox.framework */,
 				7F3470BD285286F700FDED71 /* AudioToolbox.framework */,
 				7F3470BF2852870100FDED71 /* AudioToolbox.framework */,
@@ -1386,6 +1399,16 @@
 				7F7EA07928967EEF00A09199 /* system_utils_mac.mm */,
 			);
 			path = mac;
+			sourceTree = "<group>";
+		};
+		7FAD023628DF3C2F006EA640 /* RustWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				7FAD035228DF69BF006EA640 /* scripting_exposed_interface.h */,
+				7FAD023728DF3C3B006EA640 /* rust_wrapper.hpp */,
+				7FAD023828DF3E2F006EA640 /* globals.cpp */,
+			);
+			path = RustWrapper;
 			sourceTree = "<group>";
 		};
 		7FC131072792CDB70094DF0C /* SDL */ = {
@@ -2269,6 +2292,7 @@
 				7F138272277505B600ED6D67 /* sprite_representation_static.cpp in Sources */,
 				7FB824252789AF95008F0F7A /* pipe_output.cpp in Sources */,
 				7F3470BA28527F9700FDED71 /* sound_manager.cpp in Sources */,
+				7FAD023928DF3E2F006EA640 /* globals.cpp in Sources */,
 				7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */,
 				7F6D1CA1279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				4C9EA022279205C80082EB6A /* texture_target_metal.cpp in Sources */,
@@ -2359,6 +2383,7 @@
 				7F3E8EFA279AC909003BB7B6 /* path_finder_helper.cpp in Sources */,
 				7F3470B928527F9700FDED71 /* sound_manager.cpp in Sources */,
 				7F3E8EFB279AC909003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
+				7FAD023A28DF3E2F006EA640 /* globals.cpp in Sources */,
 				7F6D1CA2279F4F800078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				7F3E8EFC279AC909003BB7B6 /* path_finder_graph.cpp in Sources */,
 				7F3E8EFD279AC909003BB7B6 /* path_finder.cpp in Sources */,
@@ -2456,6 +2481,7 @@
 				7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */,
 				7F3470B828527F9700FDED71 /* sound_manager.cpp in Sources */,
 				7F3E9124279B03F6003BB7B6 /* path_finder_line_graph_node.cpp in Sources */,
+				7FAD023B28DF3E2F006EA640 /* globals.cpp in Sources */,
 				7F6D1CA3279F4F810078D76A /* RendererEntryViewController+Helpers.mm in Sources */,
 				7F3E9125279B03F6003BB7B6 /* path_finder_graph.cpp in Sources */,
 				7F3E9126279B03F6003BB7B6 /* path_finder.cpp in Sources */,
@@ -2593,6 +2619,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CFLAGS = "-DTARGET_MACOS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2616,6 +2643,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				OTHER_CFLAGS = "-DTARGET_MACOS=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2693,6 +2721,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-Wl,-undefined,dynamic_lookup";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -2759,6 +2788,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-Wl,-undefined,dynamic_lookup";
 				SDKROOT = macosx;
 			};
 			name = Release;

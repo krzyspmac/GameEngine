@@ -27,7 +27,7 @@
 		<key>Engine-TV-Bundle.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Engine-TV-MetalLib.xcscheme_^#shared#^_</key>
 		<dict>
@@ -98,6 +98,11 @@
 			<true/>
 		</dict>
 		<key>7F63D861279A12F900139E14</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FAD024028DF44FE006EA640</key>
 		<dict>
 			<key>primary</key>
 			<true/>

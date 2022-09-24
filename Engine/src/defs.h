@@ -22,6 +22,12 @@
     #define APPLE       1
 #endif
 
+#ifndef SCRIPTING_WRAPPER_BUILD
+    #define __scriptintWrapperHidden(x) x
+#else
+    #define __scriptintWrapperHidden(x)
+#endif
+
 #define KEY_TABLE_SIZE 256
 
 #endif /* defs_h */

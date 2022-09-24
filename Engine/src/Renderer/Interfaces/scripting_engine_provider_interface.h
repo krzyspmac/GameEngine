@@ -72,7 +72,8 @@ namespace engine
          supports scripting.
          TODO: should not be in the interface!
          */
-        
+
+#ifndef SCRIPTING_BUILD
         template<typename T>
         static T *GetScriptingObjectPtr(lua_State *L, int index)
         {
@@ -91,6 +92,7 @@ namespace engine
         {
             return (T*)lua_topointer(L, index);
         };
+#endif
     };
 
     /// Provides an interface for the classes to
@@ -98,6 +100,7 @@ namespace engine
     class ScriptingInterface
     {
     public:
+#ifndef SCRIPTING_BUILD
         /// Get the name for the scripting table. Usually the `ClassName`.
         /// Later used in the script.
         static std::string ScriptingInterfaceName() { return ""; };
@@ -109,6 +112,7 @@ namespace engine
         /// Final object must have
         /// static void ScriptingInterfaceRegisterFunctions(lua_State *L,className *object) defined.
         /// See the SCRIPTING_INTERFACE_HEADERS and SCRIPTING_INTERFACE_IMPL_NAME.
+#endif
     };
 
     /// Helper macro to define .h ScriptingInterface complience.

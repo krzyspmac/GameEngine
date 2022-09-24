@@ -45,8 +45,8 @@
 		7F7EA08528968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
 		7F7EA08628968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
 		7F7EA08728968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
-		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
-		7FAD022F28DF3163006EA640 /* libyour_crate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAD022E28DF3163006EA640 /* libyour_crate.a */; };
+		7FAD035328DF6A06006EA640 /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
+		7FAD035528DF84CF006EA640 /* libyour_crate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FAD035428DF84CF006EA640 /* libyour_crate.dylib */; };
 		7FB6520028CE6582006F7030 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB651FF28CE6582006F7030 /* AudioToolbox.framework */; };
 		7FCC12962798D792002ECABD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCC12952798D792002ECABD /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
@@ -129,6 +129,12 @@
 		7FAD01F728DF2232006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
 		7FAD01F928DF2455006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
 		7FAD022E28DF3163006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
+		7FAD023028DF33A8006EA640 /* libyour_crate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libyour_crate.dylib; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.dylib"; sourceTree = "<group>"; };
+		7FAD023228DF3424006EA640 /* libyour_crate.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libyour_crate.a; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.a"; sourceTree = "<group>"; };
+		7FAD023428DF344D006EA640 /* libyour_crate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libyour_crate.dylib; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.dylib"; sourceTree = "<group>"; };
+		7FAD034D28DF4709006EA640 /* Engine_Mac_Framework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Engine_Mac_Framework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FAD035028DF59A7006EA640 /* libyour_crate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libyour_crate.dylib; path = "../../../../../../../Desktop/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.dylib"; sourceTree = "<group>"; };
+		7FAD035428DF84CF006EA640 /* libyour_crate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libyour_crate.dylib; path = "../../Game Data Folder/Rust-cargo-embedded/hello_world/target/debug/libyour_crate.dylib"; sourceTree = "<group>"; };
 		7FB651FF28CE6582006F7030 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FCC12952798D792002ECABD /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
@@ -139,9 +145,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7FAD022F28DF3163006EA640 /* libyour_crate.a in Frameworks */,
+				7FAD035328DF6A06006EA640 /* libEngine-Mac.a in Frameworks */,
+				7FAD035528DF84CF006EA640 /* libyour_crate.dylib in Frameworks */,
 				7F3470C22852870F00FDED71 /* AudioToolbox.framework in Frameworks */,
-				7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */,
 				7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */,
 				7FCC12962798D792002ECABD /* GameController.framework in Frameworks */,
 				7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */,
@@ -228,6 +234,12 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FAD035028DF59A7006EA640 /* libyour_crate.dylib */,
+				7FAD035428DF84CF006EA640 /* libyour_crate.dylib */,
+				7FAD034D28DF4709006EA640 /* Engine_Mac_Framework.framework */,
+				7FAD023428DF344D006EA640 /* libyour_crate.dylib */,
+				7FAD023228DF3424006EA640 /* libyour_crate.a */,
+				7FAD023028DF33A8006EA640 /* libyour_crate.dylib */,
 				7FAD01F728DF2232006EA640 /* libyour_crate.a */,
 				7FAD01F928DF2455006EA640 /* libyour_crate.a */,
 				7FAD022E28DF3163006EA640 /* libyour_crate.a */,
@@ -697,6 +709,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../Game\\ Data\\ Folder/Rust-cargo-embedded/hello_world/target/debug";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.renderer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -728,6 +741,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../Game\\ Data\\ Folder/Rust-cargo-embedded/hello_world/target/debug";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = pl.krzysp.gameengine.renderer;
 				PRODUCT_NAME = "$(TARGET_NAME)";

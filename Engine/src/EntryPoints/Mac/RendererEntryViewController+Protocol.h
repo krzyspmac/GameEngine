@@ -20,10 +20,13 @@
     #define PlatformViewController GCEventViewController
 #endif
 
+#include "scripting_exposed_interface.h"
+
 @protocol RendererViewControllerProtocol <NSObject>
 
 @property (nonatomic, weak) NSWindow *parentWindow;
-@property (nonatomic, assign) void (*frameUpdate)(void);
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngienInitFnc;
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngineFrameUpdteFnc;
 
 @end
 

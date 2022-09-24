@@ -8,6 +8,7 @@
 #ifndef scripting_interfaces_h
 #define scripting_interfaces_h
 
+#ifndef SCRIPTING_BUILD
 #ifdef __cplusplus
 extern "C" {
     #include "lua.h"
@@ -15,6 +16,7 @@ extern "C" {
     #include "lauxlib.h"
 }
 #endif //__cplusplus
+#endif // #ifndef SCRIPTING_BUILD
 
 namespace engine
 {
@@ -33,7 +35,10 @@ namespace engine
 
          Checks if funcRef >= 0, otherwise does nothing.
          */
+
+#ifndef SCRIPTING_BUILD
         virtual void CallRegistryFunction(int funcRef, std::function<int(lua_State*)> lambda) = 0;
+#endif
     };
 };
 

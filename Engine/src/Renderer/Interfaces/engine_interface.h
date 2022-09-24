@@ -75,6 +75,9 @@ namespace engine
     /// Setup
     public:
 
+        /** Setup the ini & the EngineSetup structure */
+        virtual void SetupInit() = 0;
+
         /** The main setup. All engine components should be
             loaded by the concrete class after this call.
          */
