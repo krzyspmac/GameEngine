@@ -1,9 +1,3 @@
-//
-//  GameSceneIntro.cpp
-//  Game-Mac
-//
-//  Created by krzysp on 25/09/2022.
-//
 
 #include "GameSceneIntro.hpp"
 
@@ -13,6 +7,12 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_font = engine::Globals::fontManager()->LoadFont("at01.fnt", "at01.png");
     m_scene = engine::Globals::sceneManager()->SceneCreateNew();
     m_textSprite = m_scene->SpriteTextLoad(m_font);
+
+    m_texts = {
+        "This game is made using a custom built engine"
+      , "Some things might not work.\nA lot of them actually."
+      , "Drop me a line if wish.\nMore in the game menu"
+    };
 
     auto size = m_resState->GetViewportSize();
 
@@ -26,6 +26,8 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_scene->SetFrameUpdate([&]{
         FrameUpdate();
     });
+
+    ContinueAnimation();
 }
 
 void
@@ -40,4 +42,9 @@ void
 GameSceneIntro::FrameUpdate() {
     auto size = m_resState->GetViewportSize();
     printf("width = %f\n", size.x);
+}
+
+void
+GameSceneIntro::ContinueAnimation() {
+    
 }

@@ -1,5 +1,5 @@
-#ifndef Game_
-#define Game_
+#ifndef Game_Entry_Point_H
+#define Game_Entry_Point_H
 
 #include "game_include.hpp"
 
@@ -9,4 +9,5 @@
 void PictelScriptInit(void);
 
 #pragma GCC visibility pop
+
 #endif

@@ -17,6 +17,7 @@ class GameSceneIntro: public GameSceneI {
     engine::FontI *m_font;
     engine::SceneI *m_scene;
     engine::SpriteRepresentationTextI *m_textSprite;
+    std::vector<std::string> m_texts;
 public: // GameSceneIntro
     GameSceneIntro(GameResolutionState*);
     void FrameUpdate();
@@ -25,6 +26,9 @@ public: // GameSceneI
     engine::SceneI *GetSceneObj() { return m_scene; };
     void DidActivate();
     void DidDeactivate();
+
+private:
+    void ContinueAnimation();
 };
 
 #endif /* GameSceneIntro_hpp */
