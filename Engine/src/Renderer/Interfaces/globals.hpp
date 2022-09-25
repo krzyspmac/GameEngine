@@ -26,6 +26,8 @@ namespace engine
         static FontManagerI *fontManager();
 
         static SceneManagerI *sceneManager();
+
+        static PropertyAnimatorFactoryI *propertyAnimatorFactory();
     };
 }
 

@@ -8,12 +8,13 @@
 #ifndef animation_function_hpp
 #define animation_function_hpp
 
-#include "scripting_engine_provider_interface.h"
+//#include "scripting_engine_provider_interface.h"
 #include "engine_provider_interface.h"
 #include "time.hpp"
 #include "callable.hpp"
 #include "animation_interface.h"
 #include "memory.h"
+#include "value_animator_interface.h"
 
 namespace engine
 {
@@ -35,8 +36,7 @@ namespace engine
      \see ValueAnimatorFactory.
      */
     class ValueAnimator
-        : public AnimationPeriodicUpdateI
-        , public AnimatableI
+        : public ValueAnimatorI
         , public MemoryI
     {
         EngineProviderI &m_engineProvider;
@@ -47,77 +47,41 @@ namespace engine
         double m_secondsStart;
         double m_secondsPassed;
         double m_val;
-        std::function<void(ValueAnimator*)> m_startFunc;
-        CallableScriptFunctionParametersEmpty m_startFuncRef;
-        CallableScriptFunctionParameters1<float> m_updateFuncRef;
-        std::function<void(ValueAnimator*, float)> m_updateFunc;
-        CallableScriptFunctionParametersEmpty m_endFuncRef;
-        std::function<void(ValueAnimator*)> m_endFunc;
+        std::function<void(ValueAnimatorI*)> m_startFunc;
+        std::function<void(ValueAnimatorI*, float)> m_updateFunc;
+        std::function<void(ValueAnimatorI*)> m_endFunc;
         bool m_isStopped;
         void *m_context;
-    public:
-        /**
-         Create the value animator with callaback as script functions.
-         @private
-         */
-        ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
-                      int delay,
-                      double seconds,
-                      CallableScriptFunctionParametersEmpty functionStartRef,
-                      CallableScriptFunctionParameters1<float> functionUpdateRef,
-                      CallableScriptFunctionParametersEmpty functionEndRef);
 
-        /**
-         Create the value animator with callaback as C++ lambdas.
-         @private
-         */
+    public: // ValueAnimatorI
         ValueAnimator(std::unique_ptr<CallableCurveLamba> curve,
-                      int delay,
-                      double seconds,
-                      std::function<void(ValueAnimator*)> functionStartRef,
-                      std::function<void(ValueAnimator*, float)> functionUpdateRef,
-                      std::function<void(ValueAnimator*)> functionEndRef);
+                       int delay,
+                       double seconds,
+                       std::function<void(ValueAnimatorI*)> callabackFunctionStart,
+                       std::function<void(ValueAnimatorI*, float)> callabackFunctionUpdate,
+                       std::function<void(ValueAnimatorI*)> callbackFunctionEnd
+                       );
 
-        /** @private */
         virtual ~ValueAnimator();
 
     public:
-        void SetFunctionUpdate(CallableScriptFunctionParameters1<float> f);
-        void SetFunctionUpdate(std::function<void(ValueAnimator*, float)> f);
-        void SetFunctionFinish(CallableScriptFunctionParametersEmpty f);
-        void SetFunctionFinish(std::function<void(ValueAnimator*)> f);
+        void SetFunctionUpdate(std::function<void(ValueAnimatorI*, float)> f);
+        void SetFunctionFinish(std::function<void(ValueAnimatorI*)> f);
 
-        CallableScriptFunctionParameters1<float> GetunctionUpdateRef();
-        std::function<void(ValueAnimator*, float)> GetFunctionUpdate();
-        CallableScriptFunctionParametersEmpty GetFunctionFinishRef();
-        std::function<void(ValueAnimator*)> GetFunctionFinish();
-
-        auto GetCurve() { return &m_curve; }
+        auto& GetFunctionUpdate() { return m_updateFunc; };
+        auto& GetFunctionFinish() { return m_endFunc; };
+        auto& GetCurve() { return m_curve; }
 
         /** Store the context. Takes ownership of the object*/
         void SetContext(void*);
         
         void *GetContext();
 
-    /// AnimatableI
-    public:
-        /**
-         Starts the animation. Adds the animation to the default engine run loop so
-         it runs automatically. It will periodically call the function
-         specified when creating the function.
-         */
+    public: // AnimatableI
         void Start();
-
-        /**
-         Stops the animation.
-         */
         void Stop();
 
-    /// MemoryI
-    public:
-        /**
-         Relase the memory if this object.
-         */
+    public: // MemoryI
         void ReleaseMem();
 
     public:
@@ -139,10 +103,10 @@ namespace engine
     public:
         void Update();
 
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(ValueAnimator);
+//    /// ScriptingInterface
+//    public:
+//        /// @private
+//        SCRIPTING_INTERFACE_HEADERS(ValueAnimator);
     };
 };
 

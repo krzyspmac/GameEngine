@@ -8,8 +8,7 @@
 #ifndef callable_interface_h
 #define callable_interface_h
 
-#include "scripting_interfaces.h"
-#include "callable.hpp"
+#include "memory.h"
 
 namespace engine
 {
@@ -39,17 +38,28 @@ namespace engine
         virtual R f(V progress) = 0;
     };
 
-    /** A concrete instance of the whole parameter stack */
-    class CallableParameterStackI
+    /**
+     Curve lambda. Provide your own implementation of the curve
+     to be used in animation/translator.
+     Available only in C++
+     @private
+     */
+    class CallableCurveLamba: public CallableCurveI<float, float>
     {
+        float m_min;
+        float m_max;
+        float m_diff;
+        std::function<float(float, float, float)> m_lambda;
     public:
-        typedef int CallableScriptFunctionRef;
-    protected:
-        CallableScriptFunctionRef m_functionRef;
+        CallableCurveLamba(float min, float max, std::function<float(float, float, float)> lambda);
     public:
-        CallableParameterStackI(CallableScriptFunctionRef ref): m_functionRef(ref) { };
+        float GetMin() { return m_min; };
+        float GetMax() { return m_max; };
+        float GetDiff() { return m_diff; };
 
-        bool CanCall() { return m_functionRef != -1; };
+        void SetMin(float value) { m_min = value; };
+        void SetMax(float value) { m_max = value; };
+        float f(float progress);
     };
 
     /**
@@ -57,24 +67,100 @@ namespace engine
      specified by the documentation. Various script related functionality will
      extend this interface to provide their own definitions.
      */
-    class CallableScriptFunctionI: public CallableI
+    class CallableScriptFunctionI: public CallableI, public MemoryI
     {
     public:
+        /** Additional holder for a script function index. Not needed in C++ */
         typedef int CallableScriptFunctionRef;
 
-        CallableScriptFunctionI(CallableScriptFunctionRef) : CallableI() { };
-
+        CallableScriptFunctionI() : CallableI(), MemoryI() { };
+        CallableScriptFunctionI(CallableScriptFunctionRef) : CallableI(), MemoryI() { };
+        virtual ~CallableScriptFunctionI() { };
+        
         /**
          Available only in C++
          @private
          */
-        virtual CallableScriptFunctionRef& GetFunctionRef() = 0;
+        CallableScriptFunctionRef GetFunctionRef() { return -1; };
 
         /**
          Available only in C++
          @private
          */
         virtual bool CanCall() = 0;
+    };
+
+    /** A wrapper for the empty callable function */
+    class CallableParametersEmpty: public CallableScriptFunctionI
+    {
+        std::function<void(void)> m_fnc;
+    public:
+        CallableParametersEmpty()
+            : m_fnc(nullptr)
+        { };
+        CallableParametersEmpty(std::function<void(void)> fnc)
+            : CallableScriptFunctionI()
+            , m_fnc(fnc)
+        {
+        };
+
+        virtual ~CallableParametersEmpty() { };
+        bool CanCall() { return m_fnc != nullptr; };
+        void Call() { if (CanCall()) m_fnc(); };
+    };
+
+    /** A wrapper for the 1 param callable function */
+    template <typename A>
+    class CallableParameters1: public CallableScriptFunctionI
+    {
+        std::function<void(A)> m_fnc;
+    public:
+        CallableParameters1()
+            : m_fnc(nullptr)
+        { };
+        CallableParameters1(std::function<void(A)> fnc)
+            : CallableScriptFunctionI()
+            , m_fnc(fnc)
+        { };
+        virtual ~CallableParametersEmpty() {};
+        bool CanCall() { return m_fnc != nullptr; };
+        void Call(A p1) { if (CanCall()) m_fnc(p1); };
+    };
+
+    /** A wrapper for the 2 params callable function */
+    template <typename A, typename B>
+    class CallableParameters2: public CallableScriptFunctionI
+    {
+        std::function<void(A, B)> m_fnc;
+    public:
+        CallableParameters2()
+            : CallableScriptFunctionI()
+            , m_fnc(nullptr)
+        { };
+        CallableParameters2(std::function<void(A, B)> fnc)
+            : m_fnc(fnc)
+        { };
+        virtual ~CallableParametersEmpty() { };
+        bool CanCall() { return m_fnc != nullptr; };
+        void Call(A p1, B p2) { if (CanCall()) m_fnc(p1, p2); };
+    };
+
+    /** A wrapper for the 3 params callable function */
+    template <typename A, typename B, typename C>
+    class CallableParameters3: public CallableScriptFunctionI
+    {
+        std::function<void(A, B, C)> m_fnc;
+    public:
+        CallableParameters3()
+            : CallableScriptFunctionI()
+            , m_fnc(nullptr)
+        { };
+        CallableParameters3(std::function<void(A, B, C)> fnc)
+            : m_fnc(fnc)
+        { };
+        virtual ~CallableParametersEmpty() { };
+        bool CanCall() { return m_fnc != nullptr; };
+        void Call(A p1, B p2, C p3) { if (CanCall()) m_fnc(p1, p2, p3); };
     };
 };
 

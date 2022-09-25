@@ -32,9 +32,19 @@ namespace engine
     public:
         MemoryI() : m_counter(0) { };
         virtual ~MemoryI() { };
-        void Keep() { m_counter++; };
-        void Release() { m_counter--; };
-        void FreeMem() { if (m_counter <= 0) delete this; };
+        void Keep() {
+            m_counter++;
+        };
+        void Release() {
+            m_counter--;
+            FreeMem();
+            
+        };
+        void FreeMem() {
+            if (m_counter <= 0) {
+                delete this;
+            }
+        };
     };
 
     /**

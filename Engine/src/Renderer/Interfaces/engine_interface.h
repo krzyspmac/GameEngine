@@ -197,10 +197,10 @@ namespace engine
         Time& getTime() { return m_time; };
 
         ///
-        ValueAnimatorFactory& getValueAnimatorFactory() { return m_valueAnimatorFactory; };
+        ValueAnimatorFactoryI& getValueAnimatorFactory() { return m_valueAnimatorFactory; };
 
         ///
-        PropertyAnimatorFactory& getPropertyAnimatorFactory() { return m_propertyAnimatorFactory; };
+        PropertyAnimatorFactoryI& getPropertyAnimatorFactory() { return m_propertyAnimatorFactory; };
 
         ///
         PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };

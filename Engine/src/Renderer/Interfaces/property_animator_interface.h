@@ -1,5 +1,5 @@
 //
-//  property_animator_interface_h.h
+//  property_animator_interface.h
 //  Engine
 //
 //  Created by krzysp on 12/08/2022.
@@ -29,10 +29,6 @@ namespace engine
         { };
 
         virtual ~PropertyAnimatorI() { };
-    public: // AnimatableI
-        // uses Start() and Stop()
-    public: // MemoryI
-        // uses FreeMem
     };
 
 };

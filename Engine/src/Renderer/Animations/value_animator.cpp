@@ -17,51 +17,21 @@ ValueAnimator
         std::unique_ptr<CallableCurveLamba> curve
       , int delay
       , double seconds
-      , CallableScriptFunctionParametersEmpty functionStartRef
-      , CallableScriptFunctionParameters1<float> functionUpdateRef
-      , CallableScriptFunctionParametersEmpty functionEndRef
-)   : AnimatableI()
-    , MemoryI()
+      , std::function<void(ValueAnimatorI*)> callabackFunctionStart
+      , std::function<void(ValueAnimatorI*, float)> callabackFunctionUpdate
+      , std::function<void(ValueAnimatorI*)> callbackFunctionEnd
+)
+    : ValueAnimatorI(nullptr, delay, seconds, callabackFunctionStart, callabackFunctionUpdate, callbackFunctionEnd)
+    ,  MemoryI()
     , m_engineProvider(ENGINE().getProvider())
     , m_time(ENGINE().getTime())
     , m_secondsDelay(delay)
     , m_secondsTotal(seconds)
     , m_secondsStart(-1)
     , m_val(curve->GetMin())
-    , m_startFuncRef(functionStartRef)
-    , m_startFunc(nullptr)
-    , m_updateFuncRef(functionUpdateRef)
-    , m_updateFunc(nullptr)
-    , m_endFuncRef(functionEndRef)
-    , m_endFunc(nullptr)
-    , m_isStopped(true)
-    , m_context(nullptr)
-{
-    m_curve = std::move(curve);
-}
-
-ValueAnimator
-    ::ValueAnimator(
-         std::unique_ptr<CallableCurveLamba> curve
-       , int delay
-       , double seconds
-       , std::function<void(ValueAnimator*)> functionStartFunc
-       , std::function<void(ValueAnimator*, float)> functionUpdate
-       , std::function<void(ValueAnimator*)> functionEnd
-)   : AnimatableI()
-    , MemoryI()
-    , m_engineProvider(ENGINE().getProvider())
-    , m_time(ENGINE().getTime())
-    , m_secondsDelay(delay)
-    , m_secondsTotal(seconds)
-    , m_secondsStart(-1)
-    , m_val(curve->GetMin())
-    , m_startFuncRef(-1)
-    , m_startFunc(functionStartFunc)
-    , m_updateFuncRef(CallableScriptFunctionParameters1<float>::empty())
-    , m_updateFunc(functionUpdate)
-    , m_endFuncRef(CallableScriptFunctionParametersEmpty::empty())
-    , m_endFunc(functionEnd)
+    , m_startFunc(callabackFunctionStart)
+    , m_updateFunc(callabackFunctionUpdate)
+    , m_endFunc(callbackFunctionEnd)
     , m_isStopped(true)
     , m_context(nullptr)
 {
@@ -103,14 +73,6 @@ void ValueAnimator::Stop()
     {
         m_animatableFinishL(this);
     }
-    
-    if (m_endFuncRef.CanCall())
-    {
-        m_endFuncRef.PerformCall([&](lua_State *L){
-            this->ScriptingInterfaceRegisterFunctions(L, this);
-            return 1;
-        });
-    }
 
     if (m_endFunc != nullptr)
     {
@@ -127,11 +89,6 @@ float ValueAnimator::GetValue()
 
 void ValueAnimator::CallbackExecute()
 {
-    if (m_updateFuncRef.CanCall())
-    {
-        m_updateFuncRef.CallWithParameters(m_val);
-    }
-
     if (m_updateFunc != nullptr)
     {
         m_updateFunc(this, m_val);
@@ -150,6 +107,7 @@ void ValueAnimator::Update()
     double progress = diffSeconds / m_secondsTotal;
 
     m_val = m_curve->f(progress);
+    printf("val = %f\n", m_val);
     CallbackExecute();
 
     if (diffSeconds >= m_secondsTotal)
@@ -158,44 +116,14 @@ void ValueAnimator::Update()
     }
 }
 
-void ValueAnimator::SetFunctionUpdate(CallableScriptFunctionParameters1<float> f)
-{
-    m_updateFuncRef = f;
-}
-
-void ValueAnimator::SetFunctionUpdate(std::function<void(ValueAnimator*, float)> f)
+void ValueAnimator::SetFunctionUpdate(std::function<void(ValueAnimatorI*, float)> f)
 {
     m_updateFunc = f;
 }
 
-void ValueAnimator::SetFunctionFinish(CallableScriptFunctionParametersEmpty f)
-{
-    m_endFuncRef = f;
-}
-
-void ValueAnimator::SetFunctionFinish(std::function<void(ValueAnimator*)> f)
+void ValueAnimator::SetFunctionFinish(std::function<void(ValueAnimatorI*)> f)
 {
     m_endFunc = f;
-}
-
-CallableScriptFunctionParameters1<float> ValueAnimator::GetunctionUpdateRef()
-{
-    return m_updateFuncRef;
-}
-
-std::function<void(ValueAnimator*, float)> ValueAnimator::GetFunctionUpdate()
-{
-    return m_updateFunc;
-}
-
-CallableScriptFunctionParametersEmpty ValueAnimator::GetFunctionFinishRef()
-{
-    return m_endFuncRef;
-}
-
-std::function<void(ValueAnimator*)> ValueAnimator::GetFunctionFinish()
-{
-    return m_endFunc;
 }
 
 void ValueAnimator::SetContext(void* context)
@@ -208,49 +136,3 @@ void *ValueAnimator::GetContext()
 {
     return m_context;
 }
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(ValueAnimator);
-
-static int lua_AnimationFactory_Start(lua_State *L)
-{
-    ValueAnimator *obj = ScriptingEngineI::GetScriptingObjectPtr<ValueAnimator>(L, 1);
-    obj->Start();
-    return 0;
-}
-
-static int lua_AnimationFactory_Stop(lua_State *L)
-{
-    ValueAnimator *obj = ScriptingEngineI::GetScriptingObjectPtr<ValueAnimator>(L, 1);
-    obj->Stop();
-    return 0;
-}
-
-static int lua_AnimationFactory_GetValue(lua_State *L)
-{
-    ValueAnimator *obj = ScriptingEngineI::GetScriptingObjectPtr<ValueAnimator>(L, 1);
-    float f = obj->GetValue();
-    lua_pushnumber(L, f);
-    return 1;
-}
-
-static int lua_AnimationFactory_ReleaseMem(lua_State *L)
-{
-    ValueAnimator *obj = ScriptingEngineI::GetScriptingObjectPtr<ValueAnimator>(L, 1);
-    obj->ReleaseMem();
-    return 0;
-}
-
-std::vector<luaL_Reg> ValueAnimator::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        {"Start", &lua_AnimationFactory_Start},
-        {"Stop", &lua_AnimationFactory_Stop},
-        {"GetValue", &lua_AnimationFactory_GetValue},
-        {"ReleaseMem", &lua_AnimationFactory_ReleaseMem},
-
-    });
-    return result;
-}
-

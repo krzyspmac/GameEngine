@@ -46,5 +46,16 @@ GameSceneIntro::FrameUpdate() {
 
 void
 GameSceneIntro::ContinueAnimation() {
-    
+
+    auto propertyAnimatorFactory = engine::Globals::propertyAnimatorFactory();
+
+    auto animator = propertyAnimatorFactory
+        ->FadeIn(
+             m_textSprite
+           , "linear", 1, 5
+           , new engine::CallableParametersEmpty([&]{
+
+           })
+    );
+    animator->Start();
 }

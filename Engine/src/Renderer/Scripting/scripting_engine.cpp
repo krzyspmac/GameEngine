@@ -152,13 +152,13 @@ void ScriptingEngine::registerFunctions()
 //    time.ScriptingInterfaceRegisterFunctions(L, &time);
 //    lua_setglobal(L, "Time");
 
-    ValueAnimatorFactory &animationFactory = ENGINE().getValueAnimatorFactory();
-    animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
-    lua_setglobal(L, "ValueAnimatorFactory");
+//    ValueAnimatorFactory &animationFactory = ENGINE().getValueAnimatorFactory();
+//    animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
+//    lua_setglobal(L, "ValueAnimatorFactory");
 
-    PropertyAnimatorFactory &propertyAnimator = ENGINE().getPropertyAnimatorFactory();
-    propertyAnimator.ScriptingInterfaceRegisterFunctions(L, &propertyAnimator);
-    lua_setglobal(L, "PropertyAnimatorFactory");
+//    PropertyAnimatorFactory &propertyAnimator = ENGINE().getPropertyAnimatorFactory();
+//    propertyAnimator.ScriptingInterfaceRegisterFunctions(L, &propertyAnimator);
+//    lua_setglobal(L, "PropertyAnimatorFactory");
 
 //    EngineState &engineState = ENGINE().getEngineState();
 //    engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);

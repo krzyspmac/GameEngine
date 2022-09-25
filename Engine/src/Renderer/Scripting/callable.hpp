@@ -22,29 +22,6 @@ extern "C" {
 
 namespace engine
 {
-    /**
-     Curve lambda. Provide your own implementation of the curve
-     to be used in animation/translator.
-     Available only in C++
-     @private
-     */
-    class CallableCurveLamba: public CallableCurveI<float, float>
-    {
-        float m_min;
-        float m_max;
-        float m_diff;
-        std::function<float(float, float, float)> m_lambda;
-    public:
-        CallableCurveLamba(float min, float max, std::function<float(float, float, float)> lambda);
-    public:
-        float GetMin() { return m_min; };
-        float GetMax() { return m_max; };
-        float GetDiff() { return m_diff; };
-
-        void SetMin(float value) { m_min = value; };
-        void SetMax(float value) { m_max = value; };
-        float f(float progress);
-    };
 
     /**
      Callable Script Encapsulation for a single scriptable object as parameter,
