@@ -81,61 +81,61 @@ void Time::PostUpdate()
     m_previousFrameStartSec = MILLI2SEC(m_previousFrameStart);
 }
 
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(Time);
-
-static int lua_Time_GetEngineStart(lua_State *L)
-{
-    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
-    lua_pushnumber(L, time->GetEngineStart());
-    return 1;
-}
-
-static int lua_Time_GetEngineStartSec(lua_State *L)
-{
-    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
-    lua_pushnumber(L, time->GetEngineStartSec());
-    return 1;
-}
-
-static int lua_Time_GetFrameStart(lua_State *L)
-{
-    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
-    lua_pushnumber(L, time->GetFrameStart());
-    return 1;
-}
-
-static int lua_Time_GetFrameStartSec(lua_State *L)
-{
-    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
-    lua_pushnumber(L, time->GetFrameStartSec());
-    return 1;
-}
-
-static int lua_Time_GetFrameDelta(lua_State *L)
-{
-    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
-    lua_pushnumber(L, time->GetFrameDelta());
-    return 1;
-}
-
-static int lua_Time_GetFrameDeltaSec(lua_State *L)
-{
-    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
-    lua_pushnumber(L, time->GetFrameDeltaSec());
-    return 1;
-}
-
-std::vector<luaL_Reg> Time::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "GetEngineStart",     &lua_Time_GetEngineStart },
-        { "GetEngineStartSec",  &lua_Time_GetEngineStartSec },
-        { "GetFrameStart",      &lua_Time_GetFrameStart },
-        { "GetFrameStartSec",   &lua_Time_GetFrameStartSec },
-        { "GetFrameDelta",      &lua_Time_GetFrameDelta },
-        { "GetFrameDeltaSec",   &lua_Time_GetFrameDeltaSec }
-    });
-    return result;
-}
+//#pragma mark - Scripting Interface
+//
+//SCRIPTING_INTERFACE_IMPL_NAME(Time);
+//
+//static int lua_Time_GetEngineStart(lua_State *L)
+//{
+//    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
+//    lua_pushnumber(L, time->GetEngineStart());
+//    return 1;
+//}
+//
+//static int lua_Time_GetEngineStartSec(lua_State *L)
+//{
+//    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
+//    lua_pushnumber(L, time->GetEngineStartSec());
+//    return 1;
+//}
+//
+//static int lua_Time_GetFrameStart(lua_State *L)
+//{
+//    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
+//    lua_pushnumber(L, time->GetFrameStart());
+//    return 1;
+//}
+//
+//static int lua_Time_GetFrameStartSec(lua_State *L)
+//{
+//    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
+//    lua_pushnumber(L, time->GetFrameStartSec());
+//    return 1;
+//}
+//
+//static int lua_Time_GetFrameDelta(lua_State *L)
+//{
+//    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
+//    lua_pushnumber(L, time->GetFrameDelta());
+//    return 1;
+//}
+//
+//static int lua_Time_GetFrameDeltaSec(lua_State *L)
+//{
+//    Time *time = ScriptingEngineI::GetScriptingObjectPtr<Time>(L, 1);
+//    lua_pushnumber(L, time->GetFrameDeltaSec());
+//    return 1;
+//}
+//
+//std::vector<luaL_Reg> Time::ScriptingInterfaceFunctions()
+//{
+//    std::vector<luaL_Reg> result({
+//        { "GetEngineStart",     &lua_Time_GetEngineStart },
+//        { "GetEngineStartSec",  &lua_Time_GetEngineStartSec },
+//        { "GetFrameStart",      &lua_Time_GetFrameStart },
+//        { "GetFrameStartSec",   &lua_Time_GetFrameStartSec },
+//        { "GetFrameDelta",      &lua_Time_GetFrameDelta },
+//        { "GetFrameDeltaSec",   &lua_Time_GetFrameDeltaSec }
+//    });
+//    return result;
+//}

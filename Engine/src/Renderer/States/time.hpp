@@ -8,9 +8,9 @@
 #ifndef time_hpp
 #define time_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "common.h"
 #include "engine_provider_interface.h"
+#include "time_interface.h"
 #include <iostream>
 
 namespace engine
@@ -19,7 +19,7 @@ namespace engine
      Time
      \addtogroup API_GLOBALS
      */
-    class Time
+    class Time: public TimeI
     {
         EngineProviderI& m_engineProvider;
         Uint64 m_beginning;
@@ -79,11 +79,6 @@ namespace engine
 
         /** @private */
         void PostUpdate();
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(Time);
     };
 };
 

@@ -13,7 +13,8 @@
 #include "font_interface.h"
 #include "file_access_provider.h"
 #include "sprite_atlas_interface.h"
-#include "sprite_draw_backbuffer.hpp"
+#include "sprite_draw_interface.h"
+#include "drawable_interface.h"
 #include "vector2.hpp"
 #include "common.h"
 

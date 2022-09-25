@@ -29,6 +29,7 @@
 #endif
 
 #include <stdio.h>
+#include "script_entry_interface.hpp"
 #include "common.h"
 #include "defs.h"
 #include "file_access.hpp"
@@ -114,11 +115,12 @@
 #endif
 }
 
-
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
-@property (weak) NSWindow *parentWindow;
+@property (nonatomic, weak) NSWindow *parentWindow;
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngienInitFnc;
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngineFrameUpdteFnc;
 #endif
 
 #if USE_CONTROLLERS

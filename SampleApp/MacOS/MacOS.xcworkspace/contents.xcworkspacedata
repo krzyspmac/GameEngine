@@ -5,6 +5,9 @@
       location = "group:MacOS.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../../Game/Game.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
    </FileRef>
    <FileRef

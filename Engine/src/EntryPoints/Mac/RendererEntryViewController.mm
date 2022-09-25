@@ -131,6 +131,13 @@ using namespace engine;
 
 - (void)prepareEngine
 {
+    // Setup initial data
+    m_engine->SetupInit();
+
+    // Inject the setup function
+    m_engine->GetEngineSetup().initFunction = self.gameEngienInitFnc;
+    m_engine->GetEngineSetup().frameUpdateFunction = self.gameEngineFrameUpdteFnc;
+
     // Setup the engine
     m_engine->Setup();
 

@@ -16,6 +16,7 @@
 		7F20ACB6278B31FA00B5772F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB5278B31FA00B5772F /* Foundation.framework */; };
 		7F20ACB8278B34D600B5772F /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB7278B34D600B5772F /* Quartz.framework */; };
 		7F20ACBA278B352400B5772F /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F20ACB9278B352400B5772F /* MetalKit.framework */; };
+		7F2DAFF128E03B980044EF8D /* libGame-Mac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2DAFF028E03B980044EF8D /* libGame-Mac.dylib */; };
 		7F3470C22852870F00FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470C12852870F00FDED71 /* AudioToolbox.framework */; };
 		7F3E8F68279AE6A2003BB7B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F66279AE6A2003BB7B6 /* Main.storyboard */; };
 		7F3E8F6A279AE6A4003BB7B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8F69279AE6A4003BB7B6 /* Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		7F20ACB5278B31FA00B5772F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F20ACB7278B34D600B5772F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
 		7F20ACB9278B352400B5772F /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		7F2DAFF028E03B980044EF8D /* libGame-Mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = "libGame-Mac.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3470C12852870F00FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7F3CAAE1277093D500E0D74C /* MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F5B279AE6A2003BB7B6 /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2DAFF128E03B980044EF8D /* libGame-Mac.dylib in Frameworks */,
 				7F3470C22852870F00FDED71 /* AudioToolbox.framework in Frameworks */,
 				7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */,
 				7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */,
@@ -213,6 +216,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F2DAFF028E03B980044EF8D /* libGame-Mac.dylib */,
 				7F0F951928DB7E03001222C5 /* GameController.framework */,
 				7F3470C12852870F00FDED71 /* AudioToolbox.framework */,
 				7FB651FF28CE6582006F7030 /* AudioToolbox.framework */,

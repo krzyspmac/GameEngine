@@ -6,17 +6,19 @@
 //
 
 #import "AppDelegate.h"
-#import "RendererEntryViewController.h"
+#import "RendererEntry.h"
 
 @interface AppDelegate ()
-
 #if TARGET_MACOS
 @property (strong) IBOutlet NSWindow *window;
 #elif TARGET_IOS
 @property (strong) IBOutlet UIWindow *window;
 #endif
-
 @end
+
+// Main initializer functions
+
+void PictelScriptInit(void);
 
 @implementation AppDelegate
 
@@ -25,13 +27,16 @@
 {
     if (self = [super init])
     {
-        RendererEntryViewController *rootViewController = [[RendererEntryViewController alloc] initWithNibName:nil bundle:nil];
+        id<RendererViewControllerProtocol> rootViewController = [RendererEntry instantiate];
+
         self.window = [[NSWindow alloc] initWithContentRect:NSZeroRect
                                                   styleMask:NSWindowStyleMaskTitled | NSWindowStyleMaskClosable | NSWindowStyleMaskResizable | NSWindowStyleMaskMiniaturizable
                                                     backing:NSBackingStoreBuffered
                                                       defer:NO];
         rootViewController.parentWindow = self.window;
-        self.window.contentViewController = rootViewController;
+        rootViewController.gameEngienInitFnc = &PictelScriptInit;
+//        rootViewController.gameEngineFrameUpdteFnc = &PictelScriptInit;
+        self.window.contentViewController = (NSViewController*)rootViewController;
         [self.window orderFront:self];
         [self.window center];
         [self.window becomeKeyWindow];

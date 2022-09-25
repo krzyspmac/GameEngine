@@ -148,9 +148,9 @@ void ScriptingEngine::registerFunctions()
     spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
     lua_setglobal(L, "SpriteRendererManager");
 
-    Time &time = ENGINE().getTime();
-    time.ScriptingInterfaceRegisterFunctions(L, &time);
-    lua_setglobal(L, "Time");
+//    Time &time = ENGINE().getTime();
+//    time.ScriptingInterfaceRegisterFunctions(L, &time);
+//    lua_setglobal(L, "Time");
 
     ValueAnimatorFactory &animationFactory = ENGINE().getValueAnimatorFactory();
     animationFactory.ScriptingInterfaceRegisterFunctions(L, &animationFactory);
@@ -218,6 +218,16 @@ void ScriptingEngine::callInit()
     {
         std::cout << "Error:" << lua_tostring(L, -1) << "\n";
     }
+
+    auto initFunction = ENGINE().GetEngineSetup().initFunction;
+    if (initFunction == nullptr)
+    {
+        std::cout << "Error: No init function setup. Cannot start engine." << std::endl;
+    }
+    else
+    {
+        initFunction();
+    }
 }
 
 void ScriptingEngine::callUpdate()
@@ -229,6 +239,8 @@ void ScriptingEngine::callUpdate()
     if (lua_pcall(L, 0, 0, 0) != 0) {
         std::cout << "Error:" << lua_tostring(L, -1) << "\n";
     }
+
+    ENGINE().GetEngineSetup().frameUpdateFunction();
 }
 
 /// loadTexture(name)

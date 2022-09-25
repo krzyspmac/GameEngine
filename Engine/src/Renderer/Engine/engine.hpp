@@ -44,6 +44,7 @@ namespace engine
         ~Engine();
 
     public:
+        void SetupInit();
         void Setup();
         int ProcessEvents();
         void FrameBegin();
