@@ -14,9 +14,11 @@
 #include "font_interface.h"
 #include "scripting_engine_provider_interface.h"
 
+#include "sprite_representation_text_interface.h"
+
 namespace engine
 {
-    class SpriteRepresentationText: public SpriteRepresentationI
+    class SpriteRepresentationText: public SpriteRepresentationTextI
     {
         FontI* m_bitmapFont;
         std::string m_text;
@@ -28,7 +30,6 @@ namespace engine
     public:
         SpriteRepresentationText(FontI*);
 
-        /** Text */
         void SetText(std::string);
         
         /** Get text */
@@ -47,28 +48,18 @@ namespace engine
         
         void SetZPosition(float zPos);
 
-        /** Lighting setter */
         void SetAcceptsLight(bool val);
 
-        /** Shadow color. If alpha is <= 0 shadow is disabled. Default is clear color. */
         void SetShadowColor(Color4);
 
-        /** Set shadow offset. Default is { 1, 1 } */
         void SetShadowOffset(OriginF);
 
-        /** Set the line multiplier. Default is 1.f and is based on what was initially
-            defined in the .fnt file */
         void SetLineHeightMultiplier(float);
 
-        /** Set the horizontal alignment. "left"|"center"|"right"
-            */
         void SetHorizontalAlignment(std::string);
         
-        /** Set the vertical alignment. "top"|"middle"|"bottom"
-            */
         void SetVerticalAlignment(std::string);
 
-        /** Override text rotation. Texts do not rotate. */
         void SetRotation(Rotation);
 
     public:

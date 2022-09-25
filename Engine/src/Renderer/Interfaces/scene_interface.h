@@ -11,12 +11,17 @@
 #include "vector2.hpp"
 #include "sprite_draw_interface.h"
 #include "font_interface.h"
+#include "sprite_representation_text_interface.h"
+#include "light_interface.hpp"
 
 namespace engine
 {
     class SceneI
     {
     public:
+        SceneI() { };
+        virtual ~SceneI() { };
+
         /** Render the scene sprites. If set this will also call the update function
             before any rendering occurs.
             @private
@@ -43,8 +48,13 @@ namespace engine
 
         /** \brief Load a drawable text representation
          */
-        virtual SpriteRepresentationI *SpriteTextLoad(FontI*) = 0;
+        virtual SpriteRepresentationTextI *SpriteTextLoad(FontI*) = 0;
 
+        /**
+         \brief Creates a light and adds it to the scene. This is a helper function
+         to the the LightManager.
+         */
+        virtual LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity) = 0;
     };
 };
 

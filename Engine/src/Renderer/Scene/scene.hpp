@@ -19,6 +19,7 @@
 #include "font_interface.h"
 #include "callable.hpp"
 #include "scene_interface.h"
+#include "sprite_representation_text_interface.h"
 #include "common.h"
 #include <iostream>
 
@@ -57,7 +58,7 @@ namespace engine
 
         SpriteRepresentationI *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
 
-        SpriteRepresentationI *SpriteTextLoad(FontI*);
+        SpriteRepresentationTextI *SpriteTextLoad(FontI*);
 
         /**
          \brief Load a character representation.

@@ -31,7 +31,7 @@ namespace engine
 
     public: // SceneManagerI
         SceneI* SceneCreateNew();
-        SceneI* SceneGetCurrent() { return m_current; };
+        SceneI* SceneGetCurrent();
         void SceneUnload(SceneI*);
         void SceneMakeActive(SceneI*);
 

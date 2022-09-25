@@ -10,7 +10,7 @@
 using namespace engine;
 
 SpriteRepresentationText::SpriteRepresentationText(FontI *font)
-    : SpriteRepresentationI(1.f)
+    : SpriteRepresentationTextI(1.f)
     , m_bitmapFont(font)
     , m_shadowOffset({1.f, 1.f})
     , m_shadowColor({0.f, 0.f, 0.f, 0.f})

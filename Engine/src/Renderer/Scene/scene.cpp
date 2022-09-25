@@ -89,7 +89,7 @@ SpriteRepresentationI *Scene::SpriteAnimatedLoad(float keyframeAnimationDelay, S
     return nullptr;
 }
 
-SpriteRepresentationI *Scene::SpriteTextLoad(FontI *font)
+SpriteRepresentationTextI *Scene::SpriteTextLoad(FontI *font)
 {
     if (font != nullptr)
     {   auto *rep = (SpriteRepresentationText*)ENGINE().getSpriteRendererManager().SpriteRepresentationTextLoad(font);

@@ -50,6 +50,11 @@ std::vector<std::unique_ptr<SceneI>>::iterator SceneManager::GetFor(SceneI* scen
     return m_scenes.end();
 }
 
+SceneI* SceneManager::SceneGetCurrent()
+{
+    return m_current;
+}
+
 //#pragma mark - Scripting
 //
 //SCRIPTING_INTERFACE_IMPL_NAME(SceneManager);

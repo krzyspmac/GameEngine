@@ -23,7 +23,8 @@
 #include "font_manager_interface.h"
 #include "scene_interface.h"
 #include "scene_manager_interface.h"
-
+#include "sprite_representation_text_interface.h"
+#include "light_interface.hpp"
 #include "globals.hpp"
 
 #endif /* interfaces_h */

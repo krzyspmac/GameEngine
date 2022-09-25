@@ -24,5 +24,7 @@ GameSceneCoordinator::ActivateScene(GameSceneI* scene) {
         m_currentScene = scene;
         m_currentScene->SetActive(true);
         m_currentScene->DidActivate();
+
+        engine::Globals::sceneManager()->SceneMakeActive(scene->GetSceneObj());
     }
 }

@@ -719,6 +719,7 @@
 		7F262554278F570E00529F29 /* drawable_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_metal.cpp; sourceTree = "<group>"; };
 		7F262555278F570E00529F29 /* drawable_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_metal.hpp; sourceTree = "<group>"; };
 		7F27C45E28551736001AA216 /* scripting_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scripting_interfaces.h; path = ../../src/Renderer/Interfaces/scripting_interfaces.h; sourceTree = "<group>"; };
+		7F2814D928E076CF000FB2BC /* sprite_representation_text_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_representation_text_interface.h; sourceTree = "<group>"; };
 		7F2CD18328D5E51200A5516D /* gamepad_apple_handle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gamepad_apple_handle.mm; sourceTree = "<group>"; };
 		7F2CD18428D5E51200A5516D /* gamepad_apple_handle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamepad_apple_handle.hpp; sourceTree = "<group>"; };
 		7F2DAFF228E03CFB0044EF8D /* time_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = time_interface.h; sourceTree = "<group>"; };
@@ -1455,6 +1456,7 @@
 				7FE6D57928E0559600A78E06 /* sprite_atlas_manager_interface.h */,
 				7FE6D57E28E05EDD00A78E06 /* font_manager_interface.h */,
 				7FE6D57F28E06FFC00A78E06 /* scene_interface.h */,
+				7F2814D928E076CF000FB2BC /* sprite_representation_text_interface.h */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";

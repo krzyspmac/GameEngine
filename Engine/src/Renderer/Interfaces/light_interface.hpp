@@ -8,8 +8,9 @@
 #ifndef light_interface_h
 #define light_interface_h
 
-#include "interfaces.h"
 #include <iostream>
+#include "size.hpp"
+#include "general.hpp"
 
 namespace engine
 {

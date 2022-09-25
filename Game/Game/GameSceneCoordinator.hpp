@@ -1,7 +1,6 @@
 #ifndef GameSceneCoordinator_hpp
 #define GameSceneCoordinator_hpp
 
-#include "game_include.hpp"
 #include "GameSceneInterface.hpp"
 
 class GameSceneCoordinator {
