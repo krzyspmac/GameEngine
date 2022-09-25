@@ -10,7 +10,7 @@ void PictelScriptInit(void) {
     printf("Pictel Script Init!\n");
 
     gameResolutionState = new GameResolutionState();
-    gameSceneCoordinator = new GameSceneCoordinator();
+    gameSceneCoordinator = new GameSceneCoordinator(gameResolutionState);
 
     gameSceneCoordinator->ShowIntroScene();
 }

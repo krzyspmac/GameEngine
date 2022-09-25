@@ -19,7 +19,7 @@ Scene::Scene()
     , m_mouseDownFunctionRef(-1)
     , m_engineProvider(ENGINE().getProvider())
     , m_mouseDownIdentifier(-1)
-    , m_frameUpdateCallback(CallableScriptFunctionParametersEmpty::none())
+    , m_frameUpdateCallback(nullptr)
     , m_isActive(false)
 {
     m_mouseDownIdentifier = ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
@@ -129,15 +129,17 @@ void Scene::SetMouseDownFunction(int mouseFunctionRef)
     m_mouseDownFunctionRef = mouseFunctionRef;
 }
 
+void Scene::SetFrameUpdate(std::function<void(void)> lambda)
+{
+    m_frameUpdateCallback = lambda;
+}
+
 void Scene::RenderSceneSprites()
 {
-//    if (m_frameUpdateCallback.CanCall())
-//    {
-//        m_frameUpdateCallback.PerformCall([&](lua_State *L){
-//            this->ScriptingInterfaceRegisterFunctions(L, this);
-//            return 1;
-//        });
-//    }
+    if (m_frameUpdateCallback != nullptr)
+    {
+        m_frameUpdateCallback();
+    }
 
     for (auto it = m_staticSprites.begin(); it != m_staticSprites.end(); ++it)
     {
@@ -175,11 +177,6 @@ LightI* Scene::CreateLight(std::string type, Color3 color, float ambientIntensit
     {
         return nullptr;
     }
-}
-
-void Scene::RegisterFrameUpdate(CallableScriptFunctionParametersEmpty function)
-{
-    m_frameUpdateCallback = function;
 }
 
 //#pragma mark - Scripting Interface

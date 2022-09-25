@@ -55,6 +55,8 @@ namespace engine
          to the the LightManager.
          */
         virtual LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity) = 0;
+
+        virtual void SetFrameUpdate(std::function<void(void)>) = 0;
     };
 };
 

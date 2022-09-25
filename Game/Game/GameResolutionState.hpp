@@ -8,6 +8,8 @@ class GameResolutionState {
     engine::EngineStateI *m_engineState;
 public:
     GameResolutionState();
+
+    auto& GetViewportSize() { return m_wantedSize; };
 };
 
 #endif /* GameResolutionState_h */

@@ -10,13 +10,16 @@
 
 #include "GameSceneInterface.hpp"
 #include "interfaces.h"
+#include "GameResolutionState.hpp"
 
 class GameSceneIntro: public GameSceneI {
+    GameResolutionState *m_resState;
     engine::FontI *m_font;
     engine::SceneI *m_scene;
     engine::SpriteRepresentationTextI *m_textSprite;
 public: // GameSceneIntro
-    GameSceneIntro();
+    GameSceneIntro(GameResolutionState*);
+    void FrameUpdate();
 
 public: // GameSceneI
     engine::SceneI *GetSceneObj() { return m_scene; };

@@ -36,7 +36,7 @@ namespace engine
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
         unsigned int m_mouseDownIdentifier;
-        CallableScriptFunctionSciptableInstance m_frameUpdateCallback;
+        std::function<void(void)> m_frameUpdateCallback;
         bool m_isActive;
     ///
     public:
@@ -117,7 +117,7 @@ namespace engine
          for the frame udpate. The frame update funciton will be called only for
          the active scene.
          */
-        void RegisterFrameUpdate(CallableScriptFunctionParametersEmpty);
+        void SetFrameUpdate(std::function<void(void)>);
 
     public: /** Getters */
 

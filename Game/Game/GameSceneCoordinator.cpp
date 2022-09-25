@@ -1,15 +1,16 @@
 #include "GameSceneCoordinator.hpp"
 #include "GameSceneIntro.hpp"
 
-GameSceneCoordinator::GameSceneCoordinator()
+GameSceneCoordinator::GameSceneCoordinator(GameResolutionState *resState)
     : m_currentScene(nullptr)
+    , m_resState(resState)
 {
 }
 
 void
 GameSceneCoordinator::ShowIntroScene() {
     if (m_introScene.get() == nullptr) {
-        m_introScene = std::unique_ptr<GameSceneI>(std::move(new GameSceneIntro()));
+        m_introScene = std::unique_ptr<GameSceneI>(std::move(new GameSceneIntro(m_resState)));
     }
     ActivateScene(m_introScene.get());
 }

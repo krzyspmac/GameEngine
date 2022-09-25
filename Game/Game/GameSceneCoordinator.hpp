@@ -2,12 +2,14 @@
 #define GameSceneCoordinator_hpp
 
 #include "GameSceneInterface.hpp"
+#include "GameResolutionState.hpp"
 
 class GameSceneCoordinator {
+    GameResolutionState *m_resState;
     GameSceneI *m_currentScene;
     std::unique_ptr<GameSceneI> m_introScene;
 public:
-    GameSceneCoordinator();
+    GameSceneCoordinator(GameResolutionState*);
 
 public:
     void ShowIntroScene();
