@@ -10,7 +10,6 @@
 
 #include "character_interface.h"
 #include "common_engine_impl.h"
-#include "path_finder_interface.h"
 
 namespace engine
 {
@@ -50,7 +49,7 @@ namespace engine
         /// Move the character along a path. Calling this again will clear
         /// the move stack and start again.
         /// Copies `path` data.
-        virtual void MoveCharacterAlongPath(PathI *path) = 0;
+//        virtual void MoveCharacterAlongPath(PathI *path) = 0;
 
         /// Gets the current character's target position.
         virtual Vector2& GetCharacterTargetPosition() { return m_targetOrigin; };

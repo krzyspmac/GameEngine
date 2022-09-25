@@ -8,7 +8,10 @@
 #ifndef rust_wrapper_h
 #define rust_wrapper_h
 
+#include "common_engine_impl.h"
 #include "time.hpp"
+#include "callable_scripting.hpp"
+#include "engine_state.hpp"
 
 namespace engine
 {
@@ -20,6 +23,8 @@ namespace engine
 
     public:
         static engine::Time *time();
+
+        static engine::EngineState *engineState();
     };
 }
 

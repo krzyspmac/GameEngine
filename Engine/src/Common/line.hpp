@@ -11,6 +11,7 @@
 #include "common.h"
 #include "common_engine_impl.h"
 #include <iostream>
+#include "vector2.hpp"
 
 namespace engine
 {

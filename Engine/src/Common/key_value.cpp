@@ -6,6 +6,7 @@
 //
 
 #include "key_value.hpp"
+#include "vector2.hpp"
 
 using namespace engine;
 
@@ -101,7 +102,7 @@ Vector2 KeyValueProperties::GetVectorValueFor(std::string key)
     auto str = GetStringValueFor(key);
     if (!str.empty())
     {
-        return VectorMake(str);
+        return Vector2Zero;//VectorMake(str.c_str());
     }
     else
     {

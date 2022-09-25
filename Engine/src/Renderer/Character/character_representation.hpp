@@ -9,7 +9,6 @@
 #define character_representation_hpp
 
 #include "character_interface.h"
-#include "path_finder.hpp"
 #include "character_mover_interface.h"
 #include "scripting_engine_provider_interface.h"
 
@@ -26,7 +25,7 @@ namespace engine
         CharacterI *m_character;
         bool m_hidden;
         std::unique_ptr<CharacterMoverI> m_mover;
-        std::unique_ptr<PathFinder> m_pathFinder;
+//        std::unique_ptr<PathFinder> m_pathFinder;
 
     public:
         /** @private */

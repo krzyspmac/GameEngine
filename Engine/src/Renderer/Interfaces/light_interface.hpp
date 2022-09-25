@@ -8,8 +8,9 @@
 #ifndef light_interface_h
 #define light_interface_h
 
-#include "common_engine_impl.h"
 #include <iostream>
+#include "common_engine_impl.h"
+#include "vector2.hpp"
 
 namespace engine
 {

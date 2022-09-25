@@ -8,7 +8,6 @@
 #include "character_manager.hpp"
 #include "scripting_engine.hpp"
 #include "character.hpp"
-#include "character_mover.hpp"
 
 using namespace engine;
 

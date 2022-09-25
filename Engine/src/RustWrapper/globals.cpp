@@ -20,3 +20,8 @@ engine::Time *Globals::time()
 {
     return &(ENGINE().getTime());
 }
+
+engine::EngineState *Globals::engineState()
+{
+    return &(ENGINE().getEngineState());
+}

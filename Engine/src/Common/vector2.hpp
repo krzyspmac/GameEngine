@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "general.hpp"
 #include "common.h"
 
 namespace engine
@@ -68,28 +67,6 @@ namespace engine
         result.y = y;
         return result;;
     };
-
-    /** {2,2} */
-    inline Vector2 VectorMake(std::string def)
-    {
-        static std::string delimiter = ",";
-        if (size_t delimPos = def.find(delimiter))
-        {
-            std::string xStr = def.substr(0, delimPos);
-            trim(xStr);
-            float x = xStr.size() > 0 ? std::stof(xStr) : 0;
-
-            std::string yStr = def.substr(delimPos+1, def.size() - delimPos);
-            trim(yStr);
-            float y = yStr.size() > 0 ? std::stof(yStr) : 0;
-
-            return Vector2Make(x, y);
-        }
-        else
-        {
-            return Vector2Zero;
-        }
-    }
 
     inline bool Vector2Equals(Vector2 &first, Vector2 &second)
     {

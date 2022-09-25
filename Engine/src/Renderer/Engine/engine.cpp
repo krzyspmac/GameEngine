@@ -13,8 +13,6 @@
 #include "sprite_representation_animated.hpp"
 #include "character_renderer.hpp"
 #include "character.hpp"
-#include "character_mover.hpp"
-#include "polygon_loader.hpp"
 #include "animation_curve_factory.hpp"
 #include "ini_reader.hpp"
 #include "static_objects.hpp"

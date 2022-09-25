@@ -12,8 +12,9 @@
 using namespace engine;
 
 EngineState::EngineState()
-    : m_screenSizeChangeHandler(nullptr)
-    , m_screenSizeChangeScriptHandler(CallableScriptFunctionParameters3<float, float, float>::empty())
+    : m_screenSizeChangeCallback(nullptr)
+//    : m_screenSizeChangeHandler(nullptr)
+//    , m_screenSizeChangeScriptHandler(CallableScriptFunctionParameters3<float, float, float>::empty())
 {
 
 }
@@ -23,26 +24,30 @@ Size EngineState::GetViewportSize()
     return ENGINE().getProvider().GetDesiredViewport();
 }
 
-void EngineState::SetOnScreenSizeChange(std::function<void (Size, float)> lambda)
+void EngineState::SetOnScreenSizeChange(void (*callback)(Size, float))
 {
-    m_screenSizeChangeHandler = lambda;
+    m_screenSizeChangeCallback = callback;
 }
 
-void EngineState::SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float> handler)
-{
-    m_screenSizeChangeScriptHandler = handler;
-}
+//void EngineState::SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float> handler)
+//{
+//    m_screenSizeChangeScriptHandler = handler;
+//}
 
 void EngineState::SendScreenSizeChangeEvent(Size size, float density)
 {
-    if (m_screenSizeChangeHandler != nullptr)
+//    if (m_screenSizeChangeHandler != nullptr)
+//    {
+//        m_screenSizeChangeHandler(size, density);
+//    }
+//
+//    if (m_screenSizeChangeScriptHandler.CanCall())
+//    {
+//        m_screenSizeChangeScriptHandler.CallWithParameters(size.width, size.height, density);
+//    }
+    if (m_screenSizeChangeCallback != nullptr)
     {
-        m_screenSizeChangeHandler(size, density);
-    }
-
-    if (m_screenSizeChangeScriptHandler.CanCall())
-    {
-        m_screenSizeChangeScriptHandler.CallWithParameters(size.width, size.height, density);
+        m_screenSizeChangeCallback(size, density);
     }
 }
 
@@ -54,6 +59,7 @@ void EngineState::SetViewportSize(Size size, float scale)
     engineSetup.affineScale = scale;
     engineSetup.isDirty = true;
 }
+
 
 #pragma mark - Scripting Interface
 
@@ -82,7 +88,7 @@ static int lua_EngineState_SetOnScreenSizeChange(lua_State *L)
 {
     EngineState *obj = ScriptingEngineI::GetScriptingObjectPtr<EngineState>(L, 1);
     int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    obj->SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>(fnRef));
+//    obj->SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>(fnRef));
     return 0;
 }
 

@@ -10,6 +10,7 @@
 #include "animation_curve_factory.hpp"
 #include "animation_interface.h"
 #include "engine.hpp"
+#include "holder.hpp"
 
 using namespace engine;
 

@@ -10,6 +10,7 @@
 
 #include "common.h"
 #include "common_engine_impl.h"
+#include "vector2.hpp"
 
 namespace engine
 {

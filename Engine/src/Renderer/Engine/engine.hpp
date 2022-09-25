@@ -18,7 +18,6 @@
 #include "character_interface.h"
 #include "texture_target.hpp"
 #include "character_mover_interface.h"
-#include "path_finder.hpp"
 #include "font_bitmap.hpp"
 
 namespace engine

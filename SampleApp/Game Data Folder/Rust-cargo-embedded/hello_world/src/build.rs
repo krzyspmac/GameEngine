@@ -39,7 +39,7 @@ fn main() {
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Memory")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Scene")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Screen")
-        // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Scripting")
+        .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Scripting")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Sound")
         // .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/Sprites")
         .clang_arg("-I/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/src/Renderer/States")

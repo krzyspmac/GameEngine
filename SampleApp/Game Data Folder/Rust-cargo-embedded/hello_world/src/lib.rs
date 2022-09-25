@@ -3,7 +3,7 @@ include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 mod scene_manager;
 use crate::scene_manager::SceneManager;
 
-static mut mainSceneManager:SceneManager = SceneManager { };
+static mut mainSceneManager:SceneManager = SceneManager { wantedWidth: 1280.0, wantedHeight: 720.0 };
 
 // let sceneManager = SceneManager { };
 

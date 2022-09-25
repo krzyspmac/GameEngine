@@ -10,6 +10,8 @@
 
 #include "common.h"
 #include "common_engine_impl.h"
+#include "vector2.hpp"
+#include "rotation.hpp"
 
 namespace engine
 {

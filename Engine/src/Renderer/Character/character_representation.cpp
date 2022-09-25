@@ -6,17 +6,14 @@
 //
 
 #include "character_representation.hpp"
-#include "character_mover.hpp"
-#include "polygon_loader.hpp"
 #include "engine.hpp"
-#include "polygon.hpp"
 
 using namespace engine;
 
 CharacterRepresentation::CharacterRepresentation(CharacterI *character)
-: m_character(character), m_hidden(false)
+: m_character(character), m_hidden(false), m_mover(nullptr)
 {
-    m_mover = std::unique_ptr<CharacterMoverI>(new CharacterMover(m_character, 100));
+//    m_mover = std::unique_ptr<CharacterMoverI>(new CharacterMover(m_character, 100));
 }
 
 CharacterRepresentation::~CharacterRepresentation()
@@ -51,24 +48,24 @@ Vector2& CharacterRepresentation::GetPosition()
 
 void CharacterRepresentation::WalkTo(Vector2& position)
 {
-    PathFinder *pf = m_pathFinder.get();
-    CharacterMoverI *cm = m_mover.get();
-
-    if (pf != nullptr && cm != nullptr)
-    {
-        PathI *path = pf->CalculatePath(cm->GetCharacterPosition(), position);
-        m_mover->MoveCharacterAlongPath(path);
-    }
-    else
-    {
-        m_mover->MoveCharacter(position);
-    }
+//    PathFinder *pf = m_pathFinder.get();
+//    CharacterMoverI *cm = m_mover.get();
+//
+//    if (pf != nullptr && cm != nullptr)
+//    {
+//        PathI *path = pf->CalculatePath(cm->GetCharacterPosition(), position);
+//        m_mover->MoveCharacterAlongPath(path);
+//    }
+//    else
+//    {
+//        m_mover->MoveCharacter(position);
+//    }
 }
 
 void CharacterRepresentation::SetInverseWalkbox(std::string polygonJsonFilename)
 {
-    std::vector<Polygon> polygonList = PolygonLoader::Load(ENGINE().getFileAccess().GetAccess(polygonJsonFilename));
-    m_pathFinder = std::unique_ptr<PathFinder>(new PathFinder(polygonList));
+//    std::vector<Polygon> polygonList = PolygonLoader::Load(ENGINE().getFileAccess().GetAccess(polygonJsonFilename));
+//    m_pathFinder = std::unique_ptr<PathFinder>(new PathFinder(polygonList));
 }
 
 void CharacterRepresentation::SetCharacterWalkingSpeed(float pixelsInMilliseconds)
@@ -83,15 +80,15 @@ void CharacterRepresentation::SetHidden(bool value)
 
 void CharacterRepresentation::Render()
 {
-    if (m_hidden) { return; }
-
-    m_mover->Update();
-
-    PathFinder *pf = m_pathFinder.get();
-    if (pf != nullptr)
-    {
-        pf->Draw();
-    }
+//    if (m_hidden) { return; }
+//
+//    m_mover->Update();
+//
+//    PathFinder *pf = m_pathFinder.get();
+//    if (pf != nullptr)
+//    {
+//        pf->Draw();
+//    }
 }
 
 #pragma mark - Scripting Interface

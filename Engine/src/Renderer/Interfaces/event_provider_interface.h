@@ -11,6 +11,7 @@
 #include "common.h"
 #include "common_engine_impl.h"
 #include "event_provider_interface.h"
+#include "vector2.hpp"
 
 namespace engine
 {

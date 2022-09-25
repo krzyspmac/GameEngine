@@ -8,9 +8,15 @@
 #ifndef engine_state_hpp
 #define engine_state_hpp
 
-#include "scripting_engine_provider_interface.h"
+#include "callable_"
+
+#ifndef SCRIPTING_WRAPPER_BUILD
+    #include "scripting_engine_provider_interface.h"
+    #include "callable.hpp"
+#else
+#endif
+
 #include "common_engine_impl.h"
-#include "callable.hpp"
 
 namespace engine
 {
@@ -22,8 +28,7 @@ namespace engine
      */
     class EngineState
     {
-        std::function<void(Size, float)> m_screenSizeChangeHandler;
-        CallableScriptFunctionParameters3<float, float, float> m_screenSizeChangeScriptHandler;
+        void (*m_screenSizeChangeCallback) (Size, float);
     public:
         EngineState();
     public:
@@ -50,7 +55,7 @@ namespace engine
             - screen density
          */
         /** @private */
-        void SetOnScreenSizeChange(std::function<void(Size, float)>);
+        void SetOnScreenSizeChange(void (*m_screenSizeChangeCallback)(Size, float));
 
         /** Register a screen resolution change handler. Once the resolution is changed
             this script function will be called and the script will have an option
@@ -71,16 +76,19 @@ namespace engine
             end)
             \endcode
          */
-        void SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>);
+//        void SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>);
 
         /** Inform that the screen size has changed. */
         /** @private */
         void SendScreenSizeChangeEvent(Size, float);
 
+
+#ifndef SCRIPTING_WRAPPER_BUILD
     /// ScriptingInterface
     public:
         /** @private */
         SCRIPTING_INTERFACE_HEADERS(EngineState);
+#endif
     };
 };
 
