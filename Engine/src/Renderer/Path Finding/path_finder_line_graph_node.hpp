@@ -8,7 +8,7 @@
 #ifndef path_finder_line_graph_node_hpp
 #define path_finder_line_graph_node_hpp
 
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "path_finder_interface.h"
 namespace engine
 {

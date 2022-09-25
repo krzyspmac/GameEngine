@@ -7,7 +7,7 @@
 
 #import "RendererEntryViewController.h"
 #include "common.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 
 #ifdef APPLE
 #include "gamepad_apple_handle.hpp"

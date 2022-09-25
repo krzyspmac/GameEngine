@@ -9,5 +9,6 @@
 #define game_include_h
 
 #include "interfaces.h"
+#include "GameResolutionState.hpp"
 
 #endif /* game_include_h */

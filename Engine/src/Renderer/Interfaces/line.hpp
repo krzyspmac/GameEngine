@@ -8,9 +8,7 @@
 #ifndef line_hpp
 #define line_hpp
 
-#include <common.h>
 #include "interfaces.h"
-#include <iostream>
 
 namespace engine
 {

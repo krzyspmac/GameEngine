@@ -9,7 +9,7 @@
 #define path_finder_interface_h
 
 #include <iostream>
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "polygon.hpp"
 
 namespace engine

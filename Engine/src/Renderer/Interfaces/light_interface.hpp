@@ -8,7 +8,7 @@
 #ifndef light_interface_h
 #define light_interface_h
 
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include <iostream>
 
 namespace engine

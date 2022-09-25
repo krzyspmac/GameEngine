@@ -9,7 +9,7 @@
 #define character_mover_hpp
 
 #include "character_mover_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "function.hpp"
 
 namespace engine

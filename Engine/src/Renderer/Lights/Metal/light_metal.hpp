@@ -9,7 +9,7 @@
 #define light_metal_hpp
 
 #include "light.hpp"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "AAPLShaderTypes.h"
 
 namespace engine

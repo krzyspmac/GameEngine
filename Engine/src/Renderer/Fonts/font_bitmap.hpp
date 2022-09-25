@@ -11,7 +11,7 @@
 #include "common.h"
 #include "key_value.hpp"
 #include "font_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "vector2.hpp"
 #include "texture_interface.h"
 #include "scripting_engine_provider_interface.h"

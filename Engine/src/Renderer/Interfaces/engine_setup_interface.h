@@ -9,7 +9,7 @@
 #define engine_setup_interface_h
 
 #include "common.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "script_entry_interface.hpp"
 
 namespace engine

@@ -21,6 +21,7 @@ namespace engine
     public:
         static TimeI *time();
 
+        static EngineStateI *engineState();
     };
 }
 

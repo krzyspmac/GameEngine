@@ -10,7 +10,7 @@
 
 #include "sprite_atlas_interface.h"
 #include "drawable_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "animation_interface.h"
 
 namespace engine

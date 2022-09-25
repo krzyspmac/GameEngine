@@ -11,8 +11,10 @@
 #include "game_include.hpp"
 
 class GameResolutionState {
-
-
+    engine::Vector2 m_wantedSize;
+    engine::EngineStateI *m_engineState;
+public:
+    GameResolutionState();
 };
 
 #endif /* GameResolutionState_h */

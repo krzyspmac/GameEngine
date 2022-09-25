@@ -10,7 +10,7 @@
 
 #include "common.h"
 #include "console_renderer_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 
 namespace engine
 {

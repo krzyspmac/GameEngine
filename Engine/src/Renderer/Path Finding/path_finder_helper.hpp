@@ -9,7 +9,7 @@
 #define path_finder_helper_hpp
 
 #include "path_finder_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 
 namespace engine
 {

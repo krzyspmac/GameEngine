@@ -9,7 +9,7 @@
 #define CharacterMoverI_h
 
 #include "character_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "path_finder_interface.h"
 
 namespace engine

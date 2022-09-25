@@ -36,7 +36,7 @@
 #include "scripting_engine.hpp"
 #include "event_provider.hpp"
 #include "engine.hpp"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "texture_target_metal.hpp"
 #include "console_renderer.h"
 #include "console_app_renderer_mac.hpp"

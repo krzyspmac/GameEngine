@@ -1,18 +1,12 @@
 //
-//  common_engine_impl.h
-//  RendererAppSDL
+//  size.hpp
+//  Engine
 //
-//  Created by krzysp on 20/12/2021.
+//  Created by krzysp on 25/09/2022.
 //
 
-#ifndef common_engine_impl_h
-#define common_engine_impl_h
-
-#include "general.hpp"
-#include "vector2.hpp"
-#include "rotation.hpp"
-#include "line.hpp"
-#include "holder.hpp"
+#ifndef size_h
+#define size_h
 
 namespace engine
 {
@@ -76,7 +70,7 @@ namespace engine
         return result;
     };
 
-    inline Origin OriginGetDiff(Vector2 &first, Origin &second)
+    inline Origin OriginGetDiff(Origin &first, Origin &second)
     {
         Origin result;
         result.x = first.x - second.x;
@@ -90,4 +84,4 @@ namespace engine
     }
 }
 
-#endif /* common_engine_impl_h */
+#endif /* size_h */

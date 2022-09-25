@@ -160,9 +160,9 @@ void ScriptingEngine::registerFunctions()
     propertyAnimator.ScriptingInterfaceRegisterFunctions(L, &propertyAnimator);
     lua_setglobal(L, "PropertyAnimatorFactory");
 
-    EngineState &engineState = ENGINE().getEngineState();
-    engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);
-    lua_setglobal(L, "EngineState");
+//    EngineState &engineState = ENGINE().getEngineState();
+//    engineState.ScriptingInterfaceRegisterFunctions(L, &engineState);
+//    lua_setglobal(L, "EngineState");
     
     MemoryReleasePool &releasePool = ENGINE().getReleasePool();
     releasePool.ScriptingInterfaceRegisterFunctions(L, &releasePool);

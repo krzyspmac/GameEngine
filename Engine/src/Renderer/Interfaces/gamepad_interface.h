@@ -9,7 +9,7 @@
 #define gamepad_interface_h
 
 #include "common.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "event_provider_interface.h"
 #include "callable.hpp"
 

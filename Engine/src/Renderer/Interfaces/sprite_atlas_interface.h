@@ -11,7 +11,7 @@
 #include "texture_interface.h"
 #include "sprite_interface_defs.h"
 #include "scripting_engine_provider_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 
 namespace engine
 {

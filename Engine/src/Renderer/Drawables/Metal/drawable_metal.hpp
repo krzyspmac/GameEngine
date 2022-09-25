@@ -10,7 +10,7 @@
 
 #include "drawable_interface.h"
 #include "common.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "texture_metal.hpp"
 #include "texture_target_metal.hpp"
 #include "sprite_atlas_interface.h"

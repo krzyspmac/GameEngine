@@ -32,6 +32,7 @@
 #include "light_manager.hpp"
 #include "sound_manager.hpp"
 #include "engine_screen.hpp"
+#include "engine_state_interface.h"
 
 namespace engine
 {
@@ -69,7 +70,8 @@ namespace engine
                 m_time(engineProvider),
                 m_lightManager(*(new LightManager())),
                 m_soundManager(*(new SoundManager())),
-                m_engineScreen(*(new EngineScreen()))
+                m_engineScreen(*(new EngineScreen())),
+                m_engineState(*(new EngineState()))
         { }
 
     /// Setup
@@ -203,7 +205,7 @@ namespace engine
         PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };
 
         ///
-        EngineState& getEngineState() { return m_engineState; };
+        EngineStateI& getEngineState() { return m_engineState; };
 
         ///
         EngineScreen& getEngineScreen() { return m_engineScreen; };
@@ -242,16 +244,15 @@ namespace engine
         LightManager &m_lightManager;
         SoundManager &m_soundManager;
         EngineScreen &m_engineScreen;
+        EngineStateI &m_engineState;
 
         engine::Origin m_mousePosition;
         Time m_time;
         ValueAnimatorFactory m_valueAnimatorFactory;
         PropertyAnimatorFactory m_propertyAnimatorFactory;
         PeriodicUpdatesManager m_periodicUpdatesManager;
-        EngineState m_engineState;
         AnimationGroupFactory m_animationGroupFactory;
         MemoryReleasePool m_releasePool;
-
         ConsoleRendererI &m_consoleRenderer;
     };
 

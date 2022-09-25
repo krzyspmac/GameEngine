@@ -10,8 +10,12 @@
 
 using namespace engine;
 
+static GameResolutionState *gameResolutionState = nullptr;
+
 void PictelScriptInit(void) {
     printf("Pictel Script Init!\n");
+
+    gameResolutionState = new GameResolutionState();
 }
 
 void PictelScriptFrameUpdate(void) {

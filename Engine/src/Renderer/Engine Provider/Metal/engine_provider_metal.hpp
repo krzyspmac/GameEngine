@@ -15,7 +15,7 @@
 #include "AAPLShaderTypes.h"
 
 #include "common.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "engine_provider_interface.h"
 #include "texture_interface.h"
 #include "font_interface.h"

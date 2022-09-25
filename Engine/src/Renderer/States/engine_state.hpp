@@ -9,8 +9,10 @@
 #define engine_state_hpp
 
 #include "scripting_engine_provider_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "callable.hpp"
+
+#include "engine_state_interface.h"
 
 namespace engine
 {
@@ -20,7 +22,7 @@ namespace engine
      */
     /** Holds various information on the state of the engine. Viewport, frames, etc.
      */
-    class EngineState
+    class EngineState: public EngineStateI
     {
         std::function<void(Size, float)> m_screenSizeChangeHandler;
         CallableScriptFunctionParameters3<float, float, float> m_screenSizeChangeScriptHandler;

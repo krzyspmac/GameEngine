@@ -6,13 +6,18 @@
 //
 
 #include "globals.hpp"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "easy.h"
 #include "time.hpp"
 
 using namespace engine;
 
-TimeI *Globals::time()
+TimeI * Globals::time()
 {
     return static_cast<TimeI*>(&(ENGINE().getTime()));
+}
+
+EngineStateI * Globals::engineState()
+{
+    return static_cast<EngineStateI*>(&(ENGINE().getEngineState()));
 }

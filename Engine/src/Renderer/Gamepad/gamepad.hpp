@@ -9,7 +9,7 @@
 #define gamepad_hpp
 
 #include "common.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "gamepad_interface.h"
 #include "events_manager_types.hpp"
 #include "scripting_engine_provider_interface.h"

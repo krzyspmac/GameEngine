@@ -9,7 +9,7 @@
 #define console_app_renderer_mac_hpp
 
 #include "console_renderer_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include <Metal/Metal.hpp>
 
 #if TARGET_OS_OSX

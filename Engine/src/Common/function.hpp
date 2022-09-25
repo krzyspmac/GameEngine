@@ -8,7 +8,7 @@
 #ifndef function_hpp
 #define function_hpp
 
-#include "common_engine_impl.h"
+#include "interfaces.h"
 
 namespace engine
 {
