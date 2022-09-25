@@ -12,8 +12,8 @@ gameState = nil
 function init()
     print("Main init function called")
 
-    setup()
-    showIntroScene()
+    -- setup()
+    -- showIntroScene()
 end
 
 function update ()

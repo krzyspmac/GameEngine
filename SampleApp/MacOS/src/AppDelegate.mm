@@ -19,6 +19,7 @@
 // Main initializer functions
 
 void PictelScriptInit(void);
+void PictelScriptFrameUpdate(void);
 
 @implementation AppDelegate
 
@@ -35,7 +36,7 @@ void PictelScriptInit(void);
                                                       defer:NO];
         rootViewController.parentWindow = self.window;
         rootViewController.gameEngienInitFnc = &PictelScriptInit;
-//        rootViewController.gameEngineFrameUpdteFnc = &PictelScriptInit;
+        rootViewController.gameEngineFrameUpdteFnc = &PictelScriptFrameUpdate;
         self.window.contentViewController = (NSViewController*)rootViewController;
         [self.window orderFront:self];
         [self.window center];

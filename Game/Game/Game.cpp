@@ -7,21 +7,16 @@
 
 #include <iostream>
 #include "Game.hpp"
-#include "GamePriv.hpp"
 
-void Game::HelloWorld(const char * s)
-{
-    GamePriv *theObj = new GamePriv;
-    theObj->HelloWorldPriv(s);
-    delete theObj;
-};
+using namespace engine;
 
-void GamePriv::HelloWorldPriv(const char * s) 
-{
-    std::cout << s << std::endl;
-};
-
-void PictelScriptInit(void)
-{
+void PictelScriptInit(void) {
     printf("Pictel Script Init!\n");
+}
+
+void PictelScriptFrameUpdate(void) {
+    printf("Pictel Frame Update!\n");
+
+    auto time = Globals::time();
+    printf("time from frame = %f\n", time->GetFrameDeltaSec());
 }

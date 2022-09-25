@@ -14,6 +14,7 @@ namespace engine
 {
     class TimeI
     {
+    public:
         /**
          Returns the number of milliseconds since the moment
          the drawing engine started. For SDL as the drawing

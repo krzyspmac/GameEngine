@@ -8,15 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		7F2DAFE628E03B630044EF8D /* Game.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F2DAFE528E03B630044EF8D /* Game.hpp */; };
-		7F2DAFE828E03B630044EF8D /* GamePriv.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F2DAFE728E03B630044EF8D /* GamePriv.hpp */; };
 		7F2DAFEA28E03B630044EF8D /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F2DAFE928E03B630044EF8D /* Game.cpp */; };
+		7F2DB01528E048870044EF8D /* GameResolutionState.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F2DB01428E048660044EF8D /* GameResolutionState.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7F2DAFE228E03B630044EF8D /* libGame-Mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libGame-Mac.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F2DAFE528E03B630044EF8D /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
-		7F2DAFE728E03B630044EF8D /* GamePriv.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GamePriv.hpp; sourceTree = "<group>"; };
 		7F2DAFE928E03B630044EF8D /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		7F2DB01128E043C40044EF8D /* game_include.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_include.hpp; sourceTree = "<group>"; };
+		7F2DB01428E048660044EF8D /* GameResolutionState.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameResolutionState.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,9 +50,10 @@
 		7F2DAFE428E03B630044EF8D /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				7F2DB01128E043C40044EF8D /* game_include.hpp */,
 				7F2DAFE528E03B630044EF8D /* Game.hpp */,
-				7F2DAFE728E03B630044EF8D /* GamePriv.hpp */,
 				7F2DAFE928E03B630044EF8D /* Game.cpp */,
+				7F2DB01428E048660044EF8D /* GameResolutionState.hpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -63,8 +65,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2DB01528E048870044EF8D /* GameResolutionState.hpp in Headers */,
 				7F2DAFE628E03B630044EF8D /* Game.hpp in Headers */,
-				7F2DAFE828E03B630044EF8D /* GamePriv.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +184,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../Engine/src/Renderer/Interfaces";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -234,6 +237,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../../Engine/src/Renderer/Interfaces";
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -251,6 +255,9 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Engine/src/Renderer/Interfaces";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "-Wl,-undefined,dynamic_lookup";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -266,6 +273,9 @@
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../Engine/src/Renderer/Interfaces";
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "-Wl,-undefined,dynamic_lookup";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

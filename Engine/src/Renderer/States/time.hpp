@@ -36,38 +36,11 @@ namespace engine
         Time(EngineProviderI &provider);
 
     public:
-
-        /**
-         Returns the number of milliseconds since the moment
-         the drawing engine started. For SDL as the drawing
-         library this resets ~49 days.
-         */
         Uint64 GetEngineStart();
-
-        /**
-         The same as Time::GetEngineStart() but in seconds.
-         */
         double GetEngineStartSec();
-
-        /**
-         Returns the number of milliseconds from the frame start.
-         */
         Uint64 GetFrameStart();
-
-        /**
-         The same as Time::GetFrameStart() but in seconds.
-         */
         double GetFrameStartSec();
-
-        /**
-         Returns the interval between the last frame and the current
-         one in milliseconds.
-         */
         Uint64 GetFrameDelta();
-
-        /**
-         The same as Time::GetFrameDelta() but in seconds.
-         */
         double GetFrameDeltaSec();
 
     public:

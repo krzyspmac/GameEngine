@@ -213,11 +213,11 @@ void ScriptingEngine::CallRegistryFunction(int funcRef, std::function<int(lua_St
 
 void ScriptingEngine::callInit()
 {
-    lua_getglobal(L, "init");  /* function to be called */
-    if (lua_pcall(L, 0, 0, 0) != 0)
-    {
-        std::cout << "Error:" << lua_tostring(L, -1) << "\n";
-    }
+//    lua_getglobal(L, "init");  /* function to be called */
+//    if (lua_pcall(L, 0, 0, 0) != 0)
+//    {
+//        std::cout << "Error:" << lua_tostring(L, -1) << "\n";
+//    }
 
     auto initFunction = ENGINE().GetEngineSetup().initFunction;
     if (initFunction == nullptr)
@@ -232,14 +232,14 @@ void ScriptingEngine::callInit()
 
 void ScriptingEngine::callUpdate()
 {
-    /* push functions and arguments */
-    lua_getglobal(L, "update");  /* function to be called */
-
-    /* do the call (2 arguments, 1 result) */
-    if (lua_pcall(L, 0, 0, 0) != 0) {
-        std::cout << "Error:" << lua_tostring(L, -1) << "\n";
-    }
-
+//    /* push functions and arguments */
+//    lua_getglobal(L, "update");  /* function to be called */
+//
+//    /* do the call (2 arguments, 1 result) */
+//    if (lua_pcall(L, 0, 0, 0) != 0) {
+//        std::cout << "Error:" << lua_tostring(L, -1) << "\n";
+//    }
+//
     ENGINE().GetEngineSetup().frameUpdateFunction();
 }
 

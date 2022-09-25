@@ -8,14 +8,10 @@
 #ifndef Game_
 #define Game_
 
+#include "game_include.hpp"
+
 /* The classes below are exported */
 #pragma GCC visibility push(default)
-
-class Game
-{
-    public:
-    void HelloWorld(const char *);
-};
 
 void PictelScriptInit(void);
 
