@@ -9,7 +9,6 @@
 #define drawable_interface_h
 
 #include "common.h"
-#include "interfaces.h"
 #include "texture_interface.h"
 #include "sprite_atlas_interface.h"
 

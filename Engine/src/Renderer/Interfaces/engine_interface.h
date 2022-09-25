@@ -173,7 +173,7 @@ namespace engine
         CharacterManager& getCharacterManager() { return m_characterManager; };
 
         ///
-        SceneManager& getSceneManager() { return m_sceneManager; };
+        SceneManagerI& getSceneManager() { return m_sceneManager; };
 
         ///
         LightManager& getLightMnaager() { return m_lightManager; };
@@ -240,7 +240,7 @@ namespace engine
         FontManager &m_fontManager;
         SpriteAtlasManager &m_spriteAtlasManager;
         SpriteRendererManager &m_spriteRendererManager;
-        SceneManager &m_sceneManager;
+        SceneManagerI &m_sceneManager;
         CharacterManager &m_characterManager;
         LightManager &m_lightManager;
         SoundManager &m_soundManager;

@@ -162,7 +162,7 @@ void Engine::ProcessScript()
 
 void Engine::FrameDrawObjects()
 {
-    Scene *scene = m_sceneManager.SceneGetCurrent();
+    SceneI *scene = m_sceneManager.SceneGetCurrent();
     if (scene != nullptr)
     {
         scene->RenderSceneSprites();

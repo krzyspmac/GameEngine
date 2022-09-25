@@ -24,6 +24,8 @@ namespace engine
         static EngineStateI *engineState();
 
         static FontManagerI *fontManager();
+
+        static SceneManagerI *sceneManager();
     };
 }
 

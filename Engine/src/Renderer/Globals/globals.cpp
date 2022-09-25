@@ -26,3 +26,8 @@ FontManagerI * Globals::fontManager()
 {
     return static_cast<FontManagerI*>(&(ENGINE().getFontManager()));
 }
+
+SceneManagerI * Globals::sceneManager()
+{
+    return static_cast<SceneManagerI*>(&(ENGINE().getSceneManager()));
+}

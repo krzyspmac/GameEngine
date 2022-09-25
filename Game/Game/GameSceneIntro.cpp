@@ -9,6 +9,7 @@
 
 GameSceneIntro::GameSceneIntro() {
     m_font = engine::Globals::fontManager()->LoadFont("at01.fnt", "at01.png");
+    m_scene = engine::Globals::sceneManager()->SceneCreateNew();
 }
 
 void

@@ -8,8 +8,8 @@
 #ifndef scene_manager_hpp
 #define scene_manager_hpp
 
-#include "scripting_engine_provider_interface.h"
-#include "scene.hpp"
+#include "scene_interface.h"
+#include "scene_manager_interface.h"
 
 namespace engine
 {
@@ -22,37 +22,30 @@ namespace engine
      Manages the scene. Loading a new scene should unload the previous
      scene's resources.
      */
-    class SceneManager
+    class SceneManager: public SceneManagerI
     {
     public:
         SceneManager()
         :   m_current(nullptr)
         { };
 
-    public:
-        /// Creates a new scene. Removes the old one and removes it data.
-        Scene* SceneCreateNew();
-
-        /// Get the current scene.
-        Scene* SceneGetCurrent() { return m_current; };
-
-        /// Unload the current scene.
-        void SceneUnload(Scene*);
-
-        /// Make active.
-        void SceneMakeActive(Scene*);
+    public: // SceneManagerI
+        SceneI* SceneCreateNew();
+        SceneI* SceneGetCurrent() { return m_current; };
+        void SceneUnload(SceneI*);
+        void SceneMakeActive(SceneI*);
 
     private:
-        std::vector<std::unique_ptr<Scene>>::iterator GetFor(Scene*);
+        std::vector<std::unique_ptr<SceneI>>::iterator GetFor(SceneI*);
 
     private:
-        std::vector<std::unique_ptr<Scene>> m_scenes;
-        Scene* m_current;
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SceneManager);
+        std::vector<std::unique_ptr<SceneI>> m_scenes;
+        SceneI* m_current;
+//
+//    /// ScriptingInterface
+//    public:
+//        /** @private */
+//        SCRIPTING_INTERFACE_HEADERS(SceneManager);
     };
 };
 

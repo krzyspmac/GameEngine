@@ -8,6 +8,7 @@
 #include "sprite_renderer_manager.hpp"
 #include "sprite_representation_static.hpp"
 #include "sprite_representation_animated.hpp"
+#include "sprite_representation_text.hpp"
 #include "engine.hpp"
 
 using namespace engine;

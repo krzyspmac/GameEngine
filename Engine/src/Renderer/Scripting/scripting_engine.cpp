@@ -136,9 +136,9 @@ void ScriptingEngine::registerFunctions()
     mgr.ScriptingInterfaceRegisterFunctions(L, &mgr);
     lua_setglobal(L, "CharacterManager");
 
-    SceneManager &sceneManager = ENGINE().getSceneManager();
-    sceneManager.ScriptingInterfaceRegisterFunctions(L, &sceneManager);
-    lua_setglobal(L, "SceneManager");
+//    SceneManager &sceneManager = ENGINE().getSceneManager();
+//    sceneManager.ScriptingInterfaceRegisterFunctions(L, &sceneManager);
+//    lua_setglobal(L, "SceneManager");
 
 //    SpriteAtlasManager &atlasManager = ENGINE().getAtlasManager();
 //    atlasManager.ScriptingInterfaceRegisterFunctions(L, &atlasManager);

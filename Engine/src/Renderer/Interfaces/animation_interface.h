@@ -9,7 +9,8 @@
 #define animation_h
 
 #include "common.h"
-#include "interfaces.h"
+#include "vector2.hpp"
+#include "rotation.hpp"
 
 namespace engine
 {

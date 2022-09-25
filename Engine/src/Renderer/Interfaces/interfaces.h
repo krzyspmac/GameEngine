@@ -21,6 +21,9 @@
 #include "sprite_atlas_manager_interface.h"
 #include "font_interface.h"
 #include "font_manager_interface.h"
+#include "scene_interface.h"
+#include "scene_manager_interface.h"
+
 #include "globals.hpp"
 
 #endif /* interfaces_h */

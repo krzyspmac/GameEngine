@@ -12,7 +12,8 @@
 #include "interfaces.h"
 
 class GameSceneIntro: public GameSceneI {
-    engine::FontI *m_font;
+    engine::FontI   *m_font;
+    engine::SceneI  *m_scene;
 public: // GameSceneIntro
     GameSceneIntro();
 

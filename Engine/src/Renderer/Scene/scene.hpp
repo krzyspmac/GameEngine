@@ -18,12 +18,13 @@
 #include "light_interface.hpp"
 #include "font_interface.h"
 #include "callable.hpp"
+#include "scene_interface.h"
 #include "common.h"
 #include <iostream>
 
 namespace engine
 {
-    class Scene
+    class Scene: public SceneI
     {
         EngineProviderI& m_engineProvider;
         std::vector<SpriteRepresentationStatic*> m_staticSprites;
@@ -42,45 +43,21 @@ namespace engine
         Scene();
         ~Scene();
 
-    /// Rederer
-    public:
-        /** Render the scene sprites. If set this will also call the update function
-            before any rendering occurs.
-            @private
-        */
+    public: // SceneI
         void RenderSceneSprites();
-
-        /**
-         Called by the engine. Reacts to mouse clicks.
-         @private
-         */
         void MouseClicked(Vector2 pos);
-
-    public: // States
-
-        /** @private */
         void SetIsActivated(bool value) { m_isActive = value; };
-
         bool GetIsActivated() { return m_isActive; };
 
+    /// Rederer
     public:
-        /**
-         \brief Load a sprite renderer.
 
-         Helper method to load the sprite and puts it into the stack.
-         Uses SpriteRendererManager.
-         \include SampleSpriteStatic-helper.lua
-         \see Scene::AddSpriteDrawStatic.
-         */
-        SpriteRepresentationStatic *SpriteStaticLoad(SpriteAtlasI *atlas, std::string name);
+    public:
+        SpriteRepresentationI *SpriteStaticLoad(SpriteAtlasI *atlas, std::string name);
 
-        /**
-         \brief Load a sprite renderer for animation
-         */
-        SpriteRepresentationAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
+        SpriteRepresentationI *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
 
-        /** \brief Load a drawable text representation */
-        SpriteRepresentationText *SpriteTextLoad(FontI*);
+        SpriteRepresentationI *SpriteTextLoad(FontI*);
 
         /**
          \brief Load a character representation.
@@ -145,10 +122,10 @@ namespace engine
 
         auto& GetStaticSprites() { return m_staticSprites; };
 
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(Scene);
+//    /// ScriptingInterface
+//    public:
+//        /// @private
+//        SCRIPTING_INTERFACE_HEADERS(Scene);
     };
 };
 

@@ -8,9 +8,7 @@
 #ifndef sprite_draw_interface_h
 #define sprite_draw_interface_h
 
-#include "sprite_atlas_interface.h"
 #include "drawable_interface.h"
-#include "interfaces.h"
 #include "animation_interface.h"
 
 namespace engine
