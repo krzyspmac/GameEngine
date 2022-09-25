@@ -1,10 +1,3 @@
-//
-//  Game.hpp
-//  Game
-//
-//  Created by krzysp on 25/09/2022.
-//
-
 #ifndef Game_
 #define Game_
 

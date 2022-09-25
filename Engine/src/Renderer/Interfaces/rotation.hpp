@@ -10,8 +10,6 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "general.hpp"
-#include "common.h"
 #include "vector2.hpp"
 
 namespace engine

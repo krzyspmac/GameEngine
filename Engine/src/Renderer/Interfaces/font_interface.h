@@ -9,7 +9,7 @@
 #define font_interface_h
 
 #include "common.h"
-#include "interfaces.h"
+#include "size.hpp"
 
 namespace engine
 {

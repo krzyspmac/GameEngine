@@ -1,21 +1,18 @@
-//
-//  Game.cpp
-//  Game
-//
-//  Created by krzysp on 25/09/2022.
-//
-
 #include <iostream>
 #include "Game.hpp"
 
 using namespace engine;
 
 static GameResolutionState *gameResolutionState = nullptr;
+static GameSceneCoordinator *gameSceneCoordinator = nullptr;
 
 void PictelScriptInit(void) {
     printf("Pictel Script Init!\n");
 
     gameResolutionState = new GameResolutionState();
+    gameSceneCoordinator = new GameSceneCoordinator();
+
+    gameSceneCoordinator->ShowIntroScene();
 }
 
 void PictelScriptFrameUpdate(void) {

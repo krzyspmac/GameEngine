@@ -22,6 +22,8 @@ namespace engine
         static TimeI *time();
 
         static EngineStateI *engineState();
+
+        static FontManagerI *fontManager();
     };
 }
 

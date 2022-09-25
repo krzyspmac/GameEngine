@@ -8,7 +8,7 @@
 #ifndef line_hpp
 #define line_hpp
 
-#include "interfaces.h"
+#include "vector2.hpp"
 
 namespace engine
 {

@@ -140,9 +140,9 @@ void ScriptingEngine::registerFunctions()
     sceneManager.ScriptingInterfaceRegisterFunctions(L, &sceneManager);
     lua_setglobal(L, "SceneManager");
 
-    SpriteAtlasManager &atlasManager = ENGINE().getAtlasManager();
-    atlasManager.ScriptingInterfaceRegisterFunctions(L, &atlasManager);
-    lua_setglobal(L, "AtlasManager");
+//    SpriteAtlasManager &atlasManager = ENGINE().getAtlasManager();
+//    atlasManager.ScriptingInterfaceRegisterFunctions(L, &atlasManager);
+//    lua_setglobal(L, "AtlasManager");
 
     SpriteRendererManager &spriteRendererManager = ENGINE().getSpriteRendererManager();
     spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
@@ -172,9 +172,9 @@ void ScriptingEngine::registerFunctions()
     animationGroupFactory.ScriptingInterfaceRegisterFunctions(L, &animationGroupFactory);
     lua_setglobal(L, "AnimationGroupFactory");
 
-    FontManager &fontManager = ENGINE().getFontManager();
-    fontManager.ScriptingInterfaceRegisterFunctions(L, &fontManager);
-    lua_setglobal(L, "FontManager");
+//    FontManager &fontManager = ENGINE().getFontManager();
+//    fontManager.ScriptingInterfaceRegisterFunctions(L, &fontManager);
+//    lua_setglobal(L, "FontManager");
 
     EventsManager &eventsManager = ENGINE().getEventsManager();
     eventsManager.ScriptingInterfaceRegisterFunctions(L, &eventsManager);

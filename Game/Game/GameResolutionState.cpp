@@ -1,10 +1,3 @@
-//
-//  GameResolutionState.cpp
-//  Game-Mac
-//
-//  Created by krzysp on 25/09/2022.
-//
-
 #include "GameResolutionState.hpp"
 
 GameResolutionState::GameResolutionState()

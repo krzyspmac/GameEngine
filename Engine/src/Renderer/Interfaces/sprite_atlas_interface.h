@@ -10,8 +10,8 @@
 
 #include "texture_interface.h"
 #include "sprite_interface_defs.h"
-#include "scripting_engine_provider_interface.h"
-#include "interfaces.h"
+#include "vector2.hpp"
+#include "size.hpp"
 
 namespace engine
 {

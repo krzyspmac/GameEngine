@@ -10,6 +10,7 @@
 
 #include "scripting_engine_provider_interface.h"
 #include "sprite_atlas_interface.h"
+#include "sprite_atlas_manager_interface.h"
 
 namespace engine
 {
@@ -21,26 +22,15 @@ namespace engine
      A manager for sprite atlases. Loads the textures, keeps them for
      future reference.
      */
-    class SpriteAtlasManager
+    class SpriteAtlasManager: public SpriteAtlasManagerI
     {
-    public:
-        /**
-         Loads sprite atlas, its texture and the json
-         file for individual sprite splices.
-        */
+    public: // SpriteAtlasManagerI
         SpriteAtlasI *SpriteAtlasLoad(std::string jsonFilename, std::string textureFilename);
-
-        /**
-         Gets the specific atlas item using the name provided.
-        */
+        
         SpriteAtlasI *SpriteAtlasGet(std::string jsonFilename);
 
-        /**
-        */
         void SpriteAtlasUnload(SpriteAtlasI *atlas);
 
-        /**
-        */
         void SpriteAtlasDisposeAll();
 
     private:

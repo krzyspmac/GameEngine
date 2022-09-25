@@ -17,6 +17,7 @@
 #include "character_manager.hpp"
 #include "scene_manager.hpp"
 #include "sprite_atlas_manager.hpp"
+#include "sprite_atlas_manager_interface.h"
 #include "sprite_renderer_manager.hpp"
 #include "periodic_updates_manager.hpp"
 #include "value_animator_factory.hpp"
@@ -166,7 +167,7 @@ namespace engine
         TextureManager &getTextureManager() { return m_textureManager; };
 
         ///
-        FontManager& getFontManager() { return m_fontManager; };
+        FontManagerI& getFontManager() { return m_fontManager; };
 
         ///
         CharacterManager& getCharacterManager() { return m_characterManager; };
@@ -181,7 +182,7 @@ namespace engine
         SoundManager& getSoundManager() { return m_soundManager; };
 
         ///
-        SpriteAtlasManager& getAtlasManager() { return m_spriteAtlasManager; };
+        SpriteAtlasManagerI& getAtlasManager() { return m_spriteAtlasManager; };
 
         ///
         SpriteRendererManager& getSpriteRendererManager() { return m_spriteRendererManager; };
