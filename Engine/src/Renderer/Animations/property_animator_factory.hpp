@@ -25,35 +25,35 @@ namespace engine
                                    float alpha,
                                    float delay,
                                    float duration,
-                                   engine::CallableParametersEmpty *endFnc
+                                   std::shared_ptr<CallableParametersEmpty> endFnc
                                    );
 
         PropertyAnimatorI *FadeIn(AnimatablePropertiesI *object,
                                   std::string curveType,
                                   float delay,
                                   float duration,
-                                  engine::CallableParametersEmpty *endFnc
+                                  std::shared_ptr<CallableParametersEmpty> endFnc
                                   );
 
         PropertyAnimatorI *FadeOut(AnimatablePropertiesI *object,
-                                  std::string curveType,
-                                  float delay,
-                                  float duration,
-                                  CallableParametersEmpty *endFnc
-                                 );
+                                   std::string curveType,
+                                   float delay,
+                                   float duration,
+                                   std::shared_ptr<CallableParametersEmpty> endFnc
+                                  );
 
         PropertyAnimatorI *SetPosition(AnimatablePropertiesI *object,
                                        std::string curveType,
                                        Vector2 offset,
                                        float delay,
                                        float duration,
-                                       CallableParametersEmpty *endFnc
+                                       std::shared_ptr<CallableParametersEmpty> endFnc
                                        );
 
         PropertyAnimatorI *Wait(float delay,
-                               float duration,
-                               CallableParametersEmpty*
-                               );
+                                float duration,
+                                std::shared_ptr<CallableParametersEmpty> endFnc
+                                );
     };
 };
 

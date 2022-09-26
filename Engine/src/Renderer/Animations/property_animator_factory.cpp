@@ -19,11 +19,9 @@ PropertyAnimatorI *PropertyAnimatorFactory
               , float alpha
               , float delay
               , float duration
-              , engine::CallableParametersEmpty *endFnc
+              , std::shared_ptr<CallableParametersEmpty> endFnc
 )
 {
-    endFnc->Keep();
-
     AnimatablePropertiesI& object = *_object;
 
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
@@ -48,8 +46,7 @@ PropertyAnimatorI *PropertyAnimatorFactory
 
     linearAnimatorImpl->SetContext(new Holder1<float>(alpha));
     linearAnimatorImpl->SetFunctionFinish([&]([[maybe_unused]] ValueAnimatorI *sender){
-        endFnc->Call();
-        endFnc->Release();
+        endFnc.get()->Call();
     });
 
     PropertyAnimator *result = new PropertyAnimator(_object, linearAnimatorImpl);
@@ -61,10 +58,8 @@ PropertyAnimatorI *PropertyAnimatorFactory
             , std::string curveType
             , float delay
             , float duration
-            , engine::CallableParametersEmpty *endFnc)
+            , std::shared_ptr<CallableParametersEmpty> endFnc)
 {
-    endFnc->Keep();
-
     AnimatablePropertiesI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
@@ -80,9 +75,8 @@ PropertyAnimatorI *PropertyAnimatorFactory
 
     ValueAnimator *linearAnimatorImpl = static_cast<ValueAnimator*>(linearAnimator);
 
-    linearAnimatorImpl->SetFunctionFinish([=](ValueAnimatorI *sender){
-        endFnc->Call();
-        endFnc->Release();
+    linearAnimatorImpl->SetFunctionFinish([endFnc](ValueAnimatorI *sender){
+        endFnc.get()->Call();
     });
 
     PropertyAnimator *result = new PropertyAnimator(sprite, linearAnimatorImpl);
@@ -94,10 +88,8 @@ PropertyAnimatorI *PropertyAnimatorFactory
               , std::string curveType
               , float delay
               , float duration
-              , CallableParametersEmpty *endFnc)
+              , std::shared_ptr<CallableParametersEmpty> endFnc)
 {
-    endFnc->Keep();
-
     AnimatablePropertiesI &spr = *sprite;
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
@@ -112,8 +104,7 @@ PropertyAnimatorI *PropertyAnimatorFactory
     ValueAnimator *linearAnimatorImpl = static_cast<ValueAnimator*>(linearAnimator);
 
     linearAnimatorImpl->SetFunctionFinish([&](ValueAnimatorI *sender){
-        endFnc->Call();
-        endFnc->Release();
+        endFnc.get()->Call();
     });
 
     PropertyAnimator *result = new PropertyAnimator(sprite, linearAnimatorImpl);
@@ -126,10 +117,8 @@ PropertyAnimatorI *PropertyAnimatorFactory
                   , Vector2 offset
                   , float delay
                   , float duration
-                  , CallableParametersEmpty *endFnc)
+                  , std::shared_ptr<CallableParametersEmpty> endFnc)
 {
-    endFnc->Keep();
-
     AnimatablePropertiesI &object = *sprite;
 
     auto startingOffset = sprite->GetPosition();
@@ -177,8 +166,7 @@ PropertyAnimatorI *PropertyAnimatorFactory
     ValueAnimator *linearAnimatorYImpl = static_cast<ValueAnimator*>(linearAnimatorY);
 
     linearAnimatorYImpl->SetFunctionFinish([&](ValueAnimatorI *sender){
-        endFnc->Call();
-        endFnc->Release();
+        endFnc.get()->Call();
     });
     linearAnimatorYImpl->SetContext(new Holder1<Vector2>(offset));
 
@@ -195,10 +183,8 @@ PropertyAnimatorI *PropertyAnimatorFactory
 }
 
 PropertyAnimatorI *PropertyAnimatorFactory
-    ::Wait(float delay, float duration, CallableParametersEmpty *endFnc)
+    ::Wait(float delay, float duration, std::shared_ptr<CallableParametersEmpty> endFnc)
 {
-    endFnc->Keep();
-
     CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(LINEAR));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
@@ -213,7 +199,6 @@ PropertyAnimatorI *PropertyAnimatorFactory
 
     linearAnimatorImpl->SetFunctionFinish([&](ValueAnimatorI *sender){
         endFnc->Call();
-        endFnc->Release();
     });
 
     PropertyAnimator *result = new PropertyAnimator(nullptr, linearAnimatorImpl);

@@ -30,7 +30,7 @@ namespace engine
                                             float alpha,
                                             float delay,
                                             float duration,
-                                            engine::CallableParametersEmpty *endFnc
+                                            std::shared_ptr<CallableParametersEmpty> endFnc
                                             ) = 0;
 
         /** Creates a `fade in` effect that animates the alpha channel to a specific
@@ -46,7 +46,7 @@ namespace engine
                                           std::string curveType,
                                           float delay,
                                           float duration,
-                                          engine::CallableParametersEmpty *endFnc
+                                          std::shared_ptr<CallableParametersEmpty> endFnc
                                           ) = 0;
 
         /**
@@ -62,7 +62,7 @@ namespace engine
                                            std::string curveType,
                                            float delay,
                                            float duration,
-                                           engine::CallableParametersEmpty *endFnc
+                                           std::shared_ptr<CallableParametersEmpty> endFnc
                                            ) = 0;
 
         /**
@@ -71,7 +71,7 @@ namespace engine
          */
         virtual PropertyAnimatorI *Wait(float delay,
                                         float duration,
-                                        engine::CallableParametersEmpty*
+                                        std::shared_ptr<CallableParametersEmpty> endFnc
                                         ) = 0;
     };
 };

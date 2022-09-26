@@ -46,16 +46,19 @@ GameSceneIntro::FrameUpdate() {
 
 void
 GameSceneIntro::ContinueAnimation() {
-
     auto propertyAnimatorFactory = engine::Globals::propertyAnimatorFactory();
 
-    auto animator = propertyAnimatorFactory
-        ->FadeIn(
-             m_textSprite
-           , "linear", 1, 5
-           , new engine::CallableParametersEmpty([&]{
-
-           })
+    m_fadeIn = propertyAnimatorFactory
+        ->FadeIn(m_textSprite, "linear", 0.2, 1, std::shared_ptr<engine::CallbackEmpty>(new engine::CallbackEmpty([&] {
+            m_fadeOut->Start();
+            }))
     );
-    animator->Start();
+    
+    m_fadeOut = propertyAnimatorFactory
+        ->FadeOut(m_textSprite, "linear", 0.2, 1, std::shared_ptr<engine::CallbackEmpty>(new engine::CallbackEmpty([&] {
+            m_fadeIn->Start();
+            }))
+    );
+
+    m_fadeIn->Start();
 }

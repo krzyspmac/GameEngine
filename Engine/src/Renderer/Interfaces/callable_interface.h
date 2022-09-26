@@ -93,32 +93,45 @@ namespace engine
     /** A wrapper for the empty callable function */
     class CallableParametersEmpty: public CallableScriptFunctionI
     {
-        std::function<void(void)> m_fnc;
+        typedef std::function<void(void)> FunctionType;
+
+        FunctionType m_fnc;
     public:
         CallableParametersEmpty()
             : m_fnc(nullptr)
         { };
-        CallableParametersEmpty(std::function<void(void)> fnc)
+        CallableParametersEmpty(FunctionType fnc)
             : CallableScriptFunctionI()
             , m_fnc(fnc)
         {
         };
 
         virtual ~CallableParametersEmpty() { };
-        bool CanCall() { return m_fnc != nullptr; };
-        void Call() { if (CanCall()) m_fnc(); };
+        
+        bool CanCall() {
+            return m_fnc != nullptr;
+        };
+        void Call() {
+            if (CanCall()) {
+                m_fnc();
+            }
+        };
     };
+
+    typedef CallableParametersEmpty CallbackEmpty;
 
     /** A wrapper for the 1 param callable function */
     template <typename A>
     class CallableParameters1: public CallableScriptFunctionI
     {
-        std::function<void(A)> m_fnc;
+        typedef std::function<void(A)> FunctionType;
+
+        FunctionType m_fnc;
     public:
         CallableParameters1()
             : m_fnc(nullptr)
         { };
-        CallableParameters1(std::function<void(A)> fnc)
+        CallableParameters1(FunctionType fnc)
             : CallableScriptFunctionI()
             , m_fnc(fnc)
         { };

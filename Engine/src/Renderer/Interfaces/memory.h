@@ -47,6 +47,89 @@ namespace engine
         };
     };
 
+    /** Keeper of the reference counter, shared amonst instances of ref_ptr of a particular
+        object */
+    class ref_ptr_counter
+    {
+        int m_counter;
+    public:
+        ref_ptr_counter() {
+            m_counter = 1;
+        }
+
+        ~ref_ptr_counter() {
+            
+        };
+
+        void Keep() { m_counter++; };
+
+        void Release() { m_counter--; };
+
+        int GetCounter() { return m_counter; };
+
+        bool SafeToRelease() {
+            return m_counter <= 0;
+            
+        };
+    };
+
+    /** A way to keep counter based, semi-manual memory management. Useful if passing
+        objects via method parameters and lambdas */
+    template <typename T>
+    class ref_ptr
+    {
+        T * m_ptr;
+        std::shared_ptr<ref_ptr_counter> m_counterPtr;
+    public:
+        ref_ptr(T* ptr) {
+            m_ptr = ptr;
+            m_counterPtr = std::shared_ptr<ref_ptr_counter>(new ref_ptr_counter());
+        };
+
+        ref_ptr(const ref_ptr<T>& other) {
+            this->m_ptr = other.m_ptr;
+            this->m_counterPtr = other.m_counterPtr;
+            this->Keep();
+        }
+
+        ~ref_ptr() {
+            if (m_ptr != nullptr) {
+                Release();
+            }
+        }
+
+        auto get() { return m_ptr; }
+
+        auto getCounter() { return m_counterPtr.get()->GetCounter(); };
+
+        void Keep() {
+            getCounterPtr()->Keep();
+        };
+
+        void Release() {
+            auto counterPtr = getCounterPtr();
+            counterPtr->Release();
+
+            if (counterPtr->SafeToRelease()) {
+                FreeMem();
+            }
+        };
+
+        void FreeMem() {
+            if (m_ptr != nullptr) {
+                delete m_ptr;
+                m_ptr = nullptr;
+            }
+        }
+
+        std::shared_ptr<ref_ptr<T*>> shared() {
+            return std::make_shared<ref_ptr<T*>>(this);
+        }
+
+    private:
+        auto getCounterPtr() { return m_counterPtr.get(); };
+    };
+
     /**
      An abstract interface to implement a shared memory pool
      that keeps dangling objects that the game script might
