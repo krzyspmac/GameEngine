@@ -1,7 +1,7 @@
 #ifndef GameSceneCoordinator_hpp
 #define GameSceneCoordinator_hpp
 
-#include "GameSceneInterface.hpp"
+#include "game_scene_interface.hpp"
 #include "GameResolutionState.hpp"
 
 class GameSceneCoordinator {

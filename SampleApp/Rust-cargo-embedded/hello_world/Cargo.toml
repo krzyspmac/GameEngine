@@ -1,0 +1,18 @@
+[package]
+name = "hello_world"
+version = "0.1.0"
+edition = "2021"
+build = "src/build.rs"
+
+[lib]
+name = "your_crate"
+crate-type = ["cdylib"]      # Creates dynamic lib
+#crate-type = ["staticlib"] # Creates static lib
+#crate-type = ["staticlib", "cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[build-dependencies]
+bindgen = "*"

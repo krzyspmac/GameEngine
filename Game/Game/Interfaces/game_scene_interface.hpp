@@ -3,8 +3,7 @@
 
 #include "interfaces.h"
 
-class GameSceneI
-{
+class GameSceneI {
 protected:
     bool m_isActive;
 

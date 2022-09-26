@@ -8,7 +8,7 @@
 #ifndef GameSceneIntro_hpp
 #define GameSceneIntro_hpp
 
-#include "GameSceneInterface.hpp"
+#include "game_scene_interface.hpp"
 #include "interfaces.h"
 #include "GameResolutionState.hpp"
 
