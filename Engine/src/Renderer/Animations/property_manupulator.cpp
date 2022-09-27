@@ -48,3 +48,29 @@ void PropertyManupulator::SetPosition(AnimatorI* animator, Vector2 wantedValue)
         m_weakParent->SetPosition({x, y});
     });
 }
+
+void PropertyManupulator::SetZPosition(AnimatorI* animator, float wantedValue)
+{
+    float min = m_weakParent->GetScale();
+    float max = wantedValue;
+
+    animator->Register([min, max, this](AnimatorI *sender){
+        auto& curve = sender->GetCurve();
+        auto progress = sender->GetProgress();
+        float val = curve(min, max, progress);
+        m_weakParent->SetZPosition(val);
+    });
+}
+
+void PropertyManupulator::SetRotation(AnimatorI* animator, Rotation rotation)
+{
+    auto startingRotation = m_weakParent->GetRotation();
+    auto endingRotation = rotation;
+
+    animator->Register([startingRotation, endingRotation, this](AnimatorI *sender){
+        auto& curve = sender->GetCurve();
+        auto progress = sender->GetProgress();
+        float val = curve(startingRotation.angle, endingRotation.angle, progress);
+        m_weakParent->SetRotation(Rotation(val, endingRotation.anchor));
+    });
+}

@@ -34,6 +34,7 @@ private:
     void FadeOut();
     void ScaleIn();
     void PositionIn();
+    void RotationIn();
 };
 
 #endif /* GameSceneIntro_hpp */

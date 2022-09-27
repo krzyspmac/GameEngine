@@ -49,7 +49,8 @@ void
 GameSceneIntro::ContinueAnimation() {
     FadeIn();
 //    ScaleIn();
-    PositionIn();
+//    PositionIn();
+    RotationIn();
 }
 
 void
@@ -98,6 +99,18 @@ GameSceneIntro::PositionIn()
 
     animator->Animate(1, 5, curve, [&](auto *animator){
         m_textSprite->animator()->SetPosition(animator, {150, 500});
+    }, [&](void){
+    });
+}
+
+void
+GameSceneIntro::RotationIn()
+{
+    auto animator = engine::Globals::animator();
+    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+
+    animator->Animate(1, 5, curve, [&](auto *animator){
+        m_textSprite->animator()->SetRotation(animator, engine::Rotation(M_PI, {0, 0}));
     }, [&](void){
     });
 }
