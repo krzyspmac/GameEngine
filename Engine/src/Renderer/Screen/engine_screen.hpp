@@ -35,6 +35,7 @@ namespace engine
         void        SetRotation(Rotation rotation) { m_rotation = rotation; };
         Rotation    &GetRotation() { return m_rotation; }
 
+
     private: /** scripting */
         /** @private */
         SCRIPTING_INTERFACE_HEADERS(EngineScreen);

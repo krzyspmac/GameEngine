@@ -8,7 +8,7 @@
 #ifndef property_animator_interface_h
 #define property_animator_interface_h
 
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 #include "memory.h"
 
 namespace engine

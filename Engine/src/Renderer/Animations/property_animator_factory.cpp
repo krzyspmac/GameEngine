@@ -8,7 +8,7 @@
 #include "property_animator_factory.hpp"
 #include "sprite_representation_static.hpp"
 #include "animation_curve_factory.hpp"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 #include "engine.hpp"
 
 using namespace engine;
@@ -23,8 +23,9 @@ PropertyAnimatorI *PropertyAnimatorFactory
 )
 {
     AnimatablePropertiesI& object = *_object;
+    auto &animationCurveFactory = ENGINE().getAnimationCurveFactory();
 
-    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, animationCurveFactory.Create(curveType));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
@@ -61,7 +62,9 @@ PropertyAnimatorI *PropertyAnimatorFactory
             , std::shared_ptr<CallableParametersEmpty> endFnc)
 {
     AnimatablePropertiesI &spr = *sprite;
-    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, AnimationCurveFactory::Create(curveType));
+    auto &animationCurveFactory = ENGINE().getAnimationCurveFactory();
+
+    CallableCurveLamba *curve = new CallableCurveLamba(0, 1, animationCurveFactory.Create(curveType));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
@@ -91,7 +94,9 @@ PropertyAnimatorI *PropertyAnimatorFactory
               , std::shared_ptr<CallableParametersEmpty> endFnc)
 {
     AnimatablePropertiesI &spr = *sprite;
-    CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(curveType));
+    auto &animationCurveFactory = ENGINE().getAnimationCurveFactory();
+
+    CallableCurveLamba *curve = new CallableCurveLamba(1, 0, animationCurveFactory.Create(curveType));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve
@@ -120,10 +125,11 @@ PropertyAnimatorI *PropertyAnimatorFactory
                   , std::shared_ptr<CallableParametersEmpty> endFnc)
 {
     AnimatablePropertiesI &object = *sprite;
+    auto &animationCurveFactory = ENGINE().getAnimationCurveFactory();
 
     auto startingOffset = sprite->GetPosition();
 
-    CallableCurveLamba *curveX = new CallableCurveLamba(startingOffset.x, offset.x, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curveX = new CallableCurveLamba(startingOffset.x, offset.x, animationCurveFactory.Create(curveType));
     ValueAnimatorI *linearAnimatorX = ENGINE().getValueAnimatorFactory()
         .Create(
                   curveX
@@ -145,7 +151,7 @@ PropertyAnimatorI *PropertyAnimatorFactory
 
     linearAnimatorXImpl->SetContext(new Holder1<Vector2>(offset));
 
-    CallableCurveLamba *curveY = new CallableCurveLamba(startingOffset.y, offset.y, AnimationCurveFactory::Create(curveType));
+    CallableCurveLamba *curveY = new CallableCurveLamba(startingOffset.y, offset.y, animationCurveFactory.Create(curveType));
     ValueAnimatorI *linearAnimatorY = ENGINE().getValueAnimatorFactory()
         .Create(
                   curveY
@@ -185,7 +191,9 @@ PropertyAnimatorI *PropertyAnimatorFactory
 PropertyAnimatorI *PropertyAnimatorFactory
     ::Wait(float delay, float duration, std::shared_ptr<CallableParametersEmpty> endFnc)
 {
-    CallableCurveLamba *curve = new CallableCurveLamba(1, 0, AnimationCurveFactory::Create(LINEAR));
+    auto &animationCurveFactory = ENGINE().getAnimationCurveFactory();
+
+    CallableCurveLamba *curve = new CallableCurveLamba(1, 0, animationCurveFactory.Create(LINEAR));
     ValueAnimatorI *linearAnimator = ENGINE().getValueAnimatorFactory()
         .Create(
                   curve

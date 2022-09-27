@@ -195,6 +195,11 @@ void FontBitmapRepresentation::SetAlpha(float value)
     }
 }
 
+float FontBitmapRepresentation::GetAlpha()
+{
+    return m_alpha;
+}
+
 void FontBitmapRepresentation::SetZPosition(float value)
 {
     for (auto& it : m_font.GetGlyphs())

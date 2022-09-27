@@ -72,7 +72,8 @@ namespace engine
                 m_lightManager(*(new LightManager())),
                 m_soundManager(*(new SoundManager())),
                 m_engineScreen(*(new EngineScreen())),
-                m_engineState(*(new EngineState()))
+                m_engineState(*(new EngineState())),
+                m_animationCurveFactory(*(new AnimationCurveFactory()))
         { }
 
     /// Setup
@@ -220,6 +221,9 @@ namespace engine
         ///
         ConsoleRendererI& getConsoleRenderer() { return m_consoleRenderer; };
 
+        ///
+        AnimationCurveFactoryI &getAnimationCurveFactory() { return m_animationCurveFactory; };
+
     /// Other states
     public:
 
@@ -246,6 +250,7 @@ namespace engine
         SoundManager &m_soundManager;
         EngineScreen &m_engineScreen;
         EngineStateI &m_engineState;
+        AnimationCurveFactoryI &m_animationCurveFactory;
 
         engine::Origin m_mousePosition;
         Time m_time;

@@ -9,7 +9,7 @@
 #define engine_screen_interface_h
 
 #include "vector2.hpp"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 
 namespace engine
 {

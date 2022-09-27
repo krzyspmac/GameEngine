@@ -60,6 +60,10 @@ namespace engine
          */
         void Draw();
 
+        void Update() {
+            
+        }
+
     public:
 
     private:

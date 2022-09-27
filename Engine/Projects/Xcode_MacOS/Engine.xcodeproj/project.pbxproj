@@ -140,7 +140,7 @@
 		7F3E8EA8279AC8F9003BB7B6 /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
 		7F3E8EA9279AC8F9003BB7B6 /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
 		7F3E8EAA279AC8F9003BB7B6 /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */; };
-		7F3E8EAB279AC8F9003BB7B6 /* animation_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.h */; };
+		7F3E8EAB279AC8F9003BB7B6 /* animation_interface.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.hpp */; };
 		7F3E8EAC279AC8F9003BB7B6 /* file_access_provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131162792FAF20094DF0C /* file_access_provider.h */; };
 		7F3E8EAE279AC8F9003BB7B6 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
 		7F3E8EAF279AC8F9003BB7B6 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D732784DDE0005C52C4 /* memory.h */; };
@@ -297,7 +297,7 @@
 		7F3E90CA279B03F6003BB7B6 /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
 		7F3E90CB279B03F6003BB7B6 /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
 		7F3E90CC279B03F6003BB7B6 /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */; };
-		7F3E90CD279B03F6003BB7B6 /* animation_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.h */; };
+		7F3E90CD279B03F6003BB7B6 /* animation_interface.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.hpp */; };
 		7F3E90CE279B03F6003BB7B6 /* file_access_provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131162792FAF20094DF0C /* file_access_provider.h */; };
 		7F3E90D0279B03F6003BB7B6 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
 		7F3E90D1279B03F6003BB7B6 /* memory.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D732784DDE0005C52C4 /* memory.h */; };
@@ -544,7 +544,7 @@
 		7FC131212792FAF20094DF0C /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
 		7FC131222792FAF20094DF0C /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
 		7FC131232792FAF20094DF0C /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */; };
-		7FC131242792FAF20094DF0C /* animation_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.h */; };
+		7FC131242792FAF20094DF0C /* animation_interface.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131152792FAF20094DF0C /* animation_interface.hpp */; };
 		7FC131252792FAF20094DF0C /* file_access_provider.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131162792FAF20094DF0C /* file_access_provider.h */; };
 		7FC131262792FAF20094DF0C /* drawable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131172792FAF20094DF0C /* drawable_interface.h */; };
 		7FC131272792FAF20094DF0C /* engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131182792FAF20094DF0C /* engine_provider_interface.h */; };
@@ -858,7 +858,7 @@
 		7FC131122792FAF20094DF0C /* path_finder_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = path_finder_interface.h; sourceTree = "<group>"; };
 		7FC131132792FAF20094DF0C /* event_provider_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event_provider_interface.h; sourceTree = "<group>"; };
 		7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sprite_atlas_interface.h; sourceTree = "<group>"; };
-		7FC131152792FAF20094DF0C /* animation_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = animation_interface.h; sourceTree = "<group>"; };
+		7FC131152792FAF20094DF0C /* animation_interface.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = animation_interface.hpp; sourceTree = "<group>"; };
 		7FC131162792FAF20094DF0C /* file_access_provider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = file_access_provider.h; sourceTree = "<group>"; };
 		7FC131172792FAF20094DF0C /* drawable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drawable_interface.h; sourceTree = "<group>"; };
 		7FC131182792FAF20094DF0C /* engine_provider_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine_provider_interface.h; sourceTree = "<group>"; };
@@ -1444,7 +1444,7 @@
 				7FC131132792FAF20094DF0C /* event_provider_interface.h */,
 				7FE6D57828E053A800A78E06 /* scene_manager_interface.h */,
 				7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */,
-				7FC131152792FAF20094DF0C /* animation_interface.h */,
+				7FC131152792FAF20094DF0C /* animation_interface.hpp */,
 				7FC131162792FAF20094DF0C /* file_access_provider.h */,
 				7F08C44227AF1FBF002FEB8F /* light_interface.hpp */,
 				7F67034428A626B000319218 /* property_animator_interface.h */,
@@ -1698,7 +1698,7 @@
 				7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */,
 				7FC1311F2792FAF20094DF0C /* scripting_engine_provider_interface.h in Headers */,
 				7F6E2C272794AFD100348C81 /* character_interface_impl.hpp in Headers */,
-				7FC131242792FAF20094DF0C /* animation_interface.h in Headers */,
+				7FC131242792FAF20094DF0C /* animation_interface.hpp in Headers */,
 				7FC131262792FAF20094DF0C /* drawable_interface.h in Headers */,
 				7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */,
 				7F67034128A60D5500319218 /* engine_screen.hpp in Headers */,
@@ -1784,7 +1784,7 @@
 				7F3E8EA8279AC8F9003BB7B6 /* path_finder_interface.h in Headers */,
 				7F3E8EA9279AC8F9003BB7B6 /* event_provider_interface.h in Headers */,
 				7F3E8EAA279AC8F9003BB7B6 /* sprite_atlas_interface.h in Headers */,
-				7F3E8EAB279AC8F9003BB7B6 /* animation_interface.h in Headers */,
+				7F3E8EAB279AC8F9003BB7B6 /* animation_interface.hpp in Headers */,
 				7F3E8EAC279AC8F9003BB7B6 /* file_access_provider.h in Headers */,
 				7F3E8EAE279AC8F9003BB7B6 /* drawable_metal.hpp in Headers */,
 				7F3E8EAF279AC8F9003BB7B6 /* memory.h in Headers */,
@@ -1904,7 +1904,7 @@
 				7F3E90CA279B03F6003BB7B6 /* path_finder_interface.h in Headers */,
 				7F3E90CB279B03F6003BB7B6 /* event_provider_interface.h in Headers */,
 				7F3E90CC279B03F6003BB7B6 /* sprite_atlas_interface.h in Headers */,
-				7F3E90CD279B03F6003BB7B6 /* animation_interface.h in Headers */,
+				7F3E90CD279B03F6003BB7B6 /* animation_interface.hpp in Headers */,
 				7F3E90CE279B03F6003BB7B6 /* file_access_provider.h in Headers */,
 				7F3E90D0279B03F6003BB7B6 /* drawable_metal.hpp in Headers */,
 				7F3E90D1279B03F6003BB7B6 /* memory.h in Headers */,

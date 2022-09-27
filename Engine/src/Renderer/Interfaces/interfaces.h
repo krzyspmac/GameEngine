@@ -25,7 +25,7 @@
 #include "scene_manager_interface.h"
 #include "sprite_representation_text_interface.h"
 #include "light_interface.hpp"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 #include "callable_interface.h"
 #include "value_animator_interface.h"
 #include "value_animator_factory_interface.h"

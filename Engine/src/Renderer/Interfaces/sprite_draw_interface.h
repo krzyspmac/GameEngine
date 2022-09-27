@@ -9,7 +9,7 @@
 #define sprite_draw_interface_h
 
 #include "drawable_interface.h"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 
 namespace engine
 {
@@ -55,7 +55,10 @@ namespace engine
         Vector2&    GetPosition() { return m_position; };
         void        SetZPosition(float zPos) { m_zPosition = zPos; };
         float&      GetZPosition() { return m_zPosition; };
-        void        SetAlpha(float val) { if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val); };
+        void        SetAlpha(float val) {
+//            AnimatablePropertiesI::SetAlpha(val);
+            if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val);
+        };
         float       GetAlpha() { return *m_drawable.get()->GetAlpha(); };
         void        SetRotation(Rotation rotation) { m_rotation = rotation; };
         Rotation    &GetRotation() { return m_rotation; }

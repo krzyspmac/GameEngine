@@ -28,6 +28,10 @@ namespace engine
         static SceneManagerI *sceneManager();
 
         static PropertyAnimatorFactoryI *propertyAnimatorFactory();
+
+        static AnimatorFactoryI *animator();
+
+        static AnimationCurveFactoryI *curveFactory();
     };
 }
 

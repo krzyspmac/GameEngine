@@ -64,7 +64,7 @@ Engine::Engine(EngineProviderI &engineProvider,
     setup.affineScale = 1.0f;
     setup.isDirty = false;
 
-    AnimationCurveFactory::Prepare();
+    m_animationCurveFactory.Prepare();
 }
 
 Engine::~Engine()

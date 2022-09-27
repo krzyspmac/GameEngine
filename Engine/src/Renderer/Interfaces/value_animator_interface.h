@@ -9,7 +9,7 @@
 #define value_animator_interface_h
 
 #include "callable_interface.h"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 
 namespace engine
 {
@@ -34,7 +34,6 @@ namespace engine
     public: // AnimatableI
         virtual void Start() = 0;
         virtual void Stop() = 0;
-
     };
 };
 

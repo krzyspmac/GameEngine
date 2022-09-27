@@ -12,7 +12,7 @@
 #include "engine_provider_interface.h"
 #include "time.hpp"
 #include "callable.hpp"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 #include "memory.h"
 #include "value_animator_interface.h"
 

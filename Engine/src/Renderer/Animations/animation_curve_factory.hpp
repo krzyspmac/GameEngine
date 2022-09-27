@@ -9,34 +9,20 @@
 #define animation_curve_factory_hpp
 
 #include "common.h"
+#include "animation_interface.hpp"
 
 namespace engine
 {
-    typedef enum
-    {
-        NONE
-      , LINEAR
-    } AnimationCurveType;
-
-    typedef std::function<float(float, float, float)> AnimationCurveLambda;
-
-    class AnimationCurveFactory
+    class AnimationCurveFactory: public AnimationCurveFactoryI
     {
     public:
-        static void Prepare();
+        void Prepare();
         
-        /**
-         Return an animation curve for a type.
-         */
-        static AnimationCurveLambda Create(AnimationCurveType);
+        AnimationCurveLambda Create(AnimationCurveType);
         
-        /**
-         Return an animation curve for a type as string.
-         */
-        static AnimationCurveLambda Create(std::string);
-        
-        /** The linear curve */
-        static AnimationCurveLambda Linear();
+        AnimationCurveLambda Create(std::string);
+
+        AnimationCurveLambda Linear();
     };
 };
 

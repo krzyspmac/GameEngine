@@ -9,7 +9,7 @@
 #define periodic_updates_manager_hpp
 
 #include "common.h"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 
 namespace engine
 {

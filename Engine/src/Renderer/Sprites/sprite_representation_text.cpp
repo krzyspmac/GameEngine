@@ -15,6 +15,7 @@ SpriteRepresentationText::SpriteRepresentationText(FontI *font)
     , m_shadowOffset({1.f, 1.f})
     , m_shadowColor({0.f, 0.f, 0.f, 0.f})
     , m_lineMultiplier(1.f)
+    , m_alpha(1.f)
     , m_textHorizontalAlignment(TEXT_ALIGN_LEFT)
     , m_textVerticalAlignment(TEXT_ALIGN_TOP)
 {
@@ -39,7 +40,14 @@ void SpriteRepresentationText::SetPosition(Vector2 pos)
 void SpriteRepresentationText::SetAlpha(float val)
 {
     SpriteRepresentationI::SetAlpha(val);
+    m_alpha = val;
     m_bitmapFont->SetAlpha(val);
+}
+
+float SpriteRepresentationText::GetAlpha()
+{
+//    return m_bitmapFont->Ge
+    return m_alpha;
 }
 
 void SpriteRepresentationText::SetZPosition(float zPos)

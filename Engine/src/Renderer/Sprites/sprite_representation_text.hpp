@@ -25,6 +25,7 @@ namespace engine
         OriginF m_shadowOffset;
         Color4 m_shadowColor;
         float m_lineMultiplier;
+        float m_alpha;
         TEXT_HORIZONTAL_ALIGNMENT m_textHorizontalAlignment;
         TEXT_VERTICAL_ALIGNMENT m_textVerticalAlignment;
     public:
@@ -41,10 +42,9 @@ namespace engine
         /** Position this sprite in game coordinates */
         void SetPosition(Vector2 pos);
 
-        /** Sets the alpha. Values range from 0-1.
-            Default value is 1.
-         */
         void SetAlpha(float val);
+
+        float GetAlpha();
         
         void SetZPosition(float zPos);
 

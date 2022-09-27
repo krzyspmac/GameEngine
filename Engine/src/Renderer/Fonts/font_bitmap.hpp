@@ -145,6 +145,9 @@ namespace engine
         
         /** Set Alpha */
         void SetAlpha(float);
+
+        /** Get */
+        float GetAlpha();
         
         /** Set Z-position */
         void SetZPosition(float);
