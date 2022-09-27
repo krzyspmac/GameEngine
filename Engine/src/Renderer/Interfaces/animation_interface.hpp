@@ -97,7 +97,8 @@ namespace engine
             : m_weakParent(weakParent)
         { }
 
-        void SetAlpha(AnimatorI* animator, float wantedValue);
+        void SetAlpha(AnimatorI*, float);
+        void SetScale(AnimatorI*, float);
     };
 
     /**  */

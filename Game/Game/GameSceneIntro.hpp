@@ -32,6 +32,7 @@ private:
 
     void FadeIn();
     void FadeOut();
+    void ScaleIn();
 };
 
 #endif /* GameSceneIntro_hpp */
