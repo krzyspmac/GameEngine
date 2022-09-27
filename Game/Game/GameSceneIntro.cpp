@@ -83,7 +83,7 @@ GameSceneIntro::ContinueAnimation() {
 
     m_textSprite->SetAlpha(0.f);
 
-    animator->Animate(1, 30, curve, [&](auto *animator){
+    animator->Animate(1, 5, curve, [&](auto *animator){
         m_textSprite->animator()->SetAlpha(animator, 1.0);
         //m_textSprite->GetAnimatableAlpha().Set(animator, 1.0f);
     });

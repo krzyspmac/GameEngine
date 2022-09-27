@@ -113,6 +113,21 @@
 		7F3470BC285286DF00FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BB285286DF00FDED71 /* AudioToolbox.framework */; };
 		7F3470BE285286F700FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BD285286F700FDED71 /* AudioToolbox.framework */; };
 		7F3470C02852870200FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BF2852870100FDED71 /* AudioToolbox.framework */; };
+		7F3B0FFE28E30C3000CB3F60 /* property_manupulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */; };
+		7F3B0FFF28E30C3000CB3F60 /* property_manupulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */; };
+		7F3B100028E30C3000CB3F60 /* property_manupulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */; };
+		7F3B100228E30E8000CB3F60 /* animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B100128E30E8000CB3F60 /* animator.cpp */; };
+		7F3B100328E30E8000CB3F60 /* animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B100128E30E8000CB3F60 /* animator.cpp */; };
+		7F3B100428E30E8000CB3F60 /* animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B100128E30E8000CB3F60 /* animator.cpp */; };
+		7F3B100628E30EC800CB3F60 /* animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3B100528E30E8B00CB3F60 /* animator.hpp */; };
+		7F3B100728E30EC800CB3F60 /* animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3B100528E30E8B00CB3F60 /* animator.hpp */; };
+		7F3B100828E30EC900CB3F60 /* animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3B100528E30E8B00CB3F60 /* animator.hpp */; };
+		7F3B100B28E310E500CB3F60 /* animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B100928E310E500CB3F60 /* animator_factory.cpp */; };
+		7F3B100C28E310E500CB3F60 /* animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B100928E310E500CB3F60 /* animator_factory.cpp */; };
+		7F3B100D28E310E500CB3F60 /* animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B100928E310E500CB3F60 /* animator_factory.cpp */; };
+		7F3B100E28E310E500CB3F60 /* animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3B100A28E310E500CB3F60 /* animator_factory.hpp */; };
+		7F3B100F28E310E500CB3F60 /* animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3B100A28E310E500CB3F60 /* animator_factory.hpp */; };
+		7F3B101028E310E500CB3F60 /* animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F3B100A28E310E500CB3F60 /* animator_factory.hpp */; };
 		7F3E8E8D279AC8F9003BB7B6 /* doxygen_main.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D2277F85BF004A6107 /* doxygen_main.h */; };
 		7F3E8E8E279AC8F9003BB7B6 /* defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138243277505B600ED6D67 /* defs.h */; };
 		7F3E8E8F279AC8F9003BB7B6 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
@@ -747,6 +762,11 @@
 		7F3470BB285286DF00FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		7F3470BD285286F700FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7F3470BF2852870100FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
+		7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = property_manupulator.cpp; sourceTree = "<group>"; };
+		7F3B100128E30E8000CB3F60 /* animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animator.cpp; sourceTree = "<group>"; };
+		7F3B100528E30E8B00CB3F60 /* animator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animator.hpp; sourceTree = "<group>"; };
+		7F3B100928E310E500CB3F60 /* animator_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animator_factory.cpp; sourceTree = "<group>"; };
+		7F3B100A28E310E500CB3F60 /* animator_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animator_factory.hpp; sourceTree = "<group>"; };
 		7F3E8E27279AC8BA003BB7B6 /* libEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F2B279ADCDB003BB7B6 /* Engine-iOS-Bundle.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Engine-iOS-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F47279AE1A4003BB7B6 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
@@ -1543,6 +1563,11 @@
 				7F849907278713BB004127CB /* animation_group_sequence.cpp */,
 				4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */,
 				4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */,
+				7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */,
+				7F3B100528E30E8B00CB3F60 /* animator.hpp */,
+				7F3B100128E30E8000CB3F60 /* animator.cpp */,
+				7F3B100A28E310E500CB3F60 /* animator_factory.hpp */,
+				7F3B100928E310E500CB3F60 /* animator_factory.cpp */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -1640,6 +1665,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3B100E28E310E500CB3F60 /* animator_factory.hpp in Headers */,
 				7F64288E2777C59D00EE9E2C /* character.hpp in Headers */,
 				7FE2E5C9277A3D0000538094 /* path_finder_helper.hpp in Headers */,
 				7F6428A527791A9100EE9E2C /* path_finder.hpp in Headers */,
@@ -1681,6 +1707,7 @@
 				7FC131232792FAF20094DF0C /* sprite_atlas_interface.h in Headers */,
 				7FB8241A27890479008F0F7A /* console_logger.hpp in Headers */,
 				7FE2E5D1277B13B000538094 /* path.hpp in Headers */,
+				7F3B100628E30EC800CB3F60 /* animator.hpp in Headers */,
 				7F2DB00628E041000044EF8D /* script_entry_interface.hpp in Headers */,
 				7F64288527779CD400EE9E2C /* character_renderer.hpp in Headers */,
 				4C255DE527859E3100D0B30A /* animation_curve_factory.hpp in Headers */,
@@ -1772,6 +1799,7 @@
 				7F3E8E9E279AC8F9003BB7B6 /* engine_events_provider_interface.h in Headers */,
 				7F3E8E9F279AC8F9003BB7B6 /* console_renderer_interface.h in Headers */,
 				7F3E8EA0279AC8F9003BB7B6 /* sprite_draw_interface.h in Headers */,
+				7F3B100728E30EC800CB3F60 /* animator.hpp in Headers */,
 				7F3E8EA1279AC8F9003BB7B6 /* drawable_interface.h in Headers */,
 				7F3E8EA2279AC8F9003BB7B6 /* font_interface.h in Headers */,
 				7FC971EC27AF3B9A00049146 /* light.hpp in Headers */,
@@ -1791,6 +1819,7 @@
 				7F3E8EB0279AC8F9003BB7B6 /* release_pool.hpp in Headers */,
 				7F3E8EB1279AC8F9003BB7B6 /* time.hpp in Headers */,
 				7F3E8EB2279AC8F9003BB7B6 /* engine_state.hpp in Headers */,
+				7F3B100F28E310E500CB3F60 /* animator_factory.hpp in Headers */,
 				7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */,
 				7F2DAFFF28E040DD0044EF8D /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3470B628527EC600FDED71 /* sound_manager.hpp in Headers */,
@@ -1892,6 +1921,7 @@
 				7F3E90C0279B03F6003BB7B6 /* engine_events_provider_interface.h in Headers */,
 				7F3E90C1279B03F6003BB7B6 /* console_renderer_interface.h in Headers */,
 				7F3E90C2279B03F6003BB7B6 /* sprite_draw_interface.h in Headers */,
+				7F3B100828E30EC900CB3F60 /* animator.hpp in Headers */,
 				7F3E90C3279B03F6003BB7B6 /* drawable_interface.h in Headers */,
 				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
 				7FC971EE27AF3B9A00049146 /* light.hpp in Headers */,
@@ -1911,6 +1941,7 @@
 				7F3E90D2279B03F6003BB7B6 /* release_pool.hpp in Headers */,
 				7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */,
 				7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */,
+				7F3B101028E310E500CB3F60 /* animator_factory.hpp in Headers */,
 				7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */,
 				7F2DB00028E040DD0044EF8D /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3470B528527EC500FDED71 /* sound_manager.hpp in Headers */,
@@ -2300,6 +2331,7 @@
 				7FCAE7D6278073B9004A6107 /* time.cpp in Sources */,
 				7FBDB67A27AFE18D00B3DFCC /* console_lights.cpp in Sources */,
 				7F64288D2777C59D00EE9E2C /* character.cpp in Sources */,
+				7F3B100228E30E8000CB3F60 /* animator.cpp in Sources */,
 				7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */,
 				4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */,
 				7F138272277505B600ED6D67 /* sprite_representation_static.cpp in Sources */,
@@ -2324,6 +2356,7 @@
 				7FCAE7BF277E36DD004A6107 /* scene_manager.cpp in Sources */,
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
 				7FC4CFFB28969603006E92F6 /* static_objects.cpp in Sources */,
+				7F3B100B28E310E500CB3F60 /* animator_factory.cpp in Sources */,
 				7F849909278713BB004127CB /* animation_group_sequence.cpp in Sources */,
 				7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */,
 				7FE2E5D0277B13B000538094 /* path.cpp in Sources */,
@@ -2346,6 +2379,7 @@
 				7FCC81BD2780A0C8003025CB /* value_animator_factory.cpp in Sources */,
 				7F6D1CA6279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
+				7F3B0FFE28E30C3000CB3F60 /* property_manupulator.cpp in Sources */,
 				7F08C44E27AF21E2002FEB8F /* light_metal.cpp in Sources */,
 				7FB8242127899731008F0F7A /* console_terminal_commands.cpp in Sources */,
 				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
@@ -2391,6 +2425,7 @@
 				7FBDB67B27AFE18D00B3DFCC /* console_lights.cpp in Sources */,
 				7F3E8EF6279AC909003BB7B6 /* animation_group_simulateneus.cpp in Sources */,
 				7F3E8EF7279AC909003BB7B6 /* animation_group_sequence.cpp in Sources */,
+				7F3B100328E30E8000CB3F60 /* animator.cpp in Sources */,
 				7F3E8EF8279AC909003BB7B6 /* animation_group_factory.cpp in Sources */,
 				7F3E8EF9279AC909003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E8EFA279AC909003BB7B6 /* path_finder_helper.cpp in Sources */,
@@ -2415,6 +2450,7 @@
 				7F3E8F07279AC909003BB7B6 /* character_renderer.cpp in Sources */,
 				7FC4CFFD28969655006E92F6 /* static_objects.cpp in Sources */,
 				7F3E8F08279AC909003BB7B6 /* character.cpp in Sources */,
+				7F3B100C28E310E500CB3F60 /* animator_factory.cpp in Sources */,
 				7F3E8F09279AC909003BB7B6 /* character_manager.cpp in Sources */,
 				7F3E8F0A279AC909003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */,
@@ -2437,6 +2473,7 @@
 				7F3E8F15279AC909003BB7B6 /* texture_target.cpp in Sources */,
 				7F6D1CA5279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F3E8F16279AC909003BB7B6 /* engine_provider_metal.cpp in Sources */,
+				7F3B0FFF28E30C3000CB3F60 /* property_manupulator.cpp in Sources */,
 				7FC971E727AF3B9600049146 /* light_metal.cpp in Sources */,
 				7F3E8F17279AC909003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E8F18279AC909003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
@@ -2489,6 +2526,7 @@
 				7FBDB67C27AFE18D00B3DFCC /* console_lights.cpp in Sources */,
 				7F3E911F279B03F6003BB7B6 /* animation_group_simulateneus.cpp in Sources */,
 				7F3E9120279B03F6003BB7B6 /* animation_group_sequence.cpp in Sources */,
+				7F3B100428E30E8000CB3F60 /* animator.cpp in Sources */,
 				7F3E9121279B03F6003BB7B6 /* animation_group_factory.cpp in Sources */,
 				7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */,
@@ -2513,6 +2551,7 @@
 				7F3E9130279B03F6003BB7B6 /* character_renderer.cpp in Sources */,
 				7FC4CFFE28969655006E92F6 /* static_objects.cpp in Sources */,
 				7F3E9131279B03F6003BB7B6 /* character.cpp in Sources */,
+				7F3B100D28E310E500CB3F60 /* animator_factory.cpp in Sources */,
 				7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */,
 				7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */,
@@ -2535,6 +2574,7 @@
 				7F3E913E279B03F6003BB7B6 /* texture_target.cpp in Sources */,
 				7F6D1CA4279F503A0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F3E913F279B03F6003BB7B6 /* engine_provider_metal.cpp in Sources */,
+				7F3B100028E30C3000CB3F60 /* property_manupulator.cpp in Sources */,
 				7FC971E927AF3B9600049146 /* light_metal.cpp in Sources */,
 				7F3E9140279B03F6003BB7B6 /* file_memory_buffer_stream_file.cpp in Sources */,
 				7F3E9141279B03F6003BB7B6 /* file_memory_buffer_stream_resource.cpp in Sources */,
