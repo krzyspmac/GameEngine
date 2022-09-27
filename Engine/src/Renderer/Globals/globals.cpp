@@ -35,11 +35,6 @@ SceneManagerI * Globals::sceneManager()
     return static_cast<SceneManagerI*>(&(ENGINE().getSceneManager()));
 }
 
-PropertyAnimatorFactoryI *Globals::propertyAnimatorFactory()
-{
-    return static_cast<PropertyAnimatorFactoryI*>(&(ENGINE().getPropertyAnimatorFactory()));
-}
-
 AnimationCurveFactoryI *Globals::curveFactory()
 {
     return static_cast<AnimationCurveFactoryI*>(&(ENGINE().getAnimationCurveFactory()));

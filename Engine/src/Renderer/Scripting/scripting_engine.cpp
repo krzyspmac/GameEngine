@@ -12,11 +12,8 @@
 #include "character_manager.hpp"
 #include "sprite_atlas_manager.hpp"
 #include "sprite_renderer_manager.hpp"
-#include "value_animator_factory.hpp"
-#include "property_animator_factory.hpp"
 #include "time.hpp"
 #include "engine_state.hpp"
-#include "animation_group_factory.hpp"
 #include "font_manager.hpp"
 #include "events_manager.hpp"
 #include "light_manager.hpp"
@@ -168,9 +165,9 @@ void ScriptingEngine::registerFunctions()
     releasePool.ScriptingInterfaceRegisterFunctions(L, &releasePool);
     lua_setglobal(L, "MemoryReleasePool");
     
-    AnimationGroupFactory &animationGroupFactory = ENGINE().getAnimationGroupFactory();
-    animationGroupFactory.ScriptingInterfaceRegisterFunctions(L, &animationGroupFactory);
-    lua_setglobal(L, "AnimationGroupFactory");
+//    AnimationGroupFactory &animationGroupFactory = ENGINE().getAnimationGroupFactory();
+//    animationGroupFactory.ScriptingInterfaceRegisterFunctions(L, &animationGroupFactory);
+//    lua_setglobal(L, "AnimationGroupFactory");
 
 //    FontManager &fontManager = ENGINE().getFontManager();
 //    fontManager.ScriptingInterfaceRegisterFunctions(L, &fontManager);

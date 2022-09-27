@@ -11,13 +11,20 @@
 
 using namespace engine;
 
-void AnimatorFactory::Animate(float delay, float seconds, AnimationCurveLambda curve, std::function<void(AnimatorI*)> block) {
+void AnimatorFactory
+    ::Animate(float delay,
+              float seconds,
+              AnimationCurveLambda curve,
+              std::function<void(AnimatorI*)> block,
+              std::function<void(void)> didFinishBlock
+) {
 
     Animator *animator = new Animator(delay, seconds, ENGINE().getTime(), curve);
 
     animator->Prepare([&](AnimatorI* sender){
         block(sender);
-    }, [&](AnimatorI*){
+    }, [didFinishBlock, animator](AnimatorI*){
+        didFinishBlock();
         delete animator;
     });
 }

@@ -65,7 +65,12 @@ namespace engine
     class AnimatorFactoryI
     {
     public:
-        virtual void Animate(float delay, float seconds, AnimationCurveLambda curve, std::function<void(AnimatorI*)> block) = 0;
+        virtual void Animate(float delay,
+                             float seconds,
+                             AnimationCurveLambda curve,
+                             std::function<void(AnimatorI*)> block,
+                             std::function<void(void)> didFinishBlock
+                             ) = 0;
     };
 
     /** All the properties of the sprite that can be modified */

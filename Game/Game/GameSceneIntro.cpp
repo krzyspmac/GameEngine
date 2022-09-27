@@ -47,44 +47,31 @@ GameSceneIntro::FrameUpdate() {
 
 void
 GameSceneIntro::ContinueAnimation() {
-//    auto propertyAnimatorFactory = engine::Globals::propertyAnimatorFactory();
+    FadeIn();
+}
 
-//    m_textSprite->SetAlpha(0.5);
-
-//    m_fadeIn = propertyAnimatorFactory
-//        ->FadeIn(m_textSprite, "linear", 0.2, 1, std::shared_ptr<engine::CallbackEmpty>(new engine::CallbackEmpty([&] {
-//            m_fadeOut->Start();
-//            }))
-//    );
-//
-//    m_fadeOut = propertyAnimatorFactory
-//        ->FadeOut(m_textSprite, "linear", 0.2, 1, std::shared_ptr<engine::CallbackEmpty>(new engine::CallbackEmpty([&] {
-//            m_fadeIn->Start();
-//            }))
-//    );
-//
-//    m_fadeIn->Start();
-
-    /*
-
-     Animator::Animate(delay, duration, curve, [&]{
-        myObject->SetAlpha(0.5);
-     });
-
-     Animator::Animate(delay, duration, curve, [&](auto *animator){
-        myObject->animator(animator).SetAlpha(0.5);
-     });
-
-
-     */
-
+void
+GameSceneIntro::FadeIn()
+{
     auto animator = engine::Globals::animator();
     auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
 
-    m_textSprite->SetAlpha(0.f);
-
-    animator->Animate(1, 5, curve, [&](auto *animator){
+    animator->Animate(1, .1, curve, [&](auto *animator){
         m_textSprite->animator()->SetAlpha(animator, 1.0);
-        //m_textSprite->GetAnimatableAlpha().Set(animator, 1.0f);
+    }, [&](void) {
+        FadeOut();
+    });
+}
+
+void
+GameSceneIntro::FadeOut()
+{
+    auto animator = engine::Globals::animator();
+    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+
+    animator->Animate(1, .1, curve, [&](auto *animator){
+        m_textSprite->animator()->SetAlpha(animator, 0.0);
+    }, [&](void){
+        FadeIn();
     });
 }

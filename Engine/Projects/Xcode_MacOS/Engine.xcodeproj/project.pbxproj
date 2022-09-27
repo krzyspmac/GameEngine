@@ -10,10 +10,6 @@
 		4C255DDD27858CC500D0B30A /* release_pool.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DDB27858CBA00D0B30A /* release_pool.cpp */; };
 		4C255DE427859E3100D0B30A /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
 		4C255DE527859E3100D0B30A /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
-		4C255DE82785BABB00D0B30A /* animation_group_simulateneus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */; };
-		4C255DE92785BABB00D0B30A /* animation_group_simulateneus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */; };
-		4C255DEC2785CA9100D0B30A /* animation_group_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */; };
-		4C255DED2785CA9100D0B30A /* animation_group_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */; };
 		4C9EA022279205C80082EB6A /* texture_target_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA020279205C80082EB6A /* texture_target_metal.cpp */; };
 		4C9EA023279205C80082EB6A /* texture_target_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C9EA021279205C80082EB6A /* texture_target_metal.hpp */; };
 		4C9EA02A2792166F0082EB6A /* texture_metal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4C9EA0282792166F0082EB6A /* texture_metal.mm */; };
@@ -163,13 +159,6 @@
 		7F3E8EB1279AC8F9003BB7B6 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
 		7F3E8EB2279AC8F9003BB7B6 /* engine_state.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FC12780F6F800E8CB01 /* engine_state.hpp */; };
 		7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
-		7F3E8EB4279AC8F9003BB7B6 /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
-		7F3E8EB5279AC8F9003BB7B6 /* value_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */; };
-		7F3E8EB6279AC8F9003BB7B6 /* property_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D752784E99A005C52C4 /* property_animator.hpp */; };
-		7F3E8EB7279AC8F9003BB7B6 /* property_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */; };
-		7F3E8EB8279AC8F9003BB7B6 /* animation_group_simulateneus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */; };
-		7F3E8EB9279AC8F9003BB7B6 /* animation_group_sequence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F849908278713BB004127CB /* animation_group_sequence.hpp */; };
-		7F3E8EBA279AC8F9003BB7B6 /* animation_group_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */; };
 		7F3E8EBB279AC8F9003BB7B6 /* character_mover.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289A2778CCCB00EE9E2C /* character_mover.hpp */; };
 		7F3E8EBC279AC8F9003BB7B6 /* path_finder_helper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */; };
 		7F3E8EBD279AC8F9003BB7B6 /* path_finder_line_graph_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */; };
@@ -223,13 +212,6 @@
 		7F3E8EEF279AC909003BB7B6 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
 		7F3E8EF0279AC909003BB7B6 /* engine_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FC02780F6F800E8CB01 /* engine_state.cpp */; };
 		7F3E8EF1279AC909003BB7B6 /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
-		7F3E8EF2279AC909003BB7B6 /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
-		7F3E8EF3279AC909003BB7B6 /* value_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */; };
-		7F3E8EF4279AC909003BB7B6 /* property_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D742784E99A005C52C4 /* property_animator.cpp */; };
-		7F3E8EF5279AC909003BB7B6 /* property_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */; };
-		7F3E8EF6279AC909003BB7B6 /* animation_group_simulateneus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */; };
-		7F3E8EF7279AC909003BB7B6 /* animation_group_sequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F849907278713BB004127CB /* animation_group_sequence.cpp */; };
-		7F3E8EF8279AC909003BB7B6 /* animation_group_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */; };
 		7F3E8EF9279AC909003BB7B6 /* character_mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428992778CCCB00EE9E2C /* character_mover.cpp */; };
 		7F3E8EFA279AC909003BB7B6 /* path_finder_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */; };
 		7F3E8EFB279AC909003BB7B6 /* path_finder_line_graph_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */; };
@@ -320,13 +302,6 @@
 		7F3E90D3279B03F6003BB7B6 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
 		7F3E90D4279B03F6003BB7B6 /* engine_state.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F869FC12780F6F800E8CB01 /* engine_state.hpp */; };
 		7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */; };
-		7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
-		7F3E90D7279B03F6003BB7B6 /* value_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */; };
-		7F3E90D8279B03F6003BB7B6 /* property_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D752784E99A005C52C4 /* property_animator.hpp */; };
-		7F3E90D9279B03F6003BB7B6 /* property_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */; };
-		7F3E90DA279B03F6003BB7B6 /* animation_group_simulateneus.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */; };
-		7F3E90DB279B03F6003BB7B6 /* animation_group_sequence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F849908278713BB004127CB /* animation_group_sequence.hpp */; };
-		7F3E90DC279B03F6003BB7B6 /* animation_group_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */; };
 		7F3E90DD279B03F6003BB7B6 /* character_mover.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F64289A2778CCCB00EE9E2C /* character_mover.hpp */; };
 		7F3E90DE279B03F6003BB7B6 /* path_finder_helper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5C7277A3D0000538094 /* path_finder_helper.hpp */; };
 		7F3E90DF279B03F6003BB7B6 /* path_finder_line_graph_node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5BF277A370D00538094 /* path_finder_line_graph_node.hpp */; };
@@ -386,13 +361,6 @@
 		7F3E9118279B03F6003BB7B6 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
 		7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F869FC02780F6F800E8CB01 /* engine_state.cpp */; };
 		7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */; };
-		7F3E911B279B03F6003BB7B6 /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
-		7F3E911C279B03F6003BB7B6 /* value_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */; };
-		7F3E911D279B03F6003BB7B6 /* property_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D742784E99A005C52C4 /* property_animator.cpp */; };
-		7F3E911E279B03F6003BB7B6 /* property_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */; };
-		7F3E911F279B03F6003BB7B6 /* animation_group_simulateneus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */; };
-		7F3E9120279B03F6003BB7B6 /* animation_group_sequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F849907278713BB004127CB /* animation_group_sequence.cpp */; };
-		7F3E9121279B03F6003BB7B6 /* animation_group_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */; };
 		7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6428992778CCCB00EE9E2C /* character_mover.cpp */; };
 		7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5C6277A3D0000538094 /* path_finder_helper.cpp */; };
 		7F3E9124279B03F6003BB7B6 /* path_finder_line_graph_node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5BE277A370D00538094 /* path_finder_line_graph_node.cpp */; };
@@ -467,8 +435,6 @@
 		7F67034128A60D5500319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
 		7F67034228A60D8E00319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
 		7F67034328A60D8E00319218 /* engine_screen.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67033F28A60D5500319218 /* engine_screen.hpp */; };
-		7F67034728A6271100319218 /* property_animator_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67034528A6271100319218 /* property_animator_multiple.cpp */; };
-		7F67034828A6271100319218 /* property_animator_multiple.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67034628A6271100319218 /* property_animator_multiple.hpp */; };
 		7F6D1C82279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
 		7F6D1C83279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
 		7F6D1C84279F14690078D76A /* ini_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6D1C80279F14690078D76A /* ini_reader.cpp */; };
@@ -505,8 +471,6 @@
 		7F7EA07E28967EEF00A09199 /* system_utils_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */; };
 		7F7EA07F28967EEF00A09199 /* system_utils_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */; };
 		7F7EA08028967EEF00A09199 /* system_utils_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */; };
-		7F849909278713BB004127CB /* animation_group_sequence.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F849907278713BB004127CB /* animation_group_sequence.cpp */; };
-		7F84990A278713BB004127CB /* animation_group_sequence.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F849908278713BB004127CB /* animation_group_sequence.hpp */; };
 		7F84990D27872F28004127CB /* font_bitmap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F84990B27872F28004127CB /* font_bitmap.cpp */; };
 		7F84990E27872F28004127CB /* font_bitmap.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F84990C27872F28004127CB /* font_bitmap.hpp */; };
 		7F8499152787464F004127CB /* key_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F8499132787464F004127CB /* key_value.cpp */; };
@@ -527,10 +491,6 @@
 		7FB2018727941D0200D0F5FE /* sprite_draw_backbuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */; };
 		7FB6520128CE65D9006F7030 /* engine_screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67033E28A60D5500319218 /* engine_screen.cpp */; };
 		7FB6520228CE65D9006F7030 /* engine_screen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67033E28A60D5500319218 /* engine_screen.cpp */; };
-		7FB6520328CE65F8006F7030 /* property_animator_multiple.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67034628A6271100319218 /* property_animator_multiple.hpp */; };
-		7FB6520428CE65F9006F7030 /* property_animator_multiple.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F67034628A6271100319218 /* property_animator_multiple.hpp */; };
-		7FB6520528CE65FC006F7030 /* property_animator_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67034528A6271100319218 /* property_animator_multiple.cpp */; };
-		7FB6520628CE65FD006F7030 /* property_animator_multiple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F67034528A6271100319218 /* property_animator_multiple.cpp */; };
 		7FB823E32788E199008F0F7A /* console_renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7FB823E12788E199008F0F7A /* console_renderer.mm */; };
 		7FB8241927890479008F0F7A /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
 		7FB8241A27890479008F0F7A /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
@@ -597,10 +557,6 @@
 		7FCAE7D1277F5872004A6107 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
 		7FCAE7D6278073B9004A6107 /* time.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7D4278073B9004A6107 /* time.cpp */; };
 		7FCAE7D7278073B9004A6107 /* time.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D5278073B9004A6107 /* time.hpp */; };
-		7FCC81BD2780A0C8003025CB /* value_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */; };
-		7FCC81BE2780A0C8003025CB /* value_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */; };
-		7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCC81C02780A2A8003025CB /* value_animator.cpp */; };
-		7FCC81C32780A2A8003025CB /* value_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCC81C12780A2A8003025CB /* value_animator.hpp */; };
 		7FD5CBEA278A0C7100498B5F /* texture_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FD5CBE8278A0C7100498B5F /* texture_manager.cpp */; };
 		7FD5CBEB278A0C7100498B5F /* texture_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD5CBE9278A0C7100498B5F /* texture_manager.hpp */; };
 		7FDDAF9E2776873900578F86 /* room.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FDDAF9C2776873900578F86 /* room.cpp */; };
@@ -625,10 +581,6 @@
 		7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5E0277B3E6E00538094 /* performance.hpp */; };
 		7FF21D6F2784C6E0005C52C4 /* callable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D6D2784C6E0005C52C4 /* callable.cpp */; };
 		7FF21D702784C6E0005C52C4 /* callable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D6E2784C6E0005C52C4 /* callable.hpp */; };
-		7FF21D762784E99A005C52C4 /* property_animator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D742784E99A005C52C4 /* property_animator.cpp */; };
-		7FF21D772784E99A005C52C4 /* property_animator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D752784E99A005C52C4 /* property_animator.hpp */; };
-		7FF21D7A2784EA33005C52C4 /* property_animator_factory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */; };
-		7FF21D7B2784EA33005C52C4 /* property_animator_factory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */; };
 		7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */; };
 		7FF641CD277CE8CB0017D86D /* polygon_loader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */; };
 		7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641DE277D22E50017D86D /* events_manager.cpp */; };
@@ -685,10 +637,6 @@
 		4C255DDC27858CBA00D0B30A /* release_pool.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = release_pool.hpp; sourceTree = "<group>"; };
 		4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_curve_factory.cpp; sourceTree = "<group>"; };
 		4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_curve_factory.hpp; sourceTree = "<group>"; };
-		4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group_simulateneus.cpp; sourceTree = "<group>"; };
-		4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_simulateneus.hpp; sourceTree = "<group>"; };
-		4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group_factory.cpp; sourceTree = "<group>"; };
-		4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_factory.hpp; sourceTree = "<group>"; };
 		4C9EA020279205C80082EB6A /* texture_target_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_target_metal.cpp; sourceTree = "<group>"; };
 		4C9EA021279205C80082EB6A /* texture_target_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_target_metal.hpp; sourceTree = "<group>"; };
 		4C9EA0282792166F0082EB6A /* texture_metal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = texture_metal.mm; sourceTree = "<group>"; };
@@ -814,8 +762,6 @@
 		7F67033E28A60D5500319218 /* engine_screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_screen.cpp; sourceTree = "<group>"; };
 		7F67033F28A60D5500319218 /* engine_screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_screen.hpp; sourceTree = "<group>"; };
 		7F67034428A626B000319218 /* property_animator_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = property_animator_interface.h; sourceTree = "<group>"; };
-		7F67034528A6271100319218 /* property_animator_multiple.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = property_animator_multiple.cpp; sourceTree = "<group>"; };
-		7F67034628A6271100319218 /* property_animator_multiple.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = property_animator_multiple.hpp; sourceTree = "<group>"; };
 		7F6D1C80279F14690078D76A /* ini_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ini_reader.cpp; sourceTree = "<group>"; };
 		7F6D1C81279F14690078D76A /* ini_reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ini_reader.hpp; sourceTree = "<group>"; };
 		7F6D1C88279F14CA0078D76A /* engine_setup_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_setup_interface.h; sourceTree = "<group>"; };
@@ -836,8 +782,6 @@
 		7F7EA07528967E7400A09199 /* system_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = system_utils.cpp; sourceTree = "<group>"; };
 		7F7EA07928967EEF00A09199 /* system_utils_mac.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = system_utils_mac.mm; sourceTree = "<group>"; };
 		7F7EA07A28967EEF00A09199 /* system_utils_mac.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = system_utils_mac.hpp; sourceTree = "<group>"; };
-		7F849907278713BB004127CB /* animation_group_sequence.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animation_group_sequence.cpp; sourceTree = "<group>"; };
-		7F849908278713BB004127CB /* animation_group_sequence.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animation_group_sequence.hpp; sourceTree = "<group>"; };
 		7F84990B27872F28004127CB /* font_bitmap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = font_bitmap.cpp; sourceTree = "<group>"; };
 		7F84990C27872F28004127CB /* font_bitmap.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = font_bitmap.hpp; sourceTree = "<group>"; };
 		7F8499132787464F004127CB /* key_value.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = key_value.cpp; sourceTree = "<group>"; };
@@ -900,10 +844,6 @@
 		7FCAE7D4278073B9004A6107 /* time.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = time.cpp; sourceTree = "<group>"; };
 		7FCAE7D5278073B9004A6107 /* time.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = time.hpp; sourceTree = "<group>"; };
 		7FCC129327984DD5002ECABD /* engine_events_provider_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_events_provider_interface.h; sourceTree = "<group>"; };
-		7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = value_animator_factory.cpp; sourceTree = "<group>"; };
-		7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = value_animator_factory.hpp; sourceTree = "<group>"; };
-		7FCC81C02780A2A8003025CB /* value_animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = value_animator.cpp; sourceTree = "<group>"; };
-		7FCC81C12780A2A8003025CB /* value_animator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = value_animator.hpp; sourceTree = "<group>"; };
 		7FD5CBE8278A0C7100498B5F /* texture_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = texture_manager.cpp; sourceTree = "<group>"; };
 		7FD5CBE9278A0C7100498B5F /* texture_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = texture_manager.hpp; sourceTree = "<group>"; };
 		7FDDAF9C2776873900578F86 /* room.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = room.cpp; sourceTree = "<group>"; };
@@ -929,10 +869,6 @@
 		7FF21D6D2784C6E0005C52C4 /* callable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = callable.cpp; sourceTree = "<group>"; };
 		7FF21D6E2784C6E0005C52C4 /* callable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = callable.hpp; sourceTree = "<group>"; };
 		7FF21D732784DDE0005C52C4 /* memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
-		7FF21D742784E99A005C52C4 /* property_animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = property_animator.cpp; sourceTree = "<group>"; };
-		7FF21D752784E99A005C52C4 /* property_animator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = property_animator.hpp; sourceTree = "<group>"; };
-		7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = property_animator_factory.cpp; sourceTree = "<group>"; };
-		7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = property_animator_factory.hpp; sourceTree = "<group>"; };
 		7FF641C6277CC72D0017D86D /* general.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
 		7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = polygon_loader.cpp; sourceTree = "<group>"; };
 		7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = polygon_loader.hpp; sourceTree = "<group>"; };
@@ -1547,22 +1483,6 @@
 			children = (
 				4C255DE327859E3100D0B30A /* animation_curve_factory.hpp */,
 				4C255DE227859E3100D0B30A /* animation_curve_factory.cpp */,
-				7FCC81C12780A2A8003025CB /* value_animator.hpp */,
-				7FCC81C02780A2A8003025CB /* value_animator.cpp */,
-				7FCC81BC2780A0C8003025CB /* value_animator_factory.hpp */,
-				7FCC81BB2780A0C8003025CB /* value_animator_factory.cpp */,
-				7FF21D752784E99A005C52C4 /* property_animator.hpp */,
-				7F67034528A6271100319218 /* property_animator_multiple.cpp */,
-				7F67034628A6271100319218 /* property_animator_multiple.hpp */,
-				7FF21D742784E99A005C52C4 /* property_animator.cpp */,
-				7FF21D792784EA33005C52C4 /* property_animator_factory.hpp */,
-				7FF21D782784EA33005C52C4 /* property_animator_factory.cpp */,
-				4C255DE72785BABB00D0B30A /* animation_group_simulateneus.hpp */,
-				4C255DE62785BABB00D0B30A /* animation_group_simulateneus.cpp */,
-				7F849908278713BB004127CB /* animation_group_sequence.hpp */,
-				7F849907278713BB004127CB /* animation_group_sequence.cpp */,
-				4C255DEB2785CA9100D0B30A /* animation_group_factory.hpp */,
-				4C255DEA2785CA9100D0B30A /* animation_group_factory.cpp */,
 				7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */,
 				7F3B100528E30E8B00CB3F60 /* animator.hpp */,
 				7F3B100128E30E8000CB3F60 /* animator.cpp */,
@@ -1674,7 +1594,6 @@
 				7FB2018727941D0200D0F5FE /* sprite_draw_backbuffer.hpp in Headers */,
 				7FBDB67D27AFE18D00B3DFCC /* console_lights.hpp in Headers */,
 				7FCAE7D7278073B9004A6107 /* time.hpp in Headers */,
-				7FF21D772784E99A005C52C4 /* property_animator.hpp in Headers */,
 				7FC131252792FAF20094DF0C /* file_access_provider.h in Headers */,
 				7F138264277505B600ED6D67 /* file_access.hpp in Headers */,
 				7FC131272792FAF20094DF0C /* engine_provider_interface.h in Headers */,
@@ -1686,7 +1605,6 @@
 				7F7AE8D327A9B67F007BEB39 /* object_pool.hpp in Headers */,
 				4C9EA02B2792166F0082EB6A /* texture_metal.hpp in Headers */,
 				7FA2AB39277DD1A600AED89D /* character_manager.hpp in Headers */,
-				4C255DE92785BABB00D0B30A /* animation_group_simulateneus.hpp in Headers */,
 				7F15D02228A64E970057F653 /* holder.hpp in Headers */,
 				7F6428A12779183C00EE9E2C /* polygon.hpp in Headers */,
 				4C9EA023279205C80082EB6A /* texture_target_metal.hpp in Headers */,
@@ -1718,9 +1636,7 @@
 				7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */,
 				7F13827E277505B600ED6D67 /* defs.h in Headers */,
 				7F8E9BCE27B5ABBC00548567 /* engine_metal_buffer_manager.hpp in Headers */,
-				7F67034828A6271100319218 /* property_animator_multiple.hpp in Headers */,
 				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
-				4C255DED2785CA9100D0B30A /* animation_group_factory.hpp in Headers */,
 				7FE2E5DA277B23BC00538094 /* vector2.hpp in Headers */,
 				7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */,
 				7FC1311F2792FAF20094DF0C /* scripting_engine_provider_interface.h in Headers */,
@@ -1730,7 +1646,6 @@
 				7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */,
 				7F67034128A60D5500319218 /* engine_screen.hpp in Headers */,
 				7F08C44327AF20A5002FEB8F /* light_interface.hpp in Headers */,
-				7FCC81C32780A2A8003025CB /* value_animator.hpp in Headers */,
 				7F2497E827B942FA001D871A /* sprite_representation_text.hpp in Headers */,
 				7F138269277505B600ED6D67 /* sprite_atlas.hpp in Headers */,
 				7FE2E5C1277A370D00538094 /* path_finder_line_graph_node.hpp in Headers */,
@@ -1742,7 +1657,6 @@
 				7F13828B277505B600ED6D67 /* common.h in Headers */,
 				7F27C45F28551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F08C45327AF22F2002FEB8F /* light.hpp in Headers */,
-				7FF21D7B2784EA33005C52C4 /* property_animator_factory.hpp in Headers */,
 				7FD5CBEB278A0C7100498B5F /* texture_manager.hpp in Headers */,
 				7FC131192792FAF20094DF0C /* console_renderer_interface.h in Headers */,
 				7F13828A277505B600ED6D67 /* common_engine.h in Headers */,
@@ -1761,9 +1675,7 @@
 				7F40C5A228D2732000B0865F /* gamepad_interface.h in Headers */,
 				7FE14B6427A6D70B008E6DAE /* events_manager_types.hpp in Headers */,
 				7F3470B728527EC600FDED71 /* sound_manager.hpp in Headers */,
-				7FCC81BE2780A0C8003025CB /* value_animator_factory.hpp in Headers */,
 				7FB8241E278993E0008F0F7A /* console_terminal.hpp in Headers */,
-				7F84990A278713BB004127CB /* animation_group_sequence.hpp in Headers */,
 				7FCAE7CC277E543E004A6107 /* sprite_renderer_manager.hpp in Headers */,
 				7F08C44F27AF21E2002FEB8F /* light_metal.hpp in Headers */,
 				7FC4CFFC28969603006E92F6 /* static_objects.hpp in Headers */,
@@ -1804,7 +1716,6 @@
 				7F3E8EA2279AC8F9003BB7B6 /* font_interface.h in Headers */,
 				7FC971EC27AF3B9A00049146 /* light.hpp in Headers */,
 				7F3E8EA3279AC8F9003BB7B6 /* character_mover_interface.h in Headers */,
-				7FB6520328CE65F8006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */,
 				7F3E8EA5279AC8F9003BB7B6 /* character_renderer_interface.h in Headers */,
 				7F3E8EA6279AC8F9003BB7B6 /* texture_interface.h in Headers */,
@@ -1823,13 +1734,6 @@
 				7F3E8EB3279AC8F9003BB7B6 /* animation_curve_factory.hpp in Headers */,
 				7F2DAFFF28E040DD0044EF8D /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3470B628527EC600FDED71 /* sound_manager.hpp in Headers */,
-				7F3E8EB4279AC8F9003BB7B6 /* value_animator.hpp in Headers */,
-				7F3E8EB5279AC8F9003BB7B6 /* value_animator_factory.hpp in Headers */,
-				7F3E8EB6279AC8F9003BB7B6 /* property_animator.hpp in Headers */,
-				7F3E8EB7279AC8F9003BB7B6 /* property_animator_factory.hpp in Headers */,
-				7F3E8EB8279AC8F9003BB7B6 /* animation_group_simulateneus.hpp in Headers */,
-				7F3E8EB9279AC8F9003BB7B6 /* animation_group_sequence.hpp in Headers */,
-				7F3E8EBA279AC8F9003BB7B6 /* animation_group_factory.hpp in Headers */,
 				7F6D1C86279F14690078D76A /* ini_reader.hpp in Headers */,
 				7F3E8EBB279AC8F9003BB7B6 /* character_mover.hpp in Headers */,
 				7F2497E927B942FA001D871A /* sprite_representation_text.hpp in Headers */,
@@ -1926,7 +1830,6 @@
 				7F3E90C4279B03F6003BB7B6 /* font_interface.h in Headers */,
 				7FC971EE27AF3B9A00049146 /* light.hpp in Headers */,
 				7F3E90C5279B03F6003BB7B6 /* character_mover_interface.h in Headers */,
-				7FB6520428CE65F9006F7030 /* property_animator_multiple.hpp in Headers */,
 				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
 				7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */,
 				7F3E90C8279B03F6003BB7B6 /* texture_interface.h in Headers */,
@@ -1945,13 +1848,6 @@
 				7F3E90D5279B03F6003BB7B6 /* animation_curve_factory.hpp in Headers */,
 				7F2DB00028E040DD0044EF8D /* RendererEntryViewController+Protocol.h in Headers */,
 				7F3470B528527EC500FDED71 /* sound_manager.hpp in Headers */,
-				7F3E90D6279B03F6003BB7B6 /* value_animator.hpp in Headers */,
-				7F3E90D7279B03F6003BB7B6 /* value_animator_factory.hpp in Headers */,
-				7F3E90D8279B03F6003BB7B6 /* property_animator.hpp in Headers */,
-				7F3E90D9279B03F6003BB7B6 /* property_animator_factory.hpp in Headers */,
-				7F3E90DA279B03F6003BB7B6 /* animation_group_simulateneus.hpp in Headers */,
-				7F3E90DB279B03F6003BB7B6 /* animation_group_sequence.hpp in Headers */,
-				7F3E90DC279B03F6003BB7B6 /* animation_group_factory.hpp in Headers */,
 				7F6D1C87279F14690078D76A /* ini_reader.hpp in Headers */,
 				7F3E90DD279B03F6003BB7B6 /* character_mover.hpp in Headers */,
 				7F2497EA27B942FA001D871A /* sprite_representation_text.hpp in Headers */,
@@ -2309,11 +2205,9 @@
 				7F7EA07628967E7400A09199 /* system_utils.cpp in Sources */,
 				7FE2E5C8277A3D0000538094 /* path_finder_helper.cpp in Sources */,
 				7FB823E32788E199008F0F7A /* console_renderer.mm in Sources */,
-				7FF21D762784E99A005C52C4 /* property_animator.cpp in Sources */,
 				7F2DB00E28E0413D0044EF8D /* RendererEntry.m in Sources */,
 				7F13826B277505B600ED6D67 /* sprite_representation_animated.cpp in Sources */,
 				7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */,
-				4C255DE82785BABB00D0B30A /* animation_group_simulateneus.cpp in Sources */,
 				7FDDAF9E2776873900578F86 /* room.cpp in Sources */,
 				7F2CD18528D5E51200A5516D /* gamepad_apple_handle.mm in Sources */,
 				7F8E9BCB27B5ABBC00548567 /* engine_metal_buffer_manager.cpp in Sources */,
@@ -2357,12 +2251,9 @@
 				7F7967CB27752175003ABD3E /* file_memory_buffer_stream_file.cpp in Sources */,
 				7FC4CFFB28969603006E92F6 /* static_objects.cpp in Sources */,
 				7F3B100B28E310E500CB3F60 /* animator_factory.cpp in Sources */,
-				7F849909278713BB004127CB /* animation_group_sequence.cpp in Sources */,
-				7FCC81C22780A2A8003025CB /* value_animator.cpp in Sources */,
 				7FE2E5D0277B13B000538094 /* path.cpp in Sources */,
 				7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */,
 				7F2DAFF728E03F990044EF8D /* globals.cpp in Sources */,
-				7F67034728A6271100319218 /* property_animator_multiple.cpp in Sources */,
 				7F869FBA2780C41F00E8CB01 /* periodic_updates_manager.cpp in Sources */,
 				7F64289327787C2E00EE9E2C /* texture_target.cpp in Sources */,
 				7F63D82F279A0C9500139E14 /* RendererEntryViewController.mm in Sources */,
@@ -2376,7 +2267,6 @@
 				7F138253277505B600ED6D67 /* texture.cpp in Sources */,
 				7F138263277505B600ED6D67 /* file_access.mm in Sources */,
 				7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */,
-				7FCC81BD2780A0C8003025CB /* value_animator_factory.cpp in Sources */,
 				7F6D1CA6279F503B0078D76A /* RendererEntryViewController+Events.mm in Sources */,
 				7F6428A02779183C00EE9E2C /* polygon.cpp in Sources */,
 				7F3B0FFE28E30C3000CB3F60 /* property_manupulator.cpp in Sources */,
@@ -2386,10 +2276,8 @@
 				7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */,
 				4C9EA02A2792166F0082EB6A /* texture_metal.mm in Sources */,
 				4C9EA03027921D8D0082EB6A /* AAPLImage.mm in Sources */,
-				4C255DEC2785CA9100D0B30A /* animation_group_factory.cpp in Sources */,
 				7F869FC22780F6F800E8CB01 /* engine_state.cpp in Sources */,
 				7F13827D277505B600ED6D67 /* engine.cpp in Sources */,
-				7FF21D7A2784EA33005C52C4 /* property_animator_factory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2418,15 +2306,8 @@
 				7F3E8EF0279AC909003BB7B6 /* engine_state.cpp in Sources */,
 				7F3E8EF1279AC909003BB7B6 /* animation_curve_factory.cpp in Sources */,
 				7F7EA07C28967EEF00A09199 /* system_utils_mac.mm in Sources */,
-				7F3E8EF2279AC909003BB7B6 /* value_animator.cpp in Sources */,
-				7F3E8EF3279AC909003BB7B6 /* value_animator_factory.cpp in Sources */,
-				7F3E8EF4279AC909003BB7B6 /* property_animator.cpp in Sources */,
-				7F3E8EF5279AC909003BB7B6 /* property_animator_factory.cpp in Sources */,
 				7FBDB67B27AFE18D00B3DFCC /* console_lights.cpp in Sources */,
-				7F3E8EF6279AC909003BB7B6 /* animation_group_simulateneus.cpp in Sources */,
-				7F3E8EF7279AC909003BB7B6 /* animation_group_sequence.cpp in Sources */,
 				7F3B100328E30E8000CB3F60 /* animator.cpp in Sources */,
-				7F3E8EF8279AC909003BB7B6 /* animation_group_factory.cpp in Sources */,
 				7F3E8EF9279AC909003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E8EFA279AC909003BB7B6 /* path_finder_helper.cpp in Sources */,
 				7F3470B928527F9700FDED71 /* sound_manager.cpp in Sources */,
@@ -2454,7 +2335,6 @@
 				7F3E8F09279AC909003BB7B6 /* character_manager.cpp in Sources */,
 				7F3E8F0A279AC909003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */,
-				7FB6520528CE65FC006F7030 /* property_animator_multiple.cpp in Sources */,
 				7F2DAFF828E03F990044EF8D /* globals.cpp in Sources */,
 				7F3E8F0C279AC909003BB7B6 /* scripting_engine.cpp in Sources */,
 				7F3E8F0D279AC909003BB7B6 /* callable.cpp in Sources */,
@@ -2519,15 +2399,8 @@
 				7F3E9119279B03F6003BB7B6 /* engine_state.cpp in Sources */,
 				7F3E911A279B03F6003BB7B6 /* animation_curve_factory.cpp in Sources */,
 				7F7EA07D28967EEF00A09199 /* system_utils_mac.mm in Sources */,
-				7F3E911B279B03F6003BB7B6 /* value_animator.cpp in Sources */,
-				7F3E911C279B03F6003BB7B6 /* value_animator_factory.cpp in Sources */,
-				7F3E911D279B03F6003BB7B6 /* property_animator.cpp in Sources */,
-				7F3E911E279B03F6003BB7B6 /* property_animator_factory.cpp in Sources */,
 				7FBDB67C27AFE18D00B3DFCC /* console_lights.cpp in Sources */,
-				7F3E911F279B03F6003BB7B6 /* animation_group_simulateneus.cpp in Sources */,
-				7F3E9120279B03F6003BB7B6 /* animation_group_sequence.cpp in Sources */,
 				7F3B100428E30E8000CB3F60 /* animator.cpp in Sources */,
-				7F3E9121279B03F6003BB7B6 /* animation_group_factory.cpp in Sources */,
 				7F3E9122279B03F6003BB7B6 /* character_mover.cpp in Sources */,
 				7F3E9123279B03F6003BB7B6 /* path_finder_helper.cpp in Sources */,
 				7F3470B828527F9700FDED71 /* sound_manager.cpp in Sources */,
@@ -2555,7 +2428,6 @@
 				7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */,
 				7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */,
-				7FB6520628CE65FD006F7030 /* property_animator_multiple.cpp in Sources */,
 				7F2DAFF928E03F990044EF8D /* globals.cpp in Sources */,
 				7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */,
 				7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */,

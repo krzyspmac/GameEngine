@@ -20,12 +20,9 @@
 #include "sprite_atlas_manager_interface.h"
 #include "sprite_renderer_manager.hpp"
 #include "periodic_updates_manager.hpp"
-#include "value_animator_factory.hpp"
-#include "property_animator_factory.hpp"
 #include "time.hpp"
 #include "engine_state.hpp"
 #include "release_pool.hpp"
-#include "animation_group_factory.hpp"
 #include "console_renderer.h"
 #include "texture_manager.hpp"
 #include "font_manager.hpp"
@@ -34,6 +31,7 @@
 #include "sound_manager.hpp"
 #include "engine_screen.hpp"
 #include "engine_state_interface.h"
+#include "animation_curve_factory.hpp"
 
 namespace engine
 {
@@ -198,12 +196,6 @@ namespace engine
         Time& getTime() { return m_time; };
 
         ///
-        ValueAnimatorFactoryI& getValueAnimatorFactory() { return m_valueAnimatorFactory; };
-
-        ///
-        PropertyAnimatorFactoryI& getPropertyAnimatorFactory() { return m_propertyAnimatorFactory; };
-
-        ///
         PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };
 
         ///
@@ -214,9 +206,6 @@ namespace engine
         
         ///
         MemoryReleasePool& getReleasePool() { return m_releasePool; };
-        
-        ///
-        AnimationGroupFactory& getAnimationGroupFactory() { return m_animationGroupFactory; };
 
         ///
         ConsoleRendererI& getConsoleRenderer() { return m_consoleRenderer; };
@@ -254,10 +243,7 @@ namespace engine
 
         engine::Origin m_mousePosition;
         Time m_time;
-        ValueAnimatorFactory m_valueAnimatorFactory;
-        PropertyAnimatorFactory m_propertyAnimatorFactory;
         PeriodicUpdatesManager m_periodicUpdatesManager;
-        AnimationGroupFactory m_animationGroupFactory;
         MemoryReleasePool m_releasePool;
         ConsoleRendererI &m_consoleRenderer;
     };

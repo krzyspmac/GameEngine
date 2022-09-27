@@ -15,7 +15,12 @@ namespace engine
     class AnimatorFactory: public AnimatorFactoryI
     {
     public:
-        void Animate(float delay, float seconds, AnimationCurveLambda curve, std::function<void(AnimatorI*)> block);
+        void Animate(float delay,
+                     float seconds,
+                     AnimationCurveLambda curve,
+                     std::function<void(AnimatorI*)> block,
+                     std::function<void(void)> didFinishBlock
+                     );
     };
 };
 

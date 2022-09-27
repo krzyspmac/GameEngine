@@ -32,6 +32,9 @@ public: // GameSceneI
 
 private:
     void ContinueAnimation();
+
+    void FadeIn();
+    void FadeOut();
 };
 
 #endif /* GameSceneIntro_hpp */
