@@ -48,7 +48,8 @@ GameSceneIntro::FrameUpdate() {
 void
 GameSceneIntro::ContinueAnimation() {
     FadeIn();
-    ScaleIn();
+//    ScaleIn();
+    PositionIn();
 }
 
 void
@@ -57,7 +58,7 @@ GameSceneIntro::FadeIn()
     auto animator = engine::Globals::animator();
     auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
 
-    animator->Animate(1, .01, curve, [&](auto *animator){
+    animator->Animate(1, .1, curve, [&](auto *animator){
         m_textSprite->animator()->SetAlpha(animator, 1.0);
     }, [&](void) {
         FadeOut();
@@ -82,9 +83,21 @@ GameSceneIntro::FadeOut()
     auto animator = engine::Globals::animator();
     auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
 
-    animator->Animate(1, .01, curve, [&](auto *animator){
+    animator->Animate(1, .1, curve, [&](auto *animator){
         m_textSprite->animator()->SetAlpha(animator, 0.0);
     }, [&](void){
         FadeIn();
+    });
+}
+
+void
+GameSceneIntro::PositionIn()
+{
+    auto animator = engine::Globals::animator();
+    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+
+    animator->Animate(1, 5, curve, [&](auto *animator){
+        m_textSprite->animator()->SetPosition(animator, {150, 500});
+    }, [&](void){
     });
 }

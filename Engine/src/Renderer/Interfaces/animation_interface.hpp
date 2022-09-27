@@ -99,6 +99,7 @@ namespace engine
 
         void SetAlpha(AnimatorI*, float);
         void SetScale(AnimatorI*, float);
+        void SetPosition(AnimatorI*, Vector2);
     };
 
     /**  */

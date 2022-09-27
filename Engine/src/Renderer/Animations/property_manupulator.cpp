@@ -34,3 +34,17 @@ void PropertyManupulator::SetScale(AnimatorI* animator, float wantedValue)
         m_weakParent->SetScale(val);
     });
 }
+
+void PropertyManupulator::SetPosition(AnimatorI* animator, Vector2 wantedValue)
+{
+    auto& startPosition = m_weakParent->GetPosition();
+    Vector2 endPosition = wantedValue;
+
+    animator->Register([startPosition, endPosition, this](AnimatorI *sender){
+        auto& curve = sender->GetCurve();
+        auto progress = sender->GetProgress();
+        float x = curve(startPosition.x, endPosition.x, progress);
+        float y = curve(startPosition.y, endPosition.y, progress);
+        m_weakParent->SetPosition({x, y});
+    });
+}
