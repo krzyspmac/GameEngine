@@ -18,7 +18,6 @@ void PropertyManupulator::SetAlpha(AnimatorI* animator, float wantedValue)
         auto& curve = sender->GetCurve();
         auto progress = sender->GetProgress();
         float val = curve(min, max, progress);
-        printf("progress=%f\n", progress);
         m_weakParent->SetAlpha(val);
     });
 }

@@ -44,10 +44,7 @@ void Animator::UpdateBlocks()
 
 void Animator::Update() {
     m_secondsCurrent = m_time.GetEngineStartSec() - m_secondsStart;
-    printf("udpate %1.2f seconds\n", m_secondsCurrent);
-
     m_progress = MIN(1.f, m_secondsCurrent / m_secondsDuration);
-
     UpdateBlocks();
 
     if (m_progress >= 1.f) {

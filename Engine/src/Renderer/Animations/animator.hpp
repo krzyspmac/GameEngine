@@ -28,10 +28,7 @@ namespace engine
     public:
         Animator(double delay, double duration, Time& time, AnimationCurveLambda curve);
 
-        ~Animator()
-        {
-            printf("Animator deallocation");
-        }
+        ~Animator() { }
 
         double GetProgress() {
             return m_progress;
