@@ -27,9 +27,6 @@
 #include "light_interface.hpp"
 #include "animation_interface.hpp"
 #include "callable_interface.h"
-#include "value_animator_interface.h"
-#include "value_animator_factory_interface.h"
-#include "property_animator_factory_interface.h"
 
 #include "globals.hpp"
 

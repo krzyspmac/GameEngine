@@ -18,9 +18,6 @@ class GameSceneIntro: public GameSceneI {
     engine::SceneI *m_scene;
     engine::SpriteRepresentationTextI *m_textSprite;
     std::vector<std::string> m_texts;
-
-    engine::PropertyAnimatorI *m_fadeIn;
-    engine::PropertyAnimatorI *m_fadeOut;
 public: // GameSceneIntro
     GameSceneIntro(GameResolutionState*);
     void FrameUpdate();
