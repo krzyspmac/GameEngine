@@ -16,6 +16,10 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
 
     auto size = m_resState->GetViewportSize();
 
+    auto* atlas = engine::Globals::spriteAtlasManager();
+    auto* atlasItem = atlas->SpriteAtlasLoad("background.json", "background.png");
+    m_background = m_scene->SpriteStaticLoad(atlasItem, "background.png");
+
     m_textSprite->SetText("Test");
     m_textSprite->SetPosition({size.x / 2, size.y / 2});
     m_textSprite->SetColorMod({1.f, 1.f, 1.f, 1.f});
@@ -23,6 +27,9 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_textSprite->SetVerticalAlignment("middle");
     m_textSprite->SetScale(2.0f);
     m_textSprite->SetAlpha(0.0f);
+    m_textSprite->SetAcceptsLight(true);
+
+    m_light = m_scene->CreateLight("linear", {0.f, 1.f, 0.f}, 0.5, {100, 100}, 50, 1.);
 
     m_scene->SetFrameUpdate([&]{
         FrameUpdate();

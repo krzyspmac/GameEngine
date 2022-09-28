@@ -30,6 +30,11 @@ FontManagerI * Globals::fontManager()
     return static_cast<FontManagerI*>(&(ENGINE().getFontManager()));
 }
 
+SpriteAtlasManagerI* Globals::spriteAtlasManager()
+{
+    return static_cast<SpriteAtlasManagerI*>(&(ENGINE().getAtlasManager()));
+}
+
 SceneManagerI * Globals::sceneManager()
 {
     return static_cast<SceneManagerI*>(&(ENGINE().getSceneManager()));

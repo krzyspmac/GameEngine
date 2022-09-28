@@ -25,6 +25,8 @@ namespace engine
 
         static FontManagerI *fontManager();
 
+        static SpriteAtlasManagerI* spriteAtlasManager();
+
         static SceneManagerI *sceneManager();
 
         static AnimatorFactoryI *animator();

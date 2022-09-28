@@ -17,6 +17,8 @@ class GameSceneIntro: public GameSceneI {
     engine::FontI *m_font;
     engine::SceneI *m_scene;
     engine::SpriteRepresentationTextI *m_textSprite;
+    engine::SpriteRepresentationI *m_background;
+    engine::LightI *m_light;
     std::vector<std::string> m_texts;
 public: // GameSceneIntro
     GameSceneIntro(GameResolutionState*);
