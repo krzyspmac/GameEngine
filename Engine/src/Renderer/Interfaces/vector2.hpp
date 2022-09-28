@@ -44,19 +44,96 @@ namespace engine
         {
             this->x = 0;
             this->y = 0;
-        }
+        };
 
         Vector2(float x, float y)
         {
             this->x = x;
             this->y = y;
-        }
+        };
 
         Vector2(Vector2 *other)
         {
             this->x = other->x;
             this->y = other->y;
+        };
+
+        static Vector2 shared()
+        {
+            return Vector2();
+        };
+
+        double length()
+        {
+            return sqrt((this->x * this->x) + (this->y * this->y));
+        };
+
+        double length_squqred()
+        {
+            return ((this->x * this->x) + (this->y * this->y));
+        };
+
+        bool is_unit()
+        {
+            return length_squqred() == 1.0;
         }
+
+        void normalize()
+        {
+            double len = this->length();
+
+            if (len != 0.0 && len != 1.0)
+            {
+                this->x /= len;
+                this->y /= len;
+            }
+        }
+
+        Vector2 normalized()
+        {
+            Vector2 copy = Vector2(this);
+            copy.normalize();
+            return copy;
+        }
+
+        void inverse()
+        {
+            this->x = -this->x;
+            this->y = -this->y;
+        }
+
+        Vector2 inversed()
+        {
+            Vector2 copy = Vector2(this);
+            copy.inverse();
+            return copy;
+        }
+
+        Vector2 operator * (double value)
+        {
+            return Vector2(this->x * value, this->y * value);
+        };
+
+        Vector2 operator + (Vector2 const &rhs)
+        {
+            return Vector2(this->x + rhs.x, this->y + rhs.y);
+        };
+
+        Vector2 operator += (Vector2 const &rhs)
+        {
+            return Vector2(this->x + rhs.x, this->y + rhs.y);
+        };
+
+        Vector2 operator *= (double value)
+        {
+            return Vector2(this->x * value, this->y * value);
+        }
+
+        bool operator == (Vector2 const &rhs)
+        {
+            return this->x == rhs.x && this->y == rhs.y;
+        };
+
     } Vector2;
 
     const Vector2 Vector2Zero = {0, 0};
