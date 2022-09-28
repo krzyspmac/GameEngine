@@ -9,8 +9,8 @@
 #define event_provider_interface_h
 
 #include "common.h"
-#include "interfaces.h"
-#include "event_provider_interface.h"
+#include "size.hpp"
+#include "vector2.hpp"
 
 namespace engine
 {

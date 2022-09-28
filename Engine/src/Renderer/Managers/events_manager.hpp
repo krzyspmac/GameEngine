@@ -18,6 +18,7 @@
 #include "events_manager_types.hpp"
 #include "object_pool.hpp"
 #include "gamepad_interface.h"
+#include "events_manager_interface.h"
 
 namespace engine
 {
@@ -31,13 +32,6 @@ namespace engine
     /** Holder for mouse moved events for scripting. Provides the position. */
     /** @private */
     class EventHolderMouseMovedScript: public EventHolderScriptCallableMousePosition
-    {
-        using EventHolderScriptCallableMousePosition::EventHolderScriptCallableMousePosition;
-    };
-
-    /** Holder for mouse clicked events for scripting. Provides the position. */
-    /** @private */
-    class EventHolderMouseClickedScript: public EventHolderScriptCallableMousePosition
     {
         using EventHolderScriptCallableMousePosition::EventHolderScriptCallableMousePosition;
     };
@@ -56,25 +50,20 @@ namespace engine
         using EventHolderKeyShortcutPressedLambda::EventHolderKeyShortcutPressedLambda;
     };
 
-    /**
-     EventsManager
-     \addtogroup API_GLOBALS
-     */
-    /** Allows for registering for keyboard & mouse events
-     */
-    class EventsManager
+    class EventsManager: public EventsManagerI
     {
     public:
         /** The main constructor.
          @private */
         EventsManager(EventProviderI &provider, EngineProviderI &engineProvider);
 
-    public: /** General events handling */
-        /** Returns 1 when quit is expected.
-            @private */
+    public: // EventsManagerI
         int DoEvents();
 
-    public: /** Register for various events */
+        EventIdentifier RegisterGamepadConnection(std::shared_ptr<CallableParameters2<GamepadI*, bool>>);
+
+    public: // other
+
         /** Register a mouse move events for C++.
             @private */
         EventIdentifier RegisterMouseMovedEvents(std::function<void(Origin*)> lambda);
@@ -88,7 +77,7 @@ namespace engine
             end)
             \endcode
          */
-        EventIdentifier RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float>);
+//        EventIdentifier RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float>);
 
         /** Register a mouse click event handler for C++.
             @private */
@@ -102,7 +91,7 @@ namespace engine
             end)
             \endcode
             */
-        EventIdentifier RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float>);
+//        EventIdentifier RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float>);
 
         /** Register a key combination for C++.
             @private */
@@ -123,35 +112,13 @@ namespace engine
 
         EventIdentifier RegisterKeyUp(CallableScriptFunctionParameters1<char>);
 
-        /** Register a left thumbstick axis change. If not avilable will not get called
-
-            \code{lua}
-             EventsManager:RegisterLeftThumbstickAxis(function(x, y)
-                 -- process, like: self.vector:set(x, y)
-             end)
-            \endcode
-         */
-        EventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
-
-
-        /** Register a right thumbstick axis change. If not avilable will not get called
-
-            \code{lua}
-             EventsManager:RegisterRightThumbstickAxis(function(x, y)
-                 -- process, like: self.vector:set(x, y)
-             end)
-            \endcode
-         */
-        EventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
-
-        /** Register for gamepad connection/disconnection */
-        EventIdentifier RegisterGamepadConnection(CallableScriptFunctionParameters2<GamepadI, bool>);
-
         /** Retrieve the gamepads */
         auto& GetGamepads() { return m_gamepads; };
 
         /** Unregisters an event for a given identifier. */
         void UnregisterEvent(EventIdentifier);
+
+        void Unregister(EventHolderIdentifier*);
 
         /** @private */
         void UnregisterAllEvents();
@@ -179,15 +146,9 @@ namespace engine
         EventProviderI &m_eventProvider;
         EngineProviderI &m_engineProvider;
         std::vector<EventHolderMouseMoved> m_mouseMoves;
-        std::vector<EventHolderMouseMovedScript> m_mouseMovesScript;
         std::vector<EventHolderMouseClicked> m_mouseClicks;
-        std::vector<EventHolderMouseClickedScript> m_mouseClickedScript;
-        std::vector<EventHolderKeyShortcutLambda> m_keyshortcuts;
-        std::vector<EventHolderKeyShortcutPressedScript> m_keyshortcutsScript;
         std::vector<EventHolderKeyDown> m_keyDowns;
         std::vector<EventHolderKeyDown> m_keyUps;
-        std::vector<EventHolderGamepadStickAxis> m_leftStickAxisChange;
-        std::vector<EventHolderGamepadStickAxis> m_rightStickAxisChange;
         std::vector<EventHolderGamepadConnection> m_gamepadConnection;
         std::vector<std::unique_ptr<GamepadI>> m_gamepads;
         bool m_shiftKeyDown;

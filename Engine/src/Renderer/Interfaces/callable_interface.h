@@ -153,9 +153,18 @@ namespace engine
         CallableParameters2(std::function<void(A, B)> fnc)
             : m_fnc(fnc)
         { };
-        virtual ~CallableParametersEmpty() { };
-        bool CanCall() { return m_fnc != nullptr; };
+        virtual ~CallableParametersEmpty() {
+
+        };
+        bool CanCall() { return m_fnc != nullptr; }; //return m_fnc != nullptr; };
         void Call(A p1, B p2) { if (CanCall()) m_fnc(p1, p2); };
+
+        static std::shared_ptr<CallableParameters2<A, B>> make_shared(std::function<void(A, B)> fnc) {
+            return std::shared_ptr<CallableParameters2<A, B>>(
+                  new CallableParameters2<A, B>(fnc)
+            );
+            return nullptr;
+        }
     };
 
     /** A wrapper for the 3 params callable function */

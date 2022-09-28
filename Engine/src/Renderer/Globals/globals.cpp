@@ -25,6 +25,11 @@ EngineStateI * Globals::engineState()
     return static_cast<EngineStateI*>(&(ENGINE().getEngineState()));
 }
 
+EventsManagerI *Globals::eventsManager()
+{
+    return static_cast<EventsManagerI*>(&(ENGINE().getEventsManager()));
+}
+
 FontManagerI * Globals::fontManager()
 {
     return static_cast<FontManagerI*>(&(ENGINE().getFontManager()));

@@ -12,7 +12,6 @@
 #include "interfaces.h"
 #include "gamepad_interface.h"
 #include "events_manager_types.hpp"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -39,16 +38,13 @@ namespace engine
 
         void UnregisterEvent(GamepadEventIdentifier);
         void UnregisterAllEvents();
-        GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
-        GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>);
-        GamepadEventIdentifier RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>);
-        GamepadEventIdentifier RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float>);
-        void SetLight(Color3 color);
-    private:
 
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(Gamepad);
+        GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableParameters1<Vector2>);
+        GamepadEventIdentifier RegisterRightThumbstickAxis(CallableParameters1<Vector2>);
+        GamepadEventIdentifier RegisterDpadAxis(CallableParameters1<Vector2>);
+        GamepadEventIdentifier RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float>);
+
+        void SetLight(Color3 color);
     };
 };
 

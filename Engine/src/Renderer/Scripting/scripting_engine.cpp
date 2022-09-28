@@ -173,9 +173,9 @@ void ScriptingEngine::registerFunctions()
 //    fontManager.ScriptingInterfaceRegisterFunctions(L, &fontManager);
 //    lua_setglobal(L, "FontManager");
 
-    EventsManager &eventsManager = ENGINE().getEventsManager();
-    eventsManager.ScriptingInterfaceRegisterFunctions(L, &eventsManager);
-    lua_setglobal(L, "EventsManager");
+//    EventsManager &eventsManager = ENGINE().getEventsManager();
+//    eventsManager.ScriptingInterfaceRegisterFunctions(L, &eventsManager);
+//    lua_setglobal(L, "EventsManager");
 
     LightManager &lightManager = ENGINE().getLightMnaager();
     lightManager.ScriptingInterfaceRegisterFunctions(L, &lightManager);

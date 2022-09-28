@@ -27,6 +27,7 @@
 #include "light_interface.hpp"
 #include "animation_interface.hpp"
 #include "callable_interface.h"
+#include "events_manager_interface.h"
 
 #include "globals.hpp"
 

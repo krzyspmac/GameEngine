@@ -16,28 +16,14 @@
 #include "scripting_engine_provider_interface.h"
 #include "gamepad_interface.h"
 #include "callable.hpp"
+#include "callable_interface.h"
+#include "events_manager_interface.h"
 #include "defs.h"
 
 #define KEY_TABLE_SIZE 256
 
 namespace engine
 {
-    /** Holder identifier
-     @private
-     */
-    typedef unsigned int EventIdentifier;
-
-    /** The base for all event holders */
-    class EventHolderIdentifier
-    {
-        EventIdentifier m_identifier;
-    public:
-        EventHolderIdentifier(EventIdentifier identifier)
-            : m_identifier(identifier)
-        { };
-
-        auto GetIdentifier() { return m_identifier; };
-    };
 
     /** The base class for all event holder types. Identifier is used to mark
         the event in order to remove it from the event hander list. */
@@ -125,26 +111,11 @@ namespace engine
     };
 
     /** Script variation of the EventHolderKeyShortcutPressed */
-    class EventHolderKeyShortcutPressedScript: public EventHolderI<void>, public EventHolderKeyShortcutPressed, public EventHolderScript
-    {
-        CallableScriptFunctionParametersEmpty m_script;
-    public:
-        EventHolderKeyShortcutPressedScript(EventIdentifier identifier, CallableScriptFunctionParametersEmpty fnc, std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys)
-            : EventHolderI<void>(identifier)
-            , EventHolderKeyShortcutPressed(modifiers, keys)
-            , EventHolderScript()
-            , m_script(fnc)
-        { };
-
-        void Process(void *val);
-    };
-
-    /** Script variation of the EventHolderKeyShortcutPressed */
     class EventHolderKeyDown: public EventHolderI<char>, public EventHolderScript
     {
-        CallableScriptFunctionParameters1<char> m_script;
+        CallableParameters1<char> m_script;
     public:
-        EventHolderKeyDown(EventIdentifier identifier, CallableScriptFunctionParameters1<char> fnc)
+        EventHolderKeyDown(EventIdentifier identifier, CallableParameters1<char> fnc)
             : EventHolderI<char>(identifier)
             , EventHolderScript()
             , m_script(fnc)
@@ -154,25 +125,25 @@ namespace engine
     };
 
     /** Gamepad Connection Event Handler */
-    class EventHolderGamepadConnection: public EventHolderI<GamepadI>, public EventHolderScript
+    class EventHolderGamepadConnection: public EventHolderI<GamepadI*>, public EventHolderScript
     {
-        CallableScriptFunctionParameters2<GamepadI, bool> m_script;
+        std::shared_ptr<CallableParameters2<GamepadI*, bool>> m_script;
     public:
-        EventHolderGamepadConnection(EventIdentifier identifier, CallableScriptFunctionParameters2<GamepadI, bool> fnc)
-            : EventHolderI<GamepadI>(identifier)
+        EventHolderGamepadConnection(EventIdentifier identifier, std::shared_ptr<CallableParameters2<GamepadI*, bool>> fnc)
+            : EventHolderI<GamepadI*>(identifier)
             , EventHolderScript()
             , m_script(fnc)
         { };
 
-        void Process(GamepadI*);
+        void Process(GamepadI**);
     };
 
     /** Gamepad Stick Event Handler */
     class EventHolderGamepadStickAxis: public EventHolderI<Vector2>, public EventHolderScript
     {
-        CallableScriptFunctionParameters1<Vector2> m_script;
+        CallableParameters1<Vector2> m_script;
     public:
-        EventHolderGamepadStickAxis(EventIdentifier identifier, CallableScriptFunctionParameters1<Vector2> fnc)
+        EventHolderGamepadStickAxis(EventIdentifier identifier, CallableParameters1<Vector2> fnc)
             : EventHolderI<Vector2>(identifier)
             , EventHolderScript()
             , m_script(fnc)

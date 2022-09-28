@@ -11,7 +11,7 @@
 #include "common.h"
 #include "interfaces.h"
 #include "event_provider_interface.h"
-#include "callable.hpp"
+#include "callable_interface.h"
 
 namespace engine
 {
@@ -37,10 +37,10 @@ namespace engine
         virtual void ProcessButtonEvent(GamepadButtonActionHolder*) = 0;
         virtual void UnregisterEvent(GamepadEventIdentifier) = 0;
         virtual void UnregisterAllEvents() = 0;
-        virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float>) = 0;
+        virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableParameters1<Vector2>) = 0;
+        virtual GamepadEventIdentifier RegisterRightThumbstickAxis(CallableParameters1<Vector2>) = 0;
+        virtual GamepadEventIdentifier RegisterDpadAxis(CallableParameters1<Vector2>) = 0;
+        virtual GamepadEventIdentifier RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float>) = 0;
 
         virtual void SetLight(Color3) = 0;
     };

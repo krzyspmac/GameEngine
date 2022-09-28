@@ -14,6 +14,24 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
       , "Drop me a line if wish.\nMore in the game menu"
     };
 
+    m_scene->SetFrameUpdate([&]{
+        FrameUpdate();
+    });
+
+//    std::shared_ptr<CallableParameters2<GamepadI *, bool>> ptr =
+//        std::shared_ptr<CallableParameters2>(new CallableParameters2<GamePad)
+//
+//    engine::Globals::eventsManager()
+//        ->RegisterGamepadConnection(
+//                                    std::shared_ptr<CallableParameters2<GamepadI *, bool>>(new CallableParameters2()
+//                                    );
+
+    m_callabackGamepadConnection = engine::CallableParameters2<engine::GamepadI *, bool>::make_shared([&](auto* gamepad, bool){
+
+    });
+    m_callabackGamepadConnectionId = engine::Globals::eventsManager()->RegisterGamepadConnection(m_callabackGamepadConnection);
+    engine::Globals::eventsManager()->UnregisterEvent(m_callabackGamepadConnectionId);
+
     auto size = m_resState->GetViewportSize();
 
     auto* atlasMgr = engine::Globals::spriteAtlasManager();
@@ -37,9 +55,7 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
 
     m_light = m_scene->CreateLight("linear", {0.f, 1.f, 0.f}, 0.5, {100, 100}, 50, 1.);
 
-    m_scene->SetFrameUpdate([&]{
-        FrameUpdate();
-    });
+    
 
     ContinueAnimation();
 }

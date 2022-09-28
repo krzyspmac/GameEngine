@@ -83,31 +83,31 @@ void Gamepad::UnregisterAllEvents()
     m_buttonChange.clear();
 }
 
-GamepadEventIdentifier Gamepad::RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2> fnc)
+GamepadEventIdentifier Gamepad::RegisterLeftThumbstickAxis(CallableParameters1<Vector2> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_leftStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2> fnc)
+GamepadEventIdentifier Gamepad::RegisterRightThumbstickAxis(CallableParameters1<Vector2> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_rightStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2> fnc)
+GamepadEventIdentifier Gamepad::RegisterDpadAxis(CallableParameters1<Vector2> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_dpadAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float> fnc)
+GamepadEventIdentifier Gamepad::RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-    m_buttonChange.push_back(EventHolderGamepadButton(identifier, fnc));
+//    m_buttonChange.push_back(EventHolderGamepadButton(identifier, fnc));
     return identifier;
 }
 
@@ -116,66 +116,4 @@ void Gamepad::SetLight(Color3 color)
     if (m_handle != nullptr)
     {   m_handle->SetLight(color);
     }
-}
-
-/** Scripting interface */
-
-SCRIPTING_INTERFACE_IMPL_NAME(Gamepad);
-
-static int lua_RegisterLeftThumbstickAxis(lua_State *L)
-{
-    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterLeftThumbstickAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_RegisterRightThumbstickAxis(lua_State *L)
-{
-    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterRightThumbstickAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_RegisterDpadAxis(lua_State *L)
-{
-    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterDpadAxis(CallableScriptFunctionParameters1<Vector2>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_RegisterButtonAction(lua_State *L)
-{
-    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterButtonTapped(CallableScriptFunctionParameters3<GamepadButtonType, GamepadButtonAction, float>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_SetLight(lua_State *L)
-{
-    Gamepad *mgr = ScriptingEngineI::GetScriptingObjectPtr<Gamepad>(L, 1);
-    float r = lua_tonumber(L, 2);
-    float g = lua_tonumber(L, 3);
-    float b = lua_tonumber(L, 4);
-    mgr->SetLight({r, g, b});
-    return 0;
-}
-
-std::vector<luaL_Reg> Gamepad::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-          { "RegisterLeftThumbstickAxis", lua_RegisterLeftThumbstickAxis }
-        , { "RegisterRightThumbstickAxis", lua_RegisterRightThumbstickAxis }
-        , { "RegisterDpadAxis", lua_RegisterDpadAxis }
-        , { "RegisterButtonTapped", lua_RegisterButtonAction }
-        , { "SetLight", lua_SetLight }
-    });
-    return result;
 }
