@@ -17,25 +17,22 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
-#ifndef GameSceneCoordinator_hpp
-#define GameSceneCoordinator_hpp
+#ifndef GameInput_hpp
+#define GameInput_hpp
 
-#include "game_scene_interface.hpp"
-#include "GameResolutionState.hpp"
 #include "game_input_interface.hpp"
-class GameSceneCoordinator {
-    GameResolutionState *m_resState;
-    GameSceneI *m_currentScene;
-    GameInputI *m_gameInput;
-    std::unique_ptr<GameSceneI> m_introScene;
-public:
-    GameSceneCoordinator(GameResolutionState*);
 
+class GameInput: public GameInputI {
+    engine::Vector2 m_leftThumbstickVector;
+    engine::Vector2 m_rightThumbstickVector;
 public:
-    void ShowIntroScene();
+    GameInput();
 
+    engine::Vector2 GetLeftThumbstickVector() { return m_leftThumbstickVector; };
+    engine::Vector2 GetRightThumbstickVector() { return m_rightThumbstickVector; };
 private:
-    void ActivateScene(GameSceneI*);
+    void SetupHandlers();
+    void UpdateWithGamepad(engine::GamepadI*);
 };
 
-#endif /* GameSceneCoordinator_hpp */
+#endif /* GameInput_hpp */

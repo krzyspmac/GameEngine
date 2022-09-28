@@ -19,17 +19,19 @@
 
 #include "GameSceneCoordinator.hpp"
 #include "GameSceneIntro.hpp"
+#include "GameInput.hpp"
 
 GameSceneCoordinator::GameSceneCoordinator(GameResolutionState *resState)
     : m_currentScene(nullptr)
     , m_resState(resState)
+    , m_gameInput(new GameInput())
 {
 }
 
 void
 GameSceneCoordinator::ShowIntroScene() {
     if (m_introScene.get() == nullptr) {
-        auto *scene = new GameSceneIntro(m_resState);
+        auto *scene = new GameSceneIntro(m_resState, m_gameInput);
         m_introScene = std::unique_ptr<GameSceneI>(std::move(scene));
     }
     ActivateScene(m_introScene.get());

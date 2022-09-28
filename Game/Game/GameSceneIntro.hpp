@@ -41,8 +41,9 @@ class GameSceneIntro: public GameSceneI {
     engine::EventIdentifier m_callabackGamepadConnectionId;
 
     IntertiaProcessor m_inertiaProcessor;
+    GameInputI *m_gameInput;
 public: // GameSceneIntro
-    GameSceneIntro(GameResolutionState*);
+    GameSceneIntro(GameResolutionState*, GameInputI*);
     void FrameUpdate();
 
 public: // GameSceneI

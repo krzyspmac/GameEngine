@@ -28,13 +28,17 @@ double INC_SPEED = 10;      // speed increase when force applied (in px/s)
 double DMP_SPEED = 0.05;    // speed fall when force not applied (in px/s)
 
 IntertiaProcessor::IntertiaProcessor()
-    : m_position(Vector2::shared())
-    , m_movementVector(Vector2::shared())
-    , m_forceVector(Vector2::shared())
+    : m_position(Vector2::zero())
+    , m_movementVector(Vector2::zero())
+    , m_forceVector(Vector2::zero())
     , m_time(*engine::Globals::time())
     , m_frameDeltaSec(0.0)
 {
-    
+}
+
+void IntertiaProcessor::SetPosition(engine::Vector2 vector)
+{
+    m_position = vector;
 }
 
 void IntertiaProcessor::UpdateForceVector(engine::Vector2 vector)
@@ -56,12 +60,6 @@ void IntertiaProcessor::Advance()
     double speedIncrease = MIN(INC_SPEED, m_frameDeltaSec * INC_SPEED);
     Vector2 incVector = m_forceVector * speedIncrease;
     m_movementVector += incVector;
-
-    /*
-    local speedIncrease = math.min(INC_SPEED, self.frameDeltaSec * INC_SPEED)
-    local incVector = self.forceVector * speedIncrease
-    self.movementVector = self.movementVector + incVector
-     */
 }
 
 void IntertiaProcessor::Damper()
@@ -69,21 +67,12 @@ void IntertiaProcessor::Damper()
     double dmpFactor = MAX(DMP_SPEED, m_frameDeltaSec * DMP_SPEED);
     Vector2 damperVector = m_movementVector.normalized().inversed() * dmpFactor;
     m_movementVector += damperVector;
-    /*
-     local dmpFactor = math.max(DMP_SPEED, self.frameDeltaSec * DMP_SPEED)
-     local damperVector = self.movementVector:normalized():inversed() * dmpFactor
-     self.movementVector = self.movementVector + damperVector
-     */
 }
 
 void IntertiaProcessor::Limit()
 {
     double length = MIN(MAX_SPEED, m_movementVector.length());
     m_movementVector = m_movementVector.normalized() * length;
-    /*
-    local length = math.min(MAX_SPEED, self.movementVector:length())
-    self.movementVector = self.movementVector:normalized() * length
-    */
 }
 
 void IntertiaProcessor::UpdatePosition()

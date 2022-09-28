@@ -13,6 +13,8 @@
 		7F2DB01B28E04D250044EF8D /* GameResolutionState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F2DB01A28E04D250044EF8D /* GameResolutionState.cpp */; };
 		7FD0FB1D28E4E485008A4389 /* InertiaProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FB1B28E4E485008A4389 /* InertiaProcessor.cpp */; };
 		7FD0FB1E28E4E485008A4389 /* InertiaProcessor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD0FB1C28E4E485008A4389 /* InertiaProcessor.hpp */; };
+		7FD0FB2128E4EBA7008A4389 /* GameInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FD0FB1F28E4EBA7008A4389 /* GameInput.cpp */; };
+		7FD0FB2228E4EBA7008A4389 /* GameInput.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */; };
 		7FE6D57328E051DB00A78E06 /* game_scene_interface.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE6D57128E051DB00A78E06 /* game_scene_interface.hpp */; };
 		7FE6D57628E051FF00A78E06 /* GameSceneCoordinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE6D57428E051FF00A78E06 /* GameSceneCoordinator.cpp */; };
 		7FE6D57728E051FF00A78E06 /* GameSceneCoordinator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE6D57528E051FF00A78E06 /* GameSceneCoordinator.hpp */; };
@@ -29,6 +31,9 @@
 		7F2DB01A28E04D250044EF8D /* GameResolutionState.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameResolutionState.cpp; sourceTree = "<group>"; };
 		7FD0FB1B28E4E485008A4389 /* InertiaProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InertiaProcessor.cpp; sourceTree = "<group>"; };
 		7FD0FB1C28E4E485008A4389 /* InertiaProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = InertiaProcessor.hpp; sourceTree = "<group>"; };
+		7FD0FB1F28E4EBA7008A4389 /* GameInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameInput.cpp; sourceTree = "<group>"; };
+		7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameInput.hpp; sourceTree = "<group>"; };
+		7FD0FB2328E4EC95008A4389 /* game_input_interface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_input_interface.hpp; sourceTree = "<group>"; };
 		7FE6D57128E051DB00A78E06 /* game_scene_interface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = game_scene_interface.hpp; sourceTree = "<group>"; };
 		7FE6D57428E051FF00A78E06 /* GameSceneCoordinator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameSceneCoordinator.cpp; sourceTree = "<group>"; };
 		7FE6D57528E051FF00A78E06 /* GameSceneCoordinator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameSceneCoordinator.hpp; sourceTree = "<group>"; };
@@ -51,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				7FE6D57128E051DB00A78E06 /* game_scene_interface.hpp */,
+				7FD0FB2328E4EC95008A4389 /* game_input_interface.hpp */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -94,6 +100,8 @@
 				7FE6D57A28E05A8A00A78E06 /* GameSceneIntro.cpp */,
 				7FD0FB1C28E4E485008A4389 /* InertiaProcessor.hpp */,
 				7FD0FB1B28E4E485008A4389 /* InertiaProcessor.cpp */,
+				7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */,
+				7FD0FB1F28E4EBA7008A4389 /* GameInput.cpp */,
 			);
 			path = Game;
 			sourceTree = "<group>";
@@ -111,6 +119,7 @@
 				7FE6D57728E051FF00A78E06 /* GameSceneCoordinator.hpp in Headers */,
 				7FD0FB1E28E4E485008A4389 /* InertiaProcessor.hpp in Headers */,
 				7F2DAFE628E03B630044EF8D /* GameEntryPoint.hpp in Headers */,
+				7FD0FB2228E4EBA7008A4389 /* GameInput.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +184,7 @@
 				7F2DAFEA28E03B630044EF8D /* GameEntryPoint.cpp in Sources */,
 				7FE6D57628E051FF00A78E06 /* GameSceneCoordinator.cpp in Sources */,
 				7FE6D57C28E05A8A00A78E06 /* GameSceneIntro.cpp in Sources */,
+				7FD0FB2128E4EBA7008A4389 /* GameInput.cpp in Sources */,
 				7F2DB01B28E04D250044EF8D /* GameResolutionState.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -21,9 +21,10 @@
 
 using namespace engine;
 
-GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
+GameSceneIntro::GameSceneIntro(GameResolutionState *resState, GameInputI *gameInput)
     : m_resState(resState)
     , m_inertiaProcessor(IntertiaProcessor())
+    , m_gameInput(gameInput)
 {
     m_font = Globals::fontManager()->LoadFont("at01.fnt", "at01.png");
     m_scene = Globals::sceneManager()->SceneCreateNew();
@@ -74,6 +75,8 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_sound->AddObserver(CallableParameters1<SoundFileI *>::make_shared([&](SoundFileI* sender){
         printf("Sound state = %d\n", sender->GetState());
     }));
+
+    m_inertiaProcessor.SetPosition(m_animated->GetPosition());
 }
 
 void GameSceneIntro::DidActivate()
@@ -98,7 +101,12 @@ void GameSceneIntro::OnGamepadConnection(GamepadI* gamepad)
     }
 }
 
-void GameSceneIntro::FrameUpdate() { }
+void GameSceneIntro::FrameUpdate()
+{
+    m_inertiaProcessor.UpdateForceVector(m_gameInput->GetLeftThumbstickVector());
+    m_inertiaProcessor.Tick();
+    m_animated->SetPosition(m_inertiaProcessor.GetPosition());
+}
 
 void GameSceneIntro::ContinueAnimation()
 {

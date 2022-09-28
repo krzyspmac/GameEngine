@@ -33,6 +33,8 @@ public:
 
     void UpdateForceVector(engine::Vector2);
     void Tick();
+    void SetPosition(engine::Vector2);
+    auto GetPosition() { return m_position; };
 
 private:
     void Advance();

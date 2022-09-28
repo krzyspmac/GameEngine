@@ -40,6 +40,13 @@ namespace engine
         float x;
         float y;
 
+        const char* toString()
+        {
+            static char string[256];
+            sprintf(string, "Vector2(x = %f, y=%f)", this->x, this->y);
+            return string;
+        }
+
         Vector2()
         {
             this->x = 0;
@@ -58,7 +65,7 @@ namespace engine
             this->y = other->y;
         };
 
-        static Vector2 shared()
+        static Vector2 zero()
         {
             return Vector2();
         };
@@ -121,12 +128,16 @@ namespace engine
 
         Vector2 operator += (Vector2 const &rhs)
         {
-            return Vector2(this->x + rhs.x, this->y + rhs.y);
+            this->x += rhs.x;
+            this->y += rhs.y;
+            return this;
         };
 
         Vector2 operator *= (double value)
         {
-            return Vector2(this->x * value, this->y * value);
+            this->x *= value;
+            this->y *= value;
+            return this;
         }
 
         bool operator == (Vector2 const &rhs)

@@ -17,25 +17,32 @@
 // TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 
-#ifndef GameSceneCoordinator_hpp
-#define GameSceneCoordinator_hpp
+#include "GameInput.hpp"
 
-#include "game_scene_interface.hpp"
-#include "GameResolutionState.hpp"
-#include "game_input_interface.hpp"
-class GameSceneCoordinator {
-    GameResolutionState *m_resState;
-    GameSceneI *m_currentScene;
-    GameInputI *m_gameInput;
-    std::unique_ptr<GameSceneI> m_introScene;
-public:
-    GameSceneCoordinator(GameResolutionState*);
+using namespace engine;
 
-public:
-    void ShowIntroScene();
+GameInput::GameInput()
+    : m_leftThumbstickVector(Vector2::zero())
+{
+    SetupHandlers();
+}
 
-private:
-    void ActivateScene(GameSceneI*);
-};
+void GameInput::SetupHandlers()
+{
+    Globals::eventsManager()->RegisterGamepadConnection(CallableParameters2<GamepadI *, bool>::make_shared([&](GamepadI *gamepad, bool active){
+        UpdateWithGamepad(gamepad);
+    }));
+}
 
-#endif /* GameSceneCoordinator_hpp */
+void GameInput::UpdateWithGamepad(GamepadI* gamepad)
+{
+    if (gamepad == nullptr) { return; };
+
+    gamepad->RegisterLeftThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vector){
+        m_leftThumbstickVector = vector;
+    }));
+
+    gamepad->RegisterRightThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vector){
+        m_rightThumbstickVector = vector * 3;
+    }));
+}
