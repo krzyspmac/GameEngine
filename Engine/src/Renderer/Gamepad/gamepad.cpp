@@ -83,31 +83,31 @@ void Gamepad::UnregisterAllEvents()
     m_buttonChange.clear();
 }
 
-GamepadEventIdentifier Gamepad::RegisterLeftThumbstickAxis(CallableParameters1<Vector2> fnc)
+GamepadEventIdentifier Gamepad::RegisterLeftThumbstickAxis(std::shared_ptr<CallableParameters1<Vector2>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_leftStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterRightThumbstickAxis(CallableParameters1<Vector2> fnc)
+GamepadEventIdentifier Gamepad::RegisterRightThumbstickAxis(std::shared_ptr<CallableParameters1<Vector2>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_rightStickAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterDpadAxis(CallableParameters1<Vector2> fnc)
+GamepadEventIdentifier Gamepad::RegisterDpadAxis(std::shared_ptr<CallableParameters1<Vector2>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_dpadAxisChange.push_back(EventHolderGamepadStickAxis(identifier, fnc));
     return identifier;
 }
 
-GamepadEventIdentifier Gamepad::RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float> fnc)
+GamepadEventIdentifier Gamepad::RegisterButtonTapped(std::shared_ptr<CallableParameters3<GamepadButtonType, GamepadButtonAction, float>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-//    m_buttonChange.push_back(EventHolderGamepadButton(identifier, fnc));
+    m_buttonChange.push_back(EventHolderGamepadButton(identifier, fnc));
     return identifier;
 }
 

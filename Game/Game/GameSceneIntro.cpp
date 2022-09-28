@@ -18,19 +18,14 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
         FrameUpdate();
     });
 
-//    std::shared_ptr<CallableParameters2<GamepadI *, bool>> ptr =
-//        std::shared_ptr<CallableParameters2>(new CallableParameters2<GamePad)
-//
-//    engine::Globals::eventsManager()
-//        ->RegisterGamepadConnection(
-//                                    std::shared_ptr<CallableParameters2<GamepadI *, bool>>(new CallableParameters2()
-//                                    );
-
-    m_callabackGamepadConnection = engine::CallableParameters2<engine::GamepadI *, bool>::make_shared([&](auto* gamepad, bool){
-
-    });
-    m_callabackGamepadConnectionId = engine::Globals::eventsManager()->RegisterGamepadConnection(m_callabackGamepadConnection);
-    engine::Globals::eventsManager()->UnregisterEvent(m_callabackGamepadConnectionId);
+    m_callabackGamepadConnectionId = engine
+        ::Globals
+        ::eventsManager()
+        ->RegisterGamepadConnection(
+            engine::CallableParameters2<engine::GamepadI *, bool>::make_shared([&](auto* gamepad, bool){
+                OnGamepadConnection(gamepad);
+            })
+        );
 
     auto size = m_resState->GetViewportSize();
 
@@ -54,31 +49,47 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_textSprite->SetAcceptsLight(true);
 
     m_light = m_scene->CreateLight("linear", {0.f, 1.f, 0.f}, 0.5, {100, 100}, 50, 1.);
+}
 
-    
-
+void
+GameSceneIntro::DidActivate()
+{
     ContinueAnimation();
 }
 
 void
-GameSceneIntro::DidActivate() {
+GameSceneIntro::DidDeactivate()
+{
 }
 
 void
-GameSceneIntro::DidDeactivate() {
+GameSceneIntro::OnGamepadConnection(engine::GamepadI* gamepad)
+{
+    if (gamepad != nullptr) {
+        gamepad->RegisterLeftThumbstickAxis(engine::CallableParameters1<engine::Vector2>::make_shared([&](engine::Vector2 vect){
+
+        }));
+        gamepad->RegisterRightThumbstickAxis(engine::CallableParameters1<engine::Vector2>::make_shared([&](engine::Vector2 vect){
+
+        }));
+        gamepad->RegisterButtonTapped(engine::CallableParameters3<engine::GamepadButtonType, engine::GamepadButtonAction, float>::make_shared([&](auto buttonType, auto buttonAction, auto value){
+
+        }));
+    }
 }
 
 void
-GameSceneIntro::FrameUpdate() {
+GameSceneIntro::FrameUpdate()
+{
     auto size = m_resState->GetViewportSize();
     printf("width = %f\n", size.x);
 }
 
 void
-GameSceneIntro::ContinueAnimation() {
+GameSceneIntro::ContinueAnimation()
+{
     FadeIn();
-//    ScaleIn();
-//    PositionIn();
+
     RotationIn();
 }
 

@@ -39,10 +39,10 @@ namespace engine
         void UnregisterEvent(GamepadEventIdentifier);
         void UnregisterAllEvents();
 
-        GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableParameters1<Vector2>);
-        GamepadEventIdentifier RegisterRightThumbstickAxis(CallableParameters1<Vector2>);
-        GamepadEventIdentifier RegisterDpadAxis(CallableParameters1<Vector2>);
-        GamepadEventIdentifier RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float>);
+        GamepadEventIdentifier RegisterLeftThumbstickAxis(std::shared_ptr<CallableParameters1<Vector2>>);
+        GamepadEventIdentifier RegisterRightThumbstickAxis(std::shared_ptr<CallableParameters1<Vector2>>);
+        GamepadEventIdentifier RegisterDpadAxis(std::shared_ptr<CallableParameters1<Vector2>>);
+        GamepadEventIdentifier RegisterButtonTapped(std::shared_ptr<CallableParameters3<GamepadButtonType, GamepadButtonAction, float>>);
 
         void SetLight(Color3 color);
     };

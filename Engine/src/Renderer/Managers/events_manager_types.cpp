@@ -10,17 +10,9 @@
 
 using namespace engine;
 
-/** Mouse Position Holders */
-void EventHolderScriptCallableMousePosition::Process(Origin *val)
+bool EventHolderKeyShortcut::Matches(bool shiftDown, bool controlDown, bool keys[KEY_TABLE_SIZE])
 {
-    m_script.CallWithParameters(val->x, val->y);
-}
-
-/** Key shortcuts holders */
-
-bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bool keys[KEY_TABLE_SIZE])
-{
-    for (auto& modifier : m_modifiers)
+    for (auto& modifier : m_flags)
     {
         if (modifier == FLAG_SHIFT)
         {
@@ -49,10 +41,23 @@ bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bo
     return true;
 }
 
-//void EventHolderKeyShortcutPressedScript::Process(void*)
-//{
-//    m_script.CallWithParameters();
-//}
+void EventHolderKeyShortcut::Process(void*)
+{
+    if (m_script->CanCall())
+    {
+        auto fnc = m_script.get();
+        fnc->Call();
+    }
+}
+
+void EventHolderVoid::Process(void*)
+{
+    if (m_script->CanCall())
+    {
+        auto fnc = m_script.get();
+        fnc->Call();
+    }
+}
 
 void EventHolderMouseMoved::Process(Origin *obj)
 {
@@ -65,33 +70,27 @@ void EventHolderMouseMoved::Process(Origin *obj)
 
 void EventHolderKeyDown::Process(char *c)
 {
-    if (m_script.CanCall())
+    if (m_script->CanCall())
     {
-//        m_script.PerformCall([&](lua_State *L){
-//            lua_pushstring(L, c);
-//            return 1;
-//        });
+        auto fnc = m_script.get();
+        fnc->Call(*c);
     }
 }
 
 void EventHolderGamepadStickAxis::Process(Vector2 *vector)
 {
-    if (m_script.CanCall())
+    if (m_script == nullptr) { return; }
+    if (m_script.get() == nullptr) { return; }
+
+    if (m_script->CanCall())
     {
-//        m_script.PerformCall([&](lua_State *L){
-//            lua_pushnumber(L, vector->x);
-//            lua_pushnumber(L, vector->y);
-//            return 2;
-//        });
+        m_script->Call(*vector);
     }
 }
 
 void EventHolderGamepadConnection::Process(GamepadI **_gamepad)
 {
-    if (m_script == nullptr)
-    {
-        return;
-    }
+    if (m_script == nullptr) { return; }
 
     if (m_script.get() != nullptr)
     {
@@ -111,13 +110,11 @@ void EventHolderGamepadConnection::Process(GamepadI **_gamepad)
 
 void EventHolderGamepadButton::Process(GamepadButtonActionHolder *descriptor)
 {
-    if (m_script.CanCall())
+    if (m_script == nullptr) { return; }
+    if (m_script.get() == nullptr) { return; }
+
+    if (m_script->CanCall())
     {
-//        m_script.PerformCall([&](lua_State *L){
-//            lua_pushnumber(L, descriptor->button);
-//            lua_pushnumber(L, descriptor->action);
-//            lua_pushnumber(L, descriptor->value);
-//            return 3;
-//        });
+        m_script->Call(descriptor->button, descriptor->action, descriptor->value);
     }
 }

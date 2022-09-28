@@ -61,9 +61,11 @@ void ConsoleRenderer::Setup()
 
 void ConsoleRenderer::SetupEvents()
 {
-    ENGINE().getEventsManager().RegisterKeyShortcut( {FLAG_NONE}, { CODE_TIDLE }, [&](void*) {
-        this->SetConsoleHidden(!m_hidden);
-    });
+    ENGINE()
+        .getEventsManager()
+        .RegisterKeyShortcut( {FLAG_NONE}, {CODE_TIDLE}, CallableParametersEmpty::make_shared([&](void){
+            this->SetConsoleHidden(!m_hidden);
+        }));
 }
 
 void ConsoleRenderer::DoFrame()

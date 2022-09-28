@@ -81,22 +81,13 @@ int EventsManager::DoEvents()
                     }
                 }
 
-//                for (auto& keyHandler : m_keyshortcuts)
-//                {
-//                    if (keyHandler.Matches(m_shiftKeyDown, m_controlKeyDown, m_keys))
-//                    {
-//                        keyHandler.Process(nullptr);
-//                    }
-//                }
-//
-//                for (auto& keyHandler : m_keyshortcutsScript)
-//                {
-//                    if (keyHandler.Matches(m_shiftKeyDown, m_controlKeyDown, m_keys))
-//                    {
-//                        keyHandler.Process(nullptr);
-//                    }
-//                }
-
+                for (auto& keyHandler : m_keyShortcuts)
+                {
+                    if (keyHandler.Matches(m_shiftKeyDown, m_controlKeyDown, m_keys))
+                    {
+                        keyHandler.Process(nullptr);
+                    }
+                }
                 break;
             }
             case EVENT_MOUSEMOVE:
@@ -199,33 +190,24 @@ EventIdentifier EventsManager::RegisterMouseClickedEvents(std::shared_ptr<Callab
     return identifier;
 }
 
-EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)
-{
-//    EventIdentifier identifier = ++m_identifierCounter;
-//    m_keyshortcuts.push_back(EventHolderKeyShortcutLambda(identifier, lambda, modifiers, keys));
-//    return identifier;
-    return -1;
-}
-
-EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, CallableScriptFunctionParametersEmpty fnc)
-{
-//    EventIdentifier identifier = ++m_identifierCounter;
-//    m_keyshortcutsScript.push_back(EventHolderKeyShortcutPressedScript(identifier, fnc, modifiers, keys));
-//    return identifier;
-    return -1;
-}
-
-EventIdentifier EventsManager::RegisterKeyDown(CallableScriptFunctionParameters1<char> fnc)
+EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::shared_ptr<CallableParametersEmpty> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-//    m_keyDowns.push_back(EventHolderKeyDown(identifier, fnc));
+    m_keyShortcuts.push_back(EventHolderKeyShortcut(identifier, modifiers, keys, fnc));
     return identifier;
 }
 
-EventIdentifier EventsManager::RegisterKeyUp(CallableScriptFunctionParameters1<char> fnc)
+EventIdentifier EventsManager::RegisterKeyDown(std::shared_ptr<CallableParameters1<char>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-//    m_keyUps.push_back(EventHolderKeyDown(identifier, fnc));
+    m_keyDowns.push_back(EventHolderKeyDown(identifier, fnc));
+    return identifier;
+}
+
+EventIdentifier EventsManager::RegisterKeyUp(std::shared_ptr<CallableParameters1<char>> fnc)
+{
+    EventIdentifier identifier = ++m_identifierCounter;
+    m_keyUps.push_back(EventHolderKeyDown(identifier, fnc));
     return identifier;
 }
 
@@ -245,7 +227,7 @@ void EventsManager::Unregister(EventHolderIdentifier* eventHolder)
 }
 
 template <typename T>
-void RemoveIfExists(EventIdentifier identifier, std::vector<T> &list)
+static void RemoveIfExists(EventIdentifier identifier, std::vector<T> &list)
 {
     for (auto it = list.begin(); it != list.end(); ++it)
     {
@@ -262,7 +244,7 @@ void EventsManager::UnregisterEvent(EventIdentifier identifier)
 {
     RemoveIfExists(identifier, m_mouseMoves);
     RemoveIfExists(identifier, m_mouseClicks);
-//    RemoveIfExists(identifier, m_keyshortcuts);
+    RemoveIfExists(identifier, m_keyShortcuts);
     RemoveIfExists(identifier, m_keyDowns);
     RemoveIfExists(identifier, m_keyUps);
     RemoveIfExists(identifier, m_gamepadConnection);
@@ -272,160 +254,8 @@ void EventsManager::UnregisterAllEvents()
 {
     m_mouseMoves.clear();
     m_mouseClicks.clear();
-//    m_keyshortcuts.clear();
+    m_keyShortcuts.clear();
     m_keyDowns.clear();
     m_keyUps.clear();
     m_gamepadConnection.clear();
-}
-
-#pragma mark - Scripting Interface
-/** Scripting interface */
-
-SCRIPTING_INTERFACE_IMPL_NAME(EventsManager);
-
-static int lua_EventsManager_RegisterMouseMoveEvents(lua_State *L)
-{
-//    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-//
-//    int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
-//    auto identifier = mgr->RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float>(functionEndRef));
-//    lua_pushnumber(L, identifier);
-//    return 1;
-    return 0;
-}
-
-static int lua_EventsManager_RegisterMouseClickedEvents(lua_State *L)
-{
-//    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-//
-//    int functionEndRef = luaL_ref( L, LUA_REGISTRYINDEX );
-//    auto identifier = mgr->RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float>(functionEndRef));
-//    lua_pushnumber(L, identifier);
-//    return 1;
-    return 0;
-}
-
-static int lua_EventsManager_RegisterKeyShortcutsEvents(lua_State *L)
-{
-    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-
-    std::string modifiersString = lua_tostring(L, 2);
-    std::string charactersString = lua_tostring(L, 3);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-
-    auto modifiers = map<std::string, EventFlagType>(explode(modifiersString, "|"), [](std::string type) {
-        return engine::String2EventFlagType(type);
-    });
-
-    auto keys = map<std::string, unsigned short>(explode(charactersString, "|"), [](std::string cs){
-        return cs.at(0);
-    });
-
-    auto identifier = mgr->RegisterKeyShortcut(modifiers, keys, CallableScriptFunctionParametersEmpty(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_EventsManager_UnregisterEvent(lua_State *L)
-{
-    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-    int eventIdentifier = lua_tonumber(L, 2);
-    mgr->UnregisterEvent(eventIdentifier);
-    return 0;
-}
-
-static int lua_EventsManager_IsShiftDown(lua_State *L)
-{
-    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-    lua_pushnumber(L, mgr->IsShiftDown());
-    return 1;
-}
-
-static int lua_EventsManager_IsControlDown(lua_State *L)
-{
-    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-    lua_pushnumber(L, mgr->IsControlDown());
-    return 1;
-}
-
-static int lua_EventsManager_RegisterKeyDown(lua_State *L)
-{
-    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterKeyDown(CallableScriptFunctionParameters1<char>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_EventsManager_RegisterKeyUp(lua_State *L)
-{
-    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-    auto identifier = mgr->RegisterKeyUp(CallableScriptFunctionParameters1<char>(fnRef));
-    lua_pushnumber(L, identifier);
-    return 1;
-}
-
-static int lua_EventsManager_RegisterGamepadConnection(lua_State *L)
-{
-//    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-//    int fnRef = luaL_ref( L, LUA_REGISTRYINDEX );
-//    auto identifier = mgr->RegisterGamepadConnection(CallableScriptFunctionParameters2<GamepadI, bool>(fnRef));
-//    lua_pushnumber(L, identifier);
-//    return 1;
-    return 0;
-}
-
-static int lua_EventsManager_GetGamepad(lua_State *L)
-{
-//    EventsManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<EventsManager>(L, 1);
-//    auto& gamepads = mgr->GetGamepads();
-//    if (gamepads.size())
-//    {
-//        auto *first = gamepads.at(0).get();
-//        if (first != nullptr)
-//        {
-//            auto *ptr = dynamic_cast<Gamepad*>(first);
-//            if (ptr != nullptr)
-//            {
-//                ptr->ScriptingInterfaceRegisterFunctions(L, ptr);
-//                return 1;
-//            }
-//        }
-//    }
-
-    return 0;
-}
-std::vector<luaL_Reg> EventsManager::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "RegisterMouseMovedEvents", &lua_EventsManager_RegisterMouseMoveEvents }
-      , { "RegisterMouseClickedEvents", &lua_EventsManager_RegisterMouseClickedEvents }
-      , { "RegisterKeyShortcutsEvents", &lua_EventsManager_RegisterKeyShortcutsEvents }
-      , { "UnregisterEvent", &lua_EventsManager_UnregisterEvent }
-      , { "IsShiftDown", &lua_EventsManager_IsShiftDown }
-      , { "IsControlDown", &lua_EventsManager_IsControlDown }
-      , { "RegisterKeyDown", &lua_EventsManager_RegisterKeyDown }
-      , { "RegisterKeyUp", &lua_EventsManager_RegisterKeyUp }
-      , { "RegisterGamepadConnection", lua_EventsManager_RegisterGamepadConnection }
-      , { "GetGamepad", lua_EventsManager_GetGamepad }
-    });
-    return result;
-}
-
-/** Helper functions */
-
-EventFlagType engine::String2EventFlagType(std::string string)
-{
-    static std::vector<std::string> values = { "none", "shift", "control", "alt", "command" };
-
-    for (int i = 0; i < values.size(); i++)
-    {
-        if (string == values.at(i))
-        {
-            return (EventFlagType)i;
-        }
-    }
-
-    return FLAG_NONE;
 }

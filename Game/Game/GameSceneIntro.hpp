@@ -33,6 +33,9 @@ public: // GameSceneI
     void DidActivate();
     void DidDeactivate();
 
+public: // Events
+    void OnGamepadConnection(engine::GamepadI*);
+
 private:
     void ContinueAnimation();
 

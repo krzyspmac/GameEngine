@@ -37,10 +37,10 @@ namespace engine
         virtual void ProcessButtonEvent(GamepadButtonActionHolder*) = 0;
         virtual void UnregisterEvent(GamepadEventIdentifier) = 0;
         virtual void UnregisterAllEvents() = 0;
-        virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(CallableParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterRightThumbstickAxis(CallableParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterDpadAxis(CallableParameters1<Vector2>) = 0;
-        virtual GamepadEventIdentifier RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float>) = 0;
+        virtual GamepadEventIdentifier RegisterLeftThumbstickAxis(std::shared_ptr<CallableParameters1<Vector2>>) = 0;
+        virtual GamepadEventIdentifier RegisterRightThumbstickAxis(std::shared_ptr<CallableParameters1<Vector2>>) = 0;
+        virtual GamepadEventIdentifier RegisterDpadAxis(std::shared_ptr<CallableParameters1<Vector2>>) = 0;
+        virtual GamepadEventIdentifier RegisterButtonTapped(std::shared_ptr<CallableParameters3<GamepadButtonType, GamepadButtonAction, float>>) = 0;
 
         virtual void SetLight(Color3) = 0;
     };

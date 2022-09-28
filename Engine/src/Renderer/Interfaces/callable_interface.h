@@ -190,6 +190,12 @@ namespace engine
         virtual ~CallableParametersEmpty() { };
         bool CanCall() { return m_fnc != nullptr; };
         void Call(A p1, B p2, C p3) { if (CanCall()) m_fnc(p1, p2, p3); };
+
+        static std::shared_ptr<CallableParameters3<A, B, C>> make_shared(std::function<void(A, B, C)> fnc) {
+            return std::shared_ptr<CallableParameters3<A, B, C>>(
+                  new CallableParameters3<A, B, C>(fnc)
+            );
+        }
     };
 };
 
