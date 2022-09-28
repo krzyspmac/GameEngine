@@ -13,6 +13,10 @@
 namespace engine
 {
 
+    /** EngineState
+        \addtogroup API_GLOBALS
+        Holds various information on the state of the engine. Viewport, frames, etc.
+     */
     class EngineStateI
     {
     public:
@@ -42,7 +46,6 @@ namespace engine
          */
         /** @private */
         virtual void SetOnScreenSizeChange(std::function<void(Size, float)>) = 0;
-
     };
 };
 
