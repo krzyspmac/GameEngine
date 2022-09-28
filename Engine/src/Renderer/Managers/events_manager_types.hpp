@@ -55,6 +55,8 @@ namespace engine
         { };
 
         void Process(T *val) { m_lambda(val); };
+
+
     };
 
     /** The base for all LUA script event handlers
@@ -122,6 +124,23 @@ namespace engine
         { };
 
         void Process(char*);
+    };
+
+    /** Holder for mouse moved event. Provides the position. */
+    /** @private */
+    class EventHolderMouseMoved: public EventHolderI<Origin>, public EventHolderScript
+    {
+        typedef std::shared_ptr<CallableParameters1<Origin>> FunctionType;
+
+        FunctionType m_script;
+    public:
+        EventHolderMouseMoved(EventIdentifier identifier, FunctionType fnc)
+            : EventHolderI<Origin>(identifier)
+            , EventHolderScript()
+            , m_script(fnc)
+        { };
+
+        void Process(Origin*);
     };
 
     /** Gamepad Connection Event Handler */

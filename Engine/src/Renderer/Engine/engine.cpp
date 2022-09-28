@@ -120,10 +120,11 @@ void Engine::Setup()
     // Register & process mouse events
     m_mousePosition.x = 0;
     m_mousePosition.y = 0;
-    m_eventsManager.RegisterMouseMovedEvents([&](Origin *origin){
-        m_mousePosition.x = origin->x;
-        m_mousePosition.y = origin->y;
-    });
+
+    m_eventsManager.RegisterMouseMovedEvents(CallableParameters1<Origin>::make_shared([&](Origin origin){
+        m_mousePosition.x = origin.x;
+        m_mousePosition.y = origin.y;
+    }));
 
 #if SHOW_CONSOLE
     m_consoleRenderer.Setup();

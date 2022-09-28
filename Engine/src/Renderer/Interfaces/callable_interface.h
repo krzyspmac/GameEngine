@@ -111,11 +111,13 @@ namespace engine
         bool CanCall() {
             return m_fnc != nullptr;
         };
-        void Call() {
-            if (CanCall()) {
-                m_fnc();
-            }
-        };
+        void Call() { if (CanCall()) { m_fnc(); } };
+
+        static std::shared_ptr<CallableParametersEmpty> make_shared(std::function<void(void)> fnc) {
+            return std::shared_ptr<CallableParametersEmpty>(
+                  new CallableParametersEmpty(fnc)
+            );
+        }
     };
 
     typedef CallableParametersEmpty CallbackEmpty;
@@ -138,6 +140,12 @@ namespace engine
         virtual ~CallableParametersEmpty() {};
         bool CanCall() { return m_fnc != nullptr; };
         void Call(A p1) { if (CanCall()) m_fnc(p1); };
+
+        static std::shared_ptr<CallableParameters1<A>> make_shared(std::function<void(A)> fnc) {
+            return std::shared_ptr<CallableParameters1<A>>(
+                  new CallableParameters1<A>(fnc)
+            );
+        }
     };
 
     /** A wrapper for the 2 params callable function */
@@ -163,7 +171,6 @@ namespace engine
             return std::shared_ptr<CallableParameters2<A, B>>(
                   new CallableParameters2<A, B>(fnc)
             );
-            return nullptr;
         }
     };
 

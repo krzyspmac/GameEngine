@@ -22,13 +22,6 @@
 
 namespace engine
 {
-    /** Holder for mouse moved event. Provides the position. */
-    /** @private */
-    class EventHolderMouseMoved: public EventHolderLambda<Origin>
-    {
-        using EventHolderLambda::EventHolderLambda;
-    };
-
     /** Holder for mouse moved events for scripting. Provides the position. */
     /** @private */
     class EventHolderMouseMovedScript: public EventHolderScriptCallableMousePosition
@@ -60,24 +53,11 @@ namespace engine
     public: // EventsManagerI
         int DoEvents();
 
+        EventIdentifier RegisterMouseMovedEvents(std::shared_ptr<CallableParameters1<Origin>>);
+
         EventIdentifier RegisterGamepadConnection(std::shared_ptr<CallableParameters2<GamepadI*, bool>>);
 
     public: // other
-
-        /** Register a mouse move events for C++.
-            @private */
-        EventIdentifier RegisterMouseMovedEvents(std::function<void(Origin*)> lambda);
-
-        /** Register a mouse move event handler for scripting.
-            The script will get the x and y position in viewport coordinates.
-
-            \code{lua}
-            EventsManager:RegisterMouseMovedEvents(function(x, y)
-                print("Mouse position = " .. x .. ", " .. y)
-            end)
-            \endcode
-         */
-//        EventIdentifier RegisterMouseMovedEvents(CallableScriptFunctionParameters2<float, float>);
 
         /** Register a mouse click event handler for C++.
             @private */

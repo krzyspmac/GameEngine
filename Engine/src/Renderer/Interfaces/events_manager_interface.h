@@ -21,9 +21,7 @@ namespace engine
     {
         EventIdentifier m_identifier;
     public:
-        EventHolderIdentifier(EventIdentifier identifier)
-            : m_identifier(identifier)
-        { };
+        EventHolderIdentifier(EventIdentifier identifier) : m_identifier(identifier) { };
 
         auto GetIdentifier() { return m_identifier; };
     };
@@ -36,9 +34,11 @@ namespace engine
     {
     public:
 
-        /** Returns 1 when quit is expected.
-            @private */
+        /** Returns 1 when quit is expected. */
         virtual int DoEvents() = 0;
+
+        /** Register a mouse move events for C++. */
+        virtual EventIdentifier RegisterMouseMovedEvents(std::shared_ptr<CallableParameters1<Origin>>) = 0;
 
         /** Register for gamepad connection/disconnection */
         virtual EventIdentifier RegisterGamepadConnection(std::shared_ptr<CallableParameters2<GamepadI*, bool>>) = 0;

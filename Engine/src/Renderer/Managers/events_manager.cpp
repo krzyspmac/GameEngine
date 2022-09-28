@@ -185,10 +185,10 @@ int EventsManager::DoEvents()
     return 0;
 }
 
-EventIdentifier EventsManager::RegisterMouseMovedEvents(std::function<void(Origin*)> lambda)
+EventIdentifier EventsManager::RegisterMouseMovedEvents(std::shared_ptr<CallableParameters1<Origin>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-    m_mouseMoves.push_back(EventHolderMouseMoved(identifier, lambda));
+    m_mouseMoves.push_back(EventHolderMouseMoved(identifier, fnc));
     return identifier;
 }
 
@@ -196,7 +196,7 @@ EventIdentifier EventsManager::RegisterMouseClickedEvents(std::function<void(voi
 {
     EventIdentifier identifier = ++m_identifierCounter;
     m_mouseClicks.push_back(EventHolderMouseClicked(identifier, lambda));
-    return identifier;;
+    return identifier;
 }
 
 EventIdentifier EventsManager::RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda)

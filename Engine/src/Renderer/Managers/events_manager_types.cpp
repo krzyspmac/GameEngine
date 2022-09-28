@@ -54,6 +54,15 @@ bool EventHolderKeyShortcutPressed::Matches(bool shiftDown, bool controlDown, bo
 //    m_script.CallWithParameters();
 //}
 
+void EventHolderMouseMoved::Process(Origin *obj)
+{
+    if (m_script->CanCall())
+    {
+        auto fnc = m_script.get();
+        fnc->Call(*obj);
+    }
+}
+
 void EventHolderKeyDown::Process(char *c)
 {
     if (m_script.CanCall())
