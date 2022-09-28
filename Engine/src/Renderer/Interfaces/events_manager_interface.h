@@ -37,8 +37,11 @@ namespace engine
         /** Returns 1 when quit is expected. */
         virtual int DoEvents() = 0;
 
-        /** Register a mouse move events for C++. */
+        /** Register a mouse move events event handler */
         virtual EventIdentifier RegisterMouseMovedEvents(std::shared_ptr<CallableParameters1<Origin>>) = 0;
+
+        /** Register a mouse click event handler */
+        virtual EventIdentifier RegisterMouseClickedEvents(std::shared_ptr<CallableParameters1<Origin>>) = 0;
 
         /** Register for gamepad connection/disconnection */
         virtual EventIdentifier RegisterGamepadConnection(std::shared_ptr<CallableParameters2<GamepadI*, bool>>) = 0;

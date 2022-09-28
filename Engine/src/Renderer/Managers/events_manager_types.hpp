@@ -143,6 +143,13 @@ namespace engine
         void Process(Origin*);
     };
 
+    /** Holder for mouse clicked event. */
+    /** @private */
+    class EventHolderMouseClicked: public EventHolderMouseMoved
+    {
+        using EventHolderMouseMoved::EventHolderMouseMoved;
+    };
+
     /** Gamepad Connection Event Handler */
     class EventHolderGamepadConnection: public EventHolderI<GamepadI*>, public EventHolderScript
     {

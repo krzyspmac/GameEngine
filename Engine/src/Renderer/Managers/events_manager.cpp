@@ -192,10 +192,10 @@ EventIdentifier EventsManager::RegisterMouseMovedEvents(std::shared_ptr<Callable
     return identifier;
 }
 
-EventIdentifier EventsManager::RegisterMouseClickedEvents(std::function<void(void*)> lambda)
+EventIdentifier EventsManager::RegisterMouseClickedEvents(std::shared_ptr<CallableParameters1<Origin>> fnc)
 {
     EventIdentifier identifier = ++m_identifierCounter;
-    m_mouseClicks.push_back(EventHolderMouseClicked(identifier, lambda));
+    m_mouseClicks.push_back(EventHolderMouseClicked(identifier, fnc));
     return identifier;
 }
 

@@ -22,14 +22,15 @@ Scene::Scene()
     , m_frameUpdateCallback(nullptr)
     , m_isActive(false)
 {
-    m_mouseDownIdentifier = ENGINE().getEventsManager().RegisterMouseClickedEvents([&](void *mouse){
-        Origin *clicked = (Origin*)mouse;
-        Vector2 pos;
-        pos.x = (*clicked).x;
-        pos.y = (*clicked).y;
-
-        MouseClicked(pos);
-    });
+    m_mouseDownIdentifier = ENGINE()
+        .getEventsManager()
+        .RegisterMouseClickedEvents(CallableParameters1<Origin>::make_shared([&](Origin clicked){
+            Vector2 pos;
+            pos.x = clicked.x;
+            pos.y = clicked.y;
+            MouseClicked(pos);
+        }))
+    ;
 }
 
 Scene::~Scene()

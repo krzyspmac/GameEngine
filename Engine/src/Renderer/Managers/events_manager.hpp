@@ -29,13 +29,6 @@ namespace engine
         using EventHolderScriptCallableMousePosition::EventHolderScriptCallableMousePosition;
     };
 
-    /** Holder for mouse clicked event. */
-    /** @private */
-    class EventHolderMouseClicked: public EventHolderLambda<void>
-    {
-        using EventHolderLambda::EventHolderLambda;
-    };
-
     /** Holder for key shortcut for C++ */
     /** @private */
     class EventHolderKeyShortcutLambda: public EventHolderKeyShortcutPressedLambda
@@ -55,24 +48,11 @@ namespace engine
 
         EventIdentifier RegisterMouseMovedEvents(std::shared_ptr<CallableParameters1<Origin>>);
 
+        EventIdentifier RegisterMouseClickedEvents(std::shared_ptr<CallableParameters1<Origin>>);
+        
         EventIdentifier RegisterGamepadConnection(std::shared_ptr<CallableParameters2<GamepadI*, bool>>);
 
     public: // other
-
-        /** Register a mouse click event handler for C++.
-            @private */
-        EventIdentifier RegisterMouseClickedEvents(std::function<void(void*)> lambda);
-
-        /** Register a mouse click event handler for scripting.
-
-            \code{lua}
-            EventsManager:RegisterMouseClickedEvents(function(x, y)
-                print("Mouse click position = " .. x .. ", " .. y)
-            end)
-            \endcode
-            */
-//        EventIdentifier RegisterMouseClickedEvents(CallableScriptFunctionParameters2<float, float>);
-
         /** Register a key combination for C++.
             @private */
         EventIdentifier RegisterKeyShortcut(std::vector<EventFlagType> modifiers, std::vector<unsigned short>keys, std::function<void(void*)> lambda);
