@@ -101,11 +101,6 @@ namespace engine
         bool m_isDrawable;
         std::unique_ptr<DrawableSpriteI> m_drawable;
     };
-
-    class SpriteRepresentationAnimatedI
-    {
-
-    };
 };
 
 #endif /* sprite_draw_interface_h */
