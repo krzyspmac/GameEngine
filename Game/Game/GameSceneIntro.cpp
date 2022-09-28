@@ -16,9 +16,15 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
 
     auto size = m_resState->GetViewportSize();
 
-    auto* atlas = engine::Globals::spriteAtlasManager();
-    auto* atlasItem = atlas->SpriteAtlasLoad("background.json", "background.png");
-    m_background = m_scene->SpriteStaticLoad(atlasItem, "background.png");
+    auto* atlasMgr = engine::Globals::spriteAtlasManager();
+
+    auto* atlasBackgroundItem = atlasMgr->SpriteAtlasLoad("background.json", "background.png");
+    m_background = m_scene->SpriteStaticLoad(atlasBackgroundItem, "background.png");
+
+    auto* atlasAnimatedSpriteItem = atlasMgr->SpriteAtlasLoad("player_Idle.json", "player_Idle.tga");
+    m_animated = m_scene->SpriteAnimatedLoad(100, atlasAnimatedSpriteItem);
+    m_animated->SetPosition({100,100});
+    m_animated->SetAcceptsLight(false);
 
     m_textSprite->SetText("Test");
     m_textSprite->SetPosition({size.x / 2, size.y / 2});

@@ -18,6 +18,7 @@ class GameSceneIntro: public GameSceneI {
     engine::SceneI *m_scene;
     engine::SpriteRepresentationTextI *m_textSprite;
     engine::SpriteRepresentationI *m_background;
+    engine::SpriteRepresentationI *m_animated;
     engine::LightI *m_light;
     std::vector<std::string> m_texts;
 public: // GameSceneIntro

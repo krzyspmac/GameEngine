@@ -20,9 +20,19 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
+    /** Declares interface for sprite properties that are not animatable
+        but can be changed */
     class SpritePropertyManipulatorsI: public AnimatablePropertiesI
     {
     public:
+        /** Control whether the object receives lights or not. If false it's
+            completely lit up. */
+        virtual void SetAcceptsLight(bool) = 0;
+        virtual float GetAcceptsLight() = 0;
+
+        /** Set the color mod */
+        virtual void SetColorMod(Color4) = 0;
+        virtual Color4 GetColorMod() = 0;
     };
 
     class SpriteRepresentationI: public SpritePropertyManipulatorsI
@@ -55,26 +65,15 @@ namespace engine
         Vector2&    GetPosition() { return m_position; };
         void        SetZPosition(float zPos) { m_zPosition = zPos; };
         float&      GetZPosition() { return m_zPosition; };
-        void        SetAlpha(float val) {
-//            AnimatablePropertiesI::SetAlpha(val);
-            if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val);
-        };
+        void        SetAlpha(float val) { if(m_drawable.get() != nullptr) m_drawable.get()->SetAlpha(val); };
         float       GetAlpha() { return *m_drawable.get()->GetAlpha(); };
         void        SetRotation(Rotation rotation) { m_rotation = rotation; };
         Rotation    &GetRotation() { return m_rotation; }
 
-    public:
-        /** Control whether the object receives lights or not. If false it's
-            completely lit up. */
-        auto& GetAcceptsLight() { return m_acceptsLight; };
-
-        /** Lighting setter */
+    public: // SpritePropertyManipulatorsI
         void SetAcceptsLight(bool val) { m_acceptsLight = val; if(m_drawable.get() != nullptr) m_drawable.get()->GetAcceptsLight() = val; };
-
-        /** Set the color mod */
+        float GetAcceptsLight() { return m_acceptsLight; };
         void SetColorMod(Color4 val) { m_colorMod = val; if(m_drawable.get() != nullptr) m_drawable.get()->SetColorMod(val); };
-
-        /** Get the color mod */
         Color4 GetColorMod() { return m_colorMod; };
 
     public: // Drawable related
@@ -101,6 +100,11 @@ namespace engine
         Color4 m_colorMod;
         bool m_isDrawable;
         std::unique_ptr<DrawableSpriteI> m_drawable;
+    };
+
+    class SpriteRepresentationAnimatedI
+    {
+
     };
 };
 

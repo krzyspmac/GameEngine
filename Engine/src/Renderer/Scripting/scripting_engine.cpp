@@ -141,9 +141,9 @@ void ScriptingEngine::registerFunctions()
 //    atlasManager.ScriptingInterfaceRegisterFunctions(L, &atlasManager);
 //    lua_setglobal(L, "AtlasManager");
 
-    SpriteRendererManager &spriteRendererManager = ENGINE().getSpriteRendererManager();
-    spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
-    lua_setglobal(L, "SpriteRendererManager");
+//    SpriteRendererManager &spriteRendererManager = ENGINE().getSpriteRendererManager();
+//    spriteRendererManager.ScriptingInterfaceRegisterFunctions(L, &spriteRendererManager);
+//    lua_setglobal(L, "SpriteRendererManager");
 
 //    Time &time = ENGINE().getTime();
 //    time.ScriptingInterfaceRegisterFunctions(L, &time);

@@ -8,7 +8,6 @@
 #ifndef sprite_renderer_manager_hpp
 #define sprite_renderer_manager_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "sprite_draw_interface.h"
 #include "font_interface.h"
 #include <iostream>
@@ -53,11 +52,6 @@ namespace engine
 
     private:
         std::vector<std::unique_ptr<SpriteRepresentationI>> m_spriteDraws;
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SpriteRendererManager);
     };
 };
 

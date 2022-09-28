@@ -15,65 +15,31 @@
 namespace engine
 {
 
-    class SpriteRepresentationStatic: public SpriteRepresentationI, public ScriptingInterface
+    class SpriteRepresentationStatic: public SpriteRepresentationI
     {
     public:
-        /** @private */
         SpriteRepresentationStatic(SpriteAtlasItemI *spriteAtlasItem);
         virtual ~SpriteRepresentationStatic() { };
         
-    public:
-        /** Sets the scale.
-         */
+    public: // AnimatablePropertiesI
         void SetScale(float x);
-
-        /** Sets the position for the sprite.
-         */
         void SetPosition(Vector2 &pos);
-
-        /** Gets the current position for the sprite.
-         */
         Vector2& GetPosition() { return m_position; };
-
-        /** Get width & size of the sprite.
-         */
         Size& GetSize() { return m_sprite->GetSize(); };
-
-        /** Set the z-axis position.
-            Possible values range from 0.0 to 1.0, 0.0 being closest to the "camera" and
-            1.0 being further away. Of two object: one being at 1.0 and one being at 0.0
-            the one at 0.0 will overlap the one at 1.0.
-            */
         void SetZPosition(float zPos);
-
-        /** Get the current sprite atlas item for this sprite */
         SpriteAtlasItemI *GetSpriteAtlasItem() { return m_sprite; };
-
-        /** Set the rotation and pass it to the drawable */
         void SetRotation(Rotation rotation);
 
-        /** Draws the sprite.
-         */
+    public: // SpriteRepresentationI
         void DrawAt(int x, int y);
-
-        /** Draws the sprite.
-         */
         void Draw();
-
-        void Update() {
-            
-        }
 
     public:
 
     private:
         SpriteAtlasItemI *m_sprite;
-
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(SpriteRepresentationStatic);
     };
 };
+
 
 #endif /* sprite_draw_hpp */
