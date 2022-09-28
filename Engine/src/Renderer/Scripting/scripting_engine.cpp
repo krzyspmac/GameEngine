@@ -181,9 +181,9 @@ void ScriptingEngine::registerFunctions()
     lightManager.ScriptingInterfaceRegisterFunctions(L, &lightManager);
     lua_setglobal(L, "LightManager");
 
-    SoundManager &soundManager = ENGINE().getSoundManager();
-    soundManager.ScriptingInterfaceRegisterFunctions(L, &soundManager);
-    lua_setglobal(L, "SoundManager");
+//    SoundManager &soundManager = ENGINE().getSoundManager();
+//    soundManager.ScriptingInterfaceRegisterFunctions(L, &soundManager);
+//    lua_setglobal(L, "SoundManager");
 
     EngineScreen &engineScreen = ENGINE().getEngineScreen();
     engineScreen.ScriptingInterfaceRegisterFunctions(L, &engineScreen);

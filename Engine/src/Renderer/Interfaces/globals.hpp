@@ -34,6 +34,8 @@ namespace engine
         static AnimatorFactoryI *animator();
 
         static AnimationCurveFactoryI *curveFactory();
+
+        static SoundManagerI* soundManager();
     };
 }
 

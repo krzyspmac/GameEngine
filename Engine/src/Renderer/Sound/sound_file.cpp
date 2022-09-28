@@ -89,13 +89,13 @@ SoundFileState SoundFile::GetState()
     return PictelSoundState2SoundFileState(m_soundPlayer->GetState());
 }
 
-SoundFileStateObserverI* SoundFile::AddObserver(CallableScriptFunctionI::CallableScriptFunctionRef function)
+SoundFileStateObserverI* SoundFile::AddObserver(std::shared_ptr<CallableParameters1<SoundFileI*>> handler)
 {
     if (m_soundPlayer == nullptr)
     {   return nullptr;
     }
 
-    auto callback = new SoundFileStateObserverLUA(function);
+    auto callback = new SoundFileStateObserver(this, handler);
     m_soundPlayer->AddCallback(std::move(callback));
     return callback;
 }
@@ -106,117 +106,17 @@ void SoundFile::RemoveObserver(SoundFileStateObserverI* observer)
     {   return;
     }
 
-    m_soundPlayer->RemoveCallback((SoundFileStateObserverLUA*)observer);
+    m_soundPlayer->RemoveCallback((SoundFileStateObserver*)observer);
 }
 
-//
-// SoundFileStateObserverLUA
-//
-
-void SoundFileStateObserverLUA::UpdateState(SoundFileState state)
+void SoundFileStateObserver::UpdateState(SoundFileState state)
 {
-    m_luaFunc.CallWithParameters(state);
+    m_handler->Call(m_parent);
 }
 
-void SoundFileStateObserverLUA::PerformStateCallback(PlayerState state)
+void SoundFileStateObserver::PerformStateCallback(PlayerState state)
 {
     UpdateState(PictelSoundState2SoundFileState(state));
-}
-
-//
-// Scripting
-//
-
-SCRIPTING_INTERFACE_IMPL_NAME(SoundFile);
-
-static int lua_Play(lua_State *L)
-{
-    SoundFile **ptr = (SoundFile**)luaL_checkudata(
-        L, 1, SoundFile::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
-
-    (*ptr)->Play();
-    return 0;
-}
-
-static int lua_Pause(lua_State *L)
-{
-    SoundFile **ptr = (SoundFile**)luaL_checkudata(
-        L, 1, SoundFile::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
-
-    (*ptr)->Pause();
-    return 0;
-}
-
-static int lua_Stop(lua_State *L)
-{
-    SoundFile **ptr = (SoundFile**)luaL_checkudata(
-        L, 1, SoundFile::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
-
-    (*ptr)->Stop();
-    return 0;
-}
-
-static int lua_SetVolume(lua_State *L)
-{
-    SoundFile **ptr = (SoundFile**)luaL_checkudata(
-        L, 1, SoundFile::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
-
-    double volume = lua_tonumber(L, 2);
-    (*ptr)->SetVolume(volume);
-    return 0;
-}
-
-static int lua_SetLoops(lua_State *L)
-{
-    SoundFile **ptr = (SoundFile**)luaL_checkudata(
-        L, 1, SoundFile::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SoundFile*>(*ptr) == nullptr) { return 0; }
-
-    bool loops = lua_tonumber(L, 2);
-    (*ptr)->SetLoops(loops);
-    return 0;
-}
-
-static int lua_AddObserver(lua_State *L)
-{
-    SoundFile *obj = ScriptingEngineI::GetScriptingObjectPtr<SoundFile>(L, 1);
-    int functionRef = luaL_ref( L, LUA_REGISTRYINDEX );
-
-    auto result = obj->AddObserver(functionRef);
-    lua_pushlightuserdata(L, result);
-    return 1;
-}
-
-static int lua_RemoveObserver(lua_State *L)
-{
-    SoundFile *obj = ScriptingEngineI::GetScriptingObjectPtr<SoundFile>(L, 1);
-    SoundFileStateObserverI *observer = (SoundFileStateObserverI*)lua_touserdata(L, 2);
-
-    obj->RemoveObserver(observer);
-    return 0;
-}
-
-std::vector<luaL_Reg> SoundFile::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "Play",           &lua_Play }
-    ,   { "Pause",          &lua_Pause }
-    ,   { "Stop",           &lua_Stop }
-    ,   { "SetVolume",      &lua_SetVolume }
-    ,   { "SetLoops",       &lua_SetLoops }
-    ,   { "AddObserver",    &lua_AddObserver }
-    ,   { "RemoveObserver", &lua_RemoveObserver }
-    });
-    return result;
 }
 
 inline SoundFileState PictelSoundState2SoundFileState(PlayerState state)

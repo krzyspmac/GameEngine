@@ -55,3 +55,8 @@ AnimatorFactoryI *Globals::animator()
     static AnimatorFactory *animator = new AnimatorFactory();
     return animator;
 }
+
+SoundManagerI *Globals::soundManager()
+{
+    return static_cast<SoundManagerI*>(&(ENGINE().getSoundManager()));
+}

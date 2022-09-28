@@ -10,7 +10,7 @@
 
 #include <iostream>
 #include <vector>
-#include "callable.hpp"
+#include "callable_interface.h"
 
 namespace engine
 {
@@ -63,9 +63,8 @@ namespace engine
         /** Get the player state */
         virtual SoundFileState GetState() = 0;
 
-        /** Add an observer as a lua function. Returns an object that can be used later
-            to remove the observer as well. */
-        virtual SoundFileStateObserverI* AddObserver(CallableScriptFunctionI::CallableScriptFunctionRef) = 0;
+        /** Add an observer for the sound file state */
+        virtual  SoundFileStateObserverI* AddObserver(std::shared_ptr<CallableParameters1<SoundFileI*>>) = 0;
 
         /** Remove an observer */
         virtual void RemoveObserver(SoundFileStateObserverI*) = 0;

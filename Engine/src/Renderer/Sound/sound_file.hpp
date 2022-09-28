@@ -9,25 +9,31 @@
 #define sound_file_hpp
 
 #include "sound_interfaces.h"
-#include "scripting_engine_provider_interface.h"
 #include "pictel_sound.hpp"
 #include "callable.hpp"
 
 namespace engine
 {
-    class SoundFileStateObserverLUA: public SoundFileStateObserverI, public PictelSound::PlayerCallbackI
+    class SoundFileStateObserver: public SoundFileStateObserverI, public PictelSound::PlayerCallbackI
     {
-        CallableScriptFunctionParameters1<int> m_luaFunc;
     public:
-        SoundFileStateObserverLUA(CallableScriptFunctionI::CallableScriptFunctionRef function)
+        typedef std::shared_ptr<CallableParameters1<SoundFileI*>> FunctionType;
+    public:
+        SoundFileStateObserver(SoundFileI* parent, FunctionType handler)
         :   SoundFileStateObserverI()
-        ,   m_luaFunc(CallableScriptFunctionParameters1<int>(function))
+        ,   m_parent(parent)
+        ,   m_handler(handler)
         { };
 
+    public: // SoundFileStateObserverI
         void UpdateState(SoundFileState);
 
     public: // PictelSound::PlayerCallbackI
         void PerformStateCallback(PlayerState);
+
+    private:
+        SoundFileI *m_parent;
+        FunctionType m_handler;
     };
 
     class SoundFile: public SoundFileI
@@ -44,13 +50,8 @@ namespace engine
         void SetVolume(double);
         void SetLoops(bool);
         SoundFileState GetState();
-        SoundFileStateObserverI* AddObserver(CallableScriptFunctionI::CallableScriptFunctionRef);
+        SoundFileStateObserverI* AddObserver(SoundFileStateObserver::FunctionType);
         void RemoveObserver(SoundFileStateObserverI*);
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SoundFile);
     };
 };
 

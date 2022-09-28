@@ -22,6 +22,8 @@ class GameSceneIntro: public GameSceneI {
     engine::LightI *m_light;
     std::vector<std::string> m_texts;
 
+    engine::SoundFileI *m_sound;
+
     std::shared_ptr<engine::CallableParameters2<engine::GamepadI *, bool>>  m_callabackGamepadConnection;
     engine::EventIdentifier m_callabackGamepadConnectionId;
 public: // GameSceneIntro

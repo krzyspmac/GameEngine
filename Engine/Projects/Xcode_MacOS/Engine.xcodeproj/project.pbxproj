@@ -1173,7 +1173,6 @@
 		7F3470AC28527C3900FDED71 /* Sound */ = {
 			isa = PBXGroup;
 			children = (
-				7F3470AD28527C5D00FDED71 /* sound_interfaces.h */,
 				7F3470AF28527C7D00FDED71 /* sound_file.hpp */,
 				7F3470AE28527C7D00FDED71 /* sound_file.cpp */,
 				7F3470B428527EAE00FDED71 /* sound_manager.hpp */,
@@ -1402,6 +1401,7 @@
 				7F08C44227AF1FBF002FEB8F /* light_interface.hpp */,
 				7F40C5A128D2732000B0865F /* gamepad_interface.h */,
 				7F138239277505B600ED6D67 /* sprite_interface_defs.h */,
+				7F3470AD28527C5D00FDED71 /* sound_interfaces.h */,
 				7FE2E5D8277B23BC00538094 /* vector2.hpp */,
 				7FF641C6277CC72D0017D86D /* general.hpp */,
 				7F2DB01728E04A200044EF8D /* rotation.hpp */,

@@ -50,6 +50,11 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_textSprite->SetAcceptsLight(true);
 
     m_light = m_scene->CreateLight("linear", {0.f, 1.f, 0.f}, 0.5, {100, 100}, 50, 1.);
+
+    m_sound = Globals::soundManager()->Load("Rondo_Alla_Turka.ogg");
+    m_sound->AddObserver(CallableParameters1<SoundFileI *>::make_shared([&](SoundFileI* sender){
+        printf("Sound state = %d\n", sender->GetState());
+    }));
 }
 
 void GameSceneIntro::DidActivate()
@@ -80,6 +85,7 @@ void GameSceneIntro::ContinueAnimation()
 {
     FadeIn();
     RotationIn();
+    m_sound->Play();
 }
 
 void GameSceneIntro::FadeIn()

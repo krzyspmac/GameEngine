@@ -10,7 +10,6 @@
 
 #include "common.h"
 #include "sound_interfaces.h"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -33,11 +32,6 @@ namespace engine
 
         /** Loads a selected sound file. Do not reference it again. */
         void Unload(SoundFileI*);
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SoundManager);
     };
 };
 
