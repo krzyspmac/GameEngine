@@ -1,11 +1,13 @@
 
 #include "GameSceneIntro.hpp"
 
+using namespace engine;
+
 GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     : m_resState(resState)
 {
-    m_font = engine::Globals::fontManager()->LoadFont("at01.fnt", "at01.png");
-    m_scene = engine::Globals::sceneManager()->SceneCreateNew();
+    m_font = Globals::fontManager()->LoadFont("at01.fnt", "at01.png");
+    m_scene = Globals::sceneManager()->SceneCreateNew();
     m_textSprite = m_scene->SpriteTextLoad(m_font);
 
     m_texts = {
@@ -22,20 +24,19 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
         ::Globals
         ::eventsManager()
         ->RegisterGamepadConnection(
-            engine::CallableParameters2<engine::GamepadI *, bool>::make_shared([&](auto* gamepad, bool){
+            CallableParameters2<GamepadI *, bool>::make_shared([&](auto* gamepad, bool){
                 OnGamepadConnection(gamepad);
             })
         );
 
     auto size = m_resState->GetViewportSize();
-
-    auto* atlasMgr = engine::Globals::spriteAtlasManager();
+    auto* atlasMgr = Globals::spriteAtlasManager();
 
     auto* atlasBackgroundItem = atlasMgr->SpriteAtlasLoad("background.json", "background.png");
     m_background = m_scene->SpriteStaticLoad(atlasBackgroundItem, "background.png");
 
     auto* atlasAnimatedSpriteItem = atlasMgr->SpriteAtlasLoad("player_Idle.json", "player_Idle.tga");
-    m_animated = m_scene->SpriteAnimatedLoad(100, atlasAnimatedSpriteItem);
+    m_animated = m_scene->SpriteAnimatedLoad(250, atlasAnimatedSpriteItem);
     m_animated->SetPosition({100,100});
     m_animated->SetAcceptsLight(false);
 
@@ -51,53 +52,40 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState)
     m_light = m_scene->CreateLight("linear", {0.f, 1.f, 0.f}, 0.5, {100, 100}, 50, 1.);
 }
 
-void
-GameSceneIntro::DidActivate()
+void GameSceneIntro::DidActivate()
 {
     ContinueAnimation();
 }
 
-void
-GameSceneIntro::DidDeactivate()
-{
-}
+void GameSceneIntro::DidDeactivate() { }
 
-void
-GameSceneIntro::OnGamepadConnection(engine::GamepadI* gamepad)
+void GameSceneIntro::OnGamepadConnection(GamepadI* gamepad)
 {
     if (gamepad != nullptr) {
-        gamepad->RegisterLeftThumbstickAxis(engine::CallableParameters1<engine::Vector2>::make_shared([&](engine::Vector2 vect){
+        gamepad->RegisterLeftThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vect){
 
         }));
-        gamepad->RegisterRightThumbstickAxis(engine::CallableParameters1<engine::Vector2>::make_shared([&](engine::Vector2 vect){
+        gamepad->RegisterRightThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vect){
 
         }));
-        gamepad->RegisterButtonTapped(engine::CallableParameters3<engine::GamepadButtonType, engine::GamepadButtonAction, float>::make_shared([&](auto buttonType, auto buttonAction, auto value){
+        gamepad->RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float>::make_shared([&](auto buttonType, auto buttonAction, auto value){
 
         }));
     }
 }
 
-void
-GameSceneIntro::FrameUpdate()
-{
-    auto size = m_resState->GetViewportSize();
-    printf("width = %f\n", size.x);
-}
+void GameSceneIntro::FrameUpdate() { }
 
-void
-GameSceneIntro::ContinueAnimation()
+void GameSceneIntro::ContinueAnimation()
 {
     FadeIn();
-
     RotationIn();
 }
 
-void
-GameSceneIntro::FadeIn()
+void GameSceneIntro::FadeIn()
 {
-    auto animator = engine::Globals::animator();
-    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+    auto animator = Globals::animator();
+    auto curve = Globals::curveFactory()->Create(LINEAR);
 
     animator->Animate(1, .1, curve, [&](auto *animator){
         m_textSprite->animator()->SetAlpha(animator, 1.0);
@@ -106,11 +94,10 @@ GameSceneIntro::FadeIn()
     });
 }
 
-void
-GameSceneIntro::ScaleIn()
+void GameSceneIntro::ScaleIn()
 {
-    auto animator = engine::Globals::animator();
-    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+    auto animator = Globals::animator();
+    auto curve = Globals::curveFactory()->Create(LINEAR);
 
     animator->Animate(1, 30, curve, [&](auto *animator){
         m_textSprite->animator()->SetScale(animator, 100);
@@ -118,11 +105,10 @@ GameSceneIntro::ScaleIn()
     });
 }
 
-void
-GameSceneIntro::FadeOut()
+void GameSceneIntro::FadeOut()
 {
-    auto animator = engine::Globals::animator();
-    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+    auto animator = Globals::animator();
+    auto curve = Globals::curveFactory()->Create(LINEAR);
 
     animator->Animate(1, .1, curve, [&](auto *animator){
         m_textSprite->animator()->SetAlpha(animator, 0.0);
@@ -131,11 +117,10 @@ GameSceneIntro::FadeOut()
     });
 }
 
-void
-GameSceneIntro::PositionIn()
+void GameSceneIntro::PositionIn()
 {
-    auto animator = engine::Globals::animator();
-    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+    auto animator = Globals::animator();
+    auto curve = Globals::curveFactory()->Create(LINEAR);
 
     animator->Animate(1, 5, curve, [&](auto *animator){
         m_textSprite->animator()->SetPosition(animator, {150, 500});
@@ -143,14 +128,13 @@ GameSceneIntro::PositionIn()
     });
 }
 
-void
-GameSceneIntro::RotationIn()
+void GameSceneIntro::RotationIn()
 {
-    auto animator = engine::Globals::animator();
-    auto curve = engine::Globals::curveFactory()->Create(engine::LINEAR);
+    auto animator = Globals::animator();
+    auto curve = Globals::curveFactory()->Create(LINEAR);
 
     animator->Animate(1, 5, curve, [&](auto *animator){
-        m_textSprite->animator()->SetRotation(animator, engine::Rotation(M_PI, {0, 0}));
+        m_textSprite->animator()->SetRotation(animator, Rotation(M_PI, {0, 0}));
     }, [&](void){
     });
 }

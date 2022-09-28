@@ -14,6 +14,4 @@ void PictelScriptInit(void) {
 }
 
 void PictelScriptFrameUpdate(void) {
-    auto time = Globals::time();
-    printf("time from frame = %f\n", time->GetFrameDeltaSec());
 }
