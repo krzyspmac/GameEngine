@@ -13,7 +13,6 @@
 #include "event_provider_interface.h"
 #include "engine_provider_interface.h"
 #include "interfaces.h"
-#include "callable.hpp"
 #include "events_manager_types.hpp"
 #include "object_pool.hpp"
 #include "gamepad_interface.h"

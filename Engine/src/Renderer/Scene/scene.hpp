@@ -8,7 +8,6 @@
 #ifndef scene_hpp
 #define scene_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "engine_provider_interface.h"
 #include "sprite_representation_static.hpp"
 #include "sprite_representation_animated.hpp"
@@ -17,7 +16,6 @@
 #include "character_representation.hpp"
 #include "light_interface.hpp"
 #include "font_interface.h"
-#include "callable.hpp"
 #include "scene_interface.h"
 #include "sprite_representation_text_interface.h"
 #include "common.h"
@@ -122,11 +120,6 @@ namespace engine
     public: /** Getters */
 
         auto& GetStaticSprites() { return m_staticSprites; };
-
-//    /// ScriptingInterface
-//    public:
-//        /// @private
-//        SCRIPTING_INTERFACE_HEADERS(Scene);
     };
 };
 

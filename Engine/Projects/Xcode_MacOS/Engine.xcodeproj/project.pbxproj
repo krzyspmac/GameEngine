@@ -180,7 +180,6 @@
 		7F3E8ECD279AC8F9003BB7B6 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
 		7F3E8ECE279AC8F9003BB7B6 /* character_interface_impl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */; };
 		7F3E8ECF279AC8F9003BB7B6 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
-		7F3E8ED0279AC8F9003BB7B6 /* callable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D6E2784C6E0005C52C4 /* callable.hpp */; };
 		7F3E8ED1279AC8F9003BB7B6 /* console_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823E82788F64D008F0F7A /* console_renderer.h */; };
 		7F3E8ED2279AC8F9003BB7B6 /* console_app_renderer_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */; };
 		7F3E8ED3279AC8F9003BB7B6 /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
@@ -232,7 +231,6 @@
 		7F3E8F0A279AC909003BB7B6 /* character_representation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7CE277F5872004A6107 /* character_representation.cpp */; };
 		7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */; };
 		7F3E8F0C279AC909003BB7B6 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
-		7F3E8F0D279AC909003BB7B6 /* callable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D6D2784C6E0005C52C4 /* callable.cpp */; };
 		7F3E8F0E279AC909003BB7B6 /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
 		7F3E8F0F279AC909003BB7B6 /* console_terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241B278993E0008F0F7A /* console_terminal.cpp */; };
 		7F3E8F10279AC909003BB7B6 /* console_terminal_commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */; };
@@ -323,7 +321,6 @@
 		7F3E90EF279B03F6003BB7B6 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
 		7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */; };
 		7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
-		7F3E90F2279B03F6003BB7B6 /* callable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D6E2784C6E0005C52C4 /* callable.hpp */; };
 		7F3E90F3279B03F6003BB7B6 /* console_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823E82788F64D008F0F7A /* console_renderer.h */; };
 		7F3E90F4279B03F6003BB7B6 /* console_app_renderer_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */; };
 		7F3E90F5279B03F6003BB7B6 /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
@@ -381,7 +378,6 @@
 		7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7CE277F5872004A6107 /* character_representation.cpp */; };
 		7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */; };
 		7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
-		7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D6D2784C6E0005C52C4 /* callable.cpp */; };
 		7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
 		7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241B278993E0008F0F7A /* console_terminal.cpp */; };
 		7F3E9139279B03F6003BB7B6 /* console_terminal_commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */; };
@@ -579,8 +575,6 @@
 		7FE2E5DA277B23BC00538094 /* vector2.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5D8277B23BC00538094 /* vector2.hpp */; };
 		7FE2E5E1277B3E6E00538094 /* performance.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2E5DF277B3E6E00538094 /* performance.cpp */; };
 		7FE2E5E2277B3E6E00538094 /* performance.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE2E5E0277B3E6E00538094 /* performance.hpp */; };
-		7FF21D6F2784C6E0005C52C4 /* callable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF21D6D2784C6E0005C52C4 /* callable.cpp */; };
-		7FF21D702784C6E0005C52C4 /* callable.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF21D6E2784C6E0005C52C4 /* callable.hpp */; };
 		7FF641CC277CE8CB0017D86D /* polygon_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */; };
 		7FF641CD277CE8CB0017D86D /* polygon_loader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FF641CB277CE8CB0017D86D /* polygon_loader.hpp */; };
 		7FF641E0277D22E50017D86D /* events_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FF641DE277D22E50017D86D /* events_manager.cpp */; };
@@ -863,8 +857,6 @@
 		7FE6D57928E0559600A78E06 /* sprite_atlas_manager_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_atlas_manager_interface.h; sourceTree = "<group>"; };
 		7FE6D57E28E05EDD00A78E06 /* font_manager_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = font_manager_interface.h; sourceTree = "<group>"; };
 		7FE6D57F28E06FFC00A78E06 /* scene_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = scene_interface.h; sourceTree = "<group>"; };
-		7FF21D6D2784C6E0005C52C4 /* callable.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = callable.cpp; sourceTree = "<group>"; };
-		7FF21D6E2784C6E0005C52C4 /* callable.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = callable.hpp; sourceTree = "<group>"; };
 		7FF21D732784DDE0005C52C4 /* memory.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
 		7FF641C6277CC72D0017D86D /* general.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = general.hpp; sourceTree = "<group>"; };
 		7FF641CA277CE8CB0017D86D /* polygon_loader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = polygon_loader.cpp; sourceTree = "<group>"; };
@@ -1040,8 +1032,6 @@
 			children = (
 				7F138222277505B600ED6D67 /* scripting_engine.hpp */,
 				7F138220277505B600ED6D67 /* scripting_engine.cpp */,
-				7FF21D6E2784C6E0005C52C4 /* callable.hpp */,
-				7FF21D6D2784C6E0005C52C4 /* callable.cpp */,
 			);
 			path = Scripting;
 			sourceTree = "<group>";
@@ -1615,7 +1605,6 @@
 				7FCAE7D1277F5872004A6107 /* character_representation.hpp in Headers */,
 				7F138273277505B600ED6D67 /* sprite_interface_defs.h in Headers */,
 				7FB824262789AF95008F0F7A /* pipe_output.hpp in Headers */,
-				7FF21D702784C6E0005C52C4 /* callable.hpp in Headers */,
 				7FC131232792FAF20094DF0C /* sprite_atlas_interface.h in Headers */,
 				7FB8241A27890479008F0F7A /* console_logger.hpp in Headers */,
 				7FE2E5D1277B13B000538094 /* path.hpp in Headers */,
@@ -1759,7 +1748,6 @@
 				7F7EA07328967C9900A09199 /* system_utils.hpp in Headers */,
 				7F3E8ECE279AC8F9003BB7B6 /* character_interface_impl.hpp in Headers */,
 				7F3E8ECF279AC8F9003BB7B6 /* scripting_engine.hpp in Headers */,
-				7F3E8ED0279AC8F9003BB7B6 /* callable.hpp in Headers */,
 				7F2DB00C28E0413D0044EF8D /* RendererEntry.h in Headers */,
 				7FCAE6D627AD345E00589EDE /* AAPLShaderTypes.h in Headers */,
 				7F3E8ED1279AC8F9003BB7B6 /* console_renderer.h in Headers */,
@@ -1873,7 +1861,6 @@
 				7F7EA07428967C9900A09199 /* system_utils.hpp in Headers */,
 				7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */,
 				7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */,
-				7F3E90F2279B03F6003BB7B6 /* callable.hpp in Headers */,
 				7F2DB00D28E0413D0044EF8D /* RendererEntry.h in Headers */,
 				7FCAE6D527AD345D00589EDE /* AAPLShaderTypes.h in Headers */,
 				7F3E90F3279B03F6003BB7B6 /* console_renderer.h in Headers */,
@@ -2232,7 +2219,6 @@
 				7F64289B2778CD2200EE9E2C /* character_mover.cpp in Sources */,
 				7F08C45227AF22F2002FEB8F /* light.cpp in Sources */,
 				7FB2018627941D0200D0F5FE /* sprite_draw_backbuffer.cpp in Sources */,
-				7FF21D6F2784C6E0005C52C4 /* callable.cpp in Sources */,
 				7FB8241D278993E0008F0F7A /* console_terminal.cpp in Sources */,
 				7F2497E527B942FA001D871A /* sprite_representation_text.cpp in Sources */,
 				7FB8242D2789D3AD008F0F7A /* console_app_renderer_mac.mm in Sources */,
@@ -2331,7 +2317,6 @@
 				7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */,
 				7F2DAFF828E03F990044EF8D /* globals.cpp in Sources */,
 				7F3E8F0C279AC909003BB7B6 /* scripting_engine.cpp in Sources */,
-				7F3E8F0D279AC909003BB7B6 /* callable.cpp in Sources */,
 				7F3E8F0E279AC909003BB7B6 /* console_logger.cpp in Sources */,
 				7F3E8F0F279AC909003BB7B6 /* console_terminal.cpp in Sources */,
 				7F40C5A928D2740400B0865F /* gamepad.cpp in Sources */,
@@ -2424,7 +2409,6 @@
 				7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */,
 				7F2DAFF928E03F990044EF8D /* globals.cpp in Sources */,
 				7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */,
-				7F3E9136279B03F6003BB7B6 /* callable.cpp in Sources */,
 				7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */,
 				7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */,
 				7F40C5AA28D2740400B0865F /* gamepad.cpp in Sources */,

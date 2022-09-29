@@ -13,7 +13,6 @@ using namespace engine;
 
 EngineState::EngineState()
     : m_screenSizeChangeHandler(nullptr)
-    , m_screenSizeChangeScriptHandler(CallableScriptFunctionParameters3<float, float, float>::empty())
 {
 
 }
@@ -28,21 +27,11 @@ void EngineState::SetOnScreenSizeChangeHandler(std::function<void (Size, float)>
     m_screenSizeChangeHandler = lambda;
 }
 
-void EngineState::SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float> handler)
-{
-    m_screenSizeChangeScriptHandler = handler;
-}
-
 void EngineState::SendScreenSizeChangeEvent(Size size, float density)
 {
     if (m_screenSizeChangeHandler != nullptr)
     {
         m_screenSizeChangeHandler(size, density);
-    }
-
-    if (m_screenSizeChangeScriptHandler.CanCall())
-    {
-        m_screenSizeChangeScriptHandler.CallWithParameters(size.width, size.height, density);
     }
 }
 

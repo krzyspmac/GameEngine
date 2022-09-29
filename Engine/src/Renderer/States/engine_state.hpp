@@ -9,7 +9,6 @@
 #define engine_state_hpp
 
 #include "interfaces.h"
-#include "callable.hpp"
 #include "engine_state_interface.h"
 
 namespace engine
@@ -17,7 +16,6 @@ namespace engine
     class EngineState: public EngineStateI
     {
         std::function<void(Size, float)> m_screenSizeChangeHandler;
-        CallableScriptFunctionParameters3<float, float, float> m_screenSizeChangeScriptHandler;
     public:
         EngineState();
     public: // EngineStateI
@@ -26,8 +24,6 @@ namespace engine
         void SetViewportSize(Size, float);
 
         void SetOnScreenSizeChangeHandler(std::function<void(Size, float)>);
-
-        void SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>);
 
         void SendScreenSizeChangeEvent(Size, float);
 
