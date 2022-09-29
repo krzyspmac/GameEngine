@@ -13,15 +13,6 @@
 
 namespace engine
 {
-
-    /**
-     SceneManager
-     \addtogroup API_GLOBALS
-     */
-    /**
-     Manages the scene. Loading a new scene should unload the previous
-     scene's resources.
-     */
     class SceneManager: public SceneManagerI
     {
     public:
@@ -41,11 +32,6 @@ namespace engine
     private:
         std::vector<std::unique_ptr<SceneI>> m_scenes;
         SceneI* m_current;
-//
-//    /// ScriptingInterface
-//    public:
-//        /** @private */
-//        SCRIPTING_INTERFACE_HEADERS(SceneManager);
     };
 };
 

@@ -25,8 +25,7 @@ namespace engine
 
         void SetViewportSize(Size, float);
 
-
-        void SetOnScreenSizeChange(std::function<void(Size, float)>);
+        void SetOnScreenSizeChangeHandler(std::function<void(Size, float)>);
 
         void SetOnScreenSizeChange(CallableScriptFunctionParameters3<float, float, float>);
 

@@ -15,10 +15,6 @@
 
 namespace engine
 {
-    /**
-     Time
-     \addtogroup API_GLOBALS
-     */
     class Time: public TimeI
     {
         EngineProviderI& m_engineProvider;

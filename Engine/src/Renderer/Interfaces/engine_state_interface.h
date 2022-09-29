@@ -12,10 +12,10 @@
 
 namespace engine
 {
-
-    /** EngineState
+    /** EngineStateI
         \addtogroup API_GLOBALS
-        Holds various information on the state of the engine. Viewport, frames, etc.
+        Holds various information on the state of the engine. Viewport, screen size change
+        handler, etc.
      */
     class EngineStateI
     {
@@ -35,17 +35,18 @@ namespace engine
         /** @private */
         virtual void SendScreenSizeChangeEvent(Size, float) = 0;
 
-        /** Register a screen resolution change. Once the resolution is changed
-            this script function will be callsed and the script will have an option
-            to modify the desired resoltion. That in turn might recreate the
+        /** Registers a screen size change. Once the screen size is changed
+            this function will be callsed and the script will have an option
+            to modify the desired viewport. That in turn might recreate the
             framebuffer texture size.
+
+            \see EngineStateI::SetViewportSize
 
             The lambda will receive the parameters:
             - size
             - screen density
          */
-        /** @private */
-        virtual void SetOnScreenSizeChange(std::function<void(Size, float)>) = 0;
+        virtual void SetOnScreenSizeChangeHandler(std::function<void(Size, float)>) = 0;
     };
 };
 

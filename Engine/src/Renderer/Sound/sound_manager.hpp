@@ -13,13 +13,6 @@
 
 namespace engine
 {
-    /**
-     SoundManager
-     \addtogroup API_GLOBALS
-     */
-    /**
-     Manages the scene's sound files.
-     */
     class SoundManager: public SoundManagerI
     {
         std::vector<std::unique_ptr<SoundFileI>> m_items;

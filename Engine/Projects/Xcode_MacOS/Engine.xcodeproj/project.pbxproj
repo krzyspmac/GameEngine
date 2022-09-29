@@ -1294,6 +1294,8 @@
 		7F64288127779CCA00EE9E2C /* Character */ = {
 			isa = PBXGroup;
 			children = (
+				7FC1310C2792FAF20094DF0C /* character_mover_interface.h */,
+				7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */,
 				7F64288327779CD400EE9E2C /* character_renderer.hpp */,
 				7F64288227779CD400EE9E2C /* character_renderer.cpp */,
 				7F6428882777C51D00EE9E2C /* character_interface.h */,
@@ -1387,9 +1389,7 @@
 				7FC131282792FCA30094DF0C /* sprite_draw_interface.h */,
 				7FC131172792FAF20094DF0C /* drawable_interface.h */,
 				7FC131112792FAF20094DF0C /* font_interface.h */,
-				7FC1310C2792FAF20094DF0C /* character_mover_interface.h */,
 				7FC1310D2792FAF20094DF0C /* callable_interface.h */,
-				7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */,
 				7FC1310F2792FAF20094DF0C /* texture_interface.h */,
 				7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */,
 				7FC131122792FAF20094DF0C /* path_finder_interface.h */,

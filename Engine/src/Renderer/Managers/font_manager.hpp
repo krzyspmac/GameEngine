@@ -14,12 +14,6 @@
 
 namespace engine
 {
-    /**
-     FontManager
-     \addtogroup API_GLOBALS
-     */
-    /** Keps a list of all fonts
-     */
     class FontManager: public FontManagerI
     {
         std::vector<std::unique_ptr<FontI>> m_fonts;

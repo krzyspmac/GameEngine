@@ -12,6 +12,11 @@
 
 namespace engine
 {
+    /** FontManagerI
+        \addtogroup API_GLOBALS
+
+        Keps a list of all fonts including memory handling of those.
+     */
     class FontManagerI
     {
     public:

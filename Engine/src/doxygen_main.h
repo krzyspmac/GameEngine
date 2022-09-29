@@ -8,28 +8,25 @@
 #ifndef doxygen_main_h
 #define doxygen_main_h
 
-/** \defgroup API_GLOBALS Global Variables
-    A list of globally available objects to be used in LUA scripts. Those manage
-    a wide variety of objects and state.
+/** \defgroup API_GLOBALS Exposed Functionality
+    A list of exposed interfaces available to be used in C++ game scripts. Those manage
+    a wide variety of objects and states from sprite loading to animations.
 */
 
 /**
 
 \mainpage Pictel 2d Game Engine
 
-...
-
 See [Init params](doxygen_ini.md) to get a list ini params.
 
 See [Command Line parameters](doxygen_executable.md) to get a list of command-line parameters.
 
-See \ref API_GLOBALS "Global API" for details on these functions.
+See \ref API_GLOBALS "Exposed Functionality" for available classes & functions that can be used in
+the game scripts.
 
-See \ref doxygen_fonts.md
+See [Font Management](doxygen_fonts.md) to learn how to render texts.
 
-[Drawing Text](doxygen_fonts.md)
-
-[Sound](doxygen_sounds.md)
+See [Sound Management](doxygen_sounds.md) to learn how to play OGG/Vorbis files.
 
 */
 

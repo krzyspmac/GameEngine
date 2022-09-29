@@ -24,7 +24,10 @@ namespace engine
     /** float min, float max, float progress */
     typedef std::function<float(float, float, float)> AnimationCurveLambda;
 
-    /** Defines the interface for the animation curve factory */
+    /** AnimationCurveFactoryI
+        \addtogroup API_GLOBALS
+        Defines the interface for the animation curve factory
+     */
     class AnimationCurveFactoryI
     {
     public:
@@ -60,11 +63,22 @@ namespace engine
         virtual void Prepare(std::function<void(AnimatorI*)> beginHndlr, std::function<void(AnimatorI*)> endHndlr) = 0;
     };
 
-    /** Defines the animator factory interface used to provde animation capability
+    /** AnimatorFactoryI
+        \addtogroup API_GLOBALS
+        Defines the animator factory interface used to provde animation capability
         in the engine. */
     class AnimatorFactoryI
     {
     public:
+        /** Starts the animation block. In it you should use the AnimatablePropertiesI::animator()
+            to use the animator functions.
+
+            @param delay        - delay in seconds
+            @param seconds      - animation duration
+            @param curve        - chosen animation curve
+            @param block        - the animation block; use AnimatablePropertiesI::animator() to animate properties
+            @param didFinishBlock - completion handler block
+         */
         virtual void Animate(float delay,
                              float seconds,
                              AnimationCurveLambda curve,

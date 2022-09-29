@@ -26,9 +26,10 @@ namespace engine
         auto GetIdentifier() { return m_identifier; };
     };
 
-    /** EventsManager
+    /** EventsManagerI
         \addtogroup API_GLOBALS
-        Allows for registering for keyboard & mouse events
+
+        Allows for registering for keyboard, mouse events & gamepad events.
      */
     class EventsManagerI
     {

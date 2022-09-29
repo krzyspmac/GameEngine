@@ -12,6 +12,11 @@
 
 namespace engine
 {
+    /** TimeI
+        \addtogroup API_GLOBALS
+        Keeps the time for the engine including game engine start and incremental time
+        between each frame so it's possible to properly animate different sprites/states.
+     */
     class TimeI
     {
     public:

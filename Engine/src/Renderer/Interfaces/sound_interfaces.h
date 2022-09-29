@@ -70,6 +70,11 @@ namespace engine
         virtual void RemoveObserver(SoundFileStateObserverI*) = 0;
     };
 
+    /** SoundManagerI
+        \addtogroup API_GLOBALS
+
+        Manages the scene's sound files.
+     */
     class SoundManagerI
     {
     public:

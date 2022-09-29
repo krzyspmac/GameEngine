@@ -871,78 +871,13 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../Renderer/Scene/scene.hpp \
-                         ../Renderer/Scene/scene.cpp \
-                         ../Renderer/Scene/scene_manager.cpp \
-                         ../Renderer/Scene/scene_manager.hpp \
-                         ../Renderer/Character/character.cpp \
-                         ../Renderer/Character/character.hpp \
-                         ../Renderer/Character/character_manager.cpp \
-                         ../Renderer/Character/character_manager.hpp \
-                         ../Renderer/Character/character_representation.cpp \
-                         ../Renderer/Character/character_representation.hpp \
-                         ../Renderer/Sprites/sprite_atlas.cpp \
-                         ../Renderer/Sprites/sprite_atlas.hpp \
-                         ../Renderer/Sprites/sprite_representation_static.hpp \
-                         ../Renderer/Sprites/sprite_representation_static.cpp \
-                         ../Renderer/Sprites/sprite_representation_animated.hpp \
-                         ../Renderer/Sprites/sprite_representation_animated.hpp \
-                         ../Renderer/Managers/events_manager.cpp \
-                         ../Renderer/Managers/sprite_atlas_manager.cpp \
-                         ../Renderer/Managers/sprite_atlas_manager.hpp \
-                         ../Renderer/Managers/sprite_renderer_manager.cpp \
-                         ../Renderer/Managers/sprite_renderer_manager.hpp \
-                         ../Renderer/Managers/sprite_atlas_manager.cpp \
+INPUT                  = . \
                          ../doxygen_main.h \
-                         ../Renderer/States/time.cpp \
-                         ../Renderer/States/time.hpp \
-                         ../Renderer/Animations/animation_factory.cpp \
-                         ../Renderer/Animations/animation_factory.hpp \
-                         ../Renderer/States/engine_state.cpp \
-                         ../Renderer/States/engine_state.hpp \
-                         ../Renderer/Scripting/callable_interface.h \
-                         ../Renderer/Scripting/callable.cpp \
-                         ../Renderer/Scripting/callable.hpp \
-                         ../Renderer/Animations/property_animator_factory.cpp \
-                         ../Renderer/Animations/property_animator_factory.hpp \
-                         ../Renderer/Animations/property_animator.cpp \
-                         ../Renderer/Animations/property_animator.hpp \
-                         ../Renderer/Animations/value_animator_factory.cpp \
-                         ../Renderer/Animations/value_animator_factory.hpp \
-                         ../Renderer/Animations/value_animator.cpp \
-                         ../Renderer/Animations/value_animator.hpp \
-                         ../Renderer/Fonts/font_bitmap.cpp \
-                         ../Renderer/Fonts/font_bitmap.hpp \
-                         ../Renderer/Managers/font_manager.cpp \
-                         ../Renderer/Managers/font_manager.hpp \
                          ../doxygen_fonts.md \
-                         ../Renderer/Animations/animation_curve_factory.cpp \
-                         ../Renderer/Animations/animation_curve_factory.hpp \
-                         ../Renderer/Animations/animation_group_factory.cpp \
-                         ../Renderer/Animations/animation_group_factory.hpp \
-                         ../Renderer/Animations/animation_group_sequence.cpp \
-                         ../Renderer/Animations/animation_group_sequence.hpp \
-                         ../Renderer/Animations/animation_group_simulateneus.cpp \
-                         ../Renderer/Animations/animation_group_simulateneus.hpp \
-                         ../Renderer/Memory/release_pool.cpp \
-                         ../Renderer/Memory/release_pool.hpp \
-                         ../Renderer/Managers/events_manager.hpp \
-                         ../Renderer/Managers/events_manager.cpp \
-                         ../Renderer/Lights/light.cpp \
-                         ../Renderer/Lights/light.hpp \
-                         ../Renderer/Managers/light_manager.cpp \
-                         ../Renderer/Managers/light_manager.hpp \
-                         ../Renderer/Sprites/sprite_representation_text.hpp \
-                         ../Renderer/Sprites/sprite_representation_text.cpp \
-                         ../Renderer/Sound/sound_file.cpp \
-                         ../Renderer/Sound/sound_file.hpp \
-                         ../Renderer/Sound/sound_manager.cpp \
-                         ../Renderer/Sound/sound_manager.hpp \
-                         ../Renderer/Sound/sound_interfaces.h \
-						 ../Renderer/Interfaces/sprite_draw_interface.h \
                          ../doxygen_sounds.md \
                          ../doxygen_executable.md \
-                         ../doxygen_ini.md
+                         ../doxygen_ini.md \
+                         ../Renderer/Interfaces/interfaces.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -974,17 +909,6 @@ INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \
-                         *.cpp \
-                         *.c++ \
-                         *.java \
-                         *.ii \
-                         *.ixx \
-                         *.ipp \
-                         *.i++ \
-                         *.inl \
-                         *.idl \
-                         *.ddl \
-                         *.odl \
                          *.h \
                          *.hh \
                          *.hxx \

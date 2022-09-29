@@ -12,6 +12,12 @@
 
 namespace engine
 {
+    /** SpriteAtlasManagerI
+        \addtogroup API_GLOBALS
+
+        A manager for sprite atlas files. Loads the textures, keeps them for
+        future reference.
+     */
     class SpriteAtlasManagerI
     {
     public:

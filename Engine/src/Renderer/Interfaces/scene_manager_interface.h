@@ -12,6 +12,13 @@
 
 namespace engine
 {
+    /** SceneManagerI
+        \addtogroup API_GLOBALS
+
+        Manages the scene. Only the current screen renders its resources on-screen.
+        Note that scene management does not impact game input handling nor any other
+        non-scene related event observers.
+     */
     class SceneManagerI
     {
     public:

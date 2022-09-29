@@ -12,7 +12,12 @@
 
 namespace engine
 {
-
+    /** Globals
+        \addtogroup API_GLOBALS
+        Provides different managers for the game scripts and is generally the main
+        connection point between the game scripts and the engine itself.
+        Those are static and it's safe to keep their references.
+     */
     class Globals
     {
     protected:

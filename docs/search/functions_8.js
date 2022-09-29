@@ -1,9 +1,20 @@
 var searchData=
 [
-  ['registerkeyshortcut_0',['RegisterKeyShortcut',['../classengine_1_1_events_manager.html#ad698eceb9dc654e9f105741cafec7432',1,'engine::EventsManager']]],
-  ['registermouseclickedevents_1',['RegisterMouseClickedEvents',['../classengine_1_1_events_manager.html#ad480c3b229132e33fdaeb55f9e5dae49',1,'engine::EventsManager']]],
-  ['registermousemovedevents_2',['RegisterMouseMovedEvents',['../classengine_1_1_events_manager.html#a64eb0c93b2cb5b8af62eb62c4125d872',1,'engine::EventsManager']]],
-  ['releasemem_3',['ReleaseMem',['../classengine_1_1_value_animator.html#a45b0dac56c6f094b18ca4cefbe447ea9',1,'engine::ValueAnimator']]],
-  ['removeobserver_4',['RemoveObserver',['../classengine_1_1_sound_file.html#a64d16e43f3c3a0d4a77f53ed4180fba2',1,'engine::SoundFile::RemoveObserver()'],['../classengine_1_1_sound_file_i.html#a967c83a3d93fa5f923d32276dda024f1',1,'engine::SoundFileI::RemoveObserver()']]],
-  ['render_5',['Render',['../classengine_1_1_character_representation.html#a331ca776fbc499885ac81d1ec5b1281e',1,'engine::CharacterRepresentation']]]
+  ['pathfinderlinegraphnodei_0',['PathFinderLineGraphNodeI',['../classengine_1_1_path_finder_line_graph_node_i.html#af903c2a298acbf5cf08e183c5f5adb11',1,'engine::PathFinderLineGraphNodeI']]],
+  ['pause_1',['Pause',['../classengine_1_1_sound_file_i.html#aafd25ebfc6888d3eb9b89f6d32c3eec5',1,'engine::SoundFileI']]],
+  ['play_2',['Play',['../classengine_1_1_sound_file_i.html#a13385702f3860b7753d30c3f963d6d2b',1,'engine::SoundFileI']]],
+  ['pointinsidepolygons_3',['PointInsidePolygons',['../classengine_1_1_path_finder_data_i.html#ab11f1d33f2bdc1a77b075033fa3f12c6',1,'engine::PathFinderDataI']]],
+  ['pollevent_4',['PollEvent',['../classengine_1_1_event_provider_i.html#a2999357b3bb50b663bd352da59d97de7',1,'engine::EventProviderI']]],
+  ['preapre_5',['Preapre',['../classengine_1_1_sound_file_i.html#ad12eb21524c90a0a92fd5b9e1db3c0dd',1,'engine::SoundFileI']]],
+  ['processevents_6',['ProcessEvents',['../classengine_1_1_engine_i.html#ab49b557693b8b8bb08ac301025aebcbb',1,'engine::EngineI']]],
+  ['processscript_7',['ProcessScript',['../classengine_1_1_engine_i.html#a8022a58a048215eb6fa0c198ab1f97ac',1,'engine::EngineI']]],
+  ['pushbuttonaction_8',['PushButtonAction',['../classengine_1_1_event_provider_i.html#a0ae9c722323aed9860233958ce6c5e0b',1,'engine::EventProviderI']]],
+  ['pushdpadaxischange_9',['PushDpadAxisChange',['../classengine_1_1_event_provider_i.html#ae852d94c7062488662a5f4255bf8bd9c',1,'engine::EventProviderI']]],
+  ['pushflagschange_10',['PushFlagsChange',['../classengine_1_1_event_provider_i.html#a6f69b2c9dff5ccb73465c6080c5aafef',1,'engine::EventProviderI']]],
+  ['pushgamepadconnectionevent_11',['PushGamepadConnectionEvent',['../classengine_1_1_event_provider_i.html#a93dfaa285247ead1b2238a397655fce3',1,'engine::EventProviderI']]],
+  ['pushkeystatechange_12',['PushKeyStateChange',['../classengine_1_1_event_provider_i.html#a759901b22abc0ef7049a0f9595a675d2',1,'engine::EventProviderI']]],
+  ['pushleftthumbstickaxischange_13',['PushLeftThumbstickAxisChange',['../classengine_1_1_event_provider_i.html#a42e6a6d91efb60f8a6c860711a87b137',1,'engine::EventProviderI']]],
+  ['pushmouseleftup_14',['PushMouseLeftUp',['../classengine_1_1_event_provider_i.html#a6b0d1c425824877e5b3943d813454bab',1,'engine::EventProviderI']]],
+  ['pushmouselocation_15',['PushMouseLocation',['../classengine_1_1_event_provider_i.html#ac59f298f36519ad3558400b10719853a',1,'engine::EventProviderI']]],
+  ['pushrightthumbstickaxischange_16',['PushRightThumbstickAxisChange',['../classengine_1_1_event_provider_i.html#a8397e00dffad10e1b1008f07018fc670',1,'engine::EventProviderI']]]
 ];
