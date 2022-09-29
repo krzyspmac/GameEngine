@@ -17,7 +17,7 @@
 
 \mainpage Pictel 2d Game Engine
 
-See [Init params](doxygen_ini.md) to get a list ini params.
+See [Init params](doxygen_ini.md) to get a list possible ini params.
 
 See [Command Line parameters](doxygen_executable.md) to get a list of command-line parameters.
 

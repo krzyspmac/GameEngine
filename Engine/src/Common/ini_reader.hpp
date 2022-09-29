@@ -15,16 +15,21 @@ namespace engine
 {
     /** The go-to class for ini file reader
         \code{ini}
-        ; Game resolution
         [RESOLUTION]
         width=1280
         height=720
-        gamepad_support=true
 
-        ; Renderer setup
+        [PHONE]
+        orientation=portrait|landscape
+
         [RENDERER]
         game_folder=@rpath/Game
         clear_color=1.0,0.0,0.0,1.0
+
+        [INPUT]
+        gamepad_support=true
+        gamepad_virtual_support=true
+        gamepad_virtual_buttons=DirectionPad|LeftThumbstick|ButtonA
         \endcode{ini}
      */
     class IniReader
