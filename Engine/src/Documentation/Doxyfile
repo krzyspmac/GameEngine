@@ -872,12 +872,58 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = . \
-                         ../doxygen_main.h \
-                         ../doxygen_fonts.md \
                          ../doxygen_sounds.md \
                          ../doxygen_executable.md \
                          ../doxygen_ini.md \
-                         ../Renderer/Interfaces/interfaces.h
+                         ../Renderer/Interfaces/interfaces.h \
+                         ../Renderer/Interfaces/animation_interface.hpp \
+                         ../Renderer/Interfaces/callable_interface.h \
+                         ../Renderer/Interfaces/character_mover_interface.h \
+                         ../Renderer/Interfaces/character_renderer_interface.h \
+                         ../Renderer/Interfaces/common.h \
+                         ../Renderer/Interfaces/console_renderer_interface.h \
+                         ../Renderer/Interfaces/defs.h \
+                         ../Renderer/Interfaces/drawable_interface.h \
+                         ../Renderer/Interfaces/engine_events_provider_interface.h \
+                         ../Renderer/Interfaces/engine_interface.h \
+                         ../Renderer/Interfaces/engine_provider_interface.h \
+                         ../Renderer/Interfaces/engine_screen_interface.h \
+                         ../Renderer/Interfaces/engine_setup_interface.h \
+                         ../Renderer/Interfaces/engine_state_interface.h \
+                         ../Renderer/Interfaces/event_provider_interface.h \
+                         ../Renderer/Interfaces/events_manager_interface.h \
+                         ../Renderer/Interfaces/file_access_provider.h \
+                         ../Renderer/Interfaces/font_interface.h \
+                         ../Renderer/Interfaces/font_manager_interface.h \
+                         ../Renderer/Interfaces/gamepad_interface.h \
+                         ../Renderer/Interfaces/general.hpp \
+                         ../Renderer/Interfaces/globals.hpp \
+                         ../Renderer/Interfaces/holder.hpp \
+                         ../Renderer/Interfaces/interfaces.h \
+                         ../Renderer/Interfaces/light_interface.hpp \
+                         ../Renderer/Interfaces/line.hpp \
+                         ../Renderer/Interfaces/memory.h \
+                         ../Renderer/Interfaces/path_finder_interface.h \
+                         ../Renderer/Interfaces/rotation.hpp \
+                         ../Renderer/Interfaces/scene_interface.h \
+                         ../Renderer/Interfaces/scene_manager_interface.h \
+                         ../Renderer/Interfaces/script_entry_interface.hpp \
+                         ../Renderer/Interfaces/scripting_engine_provider_interface.h \
+                         ../Renderer/Interfaces/scripting_interfaces.h \
+                         ../Renderer/Interfaces/size.hpp \
+                         ../Renderer/Interfaces/sound_interfaces.h \
+                         ../Renderer/Interfaces/sprite_atlas_interface.h \
+                         ../Renderer/Interfaces/sprite_atlas_manager_interface.h \
+                         ../Renderer/Interfaces/sprite_draw_interface.h \
+                         ../Renderer/Interfaces/sprite_interface_defs.h \
+                         ../Renderer/Interfaces/sprite_representation_text_interface.h \
+                         ../Renderer/Interfaces/texture_interface.h \
+                         ../Renderer/Interfaces/time_interface.h \
+                         ../Renderer/Interfaces/vector2.hpp \
+                         ../doxygen_main.md \
+                         ../doxygen_fonts.md \
+                         ../doxygen_main.md \
+                         ../doxygen_main.h
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses

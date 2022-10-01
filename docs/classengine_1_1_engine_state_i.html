@@ -73,6 +73,9 @@ $(function() {
   <div class="headertitle"><div class="title">engine::EngineStateI Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Engine state holder.  
+ <a href="classengine_1_1_engine_state_i.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -83,7 +86,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a93ac3226d96705ffe9e7112cf03705b4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classengine_1_1_engine_state_i.html#a93ac3226d96705ffe9e7112cf03705b4">SetOnScreenSizeChangeHandler</a> (std::function&lt; void(<a class="el" href="structengine_1_1_size.html">Size</a>, float)&gt;)=0</td></tr>
 <tr class="separator:a93ac3226d96705ffe9e7112cf03705b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Engine state holder. </p>
+<p >Holds various information on the state of the engine. This should be used to setup an observer for the screen size change so that the game has a chance to react and, maybe, change the viewport size.</p>
+<p >The default implementation should register for screen size change event via <a class="el" href="classengine_1_1_engine_state_i.html#a93ac3226d96705ffe9e7112cf03705b4">EngineStateI::SetOnScreenSizeChangeHandler</a> and provide the wanted viewport size via <a class="el" href="classengine_1_1_engine_state_i.html#aac22c885149bdf8c038862c7eaafa1e2">EngineStateI::SetViewportSize</a>.</p>
+<p >The code below takes the screen size provided in the handler and calcualtes and scale for the game leaving the viewport size unchanged.</p>
+<div class="fragment"><div class="line"><span class="keyword">auto</span> engineState = engine::Globals::engineState()</div>
+<div class="line">engineState-&gt;<a class="code hl_function" href="classengine_1_1_engine_state_i.html#a93ac3226d96705ffe9e7112cf03705b4">SetOnScreenSizeChangeHandler</a>([&amp;](engine::Size size, <span class="keywordtype">float</span> density) {</div>
+<div class="line">    <span class="comment">// have the wanted size ready somewhere</span></div>
+<div class="line">    <a class="code hl_struct" href="structengine_1_1_vector2.html">engine::Vector2</a> wantedSize = { 320, 200 };</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// calcualte the scale provided we don&#39;t want to change the viewport size</span></div>
+<div class="line">    <span class="keywordtype">float</span> scale = MIN((<span class="keywordtype">float</span>)size.width / wantedSize.x, (<span class="keywordtype">float</span>)size.height / wantedSize.y);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// update the viewport size with the modified scale; this is a pixel-art</span></div>
+<div class="line">    <span class="comment">// game so it should scale by using nearest-neighbour</span></div>
+<div class="line">    engineState-&gt;SetViewportSize({(int)wantedSize.x, (<span class="keywordtype">int</span>)wantedSize.y}, scale);</div>
+<div class="line">});</div>
+<div class="ttc" id="aclassengine_1_1_engine_state_i_html_a93ac3226d96705ffe9e7112cf03705b4"><div class="ttname"><a href="classengine_1_1_engine_state_i.html#a93ac3226d96705ffe9e7112cf03705b4">engine::EngineStateI::SetOnScreenSizeChangeHandler</a></div><div class="ttdeci">virtual void SetOnScreenSizeChangeHandler(std::function&lt; void(Size, float)&gt;)=0</div></div>
+<div class="ttc" id="astructengine_1_1_vector2_html"><div class="ttname"><a href="structengine_1_1_vector2.html">engine::Vector2</a></div><div class="ttdef"><b>Definition:</b> vector2.hpp:39</div></div>
+</div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6ecffec88ea092011b4579a2274e4df3" name="a6ecffec88ea092011b4579a2274e4df3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6ecffec88ea092011b4579a2274e4df3">&#9670;&nbsp;</a></span>GetViewportSize()</h2>
 

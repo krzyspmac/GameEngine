@@ -118,7 +118,9 @@ namespace engine
         void SetRotation(AnimatorI*, Rotation);
     };
 
-    /**  */
+    /** AnimatablePropertiesI
+        @brief Interface that holds the default `animator` for the sprite.
+     */
     class AnimatablePropertiesI: public SpritePropertiesI
     {
     protected:

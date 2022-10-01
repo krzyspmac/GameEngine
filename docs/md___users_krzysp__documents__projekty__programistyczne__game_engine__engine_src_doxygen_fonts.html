@@ -66,17 +66,17 @@ $(function() {
   <div class="headertitle"><div class="title">Fonts Reference </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md11"></a>
 Font types used</h1>
 <p >The Engine uses bitmap fonts. Those are comprised of the .fnt file (ascii) and the texture that includes all the glyphs for that particular font.</p>
 <p >Bitmap fonts are simply a collection of glyphs that are treated like sprites by the engine. The drawing functions simply layout glyphs at given coordinates.</p>
 <p >The engine does not use TTF or OTF fonts. Creating your own bitmap fonts from existing TTF or OTF fonts can be achieved by using a wide variety of tools.</p><dl class="section see"><dt>See also</dt><dd><a href="https://github.com/vladimirgamalyan/fontbm">https://github.com/vladimirgamalyan/fontbm</a></dd></dl>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Loading</h1>
 <p >To load the font simply call up a global manager called <em>FontManager</em> and load the font by providing .fnt and the texture file.</p>
 <div class="fragment"><div class="line">local font = FontManager:LoadFont(&quot;MyFont.fnt&quot;, &quot;MyFont.png)</div>
 </div><!-- fragment --><p >One loaded the font stays until the scene manager clears the font cache.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Sprite representation</h1>
 <p >Once the font has been loaded a sprite representation can be created. A sprite representation is being created on a given scene and its lifecycle is linked to that scene.</p>
 <div class="fragment"><div class="line">local textSprite = scene:SpriteTextLoad(font)</div>

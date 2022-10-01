@@ -36,6 +36,9 @@ namespace engine
       , GamepadConfiguration_RightThumbstickBtn = 1 << 12
     } VirtualGamepadConfiguration;
 
+    /** EngineSetup
+        @brief Main .ini configuration file holder.
+     */
     typedef struct EngineSetup
     {
         /** The game folder in relation to the executable path */

@@ -13,9 +13,39 @@
 namespace engine
 {
     /** EngineStateI
-        \addtogroup API_GLOBALS
+
         Holds various information on the state of the engine. Viewport, screen size change
         handler, etc.
+
+        \addtogroup API_GLOBALS
+     */
+    /** @brief Engine state holder
+
+        Holds various information on the state of the engine. This should be used to
+        setup an observer for the screen size change so that the game has a chance
+        to react and, maybe, change the viewport size.
+
+        The default implementation should register for screen size change event
+        via EngineStateI::SetOnScreenSizeChangeHandler and provide the wanted viewport size
+        via EngineStateI::SetViewportSize.
+
+        The code below takes the screen size provided in the handler and calcualtes and
+        scale for the game leaving the viewport size unchanged.
+
+        \code{.cpp}
+        auto engineState = engine::Globals::engineState()
+        engineState->SetOnScreenSizeChangeHandler([&](engine::Size size, float density) {
+            // have the wanted size ready somewhere
+            engine::Vector2 wantedSize = { 320, 200 };
+
+            // calcualte the scale provided we don't want to change the viewport size
+            float scale = MIN((float)size.width / wantedSize.x, (float)size.height / wantedSize.y);
+
+            // update the viewport size with the modified scale; this is a pixel-art
+            // game so it should scale by using nearest-neighbour
+            engineState->SetViewportSize({(int)wantedSize.x, (int)wantedSize.y}, scale);
+        });
+        \endcode
      */
     class EngineStateI
     {
