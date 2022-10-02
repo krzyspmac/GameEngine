@@ -65,6 +65,9 @@ namespace engine
         /** Register for gamepad connection/disconnection */
         virtual EventIdentifier RegisterGamepadConnection(std::shared_ptr<CallableParameters2<GamepadI*, bool>>) = 0;
 
+        /** Returns the adress to the static list of keys. bool[KEY_TABLE_SIZE]. True for the key being pressed. */
+        virtual bool *GetKeys() = 0;
+
         /** Unregister a callback */
         virtual void UnregisterEvent(EventIdentifier) = 0;
 

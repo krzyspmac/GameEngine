@@ -49,7 +49,7 @@ namespace engine
 
     public:
         /** @private */
-        auto& GetKeys() { return m_keys; };
+        bool* GetKeys() { return m_keys; };
 
     private:
         EventIdentifier m_identifierCounter;

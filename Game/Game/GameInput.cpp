@@ -22,15 +22,26 @@
 using namespace engine;
 
 GameInput::GameInput()
-    : m_leftThumbstickVector(Vector2::zero())
+    : m_eventsManager(Globals::eventsManager())
+    , m_leftThumbstickVector(Vector2::zero())
 {
+    m_keys = m_eventsManager->GetKeys();
+
     SetupHandlers();
 }
 
 void GameInput::SetupHandlers()
 {
-    Globals::eventsManager()->RegisterGamepadConnection(CallableParameters2<GamepadI *, bool>::make_shared([&](GamepadI *gamepad, bool active){
+    m_eventsManager->RegisterGamepadConnection(CallableParameters2<GamepadI *, bool>::make_shared([&](GamepadI *gamepad, bool active){
         UpdateWithGamepad(gamepad);
+    }));
+
+    m_eventsManager->RegisterKeyUp(CallableParameters1<char>::make_shared([&](char c){
+        UpdateKeys();
+    }));
+
+    m_eventsManager->RegisterKeyDown(CallableParameters1<char>::make_shared([&](char c){
+        UpdateKeys();
     }));
 }
 
@@ -45,4 +56,33 @@ void GameInput::UpdateWithGamepad(GamepadI* gamepad)
     gamepad->RegisterRightThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vector){
         m_rightThumbstickVector = vector * 3;
     }));
+}
+
+void GameInput::UpdateKeys()
+{
+    if (m_keys['d'] || m_keys['D'])
+    {
+        m_leftThumbstickVector.x = 1.0f;
+    }
+    else if (m_keys['a'] || m_keys['A'])
+    {
+        m_leftThumbstickVector.x = -1.0f;
+    }
+    else
+    {
+        m_leftThumbstickVector.x = 0.0f;
+    }
+
+    if (m_keys['s'] || m_keys['S'])
+    {
+        m_leftThumbstickVector.y = 1.0f;
+    }
+    else if (m_keys['w'] || m_keys['W'])
+    {
+        m_leftThumbstickVector.y = -1.0f;
+    }
+    else
+    {
+        m_leftThumbstickVector.y = 0.0f;
+    }
 }

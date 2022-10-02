@@ -25,6 +25,9 @@
 class GameInput: public GameInputI {
     engine::Vector2 m_leftThumbstickVector;
     engine::Vector2 m_rightThumbstickVector;
+
+    engine::EventsManagerI* m_eventsManager;
+    bool *m_keys;
 public:
     GameInput();
 
@@ -33,6 +36,7 @@ public:
 private:
     void SetupHandlers();
     void UpdateWithGamepad(engine::GamepadI*);
+    void UpdateKeys();
 };
 
 #endif /* GameInput_hpp */
