@@ -14,9 +14,6 @@
       location = "group:../../Libraries/cJson/cJson.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../Libraries/Lua/Lua.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:../../Libraries/imgui/imgui.xcodeproj">
    </FileRef>
 </Workspace>

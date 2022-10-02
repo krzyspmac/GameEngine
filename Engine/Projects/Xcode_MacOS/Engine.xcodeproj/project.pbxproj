@@ -32,8 +32,6 @@
 		7F0F952928DBA196001222C5 /* general.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F0F952628DBA196001222C5 /* general.cpp */; };
 		7F138253277505B600ED6D67 /* texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F13821C277505B600ED6D67 /* texture.cpp */; };
 		7F138255277505B600ED6D67 /* texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F13821E277505B600ED6D67 /* texture.hpp */; };
-		7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
-		7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
 		7F13825C277505B600ED6D67 /* event_provider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138225277505B600ED6D67 /* event_provider.cpp */; };
 		7F13825D277505B600ED6D67 /* event_provider.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138226277505B600ED6D67 /* event_provider.hpp */; };
 		7F138263277505B600ED6D67 /* file_access.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13822B277505B600ED6D67 /* file_access.mm */; };
@@ -69,9 +67,6 @@
 		7F26254E278DF96200529F29 /* engine_provider_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F26254C278DF96200529F29 /* engine_provider_metal.hpp */; };
 		7F262556278F570E00529F29 /* drawable_metal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F262554278F570E00529F29 /* drawable_metal.cpp */; };
 		7F262557278F570E00529F29 /* drawable_metal.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F262555278F570E00529F29 /* drawable_metal.hpp */; };
-		7F27C45F28551736001AA216 /* scripting_interfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F27C45E28551736001AA216 /* scripting_interfaces.h */; };
-		7F27C46028551736001AA216 /* scripting_interfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F27C45E28551736001AA216 /* scripting_interfaces.h */; };
-		7F27C46128551736001AA216 /* scripting_interfaces.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F27C45E28551736001AA216 /* scripting_interfaces.h */; };
 		7F2CD18528D5E51200A5516D /* gamepad_apple_handle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F2CD18328D5E51200A5516D /* gamepad_apple_handle.mm */; };
 		7F2CD18628D5E51200A5516D /* gamepad_apple_handle.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F2CD18428D5E51200A5516D /* gamepad_apple_handle.hpp */; };
 		7F2CD18728D5E52B00A5516D /* gamepad_apple_handle.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F2CD18428D5E51200A5516D /* gamepad_apple_handle.hpp */; };
@@ -147,7 +142,6 @@
 		7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310D2792FAF20094DF0C /* callable_interface.h */; };
 		7F3E8EA5279AC8F9003BB7B6 /* character_renderer_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */; };
 		7F3E8EA6279AC8F9003BB7B6 /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310F2792FAF20094DF0C /* texture_interface.h */; };
-		7F3E8EA7279AC8F9003BB7B6 /* scripting_engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */; };
 		7F3E8EA8279AC8F9003BB7B6 /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
 		7F3E8EA9279AC8F9003BB7B6 /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
 		7F3E8EAA279AC8F9003BB7B6 /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */; };
@@ -179,7 +173,6 @@
 		7F3E8ECC279AC8F9003BB7B6 /* character_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FA2AB37277DD1A600AED89D /* character_manager.hpp */; };
 		7F3E8ECD279AC8F9003BB7B6 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
 		7F3E8ECE279AC8F9003BB7B6 /* character_interface_impl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */; };
-		7F3E8ECF279AC8F9003BB7B6 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
 		7F3E8ED1279AC8F9003BB7B6 /* console_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823E82788F64D008F0F7A /* console_renderer.h */; };
 		7F3E8ED2279AC8F9003BB7B6 /* console_app_renderer_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */; };
 		7F3E8ED3279AC8F9003BB7B6 /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
@@ -230,7 +223,6 @@
 		7F3E8F09279AC909003BB7B6 /* character_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2AB36277DD1A600AED89D /* character_manager.cpp */; };
 		7F3E8F0A279AC909003BB7B6 /* character_representation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7CE277F5872004A6107 /* character_representation.cpp */; };
 		7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */; };
-		7F3E8F0C279AC909003BB7B6 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
 		7F3E8F0E279AC909003BB7B6 /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
 		7F3E8F0F279AC909003BB7B6 /* console_terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241B278993E0008F0F7A /* console_terminal.cpp */; };
 		7F3E8F10279AC909003BB7B6 /* console_terminal_commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */; };
@@ -261,10 +253,8 @@
 		7F3E8FF7279AF7F7003BB7B6 /* Engine-iOS-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E8FF5279AF7BC003BB7B6 /* Engine-iOS-MetalLib.metallib */; };
 		7F3E901A279AFFFC003BB7B6 /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F4C279AE2E6003BB7B6 /* libcjson.a */; };
 		7F3E901B279AFFFC003BB7B6 /* libimgui.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F4E279AE2E6003BB7B6 /* libimgui.a */; };
-		7F3E901C279AFFFC003BB7B6 /* liblua.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E8F4D279AE2E6003BB7B6 /* liblua.a */; };
 		7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E901D279B0056003BB7B6 /* libcjson-ios.a */; };
 		7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E901F279B0056003BB7B6 /* libimgui-ios.a */; };
-		7F3E9022279B0056003BB7B6 /* liblua-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9021279B0056003BB7B6 /* liblua-ios.a */; };
 		7F3E90AF279B03F6003BB7B6 /* doxygen_main.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7D2277F85BF004A6107 /* doxygen_main.h */; };
 		7F3E90B0279B03F6003BB7B6 /* defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138243277505B600ED6D67 /* defs.h */; };
 		7F3E90B1279B03F6003BB7B6 /* common.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F138251277505B600ED6D67 /* common.h */; };
@@ -288,7 +278,6 @@
 		7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310D2792FAF20094DF0C /* callable_interface.h */; };
 		7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */; };
 		7F3E90C8279B03F6003BB7B6 /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310F2792FAF20094DF0C /* texture_interface.h */; };
-		7F3E90C9279B03F6003BB7B6 /* scripting_engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */; };
 		7F3E90CA279B03F6003BB7B6 /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
 		7F3E90CB279B03F6003BB7B6 /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
 		7F3E90CC279B03F6003BB7B6 /* sprite_atlas_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131142792FAF20094DF0C /* sprite_atlas_interface.h */; };
@@ -320,7 +309,6 @@
 		7F3E90EE279B03F6003BB7B6 /* character_manager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FA2AB37277DD1A600AED89D /* character_manager.hpp */; };
 		7F3E90EF279B03F6003BB7B6 /* character_representation.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FCAE7CF277F5872004A6107 /* character_representation.hpp */; };
 		7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E2C252794AFD100348C81 /* character_interface_impl.hpp */; };
-		7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7F138222277505B600ED6D67 /* scripting_engine.hpp */; };
 		7F3E90F3279B03F6003BB7B6 /* console_renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FB823E82788F64D008F0F7A /* console_renderer.h */; };
 		7F3E90F4279B03F6003BB7B6 /* console_app_renderer_mac.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8242C2789D3AD008F0F7A /* console_app_renderer_mac.hpp */; };
 		7F3E90F5279B03F6003BB7B6 /* console_logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FB8241827890479008F0F7A /* console_logger.hpp */; };
@@ -377,7 +365,6 @@
 		7F3E9132279B03F6003BB7B6 /* character_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FA2AB36277DD1A600AED89D /* character_manager.cpp */; };
 		7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FCAE7CE277F5872004A6107 /* character_representation.cpp */; };
 		7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E2C242794AFD100348C81 /* character_interface_impl.cpp */; };
-		7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138220277505B600ED6D67 /* scripting_engine.cpp */; };
 		7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241727890479008F0F7A /* console_logger.cpp */; };
 		7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241B278993E0008F0F7A /* console_terminal.cpp */; };
 		7F3E9139279B03F6003BB7B6 /* console_terminal_commands.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FB8241F27899731008F0F7A /* console_terminal_commands.cpp */; };
@@ -398,7 +385,6 @@
 		7F3E9148279B03F6003BB7B6 /* engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F138242277505B600ED6D67 /* engine.cpp */; };
 		7F3E9153279B0424003BB7B6 /* libcjson-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9152279B0424003BB7B6 /* libcjson-tv.a */; };
 		7F3E9155279B0424003BB7B6 /* libimgui-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9154279B0424003BB7B6 /* libimgui-tv.a */; };
-		7F3E9157279B0424003BB7B6 /* liblua-tv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3E9156279B0424003BB7B6 /* liblua-tv.a */; };
 		7F3E915A279B0448003BB7B6 /* SpriteShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E8F49279AE1A4003BB7B6 /* SpriteShaders.metal */; };
 		7F3E918E279B06DC003BB7B6 /* Engine-TV-MetalLib.metallib in Resources */ = {isa = PBXBuildFile; fileRef = 7F3E918C279B06C2003BB7B6 /* Engine-TV-MetalLib.metallib */; };
 		7F40C5A228D2732000B0865F /* gamepad_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F40C5A128D2732000B0865F /* gamepad_interface.h */; };
@@ -510,7 +496,6 @@
 		7FC1311C2792FAF20094DF0C /* callable_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310D2792FAF20094DF0C /* callable_interface.h */; };
 		7FC1311D2792FAF20094DF0C /* character_renderer_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */; };
 		7FC1311E2792FAF20094DF0C /* texture_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC1310F2792FAF20094DF0C /* texture_interface.h */; };
-		7FC1311F2792FAF20094DF0C /* scripting_engine_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */; };
 		7FC131202792FAF20094DF0C /* font_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131112792FAF20094DF0C /* font_interface.h */; };
 		7FC131212792FAF20094DF0C /* path_finder_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131122792FAF20094DF0C /* path_finder_interface.h */; };
 		7FC131222792FAF20094DF0C /* event_provider_interface.h in Headers */ = {isa = PBXBuildFile; fileRef = 7FC131132792FAF20094DF0C /* event_provider_interface.h */; };
@@ -648,8 +633,6 @@
 		7F1382152775059B00ED6D67 /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F13821C277505B600ED6D67 /* texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = texture.cpp; sourceTree = "<group>"; };
 		7F13821E277505B600ED6D67 /* texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = texture.hpp; sourceTree = "<group>"; };
-		7F138220277505B600ED6D67 /* scripting_engine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = scripting_engine.cpp; sourceTree = "<group>"; };
-		7F138222277505B600ED6D67 /* scripting_engine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = scripting_engine.hpp; sourceTree = "<group>"; };
 		7F138225277505B600ED6D67 /* event_provider.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = event_provider.cpp; sourceTree = "<group>"; };
 		7F138226277505B600ED6D67 /* event_provider.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = event_provider.hpp; sourceTree = "<group>"; };
 		7F13822B277505B600ED6D67 /* file_access.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = file_access.mm; sourceTree = "<group>"; };
@@ -675,7 +658,6 @@
 		7F26254C278DF96200529F29 /* engine_provider_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_provider_metal.hpp; sourceTree = "<group>"; };
 		7F262554278F570E00529F29 /* drawable_metal.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = drawable_metal.cpp; sourceTree = "<group>"; };
 		7F262555278F570E00529F29 /* drawable_metal.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = drawable_metal.hpp; sourceTree = "<group>"; };
-		7F27C45E28551736001AA216 /* scripting_interfaces.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = scripting_interfaces.h; path = ../../src/Renderer/Interfaces/scripting_interfaces.h; sourceTree = "<group>"; };
 		7F2814D928E076CF000FB2BC /* sprite_representation_text_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sprite_representation_text_interface.h; sourceTree = "<group>"; };
 		7F2CD18328D5E51200A5516D /* gamepad_apple_handle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = gamepad_apple_handle.mm; sourceTree = "<group>"; };
 		7F2CD18428D5E51200A5516D /* gamepad_apple_handle.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gamepad_apple_handle.hpp; sourceTree = "<group>"; };
@@ -687,7 +669,6 @@
 		7F2DB00228E041000044EF8D /* script_entry_interface.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = script_entry_interface.hpp; sourceTree = "<group>"; };
 		7F2DB00928E0413D0044EF8D /* RendererEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RendererEntry.h; sourceTree = "<group>"; };
 		7F2DB00A28E0413D0044EF8D /* RendererEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RendererEntry.m; sourceTree = "<group>"; };
-		7F2DB01228E044790044EF8D /* common_lua.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = common_lua.h; sourceTree = "<group>"; };
 		7F2DB01628E0499C0044EF8D /* engine_state_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_state_interface.h; sourceTree = "<group>"; };
 		7F2DB01728E04A200044EF8D /* rotation.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = rotation.hpp; sourceTree = "<group>"; };
 		7F2DB01828E04A2A0044EF8D /* line.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = line.hpp; sourceTree = "<group>"; };
@@ -808,7 +789,6 @@
 		7FC1310D2792FAF20094DF0C /* callable_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = callable_interface.h; sourceTree = "<group>"; };
 		7FC1310E2792FAF20094DF0C /* character_renderer_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = character_renderer_interface.h; sourceTree = "<group>"; };
 		7FC1310F2792FAF20094DF0C /* texture_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = texture_interface.h; sourceTree = "<group>"; };
-		7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scripting_engine_provider_interface.h; sourceTree = "<group>"; };
 		7FC131112792FAF20094DF0C /* font_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = font_interface.h; sourceTree = "<group>"; };
 		7FC131122792FAF20094DF0C /* path_finder_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = path_finder_interface.h; sourceTree = "<group>"; };
 		7FC131132792FAF20094DF0C /* event_provider_interface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = event_provider_interface.h; sourceTree = "<group>"; };
@@ -875,7 +855,6 @@
 				7F3470A928527B5B00FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E901A279AFFFC003BB7B6 /* libcjson.a in Frameworks */,
 				7F3E901B279AFFFC003BB7B6 /* libimgui.a in Frameworks */,
-				7F3E901C279AFFFC003BB7B6 /* liblua.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -887,7 +866,6 @@
 				7F3470AA28527B5F00FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */,
 				7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */,
-				7F3E9022279B0056003BB7B6 /* liblua-ios.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -906,7 +884,6 @@
 				7F3470AB28527B6400FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E9153279B0424003BB7B6 /* libcjson-tv.a in Frameworks */,
 				7F3E9155279B0424003BB7B6 /* libimgui-tv.a in Frameworks */,
-				7F3E9157279B0424003BB7B6 /* liblua-tv.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -969,7 +946,6 @@
 				7F7EA070289678E800A09199 /* doxygen_ini.md */,
 				7FB44FEF28EA02DB00D7958B /* doxygen_animation.md */,
 				7F3E8F80279AECF0003BB7B6 /* prefix.pch */,
-				7F2DB01228E044790044EF8D /* common_lua.h */,
 				7F138250277505B600ED6D67 /* common_engine.h */,
 				7FB8242F2789DCF6008F0F7A /* easy.h */,
 				7FE2E5D2277B233900538094 /* Common */,
@@ -1001,7 +977,6 @@
 				7F67033D28A60D2900319218 /* Screen */,
 				7FCAE7BC277E36C7004A6107 /* Scene */,
 				7F64288127779CCA00EE9E2C /* Character */,
-				7F13821F277505B600ED6D67 /* Scripting */,
 				7FF641CE277D17F20017D86D /* Console */,
 				7FF641C9277CE8BC0017D86D /* Loaders */,
 				7F3470AC28527C3900FDED71 /* Sound */,
@@ -1027,15 +1002,6 @@
 				7F64289127787C2E00EE9E2C /* texture_target.cpp */,
 			);
 			path = Textures;
-			sourceTree = "<group>";
-		};
-		7F13821F277505B600ED6D67 /* Scripting */ = {
-			isa = PBXGroup;
-			children = (
-				7F138222277505B600ED6D67 /* scripting_engine.hpp */,
-				7F138220277505B600ED6D67 /* scripting_engine.cpp */,
-			);
-			path = Scripting;
 			sourceTree = "<group>";
 		};
 		7F138223277505B600ED6D67 /* Engine Provider */ = {
@@ -1176,7 +1142,6 @@
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
-				7F27C45E28551736001AA216 /* scripting_interfaces.h */,
 				7F138219277505B600ED6D67 /* src */,
 				7F3470A628527B4800FDED71 /* Dependencies */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
@@ -1383,7 +1348,6 @@
 				7FC131112792FAF20094DF0C /* font_interface.h */,
 				7FC1310D2792FAF20094DF0C /* callable_interface.h */,
 				7FC1310F2792FAF20094DF0C /* texture_interface.h */,
-				7FC131102792FAF20094DF0C /* scripting_engine_provider_interface.h */,
 				7FC131122792FAF20094DF0C /* path_finder_interface.h */,
 				7FC131132792FAF20094DF0C /* event_provider_interface.h */,
 				7FE6D57828E053A800A78E06 /* scene_manager_interface.h */,
@@ -1624,11 +1588,9 @@
 				7F64289427787C2E00EE9E2C /* texture_target.hpp in Headers */,
 				7FE2E5DA277B23BC00538094 /* vector2.hpp in Headers */,
 				7F63D830279A0C9500139E14 /* RendererEntryViewController.h in Headers */,
-				7FC1311F2792FAF20094DF0C /* scripting_engine_provider_interface.h in Headers */,
 				7F6E2C272794AFD100348C81 /* character_interface_impl.hpp in Headers */,
 				7FC131242792FAF20094DF0C /* animation_interface.hpp in Headers */,
 				7FC131262792FAF20094DF0C /* drawable_interface.h in Headers */,
-				7F138259277505B600ED6D67 /* scripting_engine.hpp in Headers */,
 				7F67034128A60D5500319218 /* engine_screen.hpp in Headers */,
 				7F08C44327AF20A5002FEB8F /* light_interface.hpp in Headers */,
 				7F2497E827B942FA001D871A /* sprite_representation_text.hpp in Headers */,
@@ -1640,7 +1602,6 @@
 				7FC1311B2792FAF20094DF0C /* character_mover_interface.h in Headers */,
 				7FE2E5D6277B234E00538094 /* function.hpp in Headers */,
 				7F13828B277505B600ED6D67 /* common.h in Headers */,
-				7F27C45F28551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F08C45327AF22F2002FEB8F /* light.hpp in Headers */,
 				7FD5CBEB278A0C7100498B5F /* texture_manager.hpp in Headers */,
 				7FC131192792FAF20094DF0C /* console_renderer_interface.h in Headers */,
@@ -1688,7 +1649,6 @@
 				7F3E8E97279AC8F9003BB7B6 /* polygon.hpp in Headers */,
 				7F3E8E98279AC8F9003BB7B6 /* performance.hpp in Headers */,
 				7F3E8E99279AC8F9003BB7B6 /* key_value.hpp in Headers */,
-				7F27C46028551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F3E8E9A279AC8F9003BB7B6 /* RendererEntryViewController.h in Headers */,
 				7F3E8E9B279AC8F9003BB7B6 /* room.hpp in Headers */,
 				7F3E8E9C279AC8F9003BB7B6 /* engine_interface.h in Headers */,
@@ -1704,7 +1664,6 @@
 				7F3E8EA4279AC8F9003BB7B6 /* callable_interface.h in Headers */,
 				7F3E8EA5279AC8F9003BB7B6 /* character_renderer_interface.h in Headers */,
 				7F3E8EA6279AC8F9003BB7B6 /* texture_interface.h in Headers */,
-				7F3E8EA7279AC8F9003BB7B6 /* scripting_engine_provider_interface.h in Headers */,
 				7F3E8EA8279AC8F9003BB7B6 /* path_finder_interface.h in Headers */,
 				7F3E8EA9279AC8F9003BB7B6 /* event_provider_interface.h in Headers */,
 				7F3E8EAA279AC8F9003BB7B6 /* sprite_atlas_interface.h in Headers */,
@@ -1749,7 +1708,6 @@
 				7F3E8ECD279AC8F9003BB7B6 /* character_representation.hpp in Headers */,
 				7F7EA07328967C9900A09199 /* system_utils.hpp in Headers */,
 				7F3E8ECE279AC8F9003BB7B6 /* character_interface_impl.hpp in Headers */,
-				7F3E8ECF279AC8F9003BB7B6 /* scripting_engine.hpp in Headers */,
 				7F2DB00C28E0413D0044EF8D /* RendererEntry.h in Headers */,
 				7FCAE6D627AD345E00589EDE /* AAPLShaderTypes.h in Headers */,
 				7F3E8ED1279AC8F9003BB7B6 /* console_renderer.h in Headers */,
@@ -1801,7 +1759,6 @@
 				7F3E90B9279B03F6003BB7B6 /* polygon.hpp in Headers */,
 				7F3E90BA279B03F6003BB7B6 /* performance.hpp in Headers */,
 				7F3E90BB279B03F6003BB7B6 /* key_value.hpp in Headers */,
-				7F27C46128551736001AA216 /* scripting_interfaces.h in Headers */,
 				7F3E90BC279B03F6003BB7B6 /* RendererEntryViewController.h in Headers */,
 				7F3E90BD279B03F6003BB7B6 /* room.hpp in Headers */,
 				7F3E90BE279B03F6003BB7B6 /* engine_interface.h in Headers */,
@@ -1817,7 +1774,6 @@
 				7F3E90C6279B03F6003BB7B6 /* callable_interface.h in Headers */,
 				7F3E90C7279B03F6003BB7B6 /* character_renderer_interface.h in Headers */,
 				7F3E90C8279B03F6003BB7B6 /* texture_interface.h in Headers */,
-				7F3E90C9279B03F6003BB7B6 /* scripting_engine_provider_interface.h in Headers */,
 				7F3E90CA279B03F6003BB7B6 /* path_finder_interface.h in Headers */,
 				7F3E90CB279B03F6003BB7B6 /* event_provider_interface.h in Headers */,
 				7F3E90CC279B03F6003BB7B6 /* sprite_atlas_interface.h in Headers */,
@@ -1862,7 +1818,6 @@
 				7F3E90EF279B03F6003BB7B6 /* character_representation.hpp in Headers */,
 				7F7EA07428967C9900A09199 /* system_utils.hpp in Headers */,
 				7F3E90F0279B03F6003BB7B6 /* character_interface_impl.hpp in Headers */,
-				7F3E90F1279B03F6003BB7B6 /* scripting_engine.hpp in Headers */,
 				7F2DB00D28E0413D0044EF8D /* RendererEntry.h in Headers */,
 				7FCAE6D527AD345D00589EDE /* AAPLShaderTypes.h in Headers */,
 				7F3E90F3279B03F6003BB7B6 /* console_renderer.h in Headers */,
@@ -2255,7 +2210,6 @@
 				7F08C44E27AF21E2002FEB8F /* light_metal.cpp in Sources */,
 				7FB8242127899731008F0F7A /* console_terminal_commands.cpp in Sources */,
 				7FE2E5CC277A3FA900538094 /* path_finder_graph.cpp in Sources */,
-				7F138257277505B600ED6D67 /* scripting_engine.cpp in Sources */,
 				4C9EA02A2792166F0082EB6A /* texture_metal.mm in Sources */,
 				4C9EA03027921D8D0082EB6A /* AAPLImage.mm in Sources */,
 				7F869FC22780F6F800E8CB01 /* engine_state.cpp in Sources */,
@@ -2318,7 +2272,6 @@
 				7F3E8F0A279AC909003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E8F0B279AC909003BB7B6 /* character_interface_impl.cpp in Sources */,
 				7F2DAFF828E03F990044EF8D /* globals.cpp in Sources */,
-				7F3E8F0C279AC909003BB7B6 /* scripting_engine.cpp in Sources */,
 				7F3E8F0E279AC909003BB7B6 /* console_logger.cpp in Sources */,
 				7F3E8F0F279AC909003BB7B6 /* console_terminal.cpp in Sources */,
 				7F40C5A928D2740400B0865F /* gamepad.cpp in Sources */,
@@ -2410,7 +2363,6 @@
 				7F3E9133279B03F6003BB7B6 /* character_representation.cpp in Sources */,
 				7F3E9134279B03F6003BB7B6 /* character_interface_impl.cpp in Sources */,
 				7F2DAFF928E03F990044EF8D /* globals.cpp in Sources */,
-				7F3E9135279B03F6003BB7B6 /* scripting_engine.cpp in Sources */,
 				7F3E9137279B03F6003BB7B6 /* console_logger.cpp in Sources */,
 				7F3E9138279B03F6003BB7B6 /* console_terminal.cpp in Sources */,
 				7F40C5AA28D2740400B0865F /* gamepad.cpp in Sources */,
@@ -2617,7 +2569,7 @@
 					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../Dependencies/Apple/PictelSound.xcframework/macos-arm64_x86_64/Headers/include",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2684,7 +2636,7 @@
 					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../Dependencies/Apple/PictelSound.xcframework/macos-arm64_x86_64/Headers/include",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;

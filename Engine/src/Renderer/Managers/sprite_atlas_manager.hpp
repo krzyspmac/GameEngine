@@ -8,7 +8,6 @@
 #ifndef sprite_atlas_manager_hpp
 #define sprite_atlas_manager_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "sprite_atlas_interface.h"
 #include "sprite_atlas_manager_interface.h"
 
@@ -27,11 +26,6 @@ namespace engine
 
     private:
         std::vector<std::unique_ptr<SpriteAtlasI>> m_atlas;
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SpriteAtlasManager);
     };
 };
 

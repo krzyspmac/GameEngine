@@ -13,7 +13,6 @@
 #include "engine_interface.h"
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
-#include "scripting_engine_provider_interface.h"
 #include "character_renderer_interface.h"
 #include "character_interface.h"
 #include "texture_target.hpp"
@@ -31,7 +30,6 @@ namespace engine
                TextureManager &textureManager,
                FileAccessI &fileAccess,
                FontManager &fontManager,
-               ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
                EventsManager &eventsManager,
                CharacterManager &characterManager,

@@ -6,7 +6,6 @@
 //
 
 #include "character_manager.hpp"
-#include "scripting_engine.hpp"
 #include "character.hpp"
 #include "character_mover.hpp"
 
@@ -51,37 +50,4 @@ CharacterRepresentation* CharacterManager::GetCharacter(std::string jsonFilename
         }
     }
     return nullptr;
-}
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(CharacterManager);
-
-static int lua_CharacterManager_loadCharacter(lua_State *L)
-{
-//    // TODO: should check if proper params are in proper places!
-//    CharacterManager **ptr = (CharacterManager**)luaL_checkudata(
-//        L, 1, CharacterManager::ScriptingInterfaceName().c_str()
-//     );
-//    std::string jsonName = luaL_checkstring(L, 2);
-//
-//    Character *character = (Character*)(*ptr)->LoadCharacter(jsonName);
-//    if (character != nullptr)
-//    {
-//        character->ScriptingInterfaceRegisterFunctions(L, character);
-//    }
-//    else
-//    {
-//        lua_pushnil(L);
-//    }
-//
-    return 1;
-}
-
-std::vector<luaL_Reg> CharacterManager::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "LoadCharacter", &lua_CharacterManager_loadCharacter },
-    });
-    return result;
 }

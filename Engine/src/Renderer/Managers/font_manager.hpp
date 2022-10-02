@@ -9,7 +9,6 @@
 #define font_manager_hpp
 
 #include "font_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "font_manager_interface.h"
 
 namespace engine
@@ -23,10 +22,6 @@ namespace engine
         FontI *GetFont(std::string name);
 
         void DisposeAllFonts();
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(FontManager);
     };
 };
 

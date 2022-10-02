@@ -36,20 +36,3 @@ void MemoryReleasePool::Drain()
     }
     m_pool.clear();
 }
-
-SCRIPTING_INTERFACE_IMPL_NAME(MemoryReleasePool);
-
-static int lua_MemoryReleasePool_Drain(lua_State *L)
-{
-    MemoryReleasePool *obj = ScriptingEngineI::GetScriptingObjectPtr<MemoryReleasePool>(L, 1);
-    obj->Drain();
-    return 0;
-}
-
-std::vector<luaL_Reg> MemoryReleasePool::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        {"Drain", &lua_MemoryReleasePool_Drain},
-    });
-    return result;
-}

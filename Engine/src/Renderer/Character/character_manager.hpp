@@ -9,7 +9,6 @@
 #define character_manager_hpp
 
 #include <iostream>
-#include "scripting_engine_provider_interface.h"
 #include "character_interface.h"
 #include "character_representation.hpp"
 
@@ -24,7 +23,7 @@ namespace engine
      from specific json files. Keeps a list of character representations
      available for future use.
      */
-    class CharacterManager: public ScriptingInterface
+    class CharacterManager
     {
     public:
         CharacterManager() { };
@@ -50,11 +49,6 @@ namespace engine
     private:
         std::vector<std::unique_ptr<CharacterI>> m_characters;
         std::vector<std::unique_ptr<CharacterRepresentation>> m_representations;
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(CharacterManager);
     };
 };
 

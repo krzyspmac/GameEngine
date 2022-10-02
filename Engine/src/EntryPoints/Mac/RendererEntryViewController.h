@@ -33,7 +33,6 @@
 #include "common.h"
 #include "defs.h"
 #include "file_access.hpp"
-#include "scripting_engine.hpp"
 #include "event_provider.hpp"
 #include "engine.hpp"
 #include "interfaces.h"
@@ -42,7 +41,6 @@
 #include "console_app_renderer_mac.hpp"
 #include "file_access_provider.h"
 #include "engine_provider_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "engine_interface.h"
 #include "engine.hpp"
 #include "events_manager.hpp"
@@ -90,7 +88,6 @@
     engine::TextureManager *m_textureManager;
     engine::EngineProviderMetal *m_engineProvider;
     engine::FontManager *m_fontManager;
-    engine::ScriptingEngineI *m_scriptingEngine;
     engine::EventProviderI *m_eventProvider;
     engine::EventsManager *m_eventsManager;
     engine::CharacterManager *m_characterManager;

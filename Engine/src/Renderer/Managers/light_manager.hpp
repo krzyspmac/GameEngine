@@ -9,7 +9,6 @@
 #define light_manager_hpp
 
 #include "common.h"
-#include "scripting_engine_provider_interface.h"
 #include "light_interface.hpp"
 #include "light.hpp"
 #include "defs.h"
@@ -103,10 +102,6 @@ namespace engine
         auto GetLightBufferSize() { return m_lightCacheBufferSize; };
         auto GetLightBufferCount() { return m_lightCacheCount; };
 #endif
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(LightManager);
     };
 };
 

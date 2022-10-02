@@ -74,15 +74,8 @@ static std::string GetRestOfCommand(std::string cmdLine, std::string cmd)
 
 bool ConsoleTerminalCmdLuaExec::Process(const char *commandLine)
 {
-    std::string cmdLine = commandLine;
-
-    if (IsCommand(cmdLine, "lua_eval"))
-    {
-        auto rest = GetRestOfCommand(cmdLine, "lua_eval");
-        ENGINE().getScripting().loadChunk((char*)rest.c_str());
-        return true;
-    }
-
+    printf("Not working right now as there's no lua... Need some processing.\n");
+    exit(1);
     return false;
 }
 

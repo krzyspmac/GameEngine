@@ -11,7 +11,6 @@
 #include "sprite_draw_interface.h"
 #include "sprite_atlas_interface.h"
 #include "sprite_representation_static.hpp"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -74,11 +73,6 @@ namespace engine
         std::vector<SpriteRepresentationStatic*> m_sprites;
         int m_maxWidth;
         int m_maxHeight;
-        
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(SpriteRepresentationAnimated);
     };
 
 };

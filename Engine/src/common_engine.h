@@ -12,9 +12,7 @@
 #include "texture_interface.h"
 #include "file_access_provider.h"
 #include "engine_provider_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "engine_interface.h"
-#include "scripting_engine.hpp"
 #include "memory.h"
 
 #endif /* engine_common_h */

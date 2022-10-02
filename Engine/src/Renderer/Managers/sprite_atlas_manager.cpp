@@ -56,32 +56,3 @@ void SpriteAtlasManager::SpriteAtlasDisposeAll()
 {
     m_atlas.clear();
 }
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(SpriteAtlasManager);
-
-static int lua_SpriteAtlas_SpriteAtlasLoad(lua_State *L)
-{
-    SpriteAtlasManager **ptr = (SpriteAtlasManager**)luaL_checkudata(
-        L, 1, SpriteAtlasManager::ScriptingInterfaceName().c_str()
-    );
-    if (ptr == nullptr) { return 0; }
-    if (dynamic_cast<SpriteAtlasManager*>(*ptr) == nullptr) { return 0; }
-
-    std::string jsonName = luaL_checkstring(L, 2);
-    std::string textureFilename = luaL_checkstring(L, 3);
-
-    SpriteAtlas *item = (SpriteAtlas*)(*ptr)->SpriteAtlasLoad(jsonName, textureFilename);
-    item->ScriptingInterfaceRegisterFunctions(L, item);
-    // no need to push user data; the object is there
-    return 1;
-}
-
-std::vector<luaL_Reg> SpriteAtlasManager::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "SpriteAtlasLoad", &lua_SpriteAtlas_SpriteAtlasLoad}
-    });
-    return result;
-}

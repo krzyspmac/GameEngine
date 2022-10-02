@@ -36,6 +36,10 @@ ConsoleAppRendererMac::ConsoleAppRendererMac()
 {
 }
 
+ConsoleAppRendererMac::~ConsoleAppRendererMac()
+{
+}
+
 void ConsoleAppRendererMac::SetDevice(MTL::Device *device)
 {
     m_device = device;

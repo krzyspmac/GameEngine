@@ -26,7 +26,8 @@ namespace engine
 
     public:
         ConsoleRenderer();
-
+        virtual ~ConsoleRenderer();
+        
         void Setup();
         void DoFrame();
         void SetConsoleHidden(bool);

@@ -9,7 +9,6 @@
 #define engine_screen_hpp
 
 #include "engine_screen_interface.h"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -34,11 +33,6 @@ namespace engine
         float       GetAlpha() { return m_alpha; };
         void        SetRotation(Rotation rotation) { m_rotation = rotation; };
         Rotation    &GetRotation() { return m_rotation; }
-
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(EngineScreen);
     };
 };
 

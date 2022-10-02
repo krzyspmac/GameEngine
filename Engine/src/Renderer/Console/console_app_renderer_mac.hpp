@@ -33,7 +33,7 @@ namespace engine
 #endif
     public: // ConsoleAppRendererI
         ConsoleAppRendererMac();
-        virtual ~ConsoleAppRendererMac() { };
+        virtual ~ConsoleAppRendererMac();
 
         void Setup();
         void SetDevice(MTL::Device*);

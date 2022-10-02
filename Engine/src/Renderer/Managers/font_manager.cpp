@@ -43,32 +43,3 @@ void FontManager::DisposeAllFonts()
 {
     std::cout << "DisposeAllFonts not implemented" << std::endl;
 }
-
-SCRIPTING_INTERFACE_IMPL_NAME(FontManager);
-
-static int lua_FontManager_LoadFont(lua_State *L)
-{
-    FontManager *mgr = ScriptingEngineI::GetScriptingObjectPtr<FontManager>(L, 1);
-
-    const char *fntFilename = lua_tostring(L, 2);
-    const char *textureFilename = lua_tostring(L, 3);
-
-    FontBitmapRepresentation *rep = (FontBitmapRepresentation*)mgr->LoadFont(fntFilename, textureFilename);
-    if (rep != nullptr)
-    {
-        rep->ScriptingInterfaceRegisterFunctions(L, rep);
-        return 1;
-    }
-    else
-    {
-        return 0;
-    }
-}
-
-std::vector<luaL_Reg> FontManager::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "LoadFont", &lua_FontManager_LoadFont}
-    });
-    return result;
-}

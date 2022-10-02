@@ -9,7 +9,6 @@
 #define light_hpp
 
 #include "light_interface.hpp"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -85,10 +84,6 @@ namespace engine
 
         /** Setter for the name */
         void SetName(std::string value);
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(Light);
     };
 };
 

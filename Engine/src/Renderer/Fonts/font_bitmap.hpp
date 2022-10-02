@@ -14,7 +14,6 @@
 #include "interfaces.h"
 #include "vector2.hpp"
 #include "texture_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "drawable_interface.h"
 
 namespace engine
@@ -171,10 +170,6 @@ namespace engine
 
     private:
         void LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth);
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(FontBitmapRepresentation);
     };
 };
 

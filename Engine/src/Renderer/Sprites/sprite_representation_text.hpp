@@ -12,7 +12,6 @@
 #include "sprite_atlas_interface.h"
 #include "sprite_representation_static.hpp"
 #include "font_interface.h"
-#include "scripting_engine_provider_interface.h"
 
 #include "sprite_representation_text_interface.h"
 
@@ -66,11 +65,6 @@ namespace engine
         void DrawAt(int x, int y);
         void Draw();
         void SetColorMod(Color4 val);
-
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(SpriteRepresentationText);
     };
 };
 

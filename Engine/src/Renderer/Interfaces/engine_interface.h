@@ -10,7 +10,6 @@
 
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
-#include "scripting_engine_provider_interface.h"
 #include "event_provider_interface.h"
 #include "sprite_draw_interface.h"
 #include "events_manager.hpp"
@@ -43,7 +42,6 @@ namespace engine
                 TextureManager &textureManager,
                 FileAccessI &fileAccess,
                 FontManager &fontManager,
-                ScriptingEngineI &scriptingEngine,
                 EventProviderI &eventProvider,
                 EventsManager &eventsManager,
                 CharacterManager &characterManager,
@@ -57,7 +55,6 @@ namespace engine
                 m_textureManager(textureManager),
                 m_fileAccess(fileAccess),
                 m_fontManager(fontManager),
-                m_scriptingEngine(scriptingEngine),
                 m_eventProvider(eventProvider),
                 m_eventsManager(eventsManager),
                 m_characterManager(characterManager),
@@ -155,9 +152,6 @@ namespace engine
         EngineProviderI& getProvider() { return m_engineProvider; };
 
         ///
-        ScriptingEngineI& getScripting() { return m_scriptingEngine; };
-
-        ///
         FileAccessI& getFileAccess() { return m_fileAccess; };
 
     /// Managers
@@ -225,7 +219,6 @@ namespace engine
 
         EngineProviderI &m_engineProvider;
         FileAccessI &m_fileAccess;
-        ScriptingEngineI &m_scriptingEngine;
         EventProviderI &m_eventProvider;
         EventsManager &m_eventsManager;
 

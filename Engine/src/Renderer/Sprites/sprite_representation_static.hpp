@@ -8,7 +8,6 @@
 #ifndef sprite_draw_hpp
 #define sprite_draw_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "sprite_draw_interface.h"
 #include "drawable_interface.h"
 

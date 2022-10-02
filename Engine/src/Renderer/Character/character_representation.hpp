@@ -11,7 +11,6 @@
 #include "character_interface.h"
 #include "path_finder.hpp"
 #include "character_mover_interface.h"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -94,11 +93,6 @@ namespace engine
          called by the engine.
          */
         void Render();
-
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(CharacterRepresentation);
     };
 };
 

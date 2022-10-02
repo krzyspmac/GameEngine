@@ -6,11 +6,10 @@
 //
 
 #include "scene.hpp"
-#include "scripting_engine.hpp"
 #include "character.hpp"
-#include "scripting_engine.hpp"
 #include "light.hpp"
 #include "font_bitmap.hpp"
+#include "easy.h"
 
 using namespace engine;
 
@@ -43,16 +42,6 @@ void Scene::MouseClicked(Vector2 pos)
     if (m_mainCharacter != nullptr)
     {
         m_mainCharacter->WalkTo(pos);
-    }
-
-    if (m_mouseDownFunctionRef > -1)
-    {
-        ScriptingEngine& se = (ScriptingEngine&)ENGINE().getScripting();
-        se.CallRegistryFunction(m_mouseDownFunctionRef, [&](lua_State *L){
-            lua_pushnumber(L, pos.x);
-            lua_pushnumber(L, pos.y);
-            return 2;
-        });
     }
 }
 

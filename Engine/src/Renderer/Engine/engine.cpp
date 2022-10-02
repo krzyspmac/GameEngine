@@ -19,14 +19,6 @@
 #include "ini_reader.hpp"
 #include "static_objects.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-    #include "../../../Lua/code/src/lua.h"
-    #include "../../../Lua/code/src/lualib.h"
-    #include "../../../Lua/code/src/lauxlib.h"
-}
-#endif //__cplusplus
-
 using namespace engine;
 
 /// Main accessor for easy access.
@@ -40,7 +32,6 @@ Engine::Engine(EngineProviderI &engineProvider,
                TextureManager &textureManager,
                FileAccessI &fileAccess,
                FontManager &fontManager,
-               ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
                EventsManager &eventsManager,
                CharacterManager &characterManager,
@@ -50,7 +41,7 @@ Engine::Engine(EngineProviderI &engineProvider,
                ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-    : EngineI(engineProvider, textureManager, fileAccess, fontManager, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize)
+    : EngineI(engineProvider, textureManager, fileAccess, fontManager, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize)
     , m_viewportScale(1)
 {
     StaticObjects::init();
@@ -89,7 +80,6 @@ void Engine::SetupInit()
 
 void Engine::Setup()
 {
-
     // Preare the file access functions
     m_fileAccess.LoadDirectory(m_engineSetup.gameFolder);
 
@@ -103,13 +93,15 @@ void Engine::Setup()
     m_displayFont->SetZPosition(0);
 #endif
 
-    // Load the main script file
-    std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
-
-    m_scriptingEngine.newState();
-    m_scriptingEngine.loadFile(streamBuffer.get());
-    m_scriptingEngine.registerFunctions();
-    m_scriptingEngine.callInit();
+    auto initFunction = ENGINE().GetEngineSetup().initFunction;
+    if (initFunction == nullptr)
+    {
+        std::cout << "Error: No init function setup. Cannot start engine." << std::endl;
+    }
+    else
+    {
+        initFunction();
+    }
 
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
@@ -158,7 +150,7 @@ void Engine::FrameBegin()
 
 void Engine::ProcessScript()
 {
-    m_scriptingEngine.callUpdate();
+    ENGINE().GetEngineSetup().frameUpdateFunction();
 }
 
 void Engine::FrameDrawObjects()

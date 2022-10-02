@@ -105,7 +105,7 @@ namespace engine
     {
     public:
         ConsoleAppRendererI() { };
-        ~ConsoleAppRendererI() { };
+        virtual ~ConsoleAppRendererI() { };
 
         virtual void Setup() = 0;
         virtual bool IsSetup() = 0;

@@ -37,6 +37,10 @@ ConsoleRenderer::ConsoleRenderer()
     this->m_lightManagement = new ConsoleLightManagement();
 }
 
+ConsoleRenderer::~ConsoleRenderer()
+{
+}
+
 ConsoleLogI& ConsoleRenderer::GetLogger()
 {
     return *m_logger;

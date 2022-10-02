@@ -8,7 +8,6 @@
 #include "sprite_representation_static.hpp"
 #include "common_engine.h"
 #include "common.h"
-#include "scripting_engine.hpp"
 
 using namespace engine;
 

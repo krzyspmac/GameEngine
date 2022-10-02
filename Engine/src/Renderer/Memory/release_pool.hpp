@@ -8,7 +8,6 @@
 #ifndef release_pool_hpp
 #define release_pool_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "memory.h"
 
 namespace engine
@@ -43,11 +42,6 @@ namespace engine
          are no longer activly being used.
          */
         void Drain();
-        
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(MemoryReleasePool);
     };
 };
 

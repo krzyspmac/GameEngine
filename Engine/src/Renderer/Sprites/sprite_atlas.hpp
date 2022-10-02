@@ -10,7 +10,6 @@
 
 #include "common.h"
 #include "sprite_atlas_interface.h"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -46,11 +45,6 @@ namespace engine
         TextureI *m_texture;
         std::vector<std::unique_ptr<SpriteAtlasItemI>> m_items;
         bool m_flippedVertically;
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SpriteAtlas);
     };
 };
 

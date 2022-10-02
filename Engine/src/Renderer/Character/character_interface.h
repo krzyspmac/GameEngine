@@ -9,7 +9,6 @@
 #define character_interface_hpp
 
 #include "character_renderer_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "vector2.hpp"
 
 namespace engine

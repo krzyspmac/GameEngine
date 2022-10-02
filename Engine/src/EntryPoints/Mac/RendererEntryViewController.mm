@@ -70,7 +70,6 @@ using namespace engine;
     TextureManager *tm = new TextureManager();
     EngineProviderMetal *ep = new EngineProviderMetal();
     FontManager *fm  = new FontManager();
-    ScriptingEngine *se = new ScriptingEngine();
     EventProvider *eventProvider = new EventProvider();
     EventsManager *eventsManager = new EventsManager(*eventProvider, *ep);
     CharacterManager *characteManager = new CharacterManager();
@@ -83,7 +82,6 @@ using namespace engine;
     m_textureManager = tm;
     m_engineProvider = ep;
     m_fontManager = fm;
-    m_scriptingEngine = se;
     m_eventProvider = eventProvider;
     m_eventsManager = eventsManager;
     m_characterManager = characteManager;
@@ -100,7 +98,6 @@ using namespace engine;
                           , *m_textureManager
                           , *m_fileAccess
                           , *m_fontManager
-                          , *m_scriptingEngine
                           , *m_eventProvider
                           , *m_eventsManager
                           , *m_characterManager

@@ -9,7 +9,6 @@
 #define character_hpp
 
 #include "character_interface.h"
-#include "scripting_engine_provider_interface.h"
 
 namespace engine
 {
@@ -17,7 +16,7 @@ namespace engine
     /**
      Default game character.
      */
-    class Character: public CharacterI, public ScriptingInterface
+    class Character: public CharacterI
     {
     public:
         /** @private */
@@ -43,13 +42,6 @@ namespace engine
          Set Z-position
          */
         void SetZPosition(float);
-
-    /// ScriptingInterface
-    public:
-        /**
-         @private
-         */
-        SCRIPTING_INTERFACE_HEADERS(Character);
     };
 };
 
