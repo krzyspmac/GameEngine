@@ -49,7 +49,7 @@ Is none at the moment. But maybe... in the future, might increase to a point abo
 
 # Scripting interface quick-access.
 
-See [Init params](doxygen_sounds.md) to get a list possible ini params.
+See [Init params](doxygen_ini.md) to get a list possible ini params.
 
 See [Command Line parameters](doxygen_executable.md) to get a list of command-line parameters.
 
@@ -59,6 +59,8 @@ the game scripts.
 See [Font Management](doxygen_fonts.md) to learn how to render texts.
 
 See [Sound Management](doxygen_sounds.md) to learn how to play OGG/Vorbis files.
+
+See [Animation](doxygen_animation.md) to learn basic animation.
 
 */
 

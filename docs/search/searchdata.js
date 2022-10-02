@@ -6,7 +6,7 @@ var indexSectionsWithContent =
   3: "abfgimrv",
   4: "c",
   5: "e",
-  6: "dfips"
+  6: "adfips"
 };
 
 var indexSectionNames =

@@ -17,10 +17,11 @@ To load the font simply call up a global manager called *FontManager* and load t
 providing .fnt and the texture file.
 
 ```
-local font = FontManager:LoadFont("MyFont.fnt", "MyFont.png)
+engine::FontI* font = Globals::fontManager()->LoadFont("MyFont.fnt", "MyFont.png");
 ```
 
-One loaded the font stays until the scene manager clears the font cache.
+One loaded the font stays until the font is removed from the FontManager.
+Loading the same font twice will just return the previously created instance.
 
 ## Sprite representation
 
@@ -28,19 +29,30 @@ Once the font has been loaded a sprite representation can be created. A sprite r
 is being created on a given scene and its lifecycle is linked to that scene.
 
 ```
-local textSprite = scene:SpriteTextLoad(font)
+engine::SceneI *scene = Globals::sceneManager()->SceneCreateNew();
+
+engine::SpriteRepresentationTextI* textSprite = scene:SpriteTextLoad(font)
 ```
 
-Font sprite representations share a number of functions with general sprite representations.
+Font sprite representations share a number of functions with general sprite representations so the position, color and scale can be set.
 
 ```
-textSprite:SetText("Test")
-textSprite:SetPosition(300, 300)
-textSprite:SetAcceptsLight(true)
-textSprite:SetScale(2)
-textSprite:SetColorMod(1.0, 1.0, 0.0, 1.0)
-textSprite:SetShadowColor(1.0, 0.0, 0.0, 1.0)
-textSprite:SetShadowOffset(2, 2)
+textSprite->SetText("Test");
+textSprite->SetPosition({100.0, 200.0});
+textSprite->SetColorMod({1.f, 1.f, 1.f, 1.f});
+textSprite->SetHorizontalAlignment("center");
+textSprite->SetVerticalAlignment("middle");
+textSprite->SetScale(2.0f);
+textSprite->SetAlpha(0.0f);
+textSprite->SetAcceptsLight(true);
 ```
 
-\see SpriteRepresentationText
+Font sprite representation also defines a couple of font-specific functionality.
+
+```
+textSprite->SetText("Test");
+textSprite->SetHorizontalAlignment("center");
+textSprite->SetVerticalAlignment("middle");
+```
+
+\see engine::SpriteRepresentationTextI

@@ -786,6 +786,7 @@
 		7FA2AB37277DD1A600AED89D /* character_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = character_manager.hpp; sourceTree = "<group>"; };
 		7FB2018427941D0200D0F5FE /* sprite_draw_backbuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sprite_draw_backbuffer.cpp; sourceTree = "<group>"; };
 		7FB2018527941D0200D0F5FE /* sprite_draw_backbuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sprite_draw_backbuffer.hpp; sourceTree = "<group>"; };
+		7FB44FEF28EA02DB00D7958B /* doxygen_animation.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = doxygen_animation.md; sourceTree = "<group>"; };
 		7FB823E12788E199008F0F7A /* console_renderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = console_renderer.mm; sourceTree = "<group>"; };
 		7FB823E82788F64D008F0F7A /* console_renderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = console_renderer.h; sourceTree = "<group>"; };
 		7FB8241727890479008F0F7A /* console_logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = console_logger.cpp; sourceTree = "<group>"; };
@@ -966,6 +967,7 @@
 				7FC68D472854D29D0060A167 /* doxygen_sounds.md */,
 				7F7EA06F2896779500A09199 /* doxygen_executable.md */,
 				7F7EA070289678E800A09199 /* doxygen_ini.md */,
+				7FB44FEF28EA02DB00D7958B /* doxygen_animation.md */,
 				7F3E8F80279AECF0003BB7B6 /* prefix.pch */,
 				7F2DB01228E044790044EF8D /* common_lua.h */,
 				7F138250277505B600ED6D67 /* common_engine.h */,

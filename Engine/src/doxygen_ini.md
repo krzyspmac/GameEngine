@@ -46,3 +46,23 @@ Possible gamepad_virtual_buttons
 - RightTrigger
 - LeftThumbstickButton
 - RightThumbstickButton
+
+# Sample
+
+```
+[RESOLUTION]
+width=1280
+height=720
+
+[PHONE]
+orientation=portrait|landscape
+
+[RENDERER]
+game_folder=@rpath/Game
+clear_color=1.0,0.0,0.0,1.0
+
+[INPUT]
+gamepad_support=true
+gamepad_virtual_support=true
+gamepad_virtual_buttons=DirectionPad|LeftThumbstick|ButtonA
+```

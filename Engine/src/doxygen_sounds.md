@@ -1,8 +1,11 @@
 #  Sound Reference
 
 ## Sound files used
-The Engine uses OGG/Vorbis sound files exclusively. A custom implementation of Vorbis
-is included in a form a [Pictel Sound Library](https://krzyspmac.github.io/Pictel/)
+
+Uses the OGG/Vorbis sound files exclusively. A custom implementation of
+Vorbis is included in a form a [Pictel Sound Library](https://krzyspmac.github.io/Pictel/).
+
+Note: C++ documentation missing.
 
 ## Loading
 
