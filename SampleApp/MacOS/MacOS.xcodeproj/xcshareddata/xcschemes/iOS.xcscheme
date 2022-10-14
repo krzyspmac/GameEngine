@@ -84,20 +84,6 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E8FA4279AF5E6003BB7B6"
-               BuildableName = "liblua-ios.a"
-               BlueprintName = "lua-ios"
-               ReferencedContainer = "container:../../Libraries/Lua/Lua.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F3E8FEA279AF5F0003BB7B6"
                BuildableName = "libcjson-ios.a"
                BlueprintName = "cjson-ios"

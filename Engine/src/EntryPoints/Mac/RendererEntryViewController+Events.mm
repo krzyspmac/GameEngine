@@ -445,8 +445,8 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     [virtualController connectWithReplyHandler:^(NSError * _Nullable error) {
         NSLog(@"setupVirtualController::connectWithReplyHandler: %@", error);
     }];
-
-    [self setupControllerProfiles:virtualController.controller];
+//
+//    [self setupControllerProfiles:virtualController.controller];
 #endif
 }
 

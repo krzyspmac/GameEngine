@@ -62,7 +62,10 @@ void PictelScriptFrameUpdate(void);
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-    PlatformViewController *rootViewController = [[RendererEntryViewController alloc] initWithNibName:nil bundle:nil];
+    UIViewController<RendererViewControllerProtocol> *rootViewController = (id)[RendererEntry instantiate];
+    rootViewController.gameEngienInitFnc = &PictelScriptInit;
+    rootViewController.gameEngineFrameUpdteFnc = &PictelScriptFrameUpdate;
+
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];

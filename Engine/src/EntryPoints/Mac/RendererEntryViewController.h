@@ -128,9 +128,10 @@
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
 @property (nonatomic, weak) NSWindow *parentWindow;
+#endif
+
 @property (nonatomic, assign) ScriptingFunctionVoid gameEngienInitFnc;
 @property (nonatomic, assign) ScriptingFunctionVoid gameEngineFrameUpdteFnc;
-#endif
 
 #if USE_CONTROLLERS
 @property (nonatomic, strong) GCController *controller;

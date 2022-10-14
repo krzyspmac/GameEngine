@@ -33,10 +33,15 @@
 #endif
 
 #include "script_entry_interface.hpp"
+#include "defs.h"
 
 @protocol RendererViewControllerProtocol <NSObject>
 
+#if defined(TARGET_IOS) || defined(TARGET_TVOS)
+@property (nonatomic, weak) UIWindow *parentWindow;
+#else
 @property (nonatomic, weak) NSWindow *parentWindow;
+#endif
 @property (nonatomic, assign) ScriptingFunctionVoid gameEngienInitFnc;
 @property (nonatomic, assign) ScriptingFunctionVoid gameEngineFrameUpdteFnc;
 

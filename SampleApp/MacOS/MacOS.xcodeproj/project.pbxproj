@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F02F86328ED198400FC9205 /* GameResources in Resources */ = {isa = PBXBuildFile; fileRef = 7F18785A28ED196700851F28 /* GameResources */; };
 		7F0F951A28DB7E03001222C5 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F0F951928DB7E03001222C5 /* GameController.framework */; };
 		7F13829F2775082800ED6D67 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 7F13829E2775082800ED6D67 /* AppDelegate.mm */; };
 		7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1382A22775086200ED6D67 /* Assets.xcassets */; };
@@ -43,12 +44,11 @@
 		7F6D1C8A279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
 		7F6D1C8B279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
 		7F6D1C8C279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
-		7F7EA08528968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
-		7F7EA08628968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
-		7F7EA08728968BDA00A09199 /* Game in Resources */ = {isa = PBXBuildFile; fileRef = 7F7EA08428968BDA00A09199 /* Game */; };
 		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
 		7FB6520028CE6582006F7030 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB651FF28CE6582006F7030 /* AudioToolbox.framework */; };
 		7FCC12962798D792002ECABD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCC12952798D792002ECABD /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		7FE9E2E328FA04F500AFE00A /* GameResources in Resources */ = {isa = PBXBuildFile; fileRef = 7F18785A28ED196700851F28 /* GameResources */; };
+		7FE9E2F528FA05D500AFE00A /* libGame-iOS.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FE9E2F428FA05D500AFE00A /* libGame-iOS.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -78,6 +78,7 @@
 		7F1382B027750B5B00ED6D67 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382C727750C0800ED6D67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = src/main.mm; sourceTree = SOURCE_ROOT; };
+		7F18785A28ED196700851F28 /* GameResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GameResources; path = ../../Game/GameResources; sourceTree = "<group>"; };
 		7F20ACB0278B2B1A00B5772F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		7F20ACB5278B31FA00B5772F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7F20ACB7278B34D600B5772F /* Quartz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quartz.framework; path = System/Library/Frameworks/Quartz.framework; sourceTree = SDKROOT; };
@@ -115,11 +116,11 @@
 		7F63D819279A067800139E14 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Engine-Mac-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6D1C89279F186A0078D76A /* main.ini */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.ini; sourceTree = "<group>"; };
-		7F7EA08428968BDA00A09199 /* Game */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Game; sourceTree = "<group>"; };
 		7F9EB6CF279A163700384C0B /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB651FF28CE6582006F7030 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FCC12952798D792002ECABD /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
+		7FE9E2F428FA05D500AFE00A /* libGame-iOS.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = "libGame-iOS.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FE9E2F528FA05D500AFE00A /* libGame-iOS.dylib in Frameworks */,
 				7F0F951A28DB7E03001222C5 /* GameController.framework in Frameworks */,
 				7FB6520028CE6582006F7030 /* AudioToolbox.framework in Frameworks */,
 				7F3E8F8C279AF17C003BB7B6 /* Metal.framework in Frameworks */,
@@ -193,6 +195,7 @@
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
+				7F18785A28ED196700851F28 /* GameResources */,
 				7F63D871279A140C00139E14 /* Build Resources */,
 				7F13828C277507C500ED6D67 /* src */,
 				7F869FC42783970400E8CB01 /* GameDataProcessed */,
@@ -216,6 +219,7 @@
 		7F3CAAF52770944E00E0D74C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FE9E2F428FA05D500AFE00A /* libGame-iOS.dylib */,
 				7F2DAFF028E03B980044EF8D /* libGame-Mac.dylib */,
 				7F0F951928DB7E03001222C5 /* GameController.framework */,
 				7F3470C12852870F00FDED71 /* AudioToolbox.framework */,
@@ -283,7 +287,6 @@
 		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
 			isa = PBXGroup;
 			children = (
-				7F7EA08428968BDA00A09199 /* Game */,
 				7F6D1C89279F186A0078D76A /* main.ini */,
 			);
 			name = GameDataProcessed;
@@ -392,8 +395,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */,
+				7F02F86328ED198400FC9205 /* GameResources in Resources */,
 				7F1382A52775086200ED6D67 /* Assets.xcassets in Resources */,
-				7F7EA08528968BDA00A09199 /* Game in Resources */,
 				7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */,
 				7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */,
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
@@ -405,7 +408,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F7EA08628968BDA00A09199 /* Game in Resources */,
+				7FE9E2E328FA04F500AFE00A /* GameResources in Resources */,
 				7F6D1C8B279F186A0078D76A /* main.ini in Resources */,
 				7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */,
 				7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */,
@@ -418,7 +421,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F7EA08728968BDA00A09199 /* Game in Resources */,
 				7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */,
 				7F6D1C8C279F186A0078D76A /* main.ini in Resources */,
 				7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */,
