@@ -93,6 +93,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7F11905728FB542B002ACB8F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7FD0FB1C28E4E485008A4389 /* InertiaProcessor.hpp */,
+				7FD0FB1B28E4E485008A4389 /* InertiaProcessor.cpp */,
+				7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */,
+				7FD0FB1F28E4EBA7008A4389 /* GameInput.cpp */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		7F11905828FB5455002ACB8F /* Entry */ = {
+			isa = PBXGroup;
+			children = (
+				7F2DAFE528E03B630044EF8D /* GameEntryPoint.hpp */,
+				7F2DAFE928E03B630044EF8D /* GameEntryPoint.cpp */,
+				7F2DB01428E048660044EF8D /* GameResolutionState.hpp */,
+				7F2DB01A28E04D250044EF8D /* GameResolutionState.cpp */,
+			);
+			path = Entry;
+			sourceTree = "<group>";
+		};
 		7F18784828ED14A500851F28 /* GameResources */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,18 +171,12 @@
 			children = (
 				7F2814DE28E198D5000FB2BC /* Headers */,
 				7F2814DD28E198CC000FB2BC /* Interfaces */,
-				7F2DAFE528E03B630044EF8D /* GameEntryPoint.hpp */,
-				7F2DAFE928E03B630044EF8D /* GameEntryPoint.cpp */,
-				7F2DB01428E048660044EF8D /* GameResolutionState.hpp */,
-				7F2DB01A28E04D250044EF8D /* GameResolutionState.cpp */,
+				7F11905728FB542B002ACB8F /* Shared */,
+				7F11905828FB5455002ACB8F /* Entry */,
 				7FE6D57528E051FF00A78E06 /* GameSceneCoordinator.hpp */,
 				7FE6D57428E051FF00A78E06 /* GameSceneCoordinator.cpp */,
 				7FE6D57B28E05A8A00A78E06 /* GameSceneIntro.hpp */,
 				7FE6D57A28E05A8A00A78E06 /* GameSceneIntro.cpp */,
-				7FD0FB1C28E4E485008A4389 /* InertiaProcessor.hpp */,
-				7FD0FB1B28E4E485008A4389 /* InertiaProcessor.cpp */,
-				7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */,
-				7FD0FB1F28E4EBA7008A4389 /* GameInput.cpp */,
 			);
 			path = Source;
 			sourceTree = "<group>";

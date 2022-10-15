@@ -40,15 +40,6 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState, GameInputI *gameIn
         FrameUpdate();
     });
 
-    m_callabackGamepadConnectionId = engine
-        ::Globals
-        ::eventsManager()
-        ->RegisterGamepadConnection(
-            CallableParameters2<GamepadI *, bool>::make_shared([&](auto* gamepad, bool){
-                OnGamepadConnection(gamepad);
-            })
-        );
-
     auto size = m_resState->GetViewportSize();
     auto* atlasMgr = Globals::spriteAtlasManager();
 
@@ -85,21 +76,6 @@ void GameSceneIntro::DidActivate()
 }
 
 void GameSceneIntro::DidDeactivate() { }
-
-void GameSceneIntro::OnGamepadConnection(GamepadI* gamepad)
-{
-    if (gamepad != nullptr) {
-        gamepad->RegisterLeftThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vect){
-
-        }));
-        gamepad->RegisterRightThumbstickAxis(CallableParameters1<Vector2>::make_shared([&](Vector2 vect){
-
-        }));
-        gamepad->RegisterButtonTapped(CallableParameters3<GamepadButtonType, GamepadButtonAction, float>::make_shared([&](auto buttonType, auto buttonAction, auto value){
-
-        }));
-    }
-}
 
 void GameSceneIntro::FrameUpdate()
 {

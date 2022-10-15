@@ -25,21 +25,19 @@
 #include "GameResolutionState.hpp"
 #include "InertiaProcessor.hpp"
 
+using namespace engine;
+
 class GameSceneIntro: public GameSceneI {
     GameResolutionState *m_resState;
-    engine::FontI *m_font;
-    engine::SceneI *m_scene;
-    engine::SpriteRepresentationTextI *m_textSprite;
-    engine::SpriteRepresentationI *m_background;
-    engine::SpriteRepresentationI *m_animated;
-    engine::LightI *m_light;
+    FontI *m_font;
+    SceneI *m_scene;
+    SpriteRepresentationTextI *m_textSprite;
+    SpriteRepresentationI *m_background;
+    SpriteRepresentationI *m_animated;
+    LightI *m_light;
     std::vector<std::string> m_texts;
 
     engine::SoundFileI *m_sound;
-
-    std::shared_ptr<engine::CallableParameters2<engine::GamepadI *, bool>>  m_callabackGamepadConnection;
-    engine::EventIdentifier m_callabackGamepadConnectionId;
-
     IntertiaProcessor m_inertiaProcessor;
     GameInputI *m_gameInput;
 public: // GameSceneIntro
@@ -52,7 +50,6 @@ public: // GameSceneI
     void DidDeactivate();
 
 public: // Events
-    void OnGamepadConnection(engine::GamepadI*);
 
 private:
     void ContinueAnimation();
