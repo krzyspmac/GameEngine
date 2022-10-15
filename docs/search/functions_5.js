@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['iscontroldown_0',['IsControlDown',['../classengine_1_1_events_manager.html#afdcaea205a7bcd2862a87c108c5d4461',1,'engine::EventsManager']]],
-  ['isshiftdown_1',['IsShiftDown',['../classengine_1_1_events_manager.html#a3d7288a1887840f88e3ca537aaa27071',1,'engine::EventsManager']]]
+  ['intersectsanyline_0',['IntersectsAnyline',['../classengine_1_1_path_finder_data_i.html#ae4b8e36830407573381aacbdf9c85d58',1,'engine::PathFinderDataI']]],
+  ['iscontroldown_1',['IsControlDown',['../classengine_1_1_events_manager_i.html#a4918e48f7c7bec0545f40bba027a0478',1,'engine::EventsManagerI']]],
+  ['isflippedhorizontally_2',['IsFlippedHorizontally',['../classengine_1_1_drawable_i.html#acbbb1e6fcefe886e40c7b7a26abe7743',1,'engine::DrawableI']]],
+  ['isshiftdown_3',['IsShiftDown',['../classengine_1_1_events_manager_i.html#a0f92dcd96a29b2a07a84c5545ce3b08c',1,'engine::EventsManagerI']]]
 ];

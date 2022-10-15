@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pictel 2d Game Engine Documentation: Global Variables</title>
+<title>Pictel 2d: Exposed Functionality</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,8 +22,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Pictel 2d Game Engine Documentation
+   <div id="projectname">Pictel 2d<span id="projectnumber">&#160;0.1</span>
    </div>
+   <div id="projectbrief">Game Engine Documentation</div>
   </td>
  </tr>
  </tbody>
@@ -63,24 +64,30 @@ $(function() {
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Global Variables</div></div>
+  <div class="headertitle"><div class="title">Exposed Functionality</div></div>
 </div><!--header-->
 <div class="contents">
-<p >A list of globally available objects to be used in LUA scripts. Those manage a wide variety of objects and state.</p>
-<p ><a class="el" href="classengine_1_1_scene_manager.html">SceneManager</a></p>
-<p ><a class="el" href="classengine_1_1_character_manager.html">CharacterManager</a></p>
-<p ><a class="el" href="classengine_1_1_sprite_atlas_manager.html">SpriteAtlasManager</a></p>
-<p ><a class="el" href="classengine_1_1_sprite_renderer_manager.html">SpriteRendererManager</a></p>
-<p ><a class="el" href="classengine_1_1_time.html">Time</a></p>
-<p ><a class="el" href="classengine_1_1_engine_state.html">EngineState</a></p>
-<p ><a class="el" href="classengine_1_1_property_animator_factory.html">PropertyAnimatorFactory</a></p>
-<p ><a class="el" href="classengine_1_1_value_animator_factory.html">ValueAnimatorFactory</a></p>
-<p ><a class="el" href="classengine_1_1_font_manager.html">FontManager</a></p>
-<p ><a class="el" href="classengine_1_1_animation_group_factory.html">AnimationGroupFactory</a></p>
-<p ><a class="el" href="classengine_1_1_memory_release_pool.html">MemoryReleasePool</a></p>
-<p ><a class="el" href="classengine_1_1_events_manager.html">EventsManager</a></p>
-<p ><a class="el" href="classengine_1_1_light_manager.html">LightManager</a></p>
-<p ><a class="el" href="classengine_1_1_sound_manager.html">SoundManager</a> </p>
+<p >A list of exposed interfaces available to be used in C++ game scripts. Those manage a wide variety of objects and states from sprite loading to animations.</p>
+<p ><a class="el" href="classengine_1_1_animation_curve_factory_i.html">AnimationCurveFactoryI</a></p>
+<p >Defines the interface for the animation curve factory</p>
+<p ><a class="el" href="classengine_1_1_animator_factory_i.html">AnimatorFactoryI</a></p>
+<p >Defines the animator factory interface used to provde animation capability in the engine.</p>
+<p ><a class="el" href="classengine_1_1_engine_state_i.html" title="Engine state holder.">EngineStateI</a></p>
+<p >Holds various information on the state of the engine. Viewport, screen size change handler, etc.</p>
+<p ><a class="el" href="classengine_1_1_events_manager_i.html">EventsManagerI</a></p>
+<p >Allows for registering for keyboard, mouse events &amp; gamepad events.</p>
+<p ><a class="el" href="classengine_1_1_font_manager_i.html">FontManagerI</a></p>
+<p >Keps a list of all fonts including memory handling of those.</p>
+<p ><a class="el" href="classengine_1_1_globals.html">Globals</a></p>
+<p >Provides different managers for the game scripts and is generally the main connection point between the game scripts and the engine itself. Those are static and it's safe to keep their references.</p>
+<p ><a class="el" href="classengine_1_1_scene_manager_i.html">SceneManagerI</a></p>
+<p >Manages the scene. Only the current screen renders its resources on-screen. Note that scene management does not impact game input handling nor any other non-scene related event observers.</p>
+<p ><a class="el" href="classengine_1_1_sound_manager_i.html">SoundManagerI</a></p>
+<p >Manages the scene's sound files.</p>
+<p ><a class="el" href="classengine_1_1_sprite_atlas_manager_i.html">SpriteAtlasManagerI</a></p>
+<p >A manager for sprite atlas files. Loads the textures, keeps them for future reference.</p>
+<p ><a class="el" href="classengine_1_1_time_i.html">TimeI</a></p>
+<p >Keeps the time for the engine including game engine start and incremental time between each frame so it's possible to properly animate different sprites/states. </p>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

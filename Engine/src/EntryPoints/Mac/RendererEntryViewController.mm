@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  PlatformViewController.m
-//  SampleApp
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 09/01/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import "RendererEntryViewController.h"
 #include <Metal/Metal.hpp>
@@ -70,7 +82,6 @@ using namespace engine;
     TextureManager *tm = new TextureManager();
     EngineProviderMetal *ep = new EngineProviderMetal();
     FontManager *fm  = new FontManager();
-    ScriptingEngine *se = new ScriptingEngine();
     EventProvider *eventProvider = new EventProvider();
     EventsManager *eventsManager = new EventsManager(*eventProvider, *ep);
     CharacterManager *characteManager = new CharacterManager();
@@ -83,7 +94,6 @@ using namespace engine;
     m_textureManager = tm;
     m_engineProvider = ep;
     m_fontManager = fm;
-    m_scriptingEngine = se;
     m_eventProvider = eventProvider;
     m_eventsManager = eventsManager;
     m_characterManager = characteManager;
@@ -100,7 +110,6 @@ using namespace engine;
                           , *m_textureManager
                           , *m_fileAccess
                           , *m_fontManager
-                          , *m_scriptingEngine
                           , *m_eventProvider
                           , *m_eventsManager
                           , *m_characterManager
@@ -131,6 +140,13 @@ using namespace engine;
 
 - (void)prepareEngine
 {
+    // Setup initial data
+    m_engine->SetupInit();
+
+    // Inject the setup function
+    m_engine->GetEngineSetup().initFunction = self.gameEngienInitFnc;
+    m_engine->GetEngineSetup().frameUpdateFunction = self.gameEngineFrameUpdteFnc;
+
     // Setup the engine
     m_engine->Setup();
 

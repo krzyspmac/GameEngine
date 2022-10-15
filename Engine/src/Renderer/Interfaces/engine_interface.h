@@ -1,30 +1,39 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  engine_interface.h
-//  Renderer
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 19/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef engine_interface_h
 #define engine_interface_h
 
 #include "engine_provider_interface.h"
 #include "file_access_provider.h"
-#include "scripting_engine_provider_interface.h"
 #include "event_provider_interface.h"
 #include "sprite_draw_interface.h"
 #include "events_manager.hpp"
 #include "character_manager.hpp"
 #include "scene_manager.hpp"
 #include "sprite_atlas_manager.hpp"
+#include "sprite_atlas_manager_interface.h"
 #include "sprite_renderer_manager.hpp"
 #include "periodic_updates_manager.hpp"
-#include "value_animator_factory.hpp"
-#include "property_animator_factory.hpp"
 #include "time.hpp"
 #include "engine_state.hpp"
 #include "release_pool.hpp"
-#include "animation_group_factory.hpp"
 #include "console_renderer.h"
 #include "texture_manager.hpp"
 #include "font_manager.hpp"
@@ -32,6 +41,8 @@
 #include "light_manager.hpp"
 #include "sound_manager.hpp"
 #include "engine_screen.hpp"
+#include "engine_state_interface.h"
+#include "animation_curve_factory.hpp"
 
 namespace engine
 {
@@ -43,7 +54,6 @@ namespace engine
                 TextureManager &textureManager,
                 FileAccessI &fileAccess,
                 FontManager &fontManager,
-                ScriptingEngineI &scriptingEngine,
                 EventProviderI &eventProvider,
                 EventsManager &eventsManager,
                 CharacterManager &characterManager,
@@ -57,7 +67,6 @@ namespace engine
                 m_textureManager(textureManager),
                 m_fileAccess(fileAccess),
                 m_fontManager(fontManager),
-                m_scriptingEngine(scriptingEngine),
                 m_eventProvider(eventProvider),
                 m_eventsManager(eventsManager),
                 m_characterManager(characterManager),
@@ -69,11 +78,16 @@ namespace engine
                 m_time(engineProvider),
                 m_lightManager(*(new LightManager())),
                 m_soundManager(*(new SoundManager())),
-                m_engineScreen(*(new EngineScreen()))
+                m_engineScreen(*(new EngineScreen())),
+                m_engineState(*(new EngineState())),
+                m_animationCurveFactory(*(new AnimationCurveFactory()))
         { }
 
     /// Setup
     public:
+
+        /** Setup the ini & the EngineSetup structure */
+        virtual void SetupInit() = 0;
 
         /** The main setup. All engine components should be
             loaded by the concrete class after this call.
@@ -150,9 +164,6 @@ namespace engine
         EngineProviderI& getProvider() { return m_engineProvider; };
 
         ///
-        ScriptingEngineI& getScripting() { return m_scriptingEngine; };
-
-        ///
         FileAccessI& getFileAccess() { return m_fileAccess; };
 
     /// Managers
@@ -161,13 +172,13 @@ namespace engine
         TextureManager &getTextureManager() { return m_textureManager; };
 
         ///
-        FontManager& getFontManager() { return m_fontManager; };
+        FontManagerI& getFontManager() { return m_fontManager; };
 
         ///
         CharacterManager& getCharacterManager() { return m_characterManager; };
 
         ///
-        SceneManager& getSceneManager() { return m_sceneManager; };
+        SceneManagerI& getSceneManager() { return m_sceneManager; };
 
         ///
         LightManager& getLightMnaager() { return m_lightManager; };
@@ -176,7 +187,7 @@ namespace engine
         SoundManager& getSoundManager() { return m_soundManager; };
 
         ///
-        SpriteAtlasManager& getAtlasManager() { return m_spriteAtlasManager; };
+        SpriteAtlasManagerI& getAtlasManager() { return m_spriteAtlasManager; };
 
         ///
         SpriteRendererManager& getSpriteRendererManager() { return m_spriteRendererManager; };
@@ -191,28 +202,22 @@ namespace engine
         Time& getTime() { return m_time; };
 
         ///
-        ValueAnimatorFactory& getValueAnimatorFactory() { return m_valueAnimatorFactory; };
-
-        ///
-        PropertyAnimatorFactory& getPropertyAnimatorFactory() { return m_propertyAnimatorFactory; };
-
-        ///
         PeriodicUpdatesManager& getPeriodicUpdatesManager() { return m_periodicUpdatesManager; };
 
         ///
-        EngineState& getEngineState() { return m_engineState; };
+        EngineStateI& getEngineState() { return m_engineState; };
 
         ///
         EngineScreen& getEngineScreen() { return m_engineScreen; };
         
         ///
         MemoryReleasePool& getReleasePool() { return m_releasePool; };
-        
-        ///
-        AnimationGroupFactory& getAnimationGroupFactory() { return m_animationGroupFactory; };
 
         ///
         ConsoleRendererI& getConsoleRenderer() { return m_consoleRenderer; };
+
+        ///
+        AnimationCurveFactoryI &getAnimationCurveFactory() { return m_animationCurveFactory; };
 
     /// Other states
     public:
@@ -226,7 +231,6 @@ namespace engine
 
         EngineProviderI &m_engineProvider;
         FileAccessI &m_fileAccess;
-        ScriptingEngineI &m_scriptingEngine;
         EventProviderI &m_eventProvider;
         EventsManager &m_eventsManager;
 
@@ -234,21 +238,18 @@ namespace engine
         FontManager &m_fontManager;
         SpriteAtlasManager &m_spriteAtlasManager;
         SpriteRendererManager &m_spriteRendererManager;
-        SceneManager &m_sceneManager;
+        SceneManagerI &m_sceneManager;
         CharacterManager &m_characterManager;
         LightManager &m_lightManager;
         SoundManager &m_soundManager;
         EngineScreen &m_engineScreen;
+        EngineStateI &m_engineState;
+        AnimationCurveFactoryI &m_animationCurveFactory;
 
         engine::Origin m_mousePosition;
         Time m_time;
-        ValueAnimatorFactory m_valueAnimatorFactory;
-        PropertyAnimatorFactory m_propertyAnimatorFactory;
         PeriodicUpdatesManager m_periodicUpdatesManager;
-        EngineState m_engineState;
-        AnimationGroupFactory m_animationGroupFactory;
         MemoryReleasePool m_releasePool;
-
         ConsoleRendererI &m_consoleRenderer;
     };
 

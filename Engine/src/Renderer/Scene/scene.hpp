@@ -1,14 +1,25 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  scene.hpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 30/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef scene_hpp
 #define scene_hpp
 
-#include "scripting_engine_provider_interface.h"
 #include "engine_provider_interface.h"
 #include "sprite_representation_static.hpp"
 #include "sprite_representation_animated.hpp"
@@ -17,13 +28,14 @@
 #include "character_representation.hpp"
 #include "light_interface.hpp"
 #include "font_interface.h"
-#include "callable.hpp"
+#include "scene_interface.h"
+#include "sprite_representation_text_interface.h"
 #include "common.h"
 #include <iostream>
 
 namespace engine
 {
-    class Scene
+    class Scene: public SceneI
     {
         EngineProviderI& m_engineProvider;
         std::vector<SpriteRepresentationStatic*> m_staticSprites;
@@ -34,7 +46,7 @@ namespace engine
         CharacterRepresentation *m_mainCharacter;
         int m_mouseDownFunctionRef;
         unsigned int m_mouseDownIdentifier;
-        CallableScriptFunctionSciptableInstance m_frameUpdateCallback;
+        std::function<void(void)> m_frameUpdateCallback;
         bool m_isActive;
     ///
     public:
@@ -42,45 +54,21 @@ namespace engine
         Scene();
         ~Scene();
 
-    /// Rederer
-    public:
-        /** Render the scene sprites. If set this will also call the update function
-            before any rendering occurs.
-            @private
-        */
+    public: // SceneI
         void RenderSceneSprites();
-
-        /**
-         Called by the engine. Reacts to mouse clicks.
-         @private
-         */
         void MouseClicked(Vector2 pos);
-
-    public: // States
-
-        /** @private */
         void SetIsActivated(bool value) { m_isActive = value; };
-
         bool GetIsActivated() { return m_isActive; };
 
+    /// Rederer
     public:
-        /**
-         \brief Load a sprite renderer.
 
-         Helper method to load the sprite and puts it into the stack.
-         Uses SpriteRendererManager.
-         \include SampleSpriteStatic-helper.lua
-         \see Scene::AddSpriteDrawStatic.
-         */
-        SpriteRepresentationStatic *SpriteStaticLoad(SpriteAtlasI *atlas, std::string name);
+    public:
+        SpriteRepresentationI *SpriteStaticLoad(SpriteAtlasI *atlas, std::string name);
 
-        /**
-         \brief Load a sprite renderer for animation
-         */
-        SpriteRepresentationAnimated *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
+        SpriteRepresentationI *SpriteAnimatedLoad(float keyframeAnimationDelay, SpriteAtlasI *atlas);
 
-        /** \brief Load a drawable text representation */
-        SpriteRepresentationText *SpriteTextLoad(FontI*);
+        SpriteRepresentationTextI *SpriteTextLoad(FontI*);
 
         /**
          \brief Load a character representation.
@@ -139,16 +127,11 @@ namespace engine
          for the frame udpate. The frame update funciton will be called only for
          the active scene.
          */
-        void RegisterFrameUpdate(CallableScriptFunctionParametersEmpty);
+        void SetFrameUpdate(std::function<void(void)>);
 
     public: /** Getters */
 
         auto& GetStaticSprites() { return m_staticSprites; };
-
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(Scene);
     };
 };
 

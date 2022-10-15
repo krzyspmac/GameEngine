@@ -1,5 +1,30 @@
 var searchData=
 [
-  ['valueanimator_0',['ValueAnimator',['../classengine_1_1_value_animator.html',1,'engine']]],
-  ['valueanimatorfactory_1',['ValueAnimatorFactory',['../classengine_1_1_value_animator_factory.html',1,'engine']]]
+  ['read_0',['Read',['../classengine_1_1_file_stream_i.html#a6267f356d588b89162ed0ef1e139c950',1,'engine::FileStreamI::Read()'],['../classengine_1_1_file_memory_buffer_stream_from_file.html#ae6202bfc8dc78ab91c2e5f809b739af8',1,'engine::FileMemoryBufferStreamFromFile::Read()']]],
+  ['readbufferstring_1',['ReadBufferString',['../classengine_1_1_file_stream_i.html#a2ea152ee755378b6362cc8a5bbbdc86b',1,'engine::FileStreamI::ReadBufferString()'],['../classengine_1_1_file_memory_buffer_stream_from_file.html#a968a643bf5cf33f316894086e738dd7d',1,'engine::FileMemoryBufferStreamFromFile::ReadBufferString()']]],
+  ['rect_2',['Rect',['../structengine_1_1_rect.html',1,'engine']]],
+  ['rectf_3',['RectF',['../structengine_1_1_rect_f.html',1,'engine']]],
+  ['ref_5fptr_4',['ref_ptr',['../classengine_1_1ref__ptr.html',1,'engine']]],
+  ['ref_5fptr_5fcounter_5',['ref_ptr_counter',['../classengine_1_1ref__ptr__counter.html',1,'engine']]],
+  ['registergamepadconnection_6',['RegisterGamepadConnection',['../classengine_1_1_events_manager_i.html#aa2ad9058734b1e6b98917c024153cd95',1,'engine::EventsManagerI']]],
+  ['registerkeydown_7',['RegisterKeyDown',['../classengine_1_1_events_manager_i.html#ab99d2aac8a1846d99d4d46d58d25948c',1,'engine::EventsManagerI']]],
+  ['registerkeyshortcut_8',['RegisterKeyShortcut',['../classengine_1_1_events_manager_i.html#aae5e12ef29fbd082f0e1f97cc3fddca0',1,'engine::EventsManagerI']]],
+  ['registerkeyup_9',['RegisterKeyUp',['../classengine_1_1_events_manager_i.html#ac060812c934890e6dca79c4c7fae36ac',1,'engine::EventsManagerI']]],
+  ['registermouseclickedevents_10',['RegisterMouseClickedEvents',['../classengine_1_1_events_manager_i.html#a2e4f30c7e73b9fdd9baf3673fbe717f8',1,'engine::EventsManagerI']]],
+  ['registermousemovedevents_11',['RegisterMouseMovedEvents',['../classengine_1_1_events_manager_i.html#a83c1d500fa253f45bf2204ea5c308df9',1,'engine::EventsManagerI']]],
+  ['removeobserver_12',['RemoveObserver',['../classengine_1_1_sound_file_i.html#a967c83a3d93fa5f923d32276dda024f1',1,'engine::SoundFileI']]],
+  ['renderclear_13',['RenderClear',['../classengine_1_1_engine_provider_i.html#a0e0cc9d985308bfa171b283d63b58bca',1,'engine::EngineProviderI']]],
+  ['renderdrawline_14',['RenderDrawLine',['../classengine_1_1_engine_provider_i.html#af338a518ec4f38d57f2946ca9bf626a8',1,'engine::EngineProviderI']]],
+  ['renderdrawpoint_15',['RenderDrawPoint',['../classengine_1_1_engine_provider_i.html#a8d2272ee8d9e39b07f13dca31260ec59',1,'engine::EngineProviderI']]],
+  ['renderdrawrect_16',['RenderDrawRect',['../classengine_1_1_engine_provider_i.html#a6165ad545e32d819583b5b63e1ea51c3',1,'engine::EngineProviderI']]],
+  ['renderertargetdrawablepop_17',['RendererTargetDrawablePop',['../classengine_1_1_engine_provider_i.html#aa4a1bca175ff1c90a591daea687863d1',1,'engine::EngineProviderI']]],
+  ['renderertargetdrawablepush_18',['RendererTargetDrawablePush',['../classengine_1_1_engine_provider_i.html#ad21fc3dd0b2802170a1786e16bf62896',1,'engine::EngineProviderI']]],
+  ['renderertargetdrawableset_19',['RendererTargetDrawableSet',['../classengine_1_1_engine_provider_i.html#a4e62e9b52fae90adc43f27318081d9a7',1,'engine::EngineProviderI']]],
+  ['renderfillrect_20',['RenderFillRect',['../classengine_1_1_engine_provider_i.html#aa9cbdd2854e98d0c7f57b08556ffcf20',1,'engine::EngineProviderI']]],
+  ['renderpresent_21',['RenderPresent',['../classengine_1_1_engine_provider_i.html#ac7a3ea1b4da08f1afbdd78d002cbf999',1,'engine::EngineProviderI']]],
+  ['rendersetcolor_22',['RenderSetColor',['../classengine_1_1_engine_provider_i.html#ad5a9637678d0e5f9bf588e288152e117',1,'engine::EngineProviderI']]],
+  ['rendersetscale_23',['RenderSetScale',['../classengine_1_1_engine_provider_i.html#ac689a1d449774dcecc2d422052ce2dbc',1,'engine::EngineProviderI']]],
+  ['rendertargetclear_24',['RenderTargetClear',['../classengine_1_1_engine_provider_i.html#aaea1b87919ef7b05a5bf785ce979de55',1,'engine::EngineProviderI']]],
+  ['resolution_25',['resolution',['../structengine_1_1_engine_setup.html#aaacfb8477a02e78b8b9f5a796acff907',1,'engine::EngineSetup']]],
+  ['rotation_26',['Rotation',['../structengine_1_1_rotation.html',1,'engine']]]
 ];

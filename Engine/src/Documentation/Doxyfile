@@ -32,19 +32,19 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = "Pictel 2d Game Engine Documentation"
+PROJECT_NAME           = "Pictel 2d"
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
 # control system is used.
 
-PROJECT_NUMBER         =
+PROJECT_NUMBER         = 0.1
 
 # Using the PROJECT_BRIEF tag one can provide an optional one line description
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          =
+PROJECT_BRIEF          = "Game Engine Documentation"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -871,78 +871,60 @@ WARN_LOGFILE           =
 # spaces. See also FILE_PATTERNS and EXTENSION_MAPPING
 # Note: If this tag is empty the current directory is searched.
 
-INPUT                  = ../Renderer/Scene/scene.hpp \
-                         ../Renderer/Scene/scene.cpp \
-                         ../Renderer/Scene/scene_manager.cpp \
-                         ../Renderer/Scene/scene_manager.hpp \
-                         ../Renderer/Character/character.cpp \
-                         ../Renderer/Character/character.hpp \
-                         ../Renderer/Character/character_manager.cpp \
-                         ../Renderer/Character/character_manager.hpp \
-                         ../Renderer/Character/character_representation.cpp \
-                         ../Renderer/Character/character_representation.hpp \
-                         ../Renderer/Sprites/sprite_atlas.cpp \
-                         ../Renderer/Sprites/sprite_atlas.hpp \
-                         ../Renderer/Sprites/sprite_representation_static.hpp \
-                         ../Renderer/Sprites/sprite_representation_static.cpp \
-                         ../Renderer/Sprites/sprite_representation_animated.hpp \
-                         ../Renderer/Sprites/sprite_representation_animated.hpp \
-                         ../Renderer/Managers/events_manager.cpp \
-                         ../Renderer/Managers/sprite_atlas_manager.cpp \
-                         ../Renderer/Managers/sprite_atlas_manager.hpp \
-                         ../Renderer/Managers/sprite_renderer_manager.cpp \
-                         ../Renderer/Managers/sprite_renderer_manager.hpp \
-                         ../Renderer/Managers/sprite_atlas_manager.cpp \
-                         ../doxygen_main.h \
-                         ../Renderer/States/time.cpp \
-                         ../Renderer/States/time.hpp \
-                         ../Renderer/Animations/animation_factory.cpp \
-                         ../Renderer/Animations/animation_factory.hpp \
-                         ../Renderer/States/engine_state.cpp \
-                         ../Renderer/States/engine_state.hpp \
-                         ../Renderer/Scripting/callable_interface.h \
-                         ../Renderer/Scripting/callable.cpp \
-                         ../Renderer/Scripting/callable.hpp \
-                         ../Renderer/Animations/property_animator_factory.cpp \
-                         ../Renderer/Animations/property_animator_factory.hpp \
-                         ../Renderer/Animations/property_animator.cpp \
-                         ../Renderer/Animations/property_animator.hpp \
-                         ../Renderer/Animations/value_animator_factory.cpp \
-                         ../Renderer/Animations/value_animator_factory.hpp \
-                         ../Renderer/Animations/value_animator.cpp \
-                         ../Renderer/Animations/value_animator.hpp \
-                         ../Renderer/Fonts/font_bitmap.cpp \
-                         ../Renderer/Fonts/font_bitmap.hpp \
-                         ../Renderer/Managers/font_manager.cpp \
-                         ../Renderer/Managers/font_manager.hpp \
-                         ../doxygen_fonts.md \
-                         ../Renderer/Animations/animation_curve_factory.cpp \
-                         ../Renderer/Animations/animation_curve_factory.hpp \
-                         ../Renderer/Animations/animation_group_factory.cpp \
-                         ../Renderer/Animations/animation_group_factory.hpp \
-                         ../Renderer/Animations/animation_group_sequence.cpp \
-                         ../Renderer/Animations/animation_group_sequence.hpp \
-                         ../Renderer/Animations/animation_group_simulateneus.cpp \
-                         ../Renderer/Animations/animation_group_simulateneus.hpp \
-                         ../Renderer/Memory/release_pool.cpp \
-                         ../Renderer/Memory/release_pool.hpp \
-                         ../Renderer/Managers/events_manager.hpp \
-                         ../Renderer/Managers/events_manager.cpp \
-                         ../Renderer/Lights/light.cpp \
-                         ../Renderer/Lights/light.hpp \
-                         ../Renderer/Managers/light_manager.cpp \
-                         ../Renderer/Managers/light_manager.hpp \
-                         ../Renderer/Sprites/sprite_representation_text.hpp \
-                         ../Renderer/Sprites/sprite_representation_text.cpp \
-                         ../Renderer/Sound/sound_file.cpp \
-                         ../Renderer/Sound/sound_file.hpp \
-                         ../Renderer/Sound/sound_manager.cpp \
-                         ../Renderer/Sound/sound_manager.hpp \
-                         ../Renderer/Sound/sound_interfaces.h \
-						 ../Renderer/Interfaces/sprite_draw_interface.h \
+INPUT                  = . \
                          ../doxygen_sounds.md \
                          ../doxygen_executable.md \
-                         ../doxygen_ini.md
+                         ../doxygen_ini.md \
+                         ../Renderer/Interfaces/interfaces.h \
+                         ../Renderer/Interfaces/animation_interface.hpp \
+                         ../Renderer/Interfaces/callable_interface.h \
+                         ../Renderer/Interfaces/character_mover_interface.h \
+                         ../Renderer/Interfaces/character_renderer_interface.h \
+                         ../Renderer/Interfaces/common.h \
+                         ../Renderer/Interfaces/console_renderer_interface.h \
+                         ../Renderer/Interfaces/defs.h \
+                         ../Renderer/Interfaces/drawable_interface.h \
+                         ../Renderer/Interfaces/engine_events_provider_interface.h \
+                         ../Renderer/Interfaces/engine_interface.h \
+                         ../Renderer/Interfaces/engine_provider_interface.h \
+                         ../Renderer/Interfaces/engine_screen_interface.h \
+                         ../Renderer/Interfaces/engine_setup_interface.h \
+                         ../Renderer/Interfaces/engine_state_interface.h \
+                         ../Renderer/Interfaces/event_provider_interface.h \
+                         ../Renderer/Interfaces/events_manager_interface.h \
+                         ../Renderer/Interfaces/file_access_provider.h \
+                         ../Renderer/Interfaces/font_interface.h \
+                         ../Renderer/Interfaces/font_manager_interface.h \
+                         ../Renderer/Interfaces/gamepad_interface.h \
+                         ../Renderer/Interfaces/general.hpp \
+                         ../Renderer/Interfaces/globals.hpp \
+                         ../Renderer/Interfaces/holder.hpp \
+                         ../Renderer/Interfaces/interfaces.h \
+                         ../Renderer/Interfaces/light_interface.hpp \
+                         ../Renderer/Interfaces/line.hpp \
+                         ../Renderer/Interfaces/memory.h \
+                         ../Renderer/Interfaces/path_finder_interface.h \
+                         ../Renderer/Interfaces/rotation.hpp \
+                         ../Renderer/Interfaces/scene_interface.h \
+                         ../Renderer/Interfaces/scene_manager_interface.h \
+                         ../Renderer/Interfaces/script_entry_interface.hpp \
+                         ../Renderer/Interfaces/scripting_engine_provider_interface.h \
+                         ../Renderer/Interfaces/scripting_interfaces.h \
+                         ../Renderer/Interfaces/size.hpp \
+                         ../Renderer/Interfaces/sound_interfaces.h \
+                         ../Renderer/Interfaces/sprite_atlas_interface.h \
+                         ../Renderer/Interfaces/sprite_atlas_manager_interface.h \
+                         ../Renderer/Interfaces/sprite_draw_interface.h \
+                         ../Renderer/Interfaces/sprite_interface_defs.h \
+                         ../Renderer/Interfaces/sprite_representation_text_interface.h \
+                         ../Renderer/Interfaces/texture_interface.h \
+                         ../Renderer/Interfaces/time_interface.h \
+                         ../Renderer/Interfaces/vector2.hpp \
+                         ../doxygen_main.md \
+                         ../doxygen_fonts.md \
+                         ../doxygen_main.md \
+                         ../doxygen_main.h \
+                         ../doxygen_animation.md
 
 # This tag can be used to specify the character encoding of the source files
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding. Doxygen uses
@@ -974,17 +956,6 @@ INPUT_ENCODING         = UTF-8
 FILE_PATTERNS          = *.c \
                          *.cc \
                          *.cxx \
-                         *.cpp \
-                         *.c++ \
-                         *.java \
-                         *.ii \
-                         *.ixx \
-                         *.ipp \
-                         *.i++ \
-                         *.inl \
-                         *.idl \
-                         *.ddl \
-                         *.odl \
                          *.h \
                          *.hh \
                          *.hxx \

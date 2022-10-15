@@ -1,20 +1,33 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  sprite_representation_text.cpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 13/02/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "sprite_representation_text.hpp"
 
 using namespace engine;
 
 SpriteRepresentationText::SpriteRepresentationText(FontI *font)
-    : SpriteRepresentationI(1.f)
+    : SpriteRepresentationTextI(1.f)
     , m_bitmapFont(font)
     , m_shadowOffset({1.f, 1.f})
     , m_shadowColor({0.f, 0.f, 0.f, 0.f})
     , m_lineMultiplier(1.f)
+    , m_alpha(1.f)
     , m_textHorizontalAlignment(TEXT_ALIGN_LEFT)
     , m_textVerticalAlignment(TEXT_ALIGN_TOP)
 {
@@ -39,7 +52,14 @@ void SpriteRepresentationText::SetPosition(Vector2 pos)
 void SpriteRepresentationText::SetAlpha(float val)
 {
     SpriteRepresentationI::SetAlpha(val);
+    m_alpha = val;
     m_bitmapFont->SetAlpha(val);
+}
+
+float SpriteRepresentationText::GetAlpha()
+{
+//    return m_bitmapFont->Ge
+    return m_alpha;
 }
 
 void SpriteRepresentationText::SetZPosition(float zPos)
@@ -125,160 +145,4 @@ void SpriteRepresentationText::DrawAt(int x, int y)
 void SpriteRepresentationText::Draw()
 {
     DrawAt(m_position.x, m_position.y);
-}
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(SpriteRepresentationText);
-
-static int lua_SetText(lua_State *L)
-{
-    SpriteRepresentationText *obj = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    std::string text = lua_tostring(L, 2);
-    obj->SetText(text);
-    return 0;
-}
-
-static int lua_GetText(lua_State *L)
-{
-    SpriteRepresentationText *obj = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    std::string text = obj->GetText();
-    lua_pushstring(L, text.c_str());
-    return 1;
-}
-
-static int lua_SetScale(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float scale = lua_tonumberx(L, 2, NULL);
-    spr->SetScale(scale);
-    return 0;
-}
-
-static int lua_SetAlpha(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float x = MAX(0, MIN(1, lua_tonumberx(L, 2, NULL)));
-    spr->SetAlpha(x);
-    return 0;
-}
-
-static int lua_GetAlpha(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float x = spr->GetAlpha();
-    lua_pushnumber(L, x);
-    return 1;
-}
-
-static int lua_SetPosition(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float x = lua_tonumberx(L, 2, nullptr);
-    float y = lua_tonumberx(L, 3, nullptr);
-    Vector2 pos = {x, y};
-    spr->SetPosition(pos);
-    return 0;
-}
-
-static int lua_GetPosition(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    Vector2 pos = spr->GetPosition();
-    lua_pushnumber(L, pos.x);
-    lua_pushnumber(L, pos.y);
-    return 2;
-}
-
-static int lua_SetAcceptsLight(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    bool value = lua_toboolean(L, 2);
-    spr->SetAcceptsLight(value);
-    return 0;
-}
-
-static int lua_SetColorMod(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float r = lua_tonumber(L, 2);
-    float g = lua_tonumber(L, 3);
-    float b = lua_tonumber(L, 4);
-    float a = lua_tonumber(L, 5);
-    spr->SetColorMod({r, g, b, a});
-    return 0;
-}
-
-static int lua_SetShadowColor(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float r = lua_tonumber(L, 2);
-    float g = lua_tonumber(L, 3);
-    float b = lua_tonumber(L, 4);
-    float a = lua_tonumber(L, 5);
-    spr->SetShadowColor({r, g, b, a});
-    return 0;
-}
-
-static int lua_SetShadowOffset(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float x = lua_tonumber(L, 2);
-    float y = lua_tonumber(L, 3);
-    spr->SetShadowOffset({x, y});
-    return 0;
-}
-
-static int lua_SetLineHeightMultiplier(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float value = lua_tonumber(L, 2);
-    spr->SetLineHeightMultiplier(value);
-    return 0;
-}
-
-static int lua_SetHorizontalAlignment(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    std::string value = lua_tostring(L, 2);
-    spr->SetHorizontalAlignment(value);
-    return 0;
-}
-
-static int lua_SetVerticalAlignment(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    std::string value = lua_tostring(L, 2);
-    spr->SetVerticalAlignment(value);
-    return 0;
-}
-
-static int lua_SetZPosition(lua_State *L)
-{
-    SpriteRepresentationText *spr = ScriptingEngineI::GetScriptingObjectPtr<SpriteRepresentationText>(L, 1);
-    float value = lua_tonumber(L, 2);
-    spr->SetZPosition(value);
-    return 0;
-}
-
-std::vector<luaL_Reg> SpriteRepresentationText::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "SetText", &lua_SetText }
-      , { "GetText", &lua_GetText }
-      , { "SetScale", &lua_SetScale }
-      , { "SetAlpha", &lua_SetAlpha }
-      , { "GetAlpha", &lua_GetAlpha }
-      , { "SetPosition", &lua_SetPosition }
-      , { "GetPosition", &lua_GetPosition }
-      , { "SetAcceptsLight", &lua_SetAcceptsLight }
-      , { "SetColorMod", &lua_SetColorMod }
-      , { "SetShadowColor", &lua_SetShadowColor }
-      , { "SetShadowOffset", &lua_SetShadowOffset }
-      , { "SetLineHeightMultiplier", &lua_SetLineHeightMultiplier }
-      , { "SetHorizontalAlignment", &lua_SetHorizontalAlignment }
-      , { "SetVerticalAlignment", &lua_SetVerticalAlignment }
-      , { "SetZPosition", &lua_SetZPosition }
-    });
-    return result;
 }

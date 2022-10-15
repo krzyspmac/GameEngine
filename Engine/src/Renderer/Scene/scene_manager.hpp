@@ -1,58 +1,49 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  scene_manager.hpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 30/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef scene_manager_hpp
 #define scene_manager_hpp
 
-#include "scripting_engine_provider_interface.h"
-#include "scene.hpp"
+#include "scene_interface.h"
+#include "scene_manager_interface.h"
 
 namespace engine
 {
-
-    /**
-     SceneManager
-     \addtogroup API_GLOBALS
-     */
-    /**
-     Manages the scene. Loading a new scene should unload the previous
-     scene's resources.
-     */
-    class SceneManager
+    class SceneManager: public SceneManagerI
     {
     public:
         SceneManager()
         :   m_current(nullptr)
         { };
 
-    public:
-        /// Creates a new scene. Removes the old one and removes it data.
-        Scene* SceneCreateNew();
-
-        /// Get the current scene.
-        Scene* SceneGetCurrent() { return m_current; };
-
-        /// Unload the current scene.
-        void SceneUnload(Scene*);
-
-        /// Make active.
-        void SceneMakeActive(Scene*);
+    public: // SceneManagerI
+        SceneI* SceneCreateNew();
+        SceneI* SceneGetCurrent();
+        void SceneUnload(SceneI*);
+        void SceneMakeActive(SceneI*);
 
     private:
-        std::vector<std::unique_ptr<Scene>>::iterator GetFor(Scene*);
+        std::vector<std::unique_ptr<SceneI>>::iterator GetFor(SceneI*);
 
     private:
-        std::vector<std::unique_ptr<Scene>> m_scenes;
-        Scene* m_current;
-
-    /// ScriptingInterface
-    public:
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(SceneManager);
+        std::vector<std::unique_ptr<SceneI>> m_scenes;
+        SceneI* m_current;
     };
 };
 

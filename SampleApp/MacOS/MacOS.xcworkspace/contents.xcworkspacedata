@@ -5,13 +5,13 @@
       location = "group:MacOS.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../../Game/Game.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../Libraries/cJson/cJson.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../../Libraries/Lua/Lua.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../Libraries/imgui/imgui.xcodeproj">

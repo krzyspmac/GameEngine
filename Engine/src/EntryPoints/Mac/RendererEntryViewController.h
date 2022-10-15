@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  PlatformViewController.h
-//  SampleApp
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 09/01/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #pragma once
 
@@ -29,19 +41,18 @@
 #endif
 
 #include <stdio.h>
+#include "script_entry_interface.hpp"
 #include "common.h"
 #include "defs.h"
 #include "file_access.hpp"
-#include "scripting_engine.hpp"
 #include "event_provider.hpp"
 #include "engine.hpp"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "texture_target_metal.hpp"
 #include "console_renderer.h"
 #include "console_app_renderer_mac.hpp"
 #include "file_access_provider.h"
 #include "engine_provider_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "engine_interface.h"
 #include "engine.hpp"
 #include "events_manager.hpp"
@@ -89,7 +100,6 @@
     engine::TextureManager *m_textureManager;
     engine::EngineProviderMetal *m_engineProvider;
     engine::FontManager *m_fontManager;
-    engine::ScriptingEngineI *m_scriptingEngine;
     engine::EventProviderI *m_eventProvider;
     engine::EventsManager *m_eventsManager;
     engine::CharacterManager *m_characterManager;
@@ -114,23 +124,20 @@
 #endif
 }
 
-
 #if defined(TARGET_IOS) || defined(TARGET_TVOS)
 #else
 @property (weak) IBOutlet NSWindowController *windowController;
-@property (weak) NSWindow *parentWindow;
+@property (nonatomic, weak) NSWindow *parentWindow;
 #endif
+
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngienInitFnc;
+@property (nonatomic, assign) ScriptingFunctionVoid gameEngineFrameUpdteFnc;
 
 #if USE_CONTROLLERS
 @property (nonatomic, strong) GCController *controller;
 #if TARGET_IOS
 @property (nonatomic, strong) GCVirtualController *virtualController;
 #endif
-@property (nonatomic, weak) GCExtendedGamepad *controllerExtendedProfile;
-@property (nonatomic, weak) GCMicroGamepad *controllerMicroProfile;
-@property (nonatomic, weak) GCControllerDirectionPad *controllerDPad;
-@property (nonatomic, weak) GCControllerDirectionPad *leftThumbstick;
-@property (nonatomic, weak) GCControllerDirectionPad *rightThumbstick;
 
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler leftThumbstickHandler;
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler rightThumbstickHandler;

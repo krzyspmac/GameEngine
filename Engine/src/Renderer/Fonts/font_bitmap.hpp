@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  font_bitmap.hpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 06/01/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef font_bitmap_hpp
 #define font_bitmap_hpp
@@ -11,10 +23,9 @@
 #include "common.h"
 #include "key_value.hpp"
 #include "font_interface.h"
-#include "common_engine_impl.h"
+#include "interfaces.h"
 #include "vector2.hpp"
 #include "texture_interface.h"
-#include "scripting_engine_provider_interface.h"
 #include "drawable_interface.h"
 
 namespace engine
@@ -145,6 +156,9 @@ namespace engine
         
         /** Set Alpha */
         void SetAlpha(float);
+
+        /** Get */
+        float GetAlpha();
         
         /** Set Z-position */
         void SetZPosition(float);
@@ -168,10 +182,6 @@ namespace engine
 
     private:
         void LineRunner(std::string& text, int from, int to, Origin position, float lineMultiplier, std::function<void(DrawableI*, float, float)> drawLabmda, std::function<void(float)> lineWidth);
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(FontBitmapRepresentation);
     };
 };
 

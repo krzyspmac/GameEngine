@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  character_representation.cpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 31/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "character_representation.hpp"
 #include "character_mover.hpp"
@@ -92,103 +104,4 @@ void CharacterRepresentation::Render()
     {
         pf->Draw();
     }
-}
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(CharacterRepresentation);
-
-static int lua_CharacterRepresentation_DrawAt(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    float x = lua_tonumberx(L, 2, nullptr);
-    float y = lua_tonumberx(L, 3, nullptr);
-    Vector2 pos = {x, y};
-    sender->DrawAt(pos);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_PlaceAt(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    float x = lua_tonumberx(L, 2, nullptr);
-    float y = lua_tonumberx(L, 3, nullptr);
-    Vector2 pos = {x, y};
-    sender->PlaceAt(pos);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_GetPosition(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    Vector2& position = sender->GetPosition();
-    lua_pushnumber(L, position.x);
-    lua_pushnumber(L, position.y);
-    return 2;
-}
-
-static int lua_CharacterRepresentation_SetScale(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    float x = lua_tonumberx(L, 2, nullptr);
-    sender->SetScale(x);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_WalkTo(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    float x = lua_tonumberx(L, 2, nullptr);
-    float y = lua_tonumberx(L, 3, nullptr);
-    Vector2 pos = {x, y};
-    sender->WalkTo(pos);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_SetInverseWalkbox(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    const char *jsonFilename = lua_tostring(L, 2);
-    sender->SetInverseWalkbox(jsonFilename);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_SetWalkingSpeed(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    float x = lua_tonumberx(L, 2, nullptr);
-    sender->SetCharacterWalkingSpeed(x);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_SetHidden(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    bool x = lua_toboolean(L, 2);
-    sender->SetHidden(x);
-    return 0;
-}
-
-static int lua_CharacterRepresentation_SetZPosition(lua_State *L)
-{
-    CharacterRepresentation *sender = ScriptingEngineI::GetScriptingObjectPtr<CharacterRepresentation>(L, 1);
-    float value = lua_tonumber(L, 2);
-    sender->SetZPosition(value);
-    return 0;
-}
-
-std::vector<luaL_Reg> CharacterRepresentation::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        {"DrawAt", &lua_CharacterRepresentation_DrawAt},
-        {"PlaceAt", &lua_CharacterRepresentation_PlaceAt},
-        {"GetPosition", &lua_CharacterRepresentation_GetPosition},
-        {"SetScale", &lua_CharacterRepresentation_SetScale},
-        {"SetInverseWalkbox", &lua_CharacterRepresentation_SetInverseWalkbox},
-        {"WalkTo", &lua_CharacterRepresentation_WalkTo},
-        {"SetWalkingSpeed", &lua_CharacterRepresentation_SetWalkingSpeed},
-        {"SetHidden", &lua_CharacterRepresentation_SetHidden},
-        {"SetZPosition", &lua_CharacterRepresentation_SetZPosition}
-    });
-    return result;
 }

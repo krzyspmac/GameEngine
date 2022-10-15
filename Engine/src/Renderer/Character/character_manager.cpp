@@ -1,12 +1,23 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  character_manager.cpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 30/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "character_manager.hpp"
-#include "scripting_engine.hpp"
 #include "character.hpp"
 #include "character_mover.hpp"
 
@@ -51,37 +62,4 @@ CharacterRepresentation* CharacterManager::GetCharacter(std::string jsonFilename
         }
     }
     return nullptr;
-}
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(CharacterManager);
-
-static int lua_CharacterManager_loadCharacter(lua_State *L)
-{
-//    // TODO: should check if proper params are in proper places!
-//    CharacterManager **ptr = (CharacterManager**)luaL_checkudata(
-//        L, 1, CharacterManager::ScriptingInterfaceName().c_str()
-//     );
-//    std::string jsonName = luaL_checkstring(L, 2);
-//
-//    Character *character = (Character*)(*ptr)->LoadCharacter(jsonName);
-//    if (character != nullptr)
-//    {
-//        character->ScriptingInterfaceRegisterFunctions(L, character);
-//    }
-//    else
-//    {
-//        lua_pushnil(L);
-//    }
-//
-    return 1;
-}
-
-std::vector<luaL_Reg> CharacterManager::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "LoadCharacter", &lua_CharacterManager_loadCharacter },
-    });
-    return result;
 }

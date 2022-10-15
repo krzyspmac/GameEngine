@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  sprite_representation_text.hpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 13/02/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef sprite_representation_text_hpp
 #define sprite_representation_text_hpp
@@ -12,23 +24,24 @@
 #include "sprite_atlas_interface.h"
 #include "sprite_representation_static.hpp"
 #include "font_interface.h"
-#include "scripting_engine_provider_interface.h"
+
+#include "sprite_representation_text_interface.h"
 
 namespace engine
 {
-    class SpriteRepresentationText: public SpriteRepresentationI
+    class SpriteRepresentationText: public SpriteRepresentationTextI
     {
         FontI* m_bitmapFont;
         std::string m_text;
         OriginF m_shadowOffset;
         Color4 m_shadowColor;
         float m_lineMultiplier;
+        float m_alpha;
         TEXT_HORIZONTAL_ALIGNMENT m_textHorizontalAlignment;
         TEXT_VERTICAL_ALIGNMENT m_textVerticalAlignment;
     public:
         SpriteRepresentationText(FontI*);
 
-        /** Text */
         void SetText(std::string);
         
         /** Get text */
@@ -40,46 +53,30 @@ namespace engine
         /** Position this sprite in game coordinates */
         void SetPosition(Vector2 pos);
 
-        /** Sets the alpha. Values range from 0-1.
-            Default value is 1.
-         */
         void SetAlpha(float val);
+
+        float GetAlpha();
         
         void SetZPosition(float zPos);
 
-        /** Lighting setter */
         void SetAcceptsLight(bool val);
 
-        /** Shadow color. If alpha is <= 0 shadow is disabled. Default is clear color. */
         void SetShadowColor(Color4);
 
-        /** Set shadow offset. Default is { 1, 1 } */
         void SetShadowOffset(OriginF);
 
-        /** Set the line multiplier. Default is 1.f and is based on what was initially
-            defined in the .fnt file */
         void SetLineHeightMultiplier(float);
 
-        /** Set the horizontal alignment. "left"|"center"|"right"
-            */
         void SetHorizontalAlignment(std::string);
         
-        /** Set the vertical alignment. "top"|"middle"|"bottom"
-            */
         void SetVerticalAlignment(std::string);
 
-        /** Override text rotation. Texts do not rotate. */
         void SetRotation(Rotation);
 
     public:
         void DrawAt(int x, int y);
         void Draw();
         void SetColorMod(Color4 val);
-
-    /// ScriptingInterface
-    public:
-        /// @private
-        SCRIPTING_INTERFACE_HEADERS(SpriteRepresentationText);
     };
 };
 

@@ -1,17 +1,27 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  sprite_draw_interface.h
-//  RendererAppSDL
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 22/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef sprite_draw_interface_h
 #define sprite_draw_interface_h
 
-#include "sprite_atlas_interface.h"
 #include "drawable_interface.h"
-#include "common_engine_impl.h"
-#include "animation_interface.h"
+#include "animation_interface.hpp"
 
 namespace engine
 {
@@ -22,9 +32,19 @@ namespace engine
       , SPRITE_DRAW_TYPE_FOREGROUND     = 1     // foreground sprites receive lights
     } SpriteDrawType;
 
+    /** Declares interface for sprite properties that are not animatable
+        but can be changed */
     class SpritePropertyManipulatorsI: public AnimatablePropertiesI
     {
     public:
+        /** Control whether the object receives lights or not. If false it's
+            completely lit up. */
+        virtual void SetAcceptsLight(bool) = 0;
+        virtual float GetAcceptsLight() = 0;
+
+        /** Set the color mod */
+        virtual void SetColorMod(Color4) = 0;
+        virtual Color4 GetColorMod() = 0;
     };
 
     class SpriteRepresentationI: public SpritePropertyManipulatorsI
@@ -62,18 +82,10 @@ namespace engine
         void        SetRotation(Rotation rotation) { m_rotation = rotation; };
         Rotation    &GetRotation() { return m_rotation; }
 
-    public:
-        /** Control whether the object receives lights or not. If false it's
-            completely lit up. */
-        auto& GetAcceptsLight() { return m_acceptsLight; };
-
-        /** Lighting setter */
+    public: // SpritePropertyManipulatorsI
         void SetAcceptsLight(bool val) { m_acceptsLight = val; if(m_drawable.get() != nullptr) m_drawable.get()->GetAcceptsLight() = val; };
-
-        /** Set the color mod */
+        float GetAcceptsLight() { return m_acceptsLight; };
         void SetColorMod(Color4 val) { m_colorMod = val; if(m_drawable.get() != nullptr) m_drawable.get()->SetColorMod(val); };
-
-        /** Get the color mod */
         Color4 GetColorMod() { return m_colorMod; };
 
     public: // Drawable related

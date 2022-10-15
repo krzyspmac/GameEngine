@@ -1,9 +1,14 @@
 var searchData=
 [
-  ['deletealllights_0',['DeleteAllLights',['../classengine_1_1_light_manager.html#a3cf281033a6e31f5834205023c27a2db',1,'engine::LightManager']]],
-  ['deletelight_1',['DeleteLight',['../classengine_1_1_light_manager.html#a21b9494d1b91ab842f8fce150b783f2b',1,'engine::LightManager']]],
-  ['disposeallfonts_2',['DisposeAllFonts',['../classengine_1_1_font_manager.html#ad5921e1774c410beace18037c2c8c4da',1,'engine::FontManager']]],
-  ['drain_3',['Drain',['../classengine_1_1_memory_release_pool.html#a97346993bc0401af9dd40944525d6171',1,'engine::MemoryReleasePool']]],
-  ['draw_4',['Draw',['../classengine_1_1_character.html#a8982f03ab00d0912248c50b7ac03c1d0',1,'engine::Character::Draw()'],['../classengine_1_1_sprite_representation_static.html#ab4d6e911d16f5772791e7841fb904f37',1,'engine::SpriteRepresentationStatic::Draw()'],['../classengine_1_1_sprite_representation_animated.html#a72b4212313b2a41345b6abded598b24a',1,'engine::SpriteRepresentationAnimated::Draw()'],['../classengine_1_1_sprite_representation_text.html#ae85c48f2c66e0b395694dd3595681dc8',1,'engine::SpriteRepresentationText::Draw()'],['../classengine_1_1_sprite_representation_i.html#a0d5d1a25928f2b8e106c3df628a563b1',1,'engine::SpriteRepresentationI::Draw()']]],
-  ['drawat_5',['DrawAt',['../classengine_1_1_character_representation.html#a07faf61364ce9b3ac4d7bcb45cd6d325',1,'engine::CharacterRepresentation::DrawAt()'],['../classengine_1_1_sprite_representation_static.html#ac9bf8b866e892b44baa46faf8a0d1c92',1,'engine::SpriteRepresentationStatic::DrawAt()'],['../classengine_1_1_sprite_representation_animated.html#a842df167569e5d3eb6aa826fb52e028e',1,'engine::SpriteRepresentationAnimated::DrawAt()'],['../classengine_1_1_font_bitmap_representation.html#a49113d2b922c430d94ce5e6612639b18',1,'engine::FontBitmapRepresentation::DrawAt()'],['../classengine_1_1_sprite_representation_text.html#a73c564d760a49ef99a81c9c3520171e2',1,'engine::SpriteRepresentationText::DrawAt()'],['../classengine_1_1_sprite_representation_i.html#aa50f143ffd61f166611089e8cd607421',1,'engine::SpriteRepresentationI::DrawAt()']]]
+  ['delay_0',['Delay',['../classengine_1_1_engine_provider_i.html#a3c99cf6bd1db7d6087de17fd4838989b',1,'engine::EngineProviderI']]],
+  ['disposeallfonts_1',['DisposeAllFonts',['../classengine_1_1_font_manager_i.html#accdb4dd27c7b60320044882b43a28c9e',1,'engine::FontManagerI']]],
+  ['distancetopoint_2',['DistanceToPoint',['../classengine_1_1_path_finder_line_graph_node_i.html#a622fe496b3db3255240add628cbfc301',1,'engine::PathFinderLineGraphNodeI']]],
+  ['doevents_3',['DoEvents',['../classengine_1_1_events_manager_i.html#af7de8a5d079e67b8f98132aecd430545',1,'engine::EventsManagerI']]],
+  ['drain_4',['Drain',['../classengine_1_1_memory_release_pool_i.html#acae2fb80dec50785757a7ad3353ecc3a',1,'engine::MemoryReleasePoolI']]],
+  ['draw_5',['Draw',['../classengine_1_1_sprite_representation_i.html#a0d5d1a25928f2b8e106c3df628a563b1',1,'engine::SpriteRepresentationI']]],
+  ['drawablecreate_6',['DrawableCreate',['../classengine_1_1_engine_provider_i.html#a13f1391e607a0d6fd9633e867f87212d',1,'engine::EngineProviderI']]],
+  ['drawablerender_7',['DrawableRender',['../classengine_1_1_engine_provider_i.html#aefe124a42570ad9a9044afac180692a5',1,'engine::EngineProviderI::DrawableRender(DrawableI *, SpriteRepresentationI *spr, float, float)=0'],['../classengine_1_1_engine_provider_i.html#af2ce18cb5ce128887b5b65be69a0f1af',1,'engine::EngineProviderI::DrawableRender(DrawableI *, SpriteRepresentationI *spr, float, float, Color4)=0']]],
+  ['drawabletargetcreate_8',['DrawableTargetCreate',['../classengine_1_1_engine_provider_i.html#a5a89a4da6b6cf33971d264edd036963a',1,'engine::EngineProviderI']]],
+  ['drawabletargetrender_9',['DrawableTargetRender',['../classengine_1_1_engine_provider_i.html#a21b71c679ff8c0a2a0b06cd369253de2',1,'engine::EngineProviderI']]],
+  ['drawat_10',['DrawAt',['../classengine_1_1_font_i.html#af2395c8da38a8f148241aa304a7b186d',1,'engine::FontI::DrawAt()'],['../classengine_1_1_sprite_representation_i.html#aa50f143ffd61f166611089e8cd607421',1,'engine::SpriteRepresentationI::DrawAt()']]]
 ];

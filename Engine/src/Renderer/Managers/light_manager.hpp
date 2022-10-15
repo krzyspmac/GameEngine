@@ -1,15 +1,26 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  light_manager.hpp
-//  Engine-Mac
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 05/02/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #ifndef light_manager_hpp
 #define light_manager_hpp
 
 #include "common.h"
-#include "scripting_engine_provider_interface.h"
 #include "light_interface.hpp"
 #include "light.hpp"
 #include "defs.h"
@@ -103,10 +114,6 @@ namespace engine
         auto GetLightBufferSize() { return m_lightCacheBufferSize; };
         auto GetLightBufferCount() { return m_lightCacheCount; };
 #endif
-
-    private: /** scripting */
-        /** @private */
-        SCRIPTING_INTERFACE_HEADERS(LightManager);
     };
 };
 

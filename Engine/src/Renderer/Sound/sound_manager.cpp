@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  sound_manager.cpp
-//  Engine
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 09/06/2022.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "sound_manager.hpp"
 #include "sound_file.hpp"
@@ -42,51 +54,4 @@ void SoundManager::Unload(SoundFileI* item)
             return;
         }
     }
-}
-
-#pragma mark - Scripting Interface
-
-SCRIPTING_INTERFACE_IMPL_NAME(SoundManager);
-
-static int lua_Load(lua_State *L)
-{
-    SoundManager **ptr = (SoundManager**)luaL_checkudata(
-        L, 1, SoundManager::ScriptingInterfaceName().c_str()
-    );
-    if (ptr != nullptr && dynamic_cast<SoundManager*>(*ptr) == nullptr) { return 0; }
-
-    std::string filename = luaL_checkstring(L, 2);
-    SoundFile *soundFile = (SoundFile*)(*ptr)->Load(filename);
-    if (soundFile != nullptr)
-    {   soundFile->ScriptingInterfaceRegisterFunctions(L, soundFile);
-        return 1;
-    }
-    else
-    {   return 0;
-    }
-}
-
-static int lua_Unload(lua_State *L)
-{
-    SoundManager **mgr = (SoundManager**)luaL_checkudata(
-        L, 1, SoundManager::ScriptingInterfaceName().c_str()
-    );
-    if (mgr != nullptr && dynamic_cast<SoundManager*>(*mgr) == nullptr) { return 0; }
-
-    SoundFile **sound = (SoundFile**)luaL_checkudata(
-        L, 2, SoundFile::ScriptingInterfaceName().c_str()
-    );
-    if (sound != nullptr && dynamic_cast<SoundFile*>(*sound) == nullptr) { return 0; }
-
-    (*mgr)->Unload(*sound);
-    return 0;
-}
-
-std::vector<luaL_Reg> SoundManager::ScriptingInterfaceFunctions()
-{
-    std::vector<luaL_Reg> result({
-        { "Load",   &lua_Load }
-    ,   { "Unload", &lua_Unload }
-    });
-    return result;
 }

@@ -1,9 +1,21 @@
+// Copyright (c) 2022 Krzysztof Pawłowski
 //
-//  engine.cpp
-//  RendererApp
+// Permission is hereby granted, free of charge, to any person obtaining a copy of
+// this software and associated documentation files (the "Software"), to deal in the
+// Software without restriction, including without limitation the rights to use, copy,
+// modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+// and to permit persons to whom the Software is furnished to do so, subject to the
+// following conditions:
 //
-//  Created by krzysp on 19/12/2021.
+// The above copyright notice and this permission notice shall be included in all copies
+// or substantial portions of the Software.
 //
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+// LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+// TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+// OR OTHER DEALINGS IN THE SOFTWARE.
 
 #include "engine.hpp"
 #include "font_bitmap.hpp"
@@ -19,14 +31,6 @@
 #include "ini_reader.hpp"
 #include "static_objects.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-    #include "../../../Lua/code/src/lua.h"
-    #include "../../../Lua/code/src/lualib.h"
-    #include "../../../Lua/code/src/lauxlib.h"
-}
-#endif //__cplusplus
-
 using namespace engine;
 
 /// Main accessor for easy access.
@@ -40,7 +44,6 @@ Engine::Engine(EngineProviderI &engineProvider,
                TextureManager &textureManager,
                FileAccessI &fileAccess,
                FontManager &fontManager,
-               ScriptingEngineI &scriptingEngine,
                EventProviderI &eventProvider,
                EventsManager &eventsManager,
                CharacterManager &characterManager,
@@ -50,7 +53,7 @@ Engine::Engine(EngineProviderI &engineProvider,
                ConsoleRendererI &consoleRenderer,
                Size viewportSize
                )
-    : EngineI(engineProvider, textureManager, fileAccess, fontManager, scriptingEngine, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize)
+    : EngineI(engineProvider, textureManager, fileAccess, fontManager, eventProvider, eventsManager, characterManager, sceneManager, spriteAtlasManager, spriteRendererManager, consoleRenderer, viewportSize)
     , m_viewportScale(1)
 {
     StaticObjects::init();
@@ -64,16 +67,16 @@ Engine::Engine(EngineProviderI &engineProvider,
     setup.affineScale = 1.0f;
     setup.isDirty = false;
 
-    AnimationCurveFactory::Prepare();
+    m_animationCurveFactory.Prepare();
 }
 
 Engine::~Engine()
 {
 }
 
-void Engine::Setup()
+void Engine::SetupInit()
 {
-    // Read the ini file first. It may change various engine properties.
+        // Read the ini file first. It may change various engine properties.
     try
     {
         std::string path = m_fileAccess.GetFullPath("main.ini");
@@ -85,7 +88,10 @@ void Engine::Setup()
         printf("Exception found while loading main.ini: %s.\n", exception);
         exit(1);
     }
+}
 
+void Engine::Setup()
+{
     // Preare the file access functions
     m_fileAccess.LoadDirectory(m_engineSetup.gameFolder);
 
@@ -99,13 +105,15 @@ void Engine::Setup()
     m_displayFont->SetZPosition(0);
 #endif
 
-    // Load the main script file
-    std::unique_ptr<FileStreamI> streamBuffer(m_fileAccess.GetAccess("main.lua"));
-
-    m_scriptingEngine.newState();
-    m_scriptingEngine.loadFile(streamBuffer.get());
-    m_scriptingEngine.registerFunctions();
-    m_scriptingEngine.callInit();
+    auto initFunction = ENGINE().GetEngineSetup().initFunction;
+    if (initFunction == nullptr)
+    {
+        std::cout << "Error: No init function setup. Cannot start engine." << std::endl;
+    }
+    else
+    {
+        initFunction();
+    }
 
     m_engineProvider.SetRenderBackgroundColor(0, 0, 0, 255);
     m_engineProvider.ClearRender();
@@ -116,10 +124,11 @@ void Engine::Setup()
     // Register & process mouse events
     m_mousePosition.x = 0;
     m_mousePosition.y = 0;
-    m_eventsManager.RegisterMouseMovedEvents([&](Origin *origin){
-        m_mousePosition.x = origin->x;
-        m_mousePosition.y = origin->y;
-    });
+
+    m_eventsManager.RegisterMouseMovedEvents(CallableParameters1<Origin>::make_shared([&](Origin origin){
+        m_mousePosition.x = origin.x;
+        m_mousePosition.y = origin.y;
+    }));
 
 #if SHOW_CONSOLE
     m_consoleRenderer.Setup();
@@ -153,12 +162,12 @@ void Engine::FrameBegin()
 
 void Engine::ProcessScript()
 {
-    m_scriptingEngine.callUpdate();
+    ENGINE().GetEngineSetup().frameUpdateFunction();
 }
 
 void Engine::FrameDrawObjects()
 {
-    Scene *scene = m_sceneManager.SceneGetCurrent();
+    SceneI *scene = m_sceneManager.SceneGetCurrent();
     if (scene != nullptr)
     {
         scene->RenderSceneSprites();
