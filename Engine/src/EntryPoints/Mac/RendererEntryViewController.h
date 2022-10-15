@@ -138,11 +138,6 @@
 #if TARGET_IOS
 @property (nonatomic, strong) GCVirtualController *virtualController;
 #endif
-@property (nonatomic, weak) GCExtendedGamepad *controllerExtendedProfile;
-@property (nonatomic, weak) GCMicroGamepad *controllerMicroProfile;
-@property (nonatomic, weak) GCControllerDirectionPad *controllerDPad;
-@property (nonatomic, weak) GCControllerDirectionPad *leftThumbstick;
-@property (nonatomic, weak) GCControllerDirectionPad *rightThumbstick;
 
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler leftThumbstickHandler;
 @property (nonatomic, copy) GCControllerDirectionPadValueChangedHandler rightThumbstickHandler;

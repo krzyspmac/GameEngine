@@ -320,7 +320,6 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 - (void)processController
 {
     [self setupController];
-    [self updateControllerScripts];
 }
 
 - (void)setupController
@@ -331,44 +330,65 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
 
     NSArray<GCController*> *controllers = [GCController controllers];
     self.controller = [controllers firstObject];
+
+#if TARGET_IOS
+    if (!self.controller)
+    {
+        if (self.virtualController != nil)
+        {
+            self.controller = self.virtualController.controller;
+        }
+    }
+#endif
+    
     [self setupControllerProfiles: self.controller];
 }
 
 - (void)setupControllerProfiles:(GCController*)controller
 {
-    self.controllerMicroProfile = controller.microGamepad;
-    self.controllerExtendedProfile = controller.extendedGamepad;
+    GCMicroGamepad *controllerMicroProfile = controller.microGamepad;
+    GCExtendedGamepad *controllerExtendedProfile = controller.extendedGamepad;
 
-    if (self.controllerExtendedProfile != nil)
+    if (controllerExtendedProfile != nil)
     {
-        self.leftThumbstick = self.controllerExtendedProfile.leftThumbstick;
-        self.rightThumbstick = self.controllerExtendedProfile.rightThumbstick;
-        self.controllerDPad = self.controllerExtendedProfile.dpad;
+        GCControllerDirectionPad *leftThumbstick = controllerExtendedProfile.leftThumbstick;
+        GCControllerDirectionPad *rightThumbstick = controllerExtendedProfile.rightThumbstick;
+        GCControllerDirectionPad *controllerDPad = controllerExtendedProfile.dpad;
 
-        self.leftThumbstick.valueChangedHandler = self.leftThumbstickHandler;
-        self.rightThumbstick.valueChangedHandler = self.rightThumbstickHandler;
-        self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+        leftThumbstick.valueChangedHandler = self.leftThumbstickHandler;
+        rightThumbstick.valueChangedHandler = self.rightThumbstickHandler;
+        controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
 
-        self.controllerExtendedProfile.buttonA.valueChangedHandler = self.handlerButtonA;
-        self.controllerExtendedProfile.buttonB.valueChangedHandler = self.handlerButtonB;
-        self.controllerExtendedProfile.buttonX.valueChangedHandler = self.handlerButtonX;
-        self.controllerExtendedProfile.buttonY.valueChangedHandler = self.handlerButtonY;
-        self.controllerExtendedProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
-        self.controllerExtendedProfile.buttonOptions.valueChangedHandler = self.handlerButtonOptions;
-        self.controllerExtendedProfile.leftShoulder.valueChangedHandler = self.handlerButtonLeftShoulder;
-        self.controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
-        self.controllerExtendedProfile.rightShoulder.valueChangedHandler = self.handlerButtonRightShoulder;
-        self.controllerExtendedProfile.rightTrigger.valueChangedHandler = self.handlerButtonRightTrigger;
-        self.controllerExtendedProfile.leftThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
-        self.controllerExtendedProfile.rightThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
+        controllerExtendedProfile.buttonA.valueChangedHandler = self.handlerButtonA;
+        controllerExtendedProfile.buttonB.valueChangedHandler = self.handlerButtonB;
+        controllerExtendedProfile.buttonX.valueChangedHandler = self.handlerButtonX;
+        controllerExtendedProfile.buttonY.valueChangedHandler = self.handlerButtonY;
+        controllerExtendedProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
+        controllerExtendedProfile.buttonOptions.valueChangedHandler = self.handlerButtonOptions;
+        controllerExtendedProfile.leftShoulder.valueChangedHandler = self.handlerButtonLeftShoulder;
+        controllerExtendedProfile.leftTrigger.valueChangedHandler = self.handlerButtonLeftTrigger;
+        controllerExtendedProfile.rightShoulder.valueChangedHandler = self.handlerButtonRightShoulder;
+        controllerExtendedProfile.rightTrigger.valueChangedHandler = self.handlerButtonRightTrigger;
+        controllerExtendedProfile.leftThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
+        controllerExtendedProfile.rightThumbstickButton.valueChangedHandler = self.handlerButtonLeftThumbstickButton;
+
+        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
     }
-    else if (self.controllerMicroProfile != nil)
+    else if (controllerMicroProfile != nil)
     {
-        self.controllerDPad = self.controllerMicroProfile.dpad;
-        self.controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
-        self.controllerMicroProfile.buttonA.valueChangedHandler = self.handlerButtonA;
-        self.controllerMicroProfile.buttonX.valueChangedHandler = self.handlerButtonX;
-        self.controllerMicroProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
+        GCControllerDirectionPad *controllerDPad = controllerMicroProfile.dpad;
+        controllerDPad.valueChangedHandler = self.dpadThumbstickHandler;
+        controllerMicroProfile.buttonA.valueChangedHandler = self.handlerButtonA;
+        controllerMicroProfile.buttonX.valueChangedHandler = self.handlerButtonX;
+        controllerMicroProfile.buttonMenu.valueChangedHandler = self.handlerButtonMenu;
+
+        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_SIMPLE, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
+    }
+    else
+    {
+        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_DISCRONNECTED, nil);
     }
 }
 
@@ -382,7 +402,6 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     auto &engineSetup = m_engine->GetEngineSetup();
     auto buttonConfig = engineSetup.gamepad_virtual_configuration;
 
-    GCVirtualControllerConfiguration *configuration = [[GCVirtualControllerConfiguration alloc] init];
     NSMutableSet<NSString*> *elements = [[NSMutableSet<NSString*> alloc] init];
 
     if (buttonConfig & GamepadConfiguration_DirectionPad)
@@ -437,16 +456,13 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     {   [elements addObject:GCInputRightThumbstickButton];
     }
 
-    GCVirtualController *virtualController = [GCVirtualController virtualControllerWithConfiguration:configuration];
+    GCVirtualControllerConfiguration *configuration = [[GCVirtualControllerConfiguration alloc] init];
+    configuration.elements = elements;
 
-    self.virtualController = virtualController;
-    self.controller = virtualController.controller;
-
-    [virtualController connectWithReplyHandler:^(NSError * _Nullable error) {
+    self.virtualController = [GCVirtualController virtualControllerWithConfiguration:configuration];
+    [self.virtualController connectWithReplyHandler:^(NSError * _Nullable error) {
         NSLog(@"setupVirtualController::connectWithReplyHandler: %@", error);
     }];
-//
-//    [self setupControllerProfiles:virtualController.controller];
 #endif
 }
 
@@ -458,24 +474,6 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
         [self createVirtualController];
     }
 #endif
-}
-
-- (void)updateControllerScripts
-{
-    if (self.controllerExtendedProfile != nil)
-    {
-        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
-        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
-    }
-    else if (self.controllerMicroProfile != nil)
-    {
-        GamepadAppleHandle *gampadHandle = new GamepadAppleHandle(self.controller);
-        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_SIMPLE, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_CONNECTED, gampadHandle);
-    }
-    else
-    {
-        m_engine->getEventProvider().PushGamepadConnectionEvent(GAMEPAD_TYPE_EXTENDED, GAMEPAD_MAKE_SONY, GAMEPAD_CONNECTION_STATUS_DISCRONNECTED, nil);
-    }
 }
 
 #endif // USE_CONTROLLERS
