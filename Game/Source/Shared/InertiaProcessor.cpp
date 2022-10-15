@@ -19,16 +19,11 @@
 
 #include "InertiaProcessor.hpp"
 
-// default include of Pictel-engine namespace
 using namespace engine;
 
-// constants
-double MAX_SPEED = 20;      // maximum speed (px/s)
-double INC_SPEED = 10;      // speed increase when force applied (in px/s)
-double DMP_SPEED = 0.05;    // speed fall when force not applied (in px/s)
-
-IntertiaProcessor::IntertiaProcessor()
-    : m_position(Vector2::zero())
+IntertiaProcessor::IntertiaProcessor(IntertiaProcessorDescriptor descriptor)
+    : m_descriptor(descriptor)
+    , m_position(Vector2::zero())
     , m_movementVector(Vector2::zero())
     , m_forceVector(Vector2::zero())
     , m_time(*engine::Globals::time())
@@ -57,21 +52,24 @@ void IntertiaProcessor::Tick()
 
 void IntertiaProcessor::Advance()
 {
-    double speedIncrease = MIN(INC_SPEED, m_frameDeltaSec * INC_SPEED);
+    double inc_speed = m_descriptor.inc_speed;
+    double speedIncrease = MIN(inc_speed, m_frameDeltaSec * inc_speed);
     Vector2 incVector = m_forceVector * speedIncrease;
     m_movementVector += incVector;
 }
 
 void IntertiaProcessor::Damper()
 {
-    double dmpFactor = MAX(DMP_SPEED, m_frameDeltaSec * DMP_SPEED);
+    double dmp_speed = m_descriptor.dmp_speed;
+    double dmpFactor = MAX(dmp_speed, m_frameDeltaSec * dmp_speed);
     Vector2 damperVector = m_movementVector.normalized().inversed() * dmpFactor;
     m_movementVector += damperVector;
 }
 
 void IntertiaProcessor::Limit()
 {
-    double length = MIN(MAX_SPEED, m_movementVector.length());
+    double max_speed = m_descriptor.max_speed;
+    double length = MIN(max_speed, m_movementVector.length());
     m_movementVector = m_movementVector.normalized() * length;
 }
 

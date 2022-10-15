@@ -22,14 +22,29 @@
 
 #include "game_include.hpp"
 
+typedef struct IntertiaProcessorDescriptor {
+    double max_speed;    // maximum speed (px/s)
+    double inc_speed;    // speed increase when force applied (in px/s)
+    double dmp_speed;    // speed fall when force not applied (in px/s)
+
+    static IntertiaProcessorDescriptor standard() {
+        IntertiaProcessorDescriptor result;
+        result.max_speed = 20;
+        result.inc_speed = 10;
+        result.dmp_speed = 0.05;
+        return result;
+    }
+} IntertiaProcessorDescriptor;
+
 class IntertiaProcessor {
+    IntertiaProcessorDescriptor m_descriptor;
     engine::Vector2 m_position;
     engine::Vector2 m_movementVector;
     engine::Vector2 m_forceVector;
     engine::TimeI&  m_time;
     double          m_frameDeltaSec;
 public:
-    IntertiaProcessor();
+    IntertiaProcessor(IntertiaProcessorDescriptor descriptor = IntertiaProcessorDescriptor::standard());
 
     void UpdateForceVector(engine::Vector2);
     void Tick();
