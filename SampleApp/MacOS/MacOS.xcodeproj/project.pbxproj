@@ -41,9 +41,6 @@
 		7F61F2A02770A17B0037FA21 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F61F29F2770A17B0037FA21 /* Metal.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7F63D81A279A067800139E14 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F63D819279A067800139E14 /* Cocoa.framework */; };
 		7F63D873279A142900139E14 /* Engine-Mac-Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */; };
-		7F6D1C8A279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
-		7F6D1C8B279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
-		7F6D1C8C279F186A0078D76A /* main.ini in Resources */ = {isa = PBXBuildFile; fileRef = 7F6D1C89279F186A0078D76A /* main.ini */; };
 		7F9EB6D0279A163700384C0B /* libEngine-Mac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F9EB6CF279A163700384C0B /* libEngine-Mac.a */; };
 		7FB6520028CE6582006F7030 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FB651FF28CE6582006F7030 /* AudioToolbox.framework */; };
 		7FCC12962798D792002ECABD /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FCC12952798D792002ECABD /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -115,7 +112,6 @@
 		7F63D818279A043300139E14 /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Info-macOS.plist"; sourceTree = SOURCE_ROOT; };
 		7F63D819279A067800139E14 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "Engine-Mac-Bundle.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F6D1C89279F186A0078D76A /* main.ini */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.ini; sourceTree = "<group>"; };
 		7F9EB6CF279A163700384C0B /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB651FF28CE6582006F7030 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,7 +194,6 @@
 				7F18785A28ED196700851F28 /* GameResources */,
 				7F63D871279A140C00139E14 /* Build Resources */,
 				7F13828C277507C500ED6D67 /* src */,
-				7F869FC42783970400E8CB01 /* GameDataProcessed */,
 				7F3E8F5C279AE6A2003BB7B6 /* iOS */,
 				7F3E9028279B015A003BB7B6 /* TVOS */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
@@ -282,15 +277,6 @@
 				7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */,
 			);
 			name = "Build Resources";
-			sourceTree = "<group>";
-		};
-		7F869FC42783970400E8CB01 /* GameDataProcessed */ = {
-			isa = PBXGroup;
-			children = (
-				7F6D1C89279F186A0078D76A /* main.ini */,
-			);
-			name = GameDataProcessed;
-			path = "../Game Data Folder/GameDataProcessed";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,7 +386,6 @@
 				7F20ACB1278B2B1A00B5772F /* Main.storyboard in Resources */,
 				7F3E8F75279AE6F8003BB7B6 /* Info-iOS.plist in Resources */,
 				7F1382A62775086200ED6D67 /* MainMenu.xib in Resources */,
-				7F6D1C8A279F186A0078D76A /* main.ini in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,7 +394,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FE9E2E328FA04F500AFE00A /* GameResources in Resources */,
-				7F6D1C8B279F186A0078D76A /* main.ini in Resources */,
 				7F3E8F6D279AE6A4003BB7B6 /* LaunchScreen.storyboard in Resources */,
 				7F3E8FFF279AF83E003BB7B6 /* Engine-iOS-Bundle.bundle in Resources */,
 				7F3E8F6A279AE6A4003BB7B6 /* Assets.xcassets in Resources */,
@@ -422,7 +406,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F3E9190279B0705003BB7B6 /* Engine-TV-Bundle.bundle in Resources */,
-				7F6D1C8C279F186A0078D76A /* main.ini in Resources */,
 				7F3E903C279B015C003BB7B6 /* LaunchScreen.storyboard in Resources */,
 				7F3E9039279B015C003BB7B6 /* Assets.xcassets in Resources */,
 				7F3E9037279B015A003BB7B6 /* Main.storyboard in Resources */,

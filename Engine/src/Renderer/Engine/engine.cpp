@@ -76,10 +76,10 @@ Engine::~Engine()
 
 void Engine::SetupInit()
 {
-        // Read the ini file first. It may change various engine properties.
+    // Read the ini file first. It may change various engine properties.
     try
     {
-        std::string path = m_fileAccess.GetFullPath("main.ini");
+        std::string path = m_fileAccess.GetFullPath("GameResources/main.ini");
         IniReader reader(path);
         m_engineSetup = reader.GetSetup();
     }
