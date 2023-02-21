@@ -28,7 +28,7 @@ assumptions.
 - [x] Simple Sound Engine (file stream audio, short clip play/pause)
 - [~] IMGUI for in-game control
 - [x] MacOS/iOS Renderer
-- [x] C++ LUA as a game script language (at least for now)
+- [x] C++ as a game script language (at least for now)
 - [ ] Windows Renderer
 - [ ] Linux Renderer
 
@@ -37,14 +37,15 @@ In other words the engine currently:
 - draws sprites using Metal on MacOS/iOS
 - has some sprite animation
 - has some basic animation curves
-- light up the 2d scene by means of shaders (simple luminosity added to the plane)
+- lights up the 2d scene by means of shaders (simple luminosity added to the plane)
 - deals with events (mouse, keyboards)
 - has basic IMGUI implementation
 - uses [Pictel-Sound](https://github.com/krzyspmac/Pictel-sound) for simple ogg/vorbis music playback
 - uses C++ exposed interfaces to control the scene
 - has test sprites taken off the internet to showcase the functions
 
-![Sample engine screenshot](Readme/screenshot.png "title")
+![Sample engine screenshot](Readme/screenshot-mac.png "Mac")
+![Sample engine screenshot](Readme/screenshot-ios.png "iOS")
 
 ## Scripting documentation
 
