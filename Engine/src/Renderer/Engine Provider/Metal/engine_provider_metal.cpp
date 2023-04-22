@@ -197,7 +197,7 @@ void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresen
     DrawableRender(baseDrawable, spr, x, y, baseDrawable->GetColorMod());
 }
 
-void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresentationI *spr, float x, float y, Color4 colorMod)
+void EngineProviderMetal::DrawableRender(DrawableI *baseDrawable, SpriteRepresentationI *spr, float x, float y, Color4& colorMod)
 {
     // Cast interface to concrete instance and check if we can draw
     auto drawable = static_cast<DrawableMetal*>(baseDrawable);

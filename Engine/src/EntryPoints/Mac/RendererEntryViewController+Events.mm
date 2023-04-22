@@ -101,6 +101,9 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
             self->m_consoleRendererProvider->HandleEvent(event);
         }
 #endif
+
+        if (event.isARepeat ) { return NULL; };
+
         auto& eventsProvider = ENGINE().getEventProvider();
         switch (event.type)
         {
@@ -124,7 +127,7 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
                 }
                 break;
             }
-            case NSFlagsChanged:
+            case NSEventTypeFlagsChanged:
             {
                 NSEventModifierFlags flags = event.modifierFlags;
 

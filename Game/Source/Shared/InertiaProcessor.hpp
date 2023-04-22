@@ -50,6 +50,7 @@ public:
     void Tick();
     void SetPosition(engine::Vector2);
     auto GetPosition() { return m_position; };
+    auto GetMovementVector() { return m_movementVector; };
 
 private:
     void Advance();
