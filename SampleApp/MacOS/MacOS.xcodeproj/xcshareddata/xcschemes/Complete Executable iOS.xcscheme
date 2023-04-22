@@ -70,24 +70,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E8F90279AF5CA003BB7B6"
-               BuildableName = "libimgui-ios.a"
-               BlueprintName = "imgui-ios"
-               ReferencedContainer = "container:../../Libraries/imgui/imgui.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E8FEA279AF5F0003BB7B6"
-               BuildableName = "libcjson-ios.a"
-               BlueprintName = "cjson-ios"
-               ReferencedContainer = "container:../../Libraries/cJson/cJson.xcodeproj">
+               BlueprintIdentifier = "7F18784C28ED151000851F28"
+               BuildableName = "GameBundle.bundle"
+               BlueprintName = "GameBundle"
+               ReferencedContainer = "container:../../Game/Game.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

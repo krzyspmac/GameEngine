@@ -122,12 +122,8 @@ namespace engine
          */
         LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity);
 
-        /**
-         \brief Register for a frame update. This will permamently add the observer
-         for the frame udpate. The frame update funciton will be called only for
-         the active scene.
-         */
         void SetFrameUpdate(std::function<void(void)>);
+        void RemoveFrameUpdates();
 
     public: /** Getters */
 
