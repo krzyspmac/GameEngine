@@ -56,6 +56,7 @@ namespace engine
             {
                 auto *any = m_stack.front();
                 m_used.emplace_back(any);
+                m_stack.erase(m_stack.begin());
                 return any;
             }
             else
