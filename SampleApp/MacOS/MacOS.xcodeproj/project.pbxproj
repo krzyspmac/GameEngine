@@ -68,12 +68,7 @@
 		7F1382A12775086200ED6D67 /* App.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = App.entitlements; sourceTree = "<group>"; };
 		7F1382A22775086200ED6D67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F1382A42775086200ED6D67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		7F1382A827750B4400ED6D67 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		7F1382AA27750B5B00ED6D67 /* libcjson.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libcjson.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1382AC27750B5B00ED6D67 /* libEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1382AE27750B5B00ED6D67 /* liblua.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblua.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1382B027750B5B00ED6D67 /* libSDL2_image.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_image.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSDL2_ttf.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1382C727750C0800ED6D67 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = src/main.mm; sourceTree = SOURCE_ROOT; };
 		7F18785A28ED196700851F28 /* GameResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GameResources; path = ../../Game/GameResources; sourceTree = "<group>"; };
 		7F20ACB0278B2B1A00B5772F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -103,7 +98,6 @@
 		7F3E9038279B015C003BB7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F3E903B279B015C003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F3E903D279B015C003BB7B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7F3E9044279B0397003BB7B6 /* libEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E9046279B039E003BB7B6 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
 		7F3E9047279B039E003BB7B6 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.0.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
 		7F3E916C279B060A003BB7B6 /* libEngine-TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -222,7 +216,6 @@
 				7F3E916C279B060A003BB7B6 /* libEngine-TV.a */,
 				7F3E9047279B039E003BB7B6 /* Metal.framework */,
 				7F3E9046279B039E003BB7B6 /* MetalKit.framework */,
-				7F3E9044279B0397003BB7B6 /* libEngine-iOS.a */,
 				7F3E8FF8279AF81B003BB7B6 /* libcjson-ios.a */,
 				7F3E8FFA279AF81B003BB7B6 /* libimgui-ios.a */,
 				7F3E8FFC279AF81B003BB7B6 /* liblua-ios.a */,
@@ -237,11 +230,6 @@
 				7F20ACB5278B31FA00B5772F /* Foundation.framework */,
 				7FB824112788F8FC008F0F7A /* libimgui.a */,
 				7F1382AA27750B5B00ED6D67 /* libcjson.a */,
-				7F1382AC27750B5B00ED6D67 /* libEngine.a */,
-				7F1382AE27750B5B00ED6D67 /* liblua.a */,
-				7F1382B027750B5B00ED6D67 /* libSDL2_image.a */,
-				7F1382B227750B5B00ED6D67 /* libSDL2_ttf.a */,
-				7F1382A827750B4400ED6D67 /* SDL2.framework */,
 				7F61F29F2770A17B0037FA21 /* Metal.framework */,
 			);
 			path = Frameworks;

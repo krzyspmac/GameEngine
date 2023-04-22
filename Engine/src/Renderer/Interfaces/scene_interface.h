@@ -68,7 +68,13 @@ namespace engine
          */
         virtual LightI* CreateLight(std::string type, Color3 color, float ambientIntensity, Origin position, float diffuseSize, float diffuseIntensity) = 0;
 
+        /** \brief Set the function to receive frame updates.
+         */
         virtual void SetFrameUpdate(std::function<void(void)>) = 0;
+
+        /** \brief Remove the frame updates
+         */
+        virtual void RemoveFrameUpdates() = 0;
     };
 };
 

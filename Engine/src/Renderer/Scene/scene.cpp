@@ -136,6 +136,11 @@ void Scene::SetFrameUpdate(std::function<void(void)> lambda)
     m_frameUpdateCallback = lambda;
 }
 
+void Scene::RemoveFrameUpdates()
+{
+    m_frameUpdateCallback = nullptr;
+}
+
 void Scene::RenderSceneSprites()
 {
     if (m_frameUpdateCallback != nullptr)

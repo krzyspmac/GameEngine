@@ -14,9 +14,9 @@
       location = "group:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../Libraries/cJson/cJson.xcodeproj">
+      location = "group:../../Frameworks/Universal/imgui/imgui.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../../Libraries/imgui/imgui.xcodeproj">
+      location = "absolute:/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/Engine/Projects/Xcode_MacOS/../../../Frameworks/Universal/cJson/cJson.xcodeproj">
    </FileRef>
 </Workspace>
