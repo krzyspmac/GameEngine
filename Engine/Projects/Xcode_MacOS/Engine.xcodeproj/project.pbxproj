@@ -102,8 +102,6 @@
 		7F3470B928527F9700FDED71 /* sound_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470B328527EAE00FDED71 /* sound_manager.cpp */; };
 		7F3470BA28527F9700FDED71 /* sound_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3470B328527EAE00FDED71 /* sound_manager.cpp */; };
 		7F3470BC285286DF00FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BB285286DF00FDED71 /* AudioToolbox.framework */; };
-		7F3470BE285286F700FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BD285286F700FDED71 /* AudioToolbox.framework */; };
-		7F3470C02852870200FDED71 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F3470BF2852870100FDED71 /* AudioToolbox.framework */; };
 		7F3B0FFE28E30C3000CB3F60 /* property_manupulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */; };
 		7F3B0FFF28E30C3000CB3F60 /* property_manupulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */; };
 		7F3B100028E30C3000CB3F60 /* property_manupulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */; };
@@ -582,6 +580,27 @@
 			remoteGlobalIDString = 7F3E9158279B0448003BB7B6;
 			remoteInfo = "Engine-TV-MetalLib";
 		};
+		7F6C032229F401C100E9D2EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F6C031C29F401C100E9D2EE /* cJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7F2E2314276F8C51003E6B4E;
+			remoteInfo = cjson;
+		};
+		7F6C032429F401C100E9D2EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F6C031C29F401C100E9D2EE /* cJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7F3E8FF3279AF5F0003BB7B6;
+			remoteInfo = "cjson-ios";
+		};
+		7F6C032629F401C100E9D2EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F6C031C29F401C100E9D2EE /* cJson.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7F3E90AC279B03EB003BB7B6;
+			remoteInfo = "cjson-tv";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -674,8 +693,6 @@
 		7F3470B328527EAE00FDED71 /* sound_manager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sound_manager.cpp; sourceTree = "<group>"; };
 		7F3470B428527EAE00FDED71 /* sound_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = sound_manager.hpp; sourceTree = "<group>"; };
 		7F3470BB285286DF00FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		7F3470BD285286F700FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
-		7F3470BF2852870100FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS15.4.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7F3B0FFD28E30C3000CB3F60 /* property_manupulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = property_manupulator.cpp; sourceTree = "<group>"; };
 		7F3B100128E30E8000CB3F60 /* animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = animator.cpp; sourceTree = "<group>"; };
 		7F3B100528E30E8B00CB3F60 /* animator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = animator.hpp; sourceTree = "<group>"; };
@@ -727,6 +744,7 @@
 		7F67033928A60C8B00319218 /* engine_screen_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_screen_interface.h; sourceTree = "<group>"; };
 		7F67033E28A60D5500319218 /* engine_screen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = engine_screen.cpp; sourceTree = "<group>"; };
 		7F67033F28A60D5500319218 /* engine_screen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = engine_screen.hpp; sourceTree = "<group>"; };
+		7F6C031C29F401C100E9D2EE /* cJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = cJson.xcodeproj; path = ../../../Frameworks/Universal/cJson/cJson.xcodeproj; sourceTree = "<group>"; };
 		7F6D1C80279F14690078D76A /* ini_reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ini_reader.cpp; sourceTree = "<group>"; };
 		7F6D1C81279F14690078D76A /* ini_reader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ini_reader.hpp; sourceTree = "<group>"; };
 		7F6D1C88279F14CA0078D76A /* engine_setup_interface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = engine_setup_interface.h; sourceTree = "<group>"; };
@@ -854,7 +872,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3470BE285286F700FDED71 /* AudioToolbox.framework in Frameworks */,
 				7F3470AA28527B5F00FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E901E279B0056003BB7B6 /* libcjson-ios.a in Frameworks */,
 				7F3E9020279B0056003BB7B6 /* libimgui-ios.a in Frameworks */,
@@ -872,7 +889,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F3470C02852870200FDED71 /* AudioToolbox.framework in Frameworks */,
 				7F3470AB28527B6400FDED71 /* PictelSound.xcframework in Frameworks */,
 				7F3E9153279B0424003BB7B6 /* libcjson-tv.a in Frameworks */,
 				7F3E9155279B0424003BB7B6 /* libimgui-tv.a in Frameworks */,
@@ -1132,6 +1148,7 @@
 		7F3CAAD8277093D500E0D74C = {
 			isa = PBXGroup;
 			children = (
+				7F6C031C29F401C100E9D2EE /* cJson.xcodeproj */,
 				7F138219277505B600ED6D67 /* src */,
 				7F3470A628527B4800FDED71 /* Dependencies */,
 				7F3CAAF52770944E00E0D74C /* Frameworks */,
@@ -1156,8 +1173,6 @@
 			isa = PBXGroup;
 			children = (
 				7F3470BB285286DF00FDED71 /* AudioToolbox.framework */,
-				7F3470BD285286F700FDED71 /* AudioToolbox.framework */,
-				7F3470BF2852870100FDED71 /* AudioToolbox.framework */,
 				7F3E9152279B0424003BB7B6 /* libcjson-tv.a */,
 				7F3E9154279B0424003BB7B6 /* libimgui-tv.a */,
 				7F3E9156279B0424003BB7B6 /* liblua-tv.a */,
@@ -1291,6 +1306,16 @@
 				7F67033E28A60D5500319218 /* engine_screen.cpp */,
 			);
 			path = Screen;
+			sourceTree = "<group>";
+		};
+		7F6C031D29F401C100E9D2EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7F6C032329F401C100E9D2EE /* libcjson.a */,
+				7F6C032529F401C100E9D2EE /* libcjson-ios.a */,
+				7F6C032729F401C100E9D2EE /* libcjson-tv.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		7F7EA08128967EF400A09199 /* platform */ = {
@@ -2016,6 +2041,12 @@
 			mainGroup = 7F3CAAD8277093D500E0D74C;
 			productRefGroup = 7F3CAAE2277093D500E0D74C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7F6C031D29F401C100E9D2EE /* Products */;
+					ProjectRef = 7F6C031C29F401C100E9D2EE /* cJson.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				7F1382142775059B00ED6D67 /* Engine-Mac */,
@@ -2030,6 +2061,30 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		7F6C032329F401C100E9D2EE /* libcjson.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcjson.a;
+			remoteRef = 7F6C032229F401C100E9D2EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7F6C032529F401C100E9D2EE /* libcjson-ios.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcjson-ios.a";
+			remoteRef = 7F6C032429F401C100E9D2EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7F6C032729F401C100E9D2EE /* libcjson-tv.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libcjson-tv.a";
+			remoteRef = 7F6C032629F401C100E9D2EE /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		7F3E8F29279ADCDB003BB7B6 /* Resources */ = {
@@ -2467,7 +2522,6 @@
 		7F3CAAEF277093D600E0D74C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -2522,10 +2576,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../Engine/src/Shaders/Apple",
 					"$(SRCROOT)/../../../Frameworks/SDL2.framework/Headers",
-					"$(SRCROOT)/../../../Libraries/Lua/code/src",
-					"$(SRCROOT)/../../../Libraries/cJson/cJson",
-					"$(SRCROOT)/../../../Libraries/imgui",
-					"$(SRCROOT)/../../../Libraries/imgui/backends",
+					"$(SRCROOT)/../../../Frameworks/Universal/Lua/code/src",
+					"$(SRCROOT)/../../../Frameworks/Universal/cJson/cJson",
+					"$(SRCROOT)/../../../Frameworks/Universal/imgui",
+					"$(SRCROOT)/../../../Frameworks/Universal/imgui/backends",
 					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../Dependencies/Apple/PictelSound.xcframework/macos-arm64_x86_64/Headers/include",
 				);
@@ -2540,7 +2594,6 @@
 		7F3CAAF0277093D600E0D74C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
@@ -2589,10 +2642,10 @@
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../Engine/src/Shaders/Apple",
 					"$(SRCROOT)/../../../Frameworks/SDL2.framework/Headers",
-					"$(SRCROOT)/../../../Libraries/Lua/code/src",
-					"$(SRCROOT)/../../../Libraries/cJson/cJson",
-					"$(SRCROOT)/../../../Libraries/imgui",
-					"$(SRCROOT)/../../../Libraries/imgui/backends",
+					"$(SRCROOT)/../../../Frameworks/Universal/Lua/code/src",
+					"$(SRCROOT)/../../../Frameworks/Universal/cJson/cJson",
+					"$(SRCROOT)/../../../Frameworks/Universal/imgui",
+					"$(SRCROOT)/../../../Frameworks/Universal/imgui/backends",
 					"$(SRCROOT)/../../../Frameworks/MacOS/metal-cpp",
 					"$(SRCROOT)/../Dependencies/Apple/PictelSound.xcframework/macos-arm64_x86_64/Headers/include",
 				);
