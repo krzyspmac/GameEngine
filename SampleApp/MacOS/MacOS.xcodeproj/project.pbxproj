@@ -109,7 +109,6 @@
 		7F9EB6CF279A163700384C0B /* libEngine-Mac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libEngine-Mac.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FB651FF28CE6582006F7030 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
 		7FB824112788F8FC008F0F7A /* libimgui.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libimgui.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FBFF2ED29F4098F0027D49A /* GameBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GameBundle.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FCC12952798D792002ECABD /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		7FE9E2F428FA05D500AFE00A /* libGame-iOS.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = "libGame-iOS.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -261,7 +260,6 @@
 		7F63D871279A140C00139E14 /* Build Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7FBFF2ED29F4098F0027D49A /* GameBundle.bundle */,
 				7F3E918F279B06FF003BB7B6 /* Engine-TV-Bundle.bundle */,
 				7F3E8FFE279AF839003BB7B6 /* Engine-iOS-Bundle.bundle */,
 				7F63D872279A141300139E14 /* Engine-Mac-Bundle.bundle */,
