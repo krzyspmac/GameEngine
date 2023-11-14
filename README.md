@@ -7,9 +7,9 @@ with MacOS/iOS, Windows & Linux. Most of the engine is platform agnostic. Only a
 parts of this software deal with the target platform like the actual renderer.
 
 This is a work in progress. Work done in no particular order and no set end-goal in mind.
-There's some metal in C++ implementation here. Some sprite management. Some LUA scripting
-added to the project. In the worse case scenario maybe it helps someone that dreams
-of building their own game engine from scratch ;)
+There's some metal in C++ implementation here. Some sprite management. Some C++ scripting
+added to the project (that will be moved to Swift in the future). In the worse case scenario maybe
+it helps someone that dreams of building their own game engine from scratch ;)
 
 ## Idea behind it
 
@@ -27,8 +27,10 @@ assumptions.
 - [x] Simple Text Engine (load, show, move)
 - [x] Simple Sound Engine (file stream audio, short clip play/pause)
 - [~] IMGUI for in-game control
-- [x] MacOS/iOS Renderer
+- [~] MacOS/iOS Renderer
 - [x] C++ as a game script language (at least for now)
+- [ ] Swift as the game language
+- [ ] Simple IDE for some visual game management
 - [ ] Windows Renderer
 - [ ] Linux Renderer
 
