@@ -18,6 +18,7 @@ struct EngineIDEApp: App {
                 document: file.$document,
                 theme: $themeManager.current
             )
+            .environmentObject(NavigationManager.shared)
         }
     }
 }
