@@ -8,12 +8,21 @@
 import SwiftUI
 import Combine
 
-final class Theme: ObservableObject {
+struct Theme {
 
-    var iconForegroundColor: Color
+    var iconForegroundDeselected: Color
+    var iconForegroundSelected: Color
 
-    init(iconForegroundColor: Color) {
-        self.iconForegroundColor = iconForegroundColor
+    var outlineItemSelected: Color
+
+    init(
+        iconForegroundDeselected: Color,
+        iconForegroundSelected: Color,
+        outlineItemSelected: Color
+    ) {
+        self.iconForegroundDeselected = iconForegroundDeselected
+        self.iconForegroundSelected = iconForegroundSelected
+        self.outlineItemSelected = outlineItemSelected
     }
 }
 
@@ -25,7 +34,9 @@ final class ThemeManager: ObservableObject {
 
     public init() {
         current = Theme(
-            iconForegroundColor: .blue
+            iconForegroundDeselected: .blue,
+            iconForegroundSelected: .white,
+            outlineItemSelected: .gray.opacity(0.5)
         )
     }
 }

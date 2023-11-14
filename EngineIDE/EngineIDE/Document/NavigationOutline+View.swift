@@ -32,11 +32,13 @@ private struct OutlineGroup: View {
     @Binding var theme: Theme
 
     var body: some View {
-        ForEach(items) { item in
-            OutlineItemView(item: item, theme: $theme)
+        VStack(spacing: 0) {
+            ForEach(items) { item in
+                OutlineItemView(item: item, theme: $theme)
 
-            if let children = item.children {
-                OutlineGroup(items: children, theme: $theme)
+                if let children = item.children {
+                    OutlineGroup(items: children, theme: $theme)
+                }
             }
         }
     }
@@ -51,29 +53,54 @@ private struct OutlineItemView: View {
 
     var body: some View {
         HStack {
-            Group {
-                NavigationLink(
-                    destination: {
-                        item.contentView()
-                            .environmentObject(navigationManager)
-                    },
-                    label: {
-                        HStack {
-                            item.image
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 14, height: 14)
-                                .symbolRenderingMode(.hierarchical)
-                                .foregroundColor(theme.iconForegroundColor)
+            Button(
+                action: {
+                    navigationManager.selectedOutlineItem = item
+                },
+                label: {
+                    HStack {
+                        item.image
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: Sizes.large, height: Sizes.large)
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundColor(
+                                navigationManager.selectedOutlineItem == item
+                                ? theme.iconForegroundSelected
+                                : theme.iconForegroundDeselected
+                            )
 
-                            Text(item.title)
+                        Text(item.title)
 
-                            Spacer()
-                        }
-                        .padding(.leading, CGFloat(item.indentation) * Sizes.large)
+                        Spacer()
                     }
+                    .padding(.leading, CGFloat(item.indentation) * Sizes.large)
+                    .frame(maxWidth: .infinity)
+                    .contentShape(Rectangle())
+                }
+            )
+            .buttonStyle(
+                OutlineButtonStyle(
+                    isSelected: navigationManager.selectedOutlineItem == item,
+                    theme: theme
                 )
-            }
+            )
         }
+    }
+}
+
+struct OutlineButtonStyle: ButtonStyle {
+    var isSelected: Bool
+    var theme: Theme
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(Sizes.mini)
+            .padding(.leading, Sizes.normal)
+            .background( isSelected ? theme.outlineItemSelected : .clear )
+            .foregroundStyle(.foreground)
+            .clipShape(
+                RoundedRectangle(cornerRadius: 7.0)
+            )
     }
 }

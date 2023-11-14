@@ -64,13 +64,13 @@ struct DocumentContentView: View {
                         Spacer()
                     }
                 }
-                .frame(minWidth: 150)
+                .frame(minWidth: 200)
             },
             detail: {
                 TextEditor(text: $document.text)
             }
         )
-        .accentColor(theme.iconForegroundColor)
+        .accentColor(theme.iconForegroundDeselected)
     }
 }
 
