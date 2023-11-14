@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  DocumentContentView.swift
 //  EngineIDE
 //
 //  Created by krzysp on 14/11/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DocumentContentView: View {
     @Binding var document: EngineIDEDocument
 
     var body: some View {
@@ -17,6 +17,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(document: .constant(EngineIDEDocument()))
+        DocumentContentView(document: .constant(EngineIDEDocument()))
     }
 }
