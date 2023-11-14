@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
-               BuildableName = "MacOS.app"
-               BlueprintName = "MacOS"
-               ReferencedContainer = "container:MacOS.xcodeproj">
+               BlueprintIdentifier = "7F3E8F5A279AE6A2003BB7B6"
+               BuildableName = "iOS.app"
+               BlueprintName = "iOS"
+               ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F1382142775059B00ED6D67"
-               BuildableName = "libEngine-Mac.a"
-               BlueprintName = "Engine-Mac"
+               BlueprintIdentifier = "7F3E8E26279AC8BA003BB7B6"
+               BuildableName = "libEngine-iOS.a"
+               BlueprintName = "Engine-iOS"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F63D861279A12F900139E14"
-               BuildableName = "Engine-Mac-Bundle.bundle"
-               BlueprintName = "Engine-Mac-Bundle"
+               BlueprintIdentifier = "7F63D832279A0D4000139E14"
+               BuildableName = "Engine-iOS-MetalLib"
+               BlueprintName = "Engine-iOS-MetalLib"
+               ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F3E8F2A279ADCDB003BB7B6"
+               BuildableName = "Engine-iOS-Bundle.bundle"
+               BlueprintName = "Engine-iOS-Bundle"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -78,7 +92,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      customWorkingDirectory = "/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/working_dir"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -87,10 +100,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
-            BuildableName = "MacOS.app"
-            BlueprintName = "MacOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3E8F5A279AE6A2003BB7B6"
+            BuildableName = "iOS.app"
+            BlueprintName = "iOS"
+            ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -104,10 +117,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
-            BuildableName = "MacOS.app"
-            BlueprintName = "MacOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3E8F5A279AE6A2003BB7B6"
+            BuildableName = "iOS.app"
+            BlueprintName = "iOS"
+            ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

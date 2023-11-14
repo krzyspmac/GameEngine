@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E9026279B015A003BB7B6"
-               BuildableName = "TVOS.app"
-               BlueprintName = "TVOS"
-               ReferencedContainer = "container:MacOS.xcodeproj">
+               BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
+               BuildableName = "Mac.app"
+               BlueprintName = "Mac"
+               ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E90AD279B03F6003BB7B6"
-               BuildableName = "libEngine-TV.a"
-               BlueprintName = "Engine-TV"
+               BlueprintIdentifier = "7F1382142775059B00ED6D67"
+               BuildableName = "libEngine-Mac.a"
+               BlueprintName = "Engine-Mac"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,51 +42,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E90A3279B03EB003BB7B6"
-               BuildableName = "libcjson-tv.a"
-               BlueprintName = "cjson-tv"
-               ReferencedContainer = "container:../../Libraries/cJson/cJson.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E905D279B03E2003BB7B6"
-               BuildableName = "liblua-tv.a"
-               BlueprintName = "lua-tv"
-               ReferencedContainer = "container:../../Libraries/Lua/Lua.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E904A279B03C4003BB7B6"
-               BuildableName = "libimgui-tv.a"
-               BlueprintName = "imgui-tv"
-               ReferencedContainer = "container:../../Libraries/imgui/imgui.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E9158279B0448003BB7B6"
-               BuildableName = "Engine-TV-MetalLib"
-               BlueprintName = "Engine-TV-MetalLib"
+               BlueprintIdentifier = "7F63D861279A12F900139E14"
+               BuildableName = "Engine-Mac-Bundle.bundle"
+               BlueprintName = "Engine-Mac-Bundle"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -98,10 +56,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E915E279B0459003BB7B6"
-               BuildableName = "Engine-TV-Bundle.bundle"
-               BlueprintName = "Engine-TV-Bundle"
-               ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
+               BlueprintIdentifier = "7F18784C28ED151000851F28"
+               BuildableName = "GameBundle.bundle"
+               BlueprintName = "GameBundle"
+               ReferencedContainer = "container:../../Game/Game.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -120,6 +78,7 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
+      customWorkingDirectory = "/Users/krzysp/Documents/Projekty/Programistyczne/GameEngine/working_dir"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
@@ -128,10 +87,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3E9026279B015A003BB7B6"
-            BuildableName = "TVOS.app"
-            BlueprintName = "TVOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
+            BuildableName = "Mac.app"
+            BlueprintName = "Mac"
+            ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -145,10 +104,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3E9026279B015A003BB7B6"
-            BuildableName = "TVOS.app"
-            BlueprintName = "TVOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3CAAE0277093D500E0D74C"
+            BuildableName = "Mac.app"
+            BlueprintName = "Mac"
+            ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

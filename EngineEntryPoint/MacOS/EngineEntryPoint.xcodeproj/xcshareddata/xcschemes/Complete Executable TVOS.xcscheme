@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E8F5A279AE6A2003BB7B6"
-               BuildableName = "iOS.app"
-               BlueprintName = "iOS"
-               ReferencedContainer = "container:MacOS.xcodeproj">
+               BlueprintIdentifier = "7F3E9026279B015A003BB7B6"
+               BuildableName = "TVOS.app"
+               BlueprintName = "TVOS"
+               ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E8E26279AC8BA003BB7B6"
-               BuildableName = "libEngine-iOS.a"
-               BlueprintName = "Engine-iOS"
+               BlueprintIdentifier = "7F3E90AD279B03F6003BB7B6"
+               BuildableName = "libEngine-TV.a"
+               BlueprintName = "Engine-TV"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,51 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F63D832279A0D4000139E14"
-               BuildableName = "Engine-iOS-MetalLib"
-               BlueprintName = "Engine-iOS-MetalLib"
+               BlueprintIdentifier = "7F3E90A3279B03EB003BB7B6"
+               BuildableName = "libcjson-tv.a"
+               BlueprintName = "cjson-tv"
+               ReferencedContainer = "container:../../Libraries/cJson/cJson.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F3E905D279B03E2003BB7B6"
+               BuildableName = "liblua-tv.a"
+               BlueprintName = "lua-tv"
+               ReferencedContainer = "container:../../Libraries/Lua/Lua.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F3E904A279B03C4003BB7B6"
+               BuildableName = "libimgui-tv.a"
+               BlueprintName = "imgui-tv"
+               ReferencedContainer = "container:../../Libraries/imgui/imgui.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7F3E9158279B0448003BB7B6"
+               BuildableName = "Engine-TV-MetalLib"
+               BlueprintName = "Engine-TV-MetalLib"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,24 +98,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F3E8F2A279ADCDB003BB7B6"
-               BuildableName = "Engine-iOS-Bundle.bundle"
-               BlueprintName = "Engine-iOS-Bundle"
+               BlueprintIdentifier = "7F3E915E279B0459003BB7B6"
+               BuildableName = "Engine-TV-Bundle.bundle"
+               BlueprintName = "Engine-TV-Bundle"
                ReferencedContainer = "container:../../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7F18784C28ED151000851F28"
-               BuildableName = "GameBundle.bundle"
-               BlueprintName = "GameBundle"
-               ReferencedContainer = "container:../../Game/Game.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -100,10 +128,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3E8F5A279AE6A2003BB7B6"
-            BuildableName = "iOS.app"
-            BlueprintName = "iOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3E9026279B015A003BB7B6"
+            BuildableName = "TVOS.app"
+            BlueprintName = "TVOS"
+            ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -117,10 +145,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7F3E8F5A279AE6A2003BB7B6"
-            BuildableName = "iOS.app"
-            BlueprintName = "iOS"
-            ReferencedContainer = "container:MacOS.xcodeproj">
+            BlueprintIdentifier = "7F3E9026279B015A003BB7B6"
+            BuildableName = "TVOS.app"
+            BlueprintName = "TVOS"
+            ReferencedContainer = "container:EngineEntryPoint.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

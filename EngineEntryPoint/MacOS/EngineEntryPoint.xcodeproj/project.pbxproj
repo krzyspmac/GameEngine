@@ -77,7 +77,7 @@
 		7F20ACB9278B352400B5772F /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
 		7F2DAFF028E03B980044EF8D /* libGame-Mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; path = "libGame-Mac.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3470C12852870F00FDED71 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		7F3CAAE1277093D500E0D74C /* MacOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7F3CAAE1277093D500E0D74C /* Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F5B279AE6A2003BB7B6 /* iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F3E8F67279AE6A2003BB7B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7F3E8F69279AE6A4003BB7B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,7 +198,7 @@
 		7F3CAAE2277093D500E0D74C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F3CAAE1277093D500E0D74C /* MacOS.app */,
+				7F3CAAE1277093D500E0D74C /* Mac.app */,
 				7F3E8F5B279AE6A2003BB7B6 /* iOS.app */,
 				7F3E9027279B015A003BB7B6 /* TVOS.app */,
 			);
@@ -270,9 +270,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7F3CAAE0277093D500E0D74C /* MacOS */ = {
+		7F3CAAE0277093D500E0D74C /* Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "MacOS" */;
+			buildConfigurationList = 7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "Mac" */;
 			buildPhases = (
 				7F3CAADD277093D500E0D74C /* Sources */,
 				7F3CAADE277093D500E0D74C /* Frameworks */,
@@ -283,9 +283,9 @@
 			);
 			dependencies = (
 			);
-			name = MacOS;
+			name = Mac;
 			productName = RendererAppSDL;
-			productReference = 7F3CAAE1277093D500E0D74C /* MacOS.app */;
+			productReference = 7F3CAAE1277093D500E0D74C /* Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
 		7F3E8F5A279AE6A2003BB7B6 /* iOS */ = {
@@ -343,7 +343,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7F3CAADC277093D500E0D74C /* Build configuration list for PBXProject "MacOS" */;
+			buildConfigurationList = 7F3CAADC277093D500E0D74C /* Build configuration list for PBXProject "EngineEntryPoint" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -356,7 +356,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F3CAAE0277093D500E0D74C /* MacOS */,
+				7F3CAAE0277093D500E0D74C /* Mac */,
 				7F3E8F5A279AE6A2003BB7B6 /* iOS */,
 				7F3E9026279B015A003BB7B6 /* TVOS */,
 			);
@@ -834,7 +834,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7F3CAADC277093D500E0D74C /* Build configuration list for PBXProject "MacOS" */ = {
+		7F3CAADC277093D500E0D74C /* Build configuration list for PBXProject "EngineEntryPoint" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F3CAAEF277093D600E0D74C /* Debug */,
@@ -843,7 +843,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "MacOS" */ = {
+		7F3CAAF1277093D600E0D74C /* Build configuration list for PBXNativeTarget "Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7F3CAAF2277093D600E0D74C /* Debug */,

@@ -5,7 +5,7 @@
       location = "group:../../README.md">
    </FileRef>
    <FileRef
-      location = "group:MacOS.xcodeproj">
+      location = "group:EngineEntryPoint.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../../Game/Game.xcodeproj">
