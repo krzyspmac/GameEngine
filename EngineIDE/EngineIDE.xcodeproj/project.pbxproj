@@ -20,6 +20,7 @@
 		7F1A3E492B03BEFB00BBB9C8 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E482B03BEFB00BBB9C8 /* NavigationManager.swift */; };
 		7F1A3E4B2B03BF3000BBB9C8 /* NavigationOutline+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E4A2B03BF3000BBB9C8 /* NavigationOutline+Data.swift */; };
 		7F1A3E4D2B03BFAD00BBB9C8 /* NavigationOutline+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E4C2B03BFAD00BBB9C8 /* NavigationOutline+View.swift */; };
+		7FC670EC2B04161600AE28ED /* NavigationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC670EB2B04161600AE28ED /* NavigationStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		7F1A3E482B03BEFB00BBB9C8 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		7F1A3E4A2B03BF3000BBB9C8 /* NavigationOutline+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationOutline+Data.swift"; sourceTree = "<group>"; };
 		7F1A3E4C2B03BFAD00BBB9C8 /* NavigationOutline+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationOutline+View.swift"; sourceTree = "<group>"; };
+		7FC670EB2B04161600AE28ED /* NavigationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,10 +105,8 @@
 		7F1A3E402B03A19C00BBB9C8 /* Document */ = {
 			isa = PBXGroup;
 			children = (
-				7F1A3E482B03BEFB00BBB9C8 /* NavigationManager.swift */,
-				7F1A3E4A2B03BF3000BBB9C8 /* NavigationOutline+Data.swift */,
-				7F1A3E4C2B03BFAD00BBB9C8 /* NavigationOutline+View.swift */,
 				7F1A3E2B2B036D7600BBB9C8 /* DocumentContentView.swift */,
+				7FC670EA2B0415CB00AE28ED /* Navigation */,
 				7F1A3E412B03A55300BBB9C8 /* Editors */,
 			);
 			path = Document;
@@ -120,6 +120,17 @@
 				7F1A3E442B03A56300BBB9C8 /* EmptyEditorView.swift */,
 			);
 			path = Editors;
+			sourceTree = "<group>";
+		};
+		7FC670EA2B0415CB00AE28ED /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				7F1A3E482B03BEFB00BBB9C8 /* NavigationManager.swift */,
+				7F1A3E4A2B03BF3000BBB9C8 /* NavigationOutline+Data.swift */,
+				7F1A3E4C2B03BFAD00BBB9C8 /* NavigationOutline+View.swift */,
+				7FC670EB2B04161600AE28ED /* NavigationStore.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +212,7 @@
 				7F1A3E3F2B037E8E00BBB9C8 /* Sizes.swift in Sources */,
 				7F1A3E452B03A56300BBB9C8 /* EmptyEditorView.swift in Sources */,
 				7F1A3E3D2B0376A400BBB9C8 /* Theme.swift in Sources */,
+				7FC670EC2B04161600AE28ED /* NavigationStore.swift in Sources */,
 				7F1A3E2A2B036D7600BBB9C8 /* EngineIDEDocument.swift in Sources */,
 				7F1A3E2C2B036D7600BBB9C8 /* DocumentContentView.swift in Sources */,
 			);

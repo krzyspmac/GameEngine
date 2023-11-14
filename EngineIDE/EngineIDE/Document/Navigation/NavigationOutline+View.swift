@@ -12,16 +12,23 @@ struct NavigationOutlineView: View {
 
     @Binding var document: EngineIDEDocument
     @Binding var theme: Theme
+    @ObservedObject var navigationStore: NavigationStore
 
     @EnvironmentObject var navigationManager: NavigationManager
 
     var body: some View {
         VStack {
             List {
-                OutlineGroup(items: data, theme: $theme)
+                OutlineGroup(items: navigationStore.data, theme: $theme)
             }
 
             Spacer()
+
+            HStack {
+                Text("\(navigationManager.selectedOutlineItem?.title ?? "n/a")")
+
+                Spacer()
+            }
         }
     }
 }

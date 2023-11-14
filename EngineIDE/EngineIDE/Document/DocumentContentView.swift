@@ -7,42 +7,11 @@
 
 import SwiftUI
 
-let data: [OutlineItem] = [
-    .init(
-        type: .project,
-        title: "Project",
-        image: .init(systemName: "doc"),
-        indentation: 0,
-        children: [
-            .init(
-                type: .scenes,
-                title: "Scenes",
-                image: .init(systemName: "folder.fill"),
-                indentation: 1,
-                children: nil
-            ),
-            .init(
-                type: .textures,
-                title: "Textures",
-                image: .init(systemName: "photo"),
-                indentation: 1,
-                children: nil
-            ),
-            .init(
-                type: .textures,
-                title: "Settings",
-                image: .init(systemName: "photo"),
-                indentation: 1,
-                children: nil
-            ),
-        ]
-    )
-]
-
 struct DocumentContentView: View {
 
     @Binding var document: EngineIDEDocument
     @Binding var theme: Theme
+    @ObservedObject var navigationStore: NavigationStore = .init()
 
     @EnvironmentObject var navigationManager: NavigationManager
 
@@ -52,17 +21,10 @@ struct DocumentContentView: View {
                 VStack {
                     NavigationOutlineView(
                         document: $document,
-                        theme: $theme
+                        theme: $theme,
+                        navigationStore: navigationStore
                     )
                     .environmentObject(navigationManager)
-
-                    Spacer()
-
-                    HStack {
-                        Text("\(navigationManager.selectedOutlineItem?.title ?? "n/a")")
-
-                        Spacer()
-                    }
                 }
                 .frame(minWidth: 200)
             },
@@ -70,6 +32,7 @@ struct DocumentContentView: View {
                 TextEditor(text: $document.text)
             }
         )
+        .searchable(text: $navigationStore.searchPhrase, placement: .sidebar)
         .accentColor(theme.iconForegroundDeselected)
     }
 }
