@@ -30,7 +30,7 @@ assumptions.
 - [~] MacOS/iOS Renderer
 - [x] C++ as a game script language (at least for now)
 - [ ] Swift as the game language
-- [ ] Simple IDE for some visual game management
+- [ ] Simple IDE for some visual game management (in SwiftUI written for MacOS)
 - [ ] Windows Renderer
 - [ ] Linux Renderer
 
