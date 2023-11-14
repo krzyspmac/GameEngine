@@ -44,7 +44,7 @@ namespace engine
 
         /** Set the color mod */
         virtual void SetColorMod(Color4) = 0;
-        virtual Color4 GetColorMod() = 0;
+        virtual Color4& GetColorMod() = 0;
     };
 
     class SpriteRepresentationI: public SpritePropertyManipulatorsI
@@ -86,7 +86,7 @@ namespace engine
         void SetAcceptsLight(bool val) { m_acceptsLight = val; if(m_drawable.get() != nullptr) m_drawable.get()->GetAcceptsLight() = val; };
         float GetAcceptsLight() { return m_acceptsLight; };
         void SetColorMod(Color4 val) { m_colorMod = val; if(m_drawable.get() != nullptr) m_drawable.get()->SetColorMod(val); };
-        Color4 GetColorMod() { return m_colorMod; };
+        Color4& GetColorMod() { return m_colorMod; };
 
     public: // Drawable related
 

@@ -41,6 +41,7 @@
 #include "callable_interface.h"
 #include "events_manager_interface.h"
 #include "sound_interfaces.h"
+#include "object_pool.hpp"
 
 #include "globals.hpp"
 

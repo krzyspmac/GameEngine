@@ -24,6 +24,7 @@
 #include "interfaces.h"
 #include "GameResolutionState.hpp"
 #include "InertiaProcessor.hpp"
+#include "ParticleEmitter.hpp"
 
 using namespace engine;
 
@@ -40,6 +41,9 @@ class GameSceneIntro: public GameSceneI {
     engine::SoundFileI *m_sound;
     IntertiaProcessor m_inertiaProcessor;
     GameInputI *m_gameInput;
+
+    ParticleEmitter *m_particleEmitter;
+    SpriteAtlasI *m_ParticlesSpriteAtlas;
 public: // GameSceneIntro
     GameSceneIntro(GameResolutionState*, GameInputI*);
     void FrameUpdate();

@@ -67,6 +67,24 @@ GameSceneIntro::GameSceneIntro(GameResolutionState *resState, GameInputI *gameIn
         printf("Sound state = %d\n", sender->GetState());
     }));
 
+    m_ParticlesSpriteAtlas = atlasMgr->SpriteAtlasLoad("smalls.json", "smalls.png");
+
+    ParticleEmitterDescriptor particleEmitterDescriptor;
+    particleEmitterDescriptor.timeInterval = 100;
+    particleEmitterDescriptor.lifetime = 1500;
+    particleEmitterDescriptor.creatorFunction = [&](void) {
+        auto *sprite = this->m_scene->SpriteStaticLoad(m_ParticlesSpriteAtlas, "2891093_small.png");
+        sprite->SetAlpha(0.0f);
+        sprite->SetAcceptsLight(false);
+        return sprite;
+    };
+    particleEmitterDescriptor.updateFunction = [](engine::SpriteRepresentationI *sprite, auto completion) {
+        sprite->SetAlpha(1.0f - completion);
+        sprite->SetScale(completion);
+    };
+
+    m_particleEmitter = new ParticleEmitter(particleEmitterDescriptor, 5000);
+
     m_inertiaProcessor.SetPosition(m_animated->GetPosition());
 }
 
@@ -82,6 +100,8 @@ void GameSceneIntro::FrameUpdate()
     m_inertiaProcessor.UpdateForceVector(m_gameInput->GetLeftThumbstickVector());
     m_inertiaProcessor.Tick();
     m_animated->SetPosition(m_inertiaProcessor.GetPosition());
+    m_particleEmitter->SetPosition(m_inertiaProcessor.GetPosition());
+    m_particleEmitter->FrameUpdate(Globals::time()->GetEngineStart());
 }
 
 void GameSceneIntro::ContinueAnimation()

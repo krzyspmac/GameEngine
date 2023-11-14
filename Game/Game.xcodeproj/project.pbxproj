@@ -44,6 +44,12 @@
 		7FE9E30228FA071300AFE00A /* GameSceneIntro.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FE6D57B28E05A8A00A78E06 /* GameSceneIntro.hpp */; };
 		7FE9E30328FA071300AFE00A /* InertiaProcessor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD0FB1C28E4E485008A4389 /* InertiaProcessor.hpp */; };
 		7FE9E30428FA071300AFE00A /* GameInput.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */; };
+		7FEA3F9729F4107200807305 /* ParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA3F9529F4107200807305 /* ParticleEmitter.cpp */; };
+		7FEA3F9829F4107200807305 /* ParticleEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FEA3F9529F4107200807305 /* ParticleEmitter.cpp */; };
+		7FEA3F9929F4107200807305 /* ParticleEmitter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FEA3F9629F4107200807305 /* ParticleEmitter.hpp */; };
+		7FEA3F9A29F4107200807305 /* ParticleEmitter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 7FEA3F9629F4107200807305 /* ParticleEmitter.hpp */; };
+		7FEA3FA029F42BC600807305 /* smalls.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FEA3F9E29F42BC500807305 /* smalls.json */; };
+		7FEA3FA129F42BC600807305 /* smalls.png in Resources */ = {isa = PBXBuildFile; fileRef = 7FEA3F9F29F42BC500807305 /* smalls.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +80,10 @@
 		7FE6D57B28E05A8A00A78E06 /* GameSceneIntro.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = GameSceneIntro.hpp; sourceTree = "<group>"; };
 		7FE9E2E128FA02E800AFE00A /* background.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = background.json; sourceTree = "<group>"; };
 		7FE9E2E928FA05B600AFE00A /* libGame-iOS.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libGame-iOS.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FEA3F9529F4107200807305 /* ParticleEmitter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleEmitter.cpp; sourceTree = "<group>"; };
+		7FEA3F9629F4107200807305 /* ParticleEmitter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ParticleEmitter.hpp; sourceTree = "<group>"; };
+		7FEA3F9E29F42BC500807305 /* smalls.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = smalls.json; sourceTree = "<group>"; };
+		7FEA3F9F29F42BC500807305 /* smalls.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smalls.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +118,8 @@
 				7FD0FB1B28E4E485008A4389 /* InertiaProcessor.cpp */,
 				7FD0FB2028E4EBA7008A4389 /* GameInput.hpp */,
 				7FD0FB1F28E4EBA7008A4389 /* GameInput.cpp */,
+				7FEA3F9629F4107200807305 /* ParticleEmitter.hpp */,
+				7FEA3F9529F4107200807305 /* ParticleEmitter.cpp */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -135,6 +147,8 @@
 				7F18785628ED156F00851F28 /* background.tga */,
 				7F18785228ED154B00851F28 /* at01.fnt */,
 				7F18785128ED154B00851F28 /* at01.png */,
+				7FEA3F9E29F42BC500807305 /* smalls.json */,
+				7FEA3F9F29F42BC500807305 /* smalls.png */,
 			);
 			path = GameResources;
 			sourceTree = "<group>";
@@ -204,6 +218,7 @@
 				7FD0FB1E28E4E485008A4389 /* InertiaProcessor.hpp in Headers */,
 				7F2DAFE628E03B630044EF8D /* GameEntryPoint.hpp in Headers */,
 				7FD0FB2228E4EBA7008A4389 /* GameInput.hpp in Headers */,
+				7FEA3F9929F4107200807305 /* ParticleEmitter.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +233,7 @@
 				7FE9E30028FA071300AFE00A /* GameResolutionState.hpp in Headers */,
 				7FE9E30128FA071300AFE00A /* GameSceneCoordinator.hpp in Headers */,
 				7FE9E30228FA071300AFE00A /* GameSceneIntro.hpp in Headers */,
+				7FEA3F9A29F4107200807305 /* ParticleEmitter.hpp in Headers */,
 				7FE9E30328FA071300AFE00A /* InertiaProcessor.hpp in Headers */,
 				7FE9E30428FA071300AFE00A /* GameInput.hpp in Headers */,
 			);
@@ -325,11 +341,13 @@
 				7FB91E1129A4BB3E006C93C2 /* main.ini in Resources */,
 				7FB91E1229A4BB3E006C93C2 /* player_Idle.json in Resources */,
 				7FB91E1329A4BB3E006C93C2 /* player_Idle.png in Resources */,
+				7FEA3FA029F42BC600807305 /* smalls.json in Resources */,
 				7FB91E1429A4BB3E006C93C2 /* player_Idle.tga in Resources */,
 				7FB91E1529A4BB3E006C93C2 /* background.json in Resources */,
 				7FB91E1629A4BB3E006C93C2 /* background.png in Resources */,
 				7FB91E1729A4BB3E006C93C2 /* background.tga in Resources */,
 				7FB91E1829A4BB3E006C93C2 /* at01.fnt in Resources */,
+				7FEA3FA129F42BC600807305 /* smalls.png in Resources */,
 				7FB91E1929A4BB3E006C93C2 /* at01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +372,7 @@
 				7FE6D57C28E05A8A00A78E06 /* GameSceneIntro.cpp in Sources */,
 				7FD0FB2128E4EBA7008A4389 /* GameInput.cpp in Sources */,
 				7F2DB01B28E04D250044EF8D /* GameResolutionState.cpp in Sources */,
+				7FEA3F9729F4107200807305 /* ParticleEmitter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +386,7 @@
 				7FE9E2F928FA070600AFE00A /* GameSceneIntro.cpp in Sources */,
 				7FE9E2FA28FA070600AFE00A /* InertiaProcessor.cpp in Sources */,
 				7FE9E2FB28FA070600AFE00A /* GameInput.cpp in Sources */,
+				7FEA3F9829F4107200807305 /* ParticleEmitter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
