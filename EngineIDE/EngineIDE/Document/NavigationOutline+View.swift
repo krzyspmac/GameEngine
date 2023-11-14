@@ -17,16 +17,27 @@ struct NavigationOutlineView: View {
 
     var body: some View {
         VStack {
-            OutlineGroup(data, children: \.children, content: { child in
-                OutlineItemView(
-                    item: child,
-                    theme: $theme
-                )
-                .environmentObject(navigationManager)
-            })
-            .padding([.leading, .trailing], Sizes.large)
+            List {
+                OutlineGroup(items: data, theme: $theme)
+            }
 
             Spacer()
+        }
+    }
+}
+
+private struct OutlineGroup: View {
+
+    var items: [OutlineItem]
+    @Binding var theme: Theme
+
+    var body: some View {
+        ForEach(items) { item in
+            OutlineItemView(item: item, theme: $theme)
+
+            if let children = item.children {
+                OutlineGroup(items: children, theme: $theme)
+            }
         }
     }
 }
@@ -47,34 +58,22 @@ private struct OutlineItemView: View {
                             .environmentObject(navigationManager)
                     },
                     label: {
-                        item.image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 14, height: 14)
-                            .symbolRenderingMode(.hierarchical)
-                            .foregroundColor(theme.iconForegroundColor)
+                        HStack {
+                            item.image
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 14, height: 14)
+                                .symbolRenderingMode(.hierarchical)
+                                .foregroundColor(theme.iconForegroundColor)
 
-                        Text(item.title)
+                            Text(item.title)
+
+                            Spacer()
+                        }
+                        .padding(.leading, CGFloat(item.indentation) * Sizes.large)
                     }
                 )
-                .buttonStyle(selected: item == navigationManager.selectedOutlineItem)
-                .onTapGesture {
-                    print("On tap \(item.title)")
-                }
             }
-        }
-        .padding(.leading, CGFloat(item.indentation) * Sizes.large)
-    }
-}
-
-private extension NavigationLink {
-
-    @ViewBuilder
-    func buttonStyle(selected: Bool) -> some View {
-        if selected {
-            self.buttonStyle(BorderedButtonStyle())
-        } else {
-            self.buttonStyle(BorderlessButtonStyle())
         }
     }
 }

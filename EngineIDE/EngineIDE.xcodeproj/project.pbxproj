@@ -15,7 +15,7 @@
 		7F1A3E3D2B0376A400BBB9C8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E3C2B0376A400BBB9C8 /* Theme.swift */; };
 		7F1A3E3F2B037E8E00BBB9C8 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E3E2B037E8E00BBB9C8 /* Sizes.swift */; };
 		7F1A3E432B03A55D00BBB9C8 /* TextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E422B03A55D00BBB9C8 /* TextEditor.swift */; };
-		7F1A3E452B03A56300BBB9C8 /* EmptyEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E442B03A56300BBB9C8 /* EmptyEditor.swift */; };
+		7F1A3E452B03A56300BBB9C8 /* EmptyEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E442B03A56300BBB9C8 /* EmptyEditorView.swift */; };
 		7F1A3E472B03B9B100BBB9C8 /* EditorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E462B03B9B100BBB9C8 /* EditorProtocol.swift */; };
 		7F1A3E492B03BEFB00BBB9C8 /* NavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E482B03BEFB00BBB9C8 /* NavigationManager.swift */; };
 		7F1A3E4B2B03BF3000BBB9C8 /* NavigationOutline+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E4A2B03BF3000BBB9C8 /* NavigationOutline+Data.swift */; };
@@ -34,7 +34,7 @@
 		7F1A3E3C2B0376A400BBB9C8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7F1A3E3E2B037E8E00BBB9C8 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 		7F1A3E422B03A55D00BBB9C8 /* TextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEditor.swift; sourceTree = "<group>"; };
-		7F1A3E442B03A56300BBB9C8 /* EmptyEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyEditor.swift; sourceTree = "<group>"; };
+		7F1A3E442B03A56300BBB9C8 /* EmptyEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyEditorView.swift; sourceTree = "<group>"; };
 		7F1A3E462B03B9B100BBB9C8 /* EditorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorProtocol.swift; sourceTree = "<group>"; };
 		7F1A3E482B03BEFB00BBB9C8 /* NavigationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationManager.swift; sourceTree = "<group>"; };
 		7F1A3E4A2B03BF3000BBB9C8 /* NavigationOutline+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NavigationOutline+Data.swift"; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 			children = (
 				7F1A3E462B03B9B100BBB9C8 /* EditorProtocol.swift */,
 				7F1A3E422B03A55D00BBB9C8 /* TextEditor.swift */,
-				7F1A3E442B03A56300BBB9C8 /* EmptyEditor.swift */,
+				7F1A3E442B03A56300BBB9C8 /* EmptyEditorView.swift */,
 			);
 			path = Editors;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 				7F1A3E4D2B03BFAD00BBB9C8 /* NavigationOutline+View.swift in Sources */,
 				7F1A3E432B03A55D00BBB9C8 /* TextEditor.swift in Sources */,
 				7F1A3E3F2B037E8E00BBB9C8 /* Sizes.swift in Sources */,
-				7F1A3E452B03A56300BBB9C8 /* EmptyEditor.swift in Sources */,
+				7F1A3E452B03A56300BBB9C8 /* EmptyEditorView.swift in Sources */,
 				7F1A3E3D2B0376A400BBB9C8 /* Theme.swift in Sources */,
 				7F1A3E2A2B036D7600BBB9C8 /* EngineIDEDocument.swift in Sources */,
 				7F1A3E2C2B036D7600BBB9C8 /* DocumentContentView.swift in Sources */,

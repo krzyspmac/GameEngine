@@ -19,16 +19,21 @@ let data: [OutlineItem] = [
                 title: "Scenes",
                 image: .init(systemName: "folder.fill"),
                 indentation: 1,
-                children: [
-                ]
+                children: nil
             ),
             .init(
                 type: .textures,
                 title: "Textures",
                 image: .init(systemName: "photo"),
                 indentation: 1,
-                children: [
-                ]
+                children: nil
+            ),
+            .init(
+                type: .textures,
+                title: "Settings",
+                image: .init(systemName: "photo"),
+                indentation: 1,
+                children: nil
             ),
         ]
     )
@@ -44,14 +49,22 @@ struct DocumentContentView: View {
     var body: some View {
         NavigationSplitView(
             sidebar: {
-                NavigationOutlineView(
-                    document: $document,
-                    theme: $theme
-                )
-                .environmentObject(navigationManager)
+                VStack {
+                    NavigationOutlineView(
+                        document: $document,
+                        theme: $theme
+                    )
+                    .environmentObject(navigationManager)
 
-                Text("\(navigationManager.selectedOutlineItem?.title ?? "n/a")")
+                    Spacer()
 
+                    HStack {
+                        Text("\(navigationManager.selectedOutlineItem?.title ?? "n/a")")
+
+                        Spacer()
+                    }
+                }
+                .frame(minWidth: 150)
             },
             detail: {
                 TextEditor(text: $document.text)

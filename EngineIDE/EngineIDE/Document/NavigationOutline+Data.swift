@@ -40,13 +40,13 @@ extension OutlineItem {
     func contentView() -> some View {
         switch self.type {
         case .unknown:
-            EmptyEditor(outlineItem: self)
+            EmptyEditorView(outlineItem: self)
         case .project:
-            EmptyEditor(outlineItem: self)
+            TextEditorView(outlineItem: self)
         case .scenes:
-            EmptyEditor(outlineItem: self)
+            EmptyEditorView(outlineItem: self)
         case .textures:
-            EmptyEditor(outlineItem: self)
+            EmptyEditorView(outlineItem: self)
         }
     }
 }

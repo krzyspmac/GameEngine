@@ -11,6 +11,4 @@ import Combine
 protocol EditorProtocol: View {
 
     var outlineItem: OutlineItem { get }
-
-    func onAppearEditor(_ completion: @escaping ((OutlineItem) -> Void)) -> Self
 }

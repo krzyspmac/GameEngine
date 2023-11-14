@@ -1,5 +1,5 @@
 //
-//  TextEditor.swift
+//  EmptyEditorView.swift
 //  EngineIDE
 //
 //  Created by krzysp on 14/11/2023.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TextEditorView: View, EditorProtocol {
+struct EmptyEditorView: View, EditorProtocol {
 
     @EnvironmentObject var navigationManager: NavigationManager
 
@@ -15,7 +15,7 @@ struct TextEditorView: View, EditorProtocol {
 
     var body: some View {
         Group {
-            Text("Text Editor View")
+            Text("Empty editor")
         }.onAppear(perform: {
             DispatchQueue.main.async {
                 navigationManager.selectedOutlineItem = outlineItem
@@ -23,4 +23,3 @@ struct TextEditorView: View, EditorProtocol {
         })
     }
 }
-
