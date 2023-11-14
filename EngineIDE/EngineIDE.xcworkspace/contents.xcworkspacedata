@@ -4,19 +4,4 @@
    <FileRef
       location = "group:EngineIDE.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:../Frameworks/Universal/cJson/cJson.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../Engine/Projects/Xcode_MacOS/Engine.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../EngineEntryPoint/MacOS/EngineEntryPoint.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../Game/Game.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../Frameworks/Universal/imgui/imgui.xcodeproj">
-   </FileRef>
 </Workspace>
