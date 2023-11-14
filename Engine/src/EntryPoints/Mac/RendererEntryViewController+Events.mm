@@ -102,13 +102,13 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
         }
 #endif
 
-        if (event.isARepeat ) { return NULL; };
-
         auto& eventsProvider = ENGINE().getEventProvider();
         switch (event.type)
         {
             case NSEventTypeKeyDown:
             {
+                if (event.ARepeat ) { break; };
+
                 NSString *characters = event.charactersIgnoringModifiers;
                 for (NSInteger i = 0; i < characters.length; i++)
                 {
@@ -119,6 +119,8 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
             }
             case NSEventTypeKeyUp:
             {
+                if (event.ARepeat ) { break; };
+
                 NSString *characters = event.charactersIgnoringModifiers;
                 for (NSInteger i = 0; i < characters.length; i++)
                 {
@@ -218,7 +220,7 @@ static GamepadButtonAction GamepadButtonActionFromPressed(bool);
     locationInViewport.y = (int)(yPer * (float)viewport.height);
 
     /** Send the calcualted position ot the engine provider */
-    m_engine->getEventProvider().PushMouseLocation(locationInViewport);
+//    m_engine->getEventProvider().PushMouseLocation(locationInViewport);
 
     /** Also handle other events if necessary */
     [self handle:event];
