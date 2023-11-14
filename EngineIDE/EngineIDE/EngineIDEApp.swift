@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct EngineIDEApp: App {
+
+    @ObservedObject private var themeManager = ThemeManager.shared
+
     var body: some Scene {
         DocumentGroup(newDocument: EngineIDEDocument()) { file in
-            ContentView(document: file.$document)
+            DocumentContentView(
+                document: file.$document,
+                theme: $themeManager.current
+            )
         }
     }
 }

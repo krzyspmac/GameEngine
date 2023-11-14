@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+enum Sizes {
+
+    static let small: CGFloat = 8
+    static let normal: CGFloat = 10
+    static let large: CGFloat = 14
+}

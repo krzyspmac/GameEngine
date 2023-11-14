@@ -9,20 +9,24 @@
 /* Begin PBXBuildFile section */
 		7F1A3E282B036D7600BBB9C8 /* EngineIDEApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E272B036D7600BBB9C8 /* EngineIDEApp.swift */; };
 		7F1A3E2A2B036D7600BBB9C8 /* EngineIDEDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E292B036D7600BBB9C8 /* EngineIDEDocument.swift */; };
-		7F1A3E2C2B036D7600BBB9C8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E2B2B036D7600BBB9C8 /* ContentView.swift */; };
+		7F1A3E2C2B036D7600BBB9C8 /* DocumentContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E2B2B036D7600BBB9C8 /* DocumentContentView.swift */; };
 		7F1A3E2E2B036D7700BBB9C8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1A3E2D2B036D7700BBB9C8 /* Assets.xcassets */; };
 		7F1A3E312B036D7700BBB9C8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F1A3E302B036D7700BBB9C8 /* Preview Assets.xcassets */; };
+		7F1A3E3D2B0376A400BBB9C8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E3C2B0376A400BBB9C8 /* Theme.swift */; };
+		7F1A3E3F2B037E8E00BBB9C8 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F1A3E3E2B037E8E00BBB9C8 /* Sizes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7F1A3E242B036D7600BBB9C8 /* EngineIDE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EngineIDE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F1A3E272B036D7600BBB9C8 /* EngineIDEApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineIDEApp.swift; sourceTree = "<group>"; };
 		7F1A3E292B036D7600BBB9C8 /* EngineIDEDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EngineIDEDocument.swift; sourceTree = "<group>"; };
-		7F1A3E2B2B036D7600BBB9C8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7F1A3E2B2B036D7600BBB9C8 /* DocumentContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentContentView.swift; sourceTree = "<group>"; };
 		7F1A3E2D2B036D7700BBB9C8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F1A3E302B036D7700BBB9C8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7F1A3E322B036D7700BBB9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F1A3E332B036D7700BBB9C8 /* EngineIDE.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EngineIDE.entitlements; sourceTree = "<group>"; };
+		7F1A3E3C2B0376A400BBB9C8 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7F1A3E3E2B037E8E00BBB9C8 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +61,9 @@
 			children = (
 				7F1A3E272B036D7600BBB9C8 /* EngineIDEApp.swift */,
 				7F1A3E292B036D7600BBB9C8 /* EngineIDEDocument.swift */,
-				7F1A3E2B2B036D7600BBB9C8 /* ContentView.swift */,
+				7F1A3E2B2B036D7600BBB9C8 /* DocumentContentView.swift */,
+				7F1A3E3C2B0376A400BBB9C8 /* Theme.swift */,
+				7F1A3E3E2B037E8E00BBB9C8 /* Sizes.swift */,
 				7F1A3E3B2B036E5500BBB9C8 /* Resources */,
 				7F1A3E2F2B036D7700BBB9C8 /* Preview Content */,
 			);
@@ -153,8 +159,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F1A3E282B036D7600BBB9C8 /* EngineIDEApp.swift in Sources */,
+				7F1A3E3F2B037E8E00BBB9C8 /* Sizes.swift in Sources */,
+				7F1A3E3D2B0376A400BBB9C8 /* Theme.swift in Sources */,
 				7F1A3E2A2B036D7600BBB9C8 /* EngineIDEDocument.swift in Sources */,
-				7F1A3E2C2B036D7600BBB9C8 /* ContentView.swift in Sources */,
+				7F1A3E2C2B036D7600BBB9C8 /* DocumentContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
